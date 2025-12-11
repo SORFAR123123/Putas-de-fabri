@@ -4,11 +4,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Entrenamiento Especial</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="1_style.css">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🔥</text></svg>">
 </head>
 
 <body>
+    <!-- BOTÓN CASA PARA VOLVER AL INICIO (visible siempre) -->
+    <button id="boton-casa" class="btn-casa" onclick="volverAlInicio()" title="Volver al inicio">
+        🏠
+    </button>
+
     <header class="header">
         <h1>🔥 Entrenamiento Especial</h1>
         <p>Mejora tus habilidades con estas herramientas de práctica</p>
@@ -20,7 +25,7 @@
         <div class="card-container">
             <!-- CARD 1 - MANGAS -->
             <div class="card card-blue" id="manga-card">
-                <div class="card-img" style="background-image: url('https://pbs.twimg.com/media/G76pBZZbQAAVvzo?format=jpg&name=small')"></div>
+                <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=400&h=400&fit=crop')"></div>
                 <h3>🎌 MANGAS</h3>
                 <p>Explora y aprende con cómics japoneses</p>
                 <button class="card-button" onclick="cargarPaginaMangas()">Ver colección</button>
@@ -34,17 +39,17 @@
                 <button class="card-button" onclick="cargarPaginaVideos()">Ver videos</button>
             </div>
 
-            <!-- CARD 2 - QUINTILLIZAS -->
+            <!-- CARD NUEVA - ANIMES -->
             <div class="card card-purple">
-                <div class="card-img" style="background-image: url('https://pbs.twimg.com/media/G6EAjYQXEAA41nv?format=jpg&name=medium')"></div>
-                <h3>💖 Quintillizas Nakano RPG</h3>
-                <p>5 hermanas + sistema único + decoración</p>
-                <button class="card-button">Explorar RPG</button>
+                <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1635805737707-575885ab0820?w=400&h=400&fit=crop')"></div>
+                <h3>🎌 ANIMES</h3>
+                <p>Anime con vocabulario + videos español/japonés</p>
+                <button class="card-button" onclick="cargarPaginaAnimes()">Ver animes</button>
             </div>
         </div>
     </section>
 
-    <!-- SECCIÓN DINÁMICA PARA MANGAS/VIDEOS -->
+    <!-- SECCIÓN DINÁMICA PARA MANGAS/VIDEOS/ANIMES -->
     <section id="manga-section" style="display: none;"></section>
 
     <!-- SECCIÓN DEL QUIZ -->
@@ -77,10 +82,12 @@
         <p class="github-link">Publicado en <a href="https://pages.github.com/" target="_blank">GitHub Pages</a></p>
     </footer>
 
-    <script src="imagenes.js"></script>
-    <script src="vocabulario.js"></script>
-    <script src="videos.js"></script>
-    <script src="sistemas.js"></script>
-    <script src="main.js"></script>
+    <script src="1_imagenes.js"></script>
+    <script src="1_vocabulario.js"></script>
+    <script src="1_videos.js"></script>
+    <script src="1_animes.js"></script>
+    <script src="1_animes_vocabulario.js"></script>
+    <script src="1_sistemas.js"></script>
+    <script src="1_main.js"></script>
 </body>
 </html>
