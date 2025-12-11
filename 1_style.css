@@ -16,10 +16,37 @@ body {
     line-height: 1.6;
 }
 
+/* BOTÓN CASA (SIEMPRE VISIBLE) */
+.btn-casa {
+    position: fixed;
+    top: 20px;
+    left: 20px;
+    background: linear-gradient(135deg, #FFD166, #FF6B6B);
+    color: #333;
+    border: none;
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    font-size: 1.8rem;
+    cursor: pointer;
+    z-index: 2000;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 3px solid white;
+}
+
+.btn-casa:hover {
+    transform: scale(1.15) rotate(15deg);
+    box-shadow: 0 8px 25px rgba(255, 107, 107, 0.6);
+}
+
 /* HEADER */
 .header {
     text-align: center;
-    padding: 50px 20px 30px;
+    padding: 60px 20px 30px;
     background: rgba(0, 0, 0, 0.3);
     backdrop-filter: blur(10px);
     border-bottom: 2px solid rgba(255, 209, 102, 0.3);
@@ -248,10 +275,10 @@ body {
 }
 
 /* ================================================
-   ESTILOS PARA MANGAS, VIDEOS Y QUIZ
+   ESTILOS PARA MANGAS, VIDEOS, ANIMES Y QUIZ
    ================================================ */
 
-/* CONTENEDORES DE MANGAS/VIDEOS */
+/* CONTENEDORES DE MANGAS/VIDEOS/ANIMES */
 .manga-contenedores {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
@@ -380,7 +407,7 @@ body {
 }
 
 /* ================================================
-   REPRODUCTOR DE VIDEOS DRIVE
+   REPRODUCTOR DE VIDEOS DRIVE - TIMESTAMPS ABAJO
    ================================================ */
 
 .reproductor-container {
@@ -391,6 +418,42 @@ body {
     padding: 40px;
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6);
     border: 3px solid #4CAF50;
+}
+
+/* CONTROLES DE IDIOMA PARA ANIMES */
+.controles-idioma {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin: 25px 0;
+    flex-wrap: wrap;
+}
+
+.boton-idioma {
+    background: linear-gradient(135deg, #5864F5, #8A5AF7);
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 180px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+}
+
+.boton-idioma:hover {
+    background: linear-gradient(135deg, #8A5AF7, #FF6B6B);
+    transform: scale(1.05);
+}
+
+.boton-idioma.activo {
+    background: linear-gradient(135deg, #4CAF50, #2E7D32);
+    border: 3px solid #FFD166;
 }
 
 .video-wrapper {
@@ -414,12 +477,12 @@ body {
     border-radius: 15px;
 }
 
-/* TIMESTAMPS */
+/* TIMESTAMPS ABAJO DEL VIDEO */
 .timestamps-container {
     background: rgba(255, 255, 255, 0.05);
     border-radius: 18px;
     padding: 25px;
-    margin: 30px 0;
+    margin: 30px 0 0 0; /* Sin margen arriba */
     border-left: 5px solid #8A5AF7;
 }
 
@@ -502,8 +565,8 @@ body {
 .palabra-japonesa {
     font-size: 4rem;
     text-align: center;
-    margin: 40px 0 20px 0; /* Menos margen abajo */
-    color: white; /* CAMBIADO: BLANCO */
+    margin: 40px 0 20px 0;
+    color: white;
     font-weight: bold;
     text-shadow: none;
     opacity: 1;
@@ -516,7 +579,7 @@ body {
 /* ROMAJI DEBAJO DE LA PALABRA */
 .romaji-debajo {
     text-align: center;
-    margin: 10px 0 40px 0; /* Justo debajo de palabra */
+    margin: 10px 0 40px 0;
     padding: 15px;
     background: rgba(138, 90, 247, 0.1);
     border-radius: 15px;
@@ -579,7 +642,7 @@ body {
 
 .romaji-container {
     text-align: center;
-    margin: 20px 0 40px 0; /* Ajustado */
+    margin: 20px 0 40px 0;
     padding: 20px;
     background: rgba(255, 255, 255, 0.08);
     border-radius: 15px;
@@ -627,8 +690,8 @@ body {
     transform: scale(1.05);
 }
 
-/* BOTÓN ATRÁS */
-.btn-atras {
+/* BOTÓN ATRÁS ESPECÍFICO */
+.btn-atras-especifico {
     background: rgba(255, 255, 255, 0.15);
     color: white;
     border: 2px solid rgba(255, 255, 255, 0.4);
@@ -644,7 +707,7 @@ body {
     font-weight: bold;
 }
 
-.btn-atras:hover {
+.btn-atras-especifico:hover {
     background: rgba(255, 255, 255, 0.25);
     transform: translateX(-8px) scale(1.05);
 }
@@ -703,6 +766,16 @@ body {
         width: 100%;
         max-width: 300px;
     }
+    
+    .controles-idioma {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .boton-idioma {
+        width: 100%;
+        max-width: 300px;
+    }
 }
 
 @media (max-width: 480px) {
@@ -746,6 +819,14 @@ body {
         margin: 20px auto;
         width: fit-content;
     }
+    
+    .btn-casa {
+        width: 50px;
+        height: 50px;
+        font-size: 1.5rem;
+        top: 15px;
+        left: 15px;
+    }
 }
 
 /* ANIMACIONES */
@@ -784,4 +865,21 @@ body {
     to {
         opacity: 0;
     }
+}
+
+/* NOTIFICACIONES */
+.notificacion-dinero {
+    position: fixed;
+    top: 80px;
+    right: 20px;
+    background: linear-gradient(135deg, #FFD166, #FF6B6B);
+    color: #333;
+    padding: 12px 25px;
+    border-radius: 50px;
+    font-weight: bold;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+    z-index: 1001;
+    animation: slideIn 0.3s ease, fadeOut 0.3s ease 2s forwards;
+    font-size: 1.1rem;
+    border: 2px solid white;
 }
