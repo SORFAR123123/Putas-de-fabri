@@ -35,15 +35,14 @@ const vocabularioDatabase = {
             { japones: '開き直る', lectura: 'hirakinarou', opciones: ['Cambiar de actitud', 'Mantenerse', 'Rendirse', 'Avanzar'], respuesta: 0 },
             { japones: '関係ない', lectura: 'kankeinai', opciones: ['No relacionado', 'Importante', 'Relevante', 'Conectado'], respuesta: 0 }
         ],
-        // Mazos 3-10 (puedes completarlos después)
+        // Mazo 3 (para probar dinero)
         3: [
             { japones: '学生', lectura: 'gakusei', opciones: ['Estudiante', 'Profesor', 'Doctor', 'Ingeniero'], respuesta: 0 },
             { japones: '学校', lectura: 'gakkou', opciones: ['Escuela', 'Casa', 'Oficina', 'Parque'], respuesta: 0 },
             { japones: '先生', lectura: 'sensei', opciones: ['Profesor', 'Estudiante', 'Padre', 'Amigo'], respuesta: 0 },
             { japones: '友達', lectura: 'tomodachi', opciones: ['Amigo', 'Enemigo', 'Extraño', 'Vecino'], respuesta: 0 },
             { japones: '家族', lectura: 'kazoku', opciones: ['Familia', 'Solo', 'Compañía', 'Grupo'], respuesta: 0 }
-        ],
-        // ... más mazos
+        ]
     },
 
     // Sub-contenedor 1.2
@@ -55,20 +54,7 @@ const vocabularioDatabase = {
             { japones: '来る', lectura: 'kuru', opciones: ['Venir', 'Ir', 'Estar', 'Ser'], respuesta: 0 },
             { japones: '見る', lectura: 'miru', opciones: ['Ver', 'Oír', 'Sentir', 'Tocar'], respuesta: 0 }
         ]
-    },
-
-    // Sub-contenedores 1.3, 1.4, 1.5 (estructura similar)
-    
-    // ================================================
-    // CONTENEDOR 2 (y así sucesivamente hasta 10)
-    // ================================================
-    'sub2_1': {
-        1: [
-            { japones: '元気', lectura: 'genki', opciones: ['Salud', 'Dinero', 'Amor', 'Suerte'], respuesta: 0 },
-            { japones: '病気', lectura: 'byouki', opciones: ['Enfermedad', 'Salud', 'Fuerza', 'Debilidad'], respuesta: 0 }
-        ]
     }
-    // ... puedes agregar más contenedores y subcontenedores
 };
 
 // Función para obtener vocabulario
