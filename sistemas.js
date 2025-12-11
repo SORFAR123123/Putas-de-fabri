@@ -30,12 +30,14 @@ class SistemaEconomia {
 
     actualizarProgreso(contenedor, subcontenedor, mazo, porcentaje) {
         const clave = `${contenedor}_${subcontenedor}_${mazo}`;
+        const progresoAnterior = this.progreso[clave] || 0;
         
-        if (!this.progreso[clave] || porcentaje > this.progreso[clave]) {
+        // Solo actualizar si es mejor
+        if (porcentaje > progresoAnterior) {
             this.progreso[clave] = porcentaje;
             this.guardarProgreso();
             
-            // Calcular recompensa solo si es mejor que antes
+            // Calcular recompensa
             this.calcularRecompensa(contenedor, subcontenedor, mazo, porcentaje);
         }
         
@@ -52,7 +54,8 @@ class SistemaEconomia {
     // ====================
 
     calcularRecompensa(contenedor, subcontenedor, mazo, porcentaje) {
-        const progresoAnterior = this.obtenerProgreso(contenedor, subcontenedor, mazo);
+        const clave = `${contenedor}_${subcontenedor}_${mazo}`;
+        const progresoAnterior = this.progreso[clave] || 0;
         
         // Solo dar recompensa si mejoró
         if (porcentaje > progresoAnterior) {
@@ -75,11 +78,9 @@ class SistemaEconomia {
             // Redondear a 2 decimales
             recompensa = Math.round(recompensa * 100) / 100;
             
-            // Dar recompensa si hay mejora
-            const mejora = porcentaje - progresoAnterior;
-            if (mejora > 0) {
-                this.agregarDinero(recompensa);
-            }
+            // Dar recompensa solo por la mejora
+            this.agregarDinero(recompensa);
+            console.log(`Recompensa: ${recompensa} soles (${progresoAnterior}% → ${porcentaje}%)`);
         }
     }
 
@@ -122,7 +123,7 @@ class SistemaEconomia {
                 <span id="dinero-cantidad">${this.dinero.toFixed(2)}</span>
                 <span>soles</span>
             `;
-            document.body.appendChild(dineroDiv);
+            document.body.insertBefore(dineroDiv, document.body.firstChild);
         }
     }
 
