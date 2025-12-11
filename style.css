@@ -1,218 +1,77 @@
-/* style.css - ESTILOS REUTILIZABLES PARA TODO */
-:root {
-    --color-fondo: linear-gradient(135deg, #0f0f0f, #1b1b1b);
-    --color-primario: #5864F5;
-    --color-secundario: #FF6B6B;
-    --color-exito: #4CAF50;
-    --color-error: #F44336;
-    --color-dinero: #FFD700;
-}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Entrenamiento de Manga</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>📚</text></svg>">
+</head>
+<body>
+    <!-- BARRA DE DINERO (siempre visible) -->
+    <div class="barra-dinero">
+        <span class="dinero-icono">💰</span>
+        <span class="dinero-actual">0 soles</span>
+    </div>
 
-/* ==================== ESTRUCTURA MANGA ==================== */
-.contenedores-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 25px;
-    max-width: 1400px;
-    margin: 40px auto;
-    padding: 0 20px;
-}
+    <!-- HEADER -->
+    <header class="header">
+        <h1>📚 Entrenamiento de Manga</h1>
+        <p>Aprende japonés mientras lees tus mangas favoritos</p>
+    </header>
 
-.contenedor-manga {
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 15px;
-    padding: 25px;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-    transition: transform 0.3s ease;
-}
+    <!-- SECCIÓN MANGA (visible por defecto) -->
+    <section id="mangas-section" class="especial-section">
+        <h2>🎌 CONTENEDORES DE MANGA</h2>
+        <div id="contenedores-manga" class="contenedores-grid">
+            <!-- SE GENERA AUTOMÁTICAMENTE CON JavaScript -->
+        </div>
+    </section>
 
-.contenedor-manga:hover {
-    transform: translateY(-5px);
-    background: rgba(255, 255, 255, 0.08);
-}
+    <!-- SECCIÓN QUIZ (oculta hasta iniciar quiz) -->
+    <section id="quiz-section" style="display: none;">
+        <div id="quiz-container">
+            <h2>📝 Quiz de Vocabulario</h2>
+            <div class="progreso-quiz">
+                Progreso: <span id="progreso-quiz">1/10</span>
+            </div>
+            
+            <div class="palabra-japones" id="palabra-japones">言葉</div>
+            
+            <div class="romaji-display" id="romaji-display"></div>
+            
+            <div class="opciones-grid" id="opciones-container">
+                <!-- Opciones se generan aquí -->
+            </div>
+            
+            <div style="text-align: center; margin-top: 30px;">
+                <button id="btn-siguiente" class="card-button" style="display: none;">
+                    Siguiente Palabra →
+                </button>
+                <button id="btn-volver" class="card-button" style="background: #666;">
+                    ← Volver a Mangas
+                </button>
+            </div>
+        </div>
+    </section>
 
-.contenedor-header {
-    display: flex;
-    align-items: center;
-    gap: 15px;
-    margin-bottom: 20px;
-}
-
-.contenedor-icono {
-    font-size: 40px;
-    width: 70px;
-    height: 70px;
-    background: rgba(88, 100, 245, 0.2);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: 2px solid var(--color-primario);
-}
-
-/* ==================== SUBCONTENEDORES ==================== */
-.subcontenedor {
-    background: rgba(0, 0, 0, 0.3);
-    border-radius: 10px;
-    padding: 15px;
-    margin-bottom: 15px;
-}
-
-.subcontenedor h4 {
-    color: #ffbeb9;
-    margin-bottom: 15px;
-    font-size: 1.2rem;
-}
-
-.mazos {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 10px;
-}
-
-.mazo-btn {
-    background: rgba(88, 100, 245, 0.15);
-    border: 1px solid rgba(88, 100, 245, 0.3);
-    color: white;
-    padding: 10px 15px;
-    border-radius: 8px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-    min-width: 100px;
-    text-align: center;
-}
-
-.mazo-btn:hover {
-    background: rgba(88, 100, 245, 0.3);
-    transform: scale(1.05);
-}
-
-.mazo-progreso {
-    display: block;
-    font-size: 0.9rem;
-    opacity: 0.8;
-    margin-top: 5px;
-}
-
-/* ==================== QUIZ ==================== */
-#quiz-container {
-    max-width: 800px;
-    margin: 40px auto;
-    padding: 30px;
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 20px;
-    border: 2px solid var(--color-primario);
-}
-
-.palabra-japones {
-    font-size: 3.5rem;
-    text-align: center;
-    margin: 40px 0;
-    color: #FFD166;
-    text-shadow: 0 0 10px rgba(255, 209, 102, 0.3);
-}
-
-.opciones-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-    margin: 30px 0;
-}
-
-.opcion-btn {
-    padding: 20px;
-    font-size: 1.1rem;
-    background: rgba(255, 255, 255, 0.1);
-    border: 2px solid rgba(255, 255, 255, 0.2);
-    color: white;
-    border-radius: 10px;
-    cursor: pointer;
-    transition: all 0.2s ease;
-}
-
-.opcion-btn:hover:not(:disabled) {
-    background: rgba(255, 255, 255, 0.2);
-    transform: scale(1.02);
-}
-
-.opcion-btn.correcta {
-    background: var(--color-exito);
-    border-color: #4CAF50;
-}
-
-.opcion-btn.incorrecta {
-    background: var(--color-error);
-    border-color: #F44336;
-}
-
-.romaji-display {
-    text-align: center;
-    font-size: 1.5rem;
-    color: #8A5AF7;
-    margin: 20px 0;
-    min-height: 40px;
-}
-
-/* ==================== BARRA DINERO ==================== */
-.barra-dinero {
-    position: fixed;
-    top: 20px;
-    right: 20px;
-    background: rgba(0, 0, 0, 0.7);
-    padding: 10px 20px;
-    border-radius: 50px;
-    border: 2px solid var(--color-dinero);
-    z-index: 1000;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.dinero-icono {
-    font-size: 1.5rem;
-}
-
-.dinero-actual {
-    font-weight: bold;
-    color: var(--color-dinero);
-}
-
-/* ==================== NOTIFICACIONES ==================== */
-.notificacion {
-    position: fixed;
-    bottom: 30px;
-    right: 30px;
-    background: var(--color-primario);
-    color: white;
-    padding: 15px 25px;
-    border-radius: 10px;
-    animation: slideIn 0.3s ease;
-    z-index: 1001;
-}
-
-@keyframes slideIn {
-    from { transform: translateX(100%); opacity: 0; }
-    to { transform: translateX(0); opacity: 1; }
-}
-
-/* ==================== RESPONSIVE ==================== */
-@media (max-width: 768px) {
-    .contenedores-grid {
-        grid-template-columns: 1fr;
-    }
+    <!-- SCRIPTS -->
+    <script src="vocabulario.js"></script>
+    <script src="sistemas.js"></script>
     
-    .opciones-grid {
-        grid-template-columns: 1fr;
-    }
-    
-    .palabra-japones {
-        font-size: 2.5rem;
-    }
-    
-    .barra-dinero {
-        top: 10px;
-        right: 10px;
-        left: 10px;
-        justify-content: center;
-    }
-}
+    <script>
+        // Controlar visibilidad de secciones
+        document.getElementById('btn-volver')?.addEventListener('click', () => {
+            document.getElementById('quiz-section').style.display = 'none';
+            document.getElementById('mangas-section').style.display = 'block';
+        });
+
+        // Si hay parámetros de quiz en URL, mostrar quiz directamente
+        const urlParams = new URLSearchParams(window.location.search);
+        if(urlParams.has('quiz')) {
+            document.getElementById('mangas-section').style.display = 'none';
+            document.getElementById('quiz-section').style.display = 'block';
+        }
+    </script>
+</body>
+</html>
