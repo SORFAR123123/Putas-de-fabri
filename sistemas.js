@@ -6,7 +6,6 @@ class SistemaEconomia {
     constructor() {
         this.dinero = this.cargarDinero() || 0;
         this.progreso = this.cargarProgreso() || {};
-        this.inicializarUI();
     }
 
     // ====================
@@ -16,7 +15,6 @@ class SistemaEconomia {
     agregarDinero(cantidad) {
         this.dinero += cantidad;
         this.guardarDinero();
-        this.actualizarUI();
         this.mostrarNotificacion(`+${cantidad.toFixed(2)} soles`);
     }
 
@@ -115,37 +113,6 @@ class SistemaEconomia {
         };
     }
 
-    // ====================
-    // UI
-    // ====================
-
-    inicializarUI() {
-        this.crearContadorDinero();
-        this.actualizarUI();
-    }
-
-    crearContadorDinero() {
-        // Crear contenedor de dinero si no existe
-        if (!document.getElementById('dinero-container')) {
-            const dineroDiv = document.createElement('div');
-            dineroDiv.id = 'dinero-container';
-            dineroDiv.className = 'dinero-container';
-            dineroDiv.innerHTML = `
-                <span>💰</span>
-                <span id="dinero-cantidad">${this.dinero.toFixed(2)}</span>
-                <span>soles</span>
-            `;
-            document.body.insertBefore(dineroDiv, document.body.firstChild);
-        }
-    }
-
-    actualizarUI() {
-        const dineroElement = document.getElementById('dinero-cantidad');
-        if (dineroElement) {
-            dineroElement.textContent = this.dinero.toFixed(2);
-        }
-    }
-
     mostrarNotificacion(mensaje) {
         // Crear notificación
         const notif = document.createElement('div');
@@ -219,7 +186,7 @@ class SistemaEconomia {
 }
 
 // ================================================
-// SISTEMA DE REPRODUCTOR DRIVE CON TIMESTAMPS
+// SISTEMA DE REPRODUCTOR DRIVE CON TIMESTAMPS FUNCIONALES
 // ================================================
 
 class SistemaReproductorDrive {
@@ -239,8 +206,6 @@ class SistemaReproductorDrive {
         
         return `
             <div class="reproductor-container">
-                <h2 style="text-align: center; margin-bottom: 20px; color: #FFD166;">🎬 REPRODUCIENDO VIDEO</h2>
-                
                 <div class="video-wrapper">
                     <iframe 
                         id="drive-iframe"
@@ -270,7 +235,7 @@ class SistemaReproductorDrive {
     }
 
     // ====================
-    // TIMESTAMPS - TRUCO ESPECIAL PARA DRIVE
+    // TIMESTAMPS - TRUCO FUNCIONAL PARA DRIVE
     // ====================
 
     crearListaTimestamps(timestamps) {
@@ -299,28 +264,32 @@ class SistemaReproductorDrive {
         return html;
     }
 
-    // TRUCO PARA SALTAR EN DRIVE
+    // TRUCO FUNCIONAL PARA SALTAR EN DRIVE
     saltarATiempo(segundos) {
         const iframe = document.getElementById('drive-iframe');
         if (!iframe) return;
         
         console.log(`Saltando a ${segundos} segundos...`);
         
-        // Método 1: Intentar con mensaje postMessage (no siempre funciona con Drive)
-        try {
+        // MÉTODO FUNCIONAL: Cambiar el src del iframe con el timestamp
+        // Formato correcto para Google Drive: #t=XmYs (minutos y segundos)
+        const minutos = Math.floor(segundos / 60);
+        const segs = segundos % 60;
+        
+        // Crear nueva URL con el timestamp
+        const nuevoSrc = `https://drive.google.com/file/d/${this.videoActual}/preview#t=${minutos}m${segs}s`;
+        
+        // Forzar recarga del iframe
+        iframe.src = nuevoSrc;
+        
+        // También intentar con parámetros de URL (alternativa)
+        setTimeout(() => {
             iframe.contentWindow.postMessage({
                 event: 'command',
                 func: 'seekTo',
                 args: [segundos, true]
             }, '*');
-        } catch (e) {
-            console.log("Método 1 falló, intentando método 2...");
-        }
-        
-        // Método 2: Recargar iframe con timestamp en URL (más confiable)
-        // NOTA: Drive no soporta oficialmente timestamps en iframe, pero intentamos
-        const nuevoSrc = `https://drive.google.com/file/d/${this.videoActual}/preview#t=${segundos}s`;
-        iframe.src = nuevoSrc;
+        }, 1000);
         
         // Mostrar notificación
         this.mostrarNotificacionTiempo(segundos);
@@ -400,31 +369,3 @@ class SistemaReproductorDrive {
 
 const sistemaEconomia = new SistemaEconomia();
 const sistemaReproductor = new SistemaReproductorDrive();
-
-// ================================================
-// ESTILOS ADICIONALES
-// ================================================
-
-const estiloNotificaciones = document.createElement('style');
-estiloNotificaciones.textContent = `
-    @keyframes slideIn {
-        from {
-            transform: translateX(100px);
-            opacity: 0;
-        }
-        to {
-            transform: translateX(0);
-            opacity: 1;
-        }
-    }
-    
-    @keyframes fadeOut {
-        from {
-            opacity: 1;
-        }
-        to {
-            opacity: 0;
-        }
-    }
-`;
-document.head.appendChild(estiloNotificaciones);
