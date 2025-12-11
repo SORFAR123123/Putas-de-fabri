@@ -19,12 +19,12 @@
 
         <div class="card-container">
 
-            <!-- CARD 1 -->
+            <!-- CARD 1 - MANGAS -->
             <div class="card card-blue">
-                <div class="card-icon red">✖</div>
-                <h3>🔥 PALABRAS FALLADAS</h3>
-                <p>Revisa y practica tus errores</p>
-                <button class="card-button">Practicar ahora</button>
+                <div class="card-icon manga">📚</div>
+                <h3>🎌 MANGAS</h3>
+                <p>Explora y aprende con cómics japoneses</p>
+                <button class="card-button">Ver colección</button>
             </div>
 
             <!-- CARD 2 -->
@@ -71,7 +71,15 @@
         document.querySelectorAll('.card-button').forEach(button => {
             button.addEventListener('click', function() {
                 const cardTitle = this.closest('.card').querySelector('h3').textContent;
-                alert(`¡Iniciando: ${cardTitle}!`);
+                
+                // Mensajes personalizados según la card
+                if (cardTitle.includes('MANGAS')) {
+                    alert('📚 ¡Explorando la colección de mangas! ¡Disfruta de la lectura!');
+                } else if (cardTitle.includes('Nakano')) {
+                    alert('💖 ¡Iniciando aventura RPG con las quintillizas Nakano!');
+                } else {
+                    alert(`¡Iniciando: ${cardTitle}!`);
+                }
             });
         });
 
@@ -84,6 +92,15 @@
             card.addEventListener('mouseleave', function() {
                 this.style.transform = 'translateY(0) scale(1)';
             });
+        });
+        
+        // Efecto especial para la card de MANGAS
+        const mangaCard = document.querySelector('.card-blue');
+        mangaCard.addEventListener('click', function() {
+            this.style.animation = 'mangaPulse 0.5s';
+            setTimeout(() => {
+                this.style.animation = '';
+            }, 500);
         });
     </script>
 </body>
