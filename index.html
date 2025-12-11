@@ -18,16 +18,15 @@
         <h2>📄 ENTRENAMIENTO ESPECIAL</h2>
 
         <div class="card-container">
-
             <!-- CARD 1 - MANGAS -->
-            <div class="card card-blue">
+            <div class="card card-blue" id="manga-card">
                 <div class="card-icon manga">📚</div>
                 <h3>🎌 MANGAS</h3>
                 <p>Explora y aprende con cómics japoneses</p>
-                <button class="card-button">Ver colección</button>
+                <button class="card-button" onclick="cargarPaginaMangas()">Ver colección</button>
             </div>
 
-            <!-- CARD 2 -->
+            <!-- CARD 2 - QUINTILLIZAS (NO TOCAR) -->
             <div class="card card-purple">
                 <div class="card-img-circle">
                     <div class="nakano-placeholder">💖</div>
@@ -36,10 +35,20 @@
                 <p>5 hermanas + sistema único + decoración</p>
                 <button class="card-button">Explorar RPG</button>
             </div>
-
         </div>
     </section>
 
+    <!-- SECCIÓN DINÁMICA PARA MANGAS -->
+    <section id="manga-section" style="display: none;">
+        <!-- Aquí se cargarán los 10 contenedores dinámicamente -->
+    </section>
+
+    <!-- SECCIÓN DEL QUIZ -->
+    <section id="quiz-section" style="display: none;">
+        <!-- Aquí se cargará el quiz dinámicamente -->
+    </section>
+
+    <!-- SECCIÓN ADICIONAL (se mantiene igual) -->
     <section class="additional-section">
         <h2>✨ Más Características</h2>
         <div class="features">
@@ -66,42 +75,10 @@
         <p class="github-link">Publicado en <a href="https://pages.github.com/" target="_blank">GitHub Pages</a></p>
     </footer>
 
-    <script>
-        // Interactividad simple para las cards
-        document.querySelectorAll('.card-button').forEach(button => {
-            button.addEventListener('click', function() {
-                const cardTitle = this.closest('.card').querySelector('h3').textContent;
-                
-                // Mensajes personalizados según la card
-                if (cardTitle.includes('MANGAS')) {
-                    alert('📚 ¡Explorando la colección de mangas! ¡Disfruta de la lectura!');
-                } else if (cardTitle.includes('Nakano')) {
-                    alert('💖 ¡Iniciando aventura RPG con las quintillizas Nakano!');
-                } else {
-                    alert(`¡Iniciando: ${cardTitle}!`);
-                }
-            });
-        });
-
-        // Efecto de hover mejorado
-        document.querySelectorAll('.card').forEach(card => {
-            card.addEventListener('mouseenter', function() {
-                this.style.transform = 'translateY(-10px) scale(1.02)';
-            });
-            
-            card.addEventListener('mouseleave', function() {
-                this.style.transform = 'translateY(0) scale(1)';
-            });
-        });
-        
-        // Efecto especial para la card de MANGAS
-        const mangaCard = document.querySelector('.card-blue');
-        mangaCard.addEventListener('click', function() {
-            this.style.animation = 'mangaPulse 0.5s';
-            setTimeout(() => {
-                this.style.animation = '';
-            }, 500);
-        });
-    </script>
+    <!-- SCRIPTS -->
+    <script src="imagenes.js"></script>
+    <script src="vocabulario.js"></script>
+    <script src="sistemas.js"></script>
+    <script src="main.js"></script>
 </body>
 </html>
