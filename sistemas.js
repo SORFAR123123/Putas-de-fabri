@@ -1,5 +1,5 @@
 // ================================================
-// SISTEMA DE DINERO Y PROGRESO
+// SISTEMA COMPLETO: DINERO + REPRODUCTOR + TIMESTAMPS
 // ================================================
 
 class SistemaEconomia {
@@ -218,10 +218,193 @@ class SistemaEconomia {
     }
 }
 
-// Crear instancia global
-const sistemaEconomia = new SistemaEconomia();
+// ================================================
+// SISTEMA DE REPRODUCTOR DRIVE CON TIMESTAMPS
+// ================================================
 
-// Estilos CSS para notificaciones
+class SistemaReproductorDrive {
+    constructor() {
+        this.videoActual = null;
+        this.timestampsActuales = [];
+        this.iframeReproductor = null;
+    }
+
+    // ====================
+    // CARGAR VIDEO
+    // ====================
+
+    cargarVideo(driveId, timestamps = []) {
+        this.videoActual = driveId;
+        this.timestampsActuales = timestamps;
+        
+        return `
+            <div class="reproductor-container">
+                <h2 style="text-align: center; margin-bottom: 20px; color: #FFD166;">🎬 REPRODUCIENDO VIDEO</h2>
+                
+                <div class="video-wrapper">
+                    <iframe 
+                        id="drive-iframe"
+                        src="https://drive.google.com/file/d/${driveId}/preview"
+                        frameborder="0"
+                        allow="autoplay; encrypted-media"
+                        allowfullscreen
+                        class="drive-iframe"
+                    ></iframe>
+                </div>
+                
+                ${this.crearListaTimestamps(timestamps)}
+                
+                <div class="video-controls">
+                    <button class="video-btn" onclick="sistemaReproductor.pausarVideo()">
+                        ⏸️ Pausar
+                    </button>
+                    <button class="video-btn" onclick="sistemaReproductor.reanudarVideo()">
+                        ▶️ Reanudar
+                    </button>
+                    <button class="video-btn btn-volver" onclick="volverASubcontenedoresVideos()">
+                        ↩️ Volver
+                    </button>
+                </div>
+            </div>
+        `;
+    }
+
+    // ====================
+    // TIMESTAMPS - TRUCO ESPECIAL PARA DRIVE
+    // ====================
+
+    crearListaTimestamps(timestamps) {
+        if (!timestamps || timestamps.length === 0) {
+            return '<p style="text-align: center; opacity: 0.7; margin: 20px 0;">No hay timestamps disponibles</p>';
+        }
+
+        let html = '<div class="timestamps-container">';
+        html += '<h3 style="color: #8A5AF7; margin-bottom: 15px;">📍 Timestamps:</h3>';
+        html += '<div class="timestamps-grid">';
+        
+        timestamps.forEach((ts, index) => {
+            const minutos = Math.floor(ts.tiempo / 60);
+            const segundos = ts.tiempo % 60;
+            const tiempoFormateado = `${minutos}:${segundos.toString().padStart(2, '0')}`;
+            
+            html += `
+                <div class="timestamp-item" onclick="sistemaReproductor.saltarATiempo(${ts.tiempo})">
+                    <div class="timestamp-tiempo">${tiempoFormateado}</div>
+                    <div class="timestamp-titulo">${ts.titulo}</div>
+                </div>
+            `;
+        });
+        
+        html += '</div></div>';
+        return html;
+    }
+
+    // TRUCO PARA SALTAR EN DRIVE
+    saltarATiempo(segundos) {
+        const iframe = document.getElementById('drive-iframe');
+        if (!iframe) return;
+        
+        console.log(`Saltando a ${segundos} segundos...`);
+        
+        // Método 1: Intentar con mensaje postMessage (no siempre funciona con Drive)
+        try {
+            iframe.contentWindow.postMessage({
+                event: 'command',
+                func: 'seekTo',
+                args: [segundos, true]
+            }, '*');
+        } catch (e) {
+            console.log("Método 1 falló, intentando método 2...");
+        }
+        
+        // Método 2: Recargar iframe con timestamp en URL (más confiable)
+        // NOTA: Drive no soporta oficialmente timestamps en iframe, pero intentamos
+        const nuevoSrc = `https://drive.google.com/file/d/${this.videoActual}/preview#t=${segundos}s`;
+        iframe.src = nuevoSrc;
+        
+        // Mostrar notificación
+        this.mostrarNotificacionTiempo(segundos);
+    }
+
+    mostrarNotificacionTiempo(segundos) {
+        const minutos = Math.floor(segundos / 60);
+        const segs = segundos % 60;
+        const mensaje = `Saltando a ${minutos}:${segs.toString().padStart(2, '0')}`;
+        
+        const notif = document.createElement('div');
+        notif.textContent = mensaje;
+        notif.style.cssText = `
+            position: fixed;
+            top: 150px;
+            right: 20px;
+            background: linear-gradient(135deg, #5864F5, #8A5AF7);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 10px;
+            font-weight: bold;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.3);
+            z-index: 1002;
+            animation: slideIn 0.3s ease, fadeOut 0.3s ease 1.5s forwards;
+        `;
+        
+        document.body.appendChild(notif);
+        setTimeout(() => notif.remove(), 2000);
+    }
+
+    // ====================
+    // CONTROLES BÁSICOS
+    // ====================
+
+    pausarVideo() {
+        const iframe = document.getElementById('drive-iframe');
+        try {
+            iframe.contentWindow.postMessage({
+                event: 'command',
+                func: 'pauseVideo',
+                args: []
+            }, '*');
+        } catch (e) {
+            console.log("No se pudo pausar:", e);
+        }
+    }
+
+    reanudarVideo() {
+        const iframe = document.getElementById('drive-iframe');
+        try {
+            iframe.contentWindow.postMessage({
+                event: 'command',
+                func: 'playVideo',
+                args: []
+            }, '*');
+        } catch (e) {
+            console.log("No se pudo reanudar:", e);
+        }
+    }
+
+    // ====================
+    // UTILIDADES
+    // ====================
+
+    obtenerVideoActual() {
+        return this.videoActual;
+    }
+
+    obtenerTimestampsActuales() {
+        return this.timestampsActuales;
+    }
+}
+
+// ================================================
+// CREAR INSTANCIAS GLOBALES
+// ================================================
+
+const sistemaEconomia = new SistemaEconomia();
+const sistemaReproductor = new SistemaReproductorDrive();
+
+// ================================================
+// ESTILOS ADICIONALES
+// ================================================
+
 const estiloNotificaciones = document.createElement('style');
 estiloNotificaciones.textContent = `
     @keyframes slideIn {
