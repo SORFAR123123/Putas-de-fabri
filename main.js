@@ -16,7 +16,7 @@ let esperandoSiguiente = false;
 let modoActual = 'manga'; // 'manga' o 'video'
 
 // ====================
-// FUNCIONES HEADER
+// FUNCIONES HEADER Y DINERO
 // ====================
 
 function ocultarHeader() {
@@ -24,6 +24,12 @@ function ocultarHeader() {
     document.querySelector('.especial-section').style.display = 'none';
     document.querySelector('.additional-section').style.display = 'none';
     document.querySelector('.footer').style.display = 'none';
+    
+    // Ocultar contador de dinero cuando no estemos en inicio
+    const dineroContador = document.getElementById('dinero-inicio');
+    if (dineroContador) {
+        dineroContador.classList.add('hidden');
+    }
 }
 
 function mostrarHeader() {
@@ -31,6 +37,37 @@ function mostrarHeader() {
     document.querySelector('.especial-section').style.display = 'block';
     document.querySelector('.additional-section').style.display = 'block';
     document.querySelector('.footer').style.display = 'block';
+    
+    // Mostrar contador de dinero solo en inicio
+    const dineroContador = document.getElementById('dinero-inicio');
+    if (dineroContador) {
+        dineroContador.classList.remove('hidden');
+    }
+}
+
+function crearContadorDineroInicio() {
+    // Crear contenedor de dinero SOLO para inicio
+    if (!document.getElementById('dinero-inicio')) {
+        const dineroDiv = document.createElement('div');
+        dineroDiv.id = 'dinero-inicio';
+        dineroDiv.className = 'dinero-inicio-container';
+        dineroDiv.innerHTML = `
+            <span>💰</span>
+            <span id="dinero-cantidad-inicio">${sistemaEconomia.obtenerDinero().toFixed(2)}</span>
+            <span>soles</span>
+        `;
+        
+        // Insertar al principio del header
+        const header = document.querySelector('.header');
+        header.insertBefore(dineroDiv, header.firstChild);
+    }
+}
+
+function actualizarContadorDineroInicio() {
+    const dineroElement = document.getElementById('dinero-cantidad-inicio');
+    if (dineroElement) {
+        dineroElement.textContent = sistemaEconomia.obtenerDinero().toFixed(2);
+    }
 }
 
 // ====================
@@ -67,6 +104,7 @@ function cargarPaginaVideos() {
 
 function volverAlInicio() {
     mostrarHeader();
+    actualizarContadorDineroInicio();
     
     // Ocultar otras secciones
     document.getElementById('manga-section').style.display = 'none';
@@ -281,7 +319,7 @@ function crearBotonVolver(funcionClick) {
 }
 
 // ====================
-// SISTEMA DE QUIZ (MANTIENE LO MISMO)
+// SISTEMA DE QUIZ (CON ROMAJI DEBAJO DE LA PALABRA)
 // ====================
 
 function iniciarQuiz(contenedor, subcontenedor, mazo) {
@@ -315,6 +353,7 @@ function mostrarPalabraQuiz() {
     const quizSection = document.getElementById('quiz-section');
     const palabra = palabrasActuales[indicePalabraActual];
     
+    // NUEVA ESTRUCTURA: Palabra → Romaji → Opciones
     quizSection.innerHTML = `
         <div class="quiz-container">
             <h2 style="text-align: center; color: #8A5AF7; margin-bottom: 20px;">
@@ -325,12 +364,17 @@ function mostrarPalabraQuiz() {
                 ${palabra.japones}
             </div>
             
+            <!-- ROMAJI JUSTO DEBAJO DE LA PALABRA -->
+            <div class="romaji-debajo" id="romaji-debajo" style="display: none;">
+                <div class="romaji-text">${palabra.lectura}</div>
+            </div>
+            
             <div class="opciones-grid" id="opciones-container">
                 <!-- Opciones se cargan dinámicamente -->
             </div>
             
-            <div id="romaji-container" style="display: none;">
-                <!-- Romaji se muestra después de responder -->
+            <div id="resultado-container" style="display: none;">
+                <!-- Resultado se muestra después de responder -->
             </div>
             
             <div class="quiz-controls">
@@ -388,6 +432,10 @@ function verificarRespuesta(opcionSeleccionada, posicionCorrecta) {
     const opcionesBtns = document.querySelectorAll('.opcion-btn');
     const correcta = opcionSeleccionada === posicionCorrecta;
     
+    // Mostrar romaji debajo de la palabra
+    const romajiDebajo = document.getElementById('romaji-debajo');
+    romajiDebajo.style.display = 'block';
+    
     // Marcar botones
     opcionesBtns.forEach((btn, index) => {
         if (index === posicionCorrecta) {
@@ -398,14 +446,12 @@ function verificarRespuesta(opcionSeleccionada, posicionCorrecta) {
         btn.disabled = true;
     });
     
-    // Mostrar romaji
-    const romajiContainer = document.getElementById('romaji-container');
-    romajiContainer.style.display = 'block';
-    romajiContainer.innerHTML = `
+    // Mostrar resultado
+    const resultadoContainer = document.getElementById('resultado-container');
+    resultadoContainer.style.display = 'block';
+    resultadoContainer.innerHTML = `
         <div class="romaji-container">
-            <h3>Romaji:</h3>
-            <div class="romaji-text">${palabra.lectura}</div>
-            <p style="margin-top: 10px; opacity: 0.8;">
+            <p style="margin-top: 10px; opacity: 0.8; font-size: 1.2rem;">
                 ${correcta ? '✅ ¡Correcto!' : '❌ Incorrecto. La respuesta correcta era: ' + palabra.opciones[palabra.respuesta]}
             </p>
         </div>
@@ -511,6 +557,9 @@ function finalizarQuiz() {
             </div>
         </div>
     `;
+    
+    // Actualizar contador de dinero en el inicio
+    actualizarContadorDineroInicio();
 }
 
 function cancelarQuiz() {
@@ -567,8 +616,8 @@ function verificarVocabularioDisponible(contenedor, subcontenedor, mazo) {
 // ====================
 
 document.addEventListener('DOMContentLoaded', function() {
-    // Inicializar sistema de economía
-    sistemaEconomia.inicializarUI();
+    // Crear contador de dinero SOLO en inicio
+    crearContadorDineroInicio();
     
     // Botón Quintillizas
     document.querySelectorAll('.card-button').forEach((button, index) => {
