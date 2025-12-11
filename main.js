@@ -330,13 +330,20 @@ function finalizarQuiz() {
     
     console.log(`Quiz finalizado: ${aciertos} aciertos de ${palabrasActuales.length} = ${porcentaje}%`);
     
-    // Actualizar progreso en sistema
+    // OBTENER DINERO ANTES DE ACTUALIZAR
+    const dineroAntes = sistemaEconomia.obtenerDinero();
+    
+    // Actualizar progreso en sistema (ESTE MÉTODO DA LA RECOMPENSA)
     sistemaEconomia.actualizarProgreso(
         contenedorActual, 
         subcontenedorActual, 
         mazoActual, 
         porcentaje
     );
+    
+    // OBTENER DINERO DESPUÉS (con la recompensa ya añadida)
+    const dineroAhora = sistemaEconomia.obtenerDinero();
+    const recompensa = dineroAhora - dineroAntes;
     
     // Mostrar resultados
     document.getElementById('quiz-section').innerHTML = `
@@ -353,10 +360,13 @@ function finalizarQuiz() {
             <div style="background: rgba(255, 255, 255, 0.05); padding: 25px; border-radius: 15px; margin: 20px 0;">
                 <h3 style="color: #4CAF50; margin-bottom: 15px;">💰 Recompensa Obtenida</h3>
                 <div style="font-size: 2.5rem; text-align: center; color: #FFD166;">
-                    ${sistemaEconomia.obtenerDinero().toFixed(2)} soles
+                    ${dineroAhora.toFixed(2)} soles
                 </div>
                 <p style="text-align: center; margin-top: 10px; opacity: 0.8;">
-                    ${porcentaje === 100 ? '¡Completado al 100%! +2.00 soles' : 'Continúa practicando para ganar más'}
+                    ${recompensa > 0 ? `+${recompensa.toFixed(2)} soles ganados` : 'Continúa practicando para ganar más'}
+                </p>
+                <p style="text-align: center; font-size: 0.9rem; opacity: 0.7;">
+                    (Antes: ${dineroAntes.toFixed(2)} soles)
                 </p>
             </div>
             
