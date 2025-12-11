@@ -25,20 +25,25 @@ class SistemaEconomia {
     }
 
     // ====================
-    // PROGRESO DE MAZOS
+    // PROGRESO DE MAZOS - CORREGIDO
     // ====================
 
     actualizarProgreso(contenedor, subcontenedor, mazo, porcentaje) {
         const clave = `${contenedor}_${subcontenedor}_${mazo}`;
         const progresoAnterior = this.progreso[clave] || 0;
         
-        // Solo actualizar si es mejor
-        if (porcentaje > progresoAnterior) {
+        console.log(`Actualizando progreso: ${clave}`);
+        console.log(`Progreso anterior: ${progresoAnterior}%, Nuevo: ${porcentaje}%`);
+        
+        // SIEMPRE actualizar si es mejor o igual (para primer intento)
+        if (porcentaje >= progresoAnterior) {
             this.progreso[clave] = porcentaje;
             this.guardarProgreso();
             
-            // Calcular recompensa
-            this.calcularRecompensa(contenedor, subcontenedor, mazo, porcentaje);
+            // Calcular recompensa SOLO si mejoró
+            if (porcentaje > progresoAnterior) {
+                this.calcularRecompensa(contenedor, subcontenedor, mazo, porcentaje);
+            }
         }
         
         return this.progreso[clave];
@@ -50,37 +55,42 @@ class SistemaEconomia {
     }
 
     // ====================
-    // CÁLCULO DE RECOMPENSAS
+    // CÁLCULO DE RECOMPENSAS - 2 SOLES POR 100%
     // ====================
 
     calcularRecompensa(contenedor, subcontenedor, mazo, porcentaje) {
         const clave = `${contenedor}_${subcontenedor}_${mazo}`;
         const progresoAnterior = this.progreso[clave] || 0;
         
+        console.log(`Calculando recompensa para: ${clave}`);
+        console.log(`De ${progresoAnterior}% a ${porcentaje}%`);
+        
         // Solo dar recompensa si mejoró
         if (porcentaje > progresoAnterior) {
             let recompensa = 0;
             
+            // SIEMPRE 2 SOLES POR COMPLETAR 100%
             if (porcentaje === 100) {
-                // Completado 100% = 2 soles
                 recompensa = 2.00;
-            } else if (porcentaje >= 80) {
-                // 80-99% = proporcional
+                console.log(`¡100% completado! Recompensa: ${recompensa} soles`);
+            }
+            // Para porcentajes menores, dar proporcional
+            else if (porcentaje >= 80) {
                 recompensa = (porcentaje / 100) * 1.50;
             } else if (porcentaje >= 50) {
-                // 50-79% = proporcional
                 recompensa = (porcentaje / 100) * 1.00;
             } else {
-                // Menos de 50% = proporcional reducido
                 recompensa = (porcentaje / 100) * 0.50;
             }
             
             // Redondear a 2 decimales
             recompensa = Math.round(recompensa * 100) / 100;
             
-            // Dar recompensa solo por la mejora
-            this.agregarDinero(recompensa);
-            console.log(`Recompensa: ${recompensa} soles (${progresoAnterior}% → ${porcentaje}%)`);
+            // Dar recompensa
+            if (recompensa > 0) {
+                this.agregarDinero(recompensa);
+                console.log(`Recompensa dada: ${recompensa} soles`);
+            }
         }
     }
 
@@ -145,12 +155,13 @@ class SistemaEconomia {
             right: 20px;
             background: linear-gradient(135deg, #4CAF50, #2E7D32);
             color: white;
-            padding: 10px 20px;
+            padding: 12px 25px;
             border-radius: 50px;
             font-weight: bold;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.4);
             z-index: 1001;
             animation: slideIn 0.3s ease, fadeOut 0.3s ease 2s forwards;
+            font-size: 1.1rem;
         `;
         
         document.body.appendChild(notif);
@@ -202,18 +213,6 @@ class SistemaEconomia {
             return {};
         }
     }
-
-    // ====================
-    // RESET (para pruebas)
-    // ====================
-
-    resetearTodo() {
-        this.dinero = 0;
-        this.progreso = {};
-        localStorage.removeItem('manga_dinero');
-        localStorage.removeItem('manga_progreso');
-        this.actualizarUI();
-    }
 }
 
 // Crear instancia global
@@ -240,10 +239,6 @@ estiloNotificaciones.textContent = `
         to {
             opacity: 0;
         }
-    }
-    
-    .notificacion-dinero {
-        animation: slideIn 0.3s ease, fadeOut 0.3s ease 2s forwards !important;
     }
 `;
 document.head.appendChild(estiloNotificaciones);
