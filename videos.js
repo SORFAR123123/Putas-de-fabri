@@ -10,7 +10,7 @@ const videosDatabase = {
     // Sub-contenedor 1.1
     '1_1': {
         titulo: "🎌 Introducción al Japonés Básico",
-        driveId: "1ABC123XYZ", // REEMPLAZA con tu ID real de Drive
+        driveId: "1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS", // REEMPLAZA con tu ID real de Drive
         descripcion: "Video introductorio para principiantes. Aprende saludos básicos y presentaciones.",
         timestamps: [
             { tiempo: 0, titulo: "👋 Introducción" },
@@ -26,7 +26,7 @@ const videosDatabase = {
     // Sub-contenedor 1.2
     '1_2': {
         titulo: "✍️ Aprendiendo Hiragana",
-        driveId: "2DEF456UVW", // REEMPLAZA con tu ID real de Drive
+        driveId: "1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS", // REEMPLAZA con tu ID real de Drive
         descripcion: "Tutorial completo del sistema Hiragana con ejercicios de escritura.",
         timestamps: [
             { tiempo: 0, titulo: "📖 Introducción a Hiragana" },
@@ -42,7 +42,7 @@ const videosDatabase = {
     // Sub-contenedor 1.3
     '1_3': {
         titulo: "🗣️ Conversación Básica N5",
-        driveId: "3GHI789RST", // REEMPLAZA con tu ID real de Drive
+        driveId: "1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS", // REEMPLAZA con tu ID real de Drive
         descripcion: "Diálogos prácticos para nivel N5 del JLPT. Situaciones cotidianas.",
         timestamps: [
             { tiempo: 0, titulo: "🏪 En la tienda" },
@@ -61,7 +61,7 @@ const videosDatabase = {
     // Sub-contenedor 2.1
     '2_1': {
         titulo: "🎌 Cultura Japonesa",
-        driveId: "4JKL012UVX", // REEMPLAZA con tu ID real de Drive
+        driveId: "1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS", // REEMPLAZA con tu ID real de Drive
         descripcion: "Introducción a las costumbres, etiqueta y cultura japonesa.",
         timestamps: [
             { tiempo: 0, titulo: "🎎 Introducción cultural" },
@@ -76,7 +76,7 @@ const videosDatabase = {
     // Sub-contenedor 2.2
     '2_2': {
         titulo: "📚 Gramática N5-N4",
-        driveId: "5MNO345YZA", // REEMPLAZA con tu ID real de Drive
+        driveId: "1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS", // REEMPLAZA con tu ID real de Drive
         descripcion: "Explicación detallada de estructuras gramaticales esenciales.",
         timestamps: [
             { tiempo: 0, titulo: "📝 Partículas (wa, ga, o)" },
@@ -95,7 +95,7 @@ const videosDatabase = {
     // Sub-contenedor 3.1
     '3_1': {
         titulo: "🎵 Japonés con Música",
-        driveId: "", // DEJA VACÍO si no tienes video
+        driveId: "1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS", // DEJA VACÍO si no tienes video
         descripcion: "Aprende japonés a través de letras de canciones populares.",
         timestamps: [],
         duracion: "0:00",
