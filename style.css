@@ -1,4 +1,226 @@
 /* ================================================
+   ESTILOS PRINCIPALES
+   ================================================ */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #0f0c29, #302b63, #24243e);
+    color: white;
+    min-height: 100vh;
+    line-height: 1.6;
+}
+
+/* HEADER */
+.header {
+    text-align: center;
+    padding: 50px 20px 30px;
+    background: rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+    border-bottom: 2px solid rgba(255, 209, 102, 0.3);
+}
+
+.header h1 {
+    font-size: 3rem;
+    margin-bottom: 10px;
+    background: linear-gradient(135deg, #FFD166, #FF6B6B);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 20px rgba(255, 107, 107, 0.3);
+}
+
+.header p {
+    font-size: 1.2rem;
+    opacity: 0.8;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+/* SECCIONES PRINCIPALES */
+.especial-section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 40px 20px;
+}
+
+.especial-section h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+    color: #FFD166;
+}
+
+.additional-section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 60px 20px;
+}
+
+.additional-section h2 {
+    text-align: center;
+    font-size: 2.5rem;
+    margin-bottom: 40px;
+    color: #8A5AF7;
+}
+
+/* CARDS PRINCIPALES */
+.card-container {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    margin-top: 30px;
+}
+
+.card {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 20px;
+    padding: 30px;
+    width: 350px;
+    text-align: center;
+    backdrop-filter: blur(10px);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+    transition: all 0.3s ease;
+    position: relative;
+    overflow: hidden;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    border-color: #FFD166;
+    box-shadow: 0 15px 30px rgba(255, 209, 102, 0.2);
+}
+
+.card-blue {
+    background: linear-gradient(135deg, rgba(88, 100, 245, 0.2), rgba(138, 90, 247, 0.2));
+}
+
+.card-purple {
+    background: linear-gradient(135deg, rgba(138, 90, 247, 0.2), rgba(255, 107, 107, 0.2));
+}
+
+.card-icon {
+    font-size: 4rem;
+    margin-bottom: 20px;
+}
+
+.card-img-circle {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, #8A5AF7, #FF6B6B);
+    margin: 0 auto 20px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 4px solid rgba(255, 255, 255, 0.3);
+}
+
+.nakano-placeholder {
+    font-size: 3.5rem;
+}
+
+.card h3 {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+    color: #FFD166;
+}
+
+.card p {
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: 25px;
+    font-size: 1.1rem;
+}
+
+.card-button {
+    background: linear-gradient(135deg, #5864F5, #8A5AF7);
+    color: white;
+    border: none;
+    padding: 15px 30px;
+    border-radius: 50px;
+    font-size: 1.1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    width: 100%;
+}
+
+.card-button:hover {
+    background: linear-gradient(135deg, #8A5AF7, #FF6B6B);
+    transform: scale(1.05);
+}
+
+/* FEATURES */
+.features {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    flex-wrap: wrap;
+    margin-top: 30px;
+}
+
+.feature {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    padding: 30px;
+    width: 300px;
+    text-align: center;
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    transition: all 0.3s ease;
+}
+
+.feature:hover {
+    transform: translateY(-5px);
+    border-color: #4CAF50;
+    box-shadow: 0 10px 20px rgba(76, 175, 80, 0.2);
+}
+
+.feature-icon {
+    font-size: 3rem;
+    margin-bottom: 20px;
+    color: #4CAF50;
+}
+
+.feature h3 {
+    font-size: 1.5rem;
+    margin-bottom: 15px;
+    color: #4CAF50;
+}
+
+.feature p {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+/* FOOTER */
+.footer {
+    text-align: center;
+    padding: 30px 20px;
+    background: rgba(0, 0, 0, 0.3);
+    margin-top: 60px;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.footer p {
+    margin-bottom: 10px;
+    opacity: 0.7;
+}
+
+.github-link a {
+    color: #FFD166;
+    text-decoration: none;
+}
+
+.github-link a:hover {
+    text-decoration: underline;
+}
+
+/* ================================================
    ESTILOS PARA MANGAS Y QUIZ
    ================================================ */
 
@@ -283,6 +505,15 @@
         padding: 20px;
         margin: 20px;
     }
+    
+    .card-container {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .card {
+        width: 90%;
+    }
 }
 
 @media (max-width: 480px) {
@@ -293,4 +524,26 @@
     .palabra-japonesa {
         font-size: 2rem;
     }
+    
+    .header h1 {
+        font-size: 2rem;
+    }
+    
+    .especial-section h2,
+    .additional-section h2 {
+        font-size: 1.8rem;
+    }
+}
+
+/* ANIMACIONES */
+@keyframes pulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+@keyframes mangaPulse {
+    0% { transform: translateY(-10px) scale(1.02); }
+    50% { transform: translateY(-10px) scale(1.1); }
+    100% { transform: translateY(-10px) scale(1.02); }
 }
