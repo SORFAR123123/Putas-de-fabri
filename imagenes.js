@@ -17,31 +17,21 @@ const imagenesDatabase = {
         10: 'https://images.unsplash.com/photo-1552820728-8b83bb6b773f?w=400&h=400&fit=crop'
     },
 
-    // IMÁGENES PARA SUB-CONTENEDORES (5 por contenedor)
+    // IMÁGENES PARA SUB-CONTENEDORES
     subcontenedores: {
         '1_1': 'https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=300&h=300&fit=crop',
         '1_2': 'https://images.unsplash.com/photo-1544717305-2782549b5136?w=300&h=300&fit=crop',
         '1_3': 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=300&h=300&fit=crop',
         '1_4': 'https://images.unsplash.com/photo-1565598621680-94c48b04e56f?w=300&h=300&fit=crop',
-        '1_5': 'https://images.unsplash.com/photo-1635805737707-575885ab0820?w=300&h=300&fit=crop',
-        // Puedes agregar más imágenes para otros contenedores
-        // Formato: 'contenedor_subcontenedor'
-    },
-
-    // IMÁGENES DEFAULT (por si faltan)
-    default: {
-        contenedor: 'https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=400&h=400&fit=crop',
-        subcontenedor: 'https://images.unsplash.com/photo-1544717305-2782549b5136?w=300&h=300&fit=crop'
+        '1_5': 'https://images.unsplash.com/photo-1635805737707-575885ab0820?w=300&h=300&fit=crop'
     }
 };
 
-// Función para obtener imagen de contenedor
 function obtenerImagenContenedor(numero) {
-    return imagenesDatabase.contenedores[numero] || imagenesDatabase.default.contenedor;
+    return imagenesDatabase.contenedores[numero] || 'https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=400&h=400&fit=crop';
 }
 
-// Función para obtener imagen de subcontenedor
 function obtenerImagenSubcontenedor(contenedor, subcontenedor) {
     const key = `${contenedor}_${subcontenedor}`;
-    return imagenesDatabase.subcontenedores[key] || imagenesDatabase.default.subcontenedor;
+    return imagenesDatabase.subcontenedores[key] || 'https://images.unsplash.com/photo-1544717305-2782549b5136?w=300&h=300&fit=crop';
 }
