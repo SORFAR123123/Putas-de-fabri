@@ -20,16 +20,22 @@
         <div class="card-container">
             <!-- CARD 1 - MANGAS -->
             <div class="card card-blue" id="manga-card">
-                <!-- CAMBIA ESTA URL POR TU IMAGEN -->
                 <div class="card-img" style="background-image: url('https://pbs.twimg.com/media/G76pBZZbQAAVvzo?format=jpg&name=small')"></div>
                 <h3>🎌 MANGAS</h3>
                 <p>Explora y aprende con cómics japoneses</p>
                 <button class="card-button" onclick="cargarPaginaMangas()">Ver colección</button>
             </div>
 
+            <!-- CARD NUEVA - VIDEOS -->
+            <div class="card card-green">
+                <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1574717024453-af2e2c8f2bcc?w=400&h=400&fit=crop')"></div>
+                <h3>🎬 VIDEOS PRIVADOS</h3>
+                <p>Google Drive con timestamps interactivos</p>
+                <button class="card-button" onclick="cargarPaginaVideos()">Ver videos</button>
+            </div>
+
             <!-- CARD 2 - QUINTILLIZAS -->
             <div class="card card-purple">
-                <!-- CAMBIA ESTA URL POR TU IMAGEN -->
                 <div class="card-img" style="background-image: url('https://pbs.twimg.com/media/G6EAjYQXEAA41nv?format=jpg&name=medium')"></div>
                 <h3>💖 Quintillizas Nakano RPG</h3>
                 <p>5 hermanas + sistema único + decoración</p>
@@ -38,7 +44,7 @@
         </div>
     </section>
 
-    <!-- SECCIÓN DINÁMICA PARA MANGAS -->
+    <!-- SECCIÓN DINÁMICA PARA MANGAS/VIDEOS -->
     <section id="manga-section" style="display: none;"></section>
 
     <!-- SECCIÓN DEL QUIZ -->
@@ -73,6 +79,7 @@
 
     <script src="imagenes.js"></script>
     <script src="vocabulario.js"></script>
+    <script src="videos.js"></script>
     <script src="sistemas.js"></script>
     <script src="main.js"></script>
 </body>
