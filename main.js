@@ -44,7 +44,7 @@ function volverAlInicio() {
 }
 
 // ====================
-// CREACIÓN DE UI
+// CREACIÓN DE UI (SIN %)
 // ====================
 
 function crearContenedoresMangas() {
@@ -83,9 +83,10 @@ function crearSubcontenedoresUI(contenedor) {
     </h2>`;
     html += '<div class="subcontenedores-grid">';
     
-    // Crear 5 subcontenedores
+    // Crear 5 subcontenedores (SIN %)
     for (let i = 1; i <= 5; i++) {
         const progreso = calcularProgresoSubcontenedor(contenedor, i);
+        const tieneContenido = tieneVocabularioEnSubcontenedor(contenedor, i);
         
         html += `
             <div class="subcontenedor-item" onclick="cargarMazos(${contenedor}, ${i})">
@@ -95,7 +96,7 @@ function crearSubcontenedoresUI(contenedor) {
                 <div class="mazo-progreso">
                     <div class="mazo-progreso-bar" style="width: ${progreso}%"></div>
                 </div>
-                <p style="font-size: 0.9rem; margin-top: 5px;">${progreso}% completado</p>
+                ${tieneContenido ? '' : '<p style="color: #FF6B6B; font-size: 0.9rem;">(Sin vocabulario)</p>'}
             </div>
         `;
     }
@@ -121,7 +122,7 @@ function crearMazosUI(contenedor, subcontenedor) {
     </h2>`;
     html += '<div class="mazos-container">';
     
-    // Crear 10 mazos
+    // Crear 10 mazos (SIN %)
     for (let i = 1; i <= 10; i++) {
         const progreso = sistemaEconomia.obtenerProgreso(contenedor, subcontenedor, i);
         const tieneVocabulario = verificarVocabularioDisponible(contenedor, subcontenedor, i);
@@ -133,7 +134,7 @@ function crearMazosUI(contenedor, subcontenedor) {
                 <div class="mazo-progreso">
                     <div class="mazo-progreso-bar" style="width: ${progreso}%"></div>
                 </div>
-                <p style="font-size: 0.9rem; margin-top: 5px;">${progreso}% completado</p>
+                ${tieneVocabulario ? '' : '<p style="color: #FF6B6B; font-size: 0.9rem; margin-top: 5px;">(Vacío)</p>'}
             </div>
         `;
     }
@@ -327,6 +328,8 @@ function pasarSiguientePalabra() {
 function finalizarQuiz() {
     const porcentaje = Math.round((aciertos / palabrasActuales.length) * 100);
     
+    console.log(`Quiz finalizado: ${aciertos} aciertos de ${palabrasActuales.length} = ${porcentaje}%`);
+    
     // Actualizar progreso en sistema
     sistemaEconomia.actualizarProgreso(
         contenedorActual, 
@@ -353,7 +356,7 @@ function finalizarQuiz() {
                     ${sistemaEconomia.obtenerDinero().toFixed(2)} soles
                 </div>
                 <p style="text-align: center; margin-top: 10px; opacity: 0.8;">
-                    Dinero total: ${sistemaEconomia.obtenerDinero().toFixed(2)} soles
+                    ${porcentaje === 100 ? '¡Completado al 100%! +2.00 soles' : 'Continúa practicando para ganar más'}
                 </p>
             </div>
             
@@ -404,6 +407,15 @@ function calcularProgresoSubcontenedor(contenedor, subcontenedor) {
     return mazosConVocabulario > 0 ? Math.round(totalProgreso / mazosConVocabulario) : 0;
 }
 
+function tieneVocabularioEnSubcontenedor(contenedor, subcontenedor) {
+    for (let mazo = 1; mazo <= 10; mazo++) {
+        if (verificarVocabularioDisponible(contenedor, subcontenedor, mazo)) {
+            return true;
+        }
+    }
+    return false;
+}
+
 function verificarVocabularioDisponible(contenedor, subcontenedor, mazo) {
     const vocabulario = obtenerVocabulario(contenedor, subcontenedor, mazo);
     return vocabulario && vocabulario.length > 0;
@@ -413,17 +425,15 @@ function verificarVocabularioDisponible(contenedor, subcontenedor, mazo) {
 // INICIALIZACIÓN
 // ====================
 
-// Interactividad original para Quintillizas (NO TOCAR)
 document.addEventListener('DOMContentLoaded', function() {
     // Inicializar sistema de economía
     sistemaEconomia.inicializarUI();
     
-    // Botones originales
+    // Botón Quintillizas
     document.querySelectorAll('.card-button').forEach((button, index) => {
-        if (index > 0) { // Solo el segundo botón (Quintillizas)
+        if (index > 0) {
             button.addEventListener('click', function() {
                 const cardTitle = this.closest('.card').querySelector('h3').textContent;
-                
                 if (cardTitle.includes('Nakano')) {
                     alert('💖 ¡Iniciando aventura RPG con las quintillizas Nakano!');
                 }
@@ -431,7 +441,7 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     });
 
-    // Efectos hover originales
+    // Efectos hover
     document.querySelectorAll('.card').forEach(card => {
         card.addEventListener('mouseenter', function() {
             this.style.transform = 'translateY(-10px) scale(1.02)';
@@ -441,15 +451,4 @@ document.addEventListener('DOMContentLoaded', function() {
             this.style.transform = 'translateY(0) scale(1)';
         });
     });
-    
-    // Efecto manga original
-    const mangaCard = document.querySelector('.card-blue');
-    if (mangaCard) {
-        mangaCard.addEventListener('click', function() {
-            this.style.animation = 'pulse 0.5s';
-            setTimeout(() => {
-                this.style.animation = '';
-            }, 500);
-        });
-    }
 });
