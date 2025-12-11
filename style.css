@@ -120,13 +120,15 @@ body {
 /* DEGRADADOS */
 .card-blue {
     background: linear-gradient(135deg, #4A90E2, #6F6BF8);
+    /* Efecto especial para manga */
+    border-left: 5px solid #FF6B6B;
 }
 
 .card-purple {
     background: linear-gradient(135deg, #5864F5, #8A5AF7);
 }
 
-/* ICONO DE LA PRIMER CARD */
+/* ICONO DE LA CARD DE MANGAS */
 .card-icon {
     font-size: 70px;
     margin-bottom: 15px;
@@ -139,11 +141,19 @@ body {
     background: rgba(255, 255, 255, 0.15);
     backdrop-filter: blur(5px);
     border: 3px solid rgba(255, 255, 255, 0.2);
+    transition: transform 0.3s ease;
 }
 
-.card-icon.red {
+.card-icon.manga {
     color: #FF6B6B;
-    text-shadow: 0 0 10px rgba(255, 107, 107, 0.5);
+    background: linear-gradient(135deg, rgba(255, 107, 107, 0.2), rgba(74, 144, 226, 0.2));
+    border: 3px solid rgba(255, 107, 107, 0.4);
+    text-shadow: 0 0 15px rgba(255, 107, 107, 0.7);
+}
+
+.card-icon.manga:hover {
+    transform: rotate(10deg) scale(1.1);
+    animation: mangaGlow 1.5s infinite alternate;
 }
 
 /* CÍRCULO DE IMAGEN */
@@ -180,6 +190,13 @@ body {
     justify-content: center;
 }
 
+/* Estilo especial para el título MANGAS */
+.card-blue h3 {
+    color: #FFEAA7;
+    text-shadow: 0 0 10px rgba(255, 107, 107, 0.5);
+    font-size: 1.6rem;
+}
+
 .card p {
     margin-top: 0;
     opacity: 0.9;
@@ -203,10 +220,21 @@ body {
     backdrop-filter: blur(5px);
 }
 
+.card-blue .card-button {
+    background: linear-gradient(90deg, #FF6B6B, #FF8E8E);
+    border: 2px solid rgba(255, 255, 255, 0.6);
+    font-weight: 700;
+}
+
 .card-button:hover {
     background: rgba(255, 255, 255, 0.3);
     transform: scale(1.05);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.card-blue .card-button:hover {
+    background: linear-gradient(90deg, #FF8E8E, #FF6B6B);
+    box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
 }
 
 /* SECCIÓN ADICIONAL */
@@ -297,6 +325,35 @@ body {
     color: #8A5AF7;
 }
 
+/* ANIMACIONES ESPECIALES PARA MANGAS */
+@keyframes mangaGlow {
+    from {
+        box-shadow: 0 0 10px rgba(255, 107, 107, 0.5);
+    }
+    to {
+        box-shadow: 0 0 25px rgba(255, 107, 107, 0.8), 0 0 35px rgba(74, 144, 226, 0.6);
+    }
+}
+
+@keyframes mangaPulse {
+    0% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+    100% { transform: scale(1); }
+}
+
+/* Efecto especial para el título MANGAS */
+.card-blue h3::after {
+    content: '  🇯🇵';
+    font-size: 1.2rem;
+    animation: wave 2s infinite;
+}
+
+@keyframes wave {
+    0%, 100% { transform: rotate(0deg); }
+    25% { transform: rotate(10deg); }
+    75% { transform: rotate(-10deg); }
+}
+
 /* RESPONSIVE */
 @media (max-width: 768px) {
     .header h1 {
@@ -322,6 +379,12 @@ body {
         width: 90%;
         max-width: 350px;
     }
+    
+    .card-icon {
+        width: 100px;
+        height: 100px;
+        font-size: 60px;
+    }
 }
 
 @media (max-width: 480px) {
@@ -335,5 +398,9 @@ body {
     
     .card {
         padding: 25px 20px;
+    }
+    
+    .card-blue h3::after {
+        content: '';
     }
 }
