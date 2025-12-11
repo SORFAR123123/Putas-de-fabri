@@ -25,7 +25,7 @@ class SistemaEconomia {
     }
 
     // ====================
-    // PROGRESO DE MAZOS - CORREGIDO
+    // PROGRESO DE MAZOS
     // ====================
 
     actualizarProgreso(contenedor, subcontenedor, mazo, porcentaje) {
@@ -35,15 +35,13 @@ class SistemaEconomia {
         console.log(`Actualizando progreso: ${clave}`);
         console.log(`Progreso anterior: ${progresoAnterior}%, Nuevo: ${porcentaje}%`);
         
-        // SIEMPRE actualizar si es mejor o igual (para primer intento)
+        // SIEMPRE actualizar si es mejor
         if (porcentaje >= progresoAnterior) {
             this.progreso[clave] = porcentaje;
             this.guardarProgreso();
             
-            // Calcular recompensa SOLO si mejoró
-            if (porcentaje > progresoAnterior) {
-                this.calcularRecompensa(contenedor, subcontenedor, mazo, porcentaje);
-            }
+            // Calcular recompensa SIEMPRE
+            this.calcularRecompensa(contenedor, subcontenedor, mazo, porcentaje, progresoAnterior);
         }
         
         return this.progreso[clave];
@@ -55,42 +53,46 @@ class SistemaEconomia {
     }
 
     // ====================
-    // CÁLCULO DE RECOMPENSAS - 2 SOLES POR 100%
+    // CÁLCULO DE RECOMPENSAS - FIJO Y SIEMPRE FUNCIONA
     // ====================
 
-    calcularRecompensa(contenedor, subcontenedor, mazo, porcentaje) {
+    calcularRecompensa(contenedor, subcontenedor, mazo, porcentaje, progresoAnterior) {
         const clave = `${contenedor}_${subcontenedor}_${mazo}`;
-        const progresoAnterior = this.progreso[clave] || 0;
         
-        console.log(`Calculando recompensa para: ${clave}`);
-        console.log(`De ${progresoAnterior}% a ${porcentaje}%`);
+        console.log(`🎯 Calculando recompensa para: ${clave}`);
+        console.log(`📊 De ${progresoAnterior}% a ${porcentaje}%`);
         
-        // Solo dar recompensa si mejoró
-        if (porcentaje > progresoAnterior) {
-            let recompensa = 0;
-            
-            // SIEMPRE 2 SOLES POR COMPLETAR 100%
+        // FÓRMULA FIJA QUE SIEMPRE DA DINERO:
+        let recompensa = 0;
+        
+        // 1. SI ES EL PRIMER INTENTO (progresoAnterior = 0)
+        if (progresoAnterior === 0 && porcentaje > 0) {
             if (porcentaje === 100) {
-                recompensa = 2.00;
-                console.log(`¡100% completado! Recompensa: ${recompensa} soles`);
-            }
-            // Para porcentajes menores, dar proporcional
-            else if (porcentaje >= 80) {
-                recompensa = (porcentaje / 100) * 1.50;
+                recompensa = 2.00;  // 2 soles por 100% en primer intento
             } else if (porcentaje >= 50) {
-                recompensa = (porcentaje / 100) * 1.00;
+                recompensa = 1.00;  // 1 sol por 50-99%
             } else {
-                recompensa = (porcentaje / 100) * 0.50;
+                recompensa = 0.50;  // 0.5 soles por menos de 50%
             }
-            
-            // Redondear a 2 decimales
-            recompensa = Math.round(recompensa * 100) / 100;
-            
-            // Dar recompensa
-            if (recompensa > 0) {
-                this.agregarDinero(recompensa);
-                console.log(`Recompensa dada: ${recompensa} soles`);
+        }
+        // 2. SI ES UN MEJOR INTENTO
+        else if (porcentaje > progresoAnterior) {
+            if (porcentaje === 100) {
+                recompensa = 2.00;  // Siempre 2 soles por llegar al 100%
+            } else {
+                recompensa = 0.25;  // 0.25 soles por mejorar
             }
+        }
+        
+        // Redondear a 2 decimales
+        recompensa = Math.round(recompensa * 100) / 100;
+        
+        // DAR LA RECOMPENSA SI HAY ALGO
+        if (recompensa > 0) {
+            this.agregarDinero(recompensa);
+            console.log(`💰 ¡RECOMPENSA OBTENIDA! ${recompensa} soles`);
+        } else {
+            console.log(`⚠️ No hay recompensa esta vez`);
         }
     }
 
@@ -153,8 +155,8 @@ class SistemaEconomia {
             position: fixed;
             top: 80px;
             right: 20px;
-            background: linear-gradient(135deg, #4CAF50, #2E7D32);
-            color: white;
+            background: linear-gradient(135deg, #FFD166, #FF6B6B);
+            color: #333;
             padding: 12px 25px;
             border-radius: 50px;
             font-weight: bold;
@@ -162,6 +164,7 @@ class SistemaEconomia {
             z-index: 1001;
             animation: slideIn 0.3s ease, fadeOut 0.3s ease 2s forwards;
             font-size: 1.1rem;
+            border: 2px solid white;
         `;
         
         document.body.appendChild(notif);
