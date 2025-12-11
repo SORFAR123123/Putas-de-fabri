@@ -10,8 +10,8 @@ const animesDatabase = {
     // Sub-contenedor 1.1
     '1_1': {
         titulo: "🎌 Shingeki no Kyojin (Ataque a los Titanes)",
-        driveIdEsp: "1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS", // REEMPLAZA con ID real
-        driveIdJap: "1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS", // REEMPLAZA con ID real
+        driveIdEsp: "1aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe", // REEMPLAZA con ID real
+        driveIdJap: "1-wYJYTaw0ZOKQy8BBPR7Fmhlzs0IVx9K", // REEMPLAZA con ID real
         descripcion: "Primer episodio doblado al español y japonés original con subtítulos.",
         timestampsEsp: [
             { tiempo: 0, titulo: "📖 Introducción" },
