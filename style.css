@@ -104,25 +104,14 @@ body {
     background: linear-gradient(135deg, rgba(138, 90, 247, 0.2), rgba(255, 107, 107, 0.2));
 }
 
-.card-icon {
-    font-size: 4rem;
-    margin-bottom: 20px;
-}
-
-.card-img-circle {
-    width: 120px;
-    height: 120px;
+.card-img {
+    width: 150px;
+    height: 150px;
     border-radius: 50%;
-    background: linear-gradient(135deg, #8A5AF7, #FF6B6B);
     margin: 0 auto 20px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
+    background-size: cover;
+    background-position: center;
     border: 4px solid rgba(255, 255, 255, 0.3);
-}
-
-.nakano-placeholder {
-    font-size: 3.5rem;
 }
 
 .card h3 {
@@ -227,16 +216,16 @@ body {
 /* CONTENEDORES DE MANGAS */
 .manga-contenedores {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    gap: 25px;
-    max-width: 1200px;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 30px;
+    max-width: 1400px;
     margin: 40px auto;
     padding: 0 20px;
 }
 
 .contenedor-item {
-    background: linear-gradient(135deg, #2a2a2a, #1a1a1a);
-    border-radius: 15px;
+    background: rgba(40, 40, 50, 0.9);
+    border-radius: 20px;
     padding: 25px;
     text-align: center;
     cursor: pointer;
@@ -248,13 +237,13 @@ body {
 
 .contenedor-item:hover {
     transform: translateY(-8px);
-    box-shadow: 0 12px 25px rgba(88, 100, 245, 0.3);
     border-color: #FF6B6B;
+    box-shadow: 0 12px 25px rgba(88, 100, 245, 0.3);
 }
 
 .contenedor-img {
-    width: 180px;
-    height: 180px;
+    width: 200px;
+    height: 200px;
     border-radius: 50%;
     margin: 0 auto 15px;
     background-size: cover;
@@ -270,74 +259,90 @@ body {
     color: #FFD166;
 }
 
-/* SUB-CONTENEDORES */
+/* SUB-CONTENEDORES MÁS GRANDES */
 .subcontenedores-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-    gap: 20px;
-    margin: 30px 0;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    gap: 25px;
+    margin: 40px 0;
 }
 
 .subcontenedor-item {
-    background: rgba(255, 255, 255, 0.05);
-    border-radius: 12px;
-    padding: 20px;
+    background: rgba(50, 50, 60, 0.9);
+    border-radius: 15px;
+    padding: 25px;
     text-align: center;
     cursor: pointer;
     transition: all 0.3s ease;
     border: 1px solid rgba(255, 255, 255, 0.1);
+    min-height: 280px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .subcontenedor-item:hover {
-    background: rgba(255, 255, 255, 0.1);
+    background: rgba(60, 60, 70, 0.9);
     transform: scale(1.05);
 }
 
 .subcontenedor-img {
-    width: 120px;
-    height: 120px;
+    width: 150px;
+    height: 150px;
     border-radius: 50%;
-    margin: 0 auto 10px;
+    margin: 0 auto 15px;
     background-size: cover;
     background-position: center;
     border: 3px solid rgba(255, 255, 255, 0.2);
 }
 
-/* MAZOS */
+.subcontenedor-item h3 {
+    font-size: 1.5rem;
+    margin: 10px 0;
+    color: #FFD166;
+}
+
+/* MAZOS MÁS GRANDES */
 .mazos-container {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-    gap: 15px;
-    margin: 25px 0;
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 20px;
+    margin: 30px 0;
 }
 
 .mazo-item {
-    background: linear-gradient(135deg, #4A90E2, #6F6BF8);
-    border-radius: 10px;
-    padding: 15px;
+    background: rgba(60, 60, 70, 0.9);
+    border-radius: 15px;
+    padding: 25px;
     text-align: center;
     cursor: pointer;
     transition: all 0.3s ease;
     color: white;
     font-weight: bold;
+    min-height: 150px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    border: 2px solid rgba(88, 100, 245, 0.5);
 }
 
 .mazo-item:hover {
-    background: linear-gradient(135deg, #FF6B6B, #FFD166);
-    transform: translateY(-5px);
+    background: rgba(70, 70, 80, 0.9);
+    transform: translateY(-8px);
+    border-color: #FF6B6B;
 }
 
 .mazo-progreso {
-    height: 6px;
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 3px;
-    margin-top: 8px;
+    height: 8px;
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 4px;
+    margin-top: 15px;
     overflow: hidden;
 }
 
 .mazo-progreso-bar {
     height: 100%;
-    background: linear-gradient(90deg, #4CAF50, #8BC34A);
+    background: linear-gradient(90deg, #4CAF50, #2E7D32);
     width: 0%;
     transition: width 0.5s ease;
 }
@@ -346,20 +351,23 @@ body {
 .quiz-container {
     max-width: 800px;
     margin: 40px auto;
-    background: rgba(30, 30, 40, 0.9);
+    background: rgba(30, 30, 40, 0.95);
     border-radius: 20px;
     padding: 40px;
     box-shadow: 0 15px 35px rgba(0, 0, 0, 0.5);
     border: 2px solid #5864F5;
 }
 
+/* PALABRA JAPONESA SIN BRILLO */
 .palabra-japonesa {
     font-size: 3.5rem;
     text-align: center;
     margin: 40px 0;
     color: #FFD166;
     font-weight: bold;
-    text-shadow: 0 0 10px rgba(255, 209, 102, 0.5);
+    /* QUITAMOS EL BRILLO */
+    text-shadow: none;
+    opacity: 0.9;
 }
 
 .opciones-grid {
@@ -376,10 +384,10 @@ body {
 }
 
 .opcion-btn {
-    background: rgba(255, 255, 255, 0.1);
-    border: 2px solid rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.08);
+    border: 2px solid rgba(255, 255, 255, 0.2);
     border-radius: 12px;
-    padding: 20px;
+    padding: 25px;
     font-size: 1.2rem;
     color: white;
     cursor: pointer;
@@ -388,17 +396,17 @@ body {
 }
 
 .opcion-btn:hover {
-    background: rgba(255, 255, 255, 0.2);
+    background: rgba(255, 255, 255, 0.15);
     transform: scale(1.05);
 }
 
 .opcion-btn.correcta {
-    background: linear-gradient(135deg, #4CAF50, #2E7D32);
+    background: rgba(76, 175, 80, 0.8);
     border-color: #4CAF50;
 }
 
 .opcion-btn.incorrecta {
-    background: linear-gradient(135deg, #F44336, #C62828);
+    background: rgba(244, 67, 54, 0.8);
     border-color: #F44336;
 }
 
@@ -415,6 +423,7 @@ body {
     font-size: 2rem;
     color: #8A5AF7;
     font-weight: bold;
+    opacity: 0.9;
 }
 
 .quiz-controls {
@@ -455,7 +464,7 @@ body {
     background: rgba(255, 255, 255, 0.1);
     color: white;
     border: 2px solid rgba(255, 255, 255, 0.3);
-    padding: 10px 20px;
+    padding: 12px 25px;
     border-radius: 50px;
     cursor: pointer;
     margin: 20px;
@@ -463,6 +472,7 @@ body {
     align-items: center;
     gap: 8px;
     transition: all 0.3s ease;
+    font-size: 1.1rem;
 }
 
 .btn-atras:hover {
@@ -475,7 +485,7 @@ body {
     position: fixed;
     top: 20px;
     right: 20px;
-    background: linear-gradient(135deg, #FFD166, #FFB347);
+    background: rgba(255, 209, 102, 0.9);
     padding: 12px 25px;
     border-radius: 50px;
     font-weight: bold;
@@ -485,9 +495,11 @@ body {
     display: flex;
     align-items: center;
     gap: 10px;
+    font-size: 1.1rem;
+    backdrop-filter: blur(10px);
 }
 
-/* RESPONSIVE QUIZ */
+/* RESPONSIVE */
 @media (max-width: 768px) {
     .palabra-japonesa {
         font-size: 2.5rem;
@@ -514,6 +526,14 @@ body {
     .card {
         width: 90%;
     }
+    
+    .subcontenedores-grid {
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    }
+    
+    .mazos-container {
+        grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
+    }
 }
 
 @media (max-width: 480px) {
@@ -533,6 +553,14 @@ body {
     .additional-section h2 {
         font-size: 1.8rem;
     }
+    
+    .subcontenedores-grid {
+        grid-template-columns: 1fr;
+    }
+    
+    .mazos-container {
+        grid-template-columns: 1fr;
+    }
 }
 
 /* ANIMACIONES */
@@ -540,10 +568,4 @@ body {
     0% { transform: scale(1); }
     50% { transform: scale(1.05); }
     100% { transform: scale(1); }
-}
-
-@keyframes mangaPulse {
-    0% { transform: translateY(-10px) scale(1.02); }
-    50% { transform: translateY(-10px) scale(1.1); }
-    100% { transform: translateY(-10px) scale(1.02); }
 }
