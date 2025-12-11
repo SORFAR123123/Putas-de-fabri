@@ -12,15 +12,34 @@ let aciertos = 0;
 let errores = 0;
 let esperandoSiguiente = false;
 
+// Variables para videos
+let modoActual = 'manga'; // 'manga' o 'video'
+
+// ====================
+// FUNCIONES HEADER
+// ====================
+
+function ocultarHeader() {
+    document.querySelector('.header').style.display = 'none';
+    document.querySelector('.especial-section').style.display = 'none';
+    document.querySelector('.additional-section').style.display = 'none';
+    document.querySelector('.footer').style.display = 'none';
+}
+
+function mostrarHeader() {
+    document.querySelector('.header').style.display = 'block';
+    document.querySelector('.especial-section').style.display = 'block';
+    document.querySelector('.additional-section').style.display = 'block';
+    document.querySelector('.footer').style.display = 'block';
+}
+
 // ====================
 // NAVEGACIÓN PRINCIPAL
 // ====================
 
 function cargarPaginaMangas() {
-    // Ocultar sección principal
-    document.querySelector('.especial-section').style.display = 'none';
-    document.querySelector('.additional-section').style.display = 'none';
-    document.querySelector('.footer').style.display = 'none';
+    modoActual = 'manga';
+    ocultarHeader();
     
     // Mostrar y crear sección de mangas
     const mangaSection = document.getElementById('manga-section');
@@ -32,11 +51,22 @@ function cargarPaginaMangas() {
     mangaSection.insertBefore(botonVolver, mangaSection.firstChild);
 }
 
+function cargarPaginaVideos() {
+    modoActual = 'video';
+    ocultarHeader();
+    
+    // Mostrar y crear sección de videos
+    const mangaSection = document.getElementById('manga-section');
+    mangaSection.style.display = 'block';
+    mangaSection.innerHTML = crearContenedoresVideos();
+    
+    // Agregar botón volver
+    const botonVolver = crearBotonVolver(volverAlInicio);
+    mangaSection.insertBefore(botonVolver, mangaSection.firstChild);
+}
+
 function volverAlInicio() {
-    // Mostrar sección principal
-    document.querySelector('.especial-section').style.display = 'block';
-    document.querySelector('.additional-section').style.display = 'block';
-    document.querySelector('.footer').style.display = 'block';
+    mostrarHeader();
     
     // Ocultar otras secciones
     document.getElementById('manga-section').style.display = 'none';
@@ -44,7 +74,7 @@ function volverAlInicio() {
 }
 
 // ====================
-// CREACIÓN DE UI (SIN %)
+// CREACIÓN DE UI - MANGAS
 // ====================
 
 function crearContenedoresMangas() {
@@ -67,13 +97,52 @@ function crearContenedoresMangas() {
     return html;
 }
 
+function crearContenedoresVideos() {
+    let html = '<h2 style="text-align: center; margin-bottom: 30px; color: #FFD166;">🎬 CONTENEDORES DE VIDEOS</h2>';
+    html += '<p style="text-align: center; margin-bottom: 30px; opacity: 0.8;">Videos privados con timestamps en Google Drive</p>';
+    html += '<div class="manga-contenedores">';
+    
+    // Obtener contenedores con videos disponibles
+    const contenedores = obtenerContenedoresDisponibles();
+    const totalContenedores = Object.keys(contenedores).length || 3;
+    
+    // Crear contenedores (máximo 10)
+    for (let i = 1; i <= Math.max(totalContenedores, 10); i++) {
+        const tieneVideos = contenedores[i] && contenedores[i].length > 0;
+        
+        html += `
+            <div class="contenedor-item" onclick="cargarSubcontenedoresVideos(${i})">
+                <div class="contenedor-img" style="background-image: url('${obtenerImagenContenedor(i)}')"></div>
+                <div class="contenedor-numero">VIDEO CONTAINER ${i}</div>
+                <p>${tieneVideos ? contenedores[i].length + ' sub-contenedores con videos' : 'Sin videos aún'}</p>
+                <div class="card-button">${tieneVideos ? 'Ver videos' : 'Vacío'}</div>
+            </div>
+        `;
+    }
+    
+    html += '</div>';
+    return html;
+}
+
 function cargarSubcontenedores(contenedor) {
     contenedorActual = contenedor;
+    modoActual = 'manga';
     
     const mangaSection = document.getElementById('manga-section');
     mangaSection.innerHTML = crearSubcontenedoresUI(contenedor);
     
     const botonVolver = crearBotonVolver(cargarPaginaMangas);
+    mangaSection.insertBefore(botonVolver, mangaSection.firstChild);
+}
+
+function cargarSubcontenedoresVideos(contenedor) {
+    contenedorActual = contenedor;
+    modoActual = 'video';
+    
+    const mangaSection = document.getElementById('manga-section');
+    mangaSection.innerHTML = crearSubcontenedoresVideosUI(contenedor);
+    
+    const botonVolver = crearBotonVolver(cargarPaginaVideos);
     mangaSection.insertBefore(botonVolver, mangaSection.firstChild);
 }
 
@@ -83,7 +152,7 @@ function crearSubcontenedoresUI(contenedor) {
     </h2>`;
     html += '<div class="subcontenedores-grid">';
     
-    // Crear 5 subcontenedores (SIN BARRA)
+    // Crear 5 subcontenedores
     for (let i = 1; i <= 5; i++) {
         const tieneContenido = tieneVocabularioEnSubcontenedor(contenedor, i);
         
@@ -93,6 +162,40 @@ function crearSubcontenedoresUI(contenedor) {
                 <h3>Sub-contenedor ${i}</h3>
                 <p>10 mazos de vocabulario</p>
                 ${tieneContenido ? '' : '<p style="color: #FF6B6B; font-size: 0.9rem;">(Sin vocabulario)</p>'}
+            </div>
+        `;
+    }
+    
+    html += '</div>';
+    return html;
+}
+
+function crearSubcontenedoresVideosUI(contenedor) {
+    let html = `<h2 style="text-align: center; margin-bottom: 30px; color: #FFD166;">
+        🎬 CONTENEDOR ${contenedor} - SUB-CONTENEDORES DE VIDEOS
+    </h2>`;
+    html += '<div class="subcontenedores-grid">';
+    
+    // Obtener videos disponibles en este contenedor
+    const contenedores = obtenerContenedoresDisponibles();
+    const subcontenedoresDisponibles = contenedores[contenedor] || [];
+    
+    // Crear 5 subcontenedores
+    for (let i = 1; i <= 5; i++) {
+        const tieneVideo = subcontenedoresDisponibles.includes(i.toString());
+        const videoInfo = tieneVideo ? obtenerVideo(contenedor, i) : null;
+        
+        html += `
+            <div class="subcontenedor-item" onclick="${tieneVideo ? `cargarVideo(${contenedor}, ${i})` : 'alert("Este sub-contenedor no tiene video disponible")'}">
+                <div class="subcontenedor-img" style="background-image: url('${obtenerImagenSubcontenedor(contenedor, i)}')"></div>
+                <h3>Video ${i}</h3>
+                ${tieneVideo ? 
+                    `<p><strong>${videoInfo.titulo}</strong></p>
+                     <p style="font-size: 0.9rem; opacity: 0.8;">${videoInfo.duracion} • ${videoInfo.categoria}</p>` 
+                    : '<p style="color: #FF6B6B;">(Sin video)</p>'}
+                <div class="card-button" style="margin-top: 10px; padding: 10px 20px; font-size: 0.9rem;">
+                    ${tieneVideo ? '▶️ Ver video' : 'Vacío'}
+                </div>
             </div>
         `;
     }
@@ -112,13 +215,47 @@ function cargarMazos(contenedor, subcontenedor) {
     mangaSection.insertBefore(botonVolver, mangaSection.firstChild);
 }
 
+function cargarVideo(contenedor, subcontenedor) {
+    contenedorActual = contenedor;
+    subcontenedorActual = subcontenedor;
+    
+    const videoInfo = obtenerVideo(contenedor, subcontenedor);
+    if (!videoInfo || !videoInfo.driveId) {
+        alert('No hay video disponible en este sub-contenedor');
+        return;
+    }
+    
+    const mangaSection = document.getElementById('manga-section');
+    mangaSection.innerHTML = sistemaReproductor.cargarVideo(videoInfo.driveId, videoInfo.timestamps);
+    
+    // Agregar título y descripción
+    const tituloDesc = `
+        <div style="text-align: center; margin-bottom: 25px;">
+            <h2 style="color: #8A5AF7; margin-bottom: 10px;">${videoInfo.titulo}</h2>
+            <p style="opacity: 0.8; max-width: 700px; margin: 0 auto;">${videoInfo.descripcion}</p>
+        </div>
+    `;
+    
+    mangaSection.querySelector('.reproductor-container').insertAdjacentHTML('afterbegin', tituloDesc);
+    
+    // Agregar botón volver
+    const botonVolver = crearBotonVolver(() => cargarSubcontenedoresVideos(contenedor));
+    mangaSection.insertBefore(botonVolver, mangaSection.firstChild);
+}
+
+function volverASubcontenedoresVideos() {
+    if (modoActual === 'video') {
+        cargarSubcontenedoresVideos(contenedorActual);
+    }
+}
+
 function crearMazosUI(contenedor, subcontenedor) {
     let html = `<h2 style="text-align: center; margin-bottom: 30px; color: #FFD166;">
         📚 CONTENEDOR ${contenedor} • SUB-CONTENEDOR ${subcontenedor} - MAZOS
     </h2>`;
     html += '<div class="mazos-container">';
     
-    // Crear 10 mazos (SIN BARRA)
+    // Crear 10 mazos
     for (let i = 1; i <= 10; i++) {
         const tieneVocabulario = verificarVocabularioDisponible(contenedor, subcontenedor, i);
         
@@ -144,7 +281,7 @@ function crearBotonVolver(funcionClick) {
 }
 
 // ====================
-// SISTEMA DE QUIZ
+// SISTEMA DE QUIZ (MANTIENE LO MISMO)
 // ====================
 
 function iniciarQuiz(contenedor, subcontenedor, mazo) {
