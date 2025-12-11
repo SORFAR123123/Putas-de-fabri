@@ -9,8 +9,6 @@
 </head>
 
 <body>
-    <!-- CONTENEDOR DE DINERO (se inserta dinámicamente) -->
-    
     <header class="header">
         <h1>🔥 Entrenamiento Especial</h1>
         <p>Mejora tus habilidades con estas herramientas de práctica</p>
@@ -22,17 +20,17 @@
         <div class="card-container">
             <!-- CARD 1 - MANGAS -->
             <div class="card card-blue" id="manga-card">
-                <div class="card-icon manga">📚</div>
+                <!-- CAMBIA ESTA URL POR TU IMAGEN -->
+                <div class="card-img" style="background-image: url('https://pbs.twimg.com/media/G76pBZZbQAAVvzo?format=jpg&name=small')"></div>
                 <h3>🎌 MANGAS</h3>
                 <p>Explora y aprende con cómics japoneses</p>
                 <button class="card-button" onclick="cargarPaginaMangas()">Ver colección</button>
             </div>
 
-            <!-- CARD 2 - QUINTILLIZAS (NO TOCAR) -->
+            <!-- CARD 2 - QUINTILLIZAS -->
             <div class="card card-purple">
-                <div class="card-img-circle">
-                    <div class="nakano-placeholder">💖</div>
-                </div>
+                <!-- CAMBIA ESTA URL POR TU IMAGEN -->
+                <div class="card-img" style="background-image: url('https://pbs.twimg.com/media/G6EAjYQXEAA41nv?format=jpg&name=medium')"></div>
                 <h3>💖 Quintillizas Nakano RPG</h3>
                 <p>5 hermanas + sistema único + decoración</p>
                 <button class="card-button">Explorar RPG</button>
@@ -41,16 +39,12 @@
     </section>
 
     <!-- SECCIÓN DINÁMICA PARA MANGAS -->
-    <section id="manga-section" style="display: none;">
-        <!-- Aquí se cargarán los 10 contenedores dinámicamente -->
-    </section>
+    <section id="manga-section" style="display: none;"></section>
 
     <!-- SECCIÓN DEL QUIZ -->
-    <section id="quiz-section" style="display: none;">
-        <!-- Aquí se cargará el quiz dinámicamente -->
-    </section>
+    <section id="quiz-section" style="display: none;"></section>
 
-    <!-- SECCIÓN ADICIONAL (se mantiene igual) -->
+    <!-- SECCIÓN ADICIONAL -->
     <section class="additional-section">
         <h2>✨ Más Características</h2>
         <div class="features">
@@ -77,7 +71,6 @@
         <p class="github-link">Publicado en <a href="https://pages.github.com/" target="_blank">GitHub Pages</a></p>
     </footer>
 
-    <!-- SCRIPTS -->
     <script src="imagenes.js"></script>
     <script src="vocabulario.js"></script>
     <script src="sistemas.js"></script>
