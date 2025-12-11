@@ -20,6 +20,7 @@ function cargarPaginaMangas() {
     // Ocultar sección principal
     document.querySelector('.especial-section').style.display = 'none';
     document.querySelector('.additional-section').style.display = 'none';
+    document.querySelector('.footer').style.display = 'none';
     
     // Mostrar y crear sección de mangas
     const mangaSection = document.getElementById('manga-section');
@@ -35,6 +36,7 @@ function volverAlInicio() {
     // Mostrar sección principal
     document.querySelector('.especial-section').style.display = 'block';
     document.querySelector('.additional-section').style.display = 'block';
+    document.querySelector('.footer').style.display = 'block';
     
     // Ocultar otras secciones
     document.getElementById('manga-section').style.display = 'none';
@@ -413,6 +415,9 @@ function verificarVocabularioDisponible(contenedor, subcontenedor, mazo) {
 
 // Interactividad original para Quintillizas (NO TOCAR)
 document.addEventListener('DOMContentLoaded', function() {
+    // Inicializar sistema de economía
+    sistemaEconomia.inicializarUI();
+    
     // Botones originales
     document.querySelectorAll('.card-button').forEach((button, index) => {
         if (index > 0) { // Solo el segundo botón (Quintillizas)
@@ -448,23 +453,3 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
-
-// Agregar animación pulse si no existe
-if (!document.querySelector('style[data-pulse]')) {
-    const pulseStyle = document.createElement('style');
-    pulseStyle.setAttribute('data-pulse', 'true');
-    pulseStyle.textContent = `
-        @keyframes pulse {
-            0% { transform: scale(1); }
-            50% { transform: scale(1.05); }
-            100% { transform: scale(1); }
-        }
-        
-        @keyframes mangaPulse {
-            0% { transform: translateY(-10px) scale(1.02); }
-            50% { transform: translateY(-10px) scale(1.1); }
-            100% { transform: translateY(-10px) scale(1.02); }
-        }
-    `;
-    document.head.appendChild(pulseStyle);
-}
