@@ -12,8 +12,9 @@ let aciertos = 0;
 let errores = 0;
 let esperandoSiguiente = false;
 
-// Variables para videos
-let modoActual = 'manga'; // 'manga' o 'video'
+// Variables para videos y animes
+let modoActual = 'manga'; // 'manga', 'video', 'anime'
+let idiomaVideoActual = 'espanol'; // 'espanol', 'japones'
 
 // ====================
 // FUNCIONES HEADER Y DINERO
@@ -78,12 +79,10 @@ function cargarPaginaMangas() {
     modoActual = 'manga';
     ocultarHeader();
     
-    // Mostrar y crear sección de mangas
     const mangaSection = document.getElementById('manga-section');
     mangaSection.style.display = 'block';
     mangaSection.innerHTML = crearContenedoresMangas();
     
-    // Agregar botón volver
     const botonVolver = crearBotonVolver(volverAlInicio);
     mangaSection.insertBefore(botonVolver, mangaSection.firstChild);
 }
@@ -92,12 +91,22 @@ function cargarPaginaVideos() {
     modoActual = 'video';
     ocultarHeader();
     
-    // Mostrar y crear sección de videos
     const mangaSection = document.getElementById('manga-section');
     mangaSection.style.display = 'block';
     mangaSection.innerHTML = crearContenedoresVideos();
     
-    // Agregar botón volver
+    const botonVolver = crearBotonVolver(volverAlInicio);
+    mangaSection.insertBefore(botonVolver, mangaSection.firstChild);
+}
+
+function cargarPaginaAnimes() {
+    modoActual = 'anime';
+    ocultarHeader();
+    
+    const mangaSection = document.getElementById('manga-section');
+    mangaSection.style.display = 'block';
+    mangaSection.innerHTML = crearContenedoresAnimes();
+    
     const botonVolver = crearBotonVolver(volverAlInicio);
     mangaSection.insertBefore(botonVolver, mangaSection.firstChild);
 }
@@ -106,7 +115,6 @@ function volverAlInicio() {
     mostrarHeader();
     actualizarContadorDineroInicio();
     
-    // Ocultar otras secciones
     document.getElementById('manga-section').style.display = 'none';
     document.getElementById('quiz-section').style.display = 'none';
 }
@@ -119,7 +127,6 @@ function crearContenedoresMangas() {
     let html = '<h2 style="text-align: center; margin-bottom: 30px; color: #FFD166;">📚 CONTENEDORES DE MANGAS</h2>';
     html += '<div class="manga-contenedores">';
     
-    // Crear 10 contenedores
     for (let i = 1; i <= 10; i++) {
         html += `
             <div class="contenedor-item" onclick="cargarSubcontenedores(${i})">
@@ -140,11 +147,9 @@ function crearContenedoresVideos() {
     html += '<p style="text-align: center; margin-bottom: 30px; opacity: 0.8;">Videos privados con timestamps en Google Drive</p>';
     html += '<div class="manga-contenedores">';
     
-    // Obtener contenedores con videos disponibles
     const contenedores = obtenerContenedoresDisponibles();
     const totalContenedores = Object.keys(contenedores).length || 3;
     
-    // Crear contenedores (máximo 10)
     for (let i = 1; i <= Math.max(totalContenedores, 10); i++) {
         const tieneVideos = contenedores[i] && contenedores[i].length > 0;
         
@@ -162,6 +167,223 @@ function crearContenedoresVideos() {
     return html;
 }
 
+// ====================
+// CREACIÓN DE UI - ANIMES
+// ====================
+
+function crearContenedoresAnimes() {
+    let html = '<h2 style="text-align: center; margin-bottom: 30px; color: #FFD166;">🎌 CONTENEDORES DE ANIMES</h2>';
+    html += '<p style="text-align: center; margin-bottom: 30px; opacity: 0.8;">Animes con videos en español/japonés + vocabulario</p>';
+    html += '<div class="manga-contenedores">';
+    
+    const contenedores = obtenerContenedoresAnimesDisponibles();
+    const totalContenedores = Object.keys(contenedores).length || 10;
+    
+    for (let i = 1; i <= Math.max(totalContenedores, 10); i++) {
+        const tieneAnimes = contenedores[i] && contenedores[i].length > 0;
+        
+        html += `
+            <div class="contenedor-item" onclick="cargarSubcontenedoresAnimes(${i})">
+                <div class="contenedor-img" style="background-image: url('${obtenerImagenContenedorAnime(i)}')"></div>
+                <div class="contenedor-numero">ANIME CONTAINER ${i}</div>
+                <p>${tieneAnimes ? contenedores[i].length + ' sub-contenedores con animes' : '5 sub-contenedores disponibles'}</p>
+                <div class="card-button">${tieneAnimes ? 'Ver animes' : 'Explorar'}</div>
+            </div>
+        `;
+    }
+    
+    html += '</div>';
+    return html;
+}
+
+function cargarSubcontenedoresAnimes(contenedor) {
+    contenedorActual = contenedor;
+    modoActual = 'anime';
+    
+    const mangaSection = document.getElementById('manga-section');
+    mangaSection.innerHTML = crearSubcontenedoresAnimesUI(contenedor);
+    
+    const botonVolver = crearBotonVolver(cargarPaginaAnimes);
+    mangaSection.insertBefore(botonVolver, mangaSection.firstChild);
+}
+
+function crearSubcontenedoresAnimesUI(contenedor) {
+    let html = `<h2 style="text-align: center; margin-bottom: 30px; color: #FFD166;">
+        🎌 CONTENEDOR ${contenedor} - SUB-CONTENEDORES DE ANIMES
+    </h2>`;
+    html += '<div class="subcontenedores-grid">';
+    
+    const contenedores = obtenerContenedoresAnimesDisponibles();
+    const subcontenedoresDisponibles = contenedores[contenedor] || [];
+    
+    for (let i = 1; i <= 5; i++) {
+        const tieneAnime = subcontenedoresDisponibles.includes(i.toString());
+        const animeInfo = tieneAnime ? obtenerAnime(contenedor, i) : null;
+        
+        html += `
+            <div class="subcontenedor-item" onclick="${tieneAnime ? `seleccionarAccionAnime(${contenedor}, ${i})` : `cargarMazosAnimes(${contenedor}, ${i})`}">
+                <div class="subcontenedor-img" style="background-image: url('${obtenerImagenSubcontenedorAnime(contenedor, i)}')"></div>
+                <h3>${tieneAnime ? animeInfo.titulo.split(' ')[0] : `Anime ${i}`}</h3>
+                ${tieneAnime ? 
+                    `<p><strong>${animeInfo.titulo}</strong></p>
+                     <p style="font-size: 0.9rem; opacity: 0.8;">${animeInfo.duracion} • ${animeInfo.categoria}</p>` 
+                    : '<p style="color: #FF6B6B;">(Sin anime configurado)</p>'}
+                <div class="card-button" style="margin-top: 10px; padding: 10px 20px; font-size: 0.9rem;">
+                    ${tieneAnime ? '🎬 Ver opciones' : '📚 Solo vocabulario'}
+                </div>
+            </div>
+        `;
+    }
+    
+    html += '</div>';
+    return html;
+}
+
+function seleccionarAccionAnime(contenedor, subcontenedor) {
+    const accionesHTML = `
+        <div style="text-align: center; margin: 40px 0;">
+            <h3 style="color: #8A5AF7; margin-bottom: 30px;">¿Qué quieres hacer?</h3>
+            <div style="display: flex; flex-direction: column; gap: 20px; max-width: 400px; margin: 0 auto;">
+                <button class="card-button" onclick="cargarVideoAnime(${contenedor}, ${subcontenedor})" style="background: linear-gradient(135deg, #4CAF50, #2E7D32);">
+                    🎬 Ver Anime (Español)
+                </button>
+                <button class="card-button" onclick="cambiarIdiomaYVerAnime(${contenedor}, ${subcontenedor}, 'japones')" style="background: linear-gradient(135deg, #5864F5, #8A5AF7);">
+                    🎌 Ver Anime (Japonés)
+                </button>
+                <button class="card-button" onclick="cargarMazosAnimes(${contenedor}, ${subcontenedor})" style="background: linear-gradient(135deg, #FF6B6B, #FFD166);">
+                    📚 Practicar Vocabulario
+                </button>
+                <button class="btn-atras-especifico" onclick="cargarSubcontenedoresAnimes(${contenedor})">
+                    ↩️ Volver
+                </button>
+            </div>
+        </div>
+    `;
+    
+    document.getElementById('manga-section').innerHTML = `
+        <div style="max-width: 800px; margin: 0 auto; padding: 40px 20px;">
+            ${crearBotonVolver(() => cargarSubcontenedoresAnimes(contenedor)).outerHTML}
+            ${accionesHTML}
+        </div>
+    `;
+}
+
+function cambiarIdiomaYVerAnime(contenedor, subcontenedor, idioma) {
+    idiomaVideoActual = idioma;
+    cargarVideoAnime(contenedor, subcontenedor);
+}
+
+function cargarVideoAnime(contenedor, subcontenedor) {
+    contenedorActual = contenedor;
+    subcontenedorActual = subcontenedor;
+    
+    const animeInfo = obtenerAnime(contenedor, subcontenedor);
+    if (!animeInfo) {
+        alert('No hay anime disponible en este sub-contenedor');
+        return;
+    }
+    
+    const driveId = obtenerDriveIdPorIdioma(animeInfo, idiomaVideoActual);
+    const timestamps = obtenerTimestampsPorIdioma(animeInfo, idiomaVideoActual);
+    
+    if (!driveId) {
+        alert(`No hay versión en ${idiomaVideoActual === 'japones' ? 'japonés' : 'español'} disponible`);
+        return;
+    }
+    
+    const mangaSection = document.getElementById('manga-section');
+    mangaSection.innerHTML = sistemaReproductor.cargarVideo(driveId, timestamps);
+    
+    // Agregar controles de idioma
+    const tituloDesc = `
+        <div style="text-align: center; margin-bottom: 25px;">
+            <h2 style="color: #8A5AF7; margin-bottom: 10px;">${animeInfo.titulo}</h2>
+            <p style="opacity: 0.8; max-width: 700px; margin: 0 auto;">${animeInfo.descripcion}</p>
+            <div class="controles-idioma">
+                <button class="boton-idioma ${idiomaVideoActual === 'espanol' ? 'activo' : ''}" onclick="cambiarIdiomaYVerAnime(${contenedor}, ${subcontenedor}, 'espanol')">
+                    🇪🇸 Español
+                </button>
+                <button class="boton-idioma ${idiomaVideoActual === 'japones' ? 'activo' : ''}" onclick="cambiarIdiomaYVerAnime(${contenedor}, ${subcontenedor}, 'japones')">
+                    🇯🇵 Japonés
+                </button>
+            </div>
+            <p style="margin-top: 10px; opacity: 0.7; font-size: 0.9rem;">
+                <strong>Duración:</strong> ${animeInfo.duracion} | 
+                <strong>Categoría:</strong> ${animeInfo.categoria} | 
+                <strong>Año:</strong> ${animeInfo.año || 'N/A'}
+            </p>
+        </div>
+    `;
+    
+    mangaSection.querySelector('.reproductor-container').insertAdjacentHTML('afterbegin', tituloDesc);
+    
+    const botonVolver = crearBotonVolver(() => seleccionarAccionAnime(contenedor, subcontenedor));
+    mangaSection.insertBefore(botonVolver, mangaSection.firstChild);
+}
+
+function cargarMazosAnimes(contenedor, subcontenedor) {
+    contenedorActual = contenedor;
+    subcontenedorActual = subcontenedor;
+    modoActual = 'anime';
+    
+    const mangaSection = document.getElementById('manga-section');
+    mangaSection.innerHTML = crearMazosAnimesUI(contenedor, subcontenedor);
+    
+    const botonVolver = crearBotonVolver(() => {
+        if (obtenerAnime(contenedor, subcontenedor)) {
+            seleccionarAccionAnime(contenedor, subcontenedor);
+        } else {
+            cargarSubcontenedoresAnimes(contenedor);
+        }
+    });
+    mangaSection.insertBefore(botonVolver, mangaSection.firstChild);
+}
+
+function crearMazosAnimesUI(contenedor, subcontenedor) {
+    const animeInfo = obtenerAnime(contenedor, subcontenedor);
+    const tituloAnime = animeInfo ? animeInfo.titulo : `Sub-contenedor ${subcontenedor}`;
+    
+    let html = `<h2 style="text-align: center; margin-bottom: 30px; color: #FFD166;">
+        📚 ${tituloAnime.toUpperCase()} - MAZOS DE VOCABULARIO
+    </h2>`;
+    
+    if (animeInfo) {
+        html += `<p style="text-align: center; margin-bottom: 30px; opacity: 0.8; max-width: 800px; margin-left: auto; margin-right: auto;">
+            Practica vocabulario relacionado con este anime. Gana dinero por cada mazo completado.
+        </p>`;
+    }
+    
+    html += '<div class="mazos-container">';
+    
+    for (let i = 1; i <= 10; i++) {
+        const tieneVocabulario = existeVocabularioAnime(contenedor, subcontenedor, i);
+        const progreso = sistemaEconomia.obtenerProgreso(contenedor, subcontenedor, i);
+        
+        html += `
+            <div class="mazo-item" onclick="${tieneVocabulario ? `iniciarQuiz(${contenedor}, ${subcontenedor}, ${i})` : 'alert("Este mazo aún no tiene vocabulario. Agrégalo en 1_animes_vocabulario.js")'}">
+                <h3>MAZO ${i}</h3>
+                <p>10 palabras japonesas</p>
+                ${progreso > 0 ? 
+                    `<div style="margin-top: 10px;">
+                        <div style="background: rgba(255,255,255,0.1); height: 8px; border-radius: 4px; overflow: hidden;">
+                            <div style="background: linear-gradient(135deg, #4CAF50, #2E7D32); width: ${progreso}%; height: 100%;"></div>
+                        </div>
+                        <p style="font-size: 0.9rem; margin-top: 5px; color: #4CAF50;">${progreso}% completado</p>
+                    </div>` 
+                    : ''}
+                ${!tieneVocabulario ? '<p style="color: #FF6B6B; font-size: 0.9rem; margin-top: 5px;">(Vacío)</p>' : ''}
+            </div>
+        `;
+    }
+    
+    html += '</div>';
+    return html;
+}
+
+// ====================
+// FUNCIONES COMPARTIDAS MANGAS/VIDEOS
+// ====================
+
 function cargarSubcontenedores(contenedor) {
     contenedorActual = contenedor;
     modoActual = 'manga';
@@ -173,24 +395,12 @@ function cargarSubcontenedores(contenedor) {
     mangaSection.insertBefore(botonVolver, mangaSection.firstChild);
 }
 
-function cargarSubcontenedoresVideos(contenedor) {
-    contenedorActual = contenedor;
-    modoActual = 'video';
-    
-    const mangaSection = document.getElementById('manga-section');
-    mangaSection.innerHTML = crearSubcontenedoresVideosUI(contenedor);
-    
-    const botonVolver = crearBotonVolver(cargarPaginaVideos);
-    mangaSection.insertBefore(botonVolver, mangaSection.firstChild);
-}
-
 function crearSubcontenedoresUI(contenedor) {
     let html = `<h2 style="text-align: center; margin-bottom: 30px; color: #FFD166;">
         📦 CONTENEDOR ${contenedor} - SUB-CONTENEDORES
     </h2>`;
     html += '<div class="subcontenedores-grid">';
     
-    // Crear 5 subcontenedores
     for (let i = 1; i <= 5; i++) {
         const tieneContenido = tieneVocabularioEnSubcontenedor(contenedor, i);
         
@@ -208,17 +418,26 @@ function crearSubcontenedoresUI(contenedor) {
     return html;
 }
 
+function cargarSubcontenedoresVideos(contenedor) {
+    contenedorActual = contenedor;
+    modoActual = 'video';
+    
+    const mangaSection = document.getElementById('manga-section');
+    mangaSection.innerHTML = crearSubcontenedoresVideosUI(contenedor);
+    
+    const botonVolver = crearBotonVolver(cargarPaginaVideos);
+    mangaSection.insertBefore(botonVolver, mangaSection.firstChild);
+}
+
 function crearSubcontenedoresVideosUI(contenedor) {
     let html = `<h2 style="text-align: center; margin-bottom: 30px; color: #FFD166;">
         🎬 CONTENEDOR ${contenedor} - SUB-CONTENEDORES DE VIDEOS
     </h2>`;
     html += '<div class="subcontenedores-grid">';
     
-    // Obtener videos disponibles en este contenedor
     const contenedores = obtenerContenedoresDisponibles();
     const subcontenedoresDisponibles = contenedores[contenedor] || [];
     
-    // Crear 5 subcontenedores
     for (let i = 1; i <= 5; i++) {
         const tieneVideo = subcontenedoresDisponibles.includes(i.toString());
         const videoInfo = tieneVideo ? obtenerVideo(contenedor, i) : null;
@@ -242,17 +461,6 @@ function crearSubcontenedoresVideosUI(contenedor) {
     return html;
 }
 
-function cargarMazos(contenedor, subcontenedor) {
-    contenedorActual = contenedor;
-    subcontenedorActual = subcontenedor;
-    
-    const mangaSection = document.getElementById('manga-section');
-    mangaSection.innerHTML = crearMazosUI(contenedor, subcontenedor);
-    
-    const botonVolver = crearBotonVolver(() => cargarSubcontenedores(contenedor));
-    mangaSection.insertBefore(botonVolver, mangaSection.firstChild);
-}
-
 function cargarVideo(contenedor, subcontenedor) {
     contenedorActual = contenedor;
     subcontenedorActual = subcontenedor;
@@ -266,7 +474,6 @@ function cargarVideo(contenedor, subcontenedor) {
     const mangaSection = document.getElementById('manga-section');
     mangaSection.innerHTML = sistemaReproductor.cargarVideo(videoInfo.driveId, videoInfo.timestamps);
     
-    // Agregar título y descripción
     const tituloDesc = `
         <div style="text-align: center; margin-bottom: 25px;">
             <h2 style="color: #8A5AF7; margin-bottom: 10px;">${videoInfo.titulo}</h2>
@@ -276,7 +483,6 @@ function cargarVideo(contenedor, subcontenedor) {
     
     mangaSection.querySelector('.reproductor-container').insertAdjacentHTML('afterbegin', tituloDesc);
     
-    // Agregar botón volver
     const botonVolver = crearBotonVolver(() => cargarSubcontenedoresVideos(contenedor));
     mangaSection.insertBefore(botonVolver, mangaSection.firstChild);
 }
@@ -287,18 +493,28 @@ function volverASubcontenedoresVideos() {
     }
 }
 
+function cargarMazos(contenedor, subcontenedor) {
+    contenedorActual = contenedor;
+    subcontenedorActual = subcontenedor;
+    
+    const mangaSection = document.getElementById('manga-section');
+    mangaSection.innerHTML = crearMazosUI(contenedor, subcontenedor);
+    
+    const botonVolver = crearBotonVolver(() => cargarSubcontenedores(contenedor));
+    mangaSection.insertBefore(botonVolver, mangaSection.firstChild);
+}
+
 function crearMazosUI(contenedor, subcontenedor) {
     let html = `<h2 style="text-align: center; margin-bottom: 30px; color: #FFD166;">
         📚 CONTENEDOR ${contenedor} • SUB-CONTENEDOR ${subcontenedor} - MAZOS
     </h2>`;
     html += '<div class="mazos-container">';
     
-    // Crear 10 mazos
     for (let i = 1; i <= 10; i++) {
         const tieneVocabulario = verificarVocabularioDisponible(contenedor, subcontenedor, i);
         
         html += `
-            <div class="mazo-item" onclick="${tieneVocabulario ? `iniciarQuiz(${contenedor}, ${subcontenedor}, ${i})` : 'alert("Este mazo aún no tiene vocabulario. Agrégalo en vocabulario.js")'}">
+            <div class="mazo-item" onclick="${tieneVocabulario ? `iniciarQuiz(${contenedor}, ${subcontenedor}, ${i})` : 'alert("Este mazo aún no tiene vocabulario. Agrégalo en 1_vocabulario.js")'}">
                 <h3>MAZO ${i}</h3>
                 <p>10 palabras japonesas</p>
                 ${tieneVocabulario ? '' : '<p style="color: #FF6B6B; font-size: 0.9rem; margin-top: 5px;">(Vacío)</p>'}
@@ -312,7 +528,7 @@ function crearMazosUI(contenedor, subcontenedor) {
 
 function crearBotonVolver(funcionClick) {
     const boton = document.createElement('button');
-    boton.className = 'btn-atras';
+    boton.className = 'btn-atras-especifico';
     boton.innerHTML = '← Volver';
     boton.onclick = funcionClick;
     return boton;
@@ -327,11 +543,16 @@ function iniciarQuiz(contenedor, subcontenedor, mazo) {
     subcontenedorActual = subcontenedor;
     mazoActual = mazo;
     
-    // Obtener palabras del mazo
-    palabrasActuales = obtenerVocabulario(contenedor, subcontenedor, mazo);
+    // Obtener palabras según el modo actual
+    if (modoActual === 'anime') {
+        palabrasActuales = obtenerVocabularioAnime(contenedor, subcontenedor, mazo);
+    } else {
+        palabrasActuales = obtenerVocabulario(contenedor, subcontenedor, mazo);
+    }
     
     if (palabrasActuales.length === 0) {
-        alert('No hay palabras en este mazo. Agrega vocabulario en vocabulario.js');
+        const archivo = modoActual === 'anime' ? '1_animes_vocabulario.js' : '1_vocabulario.js';
+        alert(`No hay palabras en este mazo. Agrega vocabulario en ${archivo}`);
         return;
     }
     
@@ -353,11 +574,10 @@ function mostrarPalabraQuiz() {
     const quizSection = document.getElementById('quiz-section');
     const palabra = palabrasActuales[indicePalabraActual];
     
-    // NUEVA ESTRUCTURA: Palabra → Romaji → Opciones
     quizSection.innerHTML = `
         <div class="quiz-container">
             <h2 style="text-align: center; color: #8A5AF7; margin-bottom: 20px;">
-                Mazo ${mazoActual} • Palabra ${indicePalabraActual + 1}/${palabrasActuales.length}
+                ${modoActual === 'anime' ? '🎌 ANIME' : '📚 MANGA'} • Mazo ${mazoActual} • Palabra ${indicePalabraActual + 1}/${palabrasActuales.length}
             </h2>
             
             <div class="palabra-japonesa" id="palabra-japonesa">
@@ -522,6 +742,11 @@ function finalizarQuiz() {
     const dineroAhora = sistemaEconomia.obtenerDinero();
     const recompensa = dineroAhora - dineroAntes;
     
+    // Determinar a dónde volver según el modo
+    const funcionVolver = modoActual === 'anime' ? 
+        () => cargarMazosAnimes(contenedorActual, subcontenedorActual) : 
+        () => cargarMazos(contenedorActual, subcontenedorActual);
+    
     // Mostrar resultados
     document.getElementById('quiz-section').innerHTML = `
         <div class="quiz-container">
@@ -548,7 +773,7 @@ function finalizarQuiz() {
             </div>
             
             <div class="quiz-controls">
-                <button class="quiz-btn btn-volver" onclick="volverAMazos()">
+                <button class="quiz-btn btn-volver" onclick="${modoActual === 'anime' ? `cargarMazosAnimes(${contenedorActual}, ${subcontenedorActual})` : `cargarMazos(${contenedorActual}, ${subcontenedorActual})`}">
                     ↩️ Volver a Mazos
                 </button>
                 <button class="quiz-btn btn-siguiente" onclick="repetirQuiz()">
@@ -564,14 +789,22 @@ function finalizarQuiz() {
 
 function cancelarQuiz() {
     if (confirm('¿Seguro que quieres cancelar el quiz? Se perderá el progreso actual.')) {
-        volverAMazos();
+        if (modoActual === 'anime') {
+            cargarMazosAnimes(contenedorActual, subcontenedorActual);
+        } else {
+            cargarMazos(contenedorActual, subcontenedorActual);
+        }
     }
 }
 
 function volverAMazos() {
     document.getElementById('quiz-section').style.display = 'none';
     document.getElementById('manga-section').style.display = 'block';
-    cargarMazos(contenedorActual, subcontenedorActual);
+    if (modoActual === 'anime') {
+        cargarMazosAnimes(contenedorActual, subcontenedorActual);
+    } else {
+        cargarMazos(contenedorActual, subcontenedorActual);
+    }
 }
 
 function repetirQuiz() {
@@ -586,7 +819,6 @@ function calcularProgresoSubcontenedor(contenedor, subcontenedor) {
     let totalProgreso = 0;
     let mazosConVocabulario = 0;
     
-    // Verificar mazos 1-10
     for (let mazo = 1; mazo <= 10; mazo++) {
         if (verificarVocabularioDisponible(contenedor, subcontenedor, mazo)) {
             totalProgreso += sistemaEconomia.obtenerProgreso(contenedor, subcontenedor, mazo);
@@ -619,19 +851,13 @@ document.addEventListener('DOMContentLoaded', function() {
     // Crear contador de dinero SOLO en inicio
     crearContadorDineroInicio();
     
-    // Botón Quintillizas
-    document.querySelectorAll('.card-button').forEach((button, index) => {
-        if (index > 0) {
-            button.addEventListener('click', function() {
-                const cardTitle = this.closest('.card').querySelector('h3').textContent;
-                if (cardTitle.includes('Nakano')) {
-                    alert('💖 ¡Iniciando aventura RPG con las quintillizas Nakano!');
-                }
-            });
-        }
-    });
-
-    // Efectos hover
+    // Inicializar botón casa
+    const botonCasa = document.getElementById('boton-casa');
+    if (botonCasa) {
+        botonCasa.onclick = volverAlInicio;
+    }
+    
+    // Efectos hover para cards
     document.querySelectorAll('.card').forEach(card => {
         card.addEventListener('mouseenter', function() {
             this.style.transform = 'translateY(-10px) scale(1.02)';
@@ -641,4 +867,8 @@ document.addEventListener('DOMContentLoaded', function() {
             this.style.transform = 'translateY(0) scale(1)';
         });
     });
+    
+    console.log('✅ Sistema de animes cargado correctamente');
+    console.log('🏠 Botón casa configurado');
+    console.log('💰 Sistema de dinero activo');
 });
