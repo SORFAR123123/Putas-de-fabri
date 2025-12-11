@@ -83,9 +83,8 @@ function crearSubcontenedoresUI(contenedor) {
     </h2>`;
     html += '<div class="subcontenedores-grid">';
     
-    // Crear 5 subcontenedores (SIN %)
+    // Crear 5 subcontenedores (SIN BARRA)
     for (let i = 1; i <= 5; i++) {
-        const progreso = calcularProgresoSubcontenedor(contenedor, i);
         const tieneContenido = tieneVocabularioEnSubcontenedor(contenedor, i);
         
         html += `
@@ -93,9 +92,6 @@ function crearSubcontenedoresUI(contenedor) {
                 <div class="subcontenedor-img" style="background-image: url('${obtenerImagenSubcontenedor(contenedor, i)}')"></div>
                 <h3>Sub-contenedor ${i}</h3>
                 <p>10 mazos de vocabulario</p>
-                <div class="mazo-progreso">
-                    <div class="mazo-progreso-bar" style="width: ${progreso}%"></div>
-                </div>
                 ${tieneContenido ? '' : '<p style="color: #FF6B6B; font-size: 0.9rem;">(Sin vocabulario)</p>'}
             </div>
         `;
@@ -122,18 +118,14 @@ function crearMazosUI(contenedor, subcontenedor) {
     </h2>`;
     html += '<div class="mazos-container">';
     
-    // Crear 10 mazos (SIN %)
+    // Crear 10 mazos (SIN BARRA)
     for (let i = 1; i <= 10; i++) {
-        const progreso = sistemaEconomia.obtenerProgreso(contenedor, subcontenedor, i);
         const tieneVocabulario = verificarVocabularioDisponible(contenedor, subcontenedor, i);
         
         html += `
             <div class="mazo-item" onclick="${tieneVocabulario ? `iniciarQuiz(${contenedor}, ${subcontenedor}, ${i})` : 'alert("Este mazo aún no tiene vocabulario. Agrégalo en vocabulario.js")'}">
                 <h3>MAZO ${i}</h3>
                 <p>10 palabras japonesas</p>
-                <div class="mazo-progreso">
-                    <div class="mazo-progreso-bar" style="width: ${progreso}%"></div>
-                </div>
                 ${tieneVocabulario ? '' : '<p style="color: #FF6B6B; font-size: 0.9rem; margin-top: 5px;">(Vacío)</p>'}
             </div>
         `;
@@ -229,23 +221,25 @@ function crearOpcionesQuiz(palabra) {
     // Encontrar nueva posición de la respuesta correcta
     const nuevaPosicionCorrecta = opcionesMezcladas.indexOf(palabra.opciones[palabra.respuesta]);
     
-    // Crear estructura 2x2
+    // Crear estructura 2x2 (2 arriba, 2 abajo)
     opcionesContainer.innerHTML = `
-        <div class="opcion-fila">
-            <button class="opcion-btn" onclick="verificarRespuesta(0, ${nuevaPosicionCorrecta})">
-                ${opcionesMezcladas[0]}
-            </button>
-            <button class="opcion-btn" onclick="verificarRespuesta(1, ${nuevaPosicionCorrecta})">
-                ${opcionesMezcladas[1]}
-            </button>
-        </div>
-        <div class="opcion-fila">
-            <button class="opcion-btn" onclick="verificarRespuesta(2, ${nuevaPosicionCorrecta})">
-                ${opcionesMezcladas[2]}
-            </button>
-            <button class="opcion-btn" onclick="verificarRespuesta(3, ${nuevaPosicionCorrecta})">
-                ${opcionesMezcladas[3]}
-            </button>
+        <div class="opciones-grid">
+            <div class="opcion-fila">
+                <button class="opcion-btn" onclick="verificarRespuesta(0, ${nuevaPosicionCorrecta})">
+                    ${opcionesMezcladas[0]}
+                </button>
+                <button class="opcion-btn" onclick="verificarRespuesta(1, ${nuevaPosicionCorrecta})">
+                    ${opcionesMezcladas[1]}
+                </button>
+            </div>
+            <div class="opcion-fila">
+                <button class="opcion-btn" onclick="verificarRespuesta(2, ${nuevaPosicionCorrecta})">
+                    ${opcionesMezcladas[2]}
+                </button>
+                <button class="opcion-btn" onclick="verificarRespuesta(3, ${nuevaPosicionCorrecta})">
+                    ${opcionesMezcladas[3]}
+                </button>
+            </div>
         </div>
     `;
 }
