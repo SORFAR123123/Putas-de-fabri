@@ -28,17 +28,10 @@ const imagenesDatabase = {
         // Formato: 'contenedor_subcontenedor'
     },
 
-    // IMÁGENES PARA LAS CARDS PRINCIPALES
-    cards: {
-        manga: 'https://images.unsplash.com/photo-1635805737707-575885ab0820?w=600&h=400&fit=crop',
-        quintillizas: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=600&h=400&fit=crop'
-    },
-
     // IMÁGENES DEFAULT (por si faltan)
     default: {
         contenedor: 'https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=400&h=400&fit=crop',
-        subcontenedor: 'https://images.unsplash.com/photo-1544717305-2782549b5136?w=300&h=300&fit=crop',
-        card: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=600&h=400&fit=crop'
+        subcontenedor: 'https://images.unsplash.com/photo-1544717305-2782549b5136?w=300&h=300&fit=crop'
     }
 };
 
