@@ -1,5 +1,4 @@
-[file name]: 1_asmr.js
-[file content begin]
+
 // ================================================
 // BASE DE DATOS DE AUDIOS ASMR
 // ================================================
@@ -322,4 +321,4 @@ console.log("✅ Base de datos ASMP cargada:");
 console.log("📊 " + Object.keys(asmrDatabase).length + " audios disponibles");
 console.log("🎧 Duración total: " + obtenerDuracionTotalASMR());
 console.log("🏷️ Categorías: " + obtenerCategoriasASMR().join(", "));
-[file content end]
+
