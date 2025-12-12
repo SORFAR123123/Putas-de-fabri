@@ -7,8 +7,6 @@ class QuintillizasRPG {
         this.personajeSeleccionado = this.cargarPersonajeSeleccionado() || null;
         this.datosPersonajes = this.cargarDatosPersonajes() || this.inicializarDatosPersonajes();
         this.condones = this.cargarCondones() || 0;
-        this.actividadesCompletadas = this.cargarActividades() || {};
-        this.momentosIntimosRealizados = this.cargarMomentosIntimos() || {};
         this.ultimaInteraccion = null;
     }
 
@@ -24,7 +22,6 @@ class QuintillizasRPG {
         window.intentarMomentoIntimoRPG = (personajeId, momentoId) => this.intentarMomentoIntimo(personajeId, momentoId);
         window.comprarActividadRPG = (personajeId, actividadId) => this.comprarActividad(personajeId, actividadId);
         window.comprarCondonesRPG = (cantidad) => this.comprarCondones(cantidad);
-        window.verVideoActividad = (personajeId, actividadId) => this.cargarVideoActividad(personajeId, actividadId);
         window.cargarVideoNivel = (personajeId, nivel) => this.cargarVideoNivel(personajeId, nivel);
     }
 
@@ -770,17 +767,16 @@ class QuintillizasRPG {
                     </p>
                 </div>
                 
-                <!-- ACTIVIDADES ESPECIALES -->
+                <!-- ACTIVIDADES ESPECIALES - MODIFICADO: SIEMPRE COMPRAR -->
                 <div style="background: rgba(255, 209, 102, 0.1); border-radius: 15px; padding: 25px; margin-bottom: 30px; border: 2px solid #FFD166;">
                     <h3 style="color: #FFD166; margin-bottom: 15px;">✨ ACTIVIDADES ESPECIALES</h3>
                     <p style="opacity: 0.8; margin-bottom: 20px;">
-                        Actividades únicas para ${personaje.nombre.split(' ')[0]}. Se compran una vez con dinero.
+                        Actividades con ${personaje.nombre.split(' ')[0]}. Se pueden comprar siempre que tengas dinero.
                     </p>
                     
                     <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 15px;">
                         ${personaje.actividadesEspeciales.map(actividad => {
-                            const yaComprada = this.actividadesCompletadas[this.personajeSeleccionado] && 
-                                               this.actividadesCompletadas[this.personajeSeleccionado].includes(actividad.id);
+                            const puedeComprar = dinero >= actividad.costo;
                             
                             return `
                                 <div style="display: flex; flex-direction: column; gap: 10px; background: rgba(255,255,255,0.05); padding: 15px; border-radius: 10px; border: 1px solid rgba(255, 209, 102, 0.3);">
@@ -793,21 +789,12 @@ class QuintillizasRPG {
                                         <span style="color: #4CAF50;">+${actividad.afinidad} afinidad</span>
                                         <span style="color: #FFD166;">+${actividad.exp} EXP</span>
                                     </div>
-                                    ${yaComprada ? 
-                                        `<div style="margin-top: 10px; padding: 10px; background: rgba(76, 175, 80, 0.2); border-radius: 8px; text-align: center;">
-                                            <span style="color: #4CAF50; font-weight: bold;">✅ ACTIVIDAD COMPRADA</span>
-                                            <button class="card-button" onclick="verVideoActividad('${this.personajeSeleccionado}', '${actividad.id}')"
-                                                    style="padding: 8px 15px; font-size: 0.9rem; background: linear-gradient(135deg, #5864F5, #8A5AF7); margin-top: 10px; width: 100%; border: none; border-radius: 10px; color: white; cursor: pointer; font-weight: bold;">
-                                                🎬 VER VIDEO
-                                            </button>
-                                        </div>` 
-                                        : 
-                                        `<button class="card-button" onclick="comprarActividadRPG('${this.personajeSeleccionado}', '${actividad.id}')"
-                                                style="padding: 12px 20px; font-size: 1rem; background: linear-gradient(135deg, #4CAF50, #2E7D32); margin-top: 10px; border: none; border-radius: 10px; color: white; cursor: pointer; font-weight: bold;"
-                                                ${dinero < actividad.costo ? 'disabled style="opacity: 0.5; cursor: not-allowed;"' : ''}>
-                                            ${dinero < actividad.costo ? '💰 DINERO INSUFICIENTE' : '✨ COMPRAR ACTIVIDAD'}
-                                        </button>`
-                                    }
+                                    
+                                    <button class="card-button" onclick="comprarActividadRPG('${this.personajeSeleccionado}', '${actividad.id}')"
+                                            style="padding: 12px 20px; font-size: 1rem; background: linear-gradient(135deg, #4CAF50, #2E7D32); margin-top: 10px; border: none; border-radius: 10px; color: white; cursor: pointer; font-weight: bold;"
+                                            ${!puedeComprar ? 'disabled style="opacity: 0.5; cursor: not-allowed;"' : ''}>
+                                        ${!puedeComprar ? '💰 DINERO INSUFICIENTE' : '✨ COMPRAR ACTIVIDAD'}
+                                    </button>
                                 </div>
                             `;
                         }).join('')}
@@ -850,10 +837,8 @@ class QuintillizasRPG {
                             <div style="font-size: 1.5rem; font-weight: bold;">${personaje.expNecesaria - personaje.exp} EXP</div>
                         </div>
                         <div style="background: rgba(255,255,255,0.08); padding: 15px; border-radius: 10px;">
-                            <div style="color: ${personaje.color}; font-size: 0.9rem;">ACTIVIDADES</div>
-                            <div style="font-size: 1.5rem; font-weight: bold;">
-                                ${(this.actividadesCompletadas[this.personajeSeleccionado] || []).length}/3
-                            </div>
+                            <div style="color: ${personaje.color}; font-size: 0.9rem;">CONDONES</div>
+                            <div style="font-size: 1.5rem; font-weight: bold;">${this.condones}</div>
                         </div>
                     </div>
                 </div>
@@ -895,17 +880,6 @@ class QuintillizasRPG {
             personaje.afinidad += momento.afinidad;
             personaje.estadoAnimo = 'feliz';
             
-            // Registrar momento realizado
-            if (!this.momentosIntimosRealizados[personajeId]) {
-                this.momentosIntimosRealizados[personajeId] = [];
-            }
-            this.momentosIntimosRealizados[personajeId].push({
-                momentoId: momento.id,
-                fecha: new Date().toISOString(),
-                exito: true
-            });
-            this.guardarMomentosIntimos();
-            
             console.log(`✅ ¡${momento.nombre} exitoso con ${personaje.nombre}!`);
             this.mostrarNotificacion(`💖 ¡${momento.nombre} exitoso! +${momento.afinidad} afinidad, +${momento.exp} EXP`);
             
@@ -919,17 +893,6 @@ class QuintillizasRPG {
             
             personaje.estadoAnimo = 'enojada';
             personaje.afinidad -= Math.floor(momento.afinidad / 2);
-            
-            // Registrar fallo
-            if (!this.momentosIntimosRealizados[personajeId]) {
-                this.momentosIntimosRealizados[personajeId] = [];
-            }
-            this.momentosIntimosRealizados[personajeId].push({
-                momentoId: momento.id,
-                fecha: new Date().toISOString(),
-                exito: false
-            });
-            this.guardarMomentosIntimos();
             
             console.log(`❌ ${momento.nombre} falló con ${personaje.nombre}`);
             this.mostrarNotificacion(`😠 ${momento.nombre} falló. ${personaje.nombre} se enojó.`);
@@ -978,7 +941,7 @@ class QuintillizasRPG {
     }
 
     // ====================
-    // SISTEMA DE ACTIVIDADES ESPECIALES
+    // SISTEMA DE ACTIVIDADES ESPECIALES - MODIFICADO
     // ====================
 
     comprarActividad(personajeId, actividadId) {
@@ -1002,15 +965,10 @@ class QuintillizasRPG {
         this.agregarEXP(personajeId, actividad.exp);
         personaje.estadoAnimo = 'feliz';
         
-        if (!this.actividadesCompletadas[personajeId]) {
-            this.actividadesCompletadas[personajeId] = [];
-        }
-        this.actividadesCompletadas[personajeId].push(actividadId);
-        this.guardarActividades();
-        
-        console.log(`🎉 Actividad ${actividad.nombre} completada para ${personaje.nombre}`);
+        console.log(`🎉 Actividad ${actividad.nombre} comprada para ${personaje.nombre}`);
         this.mostrarNotificacion(`💝 ${personaje.nombre} muy feliz! +${actividad.afinidad} afinidad, +${actividad.exp} EXP`);
         
+        // AHORA MUESTRA EL VIDEO DIRECTAMENTE
         this.cargarVideoActividad(personajeId, actividadId);
         
         return true;
@@ -1145,20 +1103,6 @@ class QuintillizasRPG {
         return emojis[estado] || '😐';
     }
 
-    obtenerAjusteEstado(estado) {
-        const ajustes = {
-            'feliz': '+20',
-            'neutral': '+0',
-            'triste': '-30',
-            'enojada': '-50',
-            'tsundere': '-40',
-            'tímida': '-20',
-            'energica': '+10',
-            'glotona': '+15'
-        };
-        return ajustes[estado] || '+0';
-    }
-
     oscurecerColor(color) {
         // Convertir color hex a RGB
         const r = parseInt(color.slice(1, 3), 16);
@@ -1258,42 +1202,6 @@ class QuintillizasRPG {
             return 0;
         }
     }
-
-    guardarActividades() {
-        try {
-            localStorage.setItem('rpg_actividades', JSON.stringify(this.actividadesCompletadas));
-        } catch (e) {
-            console.warn('No se pudo guardar actividades:', e);
-        }
-    }
-
-    cargarActividades() {
-        try {
-            const actividades = localStorage.getItem('rpg_actividades');
-            return actividades ? JSON.parse(actividades) : {};
-        } catch (e) {
-            console.warn('No se pudo cargar actividades:', e);
-            return {};
-        }
-    }
-
-    guardarMomentosIntimos() {
-        try {
-            localStorage.setItem('rpg_momentos_intimos', JSON.stringify(this.momentosIntimosRealizados));
-        } catch (e) {
-            console.warn('No se pudo guardar momentos íntimos:', e);
-        }
-    }
-
-    cargarMomentosIntimos() {
-        try {
-            const momentos = localStorage.getItem('rpg_momentos_intimos');
-            return momentos ? JSON.parse(momentos) : {};
-        } catch (e) {
-            console.warn('No se pudo cargar momentos íntimos:', e);
-            return {};
-        }
-    }
 }
 
 // ================================================
@@ -1331,7 +1239,7 @@ document.addEventListener('DOMContentLoaded', function() {
     quintillizasRPG.inicializar();
     console.log('🎮 RPG Quintillizas con imágenes listo y funcional');
     console.log('🖼️ Imágenes cargadas para las 5 hermanas');
-    console.log('💖 Sistema de momentos íntimos activo: Beso, Abrazo, Caricia, Levantar en el Aire, Confesión');
-    console.log('🎬 Cada momento tiene su propio video y probabilidad de éxito');
+    console.log('💖 Sistema de momentos íntimos activo');
+    console.log('🎬 Sistema de actividades modificado: ¡Ahora siempre se pueden comprar!');
     console.log('💰 Sistema integrado con dinero del estudio');
 });
