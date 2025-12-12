@@ -1,5 +1,5 @@
 // ================================================
-// SISTEMA PRINCIPAL DE NAVEGACIÓN Y QUIZ
+// SISTEMA PRINCIPAL COMPLETO CON PALABRAS DIFÍCILES Y MISIONES
 // ================================================
 
 // Variables globales
@@ -11,6 +11,8 @@ let indicePalabraActual = 0;
 let aciertos = 0;
 let errores = 0;
 let esperandoSiguiente = false;
+let enModoDificil = false;
+let palabrasDificilesActuales = [];
 
 // Variables para videos y animes
 let modoActual = 'manga'; // 'manga', 'video', 'anime', 'audio', 'asmr', 'rpg'
@@ -136,7 +138,7 @@ function cargarPaginaASMR() {
 }
 
 // ====================
-// NUEVA: FUNCIÓN PARA RPG QUINTILLIZAS
+// NUEVO: FUNCIÓN PARA RPG QUINTILLIZAS
 // ====================
 
 function cargarPaginaRPG() {
@@ -501,11 +503,22 @@ function crearMazosAnimesUI(contenedor, subcontenedor) {
     for (let i = 1; i <= 10; i++) {
         const tieneVocabulario = existeVocabularioAnime(contenedor, subcontenedor, i);
         const progreso = sistemaEconomia.obtenerProgreso(contenedor, subcontenedor, i);
+        const palabrasDificiles = sistemaEconomia.obtenerPalabrasDificilesMazo(contenedor, subcontenedor, i);
+        const tienePalabrasDificiles = palabrasDificiles.length > 0;
         
         html += `
-            <div class="mazo-item" onclick="${tieneVocabulario ? `iniciarQuiz(${contenedor}, ${subcontenedor}, ${i})` : 'alert("Este mazo aún no tiene vocabulario. Agrégalo en 1_animes_vocabulario.js")'}">
+            <div class="mazo-item" onclick="${tieneVocabulario ? `iniciarQuiz(${contenedor}, ${subcontenedor}, ${i})` : 'alert("Este mazo aún no tiene vocabulario. Agrégalo en 1_animes_vocabulario.js")'}" style="border-color: rgba(138, 90, 247, 0.6);">
                 <h3>MAZO ${i}</h3>
                 <p>10 palabras japonesas</p>
+                
+                <!-- INDICADOR DE PALABRAS DIFÍCILES -->
+                ${tienePalabrasDificiles ? `
+                    <div style="background: rgba(255, 107, 107, 0.2); padding: 5px 10px; border-radius: 5px; margin: 8px 0; display: flex; align-items: center; gap: 5px; font-size: 0.9rem;">
+                        <span>⚠️</span>
+                        <span>${palabrasDificiles.length} palabra(s) difícil(es)</span>
+                    </div>
+                ` : ''}
+                
                 ${progreso > 0 ? 
                     `<div style="margin-top: 10px;">
                         <div style="background: rgba(255,255,255,0.1); height: 8px; border-radius: 4px; overflow: hidden;">
@@ -515,11 +528,40 @@ function crearMazosAnimesUI(contenedor, subcontenedor) {
                     </div>` 
                     : ''}
                 ${!tieneVocabulario ? '<p style="color: #FF6B6B; font-size: 0.9rem; margin-top: 5px;">(Vacío)</p>' : ''}
+                
+                <!-- BOTÓN PARA PRACTICAR SOLO PALABRAS DIFÍCILES -->
+                ${tienePalabrasDificiles ? `
+                    <button class="card-button" onclick="iniciarQuiz(${contenedor}, ${subcontenedor}, ${i}, true)" 
+                            style="background: linear-gradient(135deg, #FF6B6B, #FFD166); margin-top: 10px; padding: 8px 15px; font-size: 0.9rem;">
+                        ⚠️ Practicar solo palabras difíciles
+                    </button>
+                ` : ''}
             </div>
         `;
     }
     
     html += '</div>';
+    
+    // SECCIÓN DE PALABRAS DIFÍCILES GLOBAL PARA ANIMES
+    const mazosConDificiles = sistemaEconomia.obtenerMazosConPalabrasDificiles();
+    const totalPalabrasDificilesAnime = Object.entries(mazosConDificiles)
+        .filter(([clave]) => clave.startsWith(`${contenedor}_${subcontenedor}_`))
+        .reduce((sum, [, palabras]) => sum + palabras.length, 0);
+    
+    if (totalPalabrasDificilesAnime > 0) {
+        html += `
+            <div style="background: rgba(255, 107, 107, 0.1); border-radius: 15px; padding: 25px; margin-top: 30px; border: 2px solid #FF6B6B;">
+                <h3 style="color: #FF6B6B; margin-bottom: 15px;">⚠️ PALABRAS DIFÍCILES EN ESTE ANIME</h3>
+                <p style="opacity: 0.8; margin-bottom: 20px;">
+                    Tienes ${totalPalabrasDificilesAnime} palabra(s) marcada(s) como difícil en este anime.
+                </p>
+                <p style="text-align: center; opacity: 0.7; font-size: 0.9rem;">
+                    💡 Practica estas palabras antes de que se reinicien automáticamente a las 3:00 AM.
+                </p>
+            </div>
+        `;
+    }
+    
     return html;
 }
 
@@ -715,11 +757,22 @@ function crearMazosAudiosUI(contenedor, subcontenedor) {
     for (let i = 1; i <= 10; i++) {
         const tieneVocabulario = existeVocabularioAudio(contenedor, subcontenedor, i);
         const progreso = sistemaEconomia.obtenerProgreso(contenedor, subcontenedor, i);
+        const palabrasDificiles = sistemaEconomia.obtenerPalabrasDificilesMazo(contenedor, subcontenedor, i);
+        const tienePalabrasDificiles = palabrasDificiles.length > 0;
         
         html += `
             <div class="mazo-item" onclick="${tieneVocabulario ? `iniciarQuiz(${contenedor}, ${subcontenedor}, ${i})` : 'alert("Este mazo aún no tiene vocabulario. Agrégalo en 1_audios_vocabulario.js")'}" style="border-color: rgba(255, 107, 107, 0.6);">
                 <h3>MAZO ${i}</h3>
                 <p>10 palabras japonesas de la letra</p>
+                
+                <!-- INDICADOR DE PALABRAS DIFÍCILES -->
+                ${tienePalabrasDificiles ? `
+                    <div style="background: rgba(255, 107, 107, 0.2); padding: 5px 10px; border-radius: 5px; margin: 8px 0; display: flex; align-items: center; gap: 5px; font-size: 0.9rem;">
+                        <span>⚠️</span>
+                        <span>${palabrasDificiles.length} palabra(s) difícil(es)</span>
+                    </div>
+                ` : ''}
+                
                 ${progreso > 0 ? 
                     `<div style="margin-top: 10px;">
                         <div style="background: rgba(255,255,255,0.1); height: 8px; border-radius: 4px; overflow: hidden;">
@@ -729,11 +782,40 @@ function crearMazosAudiosUI(contenedor, subcontenedor) {
                     </div>` 
                     : ''}
                 ${!tieneVocabulario ? '<p style="color: #FF6B6B; font-size: 0.9rem; margin-top: 5px;">(Vacío)</p>' : ''}
+                
+                <!-- BOTÓN PARA PRACTICAR SOLO PALABRAS DIFÍCILES -->
+                ${tienePalabrasDificiles ? `
+                    <button class="card-button" onclick="iniciarQuiz(${contenedor}, ${subcontenedor}, ${i}, true)" 
+                            style="background: linear-gradient(135deg, #FF6B6B, #FFD166); margin-top: 10px; padding: 8px 15px; font-size: 0.9rem;">
+                        ⚠️ Practicar solo palabras difíciles
+                    </button>
+                ` : ''}
             </div>
         `;
     }
     
     html += '</div>';
+    
+    // SECCIÓN DE PALABRAS DIFÍCILES GLOBAL PARA AUDIOS
+    const mazosConDificiles = sistemaEconomia.obtenerMazosConPalabrasDificiles();
+    const totalPalabrasDificilesAudio = Object.entries(mazosConDificiles)
+        .filter(([clave]) => clave.startsWith(`${contenedor}_${subcontenedor}_`))
+        .reduce((sum, [, palabras]) => sum + palabras.length, 0);
+    
+    if (totalPalabrasDificilesAudio > 0) {
+        html += `
+            <div style="background: rgba(255, 107, 107, 0.1); border-radius: 15px; padding: 25px; margin-top: 30px; border: 2px solid #FF6B6B;">
+                <h3 style="color: #FF6B6B; margin-bottom: 15px;">⚠️ PALABRAS DIFÍCILES EN ESTE OPENING</h3>
+                <p style="opacity: 0.8; margin-bottom: 20px;">
+                    Tienes ${totalPalabrasDificilesAudio} palabra(s) marcada(s) como difícil en esta canción.
+                </p>
+                <p style="text-align: center; opacity: 0.7; font-size: 0.9rem;">
+                    💡 Practica estas palabras antes de que se reinicien automáticamente a las 3:00 AM.
+                </p>
+            </div>
+        `;
+    }
+    
     return html;
 }
 
@@ -1019,7 +1101,7 @@ function mostrarNotificacionASMR(mensaje) {
 }
 
 // ====================
-// FUNCIONES COMPARTIDAS MANGAS/VIDEOS/ASMR (CORREGIDO: DESCRIPCIONES EN SUBCONTENEDORES)
+// FUNCIONES COMPARTIDAS MANGAS/VIDEOS (CON PALABRAS DIFÍCILES)
 // ====================
 
 function cargarSubcontenedores(contenedor) {
@@ -1187,17 +1269,85 @@ function crearMazosUI(contenedor, subcontenedor) {
     
     for (let i = 1; i <= 10; i++) {
         const tieneVocabulario = verificarVocabularioDisponible(contenedor, subcontenedor, i);
+        const progreso = sistemaEconomia.obtenerProgreso(contenedor, subcontenedor, i);
+        const palabrasDificiles = sistemaEconomia.obtenerPalabrasDificilesMazo(contenedor, subcontenedor, i);
+        const tienePalabrasDificiles = palabrasDificiles.length > 0;
         
         html += `
             <div class="mazo-item" onclick="${tieneVocabulario ? `iniciarQuiz(${contenedor}, ${subcontenedor}, ${i})` : 'alert("Este mazo aún no tiene vocabulario. Agrégalo en 1_vocabulario.js")'}">
                 <h3>MAZO ${i}</h3>
                 <p>10 palabras japonesas</p>
-                ${tieneVocabulario ? '' : '<p style="color: #FF6B6B; font-size: 0.9rem; margin-top: 5px;">(Vacío)</p>'}
+                
+                <!-- INDICADOR DE PALABRAS DIFÍCILES -->
+                ${tienePalabrasDificiles ? `
+                    <div style="background: rgba(255, 107, 107, 0.2); padding: 5px 10px; border-radius: 5px; margin: 8px 0; display: flex; align-items: center; gap: 5px; font-size: 0.9rem;">
+                        <span>⚠️</span>
+                        <span>${palabrasDificiles.length} palabra(s) difícil(es)</span>
+                    </div>
+                ` : ''}
+                
+                ${progreso > 0 ? 
+                    `<div style="margin-top: 10px;">
+                        <div style="background: rgba(255,255,255,0.1); height: 8px; border-radius: 4px; overflow: hidden;">
+                            <div style="background: linear-gradient(135deg, #4CAF50, #2E7D32); width: ${progreso}%; height: 100%;"></div>
+                        </div>
+                        <p style="font-size: 0.9rem; margin-top: 5px; color: #4CAF50;">${progreso}% completado</p>
+                    </div>` 
+                    : ''}
+                ${!tieneVocabulario ? '<p style="color: #FF6B6B; font-size: 0.9rem; margin-top: 5px;">(Vacío)</p>' : ''}
+                
+                <!-- BOTÓN PARA PRACTICAR SOLO PALABRAS DIFÍCILES -->
+                ${tienePalabrasDificiles ? `
+                    <button class="card-button" onclick="iniciarQuiz(${contenedor}, ${subcontenedor}, ${i}, true)" 
+                            style="background: linear-gradient(135deg, #FF6B6B, #FFD166); margin-top: 10px; padding: 8px 15px; font-size: 0.9rem;">
+                        ⚠️ Practicar solo palabras difíciles
+                    </button>
+                ` : ''}
             </div>
         `;
     }
     
     html += '</div>';
+    
+    // SECCIÓN DE PALABRAS DIFÍCILES GLOBAL
+    const mazosConDificiles = sistemaEconomia.obtenerMazosConPalabrasDificiles();
+    const totalPalabrasDificiles = Object.values(mazosConDificiles)
+        .filter(([clave]) => clave.startsWith(`${contenedor}_${subcontenedor}_`))
+        .reduce((sum, palabras) => sum + palabras.length, 0);
+    
+    if (totalPalabrasDificiles > 0) {
+        html += `
+            <div style="background: rgba(255, 107, 107, 0.1); border-radius: 15px; padding: 25px; margin-top: 30px; border: 2px solid #FF6B6B;">
+                <h3 style="color: #FF6B6B; margin-bottom: 15px;">⚠️ PALABRAS DIFÍCILES EN ESTE SUB-CONTENEDOR</h3>
+                <p style="opacity: 0.8; margin-bottom: 20px;">
+                    Tienes ${totalPalabrasDificiles} palabra(s) marcada(s) como difícil en este sub-contenedor.
+                </p>
+                
+                <div style="background: rgba(255, 255, 255, 0.05); padding: 15px; border-radius: 10px;">
+                    <h4 style="color: #FFD166; margin-bottom: 10px;">📊 Distribución por mazo:</h4>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(150px, 1fr)); gap: 10px;">
+                        ${Object.entries(mazosConDificiles)
+                            .filter(([clave]) => clave.startsWith(`${contenedor}_${subcontenedor}_`))
+                            .map(([clave, palabras]) => {
+                                const mazoNum = clave.split('_')[2];
+                                return `
+                                    <div style="background: rgba(255, 107, 107, 0.15); padding: 10px; border-radius: 8px; text-align: center;">
+                                        <div style="font-weight: bold;">Mazo ${mazoNum}</div>
+                                        <div style="color: #FF6B6B; font-size: 1.2rem;">${palabras.length}</div>
+                                        <div style="font-size: 0.8rem; opacity: 0.7;">palabras</div>
+                                    </div>
+                                `;
+                            }).join('')}
+                    </div>
+                </div>
+                
+                <p style="text-align: center; margin-top: 15px; opacity: 0.7; font-size: 0.9rem;">
+                    💡 Practica estas palabras antes de que se reinicien automáticamente a las 3:00 AM.
+                </p>
+            </div>
+        `;
+    }
+    
     return html;
 }
 
@@ -1210,28 +1360,38 @@ function crearBotonVolver(funcionClick) {
 }
 
 // ====================
-// SISTEMA DE QUIZ (CON ROMAJI DEBAJO DE LA PALABRA)
+// NUEVO: SISTEMA DE PALABRAS DIFÍCILES EN QUIZ
 // ====================
 
-function iniciarQuiz(contenedor, subcontenedor, mazo) {
+function iniciarQuiz(contenedor, subcontenedor, mazo, modoDificil = false) {
     contenedorActual = contenedor;
     subcontenedorActual = subcontenedor;
     mazoActual = mazo;
+    enModoDificil = modoDificil;
     
-    // Obtener palabras según el modo actual
-    if (modoActual === 'anime') {
-        palabrasActuales = obtenerVocabularioAnime(contenedor, subcontenedor, mazo);
-    } else if (modoActual === 'audio') {
-        palabrasActuales = obtenerVocabularioAudio(contenedor, subcontenedor, mazo);
+    // Obtener palabras según el modo
+    if (modoDificil) {
+        palabrasDificilesActuales = sistemaEconomia.crearMazoTemporalDificil(contenedor, subcontenedor, mazo);
+        if (!palabrasDificilesActuales || palabrasDificilesActuales.length === 0) {
+            alert('No hay palabras difíciles marcadas en este mazo');
+            return;
+        }
+        palabrasActuales = palabrasDificilesActuales;
     } else {
-        palabrasActuales = obtenerVocabulario(contenedor, subcontenedor, mazo);
-    }
-    
-    if (palabrasActuales.length === 0) {
-        const archivo = modoActual === 'anime' ? '1_animes_vocabulario.js' : 
-                      (modoActual === 'audio' ? '1_audios_vocabulario.js' : '1_vocabulario.js');
-        alert(`No hay palabras en este mazo. Agrega vocabulario en ${archivo}`);
-        return;
+        if (modoActual === 'anime') {
+            palabrasActuales = obtenerVocabularioAnime(contenedor, subcontenedor, mazo);
+        } else if (modoActual === 'audio') {
+            palabrasActuales = obtenerVocabularioAudio(contenedor, subcontenedor, mazo);
+        } else {
+            palabrasActuales = obtenerVocabulario(contenedor, subcontenedor, mazo);
+        }
+        
+        if (palabrasActuales.length === 0) {
+            const archivo = modoActual === 'anime' ? '1_animes_vocabulario.js' : 
+                          (modoActual === 'audio' ? '1_audios_vocabulario.js' : '1_vocabulario.js');
+            alert(`No hay palabras en este mazo. Agrega vocabulario en ${archivo}`);
+            return;
+        }
     }
     
     // Resetear contadores
@@ -1251,6 +1411,7 @@ function iniciarQuiz(contenedor, subcontenedor, mazo) {
 function mostrarPalabraQuiz() {
     const quizSection = document.getElementById('quiz-section');
     const palabra = palabrasActuales[indicePalabraActual];
+    const esPalabraDificil = palabra.esPalabraDificil || enModoDificil;
     
     // Determinar el ícono según el modo
     let icono = '📚';
@@ -1258,11 +1419,13 @@ function mostrarPalabraQuiz() {
     if (modoActual === 'audio') icono = '🎵';
     if (modoActual === 'asmr') icono = '🎧';
     if (modoActual === 'rpg') icono = '🎮';
+    if (esPalabraDificil) icono = '⚠️';
     
     quizSection.innerHTML = `
-        <div class="quiz-container">
-            <h2 style="text-align: center; color: #8A5AF7; margin-bottom: 20px;">
-                ${icono} ${modoActual === 'asmr' ? 'ASMR' : modoActual === 'audio' ? 'AUDIO' : modoActual === 'rpg' ? 'RPG' : modoActual.toUpperCase()} • Mazo ${mazoActual} • Palabra ${indicePalabraActual + 1}/${palabrasActuales.length}
+        <div class="quiz-container ${esPalabraDificil ? 'quiz-dificil' : ''}">
+            <h2 style="text-align: center; color: ${esPalabraDificil ? '#FF6B6B' : '#8A5AF7'}; margin-bottom: 20px;">
+                ${icono} ${esPalabraDificil ? 'MAZO DIFÍCIL' : modoActual.toUpperCase()} • Mazo ${mazoActual} • Palabra ${indicePalabraActual + 1}/${palabrasActuales.length}
+                ${esPalabraDificil ? '<span style="color: #FF6B6B; font-size: 0.8rem;">(Temporal - Se reiniciará)</span>' : ''}
             </h2>
             
             <div class="palabra-japonesa" id="palabra-japonesa">
@@ -1274,6 +1437,15 @@ function mostrarPalabraQuiz() {
                 <div class="romaji-text">${palabra.lectura}</div>
             </div>
             
+            <!-- BOTÓN PARA MARCAR COMO DIFÍCIL (solo en modo normal) -->
+            ${!enModoDificil ? `
+                <div style="text-align: center; margin: 15px 0;">
+                    <button class="btn-dificil" onclick="marcarPalabraComoDificil(${indicePalabraActual})" id="btn-dificil">
+                        ⚠️ Marcar como difícil
+                    </button>
+                </div>
+            ` : ''}
+            
             <div class="opciones-grid" id="opciones-container">
                 <!-- Opciones se cargan dinámicamente -->
             </div>
@@ -1284,14 +1456,40 @@ function mostrarPalabraQuiz() {
             
             <div class="quiz-controls">
                 <button class="quiz-btn btn-volver" onclick="cancelarQuiz()">
-                    ❌ Cancelar
+                    ❌ ${enModoDificil ? 'Cancelar mazo difícil' : 'Cancelar'}
                 </button>
             </div>
         </div>
     `;
     
+    // Si es palabra difícil marcada, mostrar estilo especial
+    if (esPalabraDificil) {
+        document.getElementById('palabra-japonesa').classList.add('palabra-dificil-marcada');
+    }
+    
     // Crear opciones (2 arriba, 2 abajo)
     crearOpcionesQuiz(palabra);
+}
+
+function marcarPalabraComoDificil(indice) {
+    const palabra = palabrasActuales[indice];
+    const marcada = sistemaEconomia.marcarPalabraComoDificil(
+        contenedorActual, 
+        subcontenedorActual, 
+        mazoActual, 
+        indice, 
+        palabra
+    );
+    
+    if (marcada) {
+        const btn = document.getElementById('btn-dificil');
+        btn.innerHTML = '✅ Marcada como difícil';
+        btn.disabled = true;
+        btn.style.opacity = '0.7';
+        
+        // Añadir clase visual
+        document.getElementById('palabra-japonesa').classList.add('palabra-dificil-marcada');
+    }
 }
 
 function crearOpcionesQuiz(palabra) {
@@ -1351,6 +1549,12 @@ function verificarRespuesta(opcionSeleccionada, posicionCorrecta) {
         btn.disabled = true;
     });
     
+    // Desactivar botón de marcar como difícil
+    const btnDificil = document.getElementById('btn-dificil');
+    if (btnDificil) {
+        btnDificil.disabled = true;
+    }
+    
     // Mostrar resultado
     const resultadoContainer = document.getElementById('resultado-container');
     resultadoContainer.style.display = 'block';
@@ -1367,6 +1571,10 @@ function verificarRespuesta(opcionSeleccionada, posicionCorrecta) {
         aciertos++;
         // DAR EXP AL RPG POR PALABRA CORRECTA
         darExpPorPalabraCorrecta(true);
+        
+        // Actualizar tiempo de práctica para misiones
+        sistemaEconomia.actualizarMisionDiaria('practicar_30_min', 2); // 2 minutos por palabra
+        sistemaEconomia.actualizarMisionSemanal('practicar_5_horas', 2); // 2 minutos por palabra
     } else {
         errores++;
     }
@@ -1387,7 +1595,7 @@ function verificarRespuesta(opcionSeleccionada, posicionCorrecta) {
         // Respuesta incorrecta: mostrar botón manual
         controls.innerHTML = `
             <button class="quiz-btn btn-volver" onclick="cancelarQuiz()">
-                ❌ Cancelar
+                ❌ ${enModoDificil ? 'Cancelar mazo difícil' : 'Cancelar'}
             </button>
             <button class="quiz-btn btn-siguiente" onclick="pasarSiguientePalabra()">
                 ⏭️ Siguiente Palabra
@@ -1420,13 +1628,18 @@ function finalizarQuiz() {
     // OBTENER DINERO ANTES DE ACTUALIZAR
     const dineroAntes = sistemaEconomia.obtenerDinero();
     
-    // Actualizar progreso en sistema (ESTE MÉTODO DA LA RECOMPENSA)
-    sistemaEconomia.actualizarProgreso(
-        contenedorActual, 
-        subcontenedorActual, 
-        mazoActual, 
-        porcentaje
-    );
+    // Actualizar progreso en sistema (SOLO si no es modo difícil)
+    if (!enModoDificil) {
+        sistemaEconomia.actualizarProgreso(
+            contenedorActual, 
+            subcontenedorActual, 
+            mazoActual, 
+            porcentaje
+        );
+    } else {
+        // En modo difícil, limpiar las palabras difíciles usadas
+        sistemaEconomia.limpiarPalabrasDificilesMazo(contenedorActual, subcontenedorActual, mazoActual);
+    }
     
     // OBTENER DINERO DESPUÉS (con la recompensa ya añadida)
     const dineroAhora = sistemaEconomia.obtenerDinero();
@@ -1434,50 +1647,75 @@ function finalizarQuiz() {
     
     // Determinar a dónde volver según el modo
     let funcionVolver;
+    let botonMazoDificil = '';
+    
     if (modoActual === 'anime') {
         funcionVolver = () => cargarMazosAnimes(contenedorActual, subcontenedorActual);
     } else if (modoActual === 'audio') {
         funcionVolver = () => cargarMazosAudios(contenedorActual, subcontenedorActual);
     } else if (modoActual === 'asmr') {
-        funcionVolver = () => volverAlInicio(); // ASMR no tiene quiz por ahora
+        funcionVolver = () => volverAlInicio();
     } else if (modoActual === 'rpg') {
-        funcionVolver = () => cargarPaginaRPG(); // Volver al RPG
+        funcionVolver = () => cargarPaginaRPG();
     } else {
         funcionVolver = () => cargarMazos(contenedorActual, subcontenedorActual);
+    }
+    
+    // Mostrar botón para hacer mazo difícil si hay palabras marcadas y NO estamos en modo difícil
+    if (!enModoDificil) {
+        const palabrasDificiles = sistemaEconomia.obtenerPalabrasDificilesMazo(contenedorActual, subcontenedorActual, mazoActual);
+        if (palabrasDificiles.length > 0) {
+            botonMazoDificil = `
+                <button class="quiz-btn btn-dificil-final" onclick="iniciarQuiz(${contenedorActual}, ${subcontenedorActual}, ${mazoActual}, true)" 
+                        style="background: linear-gradient(135deg, #FF6B6B, #FFD166); color: white; padding: 15px 30px; border: none; border-radius: 10px; cursor: pointer; font-weight: bold; margin: 10px;">
+                    ⚠️ HACER MAZO DIFÍCIL (${palabrasDificiles.length} palabras)
+                </button>
+            `;
+        }
     }
     
     // Mostrar resultados
     document.getElementById('quiz-section').innerHTML = `
         <div class="quiz-container">
-            <h2 style="text-align: center; color: #FFD166;">🎉 QUIZ COMPLETADO</h2>
+            <h2 style="text-align: center; color: ${enModoDificil ? '#FF6B6B' : '#FFD166'};">
+                ${enModoDificil ? '⚠️ MAZO DIFÍCIL COMPLETADO' : '🎉 QUIZ COMPLETADO'}
+                ${enModoDificil ? '<br><small style="font-size: 0.8rem;">(Palabras difíciles eliminadas)</small>' : ''}
+            </h2>
             
             <div style="text-align: center; margin: 40px 0;">
-                <div style="font-size: 4rem; margin-bottom: 20px;">${porcentaje}%</div>
+                <div style="font-size: 4rem; margin-bottom: 20px; color: ${enModoDificil ? '#FF6B6B' : '#8A5AF7'};">${porcentaje}%</div>
                 <p style="font-size: 1.2rem; color: #8A5AF7;">
                     ${aciertos} aciertos • ${errores} errores
                 </p>
             </div>
             
             <div style="background: rgba(255, 255, 255, 0.05); padding: 25px; border-radius: 15px; margin: 20px 0;">
-                <h3 style="color: #4CAF50; margin-bottom: 15px;">💰 Recompensa Obtenida</h3>
+                <h3 style="color: #4CAF50; margin-bottom: 15px;">💰 ${enModoDificil ? 'PRÁCTICA COMPLETADA' : 'RECOMPENSA OBTENIDA'}</h3>
                 <div style="font-size: 2.5rem; text-align: center; color: #FFD166;">
                     ${dineroAhora.toFixed(2)} soles
                 </div>
-                <p style="text-align: center; margin-top: 10px; opacity: 0.8;">
-                    ${recompensa > 0 ? `+${recompensa.toFixed(2)} soles ganados` : 'Continúa practicando para ganar más'}
-                </p>
-                <p style="text-align: center; font-size: 0.9rem; opacity: 0.7;">
-                    (Antes: ${dineroAntes.toFixed(2)} soles)
-                </p>
+                ${!enModoDificil ? `
+                    <p style="text-align: center; margin-top: 10px; opacity: 0.8;">
+                        ${recompensa > 0 ? `+${recompensa.toFixed(2)} soles ganados` : 'Continúa practicando para ganar más'}
+                    </p>
+                    <p style="text-align: center; font-size: 0.9rem; opacity: 0.7;">
+                        (Antes: ${dineroAntes.toFixed(2)} soles)
+                    </p>
+                ` : '<p style="text-align: center; opacity: 0.8;">Las palabras difíciles han sido eliminadas</p>'}
             </div>
             
+            <!-- BOTÓN MAZO DIFÍCIL -->
+            ${botonMazoDificil}
+            
             <div class="quiz-controls">
-                <button class="quiz-btn btn-volver" onclick="${modoActual === 'anime' ? `cargarMazosAnimes(${contenedorActual}, ${subcontenedorActual})` : (modoActual === 'audio' ? `cargarMazosAudios(${contenedorActual}, ${subcontenedorActual})` : (modoActual === 'rpg' ? `cargarPaginaRPG()` : `cargarMazos(${contenedorActual}, ${subcontenedorActual})`))}">
-                    ↩️ Volver a Mazos
+                <button class="quiz-btn btn-volver" onclick="volverAMazosDesdeQuiz()">
+                    ↩️ ${enModoDificil ? 'Volver a Mazos Normales' : 'Volver a Mazos'}
                 </button>
-                <button class="quiz-btn btn-siguiente" onclick="repetirQuiz()">
-                    🔄 Repetir Mazo
-                </button>
+                ${!enModoDificil ? `
+                    <button class="quiz-btn btn-siguiente" onclick="repetirQuiz()">
+                        🔄 Repetir Mazo
+                    </button>
+                ` : ''}
             </div>
         </div>
     `;
@@ -1486,25 +1724,10 @@ function finalizarQuiz() {
     actualizarContadorDineroInicio();
 }
 
-function cancelarQuiz() {
-    if (confirm('¿Seguro que quieres cancelar el quiz? Se perderá el progreso actual.')) {
-        if (modoActual === 'anime') {
-            cargarMazosAnimes(contenedorActual, subcontenedorActual);
-        } else if (modoActual === 'audio') {
-            cargarMazosAudios(contenedorActual, subcontenedorActual);
-        } else if (modoActual === 'asmr') {
-            volverAlInicio();
-        } else if (modoActual === 'rpg') {
-            cargarPaginaRPG();
-        } else {
-            cargarMazos(contenedorActual, subcontenedorActual);
-        }
-    }
-}
-
-function volverAMazos() {
+function volverAMazosDesdeQuiz() {
     document.getElementById('quiz-section').style.display = 'none';
     document.getElementById('manga-section').style.display = 'block';
+    
     if (modoActual === 'anime') {
         cargarMazosAnimes(contenedorActual, subcontenedorActual);
     } else if (modoActual === 'audio') {
@@ -1518,25 +1741,188 @@ function volverAMazos() {
     }
 }
 
+function cancelarQuiz() {
+    if (confirm('¿Seguro que quieres cancelar el quiz? Se perderá el progreso actual.')) {
+        volverAMazosDesdeQuiz();
+    }
+}
+
 function repetirQuiz() {
-    iniciarQuiz(contenedorActual, subcontenedorActual, mazoActual);
+    iniciarQuiz(contenedorActual, subcontenedorActual, mazoActual, enModoDificil);
 }
 
 // ====================
-// SISTEMA EXP RPG EN QUIZ
+// NUEVO: FUNCIÓN PARA MOSTRAR MISIONES
+// ====================
+
+function mostrarMisiones() {
+    ocultarHeader();
+    
+    const mangaSection = document.getElementById('manga-section');
+    mangaSection.style.display = 'block';
+    mangaSection.innerHTML = crearInterfazMisiones();
+    
+    const botonVolver = crearBotonVolver(volverAlInicio);
+    mangaSection.insertBefore(botonVolver, mangaSection.firstChild);
+}
+
+function crearInterfazMisiones() {
+    const misionesDiarias = sistemaEconomia.misionesDiarias;
+    const misionesSemanales = sistemaEconomia.misionesSemanales;
+    const hoy = new Date().toISOString().split('T')[0];
+    const esNuevoDia = misionesDiarias.fecha !== hoy;
+    
+    let html = `
+        <div style="max-width: 1000px; margin: 0 auto; padding: 20px;">
+            <h1 style="text-align: center; color: #FFD166; margin-bottom: 10px;">🎯 SISTEMA DE MISIONES</h1>
+            <p style="text-align: center; opacity: 0.8; margin-bottom: 30px;">
+                Completa misiones para ganar dinero extra. Se reinician automáticamente.
+            </p>
+            
+            <!-- NOTIFICACIÓN DE REINICIO -->
+            ${esNuevoDia ? `
+                <div style="background: rgba(76, 175, 80, 0.1); border-radius: 10px; padding: 15px; margin-bottom: 25px; border-left: 5px solid #4CAF50;">
+                    <p style="color: #4CAF50; margin: 0; font-weight: bold;">
+                        🆕 ¡Nuevas misiones diarias disponibles!
+                    </p>
+                </div>
+            ` : ''}
+            
+            <!-- MISIONES DIARIAS -->
+            <div style="background: rgba(255, 209, 102, 0.1); border-radius: 15px; padding: 25px; margin-bottom: 30px; border: 2px solid #FFD166;">
+                <h2 style="color: #FFD166; margin-bottom: 20px; display: flex; align-items: center; gap: 10px;">
+                    🌞 MISIONES DIARIAS
+                    <span style="font-size: 0.8rem; opacity: 0.7;">(Se reinician a las 3 AM)</span>
+                </h2>
+                <p style="opacity: 0.8; margin-bottom: 20px;">
+                    Completadas: ${misionesDiarias.completados}/${misionesDiarias.misiones.length}
+                </p>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 15px;">
+                    ${misionesDiarias.misiones.map(mision => {
+                        const completada = mision.completado >= mision.objetivo;
+                        const porcentaje = Math.min(100, (mision.completado / mision.objetivo) * 100);
+                        
+                        return `
+                            <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 10px; border: 1px solid ${completada ? '#4CAF50' : 'rgba(255, 209, 102, 0.3)'};">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                                    <span style="font-weight: bold; color: ${completada ? '#4CAF50' : '#FFD166'};">${mision.descripcion}</span>
+                                    <span style="color: #FFD166; font-weight: bold;">+${mision.recompensa} soles</span>
+                                </div>
+                                
+                                <div style="background: rgba(255,255,255,0.1); height: 8px; border-radius: 4px; margin-bottom: 10px; overflow: hidden;">
+                                    <div style="background: linear-gradient(135deg, ${completada ? '#4CAF50' : '#FFD166'}, ${completada ? '#2E7D32' : '#FF6B6B'}); 
+                                              width: ${porcentaje}%; height: 100%;"></div>
+                                </div>
+                                
+                                <div style="display: flex; justify-content: space-between; font-size: 0.9rem;">
+                                    <span style="color: ${completada ? '#4CAF50' : 'rgba(255,255,255,0.7)'};">
+                                        ${completada ? '✅ Completada' : `${mision.completado}/${mision.objetivo}`}
+                                    </span>
+                                    ${completada ? '<span style="color: #4CAF50;">✓</span>' : ''}
+                                </div>
+                            </div>
+                        `;
+                    }).join('')}
+                </div>
+                
+                <p style="text-align: center; margin-top: 20px; opacity: 0.7; font-size: 0.9rem;">
+                    Próximo reinicio: Hoy a las 3:00 AM
+                </p>
+            </div>
+            
+            <!-- MISIONES SEMANALES -->
+            <div style="background: rgba(88, 100, 245, 0.1); border-radius: 15px; padding: 25px; margin-bottom: 30px; border: 2px solid #5864F5;">
+                <h2 style="color: #5864F5; margin-bottom: 20px; display: flex; align-items: center; gap: 10px;">
+                    📅 MISIONES SEMANALES
+                    <span style="font-size: 0.8rem; opacity: 0.7;">(Semana ${misionesSemanales.semana})</span>
+                </h2>
+                <p style="opacity: 0.8; margin-bottom: 20px;">
+                    Completadas: ${misionesSemanales.completados}/${misionesSemanales.misiones.length}
+                </p>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 15px;">
+                    ${misionesSemanales.misiones.map(mision => {
+                        const completada = mision.completado >= mision.objetivo;
+                        const porcentaje = Math.min(100, (mision.completado / mision.objetivo) * 100);
+                        
+                        return `
+                            <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 10px; border: 1px solid ${completada ? '#4CAF50' : 'rgba(88, 100, 245, 0.3)'};">
+                                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                                    <span style="font-weight: bold; color: ${completada ? '#4CAF50' : '#5864F5'};">${mision.descripcion}</span>
+                                    <span style="color: #FFD166; font-weight: bold;">+${mision.recompensa} soles</span>
+                                </div>
+                                
+                                <div style="background: rgba(255,255,255,0.1); height: 8px; border-radius: 4px; margin-bottom: 10px; overflow: hidden;">
+                                    <div style="background: linear-gradient(135deg, ${completada ? '#4CAF50' : '#5864F5'}, ${completada ? '#2E7D32' : '#8A5AF7'}); 
+                                              width: ${porcentaje}%; height: 100%;"></div>
+                                </div>
+                                
+                                <div style="display: flex; justify-content: space-between; font-size: 0.9rem;">
+                                    <span style="color: ${completada ? '#4CAF50' : 'rgba(255,255,255,0.7)'};">
+                                        ${completada ? '✅ Completada' : `${mision.completado}/${mision.objetivo}`}
+                                    </span>
+                                    ${completada ? '<span style="color: #4CAF50;">✓</span>' : ''}
+                                </div>
+                            </div>
+                        `;
+                    }).join('')}
+                </div>
+                
+                <p style="text-align: center; margin-top: 20px; opacity: 0.7; font-size: 0.9rem;">
+                    Reinicio semanal: Cada lunes a las 3:00 AM
+                </p>
+            </div>
+            
+            <!-- RECOMPENSAS ACUMULADAS -->
+            <div style="background: rgba(76, 175, 80, 0.1); border-radius: 15px; padding: 25px; border: 2px solid #4CAF50;">
+                <h2 style="color: #4CAF50; margin-bottom: 20px;">💰 RECOMPENSAS ESTIMADAS</h2>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; text-align: center;">
+                    <div>
+                        <div style="color: #FFD166; font-size: 0.9rem;">HOY (MÁXIMO)</div>
+                        <div style="font-size: 1.8rem; font-weight: bold; color: #4CAF50;">
+                            ${misionesDiarias.misiones.reduce((sum, m) => sum + m.recompensa, 0)} soles
+                        </div>
+                    </div>
+                    <div>
+                        <div style="color: #FFD166; font-size: 0.9rem;">SEMANA (MÁXIMO)</div>
+                        <div style="font-size: 1.8rem; font-weight: bold; color: #5864F5;">
+                            ${misionesSemanales.misiones.reduce((sum, m) => sum + m.recompensa, 0)} soles
+                        </div>
+                    </div>
+                    <div>
+                        <div style="color: #FFD166; font-size: 0.9rem;">TOTAL POSIBLE</div>
+                        <div style="font-size: 1.8rem; font-weight: bold; color: #FFD166;">
+                            ${misionesDiarias.misiones.reduce((sum, m) => sum + m.recompensa, 0) * 7 + 
+                              misionesSemanales.misiones.reduce((sum, m) => sum + m.recompensa, 0)} soles
+                        </div>
+                    </div>
+                </div>
+                
+                <p style="text-align: center; margin-top: 20px; opacity: 0.8;">
+                    ¡Completa mazos al 100% para avanzar en las misiones más rápido!
+                </p>
+            </div>
+        </div>
+    `;
+    
+    return html;
+}
+
+// ====================
+// SISTEMA EXP RPG EN QUIZ (MODIFICADO)
 // ====================
 
 function darExpPorPalabraCorrecta(esCorrecta) {
     if (!esCorrecta) return false;
     
-    // Verificar si el RPG está cargado
     if (typeof quintillizasRPG === 'undefined' || 
         !quintillizasRPG.personajeSeleccionado) {
         return false;
     }
     
-    // Dar EXP por cada palabra correcta
-    const expPorPalabra = 20; // EXP por cada acierto
+    // REDUCIDO: Solo 10 EXP por palabra correcta (era 20)
+    const expPorPalabra = 10;
     
     const expDada = quintillizasRPG.agregarEXP(
         quintillizasRPG.personajeSeleccionado, 
@@ -1552,25 +1938,24 @@ function darExpPorPalabraCorrecta(esCorrecta) {
 }
 
 function darExpPorCompletarMazo(porcentaje) {
-    // Verificar si el RPG está cargado
     if (typeof quintillizasRPG === 'undefined' || 
         !quintillizasRPG.personajeSeleccionado) {
         return false;
     }
     
-    // Dar EXP adicional por completar mazo (basado en porcentaje)
+    // REDUCIDO: Menos EXP por completar mazo
     let expAdicional = 0;
     
     if (porcentaje >= 100) {
-        expAdicional = 100; // +100 EXP por mazo perfecto
+        expAdicional = 50; // Era 100
     } else if (porcentaje >= 90) {
-        expAdicional = 75;
+        expAdicional = 40; // Era 75
     } else if (porcentaje >= 80) {
-        expAdicional = 50;
+        expAdicional = 30; // Era 50
     } else if (porcentaje >= 70) {
-        expAdicional = 30;
+        expAdicional = 20; // Era 30
     } else if (porcentaje >= 50) {
-        expAdicional = 15;
+        expAdicional = 10; // Era 15
     }
     
     if (expAdicional > 0) {
@@ -1591,7 +1976,6 @@ function darExpPorCompletarMazo(porcentaje) {
 }
 
 function mostrarNotificacionQuiz(mensaje) {
-    // Crear notificación para EXP
     const notif = document.createElement('div');
     notif.textContent = mensaje;
     notif.style.cssText = `
@@ -1653,7 +2037,7 @@ function verificarVocabularioDisponible(contenedor, subcontenedor, mazo) {
 }
 
 // ====================
-// INICIALIZACIÓN
+// INICIALIZACIÓN COMPLETA
 // ====================
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -1664,6 +2048,33 @@ document.addEventListener('DOMContentLoaded', function() {
     const botonCasa = document.getElementById('boton-casa');
     if (botonCasa) {
         botonCasa.onclick = volverAlInicio;
+    }
+    
+    // Añadir botón de misiones al header si existe
+    const header = document.querySelector('.header');
+    if (header) {
+        const botonMisiones = document.createElement('button');
+        botonMisiones.id = 'boton-misiones';
+        botonMisiones.className = 'boton-misiones';
+        botonMisiones.innerHTML = '🎯 Misiones';
+        botonMisiones.onclick = mostrarMisiones;
+        botonMisiones.style.cssText = `
+            background: linear-gradient(135deg, #FFD166, #FF6B6B);
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: bold;
+            margin-left: 10px;
+            transition: all 0.3s ease;
+        `;
+        
+        // Insertar después del botón casa
+        const botonCasa = document.getElementById('boton-casa');
+        if (botonCasa) {
+            botonCasa.parentNode.insertBefore(botonMisiones, botonCasa.nextSibling);
+        }
     }
     
     // Inicializar RPG si existe
@@ -1683,11 +2094,12 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    console.log('✅ Sistema completo cargado correctamente');
+    console.log('✅ Sistema COMPLETO cargado correctamente');
     console.log('📚 Mangas, 🎬 Videos, 🎌 Animes, 🎵 Audios, 🎧 ASMR, 🎮 RPG');
-    console.log('📖 Lector de manga integrado');
-    console.log('🏠 Botón casa configurado');
-    console.log('💰 Sistema de dinero activo');
-    console.log('🎮 Sistema RPG Quintillizas activo');
-    console.log('💖 EXP por quiz activado: +20 EXP/palabra correcta, +15-100 EXP/mazo completo');
+    console.log('⚠️ Sistema de palabras difíciles activado');
+    console.log('🎯 Sistema de misiones diarias/semanales activado');
+    console.log('🎬 Videos especiales al 100% activados (20 videos diferentes)');
+    console.log('🔄 Reinicio automático a las 3:00 AM configurado');
+    console.log('💰 Sistema de dinero mejorado con misiones');
+    console.log('🏠 Botón casa y misiones configurados');
 });
