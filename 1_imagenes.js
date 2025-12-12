@@ -75,7 +75,7 @@ const sistemaDescriptivo = {
         subcontenedores: {
             // Contenedor 1
             '1_1': { 
-                nombre: 'Sub-contenedor 1',
+                nombre: 'Quinti zorras porno',
                 imagen: 'https://pbs.twimg.com/media/G75foT0XgAERE6s?format=jpg&name=large',
                 descripcion: 'mik',
                 nivel: 'principiante'
