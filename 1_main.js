@@ -13,7 +13,7 @@ let errores = 0;
 let esperandoSiguiente = false;
 
 // Variables para videos y animes
-let modoActual = 'manga'; // 'manga', 'video', 'anime'
+let modoActual = 'manga'; // 'manga', 'video', 'anime', 'audio'
 let idiomaVideoActual = 'espanol'; // 'espanol', 'japones'
 
 // ====================
@@ -111,6 +111,18 @@ function cargarPaginaAnimes() {
     mangaSection.insertBefore(botonVolver, mangaSection.firstChild);
 }
 
+function cargarPaginaAudios() {
+    modoActual = 'audio';
+    ocultarHeader();
+    
+    const mangaSection = document.getElementById('manga-section');
+    mangaSection.style.display = 'block';
+    mangaSection.innerHTML = crearContenedoresAudios();
+    
+    const botonVolver = crearBotonVolver(volverAlInicio);
+    mangaSection.insertBefore(botonVolver, mangaSection.firstChild);
+}
+
 function volverAlInicio() {
     mostrarHeader();
     actualizarContadorDineroInicio();
@@ -194,6 +206,37 @@ function crearContenedoresAnimes() {
                 <div class="contenedor-numero">ANIME CONTAINER ${i}</div>
                 <p>${tieneAnimes ? contenedores[i].length + ' sub-contenedores con animes' : '5 sub-contenedores disponibles'}</p>
                 <div class="card-button">${tieneAnimes ? 'Ver animes' : 'Explorar'}</div>
+            </div>
+        `;
+    }
+    
+    html += '</div>';
+    return html;
+}
+
+// ====================
+// CREACIÓN DE UI - AUDIOS
+// ====================
+
+function crearContenedoresAudios() {
+    let html = '<h2 style="text-align: center; margin-bottom: 30px; color: #FFD166;">🎵 CONTENEDORES DE AUDIOS</h2>';
+    html += '<p style="text-align: center; margin-bottom: 30px; opacity: 0.8;">Openings MP3 + vocabulario de letras</p>';
+    html += '<div class="manga-contenedores">';
+    
+    const contenedores = obtenerContenedoresAudiosDisponibles();
+    const totalContenedores = Object.keys(contenedores).length || 10;
+    
+    for (let i = 1; i <= Math.max(totalContenedores, 10); i++) {
+        const tieneAudios = contenedores[i] && contenedores[i].length > 0;
+        
+        html += `
+            <div class="contenedor-item" onclick="cargarSubcontenedoresAudios(${i})">
+                <div class="contenedor-img" style="background-image: url('https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=400&h=400&fit=crop')"></div>
+                <div class="contenedor-numero">AUDIO CONTAINER ${i}</div>
+                <p>${tieneAudios ? contenedores[i].length + ' sub-contenedores con openings' : '5 sub-contenedores disponibles'}</p>
+                <div class="card-button" style="background: linear-gradient(135deg, #FF6B6B, #FFD166);">
+                    ${tieneAudios ? '🎵 Escuchar audios' : 'Explorar'}
+                </div>
             </div>
         `;
     }
@@ -387,6 +430,218 @@ function crearMazosAnimesUI(contenedor, subcontenedor) {
 }
 
 // ====================
+// FUNCIONES PARA AUDIOS
+// ====================
+
+function cargarSubcontenedoresAudios(contenedor) {
+    contenedorActual = contenedor;
+    modoActual = 'audio';
+    
+    const mangaSection = document.getElementById('manga-section');
+    mangaSection.innerHTML = crearSubcontenedoresAudiosUI(contenedor);
+    
+    const botonVolver = crearBotonVolver(cargarPaginaAudios);
+    mangaSection.insertBefore(botonVolver, mangaSection.firstChild);
+}
+
+function crearSubcontenedoresAudiosUI(contenedor) {
+    let html = `<h2 style="text-align: center; margin-bottom: 30px; color: #FFD166;">
+        🎵 CONTENEDOR ${contenedor} - SUB-CONTENEDORES DE OPENINGS
+    </h2>`;
+    html += '<div class="subcontenedores-grid">';
+    
+    const contenedores = obtenerContenedoresAudiosDisponibles();
+    const subcontenedoresDisponibles = contenedores[contenedor] || [];
+    
+    for (let i = 1; i <= 5; i++) {
+        const tieneAudio = subcontenedoresDisponibles.includes(i.toString());
+        const audioInfo = tieneAudio ? obtenerAudio(contenedor, i) : null;
+        
+        html += `
+            <div class="subcontenedor-item" onclick="${tieneAudio ? `seleccionarAccionAudio(${contenedor}, ${i})` : `cargarMazosAudios(${contenedor}, ${i})`}">
+                <div class="subcontenedor-img" style="background-image: url('https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=300&h=300&fit=crop')"></div>
+                <h3>${tieneAudio ? audioInfo.titulo.split('-')[0] : `Audio ${i}`}</h3>
+                ${tieneAudio ? 
+                    `<p><strong>${audioInfo.titulo}</strong></p>
+                     <p style="font-size: 0.9rem; opacity: 0.8;">${audioInfo.artista} • ${audioInfo.duracion}</p>` 
+                    : '<p style="color: #FF6B6B;">(Sin audio configurado)</p>'}
+                <div class="card-button" style="margin-top: 10px; padding: 10px 20px; font-size: 0.9rem; background: linear-gradient(135deg, #FF6B6B, #FFD166);">
+                    ${tieneAudio ? '🎵 Ver opciones' : '📚 Solo vocabulario'}
+                </div>
+            </div>
+        `;
+    }
+    
+    html += '</div>';
+    return html;
+}
+
+function seleccionarAccionAudio(contenedor, subcontenedor) {
+    const audioInfo = obtenerAudio(contenedor, subcontenedor);
+    
+    const accionesHTML = `
+        <div style="text-align: center; margin: 40px 0;">
+            <h3 style="color: #FFD166; margin-bottom: 30px;">${audioInfo.titulo}</h3>
+            <p style="opacity: 0.8; margin-bottom: 30px; max-width: 600px; margin-left: auto; margin-right: auto;">
+                ${audioInfo.descripcion}
+            </p>
+            <div style="display: flex; flex-direction: column; gap: 20px; max-width: 400px; margin: 0 auto;">
+                <button class="card-button" onclick="cargarReproductorAudio(${contenedor}, ${subcontenedor})" style="background: linear-gradient(135deg, #FF6B6B, #FFD166);">
+                    🎵 Escuchar Opening
+                </button>
+                <button class="card-button" onclick="cargarMazosAudios(${contenedor}, ${subcontenedor})" style="background: linear-gradient(135deg, #5864F5, #8A5AF7);">
+                    📚 Practicar Vocabulario
+                </button>
+                <button class="btn-atras-especifico" onclick="cargarSubcontenedoresAudios(${contenedor})">
+                    ↩️ Volver
+                </button>
+            </div>
+        </div>
+    `;
+    
+    document.getElementById('manga-section').innerHTML = `
+        <div style="max-width: 800px; margin: 0 auto; padding: 40px 20px;">
+            ${crearBotonVolver(() => cargarSubcontenedoresAudios(contenedor)).outerHTML}
+            ${accionesHTML}
+        </div>
+    `;
+}
+
+function cargarReproductorAudio(contenedor, subcontenedor) {
+    contenedorActual = contenedor;
+    subcontenedorActual = subcontenedor;
+    
+    const audioInfo = obtenerAudio(contenedor, subcontenedor);
+    if (!audioInfo || !audioInfo.driveId) {
+        alert('No hay audio disponible en este sub-contenedor');
+        return;
+    }
+    
+    const mangaSection = document.getElementById('manga-section');
+    mangaSection.innerHTML = crearReproductorAudioUI(audioInfo);
+    
+    const botonVolver = crearBotonVolver(() => seleccionarAccionAudio(contenedor, subcontenedor));
+    mangaSection.insertBefore(botonVolver, mangaSection.firstChild);
+}
+
+function crearReproductorAudioUI(audioInfo) {
+    return `
+        <div class="reproductor-audio-container" style="max-width: 800px; margin: 40px auto; background: rgba(30, 30, 40, 0.95); border-radius: 25px; padding: 40px; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6); border: 3px solid #FF6B6B;">
+            <h2 style="text-align: center; color: #FFD166; margin-bottom: 10px;">${audioInfo.titulo}</h2>
+            <p style="text-align: center; opacity: 0.8; margin-bottom: 30px;">
+                ${audioInfo.descripcion}
+            </p>
+            
+            <!-- REPRODUCTOR DE AUDIO DRIVE -->
+            <div style="background: rgba(0, 0, 0, 0.3); border-radius: 15px; padding: 25px; margin: 30px 0; text-align: center;">
+                <h3 style="color: #FFD166; margin-bottom: 20px;">🎵 Reproductor</h3>
+                <div style="margin: 20px 0;">
+                    <iframe 
+                        src="https://drive.google.com/file/d/${audioInfo.driveId}/preview"
+                        width="100%"
+                        height="100"
+                        frameborder="0"
+                        style="border-radius: 10px;"
+                        allow="autoplay"
+                    ></iframe>
+                </div>
+                <p style="opacity: 0.7; font-size: 0.9rem; margin-top: 15px;">
+                    Si no se reproduce automáticamente, haz clic en el botón de play
+                </p>
+            </div>
+            
+            <!-- INFORMACIÓN DEL AUDIO -->
+            <div style="background: rgba(255, 255, 255, 0.05); border-radius: 15px; padding: 20px; margin: 20px 0;">
+                <h4 style="color: #8A5AF7; margin-bottom: 15px;">📊 Información del Opening</h4>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+                    <div style="background: rgba(255, 255, 255, 0.08); padding: 15px; border-radius: 10px;">
+                        <div style="color: #FF6B6B; font-size: 0.9rem;">🎤 Artista</div>
+                        <div style="font-weight: bold;">${audioInfo.artista || 'No especificado'}</div>
+                    </div>
+                    <div style="background: rgba(255, 255, 255, 0.08); padding: 15px; border-radius: 10px;">
+                        <div style="color: #FF6B6B; font-size: 0.9rem;">⏱️ Duración</div>
+                        <div style="font-weight: bold;">${audioInfo.duracion}</div>
+                    </div>
+                    <div style="background: rgba(255, 255, 255, 0.08); padding: 15px; border-radius: 10px;">
+                        <div style="color: #FF6B6B; font-size: 0.9rem;">📅 Año</div>
+                        <div style="font-weight: bold;">${audioInfo.año || 'N/A'}</div>
+                    </div>
+                    <div style="background: rgba(255, 255, 255, 0.08); padding: 15px; border-radius: 10px;">
+                        <div style="color: #FF6B6B; font-size: 0.9rem;">🎌 Anime</div>
+                        <div style="font-weight: bold;">${audioInfo.anime || 'N/A'}</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div style="text-align: center; margin-top: 30px;">
+                <button class="card-button" onclick="cargarMazosAudios(${contenedorActual}, ${subcontenedorActual})" style="background: linear-gradient(135deg, #5864F5, #8A5AF7); max-width: 300px; margin: 0 auto;">
+                    📚 Practicar Vocabulario de esta Canción
+                </button>
+            </div>
+        </div>
+    `;
+}
+
+function cargarMazosAudios(contenedor, subcontenedor) {
+    contenedorActual = contenedor;
+    subcontenedorActual = subcontenedor;
+    modoActual = 'audio';
+    
+    const mangaSection = document.getElementById('manga-section');
+    mangaSection.innerHTML = crearMazosAudiosUI(contenedor, subcontenedor);
+    
+    const botonVolver = crearBotonVolver(() => {
+        if (obtenerAudio(contenedor, subcontenedor)) {
+            seleccionarAccionAudio(contenedor, subcontenedor);
+        } else {
+            cargarSubcontenedoresAudios(contenedor);
+        }
+    });
+    mangaSection.insertBefore(botonVolver, mangaSection.firstChild);
+}
+
+function crearMazosAudiosUI(contenedor, subcontenedor) {
+    const audioInfo = obtenerAudio(contenedor, subcontenedor);
+    const tituloAudio = audioInfo ? audioInfo.titulo : `Sub-contenedor ${subcontenedor}`;
+    
+    let html = `<h2 style="text-align: center; margin-bottom: 30px; color: #FFD166;">
+        📚 ${tituloAudio.toUpperCase()} - MAZOS DE VOCABULARIO
+    </h2>`;
+    
+    if (audioInfo) {
+        html += `<p style="text-align: center; margin-bottom: 30px; opacity: 0.8; max-width: 800px; margin-left: auto; margin-right: auto;">
+            Practica vocabulario de la letra de este opening. Gana dinero por cada mazo completado.
+        </p>`;
+    }
+    
+    html += '<div class="mazos-container">';
+    
+    for (let i = 1; i <= 10; i++) {
+        const tieneVocabulario = existeVocabularioAudio(contenedor, subcontenedor, i);
+        const progreso = sistemaEconomia.obtenerProgreso(contenedor, subcontenedor, i);
+        
+        html += `
+            <div class="mazo-item" onclick="${tieneVocabulario ? `iniciarQuiz(${contenedor}, ${subcontenedor}, ${i})` : 'alert("Este mazo aún no tiene vocabulario. Agrégalo en 1_audios_vocabulario.js")'}" style="border-color: rgba(255, 107, 107, 0.6);">
+                <h3>MAZO ${i}</h3>
+                <p>10 palabras japonesas de la letra</p>
+                ${progreso > 0 ? 
+                    `<div style="margin-top: 10px;">
+                        <div style="background: rgba(255,255,255,0.1); height: 8px; border-radius: 4px; overflow: hidden;">
+                            <div style="background: linear-gradient(135deg, #FF6B6B, #FFD166); width: ${progreso}%; height: 100%;"></div>
+                        </div>
+                        <p style="font-size: 0.9rem; margin-top: 5px; color: #FF6B6B;">${progreso}% completado</p>
+                    </div>` 
+                    : ''}
+                ${!tieneVocabulario ? '<p style="color: #FF6B6B; font-size: 0.9rem; margin-top: 5px;">(Vacío)</p>' : ''}
+            </div>
+        `;
+    }
+    
+    html += '</div>';
+    return html;
+}
+
+// ====================
 // FUNCIONES COMPARTIDAS MANGAS/VIDEOS
 // ====================
 
@@ -418,7 +673,7 @@ function crearSubcontenedoresUI(contenedor) {
                 <p>10 mazos de vocabulario</p>
                 ${tieneContenido ? '' : '<p style="color: #FF6B6B; font-size: 0.9rem;">(Sin vocabulario)</p>'}
                 
-                <!-- NUEVO: BOTONES PARA ESTE SUB-CONTENEDOR -->
+                <!-- BOTONES PARA ESTE SUB-CONTENEDOR -->
                 <div style="display: flex; gap: 10px; margin-top: 15px;">
                     <button class="card-button" onclick="cargarMazos(${contenedor}, ${i})" style="padding: 10px 15px; font-size: 0.9rem;">
                         📚 Vocabulario
@@ -528,7 +783,7 @@ function crearMazosUI(contenedor, subcontenedor) {
         📚 CONTENEDOR ${contenedor} • SUB-CONTENEDOR ${subcontenedor} - MAZOS
     </h2>`;
     
-    // NUEVO: BOTÓN PARA LEER MANGA EN CABECERA
+    // BOTÓN PARA LEER MANGA EN CABECERA
     const tieneManga = existeManga(contenedor, subcontenedor);
     if (tieneManga) {
         const mangaInfo = mangaDatabase[`${contenedor}_${subcontenedor}`];
@@ -585,12 +840,15 @@ function iniciarQuiz(contenedor, subcontenedor, mazo) {
     // Obtener palabras según el modo actual
     if (modoActual === 'anime') {
         palabrasActuales = obtenerVocabularioAnime(contenedor, subcontenedor, mazo);
+    } else if (modoActual === 'audio') {
+        palabrasActuales = obtenerVocabularioAudio(contenedor, subcontenedor, mazo);
     } else {
         palabrasActuales = obtenerVocabulario(contenedor, subcontenedor, mazo);
     }
     
     if (palabrasActuales.length === 0) {
-        const archivo = modoActual === 'anime' ? '1_animes_vocabulario.js' : '1_vocabulario.js';
+        const archivo = modoActual === 'anime' ? '1_animes_vocabulario.js' : 
+                      (modoActual === 'audio' ? '1_audios_vocabulario.js' : '1_vocabulario.js');
         alert(`No hay palabras en este mazo. Agrega vocabulario en ${archivo}`);
         return;
     }
@@ -613,10 +871,15 @@ function mostrarPalabraQuiz() {
     const quizSection = document.getElementById('quiz-section');
     const palabra = palabrasActuales[indicePalabraActual];
     
+    // Determinar el ícono según el modo
+    let icono = '📚';
+    if (modoActual === 'anime') icono = '🎌';
+    if (modoActual === 'audio') icono = '🎵';
+    
     quizSection.innerHTML = `
         <div class="quiz-container">
             <h2 style="text-align: center; color: #8A5AF7; margin-bottom: 20px;">
-                ${modoActual === 'anime' ? '🎌 ANIME' : '📚 MANGA'} • Mazo ${mazoActual} • Palabra ${indicePalabraActual + 1}/${palabrasActuales.length}
+                ${icono} ${modoActual === 'audio' ? 'AUDIO' : modoActual.toUpperCase()} • Mazo ${mazoActual} • Palabra ${indicePalabraActual + 1}/${palabrasActuales.length}
             </h2>
             
             <div class="palabra-japonesa" id="palabra-japonesa">
@@ -782,9 +1045,14 @@ function finalizarQuiz() {
     const recompensa = dineroAhora - dineroAntes;
     
     // Determinar a dónde volver según el modo
-    const funcionVolver = modoActual === 'anime' ? 
-        () => cargarMazosAnimes(contenedorActual, subcontenedorActual) : 
-        () => cargarMazos(contenedorActual, subcontenedorActual);
+    let funcionVolver;
+    if (modoActual === 'anime') {
+        funcionVolver = () => cargarMazosAnimes(contenedorActual, subcontenedorActual);
+    } else if (modoActual === 'audio') {
+        funcionVolver = () => cargarMazosAudios(contenedorActual, subcontenedorActual);
+    } else {
+        funcionVolver = () => cargarMazos(contenedorActual, subcontenedorActual);
+    }
     
     // Mostrar resultados
     document.getElementById('quiz-section').innerHTML = `
@@ -812,7 +1080,7 @@ function finalizarQuiz() {
             </div>
             
             <div class="quiz-controls">
-                <button class="quiz-btn btn-volver" onclick="${modoActual === 'anime' ? `cargarMazosAnimes(${contenedorActual}, ${subcontenedorActual})` : `cargarMazos(${contenedorActual}, ${subcontenedorActual})`}">
+                <button class="quiz-btn btn-volver" onclick="${modoActual === 'anime' ? `cargarMazosAnimes(${contenedorActual}, ${subcontenedorActual})` : (modoActual === 'audio' ? `cargarMazosAudios(${contenedorActual}, ${subcontenedorActual})` : `cargarMazos(${contenedorActual}, ${subcontenedorActual})`)}">
                     ↩️ Volver a Mazos
                 </button>
                 <button class="quiz-btn btn-siguiente" onclick="repetirQuiz()">
@@ -830,6 +1098,8 @@ function cancelarQuiz() {
     if (confirm('¿Seguro que quieres cancelar el quiz? Se perderá el progreso actual.')) {
         if (modoActual === 'anime') {
             cargarMazosAnimes(contenedorActual, subcontenedorActual);
+        } else if (modoActual === 'audio') {
+            cargarMazosAudios(contenedorActual, subcontenedorActual);
         } else {
             cargarMazos(contenedorActual, subcontenedorActual);
         }
@@ -841,6 +1111,8 @@ function volverAMazos() {
     document.getElementById('manga-section').style.display = 'block';
     if (modoActual === 'anime') {
         cargarMazosAnimes(contenedorActual, subcontenedorActual);
+    } else if (modoActual === 'audio') {
+        cargarMazosAudios(contenedorActual, subcontenedorActual);
     } else {
         cargarMazos(contenedorActual, subcontenedorActual);
     }
@@ -907,7 +1179,8 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    console.log('✅ Sistema de animes cargado correctamente');
+    console.log('✅ Sistema completo cargado correctamente');
+    console.log('📚 Mangas, 🎬 Videos, 🎌 Animes, 🎵 Audios');
     console.log('📖 Lector de manga integrado');
     console.log('🏠 Botón casa configurado');
     console.log('💰 Sistema de dinero activo');
