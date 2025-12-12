@@ -33,7 +33,7 @@ class QuintillizasRPG {
                 color: '#FF6B8B',
                 nivel: 1,
                 exp: 0,
-                expNecesaria: 100,
+                expNecesaria: 200,  // AUMENTADO: 100 → 200
                 estadoAnimo: 'neutral',
                 afinidad: 0,
                 descripcion: 'La hermana mayor, responsable y coqueta. Le gusta cuidar a los demás.',
@@ -51,7 +51,7 @@ class QuintillizasRPG {
                 color: '#FFB347',
                 nivel: 1,
                 exp: 0,
-                expNecesaria: 100,
+                expNecesaria: 250,  // AUMENTADO: 100 → 250 (más difícil)
                 estadoAnimo: 'tsundere',
                 afinidad: -20,
                 descripcion: 'Tsundere clásica, difícil de conquistar. Cocina increíblemente bien.',
@@ -69,7 +69,7 @@ class QuintillizasRPG {
                 color: '#6A5ACD',
                 nivel: 1,
                 exp: 0,
-                expNecesaria: 100,
+                expNecesaria: 180,  // AUMENTADO: 100 → 180
                 estadoAnimo: 'tímida',
                 afinidad: 10,
                 descripcion: 'Tímida y reservada, le gusta la historia japonesa y los audífonos.',
@@ -87,7 +87,7 @@ class QuintillizasRPG {
                 color: '#4CAF50',
                 nivel: 1,
                 exp: 0,
-                expNecesaria: 100,
+                expNecesaria: 150,  // AUMENTADO: 100 → 150
                 estadoAnimo: 'energica',
                 afinidad: 30,
                 descripcion: 'La más enérgica y deportista. Siempre lista para ayudar.',
@@ -105,7 +105,7 @@ class QuintillizasRPG {
                 color: '#FFD166',
                 nivel: 1,
                 exp: 0,
-                expNecesaria: 100,
+                expNecesaria: 160,  // AUMENTADO: 100 → 160
                 estadoAnimo: 'glotona',
                 afinidad: 15,
                 descripcion: 'La más glotona, le encanta comer. Es estudiosa y honesta.',
@@ -122,7 +122,7 @@ class QuintillizasRPG {
     }
 
     // ====================
-    // SISTEMA DE EXP Y NIVELES
+    // SISTEMA DE EXP Y NIVELES (MODIFICADO PARA SER MÁS DIFÍCIL)
     // ====================
 
     agregarEXP(personajeId, cantidad) {
@@ -149,7 +149,8 @@ class QuintillizasRPG {
         const personaje = this.datosPersonajes[personajeId];
         personaje.nivel += 1;
         personaje.exp = personaje.exp - personaje.expNecesaria;
-        personaje.expNecesaria = Math.round(personaje.expNecesaria * 1.5);
+        // AUMENTAR MÁS RÁPIDO CADA NIVEL: 1.5 → 1.7
+        personaje.expNecesaria = Math.round(personaje.expNecesaria * 1.7);
         
         console.log(`🎉 ¡${personaje.nombre} subió al nivel ${personaje.nivel}!`);
         this.mostrarNotificacion(`🎉 ${personaje.nombre} nivel ${personaje.nivel}!`);
@@ -437,13 +438,9 @@ class QuintillizasRPG {
                             </ul>
                         </div>
                         <button class="card-button" onclick="quintillizasRPG.intentarInteraccionIntima('${this.personajeSeleccionado}')"
-                                style="background: linear-gradient(135deg, #FF1493, #FF69B4); 
-                                       width: 100%; 
-                                       font-size: 1.2rem;
-                                       padding: 20px;
-                                       border: 3px solid ${this.condones <= 0 ? '#FF0000' : '#FFD166'};"
-                                ${this.condones <= 0 ? 'disabled style="opacity: 0.7; cursor: not-allowed;"' : ''}>
-                            ${this.condones <= 0 ? '❌ NO HAY CONDONES - COMPRA EN TIENDA' : `💖 INTENTAR MOMENTO ÍNTIMO (Usa 1 condón)`}
+                                style="background: linear-gradient(135deg, #FF1493, #FF69B4); width: 100%;"
+                                ${this.condones <= 0 ? 'disabled style="opacity: 0.5;"' : ''}>
+                            ${this.condones <= 0 ? '❌ SIN CONDONES' : `💝 INTENTAR (Usa 1 condón)`}
                         </button>
                         <p style="text-align: center; margin-top: 10px; font-size: 0.9rem; opacity: 0.7;">
                             Condones disponibles: ${this.condones}
@@ -458,35 +455,30 @@ class QuintillizasRPG {
                         </p>
                         
                         <div style="display: flex; flex-direction: column; gap: 15px;">
-                            ${personaje.actividadesEspeciales.map(actividad => {
-                                const yaComprada = this.actividadesCompletadas[this.personajeSeleccionado] && 
-                                                   this.actividadesCompletadas[this.personajeSeleccionado].includes(actividad.id);
-                                
-                                return `
-                                    <div style="display: flex; flex-direction: column; gap: 10px; background: rgba(255,255,255,0.05); padding: 15px; border-radius: 10px;">
-                                        <div style="display: flex; justify-content: space-between; align-items: center;">
-                                            <span style="font-weight: bold; font-size: 1.1rem;">${actividad.nombre}</span>
-                                            <span style="color: #FFD166; font-weight: bold;">S/.${actividad.costo}</span>
-                                        </div>
-                                        <p style="opacity: 0.7; font-size: 0.9rem; margin: 0;">${actividad.descripcion}</p>
-                                        <div style="display: flex; justify-content: space-between; font-size: 0.9rem;">
-                                            <span style="color: #4CAF50;">+${actividad.afinidad} afinidad</span>
-                                            <span style="color: #FFD166;">+${actividad.exp} EXP</span>
-                                        </div>
-                                        ${yaComprada ? 
-                                            `<div style="margin-top: 10px; padding: 10px; background: rgba(76, 175, 80, 0.2); border-radius: 8px; text-align: center;">
-                                                <span style="color: #4CAF50; font-weight: bold;">✅ ACTIVIDAD COMPRADA</span>
-                                            </div>` 
-                                            : 
-                                            `<button class="card-button" onclick="quintillizasRPG.comprarActividad('${this.personajeSeleccionado}', '${actividad.id}')"
-                                                    style="padding: 12px 20px; font-size: 1rem; background: linear-gradient(135deg, #4CAF50, #2E7D32); margin-top: 10px;"
-                                                    ${dinero < actividad.costo ? 'disabled style="opacity: 0.5; cursor: not-allowed;"' : ''}>
-                                                ${dinero < actividad.costo ? '💰 DINERO INSUFICIENTE' : '✨ COMPRAR ACTIVIDAD'}
-                                            </button>`
-                                        }
+                            ${personaje.actividadesEspeciales.map(actividad => `
+                                <div style="display: flex; flex-direction: column; gap: 10px; background: rgba(255,255,255,0.05); padding: 15px; border-radius: 10px;">
+                                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                                        <span style="font-weight: bold; font-size: 1.1rem;">${actividad.nombre}</span>
+                                        <span style="color: #FFD166; font-weight: bold;">S/.${actividad.costo}</span>
                                     </div>
-                                `;
-                            }).join('')}
+                                    <p style="opacity: 0.7; font-size: 0.9rem; margin: 0;">${actividad.descripcion}</p>
+                                    <div style="display: flex; justify-content: space-between; font-size: 0.9rem;">
+                                        <span style="color: #4CAF50;">+${actividad.afinidad} afinidad</span>
+                                        <span style="color: #FFD166;">+${actividad.exp} EXP</span>
+                                    </div>
+                                    <div style="display: flex; gap: 10px; margin-top: 10px;">
+                                        <button class="card-button" onclick="quintillizasRPG.comprarActividad('${this.personajeSeleccionado}', '${actividad.id}')"
+                                                style="padding: 10px 15px; font-size: 0.9rem; background: linear-gradient(135deg, #4CAF50, #2E7D32);"
+                                                ${dinero < actividad.costo ? 'disabled style="opacity: 0.5;"' : ''}>
+                                            Comprar
+                                        </button>
+                                        <button class="card-button" onclick="quintillizasRPG.cargarVideoActividad('${this.personajeSeleccionado}', '${actividad.id}')"
+                                                style="padding: 10px 15px; font-size: 0.9rem; background: linear-gradient(135deg, #5864F5, #8A5AF7);">
+                                            Ver Video
+                                        </button>
+                                    </div>
+                                </div>
+                            `).join('')}
                         </div>
                     </div>
                 </div>
@@ -627,10 +619,10 @@ class QuintillizasRPG {
         this.guardarActividades();
         
         console.log(`🎉 Actividad ${actividad.nombre} completada para ${personaje.nombre}`);
-        this.mostrarNotificacion(`💝 ${personaje.nombre} muy feliz! +${actividad.afinidad} afinidad, +${actividad.exp} EXP`);
+        this.mostrarNotificacion(`💝 ${personaje.nombre} muy feliz! +${actividad.afinidad} afinidad`);
         
-        // Cargar el video automáticamente
-        this.cargarVideoActividad(personajeId, actividadId);
+        // Actualizar vista
+        this.actualizarVistaConPersonaje();
         
         return true;
     }
@@ -927,21 +919,18 @@ class QuintillizasRPG {
 }
 
 // ================================================
-// INTEGRACIÓN CON SISTEMA DE MAZOS - VERSIÓN CORREGIDA
+// INTEGRACIÓN CON SISTEMA DE MAZOS
 // ================================================
 
-// Guardar referencia original
-const agregarDineroOriginal = sistemaEconomia.agregarDinero;
-
-// Sobrescribir el método
+// Modificar el sistema de recompensas para dar EXP al RPG
+const sistemaEconomiaOriginal = sistemaEconomia.agregarDinero;
 sistemaEconomia.agregarDinero = function(cantidad) {
-    // Llamar al método original para agregar el dinero
-    const resultado = agregarDineroOriginal.call(this, cantidad);
+    // Llamar al método original
+    sistemaEconomiaOriginal.call(this, cantidad);
     
     // Si es una recompensa por mazo (cantidad positiva) y hay personaje seleccionado en RPG
     if (cantidad > 0 && window.quintillizasRPG && window.quintillizasRPG.personajeSeleccionado) {
-        // Dar EXP proporcional al dinero ganado
-        const expPorSoles = 20; // 20 EXP por cada sol ganado
+        const expPorSoles = 5; // 1 SOL = 5 EXP
         const expGanada = Math.round(cantidad * expPorSoles);
         
         window.quintillizasRPG.agregarEXP(
@@ -949,10 +938,8 @@ sistemaEconomia.agregarDinero = function(cantidad) {
             expGanada
         );
         
-        console.log(`🎮 RPG: +${expGanada} EXP para ${window.quintillizasRPG.datosPersonajes[window.quintillizasRPG.personajeSeleccionado].nombre}`);
+        console.log(`🎮 +${expGanada} EXP para ${window.quintillizasRPG.datosPersonajes[window.quintillizasRPG.personajeSeleccionado].nombre} (${cantidad} soles × ${expPorSoles})`);
     }
-    
-    return resultado;
 };
 
 // ================================================
