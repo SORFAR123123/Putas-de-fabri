@@ -1,5 +1,5 @@
 // ================================================
-// SISTEMA PRINCIPAL DE NAVEGACIÓN Y QUIZ
+// SISTEMA PRINCIPAL CON TODAS LAS MEJORAS
 // ================================================
 
 // Variables globales
@@ -17,6 +17,368 @@ let modoActual = 'manga'; // 'manga', 'video', 'anime', 'audio', 'asmr', 'rpg'
 let idiomaVideoActual = 'espanol'; // 'espanol', 'japones'
 
 // ====================
+// 1. SISTEMA DE PALABRAS DIFÍCILES
+// ====================
+
+let palabrasDificiles = JSON.parse(localStorage.getItem('palabras_dificiles')) || [];
+let mazoDificilActivo = [];
+let mazoDificilOriginalInfo = null;
+
+function agregarPalabraDificil(palabraInfo) {
+    const palabraKey = `${palabraInfo.japones}-${palabraInfo.significado}`;
+    
+    // Verificar si ya existe
+    if (!palabrasDificiles.some(p => p.key === palabraKey)) {
+        palabrasDificiles.push({
+            ...palabraInfo,
+            key: palabraKey,
+            fechaAgregada: new Date().toISOString(),
+            vecesFallada: 0,
+            vecesPracticada: 0,
+            contexto: {
+                contenedor: contenedorActual,
+                subcontenedor: subcontenedorActual,
+                mazo: mazoActual,
+                modo: modoActual
+            }
+        });
+        
+        localStorage.setItem('palabras_dificiles', JSON.stringify(palabrasDificiles));
+        mostrarNotificacion(`⭐ "${palabraInfo.japones}" añadida a palabras difíciles`);
+        return true;
+    }
+    return false;
+}
+
+function removerPalabraDificil(palabraKey) {
+    palabrasDificiles = palabrasDificiles.filter(p => p.key !== palabraKey);
+    localStorage.setItem('palabras_dificiles', JSON.stringify(palabrasDificiles));
+}
+
+function crearMazoDificil() {
+    mazoDificilActivo = [...palabrasDificiles];
+    mazoDificilOriginalInfo = {
+        contenedor: contenedorActual,
+        subcontenedor: subcontenedorActual,
+        mazo: mazoActual,
+        modo: modoActual
+    };
+    
+    if (mazoDificilActivo.length > 0) {
+        // Mezclar palabras
+        mazoDificilActivo = mazoDificilActivo.sort(() => Math.random() - 0.5);
+        return mazoDificilActivo;
+    }
+    return [];
+}
+
+function limpiarMazoDificilCompletado() {
+    palabrasDificiles = [];
+    localStorage.setItem('palabras_dificiles', JSON.stringify(palabrasDificiles));
+    mazoDificilActivo = [];
+    mazoDificilOriginalInfo = null;
+}
+
+// ====================
+// 2. SISTEMA DE MISIONES
+// ====================
+
+class SistemaMisiones {
+    constructor() {
+        this.misiones = this.cargarMisiones() || this.inicializarMisiones();
+        this.comprobarResetAutomatico();
+    }
+
+    inicializarMisiones() {
+        return {
+            diarias: {
+                completadas: 0,
+                fechaUltimoReset: this.obtenerFechaHoy(),
+                reclamadas: []
+            },
+            semanales: {
+                completadas: 0,
+                fechaUltimoReset: this.obtenerInicioSemana(),
+                reclamadas: []
+            },
+            registro: []
+        };
+    }
+
+    obtenerFechaHoy() {
+        const hoy = new Date();
+        return hoy.toISOString().split('T')[0];
+    }
+
+    obtenerInicioSemana() {
+        const hoy = new Date();
+        const dia = hoy.getDay();
+        const diff = hoy.getDate() - dia + (dia === 0 ? -6 : 1);
+        const inicioSemana = new Date(hoy.setDate(diff));
+        return inicioSemana.toISOString().split('T')[0];
+    }
+
+    comprobarResetAutomatico() {
+        const hoy = this.obtenerFechaHoy();
+        const inicioSemana = this.obtenerInicioSemana();
+        
+        // Reset diario a las 3 AM
+        if (this.misiones.diarias.fechaUltimoReset !== hoy) {
+            this.misiones.diarias.completadas = 0;
+            this.misiones.diarias.fechaUltimoReset = hoy;
+            this.misiones.diarias.reclamadas = [];
+            console.log('🔄 Misiones diarias reseteadas');
+        }
+        
+        // Reset semanal los lunes
+        if (this.misiones.semanales.fechaUltimoReset !== inicioSemana) {
+            this.misiones.semanales.completadas = 0;
+            this.misiones.semanales.fechaUltimoReset = inicioSemana;
+            this.misiones.semanales.reclamadas = [];
+            console.log('🔄 Misiones semanales reseteadas');
+        }
+        
+        this.guardarMisiones();
+    }
+
+    registrarMazoCompletado(porcentaje) {
+        if (porcentaje === 100) {
+            this.misiones.diarias.completadas += 1;
+            this.misiones.semanales.completadas += 1;
+            
+            this.misiones.registro.push({
+                fecha: new Date().toISOString(),
+                porcentaje: porcentaje,
+                contenedor: contenedorActual,
+                subcontenedor: subcontenedorActual,
+                mazo: mazoActual
+            });
+            
+            this.guardarMisiones();
+            console.log(`🎯 Mazo 100% registrado en misiones`);
+        }
+    }
+
+    obtenerRecompensasDisponibles() {
+        const recompensas = {
+            diarias: [],
+            semanales: []
+        };
+
+        // Diarias
+        const metasDiarias = [1, 3, 5, 10];
+        metasDiarias.forEach((meta, index) => {
+            if (this.misiones.diarias.completadas >= meta && 
+                !this.misiones.diarias.reclamadas.includes(meta)) {
+                recompensas.diarias.push({
+                    meta: meta,
+                    recompensa: index === 0 ? 0.50 : (index === 1 ? 1.00 : (index === 2 ? 2.00 : 5.00)),
+                    completado: true
+                });
+            }
+        });
+
+        // Semanales
+        const metasSemanales = [5, 10, 20, 30];
+        metasSemanales.forEach((meta, index) => {
+            if (this.misiones.semanales.completadas >= meta && 
+                !this.misiones.semanales.reclamadas.includes(meta)) {
+                recompensas.semanales.push({
+                    meta: meta,
+                    recompensa: index === 0 ? 2.00 : (index === 1 ? 5.00 : (index === 2 ? 10.00 : 20.00)),
+                    completado: true
+                });
+            }
+        });
+
+        return recompensas;
+    }
+
+    reclamarRecompensa(tipo, meta) {
+        if (tipo === 'diaria') {
+            if (!this.misiones.diarias.reclamadas.includes(meta)) {
+                this.misiones.diarias.reclamadas.push(meta);
+                
+                // Encontrar la recompensa
+                const recompensa = [0.50, 1.00, 2.00, 5.00][[1, 3, 5, 10].indexOf(meta)];
+                sistemaEconomia.agregarDinero(recompensa);
+                
+                this.guardarMisiones();
+                mostrarNotificacion(`💰 +${recompensa.toFixed(2)} soles por misión diaria`);
+                return recompensa;
+            }
+        } else if (tipo === 'semanal') {
+            if (!this.misiones.semanales.reclamadas.includes(meta)) {
+                this.misiones.semanales.reclamadas.push(meta);
+                
+                // Encontrar la recompensa
+                const recompensa = [2.00, 5.00, 10.00, 20.00][[5, 10, 20, 30].indexOf(meta)];
+                sistemaEconomia.agregarDinero(recompensa);
+                
+                this.guardarMisiones();
+                mostrarNotificacion(`💰 +${recompensa.toFixed(2)} soles por misión semanal`);
+                return recompensa;
+            }
+        }
+        return 0;
+    }
+
+    obtenerEstadisticas() {
+        return {
+            diarias: {
+                completadas: this.misiones.diarias.completadas,
+                reclamadas: this.misiones.diarias.reclamadas.length,
+                fechaReset: this.misiones.diarias.fechaUltimoReset
+            },
+            semanales: {
+                completadas: this.misiones.semanales.completadas,
+                reclamadas: this.misiones.semanales.reclamadas.length,
+                fechaReset: this.misiones.semanales.fechaUltimoReset
+            },
+            totalRegistros: this.misiones.registro.length
+        };
+    }
+
+    guardarMisiones() {
+        localStorage.setItem('sistema_misiones', JSON.stringify(this.misiones));
+    }
+
+    cargarMisiones() {
+        const data = localStorage.getItem('sistema_misiones');
+        return data ? JSON.parse(data) : null;
+    }
+}
+
+// ====================
+// 3. SISTEMA DE VIDEOS RECOMPENSA
+// ====================
+
+const videosRecompensa = [
+    { id: 1, driveId: "1aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe", titulo: "🎬 Recompensa Especial #1", probabilidad: 20, duracion: "1:30" },
+    { id: 2, driveId: "1-wYJYTaw0ZOKQy8BBPR7Fmhlzs0IVx9K", titulo: "🎁 Video Bonus #2", probabilidad: 15, duracion: "2:00" },
+    { id: 3, driveId: "1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS", titulo: "✨ Contenido Exclusivo #3", probabilidad: 12, duracion: "1:45" },
+    { id: 4, driveId: "1tS-gKr6bf4MY5Yrw7zRvP2uP_zq9rsLl", titulo: "🌟 Regalo Especial #4", probabilidad: 10, duracion: "2:15" },
+    { id: 5, driveId: "1aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe", titulo: "🎯 Recompensa Premium #5", probabilidad: 8, duracion: "3:00" },
+    { id: 6, driveId: "1-wYJYTaw0ZOKQy8BBPR7Fmhlzs0IVx9K", titulo: "💎 Video Raro #6", probabilidad: 7, duracion: "1:20" },
+    { id: 7, driveId: "1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS", titulo: "🔥 Contenido Ultra #7", probabilidad: 6, duracion: "2:30" },
+    { id: 8, driveId: "1tS-gKr6bf4MY5Yrw7zRvP2uP_zq9rsLl", titulo: "⚡ Bonus Sorpresa #8", probabilidad: 5, duracion: "1:50" },
+    { id: 9, driveId: "1aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe", titulo: "🌙 Video Nocturno #9", probabilidad: 4, duracion: "2:10" },
+    { id: 10, driveId: "1-wYJYTaw0ZOKQy8BBPR7Fmhlzs0IVx9K", titulo: "☀️ Regalo Matutino #10", probabilidad: 3, duracion: "1:40" },
+    { id: 11, driveId: "1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS", titulo: "🌈 Arcoíris #11", probabilidad: 2.5, duracion: "2:20" },
+    { id: 12, driveId: "1tS-gKr6bf4MY5Yrw7zRvP2uP_zq9rsLl", titulo: "🎪 Circo Mágico #12", probabilidad: 2, duracion: "1:35" },
+    { id: 13, driveId: "1aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe", titulo: "🏆 Campeón #13", probabilidad: 1.5, duracion: "2:45" },
+    { id: 14, driveId: "1-wYJYTaw0ZOKQy8BBPR7Fmhlzs0IVx9K", titulo: "👑 Realeza #14", probabilidad: 1, duracion: "1:55" },
+    { id: 15, driveId: "1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS", titulo: "💫 Estrella Fugaz #15", probabilidad: 0.8, duracion: "2:05" },
+    { id: 16, driveId: "1tS-gKr6bf4MY5Yrw7zRvP2uP_zq9rsLl", titulo: "🌌 Galaxia #16", probabilidad: 0.6, duracion: "3:10" },
+    { id: 17, driveId: "1aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe", titulo: "🌀 Torbellino #17", probabilidad: 0.5, duracion: "1:25" },
+    { id: 18, driveId: "1-wYJYTaw0ZOKQy8BBPR7Fmhlzs0IVx9K", titulo: "🎇 Fuegos Artificiales #18", probabilidad: 0.4, duracion: "2:15" },
+    { id: 19, driveId: "1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS", titulo: "🌠 Cometa #19", probabilidad: 0.3, duracion: "1:50" },
+    { id: 20, driveId: "1tS-gKr6bf4MY5Yrw7zRvP2uP_zq9rsLl", titulo: "⚛️ Átomo #20", probabilidad: 0.2, duracion: "2:30" }
+];
+
+function mostrarVideoRecompensa() {
+    // Calcular probabilidad acumulativa
+    let random = Math.random() * 100;
+    let acumulado = 0;
+    let videoSeleccionado = null;
+    
+    for (const video of videosRecompensa) {
+        acumulado += video.probabilidad;
+        if (random <= acumulado) {
+            videoSeleccionado = video;
+            break;
+        }
+    }
+    
+    // Si no se selecciona ninguno (muy improbable), usar el primero
+    if (!videoSeleccionado) {
+        videoSeleccionado = videosRecompensa[0];
+    }
+    
+    // Mostrar modal de video recompensa
+    const modalHTML = `
+        <div id="modal-video-recompensa" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 9999; display: flex; justify-content: center; align-items: center;">
+            <div style="background: #1a1a2e; border-radius: 20px; padding: 30px; max-width: 800px; width: 90%; border: 3px solid #FFD166; position: relative;">
+                <h2 style="color: #FFD166; text-align: center; margin-bottom: 20px;">🎉 ¡VIDEO RECOMPENSA DESBLOQUEADO!</h2>
+                <p style="text-align: center; margin-bottom: 25px; opacity: 0.8; font-size: 1.1rem;">
+                    ${videoSeleccionado.titulo}<br>
+                    <span style="color: #FFD166; font-size: 0.9rem;">Probabilidad: ${videoSeleccionado.probabilidad}%</span>
+                </p>
+                
+                <div style="margin: 25px 0;">
+                    <iframe 
+                        src="https://drive.google.com/file/d/${videoSeleccionado.driveId}/preview"
+                        width="100%"
+                        height="400"
+                        frameborder="0"
+                        style="border-radius: 15px;"
+                        allow="autoplay"
+                    ></iframe>
+                </div>
+                
+                <div style="display: flex; gap: 15px; justify-content: center; margin-top: 25px;">
+                    <button onclick="saltarVideoRecompensa()" style="padding: 12px 30px; background: rgba(255,255,255,0.1); border: 2px solid #FF6B6B; border-radius: 10px; color: #FF6B6B; font-weight: bold; cursor: pointer;">
+                        ⏭️ Saltar Video
+                    </button>
+                    <button onclick="cerrarModalVideo()" style="padding: 12px 30px; background: #FFD166; border: none; border-radius: 10px; color: #333; font-weight: bold; cursor: pointer;">
+                        ✅ Continuar
+                    </button>
+                </div>
+                
+                <p style="text-align: center; margin-top: 20px; opacity: 0.6; font-size: 0.9rem;">
+                    ¡Felicidades! Has desbloqueado un video especial
+                </p>
+            </div>
+        </div>
+    `;
+    
+    document.body.insertAdjacentHTML('beforeend', modalHTML);
+}
+
+function saltarVideoRecompensa() {
+    cerrarModalVideo();
+}
+
+function cerrarModalVideo() {
+    const modal = document.getElementById('modal-video-recompensa');
+    if (modal) {
+        modal.remove();
+    }
+}
+
+// ====================
+// 4. SISTEMA RPG MEJORADO
+// ====================
+
+function comprarActividadRPG(personajeId, actividadId) {
+    if (typeof quintillizasRPG === 'undefined') return false;
+    return quintillizasRPG.comprarActividad(personajeId, actividadId);
+}
+
+// ====================
+// 5. FUNCIÓN VOLVER A MAZOS REPARADA
+// ====================
+
+function volverAMazos() {
+    document.getElementById('quiz-section').style.display = 'none';
+    document.getElementById('manga-section').style.display = 'block';
+    
+    // Determinar qué función de volver usar según el modo
+    if (modoActual === 'anime') {
+        cargarMazosAnimes(contenedorActual, subcontenedorActual);
+    } else if (modoActual === 'audio') {
+        cargarMazosAudios(contenedorActual, subcontenedorActual);
+    } else if (modoActual === 'asmr') {
+        volverAlInicio();
+    } else if (modoActual === 'rpg') {
+        cargarPaginaRPG();
+    } else {
+        // Modo manga o video
+        cargarMazos(contenedorActual, subcontenedorActual);
+    }
+}
+
+// ====================
 // FUNCIONES HEADER Y DINERO
 // ====================
 
@@ -26,7 +388,6 @@ function ocultarHeader() {
     document.querySelector('.additional-section').style.display = 'none';
     document.querySelector('.footer').style.display = 'none';
     
-    // Ocultar contador de dinero cuando no estemos en inicio
     const dineroContador = document.getElementById('dinero-inicio');
     if (dineroContador) {
         dineroContador.classList.add('hidden');
@@ -39,7 +400,6 @@ function mostrarHeader() {
     document.querySelector('.additional-section').style.display = 'block';
     document.querySelector('.footer').style.display = 'block';
     
-    // Mostrar contador de dinero solo en inicio
     const dineroContador = document.getElementById('dinero-inicio');
     if (dineroContador) {
         dineroContador.classList.remove('hidden');
@@ -47,7 +407,6 @@ function mostrarHeader() {
 }
 
 function crearContadorDineroInicio() {
-    // Crear contenedor de dinero SOLO para inicio
     if (!document.getElementById('dinero-inicio')) {
         const dineroDiv = document.createElement('div');
         dineroDiv.id = 'dinero-inicio';
@@ -58,7 +417,6 @@ function crearContadorDineroInicio() {
             <span>soles</span>
         `;
         
-        // Insertar al principio del header
         const header = document.querySelector('.header');
         header.insertBefore(dineroDiv, header.firstChild);
     }
@@ -72,7 +430,7 @@ function actualizarContadorDineroInicio() {
 }
 
 // ====================
-// NAVEGACIÓN PRINCIPAL - TODOS LOS MODOS
+// NAVEGACIÓN PRINCIPAL
 // ====================
 
 function cargarPaginaMangas() {
@@ -135,10 +493,6 @@ function cargarPaginaASMR() {
     mangaSection.insertBefore(botonVolver, mangaSection.firstChild);
 }
 
-// ====================
-// NUEVA: FUNCIÓN PARA RPG QUINTILLIZAS
-// ====================
-
 function cargarPaginaRPG() {
     modoActual = 'rpg';
     ocultarHeader();
@@ -146,7 +500,6 @@ function cargarPaginaRPG() {
     const mangaSection = document.getElementById('manga-section');
     mangaSection.style.display = 'block';
     
-    // Verificar si el RPG está cargado
     if (typeof quintillizasRPG !== 'undefined') {
         mangaSection.innerHTML = quintillizasRPG.cargarPaginaPrincipal();
     } else {
@@ -172,7 +525,6 @@ function volverAlInicio() {
     document.getElementById('manga-section').style.display = 'none';
     document.getElementById('quiz-section').style.display = 'none';
     
-    // También ocultar lector de manga si está activo
     const lectorContainer = document.getElementById('lector-manga-container');
     if (lectorContainer) {
         lectorContainer.style.display = 'none';
@@ -180,7 +532,7 @@ function volverAlInicio() {
 }
 
 // ====================
-// CREACIÓN DE UI - MANGAS (CON DESCRIPCIONES PERSONALIZADAS)
+// CREACIÓN DE UI - MANGAS
 // ====================
 
 function crearContenedoresMangas() {
@@ -188,13 +540,11 @@ function crearContenedoresMangas() {
     html += '<div class="manga-contenedores">';
     
     for (let i = 1; i <= 10; i++) {
-        const contenedorInfo = obtenerContenedorManga(i);
-        
         html += `
             <div class="contenedor-item" onclick="cargarSubcontenedores(${i})">
-                <div class="contenedor-img" style="background-image: url('${contenedorInfo.imagen}')"></div>
+                <div class="contenedor-img" style="background-image: url('${obtenerImagenContenedor(i)}')"></div>
                 <div class="contenedor-numero">CONTAINER ${i}</div>
-                <p>${contenedorInfo.descripcion || '5 sub-contenedores con vocabulario y manga'}</p>
+                <p>5 sub-contenedores con vocabulario y manga</p>
                 <div class="card-button">Abrir</div>
             </div>
         `;
@@ -206,6 +556,7 @@ function crearContenedoresMangas() {
 
 function crearContenedoresVideos() {
     let html = '<h2 style="text-align: center; margin-bottom: 30px; color: #FFD166;">🎬 CONTENEDORES DE VIDEOS</h2>';
+    html += '<p style="text-align: center; margin-bottom: 30px; opacity: 0.8;">Videos privados con timestamps en Google Drive</p>';
     html += '<div class="manga-contenedores">';
     
     const contenedores = obtenerContenedoresDisponibles();
@@ -213,13 +564,12 @@ function crearContenedoresVideos() {
     
     for (let i = 1; i <= Math.max(totalContenedores, 10); i++) {
         const tieneVideos = contenedores[i] && contenedores[i].length > 0;
-        const contenedorInfo = obtenerContenedorVideo(i);
         
         html += `
             <div class="contenedor-item" onclick="cargarSubcontenedoresVideos(${i})">
-                <div class="contenedor-img" style="background-image: url('${contenedorInfo.imagen}')"></div>
+                <div class="contenedor-img" style="background-image: url('${obtenerImagenContenedor(i)}')"></div>
                 <div class="contenedor-numero">VIDEO CONTAINER ${i}</div>
-                <p>${contenedorInfo.descripcion || (tieneVideos ? contenedores[i].length + ' sub-contenedores con videos' : 'Sin videos aún')}</p>
+                <p>${tieneVideos ? contenedores[i].length + ' sub-contenedores con videos' : 'Sin videos aún'}</p>
                 <div class="card-button">${tieneVideos ? 'Ver videos' : 'Vacío'}</div>
             </div>
         `;
@@ -230,11 +580,12 @@ function crearContenedoresVideos() {
 }
 
 // ====================
-// CREACIÓN DE UI - ANIMES (CON DESCRIPCIONES PERSONALIZADAS)
+// CREACIÓN DE UI - ANIMES
 // ====================
 
 function crearContenedoresAnimes() {
     let html = '<h2 style="text-align: center; margin-bottom: 30px; color: #FFD166;">🎌 CONTENEDORES DE ANIMES</h2>';
+    html += '<p style="text-align: center; margin-bottom: 30px; opacity: 0.8;">Animes con videos en español/japonés + vocabulario</p>';
     html += '<div class="manga-contenedores">';
     
     const contenedores = obtenerContenedoresAnimesDisponibles();
@@ -242,13 +593,12 @@ function crearContenedoresAnimes() {
     
     for (let i = 1; i <= Math.max(totalContenedores, 10); i++) {
         const tieneAnimes = contenedores[i] && contenedores[i].length > 0;
-        const contenedorInfo = obtenerContenedorAnime(i);
         
         html += `
             <div class="contenedor-item" onclick="cargarSubcontenedoresAnimes(${i})">
-                <div class="contenedor-img" style="background-image: url('${contenedorInfo.imagen}')"></div>
+                <div class="contenedor-img" style="background-image: url('${obtenerImagenContenedorAnime(i)}')"></div>
                 <div class="contenedor-numero">ANIME CONTAINER ${i}</div>
-                <p>${contenedorInfo.descripcion || (tieneAnimes ? contenedores[i].length + ' sub-contenedores con animes' : '5 sub-contenedores disponibles')}</p>
+                <p>${tieneAnimes ? contenedores[i].length + ' sub-contenedores con animes' : '5 sub-contenedores disponibles'}</p>
                 <div class="card-button">${tieneAnimes ? 'Ver animes' : 'Explorar'}</div>
             </div>
         `;
@@ -259,11 +609,12 @@ function crearContenedoresAnimes() {
 }
 
 // ====================
-// CREACIÓN DE UI - AUDIOS (CON DESCRIPCIONES PERSONALIZADAS)
+// CREACIÓN DE UI - AUDIOS
 // ====================
 
 function crearContenedoresAudios() {
     let html = '<h2 style="text-align: center; margin-bottom: 30px; color: #FFD166;">🎵 CONTENEDORES DE AUDIOS</h2>';
+    html += '<p style="text-align: center; margin-bottom: 30px; opacity: 0.8;">Openings MP3 + vocabulario de letras</p>';
     html += '<div class="manga-contenedores">';
     
     const contenedores = obtenerContenedoresAudiosDisponibles();
@@ -271,13 +622,12 @@ function crearContenedoresAudios() {
     
     for (let i = 1; i <= Math.max(totalContenedores, 10); i++) {
         const tieneAudios = contenedores[i] && contenedores[i].length > 0;
-        const contenedorInfo = obtenerContenedorAudio(i);
         
         html += `
             <div class="contenedor-item" onclick="cargarSubcontenedoresAudios(${i})">
-                <div class="contenedor-img" style="background-image: url('${contenedorInfo.imagen}')"></div>
+                <div class="contenedor-img" style="background-image: url('https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=300&h=300&fit=crop')"></div>
                 <div class="contenedor-numero">AUDIO CONTAINER ${i}</div>
-                <p>${contenedorInfo.descripcion || (tieneAudios ? contenedores[i].length + ' sub-contenedores con openings' : '5 sub-contenedores disponibles')}</p>
+                <p>${tieneAudios ? contenedores[i].length + ' sub-contenedores con openings' : '5 sub-contenedores disponibles'}</p>
                 <div class="card-button" style="background: linear-gradient(135deg, #FF6B6B, #FFD166);">
                     ${tieneAudios ? '🎵 Escuchar audios' : 'Explorar'}
                 </div>
@@ -290,11 +640,12 @@ function crearContenedoresAudios() {
 }
 
 // ====================
-// CREACIÓN DE UI - ASMR (CON DESCRIPCIONES PERSONALIZADAS)
+// CREACIÓN DE UI - ASMR
 // ====================
 
 function crearContenedoresASMR() {
     let html = '<h2 style="text-align: center; margin-bottom: 30px; color: #FFD166;">🎧 CONTENEDORES DE ASMR</h2>';
+    html += '<p style="text-align: center; margin-bottom: 30px; opacity: 0.8;">Audios relajantes para estudio y meditación</p>';
     html += '<div class="manga-contenedores">';
     
     const contenedores = obtenerContenedoresASMRDisponibles();
@@ -302,13 +653,12 @@ function crearContenedoresASMR() {
     
     for (let i = 1; i <= Math.max(totalContenedores, 4); i++) {
         const tieneAudios = contenedores[i] && contenedores[i].length > 0;
-        const contenedorInfo = obtenerContenedorASMR(i);
         
         html += `
             <div class="contenedor-item" onclick="cargarSubcontenedoresASMR(${i})">
-                <div class="contenedor-img" style="background-image: url('${contenedorInfo.imagen}')"></div>
+                <div class="contenedor-img" style="background-image: url('https://images.unsplash.com/photo-1572860177022-8fda92a90b95?w=300&h=300&fit=crop')"></div>
                 <div class="contenedor-numero">ASMR CONTAINER ${i}</div>
-                <p>${contenedorInfo.descripcion || (tieneAudios ? contenedores[i].length + ' sub-contenedores con audios' : '3 sub-contenedores disponibles')}</p>
+                <p>${tieneAudios ? contenedores[i].length + ' sub-contenedores con audios' : '3 sub-contenedores disponibles'}</p>
                 <div class="card-button" style="background: linear-gradient(135deg, #9C27B0, #673AB7);">
                     ${tieneAudios ? '🎧 Escuchar ASMR' : 'Explorar'}
                 </div>
@@ -321,7 +671,7 @@ function crearContenedoresASMR() {
 }
 
 // ====================
-// FUNCIONES PARA ANIMES (CON DESCRIPCIONES PERSONALIZADAS)
+// FUNCIONES PARA ANIMES
 // ====================
 
 function cargarSubcontenedoresAnimes(contenedor) {
@@ -347,16 +697,15 @@ function crearSubcontenedoresAnimesUI(contenedor) {
     for (let i = 1; i <= 5; i++) {
         const tieneAnime = subcontenedoresDisponibles.includes(i.toString());
         const animeInfo = tieneAnime ? obtenerAnime(contenedor, i) : null;
-        const subcontenedorInfo = obtenerSubcontenedorAnime(contenedor, i);
         
         html += `
             <div class="subcontenedor-item" onclick="${tieneAnime ? `seleccionarAccionAnime(${contenedor}, ${i})` : `cargarMazosAnimes(${contenedor}, ${i})`}">
-                <div class="subcontenedor-img" style="background-image: url('${subcontenedorInfo.imagen}')"></div>
+                <div class="subcontenedor-img" style="background-image: url('${obtenerImagenSubcontenedorAnime(contenedor, i)}')"></div>
                 <h3>${tieneAnime ? animeInfo.titulo.split(' ')[0] : `Anime ${i}`}</h3>
-                <p><strong>${subcontenedorInfo.descripcion || (tieneAnime ? animeInfo.titulo : 'Sub-contenedor de anime')}</strong></p>
                 ${tieneAnime ? 
-                    `<p style="font-size: 0.9rem; opacity: 0.8;">${animeInfo.duracion} • ${animeInfo.categoria}</p>` 
-                    : '<p style="color: #FF6B6B; font-size: 0.9rem;">(Sin anime configurado)</p>'}
+                    `<p><strong>${animeInfo.titulo}</strong></p>
+                     <p style="font-size: 0.9rem; opacity: 0.8;">${animeInfo.duracion} • ${animeInfo.categoria}</p>` 
+                    : '<p style="color: #FF6B6B;">(Sin anime configurado)</p>'}
                 <div class="card-button" style="margin-top: 10px; padding: 10px 20px; font-size: 0.9rem;">
                     ${tieneAnime ? '🎬 Ver opciones' : '📚 Solo vocabulario'}
                 </div>
@@ -423,7 +772,6 @@ function cargarVideoAnime(contenedor, subcontenedor) {
     const mangaSection = document.getElementById('manga-section');
     mangaSection.innerHTML = sistemaReproductor.cargarVideo(driveId, timestamps);
     
-    // Agregar controles de idioma
     const tituloDesc = `
         <div style="text-align: center; margin-bottom: 25px;">
             <h2 style="color: #8A5AF7; margin-bottom: 10px;">${animeInfo.titulo}</h2>
@@ -471,7 +819,6 @@ function cargarMazosAnimes(contenedor, subcontenedor) {
 function crearMazosAnimesUI(contenedor, subcontenedor) {
     const animeInfo = obtenerAnime(contenedor, subcontenedor);
     const tituloAnime = animeInfo ? animeInfo.titulo : `Sub-contenedor ${subcontenedor}`;
-    const subcontenedorInfo = obtenerSubcontenedorAnime(contenedor, subcontenedor);
     
     let html = `<h2 style="text-align: center; margin-bottom: 30px; color: #FFD166;">
         📚 ${tituloAnime.toUpperCase()} - MAZOS DE VOCABULARIO
@@ -479,7 +826,7 @@ function crearMazosAnimesUI(contenedor, subcontenedor) {
     
     if (animeInfo) {
         html += `<p style="text-align: center; margin-bottom: 30px; opacity: 0.8; max-width: 800px; margin-left: auto; margin-right: auto;">
-            ${subcontenedorInfo.descripcion || 'Practica vocabulario relacionado con este anime. Gana dinero por cada mazo completado.'}
+            Practica vocabulario relacionado con este anime. Gana dinero por cada mazo completado.
         </p>`;
     }
     
@@ -511,7 +858,7 @@ function crearMazosAnimesUI(contenedor, subcontenedor) {
 }
 
 // ====================
-// FUNCIONES PARA AUDIOS (CON DESCRIPCIONES PERSONALIZADAS)
+// FUNCIONES PARA AUDIOS
 // ====================
 
 function cargarSubcontenedoresAudios(contenedor) {
@@ -537,16 +884,15 @@ function crearSubcontenedoresAudiosUI(contenedor) {
     for (let i = 1; i <= 5; i++) {
         const tieneAudio = subcontenedoresDisponibles.includes(i.toString());
         const audioInfo = tieneAudio ? obtenerAudio(contenedor, i) : null;
-        const subcontenedorInfo = obtenerSubcontenedorAudio(contenedor, i);
         
         html += `
             <div class="subcontenedor-item" onclick="${tieneAudio ? `seleccionarAccionAudio(${contenedor}, ${i})` : `cargarMazosAudios(${contenedor}, ${i})`}">
-                <div class="subcontenedor-img" style="background-image: url('${subcontenedorInfo.imagen}')"></div>
+                <div class="subcontenedor-img" style="background-image: url('https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=300&h=300&fit=crop')"></div>
                 <h3>${tieneAudio ? audioInfo.titulo.split('-')[0] : `Audio ${i}`}</h3>
-                <p><strong>${subcontenedorInfo.descripcion || (tieneAudio ? audioInfo.titulo : 'Sub-contenedor de audio')}</strong></p>
                 ${tieneAudio ? 
-                    `<p style="font-size: 0.9rem; opacity: 0.8;">${audioInfo.artista} • ${audioInfo.duracion}</p>` 
-                    : '<p style="color: #FF6B6B; font-size: 0.9rem;">(Sin audio configurado)</p>'}
+                    `<p><strong>${audioInfo.titulo}</strong></p>
+                     <p style="font-size: 0.9rem; opacity: 0.8;">${audioInfo.artista} • ${audioInfo.duracion}</p>` 
+                    : '<p style="color: #FF6B6B;">(Sin audio configurado)</p>'}
                 <div class="card-button" style="margin-top: 10px; padding: 10px 20px; font-size: 0.9rem; background: linear-gradient(135deg, #FF6B6B, #FFD166);">
                     ${tieneAudio ? '🎵 Ver opciones' : '📚 Solo vocabulario'}
                 </div>
@@ -560,13 +906,12 @@ function crearSubcontenedoresAudiosUI(contenedor) {
 
 function seleccionarAccionAudio(contenedor, subcontenedor) {
     const audioInfo = obtenerAudio(contenedor, subcontenedor);
-    const subcontenedorInfo = obtenerSubcontenedorAudio(contenedor, subcontenedor);
     
     const accionesHTML = `
         <div style="text-align: center; margin: 40px 0;">
             <h3 style="color: #FFD166; margin-bottom: 30px;">${audioInfo.titulo}</h3>
             <p style="opacity: 0.8; margin-bottom: 30px; max-width: 600px; margin-left: auto; margin-right: auto;">
-                ${subcontenedorInfo.descripcion || audioInfo.descripcion}
+                ${audioInfo.descripcion}
             </p>
             <div style="display: flex; flex-direction: column; gap: 20px; max-width: 400px; margin: 0 auto;">
                 <button class="card-button" onclick="cargarReproductorAudio(${contenedor}, ${subcontenedor})" style="background: linear-gradient(135deg, #FF6B6B, #FFD166);">
@@ -686,7 +1031,6 @@ function cargarMazosAudios(contenedor, subcontenedor) {
 function crearMazosAudiosUI(contenedor, subcontenedor) {
     const audioInfo = obtenerAudio(contenedor, subcontenedor);
     const tituloAudio = audioInfo ? audioInfo.titulo : `Sub-contenedor ${subcontenedor}`;
-    const subcontenedorInfo = obtenerSubcontenedorAudio(contenedor, subcontenedor);
     
     let html = `<h2 style="text-align: center; margin-bottom: 30px; color: #FFD166;">
         📚 ${tituloAudio.toUpperCase()} - MAZOS DE VOCABULARIO
@@ -694,7 +1038,7 @@ function crearMazosAudiosUI(contenedor, subcontenedor) {
     
     if (audioInfo) {
         html += `<p style="text-align: center; margin-bottom: 30px; opacity: 0.8; max-width: 800px; margin-left: auto; margin-right: auto;">
-            ${subcontenedorInfo.descripcion || 'Practica vocabulario de la letra de este opening. Gana dinero por cada mazo completado.'}
+            Practica vocabulario de la letra de este opening. Gana dinero por cada mazo completado.
         </p>`;
     }
     
@@ -726,7 +1070,7 @@ function crearMazosAudiosUI(contenedor, subcontenedor) {
 }
 
 // ====================
-// FUNCIONES PARA ASMR (CON DESCRIPCIONES PERSONALIZADAS)
+// FUNCIONES PARA ASMR
 // ====================
 
 function cargarSubcontenedoresASMR(contenedor) {
@@ -752,17 +1096,16 @@ function crearSubcontenedoresASMRUI(contenedor) {
     for (let i = 1; i <= 3; i++) {
         const tieneASMR = subcontenedoresDisponibles.includes(i.toString());
         const asmrInfo = tieneASMR ? obtenerASMR(contenedor, i) : null;
-        const subcontenedorInfo = obtenerSubcontenedorASMR(contenedor, i);
         
         html += `
             <div class="subcontenedor-item" onclick="${tieneASMR ? `seleccionarAccionASMR(${contenedor}, ${i})` : 'alert("Este sub-contenedor no tiene audio ASMR disponible")'}">
-                <div class="subcontenedor-img" style="background-image: url('${subcontenedorInfo.imagen}')"></div>
+                <div class="subcontenedor-img" style="background-image: url('https://images.unsplash.com/photo-1572860177022-8fda92a90b95?w=300&h=300&fit=crop')"></div>
                 <h3>${tieneASMR ? asmrInfo.titulo.split(' ')[0] : `ASMR ${i}`}</h3>
-                <p><strong>${subcontenedorInfo.descripcion || (tieneASMR ? asmrInfo.titulo : 'Sub-contenedor ASMR')}</strong></p>
                 ${tieneASMR ? 
-                    `<p style="font-size: 0.9rem; opacity: 0.8;">${asmrInfo.duracion} • ${asmrInfo.categoria}</p>
+                    `<p><strong>${asmrInfo.titulo}</strong></p>
+                     <p style="font-size: 0.9rem; opacity: 0.8;">${asmrInfo.duracion} • ${asmrInfo.categoria}</p>
                      <p style="font-size: 0.8rem; opacity: 0.7;">🎤 ${asmrInfo.tipoVoz}</p>` 
-                    : '<p style="color: #FF6B6B; font-size: 0.9rem;">(Sin audio ASMR configurado)</p>'}
+                    : '<p style="color: #FF6B6B;">(Sin audio ASMR configurado)</p>'}
                 <div class="card-button" style="margin-top: 10px; padding: 10px 20px; font-size: 0.9rem; background: linear-gradient(135deg, #9C27B0, #673AB7);">
                     ${tieneASMR ? '🎧 Escuchar ASMR' : 'Vacío'}
                 </div>
@@ -772,15 +1115,10 @@ function crearSubcontenedoresASMRUI(contenedor) {
     
     html += '</div>';
     
-    // Información sobre el contenedor
-    const contenedorInfo = obtenerContenedorASMR(contenedor);
     const estadisticas = obtenerEstadisticasASMR();
     html += `
         <div style="background: rgba(156, 39, 176, 0.1); border-radius: 15px; padding: 20px; margin: 30px 0; border-left: 5px solid #9C27B0;">
-            <h4 style="color: #FFD166; margin-bottom: 15px;">📊 ${contenedorInfo.descripcion ? 'Descripción del Contenedor' : 'Estadísticas ASMR'}</h4>
-            ${contenedorInfo.descripcion ? 
-                `<p style="opacity: 0.8; margin-bottom: 15px;">${contenedorInfo.descripcion}</p>` 
-                : ''}
+            <h4 style="color: #FFD166; margin-bottom: 15px;">📊 Estadísticas ASMR</h4>
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px;">
                 <div style="text-align: center;">
                     <div style="color: #9C27B0; font-size: 0.9rem;">🎧 Audios</div>
@@ -820,13 +1158,12 @@ function calcularDuracionTotalASMRContenedor(contenedor) {
 
 function seleccionarAccionASMR(contenedor, subcontenedor) {
     const asmrInfo = obtenerASMR(contenedor, subcontenedor);
-    const subcontenedorInfo = obtenerSubcontenedorASMR(contenedor, subcontenedor);
     
     const accionesHTML = `
         <div style="text-align: center; margin: 40px 0;">
             <h3 style="color: #9C27B0; margin-bottom: 20px;">${asmrInfo.titulo}</h3>
             <p style="opacity: 0.8; margin-bottom: 30px; max-width: 600px; margin-left: auto; margin-right: auto;">
-                ${subcontenedorInfo.descripcion || asmrInfo.descripcion}
+                ${asmrInfo.descripcion}
             </p>
             
             <div style="display: flex; flex-direction: column; gap: 20px; max-width: 400px; margin: 0 auto;">
@@ -982,7 +1319,6 @@ function saltarASeccionASMR(segundos) {
         const urlConTiempo = iframe.src.split('#')[0] + `#t=${minutos}m${segs}s`;
         iframe.src = urlConTiempo;
         
-        // Mostrar notificación
         mostrarNotificacionASMR(`⏱️ Saltando a ${minutos}:${segs.toString().padStart(2, '0')}`);
     }
 }
@@ -1011,7 +1347,7 @@ function mostrarNotificacionASMR(mensaje) {
 }
 
 // ====================
-// FUNCIONES COMPARTIDAS MANGAS/VIDEOS (CON DESCRIPCIONES PERSONALIZADAS)
+// FUNCIONES COMPARTIDAS MANGAS/VIDEOS/ASMR
 // ====================
 
 function cargarSubcontenedores(contenedor) {
@@ -1034,14 +1370,12 @@ function crearSubcontenedoresUI(contenedor) {
     for (let i = 1; i <= 5; i++) {
         const tieneContenido = tieneVocabularioEnSubcontenedor(contenedor, i);
         const tieneManga = existeManga(contenedor, i);
-        const subcontenedorInfo = obtenerSubcontenedorManga(contenedor, i);
         
         html += `
             <div class="subcontenedor-item">
-                <div class="subcontenedor-img" style="background-image: url('${subcontenedorInfo.imagen}')"></div>
+                <div class="subcontenedor-img" style="background-image: url('${obtenerImagenSubcontenedor(contenedor, i)}')"></div>
                 <h3>Sub-contenedor ${i}</h3>
-                <p>${subcontenedorInfo.descripcion || '10 mazos de vocabulario'}</p>
-                ${subcontenedorInfo.nivel ? `<p style="font-size: 0.9rem; opacity: 0.7;">Nivel: ${subcontenedorInfo.nivel}</p>` : ''}
+                <p>10 mazos de vocabulario</p>
                 ${tieneContenido ? '' : '<p style="color: #FF6B6B; font-size: 0.9rem;">(Sin vocabulario)</p>'}
                 
                 <!-- BOTONES PARA ESTE SUB-CONTENEDOR -->
@@ -1060,19 +1394,6 @@ function crearSubcontenedoresUI(contenedor) {
     }
     
     html += '</div>';
-    
-    // Información del contenedor principal
-    const contenedorInfo = obtenerContenedorManga(contenedor);
-    if (contenedorInfo.descripcion) {
-        html += `
-            <div style="background: rgba(255, 209, 102, 0.1); border-radius: 15px; padding: 20px; margin: 30px 0; border-left: 5px solid #FFD166;">
-                <h4 style="color: #FFD166; margin-bottom: 10px;">📋 Descripción del Contenedor</h4>
-                <p style="opacity: 0.8;">${contenedorInfo.descripcion}</p>
-                ${contenedorInfo.tipo ? `<p style="font-size: 0.9rem; opacity: 0.7; margin-top: 10px;">Tipo: ${contenedorInfo.tipo}</p>` : ''}
-            </div>
-        `;
-    }
-    
     return html;
 }
 
@@ -1099,16 +1420,15 @@ function crearSubcontenedoresVideosUI(contenedor) {
     for (let i = 1; i <= 5; i++) {
         const tieneVideo = subcontenedoresDisponibles.includes(i.toString());
         const videoInfo = tieneVideo ? obtenerVideo(contenedor, i) : null;
-        const subcontenedorInfo = obtenerSubcontenedorVideo(contenedor, i);
         
         html += `
             <div class="subcontenedor-item" onclick="${tieneVideo ? `cargarVideo(${contenedor}, ${i})` : 'alert("Este sub-contenedor no tiene video disponible")'}">
-                <div class="subcontenedor-img" style="background-image: url('${subcontenedorInfo.imagen}')"></div>
+                <div class="subcontenedor-img" style="background-image: url('${obtenerImagenSubcontenedor(contenedor, i)}')"></div>
                 <h3>Video ${i}</h3>
-                <p><strong>${subcontenedorInfo.descripcion || (tieneVideo ? videoInfo.titulo : 'Sub-contenedor de video')}</strong></p>
                 ${tieneVideo ? 
-                    `<p style="font-size: 0.9rem; opacity: 0.8;">${videoInfo.duracion} • ${videoInfo.categoria}</p>` 
-                    : '<p style="color: #FF6B6B; font-size: 0.9rem;">(Sin video)</p>'}
+                    `<p><strong>${videoInfo.titulo}</strong></p>
+                     <p style="font-size: 0.9rem; opacity: 0.8;">${videoInfo.duracion} • ${videoInfo.categoria}</p>` 
+                    : '<p style="color: #FF6B6B;">(Sin video)</p>'}
                 <div class="card-button" style="margin-top: 10px; padding: 10px 20px; font-size: 0.9rem;">
                     ${tieneVideo ? '▶️ Ver video' : 'Vacío'}
                 </div>
@@ -1117,19 +1437,6 @@ function crearSubcontenedoresVideosUI(contenedor) {
     }
     
     html += '</div>';
-    
-    // Información del contenedor principal
-    const contenedorInfo = obtenerContenedorVideo(contenedor);
-    if (contenedorInfo.descripcion) {
-        html += `
-            <div style="background: rgba(88, 100, 245, 0.1); border-radius: 15px; padding: 20px; margin: 30px 0; border-left: 5px solid #5864F5;">
-                <h4 style="color: #FFD166; margin-bottom: 10px;">📋 Descripción del Contenedor</h4>
-                <p style="opacity: 0.8;">${contenedorInfo.descripcion}</p>
-                ${contenedorInfo.tematica ? `<p style="font-size: 0.9rem; opacity: 0.7; margin-top: 10px;">Temática: ${contenedorInfo.tematica}</p>` : ''}
-            </div>
-        `;
-    }
-    
     return html;
 }
 
@@ -1177,23 +1484,10 @@ function cargarMazos(contenedor, subcontenedor) {
 }
 
 function crearMazosUI(contenedor, subcontenedor) {
-    const subcontenedorInfo = obtenerSubcontenedorManga(contenedor, subcontenedor);
     let html = `<h2 style="text-align: center; margin-bottom: 30px; color: #FFD166;">
         📚 CONTENEDOR ${contenedor} • SUB-CONTENEDOR ${subcontenedor} - MAZOS
     </h2>`;
     
-    // Descripción del sub-contenedor
-    if (subcontenedorInfo.descripcion) {
-        html += `
-            <div style="background: rgba(138, 90, 247, 0.1); border-radius: 15px; padding: 20px; margin-bottom: 25px; border-left: 5px solid #8A5AF7;">
-                <h4 style="color: #FFD166; margin-bottom: 10px;">📋 Descripción</h4>
-                <p style="opacity: 0.8;">${subcontenedorInfo.descripcion}</p>
-                ${subcontenedorInfo.nivel ? `<p style="font-size: 0.9rem; opacity: 0.7; margin-top: 10px;">Nivel: ${subcontenedorInfo.nivel}</p>` : ''}
-            </div>
-        `;
-    }
-    
-    // BOTÓN PARA LEER MANGA EN CABECERA
     const tieneManga = existeManga(contenedor, subcontenedor);
     if (tieneManga) {
         const mangaInfo = mangaDatabase[`${contenedor}_${subcontenedor}`];
@@ -1239,7 +1533,7 @@ function crearBotonVolver(funcionClick) {
 }
 
 // ====================
-// SISTEMA DE QUIZ (CON ROMAJI DEBAJO DE LA PALABRA)
+// SISTEMA DE QUIZ MEJORADO CON PALABRAS DIFÍCILES
 // ====================
 
 function iniciarQuiz(contenedor, subcontenedor, mazo) {
@@ -1247,13 +1541,18 @@ function iniciarQuiz(contenedor, subcontenedor, mazo) {
     subcontenedorActual = subcontenedor;
     mazoActual = mazo;
     
-    // Obtener palabras según el modo actual
-    if (modoActual === 'anime') {
-        palabrasActuales = obtenerVocabularioAnime(contenedor, subcontenedor, mazo);
-    } else if (modoActual === 'audio') {
-        palabrasActuales = obtenerVocabularioAudio(contenedor, subcontenedor, mazo);
+    // Verificar si estamos en mazo difícil
+    if (mazoDificilActivo.length > 0 && mazoDificilOriginalInfo) {
+        palabrasActuales = mazoDificilActivo;
     } else {
-        palabrasActuales = obtenerVocabulario(contenedor, subcontenedor, mazo);
+        // Obtener palabras según el modo actual
+        if (modoActual === 'anime') {
+            palabrasActuales = obtenerVocabularioAnime(contenedor, subcontenedor, mazo);
+        } else if (modoActual === 'audio') {
+            palabrasActuales = obtenerVocabularioAudio(contenedor, subcontenedor, mazo);
+        } else {
+            palabrasActuales = obtenerVocabulario(contenedor, subcontenedor, mazo);
+        }
     }
     
     if (palabrasActuales.length === 0) {
@@ -1274,10 +1573,10 @@ function iniciarQuiz(contenedor, subcontenedor, mazo) {
     document.getElementById('quiz-section').style.display = 'block';
     
     // Cargar primera palabra
-    mostrarPalabraQuiz();
+    mostrarPalabraQuizMejorado();
 }
 
-function mostrarPalabraQuiz() {
+function mostrarPalabraQuizMejorado() {
     const quizSection = document.getElementById('quiz-section');
     const palabra = palabrasActuales[indicePalabraActual];
     
@@ -1288,10 +1587,14 @@ function mostrarPalabraQuiz() {
     if (modoActual === 'asmr') icono = '🎧';
     if (modoActual === 'rpg') icono = '🎮';
     
+    // Verificar si es mazo difícil
+    const esMazoDificil = mazoDificilActivo.length > 0;
+    const tituloMazo = esMazoDificil ? '⭐ MAZO DE PALABRAS DIFÍCILES' : `${modoActual.toUpperCase()} • Mazo ${mazoActual}`;
+    
     quizSection.innerHTML = `
         <div class="quiz-container">
             <h2 style="text-align: center; color: #8A5AF7; margin-bottom: 20px;">
-                ${icono} ${modoActual === 'asmr' ? 'ASMR' : modoActual === 'audio' ? 'AUDIO' : modoActual === 'rpg' ? 'RPG' : modoActual.toUpperCase()} • Mazo ${mazoActual} • Palabra ${indicePalabraActual + 1}/${palabrasActuales.length}
+                ${icono} ${tituloMazo} • Palabra ${indicePalabraActual + 1}/${palabrasActuales.length}
             </h2>
             
             <div class="palabra-japonesa" id="palabra-japonesa">
@@ -1311,6 +1614,16 @@ function mostrarPalabraQuiz() {
                 <!-- Resultado se muestra después de responder -->
             </div>
             
+            <!-- BOTÓN PARA MARCAR COMO DIFÍCIL -->
+            ${!esMazoDificil ? `
+                <div style="text-align: center; margin: 20px 0;">
+                    <button id="btn-marcar-dificil" onclick="marcarPalabraActualComoDificil()" 
+                            style="padding: 10px 20px; background: rgba(255, 215, 0, 0.1); border: 2px solid #FFD700; border-radius: 10px; color: #FFD700; cursor: pointer; font-weight: bold;">
+                        ⭐ Marcar como difícil
+                    </button>
+                </div>
+            ` : ''}
+            
             <div class="quiz-controls">
                 <button class="quiz-btn btn-volver" onclick="cancelarQuiz()">
                     ❌ Cancelar
@@ -1320,10 +1633,10 @@ function mostrarPalabraQuiz() {
     `;
     
     // Crear opciones (2 arriba, 2 abajo)
-    crearOpcionesQuiz(palabra);
+    crearOpcionesQuizMejorado(palabra);
 }
 
-function crearOpcionesQuiz(palabra) {
+function crearOpcionesQuizMejorado(palabra) {
     const opcionesContainer = document.getElementById('opciones-container');
     
     // Mezclar opciones (pero mantener la correcta)
@@ -1340,18 +1653,18 @@ function crearOpcionesQuiz(palabra) {
     opcionesContainer.innerHTML = `
         <div class="opciones-grid">
             <div class="opcion-fila">
-                <button class="opcion-btn" onclick="verificarRespuesta(0, ${nuevaPosicionCorrecta})">
+                <button class="opcion-btn" onclick="verificarRespuestaMejorada(0, ${nuevaPosicionCorrecta})">
                     ${opcionesMezcladas[0]}
                 </button>
-                <button class="opcion-btn" onclick="verificarRespuesta(1, ${nuevaPosicionCorrecta})">
+                <button class="opcion-btn" onclick="verificarRespuestaMejorada(1, ${nuevaPosicionCorrecta})">
                     ${opcionesMezcladas[1]}
                 </button>
             </div>
             <div class="opcion-fila">
-                <button class="opcion-btn" onclick="verificarRespuesta(2, ${nuevaPosicionCorrecta})">
+                <button class="opcion-btn" onclick="verificarRespuestaMejorada(2, ${nuevaPosicionCorrecta})">
                     ${opcionesMezcladas[2]}
                 </button>
-                <button class="opcion-btn" onclick="verificarRespuesta(3, ${nuevaPosicionCorrecta})">
+                <button class="opcion-btn" onclick="verificarRespuestaMejorada(3, ${nuevaPosicionCorrecta})">
                     ${opcionesMezcladas[3]}
                 </button>
             </div>
@@ -1359,7 +1672,22 @@ function crearOpcionesQuiz(palabra) {
     `;
 }
 
-function verificarRespuesta(opcionSeleccionada, posicionCorrecta) {
+function marcarPalabraActualComoDificil() {
+    const palabra = palabrasActuales[indicePalabraActual];
+    agregarPalabraDificil(palabra);
+    
+    // Actualizar botón
+    const btn = document.getElementById('btn-marcar-dificil');
+    if (btn) {
+        btn.innerHTML = '✅ Marcada como difícil';
+        btn.style.background = 'rgba(76, 175, 80, 0.1)';
+        btn.style.borderColor = '#4CAF50';
+        btn.style.color = '#4CAF50';
+        btn.disabled = true;
+    }
+}
+
+function verificarRespuestaMejorada(opcionSeleccionada, posicionCorrecta) {
     if (esperandoSiguiente) return;
     
     const palabra = palabrasActuales[indicePalabraActual];
@@ -1380,6 +1708,12 @@ function verificarRespuesta(opcionSeleccionada, posicionCorrecta) {
         btn.disabled = true;
     });
     
+    // Deshabilitar botón de marcar como difícil
+    const btnMarcar = document.getElementById('btn-marcar-dificil');
+    if (btnMarcar) {
+        btnMarcar.disabled = true;
+    }
+    
     // Mostrar resultado
     const resultadoContainer = document.getElementById('resultado-container');
     resultadoContainer.style.display = 'block';
@@ -1394,7 +1728,6 @@ function verificarRespuesta(opcionSeleccionada, posicionCorrecta) {
     // Actualizar contadores
     if (correcta) {
         aciertos++;
-        // DAR EXP AL RPG POR PALABRA CORRECTA
         darExpPorPalabraCorrecta(true);
     } else {
         errores++;
@@ -1411,14 +1744,14 @@ function verificarRespuesta(opcionSeleccionada, posicionCorrecta) {
         </div>`;
         
         esperandoSiguiente = true;
-        setTimeout(pasarSiguientePalabra, 1500);
+        setTimeout(pasarSiguientePalabraMejorada, 1500);
     } else {
         // Respuesta incorrecta: mostrar botón manual
         controls.innerHTML = `
             <button class="quiz-btn btn-volver" onclick="cancelarQuiz()">
                 ❌ Cancelar
             </button>
-            <button class="quiz-btn btn-siguiente" onclick="pasarSiguientePalabra()">
+            <button class="quiz-btn btn-siguiente" onclick="pasarSiguientePalabraMejorada()">
                 ⏭️ Siguiente Palabra
             </button>
         `;
@@ -1426,22 +1759,34 @@ function verificarRespuesta(opcionSeleccionada, posicionCorrecta) {
     }
 }
 
-function pasarSiguientePalabra() {
+function pasarSiguientePalabraMejorada() {
     indicePalabraActual++;
     
     if (indicePalabraActual < palabrasActuales.length) {
         esperandoSiguiente = false;
-        mostrarPalabraQuiz();
+        mostrarPalabraQuizMejorado();
     } else {
         // Quiz terminado
-        finalizarQuiz();
+        finalizarQuizMejorado();
     }
 }
 
-function finalizarQuiz() {
+function finalizarQuizMejorado() {
     const porcentaje = Math.round((aciertos / palabrasActuales.length) * 100);
+    const esMazoDificil = mazoDificilActivo.length > 0;
     
     console.log(`Quiz finalizado: ${aciertos} aciertos de ${palabrasActuales.length} = ${porcentaje}%`);
+    
+    // Registrar en sistema de misiones
+    if (!esMazoDificil && porcentaje === 100) {
+        const misiones = new SistemaMisiones();
+        misiones.registrarMazoCompletado(porcentaje);
+        
+        // Mostrar video recompensa con probabilidad
+        if (Math.random() * 100 < 30) { // 30% de probabilidad
+            setTimeout(mostrarVideoRecompensa, 500);
+        }
+    }
     
     // DAR EXP ADICIONAL POR COMPLETAR MAZO
     darExpPorCompletarMazo(porcentaje);
@@ -1450,12 +1795,14 @@ function finalizarQuiz() {
     const dineroAntes = sistemaEconomia.obtenerDinero();
     
     // Actualizar progreso en sistema (ESTE MÉTODO DA LA RECOMPENSA)
-    sistemaEconomia.actualizarProgreso(
-        contenedorActual, 
-        subcontenedorActual, 
-        mazoActual, 
-        porcentaje
-    );
+    if (!esMazoDificil) {
+        sistemaEconomia.actualizarProgreso(
+            contenedorActual, 
+            subcontenedorActual, 
+            mazoActual, 
+            porcentaje
+        );
+    }
     
     // OBTENER DINERO DESPUÉS (con la recompensa ya añadida)
     const dineroAhora = sistemaEconomia.obtenerDinero();
@@ -1468,17 +1815,22 @@ function finalizarQuiz() {
     } else if (modoActual === 'audio') {
         funcionVolver = () => cargarMazosAudios(contenedorActual, subcontenedorActual);
     } else if (modoActual === 'asmr') {
-        funcionVolver = () => volverAlInicio(); // ASMR no tiene quiz por ahora
+        funcionVolver = () => volverAlInicio();
     } else if (modoActual === 'rpg') {
-        funcionVolver = () => cargarPaginaRPG(); // Volver al RPG
+        funcionVolver = () => cargarPaginaRPG();
     } else {
         funcionVolver = () => cargarMazos(contenedorActual, subcontenedorActual);
     }
     
+    // Si es mazo difícil y se completó con buen porcentaje, limpiarlo
+    if (esMazoDificil && porcentaje >= 80) {
+        limpiarMazoDificilCompletado();
+    }
+    
     // Mostrar resultados
-    document.getElementById('quiz-section').innerHTML = `
+    const resultadosHTML = `
         <div class="quiz-container">
-            <h2 style="text-align: center; color: #FFD166;">🎉 QUIZ COMPLETADO</h2>
+            <h2 style="text-align: center; color: #FFD166;">${esMazoDificil ? '⭐ ' : ''}🎉 QUIZ COMPLETADO</h2>
             
             <div style="text-align: center; margin: 40px 0;">
                 <div style="font-size: 4rem; margin-bottom: 20px;">${porcentaje}%</div>
@@ -1487,67 +1839,248 @@ function finalizarQuiz() {
                 </p>
             </div>
             
-            <div style="background: rgba(255, 255, 255, 0.05); padding: 25px; border-radius: 15px; margin: 20px 0;">
-                <h3 style="color: #4CAF50; margin-bottom: 15px;">💰 Recompensa Obtenida</h3>
-                <div style="font-size: 2.5rem; text-align: center; color: #FFD166;">
-                    ${dineroAhora.toFixed(2)} soles
+            ${esMazoDificil && porcentaje >= 80 ? `
+                <div style="background: rgba(255, 215, 0, 0.1); border-radius: 15px; padding: 20px; margin: 20px 0; border: 2px solid #FFD700;">
+                    <h3 style="color: #FFD700; text-align: center;">⭐ ¡MAZO DIFÍCIL SUPERADO!</h3>
+                    <p style="text-align: center; opacity: 0.8;">
+                        Has dominado las palabras difíciles. Se eliminarán del sistema.
+                    </p>
                 </div>
-                <p style="text-align: center; margin-top: 10px; opacity: 0.8;">
-                    ${recompensa > 0 ? `+${recompensa.toFixed(2)} soles ganados` : 'Continúa practicando para ganar más'}
-                </p>
-                <p style="text-align: center; font-size: 0.9rem; opacity: 0.7;">
-                    (Antes: ${dineroAntes.toFixed(2)} soles)
-                </p>
-            </div>
+            ` : ''}
+            
+            ${!esMazoDificil && recompensa > 0 ? `
+                <div style="background: rgba(255, 255, 255, 0.05); padding: 25px; border-radius: 15px; margin: 20px 0;">
+                    <h3 style="color: #4CAF50; margin-bottom: 15px;">💰 Recompensa Obtenida</h3>
+                    <div style="font-size: 2.5rem; text-align: center; color: #FFD166;">
+                        ${dineroAhora.toFixed(2)} soles
+                    </div>
+                    <p style="text-align: center; margin-top: 10px; opacity: 0.8;">
+                        +${recompensa.toFixed(2)} soles ganados
+                    </p>
+                </div>
+            ` : ''}
+            
+            <!-- BOTÓN PARA PRACTICAR MAZO DIFÍCIL -->
+            ${!esMazoDificil && palabrasDificiles.length > 0 ? `
+                <div style="text-align: center; margin: 25px 0;">
+                    <button class="card-button" onclick="iniciarMazoDificil()" 
+                            style="background: linear-gradient(135deg, #FFD700, #FF8C00); padding: 15px 30px; font-size: 1.1rem; font-weight: bold;">
+                        🔰 Practicar Mazo de Palabras Difíciles (${palabrasDificiles.length})
+                    </button>
+                    <p style="opacity: 0.7; font-size: 0.9rem; margin-top: 10px;">
+                        ${palabrasDificiles.length} palabras marcadas como difíciles
+                    </p>
+                </div>
+            ` : ''}
+            
+            <!-- BOTÓN PARA VER MISIONES -->
+            ${!esMazoDificil ? `
+                <div style="text-align: center; margin: 20px 0;">
+                    <button class="card-button" onclick="mostrarMisiones()" 
+                            style="background: linear-gradient(135deg, #5864F5, #8A5AF7); padding: 12px 25px; font-size: 1rem;">
+                        🎯 Ver Misiones y Recompensas
+                    </button>
+                </div>
+            ` : ''}
             
             <div class="quiz-controls">
-                <button class="quiz-btn btn-volver" onclick="${modoActual === 'anime' ? `cargarMazosAnimes(${contenedorActual}, ${subcontenedorActual})` : (modoActual === 'audio' ? `cargarMazosAudios(${contenedorActual}, ${subcontenedorActual})` : (modoActual === 'rpg' ? `cargarPaginaRPG()` : `cargarMazos(${contenedorActual}, ${subcontenedorActual})`))}">
+                <button class="quiz-btn btn-volver" onclick="${esMazoDificil ? 'volverAMazos()' : (modoActual === 'anime' ? `cargarMazosAnimes(${contenedorActual}, ${subcontenedorActual})` : (modoActual === 'audio' ? `cargarMazosAudios(${contenedorActual}, ${subcontenedorActual})` : (modoActual === 'rpg' ? `cargarPaginaRPG()` : `cargarMazos(${contenedorActual}, ${subcontenedorActual})`))}">
                     ↩️ Volver a Mazos
                 </button>
                 <button class="quiz-btn btn-siguiente" onclick="repetirQuiz()">
-                    🔄 Repetir Mazo
+                    🔄 ${esMazoDificil ? 'Repetir Mazo Difícil' : 'Repetir Mazo'}
                 </button>
             </div>
         </div>
     `;
     
+    document.getElementById('quiz-section').innerHTML = resultadosHTML;
+    
     // Actualizar contador de dinero en el inicio
     actualizarContadorDineroInicio();
 }
 
-function cancelarQuiz() {
-    if (confirm('¿Seguro que quieres cancelar el quiz? Se perderá el progreso actual.')) {
-        if (modoActual === 'anime') {
-            cargarMazosAnimes(contenedorActual, subcontenedorActual);
-        } else if (modoActual === 'audio') {
-            cargarMazosAudios(contenedorActual, subcontenedorActual);
-        } else if (modoActual === 'asmr') {
-            volverAlInicio();
-        } else if (modoActual === 'rpg') {
-            cargarPaginaRPG();
-        } else {
-            cargarMazos(contenedorActual, subcontenedorActual);
-        }
+function iniciarMazoDificil() {
+    const mazoDificil = crearMazoDificil();
+    if (mazoDificil.length > 0) {
+        // Usar contenedor/subcontenedor actual, pero con mazo especial
+        palabrasActuales = mazoDificil;
+        indicePalabraActual = 0;
+        aciertos = 0;
+        errores = 0;
+        esperandoSiguiente = false;
+        
+        document.getElementById('quiz-section').innerHTML = '';
+        mostrarPalabraQuizMejorado();
+    } else {
+        alert('No hay palabras difíciles para practicar');
     }
 }
 
-function volverAMazos() {
-    document.getElementById('quiz-section').style.display = 'none';
-    document.getElementById('manga-section').style.display = 'block';
-    if (modoActual === 'anime') {
-        cargarMazosAnimes(contenedorActual, subcontenedorActual);
-    } else if (modoActual === 'audio') {
-        cargarMazosAudios(contenedorActual, subcontenedorActual);
-    } else if (modoActual === 'asmr') {
-        volverAlInicio();
-    } else if (modoActual === 'rpg') {
-        cargarPaginaRPG();
-    } else {
-        cargarMazos(contenedorActual, subcontenedorActual);
+function mostrarMisiones() {
+    const misiones = new SistemaMisiones();
+    const recompensas = misiones.obtenerRecompensasDisponibles();
+    const estadisticas = misiones.obtenerEstadisticas();
+    
+    const modalHTML = `
+        <div id="modal-misiones" style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); z-index: 9999; display: flex; justify-content: center; align-items: center; padding: 20px;">
+            <div style="background: #1a1a2e; border-radius: 20px; padding: 30px; max-width: 800px; width: 90%; border: 3px solid #FFD166; position: relative; max-height: 90vh; overflow-y: auto;">
+                <h2 style="color: #FFD166; text-align: center; margin-bottom: 25px;">🎯 SISTEMA DE MISIONES</h2>
+                
+                <!-- ESTADÍSTICAS -->
+                <div style="background: rgba(255, 255, 255, 0.05); border-radius: 15px; padding: 20px; margin-bottom: 25px;">
+                    <h3 style="color: #8A5AF7; margin-bottom: 15px;">📊 Tu Progreso</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px;">
+                        <div style="text-align: center;">
+                            <div style="color: #FFD166; font-size: 0.9rem;">📅 Mazos Hoy</div>
+                            <div style="font-size: 1.8rem; font-weight: bold;">${estadisticas.diarias.completadas}</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="color: #FFD166; font-size: 0.9rem;">📆 Mazos Semana</div>
+                            <div style="font-size: 1.8rem; font-weight: bold;">${estadisticas.semanales.completadas}</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="color: #FFD166; font-size: 0.9rem;">💰 Total</div>
+                            <div style="font-size: 1.8rem; font-weight: bold;">${estadisticas.totalRegistros}</div>
+                        </div>
+                    </div>
+                    <p style="text-align: center; opacity: 0.7; font-size: 0.9rem; margin-top: 15px;">
+                        Reseteo diario: 3:00 AM • Reseteo semanal: Lunes
+                    </p>
+                </div>
+                
+                <!-- MISIONES DIARIAS -->
+                <div style="background: rgba(76, 175, 80, 0.1); border-radius: 15px; padding: 20px; margin-bottom: 25px; border: 2px solid rgba(76, 175, 80, 0.3);">
+                    <h3 style="color: #4CAF50; margin-bottom: 15px;">🌞 Misiones Diarias</h3>
+                    <p style="opacity: 0.8; margin-bottom: 15px;">Completa mazos al 100% para ganar recompensas diarias</p>
+                    
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 15px;">
+                        ${[1, 3, 5, 10].map((meta, index) => {
+                            const recompensa = [0.50, 1.00, 2.00, 5.00][index];
+                            const completado = estadisticas.diarias.completadas >= meta;
+                            const reclamado = misiones.misiones.diarias.reclamadas.includes(meta);
+                            
+                            return `
+                                <div style="background: rgba(255,255,255,0.08); border-radius: 10px; padding: 15px; text-align: center;">
+                                    <div style="font-weight: bold; margin-bottom: 10px;">${meta} Mazo${meta > 1 ? 's' : ''}</div>
+                                    <div style="color: #FFD166; font-size: 1.2rem; margin-bottom: 10px;">${recompensa.toFixed(2)} soles</div>
+                                    <div style="margin-bottom: 10px;">
+                                        <span style="color: ${completado ? '#4CAF50' : '#FF6B6B'}">${completado ? '✅ Completado' : '❌ Pendiente'}</span>
+                                    </div>
+                                    <button onclick="reclamarMision('diaria', ${meta})" 
+                                            style="padding: 8px 15px; background: ${reclamado ? 'rgba(255,255,255,0.1)' : (completado ? '#4CAF50' : '#FF6B6B')}; 
+                                                   border: none; border-radius: 8px; color: white; font-weight: bold; width: 100%; cursor: ${reclamado ? 'not-allowed' : (completado ? 'pointer' : 'not-allowed')};"
+                                            ${reclamado || !completado ? 'disabled' : ''}>
+                                        ${reclamado ? '✅ Reclamado' : (completado ? '💰 Reclamar' : '🔒 Bloqueado')}
+                                    </button>
+                                </div>
+                            `;
+                        }).join('')}
+                    </div>
+                </div>
+                
+                <!-- MISIONES SEMANALES -->
+                <div style="background: rgba(138, 90, 247, 0.1); border-radius: 15px; padding: 20px; margin-bottom: 25px; border: 2px solid rgba(138, 90, 247, 0.3);">
+                    <h3 style="color: #8A5AF7; margin-bottom: 15px;">📅 Misiones Semanales</h3>
+                    <p style="opacity: 0.8; margin-bottom: 15px;">Recompensas mayores por completar más mazos en la semana</p>
+                    
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); gap: 15px;">
+                        ${[5, 10, 20, 30].map((meta, index) => {
+                            const recompensa = [2.00, 5.00, 10.00, 20.00][index];
+                            const completado = estadisticas.semanales.completadas >= meta;
+                            const reclamado = misiones.misiones.semanales.reclamadas.includes(meta);
+                            
+                            return `
+                                <div style="background: rgba(255,255,255,0.08); border-radius: 10px; padding: 15px; text-align: center;">
+                                    <div style="font-weight: bold; margin-bottom: 10px;">${meta} Mazo${meta > 1 ? 's' : ''}</div>
+                                    <div style="color: #FFD166; font-size: 1.2rem; margin-bottom: 10px;">${recompensa.toFixed(2)} soles</div>
+                                    <div style="margin-bottom: 10px;">
+                                        <span style="color: ${completado ? '#4CAF50' : '#FF6B6B'}">${completado ? '✅ Completado' : '❌ Pendiente'}</span>
+                                    </div>
+                                    <button onclick="reclamarMision('semanal', ${meta})" 
+                                            style="padding: 8px 15px; background: ${reclamado ? 'rgba(255,255,255,0.1)' : (completado ? '#8A5AF7' : '#FF6B6B')}; 
+                                                   border: none; border-radius: 8px; color: white; font-weight: bold; width: 100%; cursor: ${reclamado ? 'not-allowed' : (completado ? 'pointer' : 'not-allowed')};"
+                                            ${reclamado || !completado ? 'disabled' : ''}>
+                                        ${reclamado ? '✅ Reclamado' : (completado ? '💰 Reclamar' : '🔒 Bloqueado')}
+                                    </button>
+                                </div>
+                            `;
+                        }).join('')}
+                    </div>
+                </div>
+                
+                <!-- INSTRUCCIONES -->
+                <div style="background: rgba(255, 209, 102, 0.1); border-radius: 15px; padding: 20px; border-left: 5px solid #FFD166;">
+                    <h4 style="color: #FFD166; margin-bottom: 10px;">📖 ¿Cómo funciona?</h4>
+                    <ul style="padding-left: 20px; opacity: 0.8; font-size: 0.95rem;">
+                        <li>Completa mazos de vocabulario al <strong>100%</strong></li>
+                        <li>Cada mazo completo cuenta para misiones diarias y semanales</li>
+                        <li>Las recompensas se acumulan automáticamente</li>
+                        <li>Reclama tus recompensas cuando completes los objetivos</li>
+                        <li>Las misiones se reinician: <strong>Diarias a las 3:00 AM</strong> • <strong>Semanales los lunes</strong></li>
+                    </ul>
+                </div>
+                
+                <div style="text-align: center; margin-top: 30px;">
+                    <button onclick="cerrarModalMisiones()" 
+                            style="padding: 12px 30px; background: #FFD166; border: none; border-radius: 10px; color: #333; font-weight: bold; cursor: pointer;">
+                        ✅ Cerrar
+                    </button>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    document.body.insertAdjacentHTML('beforeend', modalHTML);
+}
+
+function reclamarMision(tipo, meta) {
+    const misiones = new SistemaMisiones();
+    const reclamada = misiones.reclamarRecompensa(tipo, meta);
+    
+    if (reclamada > 0) {
+        // Actualizar modal
+        setTimeout(() => {
+            const modal = document.getElementById('modal-misiones');
+            if (modal) modal.remove();
+            mostrarMisiones();
+        }, 500);
+    }
+}
+
+function cerrarModalMisiones() {
+    const modal = document.getElementById('modal-misiones');
+    if (modal) {
+        modal.remove();
+    }
+}
+
+function cancelarQuiz() {
+    if (confirm('¿Seguro que quieres cancelar el quiz? Se perderá el progreso actual.')) {
+        // Si es mazo difícil, regresar al mazo original
+        if (mazoDificilActivo.length > 0 && mazoDificilOriginalInfo) {
+            const { contenedor, subcontenedor, mazo, modo } = mazoDificilOriginalInfo;
+            contenedorActual = contenedor;
+            subcontenedorActual = subcontenedor;
+            mazoActual = mazo;
+            modoActual = modo;
+            
+            // Limpiar mazo difícil temporal
+            mazoDificilActivo = [];
+            mazoDificilOriginalInfo = null;
+        }
+        
+        // Volver a mazos según el modo
+        volverAMazos();
     }
 }
 
 function repetirQuiz() {
+    // Si es mazo difícil, mantenerlo
+    if (mazoDificilActivo.length > 0) {
+        palabrasActuales = mazoDificilActivo;
+    }
+    
     iniciarQuiz(contenedorActual, subcontenedorActual, mazoActual);
 }
 
@@ -1558,14 +2091,12 @@ function repetirQuiz() {
 function darExpPorPalabraCorrecta(esCorrecta) {
     if (!esCorrecta) return false;
     
-    // Verificar si el RPG está cargado
     if (typeof quintillizasRPG === 'undefined' || 
         !quintillizasRPG.personajeSeleccionado) {
         return false;
     }
     
-    // Dar EXP por cada palabra correcta
-    const expPorPalabra = 20; // EXP por cada acierto
+    const expPorPalabra = 20;
     
     const expDada = quintillizasRPG.agregarEXP(
         quintillizasRPG.personajeSeleccionado, 
@@ -1581,17 +2112,15 @@ function darExpPorPalabraCorrecta(esCorrecta) {
 }
 
 function darExpPorCompletarMazo(porcentaje) {
-    // Verificar si el RPG está cargado
     if (typeof quintillizasRPG === 'undefined' || 
         !quintillizasRPG.personajeSeleccionado) {
         return false;
     }
     
-    // Dar EXP adicional por completar mazo (basado en porcentaje)
     let expAdicional = 0;
     
     if (porcentaje >= 100) {
-        expAdicional = 100; // +100 EXP por mazo perfecto
+        expAdicional = 100;
     } else if (porcentaje >= 90) {
         expAdicional = 75;
     } else if (porcentaje >= 80) {
@@ -1609,7 +2138,6 @@ function darExpPorCompletarMazo(porcentaje) {
         );
         
         if (expDada) {
-            const personaje = quintillizasRPG.datosPersonajes[quintillizasRPG.personajeSeleccionado];
             mostrarNotificacionQuiz(`🎯 +${expAdicional} EXP por completar mazo`);
         }
         
@@ -1620,7 +2148,6 @@ function darExpPorCompletarMazo(porcentaje) {
 }
 
 function mostrarNotificacionQuiz(mensaje) {
-    // Crear notificación para EXP
     const notif = document.createElement('div');
     notif.textContent = mensaje;
     notif.style.cssText = `
@@ -1713,14 +2240,13 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     console.log('✅ Sistema completo cargado correctamente');
-    console.log('📚 Mangas: Con descripciones personalizadas en contenedores y sub-contenedores');
-    console.log('🎌 Animes: Con descripciones personalizadas en contenedores y sub-contenedores');
-    console.log('🎵 Audios: Con descripciones personalizadas en contenedores y sub-contenedores');
-    console.log('🎧 ASMR: Con descripciones personalizadas en contenedores y sub-contenedores');
-    console.log('🎬 Videos: Con descripciones personalizadas en contenedores y sub-contenedores');
+    console.log('📚 Mangas, 🎬 Videos, 🎌 Animes, 🎵 Audios, 🎧 ASMR, 🎮 RPG');
     console.log('📖 Lector de manga integrado');
     console.log('🏠 Botón casa configurado');
     console.log('💰 Sistema de dinero activo');
     console.log('🎮 Sistema RPG Quintillizas activo');
     console.log('💖 EXP por quiz activado: +20 EXP/palabra correcta, +15-100 EXP/mazo completo');
+    console.log('⭐ Sistema de palabras difíciles activo');
+    console.log('🎯 Sistema de misiones activo');
+    console.log('🎬 Sistema de videos recompensa activo (20 videos, 20% a 0.5%)');
 });
