@@ -1401,6 +1401,29 @@ function finalizarQuiz() {
     // OBTENER DINERO DESPUÉS (con la recompensa ya añadida)
     const dineroAhora = sistemaEconomia.obtenerDinero();
     const recompensa = dineroAhora - dineroAntes;
+    // OBTENER DINERO DESPUÉS (con la recompensa ya añadida)
+const dineroAhora = sistemaEconomia.obtenerDinero();
+const recompensa = dineroAhora - dineroAntes;
+
+// ✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅
+// NUEVO CÓDIGO PARA DAR EXP - PEGAR AQUÍ
+// ✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅✅
+
+// DAR EXP BASADA EN PORCENTAJE (100% = 100 EXP, 50% = 50 EXP, etc.)
+if (window.quintillizasRPG && window.quintillizasRPG.personajeSeleccionado) {
+    // Fórmula: porcentaje = EXP (100% = 100 EXP, 80% = 80 EXP)
+    const expGanada = porcentaje;
+    
+    window.quintillizasRPG.agregarEXP(
+        window.quintillizasRPG.personajeSeleccionado, 
+        expGanada
+    );
+    
+    console.log(`🎮 MAZO ${porcentaje}%: +${expGanada} EXP para ${window.quintillizasRPG.datosPersonajes[window.quintillizasRPG.personajeSeleccionado].nombre}`);
+    
+    // Mostrar notificación
+    window.quintillizasRPG.mostrarNotificacion(`📚 +${expGanada} EXP para ${window.quintillizasRPG.datosPersonajes[window.quintillizasRPG.personajeSeleccionado].nombre.split(' ')[0]}`);
+}
     
     // ✅✅✅ NUEVO: CALCULAR EXP BASADA EN DINERO (1 SOL = 5 EXP)
     let expGanada = 0;
