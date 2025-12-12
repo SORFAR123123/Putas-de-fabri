@@ -13,8 +13,8 @@ const mangaDatabase = {
         titulo: "🎌 Quintillizas Porneras",
         descripcion: "Miku la mas puta quiere hacer porno con sus hermanas culonas.",
         paginas: 15,
-        año: 2017,
-        autor: "Ken Wakui",
+        año: 2024,
+        autor: "Chikell ",
         paginasUrls: [
             "https://pbs.twimg.com/media/G75WPTWXgAARV2h?format=png&name=large", // Página 1
             "https://pbs.twimg.com/media/G75WQvSWMAEmFMf?format=png&name=large", // Página 2
