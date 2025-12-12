@@ -31,7 +31,7 @@
                 <button class="card-button" onclick="cargarPaginaMangas()">Ver colección</button>
             </div>
 
-            <!-- CARD NUEVA - VIDEOS -->
+            <!-- CARD 2 - VIDEOS -->
             <div class="card card-green">
                 <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1574717024453-af2e2c8f2bcc?w=400&h=400&fit=crop')"></div>
                 <h3>🎬 VIDEOS PRIVADOS</h3>
@@ -39,17 +39,27 @@
                 <button class="card-button" onclick="cargarPaginaVideos()">Ver videos</button>
             </div>
 
-            <!-- CARD NUEVA - ANIMES -->
+            <!-- CARD 3 - ANIMES -->
             <div class="card card-purple">
                 <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1635805737707-575885ab0820?w=400&h=400&fit=crop')"></div>
                 <h3>🎌 ANIMES</h3>
                 <p>Anime con vocabulario + videos español/japonés</p>
                 <button class="card-button" onclick="cargarPaginaAnimes()">Ver animes</button>
             </div>
+
+            <!-- CARD NUEVA 4 - AUDIOS -->
+            <div class="card card-green" style="background: linear-gradient(135deg, rgba(255, 107, 107, 0.2), rgba(255, 209, 102, 0.2)); border-color: rgba(255, 107, 107, 0.5);">
+                <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=400&h=400&fit=crop')"></div>
+                <h3>🎵 AUDIOS OPENINGS</h3>
+                <p>Openings MP3 + vocabulario de letras</p>
+                <button class="card-button" style="background: linear-gradient(135deg, #FF6B6B, #FFD166);" onclick="cargarPaginaAudios()">
+                    Escuchar audios
+                </button>
+            </div>
         </div>
     </section>
 
-    <!-- SECCIÓN DINÁMICA PARA MANGAS/VIDEOS/ANIMES -->
+    <!-- SECCIÓN DINÁMICA PARA MANGAS/VIDEOS/ANIMES/AUDIOS -->
     <section id="manga-section" style="display: none;"></section>
 
     <!-- SECCIÓN DEL QUIZ -->
@@ -89,6 +99,9 @@
     <script src="1_animes_vocabulario.js"></script>
     <script src="1_sistemas.js"></script>
     <script src="lectormanga.js"></script>
+    <!-- ARCHIVOS NUEVOS PARA AUDIOS -->
+    <script src="1_audios.js"></script>
+    <script src="1_audios_vocabulario.js"></script>
     <script src="1_main.js"></script>
 </body>
 </html>
