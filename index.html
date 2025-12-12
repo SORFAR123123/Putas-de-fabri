@@ -1,3 +1,4 @@
+
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -47,7 +48,7 @@
                 <button class="card-button" onclick="cargarPaginaAnimes()">Ver animes</button>
             </div>
 
-            <!-- CARD NUEVA 4 - AUDIOS -->
+            <!-- CARD 4 - AUDIOS -->
             <div class="card card-green" style="background: linear-gradient(135deg, rgba(255, 107, 107, 0.2), rgba(255, 209, 102, 0.2)); border-color: rgba(255, 107, 107, 0.5);">
                 <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=400&h=400&fit=crop')"></div>
                 <h3>🎵 AUDIOS OPENINGS</h3>
@@ -56,10 +57,20 @@
                     Escuchar audios
                 </button>
             </div>
+
+            <!-- CARD 5 - ASMR -->
+            <div class="card card-purple" style="background: linear-gradient(135deg, rgba(156, 39, 176, 0.2), rgba(103, 58, 183, 0.2)); border-color: rgba(156, 39, 176, 0.5);">
+                <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1572860177022-8fda92a90b95?w=400&h=400&fit=crop')"></div>
+                <h3>🎧 ASMR JAPONÉS</h3>
+                <p>Audios relajantes para estudio y meditación</p>
+                <button class="card-button" style="background: linear-gradient(135deg, #9C27B0, #673AB7);" onclick="cargarPaginaASMR()">
+                    Escuchar ASMR
+                </button>
+            </div>
         </div>
     </section>
 
-    <!-- SECCIÓN DINÁMICA PARA MANGAS/VIDEOS/ANIMES/AUDIOS -->
+    <!-- SECCIÓN DINÁMICA PARA MANGAS/VIDEOS/ANIMES/AUDIOS/ASMR -->
     <section id="manga-section" style="display: none;"></section>
 
     <!-- SECCIÓN DEL QUIZ -->
@@ -92,17 +103,21 @@
         <p class="github-link">Publicado en <a href="https://pages.github.com/" target="_blank">GitHub Pages</a></p>
     </footer>
 
+    <!-- ARCHIVOS DEL SISTEMA -->
     <script src="1_imagenes.js"></script>
     <script src="1_vocabulario.js"></script>
     <script src="1_videos.js"></script>
-    <script src="1_asmr.js"></script>
     <script src="1_animes.js"></script>
     <script src="1_animes_vocabulario.js"></script>
     <script src="1_sistemas.js"></script>
     <script src="lectormanga.js"></script>
-    <!-- ARCHIVOS NUEVOS PARA AUDIOS -->
+    
+    <!-- ARCHIVOS NUEVOS PARA AUDIOS Y ASMR -->
     <script src="1_audios.js"></script>
     <script src="1_audios_vocabulario.js"></script>
+    <script src="1_asmr.js"></script>
+    
+    <!-- ARCHIVO PRINCIPAL -->
     <script src="1_main.js"></script>
 </body>
 </html>
