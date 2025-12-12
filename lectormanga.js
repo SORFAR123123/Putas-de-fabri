@@ -16,7 +16,7 @@ const mangaDatabase = {
         año: 2017,
         autor: "Ken Wakui",
         paginasUrls: [
-            "https://images.unsplash.com/photo-1635805737707-575885ab0820?w=1200&h=1800&fit=crop&auto=format", // Página 1
+            "https://pbs.twimg.com/media/G75lL5JXwAERj0b?format=png&name=large", // Página 1
             "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=1200&h=1800&fit=crop&auto=format", // Página 2
             "https://images.unsplash.com/photo-1639322537228-f710d846310a?w=1200&h=1800&fit=crop&auto=format", // Página 3
             "https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=1200&h=1800&fit=crop&auto=format", // Página 4
