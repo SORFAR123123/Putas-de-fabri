@@ -122,19 +122,20 @@ class QuintillizasRPG {
     }
 
     // ====================
-    // SISTEMA DE EXP Y NIVELES
+    // SISTEMA DE EXP Y NIVELES - MODIFICADO PARA QUIZ
     // ====================
 
     agregarEXP(personajeId, cantidad) {
+        // MODIFICACIÓN: Solo dar EXP si hay personaje seleccionado Y coincide
         if (!this.personajeSeleccionado || this.personajeSeleccionado !== personajeId) {
-            console.log(`⚠️ No hay personaje seleccionado. EXP no añadida.`);
+            console.log(`⚠️ No se puede añadir EXP: Personaje ${personajeId} no coincide con seleccionado ${this.personajeSeleccionado}`);
             return false;
         }
 
         const personaje = this.datosPersonajes[personajeId];
         personaje.exp += cantidad;
         
-        console.log(`🎯 ${personaje.nombre} +${cantidad} EXP (Total: ${personaje.exp}/${personaje.expNecesaria})`);
+        console.log(`🎮 ${personaje.nombre} +${cantidad} EXP (Total: ${personaje.exp}/${personaje.expNecesaria})`);
         
         // Subir de nivel si alcanza la EXP necesaria
         if (personaje.exp >= personaje.expNecesaria) {
@@ -267,6 +268,7 @@ class QuintillizasRPG {
                         <li>Intenta momentos íntimos (pueden fallar)</li>
                         <li>Sube de nivel para desbloquear más contenido</li>
                         <li>Cada hermana tiene diferente dificultad</li>
+                        <li><strong>💖 NUEVO:</strong> ¡Gana EXP respondiendo correctamente en el quiz!</li>
                     </ol>
                 </div>
             </div>
@@ -414,6 +416,9 @@ class QuintillizasRPG {
                         </div>
                         <p style="text-align: center; margin-top: 10px; opacity: 0.8;">
                             <strong>${personaje.descripcion}</strong>
+                        </p>
+                        <p style="text-align: center; margin-top: 15px; color: #FFD166; font-weight: bold;">
+                            💖 ¡Gana EXP respondiendo correctamente en los quizzes!
                         </p>
                     </div>
                 </div>
@@ -965,4 +970,5 @@ const quintillizasRPG = new QuintillizasRPG();
 document.addEventListener('DOMContentLoaded', function() {
     quintillizasRPG.inicializar();
     console.log('🎮 RPG Quintillizas listo y funcional');
+    console.log('💖 EXP por quiz activado: +20 EXP/palabra correcta, +15-100 EXP/mazo completo');
 });
