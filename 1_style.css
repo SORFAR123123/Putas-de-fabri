@@ -1235,3 +1235,26 @@ body {
     border-radius: 10px;
     background: rgba(0, 0, 0, 0.5);
 }
+/* Añade después de .card-green en 1_style.css */
+.card-purple {
+    background: linear-gradient(135deg, rgba(156, 39, 176, 0.2), rgba(103, 58, 183, 0.2));
+    border-color: rgba(156, 39, 176, 0.5);
+}
+
+.card-purple .card-button {
+    background: linear-gradient(135deg, #9C27B0, #673AB7);
+}
+
+.card-purple .card-button:hover {
+    background: linear-gradient(135deg, #673AB7, #4A148C);
+}
+
+/* Para el botón ASMR específico en las cards de contenedores */
+.card-button-asmr {
+    background: linear-gradient(135deg, #9C27B0, #673AB7) !important;
+    border: 2px solid rgba(156, 39, 176, 0.5) !important;
+}
+
+.card-button-asmr:hover {
+    background: linear-gradient(135deg, #673AB7, #4A148C) !important;
+}
