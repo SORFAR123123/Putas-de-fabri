@@ -1258,3 +1258,33 @@ body {
 .card-button-asmr:hover {
     background: linear-gradient(135deg, #673AB7, #4A148C) !important;
 }
+/* ================================================
+   ESTILOS PARA RPG QUINTILLIZAS
+   ================================================ */
+
+/* Personaje cards */
+.personaje-card {
+    background: rgba(50, 50, 70, 0.9);
+    border-radius: 20px;
+    padding: 25px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border: 2px solid;
+    min-height: 280px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.personaje-card:hover {
+    transform: translateY(-8px) scale(1.03);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.4);
+}
+
+/* Colores específicos por personaje */
+.personaje-ichika { border-color: #FF6B8B; }
+.personaje-nino { border-color: #FFB347; }
+.personaje-miku { border-color: #6A5ACD; }
+.personaje-yotsuba { border-color: #4CAF50; }
+.personaje-itsuki { border-color: #FFD166; }
