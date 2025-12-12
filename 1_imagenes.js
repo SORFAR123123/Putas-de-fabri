@@ -314,7 +314,7 @@ const sistemaDescriptivo = {
     videos: {
         // CONTENEDORES PRINCIPALES (1-10)
         contenedores: {
-            1: { imagen: '', descripcion: '', tematica: '' },
+            1: { imagen: 'https://pbs.twimg.com/media/GztU8Y3XsAA5Yzm?format=png&name=small', descripcion: 'Quintillizas ricos culos y ortos ', tematica: '' },
             2: { imagen: '', descripcion: '', tematica: '' },
             3: { imagen: '', descripcion: '', tematica: '' },
             4: { imagen: '', descripcion: '', tematica: '' },
@@ -329,9 +329,9 @@ const sistemaDescriptivo = {
         // SUB-CONTENEDORES (5 por cada contenedor)
         subcontenedores: {
             // Contenedor 1
-            '1_1': { imagen: '', descripcion: '', duracion: '' },
-            '1_2': { imagen: '', descripcion: '', duracion: '' },
-            '1_3': { imagen: '', descripcion: '', duracion: '' },
+            '1_1': { imagen: 'https://pbs.twimg.com/media/G7wgYR9XQAAwo0T?format=jpg&name=large', descripcion: 'Nino chupando mi pinga enojada esa putita cachonda perra', duracion: '' },
+            '1_2': { imagen: 'https://pbs.twimg.com/media/G7wfStPXUAA1Ra2?format=png&name=360x360', descripcion: 'Quinti trolas', duracion: '' },
+            '1_3': { imagen: 'https://pbs.twimg.com/media/G7wgF7aW4AAYsOQ?format=jpg&name=large', descripcion: 'Miku kachera culona que rico orto', duracion: '' },
             '1_4': { imagen: '', descripcion: '', duracion: '' },
             '1_5': { imagen: '', descripcion: '', duracion: '' },
             
