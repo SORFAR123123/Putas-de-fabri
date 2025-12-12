@@ -433,6 +433,208 @@ class QuintillizasRPG {
     }
 
     // ====================
+    // SISTEMA CON LÍMITES + CONDÓN 0.01 ESPECIAL
+    // ====================
+
+    calcularProbabilidadMomento(personaje, momento, usarCondonEspecial = false) {
+        // ============================================
+        // CONFIGURACIÓN DE LÍMITES
+        // ============================================
+        const MAX_AFINIDAD = 200;     // AFINIDAD MÁXIMA POSIBLE
+        const MAX_NIVEL = 10;         // NIVEL MÁXIMO POSIBLE
+        const MAX_EXITO_BASE = 80;    // ÉXITO MÁXIMO SIN CONDÓN ESPECIAL
+        const MAX_EXITO_CON_CONDON = 100; // ÉXITO MÁXIMO CON CONDÓN 0.01
+        
+        // Determinar el límite máximo
+        const usarLimiteEspecial = usarCondonEspecial || momento.condones001Requeridos > 0;
+        const limiteMaximo = usarLimiteEspecial ? MAX_EXITO_CON_CONDON : MAX_EXITO_BASE;
+        
+        let probabilidad = momento.probabilidadBase;
+        
+        // ============================================
+        // 1. CONTRIBUCIÓN POR AFINIDAD (máx 40%)
+        // ============================================
+        // Ajustar afinidad: Nino empieza con -50, así que normalizamos
+        let afinidadEfectiva = Math.max(personaje.afinidad, 0); // No negativa
+        afinidadEfectiva = Math.min(afinidadEfectiva, MAX_AFINIDAD);
+        const porcentajeAfinidad = (afinidadEfectiva / MAX_AFINIDAD) * 40;
+        probabilidad += porcentajeAfinidad;
+        
+        // ============================================
+        // 2. CONTRIBUCIÓN POR NIVEL (máx 30%)
+        // ============================================
+        const nivelNormalizado = Math.min(personaje.nivel, MAX_NIVEL);
+        const porcentajeNivel = (nivelNormalizado / MAX_NIVEL) * 30;
+        probabilidad += porcentajeNivel;
+        
+        // ============================================
+        // 3. BONUS POR CONDÓN 0.01 (+30% y límite 100%)
+        // ============================================
+        if (usarLimiteEspecial) {
+            probabilidad += 30; // +30% por condón 0.01
+        }
+        
+        // ============================================
+        // 4. AJUSTES POR ESTADO DE ÁNIMO (varía)
+        // ============================================
+        const ajustesEstado = {
+            'feliz': 15,      // +15% si está feliz
+            'neutral': 0,
+            'triste': -25,    // -25% si está triste
+            'enojada': -40,   // -40% si está enojada
+            'tsundere': -30,  // Nino especial
+            'tímida': -15,    // Miku especial
+            'energica': 10,   // Yotsuba especial
+            'glotona': 12     // Itsuki especial
+        };
+        
+        probabilidad += ajustesEstado[personaje.estadoAnimo] || 0;
+        
+        // ============================================
+        // 5. APLICAR LÍMITES Y REDONDEAR
+        // ============================================
+        // Límite mínimo (nunca menos de 5% de éxito)
+        probabilidad = Math.max(5, probabilidad);
+        
+        // Límite máximo (80% sin condón, 100% con condón)
+        probabilidad = Math.min(probabilidad, limiteMaximo);
+        
+        // Redondear
+        const probabilidadFinal = Math.round(probabilidad);
+        
+        console.log(`🎯 Probabilidad ${momento.nombre}:`);
+        console.log(`   Base: ${momento.probabilidadBase}%`);
+        console.log(`   Afinidad: +${porcentajeAfinidad.toFixed(1)}%`);
+        console.log(`   Nivel: +${porcentajeNivel.toFixed(1)}%`);
+        console.log(`   Estado: ${ajustesEstado[personaje.estadoAnimo] || 0}%`);
+        console.log(`   Condón 0.01: ${usarLimiteEspecial ? '+30%' : 'No'}`);
+        console.log(`   Límite: ${limiteMaximo}% → Final: ${probabilidadFinal}%`);
+        
+        return probabilidadFinal;
+    }
+
+    // ====================
+    // SISTEMA DE MOMENTOS ÍNTIMOS CON CONDONES ESPECIALES
+    // ====================
+
+    intentarMomentoIntimo(personajeId, momentoId) {
+        const personaje = this.datosPersonajes[personajeId];
+        const momento = personaje.momentosIntimos.find(m => m.id === momentoId);
+        
+        if (!momento) {
+            this.mostrarNotificacion('❌ Momento íntimo no encontrado');
+            return false;
+        }
+        
+        // Verificar nivel requerido
+        if (personaje.nivel < (momento.nivelRequerido || 1)) {
+            this.mostrarNotificacion(`❌ Necesitas nivel ${momento.nivelRequerido} para este momento íntimo`);
+            return false;
+        }
+        
+        // Verificar condones normales
+        if (this.condones < momento.condonesRequeridos) {
+            this.mostrarNotificacion(`❌ Necesitas ${momento.condonesRequeridos} condones normales`);
+            return false;
+        }
+        
+        // Verificar condones especiales si son requeridos
+        if (this.condones001 < momento.condones001Requeridos) {
+            this.mostrarNotificacion(`❌ Necesitas ${momento.condones001Requeridos} condones 0.01`);
+            return false;
+        }
+        
+        // Preguntar si usar condón especial si está disponible pero no requerido
+        let usarCondonEspecial = false;
+        if (this.condones001 > 0 && momento.condones001Requeridos === 0) {
+            const mensaje = `💎 ¿Quieres usar un CONDÓN 0.01?\n\n` +
+                           `• +30% probabilidad de éxito\n` +
+                           `• +80% afinidad obtenida (antes era 50%)\n` +
+                           `• Puede superar el límite del 80% (hasta 100%)\n` +
+                           `• Se sentirá MÁS RICO para ${personaje.nombre.split(' ')[0]}\n\n` +
+                           `Tienes: ${this.condones001} condones 0.01 disponibles`;
+            
+            usarCondonEspecial = confirm(mensaje);
+            
+            if (usarCondonEspecial) {
+                momento.condones001Requeridos = 1; // Temporalmente requerido
+            }
+        }
+        
+        // Calcular probabilidad real CON el nuevo sistema
+        const probabilidadReal = this.calcularProbabilidadMomento(personaje, momento, usarCondonEspecial);
+        
+        // Mostrar mensaje especial si es con condón 0.01
+        if (usarCondonEspecial) {
+            this.mostrarNotificacion(`💎 Condón 0.01 activado! Éxito: ${probabilidadReal}% (Máximo: 100%)`);
+        }
+        
+        console.log(`🎯 Probabilidad final para ${momento.nombre}: ${probabilidadReal}%`);
+        const exito = Math.random() * 100 < probabilidadReal;
+        
+        if (exito) {
+            // ÉXITO - AUMENTAR BONUS POR CONDÓN ESPECIAL
+            this.condones -= momento.condonesRequeridos;
+            if (usarCondonEspecial || momento.condones001Requeridos > 0) {
+                this.condones001 -= momento.condones001Requeridos;
+            }
+            this.guardarCondones();
+            this.guardarCondones001();
+            
+            let afinidadGanada = momento.afinidad;
+            let expGanada = momento.exp;
+            
+            // BONUS ESPECIAL POR CONDÓN 0.01
+            if (usarCondonEspecial || momento.condones001Requeridos > 0) {
+                afinidadGanada = Math.round(afinidadGanada * 1.8); // ¡+80% afinidad! (antes era 50%)
+                expGanada = Math.round(expGanada * 1.5); // +50% EXP
+                this.mostrarNotificacion(`💎 ¡CONDÓN 0.01! +80% afinidad, +50% EXP, +30% éxito`);
+                
+                // MENSAJE ESPECIAL: Se siente más rico
+                const mensajesRico = [
+                    `💖 ${personaje.nombre.split(' ')[0]} gime más fuerte con el condón 0.01`,
+                    `✨ ${personaje.nombre.split(' ')[0]} siente cada movimiento intensificado`,
+                    `🔥 La sensación es tan buena que ${personaje.nombre.split(' ')[0]} tiembla`,
+                    `🎇 El condón 0.01 hace que ${personaje.nombre.split(' ')[0]} llegue al orgasmo más rápido`,
+                    `🥵 ${personaje.nombre.split(' ')[0]} no puede contener sus gemidos por lo rico que se siente`,
+                    `💦 ${personaje.nombre.split(' ')[0]} se corre más fuerte gracias al condón especial`
+                ];
+                const mensajeAleatorio = mensajesRico[Math.floor(Math.random() * mensajesRico.length)];
+                this.mostrarNotificacion(mensajeAleatorio);
+            }
+            
+            this.agregarEXP(personajeId, expGanada);
+            personaje.afinidad += afinidadGanada;
+            personaje.estadoAnimo = 'feliz';
+            
+            console.log(`✅ ¡${momento.nombre} exitoso con ${personaje.nombre}!`);
+            this.mostrarNotificacion(`💖 ¡${momento.nombre} exitoso! +${afinidadGanada} afinidad, +${expGanada} EXP`);
+            
+            this.cargarVideoMomentoIntimo(personajeId, momento);
+            
+            return true;
+        } else {
+            // FALLO
+            this.condones -= momento.condonesRequeridos;
+            if (usarCondonEspecial || momento.condones001Requeridos > 0) {
+                this.condones001 -= momento.condones001Requeridos;
+            }
+            this.guardarCondones();
+            this.guardarCondones001();
+            
+            personaje.estadoAnimo = 'enojada';
+            personaje.afinidad -= Math.floor(momento.afinidad / 3);
+            
+            console.log(`❌ ${momento.nombre} falló con ${personaje.nombre}`);
+            this.mostrarNotificacion(`😠 ${momento.nombre} falló. ${personaje.nombre} se enojó. Pérdida de afinidad.`);
+            
+            this.actualizarVistaConPersonaje();
+            
+            return false;
+        }
+    }
+
+    // ====================
     // SISTEMA DE UI MEJORADO
     // ====================
 
@@ -488,7 +690,7 @@ class QuintillizasRPG {
                     <h3 style="color: #5864F5; margin-bottom: 20px;">🛍️ TIENDA DE CONDONES</h3>
                     <p style="opacity: 0.8; margin-bottom: 20px;">
                         <strong>Condones Normales (S/.50):</strong> Para momentos íntimos básicos<br>
-                        <strong>Condones 0.01 (S/.200):</strong> Efectos especiales + mayor probabilidad de éxito
+                        <strong>Condones 0.01 (S/.200):</strong> ¡ESPECIAL! +30% éxito, +80% afinidad, hasta 100% de éxito
                     </p>
                     
                     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 30px;">
@@ -507,12 +709,15 @@ class QuintillizasRPG {
                             </div>
                         </div>
                         
-                        <!-- CONDONES 0.01 -->
+                        <!-- CONDONES 0.01 ESPECIALES -->
                         <div style="background: rgba(88, 100, 245, 0.1); border-radius: 15px; padding: 20px; border: 2px solid #5864F5;">
-                            <h4 style="color: #5864F5; margin-bottom: 15px;">💎 Condones 0.01</h4>
+                            <h4 style="color: #5864F5; margin-bottom: 15px;">💎 Condones 0.01 ESPECIALES</h4>
                             <p style="font-size: 0.9rem; opacity: 0.8; margin-bottom: 15px;">
-                                +30% probabilidad de éxito<br>
-                                +50% afinidad obtenida
+                                <strong>¡EFECTOS ESPECIALES!</strong><br>
+                                • +30% probabilidad de éxito<br>
+                                • +80% afinidad obtenida<br>
+                                • Puede superar límite 80% (hasta 100%)<br>
+                                • ¡Se siente MÁS RICO para ellas!
                             </p>
                             <div style="display: flex; gap: 10px; flex-wrap: wrap;">
                                 <button class="card-button" onclick="comprarCondones001RPG(1)" 
@@ -528,7 +733,7 @@ class QuintillizasRPG {
                     </div>
                     
                     <p style="text-align: center; opacity: 0.7; font-size: 0.9rem;">
-                        💡 Consejo: Los condones 0.01 son caros pero aumentan mucho tus probabilidades
+                        💡 <strong>Consejo:</strong> Los condones 0.01 son caros pero valen la pena. ¡Puedes llegar al 100% de éxito!
                     </p>
                 </div>
                 
@@ -542,14 +747,14 @@ class QuintillizasRPG {
                 
                 <!-- INSTRUCCIONES ACTUALIZADAS -->
                 <div style="background: rgba(255, 209, 102, 0.1); border-radius: 20px; padding: 25px; border-left: 5px solid #FFD166;">
-                    <h4 style="color: #FFD166; margin-bottom: 15px;">📖 ¿CÓMO FUNCIONA EL SISTEMA DIFICULTOSO?</h4>
+                    <h4 style="color: #FFD166; margin-bottom: 15px;">📖 ¿CÓMO FUNCIONA EL SISTEMA CON LÍMITES?</h4>
                     <ol style="padding-left: 20px; opacity: 0.8;">
-                        <li><strong>Niveles altos:</strong> Necesitas 1000+ EXP por nivel</li>
-                        <li><strong>Probabilidades bajas:</strong> Los momentos íntimos tienen 10-40% de éxito</li>
-                        <li><strong>Nivel requerido:</strong> Necesitas nivel 3+ para momentos íntimos</li>
-                        <li><strong>Condones especiales:</strong> Los 0.01 dan +30% probabilidad</li>
-                        <li><strong>Precios realistas:</strong> Acordes a lo que ganas (2-3 soles/mazo)</li>
-                        <li><strong>Conquista lenta:</strong> Tendrás que estudiar mucho para cogerlas</li>
+                        <li><strong>Límite de éxito:</strong> Máximo 80% sin condón 0.01</li>
+                        <li><strong>Condón 0.01:</strong> ¡Puede llegar al 100%! +30% éxito</li>
+                        <li><strong>Afinidad:</strong> Contribuye hasta 40% (máx 200 puntos)</li>
+                        <li><strong>Nivel:</strong> Contribuye hasta 30% (máx nivel 10)</li>
+                        <li><strong>Estado de ánimo:</strong> Afecta de -40% a +15%</li>
+                        <li><strong>Condón especial:</strong> +80% afinidad obtenida (antes 50%)</li>
                     </ol>
                 </div>
             </div>
@@ -601,7 +806,7 @@ class QuintillizasRPG {
                     </p>
                     
                     <div style="display: flex; justify-content: space-between; font-size: 0.85rem; opacity: 0.7;">
-                        <div>💝 ${personaje.afinidad >= 0 ? '+' : ''}${personaje.afinidad}</div>
+                        <div>💝 ${personaje.afinidad >= 0 ? '+' : ''}${personaje.afinidad}/200</div>
                         <div>${this.obtenerEmojiEstado(personaje.estadoAnimo)} ${personaje.estadoAnimo.toUpperCase()}</div>
                         <div>🎯 ${personaje.probabilidadBase}%</div>
                     </div>
@@ -628,7 +833,7 @@ class QuintillizasRPG {
         this.guardarPersonajeSeleccionado();
         
         const personaje = this.datosPersonajes[personajeId];
-        this.mostrarNotificacion(`💖 Seleccionaste a ${personaje.nombre} (Nivel ${personaje.nivel})`);
+        this.mostrarNotificacion(`💖 Seleccionaste a ${personaje.nombre} (Nivel ${personaje.nivel}, Afinidad ${personaje.afinidad})`);
         
         this.actualizarVistaConPersonaje();
     }
@@ -661,6 +866,12 @@ class QuintillizasRPG {
         const personaje = this.datosPersonajes[this.personajeSeleccionado];
         const dinero = sistemaEconomia.obtenerDinero();
         
+        // Calcular máximo de afinidad (200) y nivel (10)
+        const maxAfinidad = 200;
+        const maxNivel = 10;
+        const porcentajeAfinidad = Math.min((personaje.afinidad / maxAfinidad) * 100, 100);
+        const porcentajeNivel = Math.min((personaje.nivel / maxNivel) * 100, 100);
+        
         return `
             <div style="max-width: 1000px; margin: 0 auto; padding: 20px;">
                 <!-- CABECERA PERSONAJE -->
@@ -684,7 +895,10 @@ class QuintillizasRPG {
                                 <div>
                                     <div style="color: rgba(255,255,255,0.7); font-size: 0.9rem;">AFINIDAD</div>
                                     <div style="font-size: 2rem; font-weight: bold; color: ${personaje.afinidad >= 0 ? '#4CAF50' : '#FF6B6B'}">
-                                        ${personaje.afinidad >= 0 ? '+' : ''}${personaje.afinidad}
+                                        ${personaje.afinidad >= 0 ? '+' : ''}${personaje.afinidad}/200
+                                    </div>
+                                    <div style="background: rgba(255,255,255,0.1); height: 8px; border-radius: 4px; margin-top: 5px; overflow: hidden;">
+                                        <div style="background: #4CAF50; width: ${porcentajeAfinidad}%; height: 100%;"></div>
                                     </div>
                                 </div>
                                 <div>
@@ -700,9 +914,12 @@ class QuintillizasRPG {
                                     </div>
                                 </div>
                                 <div>
-                                    <div style="color: rgba(255,255,255,0.7); font-size: 0.9rem;">NIVEL REQUERIDO</div>
+                                    <div style="color: rgba(255,255,255,0.7); font-size: 0.9rem;">NIVEL</div>
                                     <div style="font-size: 1.5rem; font-weight: bold; color: #FF1493;">
-                                        ${personaje.nivelRequeridoParaIntimos}
+                                        ${personaje.nivel}/10
+                                    </div>
+                                    <div style="background: rgba(255,255,255,0.1); height: 8px; border-radius: 4px; margin-top: 5px; overflow: hidden;">
+                                        <div style="background: #FF1493; width: ${porcentajeNivel}%; height: 100%;"></div>
                                     </div>
                                 </div>
                             </div>
@@ -728,14 +945,57 @@ class QuintillizasRPG {
                     </div>
                 </div>
                 
+                <!-- SISTEMA DE CONTRIBUCIÓN -->
+                <div style="background: rgba(88, 100, 245, 0.1); border-radius: 15px; padding: 25px; margin-bottom: 30px; border: 2px solid #5864F5;">
+                    <h3 style="color: #5864F5; margin-bottom: 15px;">📊 SISTEMA DE CONTRIBUCIÓN AL ÉXITO</h3>
+                    <p style="opacity: 0.8; margin-bottom: 20px;">
+                        Tu afinidad y nivel contribuyen al éxito de momentos íntimos:
+                    </p>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
+                        <!-- AFINIDAD -->
+                        <div style="background: rgba(76, 175, 80, 0.1); padding: 20px; border-radius: 12px; border: 2px solid #4CAF50;">
+                            <h4 style="color: #4CAF50; margin-bottom: 10px;">💝 AFINIDAD (0-200)</h4>
+                            <div style="font-size: 2rem; font-weight: bold; text-align: center; color: #4CAF50;">
+                                ${personaje.afinidad}/200
+                            </div>
+                            <div style="background: rgba(255,255,255,0.1); height: 10px; border-radius: 5px; margin: 15px 0; overflow: hidden;">
+                                <div style="background: #4CAF50; width: ${porcentajeAfinidad}%; height: 100%;"></div>
+                            </div>
+                            <p style="text-align: center; opacity: 0.8; font-size: 0.9rem;">
+                                Contribuye: <strong>${Math.round(porcentajeAfinidad * 0.4)}%</strong> de 40% máximo
+                            </p>
+                        </div>
+                        
+                        <!-- NIVEL -->
+                        <div style="background: rgba(255, 20, 147, 0.1); padding: 20px; border-radius: 12px; border: 2px solid #FF1493;">
+                            <h4 style="color: #FF1493; margin-bottom: 10px;">⭐ NIVEL (1-10)</h4>
+                            <div style="font-size: 2rem; font-weight: bold; text-align: center; color: #FF1493;">
+                                ${personaje.nivel}/10
+                            </div>
+                            <div style="background: rgba(255,255,255,0.1); height: 10px; border-radius: 5px; margin: 15px 0; overflow: hidden;">
+                                <div style="background: #FF1493; width: ${porcentajeNivel}%; height: 100%;"></div>
+                            </div>
+                            <p style="text-align: center; opacity: 0.8; font-size: 0.9rem;">
+                                Contribuye: <strong>${Math.round(porcentajeNivel * 0.3)}%</strong> de 30% máximo
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div style="background: rgba(255, 209, 102, 0.1); padding: 15px; border-radius: 10px; text-align: center;">
+                        <p style="color: #FFD166; font-weight: bold;">
+                            💎 Con condón 0.01: +30% éxito, límite 100% | Sin condón: límite 80%
+                        </p>
+                    </div>
+                </div>
+                
                 <!-- MOMENTOS ÍNTIMOS (SOLO SI TIENE NIVEL SUFICIENTE) -->
                 ${personaje.nivel >= personaje.nivelRequeridoParaIntimos ? `
                     <div style="background: rgba(255, 20, 147, 0.1); border-radius: 15px; padding: 25px; margin-bottom: 30px; border: 2px solid #FF1493;">
                         <h3 style="color: #FF1493; margin-bottom: 15px;">💖 MOMENTOS ÍNTIMOS (🔞 +18)</h3>
                         <p style="opacity: 0.8; margin-bottom: 20px;">
                             Intenta momentos íntimos con ${personaje.nombre.split(' ')[0]}. 
-                            <strong>Nivel requerido:</strong> ${personaje.nivelRequeridoParaIntimos}+ | 
-                            <strong>Tu nivel:</strong> ${personaje.nivel}
+                            <strong>Límite normal:</strong> 80% | <strong>Con condón 0.01:</strong> 100%
                         </p>
                         
                         <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 15px; margin-bottom: 20px;">
@@ -745,6 +1005,9 @@ class QuintillizasRPG {
                                 const tieneCondonesEspeciales = this.condones001 >= momento.condones001Requeridos;
                                 const puedeIntentar = tieneCondonesNormales && tieneCondonesEspeciales;
                                 const nivelSuficiente = personaje.nivel >= (momento.nivelRequerido || 1);
+                                
+                                // Mostrar límite con/sin condón
+                                const limiteMostrar = momento.condones001Requeridos > 0 ? "100%" : "80%";
                                 
                                 return `
                                     <div style="background: rgba(255,255,255,0.05); border-radius: 12px; padding: 15px; border: 1px solid ${personaje.color}50;">
@@ -764,7 +1027,7 @@ class QuintillizasRPG {
                                             <div style="background: linear-gradient(135deg, #FF1493, #FF6B6B); width: ${probabilidadReal}%; height: 100%;"></div>
                                         </div>
                                         <p style="text-align: center; font-size: 0.9rem; margin-bottom: 10px; color: #FFD166;">
-                                            Éxito: ${probabilidadReal}% ${momento.nivelRequerido ? `| Nivel ${momento.nivelRequerido}+` : ''}
+                                            Éxito: ${probabilidadReal}% (Límite: ${limiteMostrar})${momento.nivelRequerido ? ` | Nivel ${momento.nivelRequerido}+` : ''}
                                         </p>
                                         <button class="card-button" 
                                                 onclick="intentarMomentoIntimoRPG('${this.personajeSeleccionado}', '${momento.id}')"
@@ -784,7 +1047,7 @@ class QuintillizasRPG {
                                 Condones disponibles: ${this.condones}🛒 | Condones 0.01: ${this.condones001}💎
                             </p>
                             <p style="text-align: center; opacity: 0.7; font-size: 0.8rem; margin-top: 5px;">
-                                💎 Los condones 0.01 dan +30% probabilidad y +50% afinidad
+                                💎 <strong>Condón 0.01:</strong> +30% éxito, +80% afinidad, límite 100%
                             </p>
                         </div>
                     </div>
@@ -865,8 +1128,11 @@ class QuintillizasRPG {
                     <h3 style="color: #FFD166; margin-bottom: 20px;">📈 ESTADÍSTICAS DETALLADAS</h3>
                     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
                         <div style="background: rgba(255,255,255,0.08); padding: 15px; border-radius: 10px;">
-                            <div style="color: ${personaje.color}; font-size: 0.9rem;">PROB. BASE</div>
-                            <div style="font-size: 1.5rem; font-weight: bold;">${personaje.probabilidadBase}%</div>
+                            <div style="color: ${personaje.color}; font-size: 0.9rem;">CONTRIBUCIÓN</div>
+                            <div style="font-size: 1.5rem; font-weight: bold;">
+                                ${Math.round((personaje.afinidad/200)*40 + (personaje.nivel/10)*30)}%
+                            </div>
+                            <div style="font-size: 0.8rem; opacity: 0.7;">Afinidad+Nivel</div>
                         </div>
                         <div style="background: rgba(255,255,255,0.08); padding: 15px; border-radius: 10px;">
                             <div style="color: ${personaje.color}; font-size: 0.9rem;">VIDEOS</div>
@@ -884,146 +1150,6 @@ class QuintillizasRPG {
                 </div>
             </div>
         `;
-    }
-
-    // ====================
-    // NUEVO: SISTEMA DE MOMENTOS ÍNTIMOS CON CONDONES ESPECIALES
-    // ====================
-
-    intentarMomentoIntimo(personajeId, momentoId) {
-        const personaje = this.datosPersonajes[personajeId];
-        const momento = personaje.momentosIntimos.find(m => m.id === momentoId);
-        
-        if (!momento) {
-            this.mostrarNotificacion('❌ Momento íntimo no encontrado');
-            return false;
-        }
-        
-        // Verificar nivel requerido
-        if (personaje.nivel < (momento.nivelRequerido || 1)) {
-            this.mostrarNotificacion(`❌ Necesitas nivel ${momento.nivelRequerido} para este momento íntimo`);
-            return false;
-        }
-        
-        // Verificar condones normales
-        if (this.condones < momento.condonesRequeridos) {
-            this.mostrarNotificacion(`❌ Necesitas ${momento.condonesRequeridos} condones normales`);
-            return false;
-        }
-        
-        // Verificar condones especiales si son requeridos
-        if (this.condones001 < momento.condones001Requeridos) {
-            this.mostrarNotificacion(`❌ Necesitas ${momento.condones001Requeridos} condones 0.01`);
-            return false;
-        }
-        
-        // Preguntar si usar condón especial si está disponible pero no requerido
-        let usarCondonEspecial = false;
-        if (this.condones001 > 0 && momento.condones001Requeridos === 0) {
-            usarCondonEspecial = confirm(`¿Quieres usar un condón 0.01? (+30% probabilidad, +50% afinidad)\n\nTienes: ${this.condones001} condones 0.01`);
-            
-            if (usarCondonEspecial) {
-                momento.condones001Requeridos = 1; // Temporalmente requerido
-            }
-        }
-        
-        // Calcular probabilidad real
-        const probabilidadReal = this.calcularProbabilidadMomento(personaje, momento, usarCondonEspecial);
-        console.log(`🎯 Probabilidad para ${momento.nombre}: ${probabilidadReal}% ${usarCondonEspecial ? '(con condón 0.01)' : ''}`);
-        
-        const exito = Math.random() * 100 < probabilidadReal;
-        
-        if (exito) {
-            // ÉXITO
-            this.condones -= momento.condonesRequeridos;
-            if (usarCondonEspecial || momento.condones001Requeridos > 0) {
-                this.condones001 -= momento.condones001Requeridos;
-            }
-            this.guardarCondones();
-            this.guardarCondones001();
-            
-            let afinidadGanada = momento.afinidad;
-            let expGanada = momento.exp;
-            
-            // Bonus por condón especial
-            if (usarCondonEspecial || momento.condones001Requeridos > 0) {
-                afinidadGanada = Math.round(afinidadGanada * 1.5); // +50%
-                expGanada = Math.round(expGanada * 1.3); // +30%
-                this.mostrarNotificacion(`💎 ¡Efecto condón 0.01! +50% afinidad, +30% EXP`);
-            }
-            
-            this.agregarEXP(personajeId, expGanada);
-            personaje.afinidad += afinidadGanada;
-            personaje.estadoAnimo = 'feliz';
-            
-            console.log(`✅ ¡${momento.nombre} exitoso con ${personaje.nombre}!`);
-            this.mostrarNotificacion(`💖 ¡${momento.nombre} exitoso! +${afinidadGanada} afinidad, +${expGanada} EXP`);
-            
-            this.cargarVideoMomentoIntimo(personajeId, momento);
-            
-            return true;
-        } else {
-            // FALLO
-            this.condones -= momento.condonesRequeridos;
-            if (usarCondonEspecial || momento.condones001Requeridos > 0) {
-                this.condones001 -= momento.condones001Requeridos;
-            }
-            this.guardarCondones();
-            this.guardarCondones001();
-            
-            personaje.estadoAnimo = 'enojada';
-            personaje.afinidad -= Math.floor(momento.afinidad / 3);
-            
-            console.log(`❌ ${momento.nombre} falló con ${personaje.nombre}`);
-            this.mostrarNotificacion(`😠 ${momento.nombre} falló. ${personaje.nombre} se enojó.`);
-            
-            this.actualizarVistaConPersonaje();
-            
-            return false;
-        }
-    }
-
-    calcularProbabilidadMomento(personaje, momento, usarCondonEspecial = false) {
-        let probabilidad = momento.probabilidadBase;
-        
-        // Ajustes por nivel (más difícil de subir)
-        probabilidad += (personaje.nivel - 1) * 5; // REDUCIDO: 5% por nivel en lugar de 10%
-        
-        // Ajustes por afinidad
-        probabilidad += personaje.afinidad * 0.5; // REDUCIDO: Menos impacto de afinidad
-        
-        // Ajustes por estado de ánimo
-        const ajustesEstado = {
-            'feliz': 20,    // REDUCIDO
-            'neutral': 0,
-            'triste': -30,  // REDUCIDO
-            'enojada': -50, // REDUCIDO
-            'tsundere': -40,
-            'tímida': -20,
-            'energica': 15,
-            'glotona': 18
-        };
-        
-        probabilidad += ajustesEstado[personaje.estadoAnimo] || 0;
-        
-        // Bonus por condón especial
-        if (usarCondonEspecial || momento.condones001Requeridos > 0) {
-            probabilidad += 30; // +30% por condón 0.01
-        }
-        
-        // Límites
-        return Math.max(5, Math.min(95, Math.round(probabilidad)));
-    }
-
-    cargarVideoMomentoIntimo(personajeId, momento) {
-        const personaje = this.datosPersonajes[personajeId];
-        
-        this.mostrarReproductorVideo({
-            driveId: momento.videoId,
-            titulo: `${momento.nombre} - ${personaje.nombre}`,
-            duracion: '3:00',
-            esExplicito: true
-        }, personaje);
     }
 
     // ====================
@@ -1088,12 +1214,23 @@ class QuintillizasRPG {
         }, personaje);
     }
 
+    cargarVideoMomentoIntimo(personajeId, momento) {
+        const personaje = this.datosPersonajes[personajeId];
+        
+        this.mostrarReproductorVideo({
+            driveId: momento.videoId,
+            titulo: `${momento.nombre} - ${personaje.nombre}`,
+            duracion: '3:00',
+            esExplicito: true
+        }, personaje);
+    }
+
     // ====================
     // SISTEMA DE CONDONES MEJORADO
     // ====================
 
     comprarCondones(cantidad) {
-        const costoPorCondon = 50; // AUMENTADO: 50 soles por condón
+        const costoPorCondon = 50;
         const costoTotal = cantidad * costoPorCondon;
         
         const dineroActual = sistemaEconomia.obtenerDinero();
@@ -1118,7 +1255,7 @@ class QuintillizasRPG {
     }
 
     comprarCondones001(cantidad) {
-        const costoPorCondon = 200; // MUY CAROS: 200 soles por condón 0.01
+        const costoPorCondon = 200;
         const costoTotal = cantidad * costoPorCondon;
         
         const dineroActual = sistemaEconomia.obtenerDinero();
@@ -1133,7 +1270,7 @@ class QuintillizasRPG {
         this.guardarCondones001();
         
         console.log(`💎 Comprados ${cantidad} condones 0.01 por S/.${costoTotal}`);
-        this.mostrarNotificacion(`💎 +${cantidad} condones 0.01 comprados (+30% éxito, +50% afinidad)`);
+        this.mostrarNotificacion(`💎 +${cantidad} condones 0.01 comprados (+30% éxito, +80% afinidad, límite 100%)`);
         
         if (this.personajeSeleccionado) {
             this.actualizarVistaConPersonaje();
@@ -1340,7 +1477,6 @@ class QuintillizasRPG {
     }
 
     seleccionarTipoCondon(tipo) {
-        // Esta función podría usarse para seleccionar tipo de condón antes de intentar momento íntimo
         console.log(`Tipo de condón seleccionado: ${tipo}`);
         return tipo;
     }
@@ -1379,10 +1515,9 @@ const quintillizasRPG = new QuintillizasRPG();
 // Inicializar al cargar
 document.addEventListener('DOMContentLoaded', function() {
     quintillizasRPG.inicializar();
-    console.log('🎮 RPG Quintillizas - Sistema dificultoso listo');
-    console.log('🔞 Momentos íntimos con títulos explícitos');
-    console.log('💎 Sistema de condones 0.01 activo (+30% éxito, +50% afinidad)');
-    console.log('📈 Niveles difíciles: 1000+ EXP por nivel');
-    console.log('🎯 Probabilidades bajas: 10-40% de éxito en momentos íntimos');
-    console.log('💰 Precios realistas: Acordes a lo que ganas estudiando');
+    console.log('🎮 RPG Quintillizas - Sistema con límites activado');
+    console.log('📊 Límites: Afinidad 0-200 | Nivel 1-10');
+    console.log('🎯 Éxito máximo: 80% sin condón | 100% con condón 0.01');
+    console.log('💎 Condón 0.01: +30% éxito, +80% afinidad, se siente más rico');
+    console.log('💖 Contribución: Afinidad (40% max) + Nivel (30% max) + Estado (+/-) + Condón (+30%)');
 });
