@@ -1,4 +1,3 @@
-
 // ================================================
 // SISTEMA PRINCIPAL DE NAVEGACIÓN Y QUIZ
 // ================================================
@@ -940,7 +939,7 @@ function crearReproductorASMRUI(asmrInfo) {
                         <div style="color: #9C27B0; font-size: 0.9rem;">🎤 Tipo de Voz</div>
                         <div style="font-weight: bold;">${asmrInfo.tipoVoz}</div>
                     </div>
-                    <div style="background: rgba(255, 255, 255, 0.08); padding: 15px; border-radius: 10px;">
+                    <div style="background: rgba(255, 255, 255, 0.08); padding: 15px; border-radius= 10px;">
                         <div style="color: #9C27B0; font-size: 0.9rem;">🏷️ Tags</div>
                         <div style="font-weight: bold;">${asmrInfo.tags.join(', ')}</div>
                     </div>
@@ -1341,6 +1340,8 @@ function verificarRespuesta(opcionSeleccionada, posicionCorrecta) {
     // Actualizar contadores
     if (correcta) {
         aciertos++;
+        // DAR EXP AL RPG POR PALABRA CORRECTA
+        darExpPorPalabraCorrecta(true);
     } else {
         errores++;
     }
@@ -1387,6 +1388,9 @@ function finalizarQuiz() {
     const porcentaje = Math.round((aciertos / palabrasActuales.length) * 100);
     
     console.log(`Quiz finalizado: ${aciertos} aciertos de ${palabrasActuales.length} = ${porcentaje}%`);
+    
+    // DAR EXP ADICIONAL POR COMPLETAR MAZO
+    darExpPorCompletarMazo(porcentaje);
     
     // OBTENER DINERO ANTES DE ACTUALIZAR
     const dineroAntes = sistemaEconomia.obtenerDinero();
@@ -1494,6 +1498,104 @@ function repetirQuiz() {
 }
 
 // ====================
+// SISTEMA EXP RPG EN QUIZ
+// ====================
+
+function darExpPorPalabraCorrecta(esCorrecta) {
+    if (!esCorrecta) return false;
+    
+    // Verificar si el RPG está cargado
+    if (typeof quintillizasRPG === 'undefined' || 
+        !quintillizasRPG.personajeSeleccionado) {
+        return false;
+    }
+    
+    // Dar EXP por cada palabra correcta
+    const expPorPalabra = 20; // EXP por cada acierto
+    
+    const expDada = quintillizasRPG.agregarEXP(
+        quintillizasRPG.personajeSeleccionado, 
+        expPorPalabra
+    );
+    
+    if (expDada) {
+        const personaje = quintillizasRPG.datosPersonajes[quintillizasRPG.personajeSeleccionado];
+        mostrarNotificacionQuiz(`💖 +${expPorPalabra} EXP para ${personaje.nombre.split(' ')[0]}`);
+    }
+    
+    return expDada;
+}
+
+function darExpPorCompletarMazo(porcentaje) {
+    // Verificar si el RPG está cargado
+    if (typeof quintillizasRPG === 'undefined' || 
+        !quintillizasRPG.personajeSeleccionado) {
+        return false;
+    }
+    
+    // Dar EXP adicional por completar mazo (basado en porcentaje)
+    let expAdicional = 0;
+    
+    if (porcentaje >= 100) {
+        expAdicional = 100; // +100 EXP por mazo perfecto
+    } else if (porcentaje >= 90) {
+        expAdicional = 75;
+    } else if (porcentaje >= 80) {
+        expAdicional = 50;
+    } else if (porcentaje >= 70) {
+        expAdicional = 30;
+    } else if (porcentaje >= 50) {
+        expAdicional = 15;
+    }
+    
+    if (expAdicional > 0) {
+        const expDada = quintillizasRPG.agregarEXP(
+            quintillizasRPG.personajeSeleccionado, 
+            expAdicional
+        );
+        
+        if (expDada) {
+            const personaje = quintillizasRPG.datosPersonajes[quintillizasRPG.personajeSeleccionado];
+            mostrarNotificacionQuiz(`🎯 +${expAdicional} EXP por completar mazo`);
+        }
+        
+        return expDada;
+    }
+    
+    return false;
+}
+
+function mostrarNotificacionQuiz(mensaje) {
+    // Crear notificación para EXP
+    const notif = document.createElement('div');
+    notif.textContent = mensaje;
+    notif.style.cssText = `
+        position: fixed;
+        top: 150px;
+        right: 20px;
+        background: linear-gradient(135deg, #FF1493, #FF69B4);
+        color: white;
+        padding: 12px 20px;
+        border-radius: 50px;
+        font-weight: bold;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+        z-index: 1002;
+        animation: slideIn 0.3s ease, fadeOut 0.3s ease 2s forwards;
+        font-size: 1rem;
+        border: 2px solid white;
+        white-space: nowrap;
+    `;
+    
+    document.body.appendChild(notif);
+    
+    setTimeout(() => {
+        if (notif.parentNode) {
+            notif.parentNode.removeChild(notif);
+        }
+    }, 2500);
+}
+
+// ====================
 // FUNCIONES AUXILIARES
 // ====================
 
@@ -1562,4 +1664,5 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log('🏠 Botón casa configurado');
     console.log('💰 Sistema de dinero activo');
     console.log('🎮 Sistema RPG Quintillizas activo');
+    console.log('💖 EXP por quiz activado: +20 EXP/palabra correcta, +15-100 EXP/mazo completo');
 });
