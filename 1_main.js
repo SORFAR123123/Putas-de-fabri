@@ -390,12 +390,13 @@ function crearContenedoresMangas() {
     
     for (let i = 1; i <= 10; i++) {
         const contenedorData = obtenerContenedorManga(i);
+        const nombre = contenedorData.nombre || `CONTAINER ${i}`; // USAR NOMBRE PERSONALIZADO
         const desc = contenedorData.descripcion || '5 sub-contenedores con vocabulario y manga';
         
         html += `
             <div class="contenedor-item" onclick="cargarSubcontenedores(${i})">
                 <div class="contenedor-img" style="background-image: url('${contenedorData.imagen || obtenerImagenContenedor(i)}')"></div>
-                <div class="contenedor-numero">CONTAINER ${i}</div>
+                <div class="contenedor-numero">${nombre}</div> <!-- USAR NOMBRE AQUÍ -->
                 <p>${desc}</p>
                 <div class="card-button">Abrir</div>
             </div>
@@ -408,23 +409,19 @@ function crearContenedoresMangas() {
 
 function crearContenedoresVideos() {
     let html = '<h2 style="text-align: center; margin-bottom: 30px; color: #FFD166;">🎬 CONTENEDORES DE VIDEOS</h2>';
-    html += '<p style="text-align: center; margin-bottom: 30px; opacity: 0.8;">Videos privados con timestamps en Google Drive</p>';
     html += '<div class="manga-contenedores">';
     
-    const contenedores = obtenerContenedoresDisponibles();
-    const totalContenedores = Object.keys(contenedores).length || 3;
-    
-    for (let i = 1; i <= Math.max(totalContenedores, 10); i++) {
+    for (let i = 1; i <= 10; i++) {
         const contenedorData = obtenerContenedorVideo(i);
-        const tieneVideos = contenedores[i] && contenedores[i].length > 0;
-        const desc = contenedorData.descripcion || (tieneVideos ? contenedores[i].length + ' sub-contenedores con videos' : 'Sin videos aún');
+        const nombre = contenedorData.nombre || `VIDEO CONTAINER ${i}`; // USAR NOMBRE PERSONALIZADO
+        const desc = contenedorData.descripcion || 'Videos privados con timestamps';
         
         html += `
             <div class="contenedor-item" onclick="cargarSubcontenedoresVideos(${i})">
                 <div class="contenedor-img" style="background-image: url('${contenedorData.imagen || obtenerImagenContenedor(i)}')"></div>
-                <div class="contenedor-numero">VIDEO CONTAINER ${i}</div>
+                <div class="contenedor-numero">${nombre}</div> <!-- USAR NOMBRE AQUÍ -->
                 <p>${desc}</p>
-                <div class="card-button">${tieneVideos ? 'Ver videos' : 'Vacío'}</div>
+                <div class="card-button">Ver videos</div>
             </div>
         `;
     }
@@ -1225,20 +1222,21 @@ function cargarSubcontenedores(contenedor) {
 
 function crearSubcontenedoresUI(contenedor) {
     let html = `<h2 style="text-align: center; margin-bottom: 30px; color: #FFD166;">
-        📦 CONTENEDOR ${contenedor} - SUB-CONTENEDORES
+        📦 ${obtenerNombreContenedor('manga', contenedor)} - SUB-CONTENEDORES
     </h2>`;
     html += '<div class="subcontenedores-grid">';
     
     for (let i = 1; i <= 5; i++) {
+        const subData = obtenerSubcontenedorManga(contenedor, i);
+        const nombre = subData.nombre || `Sub-contenedor ${i}`; // USAR NOMBRE PERSONALIZADO
+        const desc = subData.descripcion || '10 mazos de vocabulario';
         const tieneContenido = tieneVocabularioEnSubcontenedor(contenedor, i);
         const tieneManga = existeManga(contenedor, i);
-        const subData = obtenerSubcontenedorManga(contenedor, i);
-        const desc = subData.descripcion || '10 mazos de vocabulario';
         
         html += `
             <div class="subcontenedor-item">
                 <div class="subcontenedor-img" style="background-image: url('${subData.imagen || obtenerImagenSubcontenedor(contenedor, i)}')"></div>
-                <h3>Sub-contenedor ${i}</h3>
+                <h3>${nombre}</h3> <!-- USAR NOMBRE AQUÍ -->
                 <p>${desc}</p>
                 ${tieneContenido ? '' : '<p style="color: #FF6B6B; font-size: 0.9rem;">(Sin vocabulario)</p>'}
                 
