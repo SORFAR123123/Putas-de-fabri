@@ -9,7 +9,7 @@ const sistemaDescriptivo = {
     mangas: {
         // CONTENEDORES PRINCIPALES (1-10)
         contenedores: {
-            1: { imagen: '', descripcion: '', tipo: '' },
+            1: { imagen: 'https://pbs.twimg.com/media/GztU8Y3XsAA5Yzm?format=png&name=small', descripcion: 'Putas culonas', tipo: '' },
             2: { imagen: '', descripcion: '', tipo: '' },
             3: { imagen: '', descripcion: '', tipo: '' },
             4: { imagen: '', descripcion: '', tipo: '' },
