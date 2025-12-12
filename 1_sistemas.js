@@ -30,8 +30,8 @@ class SistemaEconomia {
         const clave = `${contenedor}_${subcontenedor}_${mazo}`;
         const progresoAnterior = this.progreso[clave] || 0;
         
-        console.log(`Actualizando progreso: ${clave}`);
-        console.log(`Progreso anterior: ${progresoAnterior}%, Nuevo: ${porcentaje}%`);
+        console.log(`🎯 Actualizando progreso: ${clave}`);
+        console.log(`📊 Progreso anterior: ${progresoAnterior}%, Nuevo: ${porcentaje}%`);
         
         // SIEMPRE actualizar si es mejor
         if (porcentaje >= progresoAnterior) {
@@ -51,47 +51,64 @@ class SistemaEconomia {
     }
 
     // ====================
-    // CÁLCULO DE RECOMPENSAS - FIJO Y SIEMPRE FUNCIONA
+    // CÁLCULO DE RECOMPENSAS - SIEMPRE FUNCIONA
     // ====================
 
     calcularRecompensa(contenedor, subcontenedor, mazo, porcentaje, progresoAnterior) {
         const clave = `${contenedor}_${subcontenedor}_${mazo}`;
         
-        console.log(`🎯 Calculando recompensa para: ${clave}`);
-        console.log(`📊 De ${progresoAnterior}% a ${porcentaje}%`);
+        console.log(`💰 Calculando recompensa para: ${clave}`);
+        console.log(`📈 De ${progresoAnterior}% a ${porcentaje}%`);
         
-        // FÓRMULA FIJA QUE SIEMPRE DA DINERO:
         let recompensa = 0;
         
-        // 1. SI ES EL PRIMER INTENTO (progresoAnterior = 0)
-        if (progresoAnterior === 0 && porcentaje > 0) {
-            if (porcentaje === 100) {
-                recompensa = 2.00;  // 2 soles por 100% en primer intento
+        // REGLA PRINCIPAL: SIEMPRE DAR DINERO CUANDO HAY PROGRESO
+        if (porcentaje > 0) {
+            // RECOMPENSA BASE POR INTENTAR
+            recompensa = 0.50;
+            
+            // BONIFICACIÓN POR PORCENTAJE
+            if (porcentaje >= 100) {
+                recompensa += 1.50; // Total: 2.00
+                console.log(`🎉 BONIFICACIÓN POR 100%: +1.50`);
+            } else if (porcentaje >= 90) {
+                recompensa += 1.00; // Total: 1.50
+            } else if (porcentaje >= 80) {
+                recompensa += 0.75; // Total: 1.25
+            } else if (porcentaje >= 70) {
+                recompensa += 0.50; // Total: 1.00
+            } else if (porcentaje >= 60) {
+                recompensa += 0.25; // Total: 0.75
             } else if (porcentaje >= 50) {
-                recompensa = 1.00;  // 1 sol por 50-99%
-            } else {
-                recompensa = 0.50;  // 0.5 soles por menos de 50%
+                recompensa += 0.15; // Total: 0.65
             }
-        }
-        // 2. SI ES UN MEJOR INTENTO
-        else if (porcentaje > progresoAnterior) {
-            if (porcentaje === 100) {
-                recompensa = 2.00;  // Siempre 2 soles por llegar al 100%
-            } else {
-                recompensa = 0.25;  // 0.25 soles por mejorar
+            
+            // BONIFICACIÓN POR MEJORA
+            if (porcentaje > progresoAnterior) {
+                const mejora = porcentaje - progresoAnterior;
+                const bonusMejora = mejora * 0.01; // 0.01 soles por cada 1% de mejora
+                recompensa += bonusMejora;
+                console.log(`📈 Bonificación por mejora: +${bonusMejora.toFixed(2)}`);
             }
         }
         
         // Redondear a 2 decimales
         recompensa = Math.round(recompensa * 100) / 100;
         
-        // DAR LA RECOMPENSA SI HAY ALGO
+        // DAR LA RECOMPENSA SIEMPRE QUE SEA POSITIVA
         if (recompensa > 0) {
             this.agregarDinero(recompensa);
-            console.log(`💰 ¡RECOMPENSA OBTENIDA! ${recompensa} soles`);
+            console.log(`💰 ¡RECOMPENSA TOTAL: ${recompensa} soles!`);
+            
+            // También mostrar notificación
+            setTimeout(() => {
+                this.mostrarNotificacion(`+${recompensa.toFixed(2)} soles por mazo`);
+            }, 500);
         } else {
-            console.log(`⚠️ No hay recompensa esta vez`);
+            console.log(`⚠️ Recompensa calculada: 0 (no debería pasar)`);
         }
+        
+        return recompensa;
     }
 
     // ====================
