@@ -30,7 +30,7 @@ class QuintillizasRPG {
             'ichika': {
                 nombre: 'Ichika Nakano',
                 color: '#FF6B8B',
-                imagen: 'https://i.imgur.com/y6lOjPq.png', // REEMPLAZA CON TU IMAGEN
+                imagen: 'https://pbs.twimg.com/media/G7qfcGRWkAAV74w?format=png&name=small', // REEMPLAZA CON TU IMAGEN
                 nivel: 1,
                 exp: 0,
                 expNecesaria: 100,
@@ -49,7 +49,7 @@ class QuintillizasRPG {
             'nino': {
                 nombre: 'Nino Nakano',
                 color: '#FFB347',
-                imagen: 'https://i.imgur.com/z4kLQxM.png', // REEMPLAZA CON TU IMAGEN
+                imagen: 'https://pbs.twimg.com/media/G7qfpGZXAAAib4A?format=png&name=small', // REEMPLAZA CON TU IMAGEN
                 nivel: 1,
                 exp: 0,
                 expNecesaria: 100,
@@ -68,7 +68,7 @@ class QuintillizasRPG {
             'miku': {
                 nombre: 'Miku Nakano',
                 color: '#6A5ACD',
-                imagen: 'https://i.imgur.com/p9QmNrL.png', // REEMPLAZA CON TU IMAGEN
+                imagen: 'https://pbs.twimg.com/media/G7qfrrKWsAAv6ZT?format=png&name=small', // REEMPLAZA CON TU IMAGEN
                 nivel: 1,
                 exp: 0,
                 expNecesaria: 100,
@@ -87,7 +87,7 @@ class QuintillizasRPG {
             'yotsuba': {
                 nombre: 'Yotsuba Nakano',
                 color: '#4CAF50',
-                imagen: 'https://i.imgur.com/7tGf3Yj.png', // REEMPLAZA CON TU IMAGEN
+                imagen: 'https://pbs.twimg.com/media/G7qfupkXUAAX0aS?format=png&name=small', // REEMPLAZA CON TU IMAGEN
                 nivel: 1,
                 exp: 0,
                 expNecesaria: 100,
@@ -106,7 +106,7 @@ class QuintillizasRPG {
             'itsuki': {
                 nombre: 'Itsuki Nakano',
                 color: '#FFD166',
-                imagen: 'https://i.imgur.com/qrSTvWk.png', // REEMPLAZA CON TU IMAGEN
+                imagen: 'https://pbs.twimg.com/media/G7qfxnsX0AIbJK1?format=png&name=small', // REEMPLAZA CON TU IMAGEN
                 nivel: 1,
                 exp: 0,
                 expNecesaria: 100,
