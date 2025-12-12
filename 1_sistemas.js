@@ -1,29 +1,365 @@
 // ================================================
-// SISTEMA COMPLETO: DINERO + REPRODUCTOR + TIMESTAMPS FUNCIONALES
+// SISTEMA COMPLETO: DINERO + REPRODUCTOR + TIMESTAMPS + MISIONES + PALABRAS DIFÍCILES
 // ================================================
 
 class SistemaEconomia {
     constructor() {
         this.dinero = this.cargarDinero() || 0;
         this.progreso = this.cargarProgreso() || {};
+        this.palabrasDificiles = this.cargarPalabrasDificiles() || {};
+        this.misionesDiarias = this.cargarMisionesDiarias() || this.inicializarMisionesDiarias();
+        this.misionesSemanales = this.cargarMisionesSemanales() || this.inicializarMisionesSemanales();
+        this.ultimoReinicio = this.cargarUltimoReinicio() || new Date().toISOString();
+        this.videosEspeciales = this.obtenerVideosEspeciales();
+        this.verificarReinicioAutomatico();
     }
 
     // ====================
-    // DINERO
+    // NUEVO: SISTEMA DE PALABRAS DIFÍCILES
+    // ====================
+
+    marcarPalabraComoDificil(contenedor, subcontenedor, mazo, palabraIndex, palabraData) {
+        const clave = `${contenedor}_${subcontenedor}_${mazo}`;
+        
+        if (!this.palabrasDificiles[clave]) {
+            this.palabrasDificiles[clave] = [];
+        }
+        
+        // Verificar si ya está marcada
+        const yaMarcada = this.palabrasDificiles[clave].some(p => 
+            p.index === palabraIndex && 
+            p.japones === palabraData.japones
+        );
+        
+        if (!yaMarcada) {
+            this.palabrasDificiles[clave].push({
+                index: palabraIndex,
+                ...palabraData,
+                fechaMarcado: new Date().toISOString()
+            });
+            
+            this.guardarPalabrasDificiles();
+            this.mostrarNotificacion(`⚠️ Palabra marcada como difícil: ${palabraData.japones}`);
+            return true;
+        }
+        
+        return false;
+    }
+
+    obtenerPalabrasDificilesMazo(contenedor, subcontenedor, mazo) {
+        const clave = `${contenedor}_${subcontenedor}_${mazo}`;
+        return this.palabrasDificiles[clave] || [];
+    }
+
+    obtenerMazosConPalabrasDificiles() {
+        const mazosConDificiles = {};
+        
+        Object.keys(this.palabrasDificiles).forEach(clave => {
+            const palabras = this.palabrasDificiles[clave];
+            if (palabras.length > 0) {
+                mazosConDificiles[clave] = palabras;
+            }
+        });
+        
+        return mazosConDificiles;
+    }
+
+    crearMazoTemporalDificil(contenedor, subcontenedor, mazo) {
+        const clave = `${contenedor}_${subcontenedor}_${mazo}`;
+        const palabras = this.palabrasDificiles[clave] || [];
+        
+        if (palabras.length === 0) {
+            return null;
+        }
+        
+        // Convertir palabras difíciles a formato de quiz
+        const mazoTemporal = palabras.map(p => ({
+            japones: p.japones,
+            lectura: p.lectura,
+            opciones: p.opciones || [
+                p.espanol,
+                "Opción incorrecta 1",
+                "Opción incorrecta 2",
+                "Opción incorrecta 3"
+            ],
+            respuesta: 0,
+            esPalabraDificil: true,
+            fechaMarcado: p.fechaMarcado
+        }));
+        
+        return mazoTemporal;
+    }
+
+    limpiarPalabrasDificilesMazo(contenedor, subcontenedor, mazo) {
+        const clave = `${contenedor}_${subcontenedor}_${mazo}`;
+        if (this.palabrasDificiles[clave]) {
+            delete this.palabrasDificiles[clave];
+            this.guardarPalabrasDificiles();
+            return true;
+        }
+        return false;
+    }
+
+    // ====================
+    // NUEVO: SISTEMA DE MISIONES DIARIAS/SEMANALES
+    // ====================
+
+    inicializarMisionesDiarias() {
+        return {
+            completados: 0,
+            fecha: new Date().toISOString().split('T')[0],
+            misiones: [
+                { id: 'completar_1_mazo', objetivo: 1, completado: 0, recompensa: 5, descripcion: "Completar 1 mazo al 100%" },
+                { id: 'completar_3_mazos', objetivo: 3, completado: 0, recompensa: 15, descripcion: "Completar 3 mazos al 100%" },
+                { id: 'completar_5_mazos', objetivo: 5, completado: 0, recompensa: 30, descripcion: "Completar 5 mazos al 100%" },
+                { id: 'ganar_50_soles', objetivo: 50, completado: 0, recompensa: 20, descripcion: "Ganar 50 soles estudiando" },
+                { id: 'practicar_30_min', objetivo: 30, completado: 0, recompensa: 25, descripcion: "Practicar 30 minutos" }
+            ]
+        };
+    }
+
+    inicializarMisionesSemanales() {
+        return {
+            completados: 0,
+            semana: this.obtenerNumeroSemana(),
+            misiones: [
+                { id: 'completar_20_mazos', objetivo: 20, completado: 0, recompensa: 100, descripcion: "Completar 20 mazos al 100%" },
+                { id: 'completar_todas_misiones_diarias', objetivo: 5, completado: 0, recompensa: 150, descripcion: "Completar todas las misiones diarias" },
+                { id: 'ganar_200_soles', objetivo: 200, completado: 0, recompensa: 200, descripcion: "Ganar 200 soles" },
+                { id: 'subir_nivel_rpg_3', objetivo: 3, completado: 0, recompensa: 300, descripcion: "Subir 3 niveles en el RPG" },
+                { id: 'practicar_5_horas', objetivo: 300, completado: 0, recompensa: 250, descripcion: "Practicar 5 horas esta semana" }
+            ]
+        };
+    }
+
+    obtenerNumeroSemana() {
+        const fecha = new Date();
+        const inicioAno = new Date(fecha.getFullYear(), 0, 1);
+        const diferenciaMs = fecha - inicioAno;
+        const dias = Math.floor(diferenciaMs / (1000 * 60 * 60 * 24));
+        return Math.ceil((dias + inicioAno.getDay() + 1) / 7);
+    }
+
+    actualizarMisionDiaria(idMision, cantidad = 1) {
+        const hoy = new Date().toISOString().split('T')[0];
+        
+        // Verificar si es nuevo día
+        if (this.misionesDiarias.fecha !== hoy) {
+            this.misionesDiarias = this.inicializarMisionesDiarias();
+            this.guardarMisionesDiarias();
+        }
+        
+        const mision = this.misionesDiarias.misiones.find(m => m.id === idMision);
+        if (mision && !mision.completado) {
+            mision.completado += cantidad;
+            
+            if (mision.completado >= mision.objetivo) {
+                mision.completado = mision.objetivo;
+                this.entregarRecompensaMision(mision.recompensa, `Misión diaria: ${mision.descripcion}`);
+                this.misionesDiarias.completados++;
+                this.mostrarNotificacion(`✅ Misión diaria completada: +${mision.recompensa} soles`);
+            }
+            
+            this.guardarMisionesDiarias();
+            return true;
+        }
+        return false;
+    }
+
+    actualizarMisionSemanal(idMision, cantidad = 1) {
+        const semanaActual = this.obtenerNumeroSemana();
+        
+        // Verificar si es nueva semana
+        if (this.misionesSemanales.semana !== semanaActual) {
+            this.misionesSemanales = this.inicializarMisionesSemanales();
+            this.guardarMisionesSemanales();
+        }
+        
+        const mision = this.misionesSemanales.misiones.find(m => m.id === idMision);
+        if (mision && !mision.completado) {
+            mision.completado += cantidad;
+            
+            if (mision.completado >= mision.objetivo) {
+                mision.completado = mision.objetivo;
+                this.entregarRecompensaMision(mision.recompensa, `Misión semanal: ${mision.descripcion}`);
+                this.misionesSemanales.completados++;
+                this.mostrarNotificacion(`🎯 Misión semanal completada: +${mision.recompensa} soles`);
+            }
+            
+            this.guardarMisionesSemanales();
+            return true;
+        }
+        return false;
+    }
+
+    entregarRecompensaMision(cantidad, motivo) {
+        this.agregarDinero(cantidad);
+        console.log(`💰 Recompensa de misión: ${cantidad} soles - ${motivo}`);
+    }
+
+    verificarReinicioAutomatico() {
+        const ahora = new Date();
+        const hora = ahora.getHours();
+        
+        // Reiniciar a las 3 AM si ha pasado ese tiempo
+        if (hora >= 3) {
+            const ultimaFecha = new Date(this.ultimoReinicio);
+            const hoy = new Date();
+            
+            // Si la última vez fue antes de hoy y ya pasó las 3 AM
+            if (ultimaFecha.getDate() < hoy.getDate() || 
+                ultimaFecha.getMonth() < hoy.getMonth() ||
+                ultimaFecha.getFullYear() < hoy.getFullYear()) {
+                
+                this.reiniciarSistema();
+                this.ultimoReinicio = ahora.toISOString();
+                this.guardarUltimoReinicio();
+            }
+        }
+    }
+
+    reiniciarSistema() {
+        console.log('🔄 Reiniciando sistema automático (3 AM)...');
+        
+        // Reiniciar palabras difíciles
+        this.palabrasDificiles = {};
+        this.guardarPalabrasDificiles();
+        
+        // Reiniciar misiones diarias
+        this.misionesDiarias = this.inicializarMisionesDiarias();
+        this.guardarMisionesDiarias();
+        
+        this.mostrarNotificacion('🔄 Sistema reiniciado (nuevo día)');
+    }
+
+    // ====================
+    // NUEVO: VIDEOS ESPECIALES POR MAZO 100%
+    // ====================
+
+    obtenerVideosEspeciales() {
+        return [
+            { id: 1, probabilidad: 20, driveId: '1aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe', titulo: "🎬 Video Especial 1", descripcion: "Recompensa por excelente trabajo" },
+            { id: 2, probabilidad: 30, driveId: '1-wYJYTaw0ZOKQy8BBPR7Fmhlzs0IVx9K', titulo: "🎬 Video Especial 2", descripcion: "¡Felicidades por tu dedicación!" },
+            { id: 3, probabilidad: 20, driveId: '1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS', titulo: "🎬 Video Especial 3", descripcion: "Recompensa secreta" },
+            { id: 4, probabilidad: 10, driveId: '1tS-gKr6bf4MY5Yrw7zRvP2uP_zq9rsLl', titulo: "🎬 Video Especial 4", descripcion: "¡Increíble desempeño!" },
+            { id: 5, probabilidad: 5, driveId: '1aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe', titulo: "🎬 Video Especial 5", descripcion: "Premio ultra raro" },
+            { id: 6, probabilidad: 15, driveId: '1-wYJYTaw0ZOKQy8BBPR7Fmhlzs0IVx9K', titulo: "🎬 Video Especial 6", descripcion: "Recompensa de dedicación" },
+            { id: 7, probabilidad: 25, driveId: '1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS', titulo: "🎬 Video Especial 7", descripcion: "¡Buen trabajo!" },
+            { id: 8, probabilidad: 20, driveId: '1tS-gKr6bf4MY5Yrw7zRvP2uP_zq9rsLl', titulo: "🎬 Video Especial 8", descripcion: "Premio especial" },
+            { id: 9, probabilidad: 15, driveId: '1aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe', titulo: "🎬 Video Especial 9", descripcion: "Recompensa aleatoria" },
+            { id: 10, probabilidad: 10, driveId: '1-wYJYTaw0ZOKQy8BBPR7Fmhlzs0IVx9K', titulo: "🎬 Video Especial 10", descripcion: "¡Excelente!" },
+            { id: 11, probabilidad: 5, driveId: '1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS', titulo: "🎬 Video Especial 11", descripcion: "Premio super raro" },
+            { id: 12, probabilidad: 20, driveId: '1tS-gKr6bf4MY5Yrw7zRvP2uP_zq9rsLl', titulo: "🎬 Video Especial 12", descripcion: "Recompensa motivacional" },
+            { id: 13, probabilidad: 15, driveId: '1aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe', titulo: "🎬 Video Especial 13", descripcion: "¡Sigue así!" },
+            { id: 14, probabilidad: 10, driveId: '1-wYJYTaw0ZOKQy8BBPR7Fmhlzs0IVx9K', titulo: "🎬 Video Especial 14", descripcion: "Premio de esfuerzo" },
+            { id: 15, probabilidad: 20, driveId: '1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS', titulo: "🎬 Video Especial 15", descripcion: "Recompensa especial" },
+            { id: 16, probabilidad: 25, driveId: '1tS-gKr6bf4MY5Yrw7zRvP2uP_zq9rsLl', titulo: "🎬 Video Especial 16", descripcion: "¡Increíble!" },
+            { id: 17, probabilidad: 15, driveId: '1aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe', titulo: "🎬 Video Especial 17", descripcion: "Premio de dedicación" },
+            { id: 18, probabilidad: 10, driveId: '1-wYJYTaw0ZOKQy8BBPR7Fmhlzs0IVx9K', titulo: "🎬 Video Especial 18", descripcion: "Recompensa sorpresa" },
+            { id: 19, probabilidad: 5, driveId: '1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS', titulo: "🎬 Video Especial 19", descripcion: "Premio ultra especial" },
+            { id: 20, probabilidad: 30, driveId: '1tS-gKr6bf4MY5Yrw7zRvP2uP_zq9rsLl', titulo: "🎬 Video Especial 20", descripcion: "¡Felicidades!" }
+        ];
+    }
+
+    intentarMostrarVideoEspecial() {
+        const random = Math.random() * 100;
+        let acumulado = 0;
+        
+        for (const video of this.videosEspeciales) {
+            acumulado += video.probabilidad;
+            if (random <= acumulado) {
+                return video;
+            }
+        }
+        
+        return null; // No mostrar video esta vez
+    }
+
+    mostrarVideoEspecialSiAplica(porcentaje) {
+        if (porcentaje === 100) {
+            const videoEspecial = this.intentarMostrarVideoEspecial();
+            if (videoEspecial) {
+                setTimeout(() => {
+                    this.mostrarModalVideoEspecial(videoEspecial);
+                }, 2000);
+                return videoEspecial;
+            }
+        }
+        return null;
+    }
+
+    mostrarModalVideoEspecial(video) {
+        const modal = document.createElement('div');
+        modal.className = 'modal-video-especial';
+        modal.style.cssText = `
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 2000;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.3s ease;
+        `;
+        
+        modal.innerHTML = `
+            <div style="background: rgba(30, 30, 40, 0.95); padding: 30px; border-radius: 20px; max-width: 800px; width: 90%; border: 3px solid #FFD166; position: relative;">
+                <button onclick="this.parentElement.parentElement.remove()" 
+                        style="position: absolute; top: 15px; right: 15px; background: #FF6B6B; border: none; color: white; width: 30px; height: 30px; border-radius: 50%; font-weight: bold; cursor: pointer;">×</button>
+                
+                <h2 style="color: #FFD166; text-align: center; margin-bottom: 20px;">${video.titulo}</h2>
+                <p style="text-align: center; opacity: 0.8; margin-bottom: 25px;">${video.descripcion}</p>
+                
+                <div style="margin: 20px 0;">
+                    <iframe 
+                        src="https://drive.google.com/file/d/${video.driveId}/preview"
+                        width="100%"
+                        height="400"
+                        frameborder="0"
+                        style="border-radius: 15px;"
+                        allow="autoplay; encrypted-media"
+                        allowfullscreen
+                    ></iframe>
+                </div>
+                
+                <p style="text-align: center; opacity: 0.7; font-size: 0.9rem;">
+                    🎉 ¡Felicidades por completar un mazo al 100%! Este es tu premio especial.
+                </p>
+                
+                <div style="text-align: center; margin-top: 25px;">
+                    <button onclick="this.parentElement.parentElement.remove()" 
+                            style="background: linear-gradient(135deg, #4CAF50, #2E7D32); color: white; padding: 12px 30px; border: none; border-radius: 10px; cursor: pointer; font-weight: bold;">
+                        ✅ Cerrar y Continuar
+                    </button>
+                </div>
+            </div>
+        `;
+        
+        document.body.appendChild(modal);
+    }
+
+    // ====================
+    // DINERO (MODIFICADO PARA MISIONES)
     // ====================
 
     agregarDinero(cantidad) {
         this.dinero += cantidad;
         this.guardarDinero();
-        this.mostrarNotificacion(`+${cantidad.toFixed(2)} soles`);
-    }
-
-    obtenerDinero() {
-        return this.dinero;
+        
+        if (cantidad > 0) {
+            this.mostrarNotificacion(`+${cantidad.toFixed(2)} soles`);
+            
+            // Actualizar misiones de ganar dinero
+            this.actualizarMisionDiaria('ganar_50_soles', cantidad);
+            this.actualizarMisionSemanal('ganar_200_soles', cantidad);
+        }
     }
 
     // ====================
-    // PROGRESO DE MAZOS
+    // PROGRESO DE MAZOS (MODIFICADO PARA MISIONES)
     // ====================
 
     actualizarProgreso(contenedor, subcontenedor, mazo, porcentaje) {
@@ -40,19 +376,120 @@ class SistemaEconomia {
             
             // Calcular recompensa SIEMPRE
             this.calcularRecompensa(contenedor, subcontenedor, mazo, porcentaje, progresoAnterior);
+            
+            // Actualizar misiones si es 100%
+            if (porcentaje === 100) {
+                this.actualizarMisionesPorMazoCompletado();
+                
+                // Intentar mostrar video especial
+                this.mostrarVideoEspecialSiAplica(porcentaje);
+            }
         }
         
         return this.progreso[clave];
+    }
+
+    actualizarMisionesPorMazoCompletado() {
+        // Misiones diarias
+        this.actualizarMisionDiaria('completar_1_mazo');
+        this.actualizarMisionDiaria('completar_3_mazos');
+        this.actualizarMisionDiaria('completar_5_mazos');
+        
+        // Misiones semanales
+        this.actualizarMisionSemanal('completar_20_mazos');
+        
+        // Actualizar misión de completar todas las diarias
+        const diariasCompletadas = this.misionesDiarias.completados;
+        this.actualizarMisionSemanal('completar_todas_misiones_diarias', diariasCompletadas);
+    }
+
+    // ====================
+    // LOCAL STORAGE NUEVO
+    // ====================
+
+    guardarPalabrasDificiles() {
+        try {
+            localStorage.setItem('palabras_dificiles', JSON.stringify(this.palabrasDificiles));
+        } catch (e) {
+            console.warn('No se pudo guardar palabras difíciles:', e);
+        }
+    }
+
+    cargarPalabrasDificiles() {
+        try {
+            const palabras = localStorage.getItem('palabras_dificiles');
+            return palabras ? JSON.parse(palabras) : {};
+        } catch (e) {
+            console.warn('No se pudo cargar palabras difíciles:', e);
+            return {};
+        }
+    }
+
+    guardarMisionesDiarias() {
+        try {
+            localStorage.setItem('misiones_diarias', JSON.stringify(this.misionesDiarias));
+        } catch (e) {
+            console.warn('No se pudo guardar misiones diarias:', e);
+        }
+    }
+
+    cargarMisionesDiarias() {
+        try {
+            const misiones = localStorage.getItem('misiones_diarias');
+            return misiones ? JSON.parse(misiones) : null;
+        } catch (e) {
+            console.warn('No se pudo cargar misiones diarias:', e);
+            return null;
+        }
+    }
+
+    guardarMisionesSemanales() {
+        try {
+            localStorage.setItem('misiones_semanales', JSON.stringify(this.misionesSemanales));
+        } catch (e) {
+            console.warn('No se pudo guardar misiones semanales:', e);
+        }
+    }
+
+    cargarMisionesSemanales() {
+        try {
+            const misiones = localStorage.getItem('misiones_semanales');
+            return misiones ? JSON.parse(misiones) : null;
+        } catch (e) {
+            console.warn('No se pudo cargar misiones semanales:', e);
+            return null;
+        }
+    }
+
+    guardarUltimoReinicio() {
+        try {
+            localStorage.setItem('ultimo_reinicio', this.ultimoReinicio);
+        } catch (e) {
+            console.warn('No se pudo guardar último reinicio:', e);
+        }
+    }
+
+    cargarUltimoReinicio() {
+        try {
+            return localStorage.getItem('ultimo_reinicio');
+        } catch (e) {
+            console.warn('No se pudo cargar último reinicio:', e);
+            return null;
+        }
+    }
+
+    // ====================
+    // MÉTODOS EXISTENTES (MANTENIDOS)
+    // ====================
+
+    obtenerDinero() {
+        return this.dinero;
     }
 
     obtenerProgreso(contenedor, subcontenedor, mazo) {
         const clave = `${contenedor}_${subcontenedor}_${mazo}`;
         return this.progreso[clave] || 0;
     }
-
-    // ====================
-    // CÁLCULO DE RECOMPENSAS - SIEMPRE FUNCIONA
-    // ====================
 
     calcularRecompensa(contenedor, subcontenedor, mazo, porcentaje, progresoAnterior) {
         const clave = `${contenedor}_${subcontenedor}_${mazo}`;
@@ -111,10 +548,6 @@ class SistemaEconomia {
         return recompensa;
     }
 
-    // ====================
-    // ESTADÍSTICAS
-    // ====================
-
     obtenerEstadisticas() {
         const claves = Object.keys(this.progreso);
         const totalMazos = claves.length;
@@ -160,10 +593,6 @@ class SistemaEconomia {
             }
         }, 2500);
     }
-
-    // ====================
-    // LOCAL STORAGE
-    // ====================
 
     guardarDinero() {
         try {
@@ -516,6 +945,39 @@ document.addEventListener('DOMContentLoaded', function() {
             to {
                 opacity: 0;
             }
+        }
+        
+        /* Estilos para modal de video especial */
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+            }
+            to {
+                opacity: 1;
+            }
+        }
+        
+        /* Estilos para palabras difíciles */
+        .palabra-dificil-marcada {
+            border-left: 5px solid #FF6B6B !important;
+            background: rgba(255, 107, 107, 0.1) !important;
+        }
+        
+        .btn-dificil {
+            background: linear-gradient(135deg, #FF6B6B, #FFD166) !important;
+            color: white !important;
+            border: none !important;
+            padding: 8px 15px !important;
+            border-radius: 5px !important;
+            cursor: pointer !important;
+            font-size: 0.9rem !important;
+            margin-top: 10px !important;
+            transition: all 0.3s ease !important;
+        }
+        
+        .btn-dificil:hover {
+            transform: scale(1.05) !important;
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3) !important;
         }
     `;
     document.head.appendChild(estiloTimestamps);
