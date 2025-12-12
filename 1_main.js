@@ -1,4 +1,3 @@
-
 // ================================================
 // SISTEMA PRINCIPAL DE NAVEGACIÓN Y QUIZ
 // ================================================
@@ -1403,6 +1402,20 @@ function finalizarQuiz() {
     const dineroAhora = sistemaEconomia.obtenerDinero();
     const recompensa = dineroAhora - dineroAntes;
     
+    // ✅✅✅ NUEVO: CALCULAR EXP BASADA EN DINERO (1 SOL = 5 EXP)
+    let expGanada = 0;
+    if (recompensa > 0 && window.quintillizasRPG && window.quintillizasRPG.personajeSeleccionado) {
+        expGanada = Math.round(recompensa * 5); // 1 SOL = 5 EXP
+        
+        // Dar la EXP a la chica seleccionada
+        window.quintillizasRPG.agregarEXP(
+            window.quintillizasRPG.personajeSeleccionado, 
+            expGanada
+        );
+        
+        console.log(`🎮 EXP: +${expGanada} (${recompensa} soles × 5)`);
+    }
+    
     // Determinar a dónde volver según el modo
     let funcionVolver;
     if (modoActual === 'anime') {
@@ -1441,6 +1454,21 @@ function finalizarQuiz() {
                     (Antes: ${dineroAntes.toFixed(2)} soles)
                 </p>
             </div>
+            
+            ${expGanada > 0 ? `
+                <div style="background: rgba(255, 20, 147, 0.1); padding: 25px; border-radius: 15px; margin: 20px 0; border: 2px solid #FF1493;">
+                    <h3 style="color: #FF1493; margin-bottom: 15px;">💖 EXP para tu Chica</h3>
+                    <div style="font-size: 2.5rem; text-align: center; color: #FF69B4;">
+                        +${expGanada} EXP
+                    </div>
+                    <p style="text-align: center; margin-top: 10px; opacity: 0.8;">
+                        ${recompensa.toFixed(2)} soles × 5 = ${expGanada} EXP
+                    </p>
+                    <p style="text-align: center; font-size: 0.9rem; opacity: 0.7;">
+                        ¡Sigue estudiando para subir de nivel!
+                    </p>
+                </div>
+            ` : ''}
             
             <div class="quiz-controls">
                 <button class="quiz-btn btn-volver" onclick="${modoActual === 'anime' ? `cargarMazosAnimes(${contenedorActual}, ${subcontenedorActual})` : (modoActual === 'audio' ? `cargarMazosAudios(${contenedorActual}, ${subcontenedorActual})` : (modoActual === 'rpg' ? `cargarPaginaRPG()` : `cargarMazos(${contenedorActual}, ${subcontenedorActual})`))}">
