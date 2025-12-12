@@ -1,5 +1,5 @@
 // ================================================
-// RPG COMPLETO: LAS QUINTILLIZAS NAKANO - VERSIÓN UI FUNCIONAL
+// RPG COMPLETO: LAS QUINTILLIZAS NAKANO - CON IMÁGENES REALES
 // ================================================
 
 class QuintillizasRPG {
@@ -12,13 +12,12 @@ class QuintillizasRPG {
     }
 
     // ====================
-    // INICIALIZACIÓN
+    // INICIALIZACIÓN CON IMÁGENES
     // ====================
 
     inicializar() {
-        console.log('🎮 RPG Quintillizas inicializado');
+        console.log('🎮 RPG Quintillizas con imágenes inicializado');
         
-        // Hacer métodos globalmente accesibles
         window.seleccionarPersonajeRPG = (personajeId) => this.seleccionarPersonajeUI(personajeId);
         window.intentarInteraccionRPG = (personajeId) => this.intentarInteraccionIntima(personajeId);
         window.comprarActividadRPG = (personajeId, actividadId) => this.comprarActividad(personajeId, actividadId);
@@ -31,6 +30,7 @@ class QuintillizasRPG {
             'ichika': {
                 nombre: 'Ichika Nakano',
                 color: '#FF6B8B',
+                imagen: 'https://i.imgur.com/y6lOjPq.png', // REEMPLAZA CON TU IMAGEN
                 nivel: 1,
                 exp: 0,
                 expNecesaria: 100,
@@ -49,6 +49,7 @@ class QuintillizasRPG {
             'nino': {
                 nombre: 'Nino Nakano',
                 color: '#FFB347',
+                imagen: 'https://i.imgur.com/z4kLQxM.png', // REEMPLAZA CON TU IMAGEN
                 nivel: 1,
                 exp: 0,
                 expNecesaria: 100,
@@ -67,6 +68,7 @@ class QuintillizasRPG {
             'miku': {
                 nombre: 'Miku Nakano',
                 color: '#6A5ACD',
+                imagen: 'https://i.imgur.com/p9QmNrL.png', // REEMPLAZA CON TU IMAGEN
                 nivel: 1,
                 exp: 0,
                 expNecesaria: 100,
@@ -85,6 +87,7 @@ class QuintillizasRPG {
             'yotsuba': {
                 nombre: 'Yotsuba Nakano',
                 color: '#4CAF50',
+                imagen: 'https://i.imgur.com/7tGf3Yj.png', // REEMPLAZA CON TU IMAGEN
                 nivel: 1,
                 exp: 0,
                 expNecesaria: 100,
@@ -103,6 +106,7 @@ class QuintillizasRPG {
             'itsuki': {
                 nombre: 'Itsuki Nakano',
                 color: '#FFD166',
+                imagen: 'https://i.imgur.com/qrSTvWk.png', // REEMPLAZA CON TU IMAGEN
                 nivel: 1,
                 exp: 0,
                 expNecesaria: 100,
@@ -122,11 +126,10 @@ class QuintillizasRPG {
     }
 
     // ====================
-    // SISTEMA DE EXP Y NIVELES - MODIFICADO PARA QUIZ
+    // SISTEMA DE EXP Y NIVELES
     // ====================
 
     agregarEXP(personajeId, cantidad) {
-        // MODIFICACIÓN: Solo dar EXP si hay personaje seleccionado Y coincide
         if (!this.personajeSeleccionado || this.personajeSeleccionado !== personajeId) {
             console.log(`⚠️ No se puede añadir EXP: Personaje ${personajeId} no coincide con seleccionado ${this.personajeSeleccionado}`);
             return false;
@@ -137,7 +140,6 @@ class QuintillizasRPG {
         
         console.log(`🎮 ${personaje.nombre} +${cantidad} EXP (Total: ${personaje.exp}/${personaje.expNecesaria})`);
         
-        // Subir de nivel si alcanza la EXP necesaria
         if (personaje.exp >= personaje.expNecesaria) {
             this.subirNivel(personajeId);
         }
@@ -155,9 +157,7 @@ class QuintillizasRPG {
         console.log(`🎉 ¡${personaje.nombre} subió al nivel ${personaje.nivel}!`);
         this.mostrarNotificacion(`🎉 ${personaje.nombre} nivel ${personaje.nivel}!`);
         
-        // Desbloquear nuevo video al subir de nivel
         this.desbloquearVideo(personajeId);
-        
         this.guardarDatosPersonajes();
     }
 
@@ -192,7 +192,7 @@ class QuintillizasRPG {
     }
 
     // ====================
-    // SISTEMA DE UI Y NAVEGACIÓN
+    // SISTEMA DE UI CON IMÁGENES
     // ====================
 
     cargarPaginaPrincipal() {
@@ -230,7 +230,7 @@ class QuintillizasRPG {
                     </div>
                 </div>
                 
-                <!-- PERSONAJES -->
+                <!-- PERSONAJES CON IMÁGENES -->
                 <h2 style="text-align: center; color: #FFD166; margin-bottom: 30px;">💖 SELECCIONA UNA HERMANA</h2>
                 <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; margin-bottom: 50px;">
                     ${this.crearCardsPersonajes()}
@@ -276,24 +276,28 @@ class QuintillizasRPG {
     }
 
     crearCardsPersonajes() {
-        const personajes = [
-            { id: 'ichika', icono: '👩‍🦰', desc: 'Hermana mayor coqueta' },
-            { id: 'nino', icono: '👩‍🦳', desc: 'Tsundere que cocina bien' },
-            { id: 'miku', icono: '🎧', desc: 'Tímida amante de la historia' },
-            { id: 'yotsuba', icono: '🎗️', desc: 'Energética y deportista' },
-            { id: 'itsuki', icono: '🍔', desc: 'Glotona y estudiosa' }
-        ];
+        const personajesIds = ['ichika', 'nino', 'miku', 'yotsuba', 'itsuki'];
         
-        return personajes.map(p => {
-            const personaje = this.datosPersonajes[p.id];
-            const esSeleccionado = this.personajeSeleccionado === p.id;
+        return personajesIds.map(id => {
+            const personaje = this.datosPersonajes[id];
+            const esSeleccionado = this.personajeSeleccionado === id;
             
             return `
                 <div class="personaje-card" 
-                     style="border-color: ${personaje.color}; ${esSeleccionado ? 'border-width: 4px;' : ''}"
-                     onclick="quintillizasRPG.seleccionarPersonajeUI('${p.id}')">
+                     style="border-color: ${personaje.color}; ${esSeleccionado ? 'border-width: 4px;' : ''}; background: rgba(255,255,255,0.05);"
+                     onclick="quintillizasRPG.seleccionarPersonajeUI('${id}')">
                     <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
-                        <div style="font-size: 2.5rem;">${p.icono}</div>
+                        <!-- IMAGEN DEL PERSONAJE -->
+                        <div style="position: relative;">
+                            <img src="${personaje.imagen}" 
+                                 alt="${personaje.nombre}"
+                                 style="width: 70px; height: 70px; border-radius: 50%; object-fit: cover; border: 3px solid ${personaje.color};">
+                            ${esSeleccionado ? 
+                                `<div style="position: absolute; top: -5px; right: -5px; background: ${personaje.color}; color: white; width: 25px; height: 25px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; border: 2px solid white;">
+                                    ✓
+                                </div>` 
+                                : ''}
+                        </div>
                         <div>
                             <h3 style="color: ${personaje.color}; margin: 0;">${personaje.nombre}</h3>
                             <p style="opacity: 0.7; margin: 5px 0 0 0; font-size: 0.9rem;">
@@ -302,6 +306,7 @@ class QuintillizasRPG {
                         </div>
                     </div>
                     
+                    <!-- BARRA DE EXP -->
                     <div style="margin-bottom: 15px;">
                         <div style="background: rgba(255,255,255,0.1); height: 10px; border-radius: 5px; overflow: hidden;">
                             <div style="background: ${personaje.color}; width: ${(personaje.exp / personaje.expNecesaria) * 100}%; height: 100%;"></div>
@@ -312,12 +317,12 @@ class QuintillizasRPG {
                     </div>
                     
                     <p style="font-size: 0.9rem; opacity: 0.8; margin-bottom: 15px;">
-                        ${p.desc}
+                        ${personaje.descripcion}
                     </p>
                     
                     <div style="display: flex; justify-content: space-between; font-size: 0.85rem; opacity: 0.7;">
                         <div>💝 ${personaje.afinidad >= 0 ? '+' : ''}${personaje.afinidad}</div>
-                        <div>${personaje.estadoAnimo.toUpperCase()}</div>
+                        <div>${this.obtenerEmojiEstado(personaje.estadoAnimo)} ${personaje.estadoAnimo.toUpperCase()}</div>
                         <div>🎯 ${personaje.probabilidadBase}%</div>
                     </div>
                     
@@ -338,7 +343,6 @@ class QuintillizasRPG {
         const personaje = this.datosPersonajes[personajeId];
         this.mostrarNotificacion(`💖 Seleccionaste a ${personaje.nombre}`);
         
-        // Actualizar la vista con la UI del personaje
         this.actualizarVistaConPersonaje();
     }
 
@@ -348,7 +352,6 @@ class QuintillizasRPG {
         
         mangaSection.innerHTML = '';
         
-        // Botón volver al RPG principal
         const botonVolver = document.createElement('button');
         botonVolver.className = 'btn-atras-especifico';
         botonVolver.innerHTML = '← Volver al RPG Principal';
@@ -360,7 +363,6 @@ class QuintillizasRPG {
         };
         mangaSection.appendChild(botonVolver);
         
-        // Contenido del personaje
         const personajeDiv = document.createElement('div');
         personajeDiv.innerHTML = this.crearUIPersonaje();
         mangaSection.appendChild(personajeDiv);
@@ -375,19 +377,26 @@ class QuintillizasRPG {
         
         return `
             <div style="max-width: 1000px; margin: 0 auto; padding: 20px;">
-                <!-- CABECERA PERSONAJE -->
-                <div style="background: ${personaje.color}20; border-radius: 20px; padding: 30px; margin-bottom: 30px; border: 3px solid ${personaje.color};">
-                    <div style="display: flex; align-items: center; gap: 25px; flex-wrap: wrap;">
-                        <div style="font-size: 4rem;">${this.obtenerIconoPersonaje(personaje.nombre)}</div>
+                <!-- CABECERA PERSONAJE CON IMAGEN GRANDE -->
+                <div style="background: ${personaje.color}20; border-radius: 20px; padding: 30px; margin-bottom: 30px; border: 3px solid ${personaje.color}; position: relative; overflow: hidden;">
+                    <!-- FONDO DECORATIVO -->
+                    <div style="position: absolute; top: 0; right: 0; width: 200px; height: 200px; background: ${personaje.color}10; border-radius: 0 20px 0 100px; z-index: 1;"></div>
+                    
+                    <div style="display: flex; align-items: center; gap: 25px; flex-wrap: wrap; position: relative; z-index: 2;">
+                        <!-- IMAGEN GRANDE DEL PERSONAJE -->
+                        <div style="position: relative;">
+                            <img src="${personaje.imagen}" 
+                                 alt="${personaje.nombre}"
+                                 style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 5px solid ${personaje.color}; box-shadow: 0 10px 20px rgba(0,0,0,0.3);">
+                            <div style="position: absolute; bottom: -10px; right: -10px; background: ${personaje.color}; color: white; padding: 5px 15px; border-radius: 20px; font-weight: bold; font-size: 1.2rem; border: 3px solid white;">
+                                Nivel ${personaje.nivel}
+                            </div>
+                        </div>
                         <div style="flex: 1;">
                             <h1 style="color: ${personaje.color}; margin: 0 0 10px 0; font-size: 2.5rem;">
                                 ${personaje.nombre}
                             </h1>
                             <div style="display: flex; gap: 20px; flex-wrap: wrap;">
-                                <div>
-                                    <div style="color: rgba(255,255,255,0.7); font-size: 0.9rem;">NIVEL</div>
-                                    <div style="font-size: 2rem; font-weight: bold;">${personaje.nivel}</div>
-                                </div>
                                 <div>
                                     <div style="color: rgba(255,255,255,0.7); font-size: 0.9rem;">AFINIDAD</div>
                                     <div style="font-size: 2rem; font-weight: bold; color: ${personaje.afinidad >= 0 ? '#4CAF50' : '#FF6B6B'}">
@@ -400,14 +409,20 @@ class QuintillizasRPG {
                                         ${this.obtenerEmojiEstado(personaje.estadoAnimo)} ${personaje.estadoAnimo}
                                     </div>
                                 </div>
+                                <div>
+                                    <div style="color: rgba(255,255,255,0.7); font-size: 0.9rem;">DIFICULTAD</div>
+                                    <div style="font-size: 1.5rem; font-weight: bold; text-transform: uppercase;">
+                                        ${personaje.dificultad}
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
                     
                     <!-- BARRA DE EXP -->
-                    <div style="margin-top: 25px;">
+                    <div style="margin-top: 25px; position: relative; z-index: 2;">
                         <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
-                            <span style="color: ${personaje.color}; font-weight: bold;">PROGRESO</span>
+                            <span style="color: ${personaje.color}; font-weight: bold;">PROGRESO HACIA NIVEL ${personaje.nivel + 1}</span>
                             <span style="color: ${personaje.color};">${personaje.exp}/${personaje.expNecesaria} EXP</span>
                         </div>
                         <div style="background: rgba(255,255,255,0.1); height: 15px; border-radius: 10px; overflow: hidden;">
@@ -455,7 +470,7 @@ class QuintillizasRPG {
                         </p>
                     </div>
                     
-                    <!-- ACTIVIDADES ESPECIALES DE ESTA CHICA -->
+                    <!-- ACTIVIDADES ESPECIALES -->
                     <div style="background: rgba(255, 209, 102, 0.1); border-radius: 15px; padding: 25px; border: 2px solid #FFD166;">
                         <h3 style="color: #FFD166; margin-bottom: 15px;">✨ ACTIVIDADES ESPECIALES</h3>
                         <p style="opacity: 0.8; margin-bottom: 20px;">
@@ -520,10 +535,6 @@ class QuintillizasRPG {
                     <h3 style="color: #FFD166; margin-bottom: 20px;">📈 ESTADÍSTICAS DETALLADAS</h3>
                     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
                         <div style="background: rgba(255,255,255,0.08); padding: 15px; border-radius: 10px;">
-                            <div style="color: ${personaje.color}; font-size: 0.9rem;">DIFICULTAD</div>
-                            <div style="font-size: 1.5rem; font-weight: bold;">${personaje.dificultad.toUpperCase()}</div>
-                        </div>
-                        <div style="background: rgba(255,255,255,0.08); padding: 15px; border-radius: 10px;">
                             <div style="color: ${personaje.color}; font-size: 0.9rem;">PROB. BASE</div>
                             <div style="font-size: 1.5rem; font-weight: bold;">${personaje.probabilidadBase}%</div>
                         </div>
@@ -534,6 +545,12 @@ class QuintillizasRPG {
                         <div style="background: rgba(255,255,255,0.08); padding: 15px; border-radius: 10px;">
                             <div style="color: ${personaje.color}; font-size: 0.9rem;">NEXT LEVEL</div>
                             <div style="font-size: 1.5rem; font-weight: bold;">${personaje.expNecesaria - personaje.exp} EXP</div>
+                        </div>
+                        <div style="background: rgba(255,255,255,0.08); padding: 15px; border-radius: 10px;">
+                            <div style="color: ${personaje.color}; font-size: 0.9rem;">ACTIVIDADES</div>
+                            <div style="font-size: 1.5rem; font-weight: bold;">
+                                ${(this.actividadesCompletadas[this.personajeSeleccionado] || []).length}/3
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -556,26 +573,19 @@ class QuintillizasRPG {
         
         console.log(`🎯 Probabilidad de éxito: ${probabilidad}%`);
         
-        // Intentar
         const exito = Math.random() * 100 < probabilidad;
         
         if (exito) {
             this.condones -= 1;
             this.guardarCondones();
             
-            // Dar EXP por éxito
             this.agregarEXP(personajeId, 50);
-            
-            // Aumentar afinidad
             personaje.afinidad += 15;
-            
-            // Cambiar estado de ánimo a feliz
             personaje.estadoAnimo = 'feliz';
             
             console.log(`✅ ¡Éxito con ${personaje.nombre}!`);
             this.mostrarNotificacion(`💖 ¡Éxito con ${personaje.nombre}! +50 EXP, +15 afinidad`);
             
-            // Cargar video íntimo
             this.cargarVideoIntimo(personajeId);
             
             return true;
@@ -583,14 +593,12 @@ class QuintillizasRPG {
             this.condones -= 1;
             this.guardarCondones();
             
-            // Personaje se enoja
             personaje.estadoAnimo = 'enojada';
             personaje.afinidad -= 10;
             
             console.log(`❌ Falla con ${personaje.nombre}`);
             this.mostrarNotificacion(`😠 ${personaje.nombre} se enojó. Afinidad -10`);
             
-            // Actualizar vista
             this.actualizarVistaConPersonaje();
             
             return false;
@@ -616,15 +624,12 @@ class QuintillizasRPG {
             return false;
         }
         
-        // Gastar dinero
         sistemaEconomia.agregarDinero(-actividad.costo);
         
-        // Aplicar beneficios
         personaje.afinidad += actividad.afinidad;
         this.agregarEXP(personajeId, actividad.exp);
         personaje.estadoAnimo = 'feliz';
         
-        // Marcar como completada
         if (!this.actividadesCompletadas[personajeId]) {
             this.actividadesCompletadas[personajeId] = [];
         }
@@ -634,7 +639,6 @@ class QuintillizasRPG {
         console.log(`🎉 Actividad ${actividad.nombre} completada para ${personaje.nombre}`);
         this.mostrarNotificacion(`💝 ${personaje.nombre} muy feliz! +${actividad.afinidad} afinidad, +${actividad.exp} EXP`);
         
-        // Cargar el video automáticamente
         this.cargarVideoActividad(personajeId, actividadId);
         
         return true;
@@ -693,17 +697,14 @@ class QuintillizasRPG {
             return false;
         }
         
-        // Gastar dinero
         sistemaEconomia.agregarDinero(-costoTotal);
         
-        // Añadir condones
         this.condones += cantidad;
         this.guardarCondones();
         
         console.log(`🛒 Comprados ${cantidad} condones por S/.${costoTotal}`);
         this.mostrarNotificacion(`🛍️ +${cantidad} condones comprados`);
         
-        // Actualizar vista si estamos en página principal
         this.actualizarVistaConPersonaje();
         
         return true;
@@ -716,12 +717,17 @@ class QuintillizasRPG {
     mostrarReproductorVideo(video, personaje) {
         const html = `
             <div class="reproductor-container">
-                <h2 style="text-align: center; color: ${personaje.color}; margin-bottom: 10px;">
-                    🎬 ${video.titulo} - ${personaje.nombre}
-                </h2>
-                <p style="text-align: center; opacity: 0.8; margin-bottom: 25px;">
-                    Nivel de ${personaje.nombre.split(' ')[0]}: ${personaje.nivel} • Duración: ${video.duracion}
-                </p>
+                <div style="text-align: center; margin-bottom: 20px;">
+                    <img src="${personaje.imagen}" 
+                         alt="${personaje.nombre}"
+                         style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover; border: 4px solid ${personaje.color}; margin-bottom: 15px;">
+                    <h2 style="color: ${personaje.color}; margin-bottom: 10px;">
+                        🎬 ${video.titulo} - ${personaje.nombre}
+                    </h2>
+                    <p style="opacity: 0.8; margin-bottom: 10px;">
+                        Nivel de ${personaje.nombre.split(' ')[0]}: ${personaje.nivel} • Duración: ${video.duracion}
+                    </p>
+                </div>
                 
                 <div class="video-wrapper">
                     <iframe 
@@ -746,7 +752,6 @@ class QuintillizasRPG {
         const mangaSection = document.getElementById('manga-section');
         mangaSection.innerHTML = html;
         
-        // Agregar botón volver
         const botonVolver = document.createElement('button');
         botonVolver.className = 'btn-atras-especifico';
         botonVolver.innerHTML = '← Volver al RPG';
@@ -762,17 +767,6 @@ class QuintillizasRPG {
     // ====================
     // UTILIDADES
     // ====================
-
-    obtenerIconoPersonaje(nombre) {
-        const iconos = {
-            'Ichika': '👩‍🦰',
-            'Nino': '👩‍🦳', 
-            'Miku': '🎧',
-            'Yotsuba': '🎗️',
-            'Itsuki': '🍔'
-        };
-        return iconos[nombre.split(' ')[0]] || '👩';
-    }
 
     obtenerEmojiEstado(estado) {
         const emojis = {
@@ -932,21 +926,16 @@ class QuintillizasRPG {
 }
 
 // ================================================
-// INTEGRACIÓN CON SISTEMA DE MAZOS - VERSIÓN CORREGIDA
+// INTEGRACIÓN CON SISTEMA DE MAZOS
 // ================================================
 
-// Guardar referencia original
 const agregarDineroOriginal = sistemaEconomia.agregarDinero;
 
-// Sobrescribir el método
 sistemaEconomia.agregarDinero = function(cantidad) {
-    // Llamar al método original para agregar el dinero
     const resultado = agregarDineroOriginal.call(this, cantidad);
     
-    // Si es una recompensa por mazo (cantidad positiva) y hay personaje seleccionado en RPG
     if (cantidad > 0 && window.quintillizasRPG && window.quintillizasRPG.personajeSeleccionado) {
-        // Dar EXP proporcional al dinero ganado
-        const expPorSoles = 20; // 20 EXP por cada sol ganado
+        const expPorSoles = 20;
         const expGanada = Math.round(cantidad * expPorSoles);
         
         window.quintillizasRPG.agregarEXP(
@@ -969,6 +958,6 @@ const quintillizasRPG = new QuintillizasRPG();
 // Inicializar al cargar
 document.addEventListener('DOMContentLoaded', function() {
     quintillizasRPG.inicializar();
-    console.log('🎮 RPG Quintillizas listo y funcional');
-    console.log('💖 EXP por quiz activado: +20 EXP/palabra correcta, +15-100 EXP/mazo completo');
+    console.log('🎮 RPG Quintillizas con imágenes listo y funcional');
+    console.log('🖼️ Imágenes cargadas para las 5 hermanas');
 });
