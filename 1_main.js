@@ -117,6 +117,12 @@ function volverAlInicio() {
     
     document.getElementById('manga-section').style.display = 'none';
     document.getElementById('quiz-section').style.display = 'none';
+    
+    // También ocultar lector de manga si está activo
+    const lectorContainer = document.getElementById('lector-manga-container');
+    if (lectorContainer) {
+        lectorContainer.style.display = 'none';
+    }
 }
 
 // ====================
@@ -132,7 +138,7 @@ function crearContenedoresMangas() {
             <div class="contenedor-item" onclick="cargarSubcontenedores(${i})">
                 <div class="contenedor-img" style="background-image: url('${obtenerImagenContenedor(i)}')"></div>
                 <div class="contenedor-numero">CONTAINER ${i}</div>
-                <p>5 sub-contenedores con vocabulario</p>
+                <p>5 sub-contenedores con vocabulario y manga</p>
                 <div class="card-button">Abrir</div>
             </div>
         `;
@@ -403,13 +409,26 @@ function crearSubcontenedoresUI(contenedor) {
     
     for (let i = 1; i <= 5; i++) {
         const tieneContenido = tieneVocabularioEnSubcontenedor(contenedor, i);
+        const tieneManga = existeManga(contenedor, i);
         
         html += `
-            <div class="subcontenedor-item" onclick="cargarMazos(${contenedor}, ${i})">
+            <div class="subcontenedor-item">
                 <div class="subcontenedor-img" style="background-image: url('${obtenerImagenSubcontenedor(contenedor, i)}')"></div>
                 <h3>Sub-contenedor ${i}</h3>
                 <p>10 mazos de vocabulario</p>
                 ${tieneContenido ? '' : '<p style="color: #FF6B6B; font-size: 0.9rem;">(Sin vocabulario)</p>'}
+                
+                <!-- NUEVO: BOTONES PARA ESTE SUB-CONTENEDOR -->
+                <div style="display: flex; gap: 10px; margin-top: 15px;">
+                    <button class="card-button" onclick="cargarMazos(${contenedor}, ${i})" style="padding: 10px 15px; font-size: 0.9rem;">
+                        📚 Vocabulario
+                    </button>
+                    ${tieneManga ? 
+                        `<button class="card-button" onclick="iniciarLectorManga(${contenedor}, ${i})" style="padding: 10px 15px; font-size: 0.9rem; background: linear-gradient(135deg, #8A5AF7, #FF6B6B);">
+                            📖 Leer Manga
+                        </button>` 
+                        : '<button class="card-button" style="padding: 10px 15px; font-size: 0.9rem; background: rgba(255,255,255,0.1); opacity: 0.5; cursor: not-allowed;">📖 (Sin manga)</button>'}
+                </div>
             </div>
         `;
     }
@@ -508,6 +527,26 @@ function crearMazosUI(contenedor, subcontenedor) {
     let html = `<h2 style="text-align: center; margin-bottom: 30px; color: #FFD166;">
         📚 CONTENEDOR ${contenedor} • SUB-CONTENEDOR ${subcontenedor} - MAZOS
     </h2>`;
+    
+    // NUEVO: BOTÓN PARA LEER MANGA EN CABECERA
+    const tieneManga = existeManga(contenedor, subcontenedor);
+    if (tieneManga) {
+        const mangaInfo = mangaDatabase[`${contenedor}_${subcontenedor}`];
+        html += `
+            <div style="text-align: center; margin-bottom: 25px; background: rgba(138, 90, 247, 0.1); padding: 20px; border-radius: 15px; border: 2px solid #8A5AF7;">
+                <h3 style="color: #FFD166; margin-bottom: 10px;">📖 ${mangaInfo.titulo}</h3>
+                <p style="opacity: 0.8; margin-bottom: 15px; font-size: 0.95rem;">${mangaInfo.descripcion}</p>
+                <button class="card-button" onclick="iniciarLectorManga(${contenedor}, ${subcontenedor})" 
+                        style="background: linear-gradient(135deg, #8A5AF7, #FF6B6B); max-width: 300px; margin: 0 auto;">
+                    📖 LEER MANGA COMPLETO (${mangaInfo.paginas} páginas)
+                </button>
+                <p style="opacity: 0.7; font-size: 0.9rem; margin-top: 10px;">
+                    Autor: ${mangaInfo.autor} • Año: ${mangaInfo.año}
+                </p>
+            </div>
+        `;
+    }
+    
     html += '<div class="mazos-container">';
     
     for (let i = 1; i <= 10; i++) {
@@ -869,6 +908,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     console.log('✅ Sistema de animes cargado correctamente');
+    console.log('📖 Lector de manga integrado');
     console.log('🏠 Botón casa configurado');
     console.log('💰 Sistema de dinero activo');
 });
