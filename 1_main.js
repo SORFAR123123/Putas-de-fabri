@@ -180,7 +180,7 @@ function volverAlInicio() {
 }
 
 // ====================
-// CREACIÓN DE UI - MANGAS
+// CREACIÓN DE UI - MANGAS (CORREGIDO: DESCRIPCIONES DINÁMICAS)
 // ====================
 
 function crearContenedoresMangas() {
@@ -188,11 +188,14 @@ function crearContenedoresMangas() {
     html += '<div class="manga-contenedores">';
     
     for (let i = 1; i <= 10; i++) {
+        const contenedorData = obtenerContenedorManga(i);
+        const desc = contenedorData.descripcion || '5 sub-contenedores con vocabulario y manga';
+        
         html += `
             <div class="contenedor-item" onclick="cargarSubcontenedores(${i})">
-                <div class="contenedor-img" style="background-image: url('${obtenerImagenContenedor(i)}')"></div>
+                <div class="contenedor-img" style="background-image: url('${contenedorData.imagen || obtenerImagenContenedor(i)}')"></div>
                 <div class="contenedor-numero">CONTAINER ${i}</div>
-                <p>5 sub-contenedores con vocabulario y manga</p>
+                <p>${desc}</p>
                 <div class="card-button">Abrir</div>
             </div>
         `;
@@ -201,6 +204,10 @@ function crearContenedoresMangas() {
     html += '</div>';
     return html;
 }
+
+// ====================
+// CREACIÓN DE UI - VIDEOS (CORREGIDO: DESCRIPCIONES DINÁMICAS)
+// ====================
 
 function crearContenedoresVideos() {
     let html = '<h2 style="text-align: center; margin-bottom: 30px; color: #FFD166;">🎬 CONTENEDORES DE VIDEOS</h2>';
@@ -211,13 +218,15 @@ function crearContenedoresVideos() {
     const totalContenedores = Object.keys(contenedores).length || 3;
     
     for (let i = 1; i <= Math.max(totalContenedores, 10); i++) {
+        const contenedorData = obtenerContenedorVideo(i);
         const tieneVideos = contenedores[i] && contenedores[i].length > 0;
+        const desc = contenedorData.descripcion || (tieneVideos ? contenedores[i].length + ' sub-contenedores con videos' : 'Sin videos aún');
         
         html += `
             <div class="contenedor-item" onclick="cargarSubcontenedoresVideos(${i})">
-                <div class="contenedor-img" style="background-image: url('${obtenerImagenContenedor(i)}')"></div>
+                <div class="contenedor-img" style="background-image: url('${contenedorData.imagen || obtenerImagenContenedor(i)}')"></div>
                 <div class="contenedor-numero">VIDEO CONTAINER ${i}</div>
-                <p>${tieneVideos ? contenedores[i].length + ' sub-contenedores con videos' : 'Sin videos aún'}</p>
+                <p>${desc}</p>
                 <div class="card-button">${tieneVideos ? 'Ver videos' : 'Vacío'}</div>
             </div>
         `;
@@ -228,7 +237,7 @@ function crearContenedoresVideos() {
 }
 
 // ====================
-// CREACIÓN DE UI - ANIMES
+// CREACIÓN DE UI - ANIMES (CORREGIDO: DESCRIPCIONES DINÁMICAS)
 // ====================
 
 function crearContenedoresAnimes() {
@@ -240,13 +249,15 @@ function crearContenedoresAnimes() {
     const totalContenedores = Object.keys(contenedores).length || 10;
     
     for (let i = 1; i <= Math.max(totalContenedores, 10); i++) {
+        const contenedorData = obtenerContenedorAnime(i);
         const tieneAnimes = contenedores[i] && contenedores[i].length > 0;
+        const desc = contenedorData.descripcion || (tieneAnimes ? contenedores[i].length + ' sub-contenedores con animes' : '5 sub-contenedores disponibles');
         
         html += `
             <div class="contenedor-item" onclick="cargarSubcontenedoresAnimes(${i})">
-                <div class="contenedor-img" style="background-image: url('${obtenerImagenContenedorAnime(i)}')"></div>
+                <div class="contenedor-img" style="background-image: url('${contenedorData.imagen || obtenerImagenContenedorAnime(i)}')"></div>
                 <div class="contenedor-numero">ANIME CONTAINER ${i}</div>
-                <p>${tieneAnimes ? contenedores[i].length + ' sub-contenedores con animes' : '5 sub-contenedores disponibles'}</p>
+                <p>${desc}</p>
                 <div class="card-button">${tieneAnimes ? 'Ver animes' : 'Explorar'}</div>
             </div>
         `;
@@ -257,7 +268,7 @@ function crearContenedoresAnimes() {
 }
 
 // ====================
-// CREACIÓN DE UI - AUDIOS
+// CREACIÓN DE UI - AUDIOS (CORREGIDO: DESCRIPCIONES DINÁMICAS)
 // ====================
 
 function crearContenedoresAudios() {
@@ -269,13 +280,15 @@ function crearContenedoresAudios() {
     const totalContenedores = Object.keys(contenedores).length || 10;
     
     for (let i = 1; i <= Math.max(totalContenedores, 10); i++) {
+        const contenedorData = obtenerContenedorAudio(i);
         const tieneAudios = contenedores[i] && contenedores[i].length > 0;
+        const desc = contenedorData.descripcion || (tieneAudios ? contenedores[i].length + ' sub-contenedores con openings' : '5 sub-contenedores disponibles');
         
         html += `
             <div class="contenedor-item" onclick="cargarSubcontenedoresAudios(${i})">
-                <div class="contenedor-img" style="background-image: url('https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=300&h=300&fit=crop')"></div>
+                <div class="contenedor-img" style="background-image: url('${contenedorData.imagen}')"></div>
                 <div class="contenedor-numero">AUDIO CONTAINER ${i}</div>
-                <p>${tieneAudios ? contenedores[i].length + ' sub-contenedores con openings' : '5 sub-contenedores disponibles'}</p>
+                <p>${desc}</p>
                 <div class="card-button" style="background: linear-gradient(135deg, #FF6B6B, #FFD166);">
                     ${tieneAudios ? '🎵 Escuchar audios' : 'Explorar'}
                 </div>
@@ -288,7 +301,7 @@ function crearContenedoresAudios() {
 }
 
 // ====================
-// CREACIÓN DE UI - ASMR
+// CREACIÓN DE UI - ASMR (CORREGIDO: DESCRIPCIONES DINÁMICAS)
 // ====================
 
 function crearContenedoresASMR() {
@@ -300,13 +313,15 @@ function crearContenedoresASMR() {
     const totalContenedores = Object.keys(contenedores).length || 4;
     
     for (let i = 1; i <= Math.max(totalContenedores, 4); i++) {
+        const contenedorData = obtenerContenedorASMR(i);
         const tieneAudios = contenedores[i] && contenedores[i].length > 0;
+        const desc = contenedorData.descripcion || (tieneAudios ? contenedores[i].length + ' sub-contenedores con audios' : '3 sub-contenedores disponibles');
         
         html += `
             <div class="contenedor-item" onclick="cargarSubcontenedoresASMR(${i})">
-                <div class="contenedor-img" style="background-image: url('https://images.unsplash.com/photo-1572860177022-8fda92a90b95?w=300&h=300&fit=crop')"></div>
+                <div class="contenedor-img" style="background-image: url('${contenedorData.imagen}')"></div>
                 <div class="contenedor-numero">ASMR CONTAINER ${i}</div>
-                <p>${tieneAudios ? contenedores[i].length + ' sub-contenedores con audios' : '3 sub-contenedores disponibles'}</p>
+                <p>${desc}</p>
                 <div class="card-button" style="background: linear-gradient(135deg, #9C27B0, #673AB7);">
                     ${tieneAudios ? '🎧 Escuchar ASMR' : 'Explorar'}
                 </div>
@@ -319,7 +334,7 @@ function crearContenedoresASMR() {
 }
 
 // ====================
-// FUNCIONES PARA ANIMES
+// FUNCIONES PARA ANIMES (CORREGIDO: DESCRIPCIONES EN SUBCONTENEDORES)
 // ====================
 
 function cargarSubcontenedoresAnimes(contenedor) {
@@ -344,16 +359,18 @@ function crearSubcontenedoresAnimesUI(contenedor) {
     
     for (let i = 1; i <= 5; i++) {
         const tieneAnime = subcontenedoresDisponibles.includes(i.toString());
+        const subData = obtenerSubcontenedorAnime(contenedor, i); // ← NUEVO: Para desc
+        const desc = subData.descripcion || (tieneAnime ? 'Anime disponible' : '(Sin anime configurado)'); // ← Fallback
         const animeInfo = tieneAnime ? obtenerAnime(contenedor, i) : null;
         
         html += `
             <div class="subcontenedor-item" onclick="${tieneAnime ? `seleccionarAccionAnime(${contenedor}, ${i})` : `cargarMazosAnimes(${contenedor}, ${i})`}">
-                <div class="subcontenedor-img" style="background-image: url('${obtenerImagenSubcontenedorAnime(contenedor, i)}')"></div>
+                <div class="subcontenedor-img" style="background-image: url('${subData.imagen || obtenerImagenSubcontenedorAnime(contenedor, i)}')"></div>
                 <h3>${tieneAnime ? animeInfo.titulo.split(' ')[0] : `Anime ${i}`}</h3>
                 ${tieneAnime ? 
                     `<p><strong>${animeInfo.titulo}</strong></p>
                      <p style="font-size: 0.9rem; opacity: 0.8;">${animeInfo.duracion} • ${animeInfo.categoria}</p>` 
-                    : '<p style="color: #FF6B6B;">(Sin anime configurado)</p>'}
+                    : `<p style="color: #FF6B6B;">${desc}</p>`} <!-- ← AQUÍ: Desc dinámica -->
                 <div class="card-button" style="margin-top: 10px; padding: 10px 20px; font-size: 0.9rem;">
                     ${tieneAnime ? '🎬 Ver opciones' : '📚 Solo vocabulario'}
                 </div>
@@ -507,7 +524,7 @@ function crearMazosAnimesUI(contenedor, subcontenedor) {
 }
 
 // ====================
-// FUNCIONES PARA AUDIOS
+// FUNCIONES PARA AUDIOS (CORREGIDO: DESCRIPCIONES EN SUBCONTENEDORES)
 // ====================
 
 function cargarSubcontenedoresAudios(contenedor) {
@@ -532,16 +549,18 @@ function crearSubcontenedoresAudiosUI(contenedor) {
     
     for (let i = 1; i <= 5; i++) {
         const tieneAudio = subcontenedoresDisponibles.includes(i.toString());
+        const subData = obtenerSubcontenedorAudio(contenedor, i); // ← NUEVO
+        const desc = subData.descripcion || (tieneAudio ? 'Opening disponible' : '(Sin audio configurado)'); // ← Fallback
         const audioInfo = tieneAudio ? obtenerAudio(contenedor, i) : null;
         
         html += `
             <div class="subcontenedor-item" onclick="${tieneAudio ? `seleccionarAccionAudio(${contenedor}, ${i})` : `cargarMazosAudios(${contenedor}, ${i})`}">
-                <div class="subcontenedor-img" style="background-image: url('https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=300&h=300&fit=crop')"></div>
+                <div class="subcontenedor-img" style="background-image: url('${subData.imagen}')"></div>
                 <h3>${tieneAudio ? audioInfo.titulo.split('-')[0] : `Audio ${i}`}</h3>
                 ${tieneAudio ? 
                     `<p><strong>${audioInfo.titulo}</strong></p>
                      <p style="font-size: 0.9rem; opacity: 0.8;">${audioInfo.artista} • ${audioInfo.duracion}</p>` 
-                    : '<p style="color: #FF6B6B;">(Sin audio configurado)</p>'}
+                    : `<p style="color: #FF6B6B;">${desc}</p>`} <!-- ← AQUÍ: Desc dinámica -->
                 <div class="card-button" style="margin-top: 10px; padding: 10px 20px; font-size: 0.9rem; background: linear-gradient(135deg, #FF6B6B, #FFD166);">
                     ${tieneAudio ? '🎵 Ver opciones' : '📚 Solo vocabulario'}
                 </div>
@@ -719,7 +738,7 @@ function crearMazosAudiosUI(contenedor, subcontenedor) {
 }
 
 // ====================
-// FUNCIONES PARA ASMR
+// FUNCIONES PARA ASMR (CORREGIDO: DESCRIPCIONES EN SUBCONTENEDORES)
 // ====================
 
 function cargarSubcontenedoresASMR(contenedor) {
@@ -744,17 +763,19 @@ function crearSubcontenedoresASMRUI(contenedor) {
     
     for (let i = 1; i <= 3; i++) {
         const tieneASMR = subcontenedoresDisponibles.includes(i.toString());
+        const subData = obtenerSubcontenedorASMR(contenedor, i); // ← NUEVO
+        const desc = subData.descripcion || (tieneASMR ? 'ASMR disponible' : '(Sin audio ASMR configurado)'); // ← Fallback
         const asmrInfo = tieneASMR ? obtenerASMR(contenedor, i) : null;
         
         html += `
             <div class="subcontenedor-item" onclick="${tieneASMR ? `seleccionarAccionASMR(${contenedor}, ${i})` : 'alert("Este sub-contenedor no tiene audio ASMR disponible")'}">
-                <div class="subcontenedor-img" style="background-image: url('https://images.unsplash.com/photo-1572860177022-8fda92a90b95?w=300&h=300&fit=crop')"></div>
+                <div class="subcontenedor-img" style="background-image: url('${subData.imagen}')"></div>
                 <h3>${tieneASMR ? asmrInfo.titulo.split(' ')[0] : `ASMR ${i}`}</h3>
                 ${tieneASMR ? 
                     `<p><strong>${asmrInfo.titulo}</strong></p>
                      <p style="font-size: 0.9rem; opacity: 0.8;">${asmrInfo.duracion} • ${asmrInfo.categoria}</p>
                      <p style="font-size: 0.8rem; opacity: 0.7;">🎤 ${asmrInfo.tipoVoz}</p>` 
-                    : '<p style="color: #FF6B6B;">(Sin audio ASMR configurado)</p>'}
+                    : `<p style="color: #FF6B6B;">${desc}</p>`} <!-- ← AQUÍ: Desc dinámica -->
                 <div class="card-button" style="margin-top: 10px; padding: 10px 20px; font-size: 0.9rem; background: linear-gradient(135deg, #9C27B0, #673AB7);">
                     ${tieneASMR ? '🎧 Escuchar ASMR' : 'Vacío'}
                 </div>
@@ -939,7 +960,7 @@ function crearReproductorASMRUI(asmrInfo) {
                         <div style="color: #9C27B0; font-size: 0.9rem;">🎤 Tipo de Voz</div>
                         <div style="font-weight: bold;">${asmrInfo.tipoVoz}</div>
                     </div>
-                    <div style="background: rgba(255, 255, 255, 0.08); padding: 15px; border-radius= 10px;">
+                    <div style="background: rgba(255, 255, 255, 0.08); padding: 15px; border-radius: 10px;">
                         <div style="color: #9C27B0; font-size: 0.9rem;">🏷️ Tags</div>
                         <div style="font-weight: bold;">${asmrInfo.tags.join(', ')}</div>
                     </div>
@@ -998,7 +1019,7 @@ function mostrarNotificacionASMR(mensaje) {
 }
 
 // ====================
-// FUNCIONES COMPARTIDAS MANGAS/VIDEOS/ASMR
+// FUNCIONES COMPARTIDAS MANGAS/VIDEOS/ASMR (CORREGIDO: DESCRIPCIONES EN SUBCONTENEDORES)
 // ====================
 
 function cargarSubcontenedores(contenedor) {
@@ -1021,12 +1042,14 @@ function crearSubcontenedoresUI(contenedor) {
     for (let i = 1; i <= 5; i++) {
         const tieneContenido = tieneVocabularioEnSubcontenedor(contenedor, i);
         const tieneManga = existeManga(contenedor, i);
+        const subData = obtenerSubcontenedorManga(contenedor, i); // ← NUEVO
+        const desc = subData.descripcion || '10 mazos de vocabulario'; // ← Fallback
         
         html += `
             <div class="subcontenedor-item">
-                <div class="subcontenedor-img" style="background-image: url('${obtenerImagenSubcontenedor(contenedor, i)}')"></div>
+                <div class="subcontenedor-img" style="background-image: url('${subData.imagen || obtenerImagenSubcontenedor(contenedor, i)}')"></div>
                 <h3>Sub-contenedor ${i}</h3>
-                <p>10 mazos de vocabulario</p>
+                <p>${desc}</p> <!-- ← AQUÍ: Desc dinámica -->
                 ${tieneContenido ? '' : '<p style="color: #FF6B6B; font-size: 0.9rem;">(Sin vocabulario)</p>'}
                 
                 <!-- BOTONES PARA ESTE SUB-CONTENEDOR -->
@@ -1070,16 +1093,18 @@ function crearSubcontenedoresVideosUI(contenedor) {
     
     for (let i = 1; i <= 5; i++) {
         const tieneVideo = subcontenedoresDisponibles.includes(i.toString());
+        const subData = obtenerSubcontenedorVideo(contenedor, i); // ← NUEVO
+        const desc = subData.descripcion || (tieneVideo ? 'Video disponible' : '(Sin video)'); // ← Fallback
         const videoInfo = tieneVideo ? obtenerVideo(contenedor, i) : null;
         
         html += `
             <div class="subcontenedor-item" onclick="${tieneVideo ? `cargarVideo(${contenedor}, ${i})` : 'alert("Este sub-contenedor no tiene video disponible")'}">
-                <div class="subcontenedor-img" style="background-image: url('${obtenerImagenSubcontenedor(contenedor, i)}')"></div>
+                <div class="subcontenedor-img" style="background-image: url('${subData.imagen || obtenerImagenSubcontenedor(contenedor, i)}')"></div>
                 <h3>Video ${i}</h3>
                 ${tieneVideo ? 
                     `<p><strong>${videoInfo.titulo}</strong></p>
                      <p style="font-size: 0.9rem; opacity: 0.8;">${videoInfo.duracion} • ${videoInfo.categoria}</p>` 
-                    : '<p style="color: #FF6B6B;">(Sin video)</p>'}
+                    : `<p style="color: #FF6B6B;">${desc}</p>`} <!-- ← AQUÍ: Desc dinámica -->
                 <div class="card-button" style="margin-top: 10px; padding: 10px 20px; font-size: 0.9rem;">
                     ${tieneVideo ? '▶️ Ver video' : 'Vacío'}
                 </div>
