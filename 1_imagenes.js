@@ -9,7 +9,7 @@ const imagenesDatabase = {
     
     contenedores: {
         // Contenedores 1-10 - Imágenes generales
-        1: 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=400&h=400&fit=crop&auto=format', // Libros
+        1: 'https://pbs.twimg.com/media/G23BILfWkAAgmsn?format=jpg&name=medium', // Libros
         2: 'https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=400&h=400&fit=crop&auto=format', // Persona
         3: 'https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=400&h=400&fit=crop&auto=format', // Estudio
         4: 'https://images.unsplash.com/photo-1531306728370-e2ebd9d7bb1c?w=400&h=400&fit=crop&auto=format', // Ciudad
