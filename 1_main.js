@@ -1487,7 +1487,17 @@ function verificarVocabularioDisponible(contenedor, subcontenedor, mazo) {
     const vocabulario = obtenerVocabulario(contenedor, subcontenedor, mazo);
     return vocabulario && vocabulario.length > 0;
 }
-
+function cargarPaginaRPG() {
+    modoActual = 'rpg';
+    ocultarHeader();
+    
+    const mangaSection = document.getElementById('manga-section');
+    mangaSection.style.display = 'block';
+    mangaSection.innerHTML = quintillizasRPG.cargarPaginaPrincipal();
+    
+    const botonVolver = crearBotonVolver(volverAlInicio);
+    mangaSection.insertBefore(botonVolver, mangaSection.firstChild);
+}
 // ====================
 // INICIALIZACIÓN
 // ====================
