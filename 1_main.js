@@ -1,3 +1,4 @@
+
 // ================================================
 // SISTEMA PRINCIPAL DE NAVEGACIÓN Y QUIZ
 // ================================================
@@ -13,7 +14,7 @@ let errores = 0;
 let esperandoSiguiente = false;
 
 // Variables para videos y animes
-let modoActual = 'manga'; // 'manga', 'video', 'anime', 'audio'
+let modoActual = 'manga'; // 'manga', 'video', 'anime', 'audio', 'asmr'
 let idiomaVideoActual = 'espanol'; // 'espanol', 'japones'
 
 // ====================
@@ -72,7 +73,7 @@ function actualizarContadorDineroInicio() {
 }
 
 // ====================
-// NAVEGACIÓN PRINCIPAL
+// NAVEGACIÓN PRINCIPAL - TODOS LOS MODOS
 // ====================
 
 function cargarPaginaMangas() {
@@ -118,6 +119,18 @@ function cargarPaginaAudios() {
     const mangaSection = document.getElementById('manga-section');
     mangaSection.style.display = 'block';
     mangaSection.innerHTML = crearContenedoresAudios();
+    
+    const botonVolver = crearBotonVolver(volverAlInicio);
+    mangaSection.insertBefore(botonVolver, mangaSection.firstChild);
+}
+
+function cargarPaginaASMR() {
+    modoActual = 'asmr';
+    ocultarHeader();
+    
+    const mangaSection = document.getElementById('manga-section');
+    mangaSection.style.display = 'block';
+    mangaSection.innerHTML = crearContenedoresASMR();
     
     const botonVolver = crearBotonVolver(volverAlInicio);
     mangaSection.insertBefore(botonVolver, mangaSection.firstChild);
@@ -244,6 +257,41 @@ function crearContenedoresAudios() {
     html += '</div>';
     return html;
 }
+
+// ====================
+// CREACIÓN DE UI - ASMR
+// ====================
+
+function crearContenedoresASMR() {
+    let html = '<h2 style="text-align: center; margin-bottom: 30px; color: #FFD166;">🎧 CONTENEDORES DE ASMR</h2>';
+    html += '<p style="text-align: center; margin-bottom: 30px; opacity: 0.8;">Audios relajantes para estudio y meditación</p>';
+    html += '<div class="manga-contenedores">';
+    
+    const contenedores = obtenerContenedoresASMRDisponibles();
+    const totalContenedores = Object.keys(contenedores).length || 4;
+    
+    for (let i = 1; i <= Math.max(totalContenedores, 4); i++) {
+        const tieneAudios = contenedores[i] && contenedores[i].length > 0;
+        
+        html += `
+            <div class="contenedor-item" onclick="cargarSubcontenedoresASMR(${i})">
+                <div class="contenedor-img" style="background-image: url('https://images.unsplash.com/photo-1572860177022-8fda92a90b95?w=400&h=400&fit=crop')"></div>
+                <div class="contenedor-numero">ASMR CONTAINER ${i}</div>
+                <p>${tieneAudios ? contenedores[i].length + ' sub-contenedores con audios' : '3 sub-contenedores disponibles'}</p>
+                <div class="card-button" style="background: linear-gradient(135deg, #9C27B0, #673AB7);">
+                    ${tieneAudios ? '🎧 Escuchar ASMR' : 'Explorar'}
+                </div>
+            </div>
+        `;
+    }
+    
+    html += '</div>';
+    return html;
+}
+
+// ====================
+// FUNCIONES PARA ANIMES
+// ====================
 
 function cargarSubcontenedoresAnimes(contenedor) {
     contenedorActual = contenedor;
@@ -642,7 +690,286 @@ function crearMazosAudiosUI(contenedor, subcontenedor) {
 }
 
 // ====================
-// FUNCIONES COMPARTIDAS MANGAS/VIDEOS
+// FUNCIONES PARA ASMR
+// ====================
+
+function cargarSubcontenedoresASMR(contenedor) {
+    contenedorActual = contenedor;
+    modoActual = 'asmr';
+    
+    const mangaSection = document.getElementById('manga-section');
+    mangaSection.innerHTML = crearSubcontenedoresASMRUI(contenedor);
+    
+    const botonVolver = crearBotonVolver(cargarPaginaASMR);
+    mangaSection.insertBefore(botonVolver, mangaSection.firstChild);
+}
+
+function crearSubcontenedoresASMRUI(contenedor) {
+    let html = `<h2 style="text-align: center; margin-bottom: 30px; color: #FFD166;">
+        🎧 CONTENEDOR ${contenedor} - SUB-CONTENEDORES DE ASMR
+    </h2>`;
+    html += '<div class="subcontenedores-grid">';
+    
+    const contenedores = obtenerContenedoresASMRDisponibles();
+    const subcontenedoresDisponibles = contenedores[contenedor] || [];
+    
+    for (let i = 1; i <= 3; i++) {
+        const tieneASMR = subcontenedoresDisponibles.includes(i.toString());
+        const asmrInfo = tieneASMR ? obtenerASMR(contenedor, i) : null;
+        
+        html += `
+            <div class="subcontenedor-item" onclick="${tieneASMR ? `seleccionarAccionASMR(${contenedor}, ${i})` : 'alert("Este sub-contenedor no tiene audio ASMR disponible")'}">
+                <div class="subcontenedor-img" style="background-image: url('https://images.unsplash.com/photo-1572860177022-8fda92a90b95?w=300&h=300&fit=crop')"></div>
+                <h3>${tieneASMR ? asmrInfo.titulo.split(' ')[0] : `ASMR ${i}`}</h3>
+                ${tieneASMR ? 
+                    `<p><strong>${asmrInfo.titulo}</strong></p>
+                     <p style="font-size: 0.9rem; opacity: 0.8;">${asmrInfo.duracion} • ${asmrInfo.categoria}</p>
+                     <p style="font-size: 0.8rem; opacity: 0.7;">🎤 ${asmrInfo.tipoVoz}</p>` 
+                    : '<p style="color: #FF6B6B;">(Sin audio ASMR configurado)</p>'}
+                <div class="card-button" style="margin-top: 10px; padding: 10px 20px; font-size: 0.9rem; background: linear-gradient(135deg, #9C27B0, #673AB7);">
+                    ${tieneASMR ? '🎧 Escuchar ASMR' : 'Vacío'}
+                </div>
+            </div>
+        `;
+    }
+    
+    html += '</div>';
+    
+    // Información sobre el contenedor
+    const estadisticas = obtenerEstadisticasASMR();
+    html += `
+        <div style="background: rgba(156, 39, 176, 0.1); border-radius: 15px; padding: 20px; margin: 30px 0; border-left: 5px solid #9C27B0;">
+            <h4 style="color: #FFD166; margin-bottom: 15px;">📊 Estadísticas ASMR</h4>
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px;">
+                <div style="text-align: center;">
+                    <div style="color: #9C27B0; font-size: 0.9rem;">🎧 Audios</div>
+                    <div style="font-weight: bold; font-size: 1.2rem;">${subcontenedoresDisponibles.length}/3</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="color: #9C27B0; font-size: 0.9rem;">⏱️ Duración Total</div>
+                    <div style="font-weight: bold; font-size: 1.2rem;">${calcularDuracionTotalASMRContenedor(contenedor)}</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="color: #9C27B0; font-size: 0.9rem;">📈 Completado</div>
+                    <div style="font-weight: bold; font-size: 1.2rem;">${Math.round((subcontenedoresDisponibles.length / 3) * 100)}%</div>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    return html;
+}
+
+function calcularDuracionTotalASMRContenedor(contenedor) {
+    let totalSegundos = 0;
+    const contenedores = obtenerContenedoresASMRDisponibles();
+    const subcontenedoresDisponibles = contenedores[contenedor] || [];
+    
+    subcontenedoresDisponibles.forEach(sub => {
+        const asmrInfo = obtenerASMR(contenedor, parseInt(sub));
+        if (asmrInfo && asmrInfo.duracion !== "0:00") {
+            const [minutos, segundos] = asmrInfo.duracion.split(':').map(Number);
+            totalSegundos += minutos * 60 + segundos;
+        }
+    });
+    
+    const minutos = Math.floor(totalSegundos / 60);
+    return `${minutos} min`;
+}
+
+function seleccionarAccionASMR(contenedor, subcontenedor) {
+    const asmrInfo = obtenerASMR(contenedor, subcontenedor);
+    
+    const accionesHTML = `
+        <div style="text-align: center; margin: 40px 0;">
+            <h3 style="color: #9C27B0; margin-bottom: 20px;">${asmrInfo.titulo}</h3>
+            <p style="opacity: 0.8; margin-bottom: 30px; max-width: 600px; margin-left: auto; margin-right: auto;">
+                ${asmrInfo.descripcion}
+            </p>
+            
+            <div style="display: flex; flex-direction: column; gap: 20px; max-width: 400px; margin: 0 auto;">
+                <button class="card-button" onclick="cargarReproductorASMR(${contenedor}, ${subcontenedor})" style="background: linear-gradient(135deg, #9C27B0, #673AB7);">
+                    🎧 Escuchar ASMR
+                </button>
+                
+                <button class="btn-atras-especifico" onclick="cargarSubcontenedoresASMR(${contenedor})">
+                    ↩️ Volver
+                </button>
+            </div>
+            
+            <!-- INFORMACIÓN DETALLADA -->
+            <div style="background: rgba(156, 39, 176, 0.1); border-radius: 15px; padding: 20px; margin-top: 40px; text-align: left;">
+                <h4 style="color: #FFD166; margin-bottom: 15px;">📋 Detalles del Audio</h4>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+                    <div>
+                        <span style="color: #9C27B0; font-size: 0.9rem;">🎵 Categoría:</span>
+                        <div style="font-weight: bold;">${asmrInfo.categoria}</div>
+                    </div>
+                    <div>
+                        <span style="color: #9C27B0; font-size: 0.9rem;">⏱️ Duración:</span>
+                        <div style="font-weight: bold;">${asmrInfo.duracion}</div>
+                    </div>
+                    <div>
+                        <span style="color: #9C27B0; font-size: 0.9rem;">🎤 Tipo de Voz:</span>
+                        <div style="font-weight: bold;">${asmrInfo.tipoVoz}</div>
+                    </div>
+                    <div>
+                        <span style="color: #9C27B0; font-size: 0.9rem;">🏷️ Tags:</span>
+                        <div style="font-weight: bold;">${asmrInfo.tags.join(', ')}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    document.getElementById('manga-section').innerHTML = `
+        <div style="max-width: 800px; margin: 0 auto; padding: 40px 20px;">
+            ${crearBotonVolver(() => cargarSubcontenedoresASMR(contenedor)).outerHTML}
+            ${accionesHTML}
+        </div>
+    `;
+}
+
+function cargarReproductorASMR(contenedor, subcontenedor) {
+    contenedorActual = contenedor;
+    subcontenedorActual = subcontenedor;
+    
+    const asmrInfo = obtenerASMR(contenedor, subcontenedor);
+    if (!asmrInfo || !asmrInfo.driveId) {
+        alert('No hay audio ASMR disponible en este sub-contenedor');
+        return;
+    }
+    
+    const mangaSection = document.getElementById('manga-section');
+    mangaSection.innerHTML = crearReproductorASMRUI(asmrInfo);
+    
+    const botonVolver = crearBotonVolver(() => seleccionarAccionASMR(contenedor, subcontenedor));
+    mangaSection.insertBefore(botonVolver, mangaSection.firstChild);
+}
+
+function crearReproductorASMRUI(asmrInfo) {
+    return `
+        <div class="reproductor-audio-container" style="max-width: 800px; margin: 40px auto; background: rgba(30, 30, 40, 0.95); border-radius: 25px; padding: 40px; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6); border: 3px solid #9C27B0;">
+            <h2 style="text-align: center; color: #FFD166; margin-bottom: 10px;">${asmrInfo.titulo}</h2>
+            <p style="text-align: center; opacity: 0.8; margin-bottom: 30px;">
+                ${asmrInfo.descripcion}
+            </p>
+            
+            <!-- REPRODUCTOR DE AUDIO DRIVE -->
+            <div style="background: rgba(156, 39, 176, 0.1); border-radius: 15px; padding: 25px; margin: 30px 0; text-align: center; border: 2px solid rgba(156, 39, 176, 0.3);">
+                <h3 style="color: #FFD166; margin-bottom: 20px;">🎧 Reproductor ASMR</h3>
+                <div style="margin: 20px 0;">
+                    <iframe 
+                        src="https://drive.google.com/file/d/${asmrInfo.driveId}/preview"
+                        width="100%"
+                        height="100"
+                        frameborder="0"
+                        style="border-radius: 10px; background: rgba(0, 0, 0, 0.5);"
+                        allow="autoplay"
+                    ></iframe>
+                </div>
+                <p style="opacity: 0.7; font-size: 0.9rem; margin-top: 15px;">
+                    🎯 Recomendación: Usa auriculares para mejor experiencia ASMR
+                </p>
+            </div>
+            
+            <!-- TIMESTAMPS PARA ASMR -->
+            ${asmrInfo.timestamps && asmrInfo.timestamps.length > 0 ? `
+                <div style="background: rgba(255, 255, 255, 0.05); border-radius: 15px; padding: 25px; margin: 30px 0; border-left: 5px solid #FFD166;">
+                    <h4 style="color: #FFD166; margin-bottom: 20px;">📍 Secciones del Audio</h4>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+                        ${asmrInfo.timestamps.map(ts => {
+                            const minutos = Math.floor(ts.tiempo / 60);
+                            const segundos = ts.tiempo % 60;
+                            return `
+                                <div class="timestamp-item" onclick="saltarASeccionASMR(${ts.tiempo})" style="background: rgba(156, 39, 176, 0.15); cursor: pointer;">
+                                    <div style="font-size: 1.3rem; color: #FFD166; margin-bottom: 5px;">
+                                        ${minutos.toString().padStart(2, '0')}:${segundos.toString().padStart(2, '0')}
+                                    </div>
+                                    <div>${ts.titulo}</div>
+                                </div>
+                            `;
+                        }).join('')}
+                    </div>
+                </div>
+            ` : ''}
+            
+            <!-- INFORMACIÓN DEL ASMR -->
+            <div style="background: rgba(255, 255, 255, 0.05); border-radius: 15px; padding: 20px; margin: 20px 0;">
+                <h4 style="color: #9C27B0; margin-bottom: 15px;">📊 Información del Audio ASMR</h4>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+                    <div style="background: rgba(255, 255, 255, 0.08); padding: 15px; border-radius: 10px;">
+                        <div style="color: #9C27B0; font-size: 0.9rem;">🎵 Categoría</div>
+                        <div style="font-weight: bold;">${asmrInfo.categoria}</div>
+                    </div>
+                    <div style="background: rgba(255, 255, 255, 0.08); padding: 15px; border-radius: 10px;">
+                        <div style="color: #9C27B0; font-size: 0.9rem;">⏱️ Duración</div>
+                        <div style="font-weight: bold;">${asmrInfo.duracion}</div>
+                    </div>
+                    <div style="background: rgba(255, 255, 255, 0.08); padding: 15px; border-radius: 10px;">
+                        <div style="color: #9C27B0; font-size: 0.9rem;">🎤 Tipo de Voz</div>
+                        <div style="font-weight: bold;">${asmrInfo.tipoVoz}</div>
+                    </div>
+                    <div style="background: rgba(255, 255, 255, 0.08); padding: 15px; border-radius: 10px;">
+                        <div style="color: #9C27B0; font-size: 0.9rem;">🏷️ Tags</div>
+                        <div style="font-weight: bold;">${asmrInfo.tags.join(', ')}</div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- CONSEJOS PARA ASMR -->
+            <div style="background: rgba(255, 209, 102, 0.1); border-radius: 15px; padding: 20px; margin: 20px 0; border-left: 5px solid #FFD166;">
+                <h4 style="color: #FFD166; margin-bottom: 15px;">💡 Consejos para disfrutar el ASMR</h4>
+                <ul style="padding-left: 20px; opacity: 0.8;">
+                    <li>Usa auriculares de buena calidad</li>
+                    <li>Encuentra un lugar tranquilo y cómodo</li>
+                    <li>Ajusta el volumen a un nivel agradable</li>
+                    <li>Cierra los ojos para mayor inmersión</li>
+                    <li>Practica respiración profunda mientras escuchas</li>
+                </ul>
+            </div>
+        </div>
+    `;
+}
+
+function saltarASeccionASMR(segundos) {
+    const iframe = document.querySelector('.reproductor-audio-container iframe');
+    if (iframe) {
+        const minutos = Math.floor(segundos / 60);
+        const segs = segundos % 60;
+        const urlConTiempo = iframe.src.split('#')[0] + `#t=${minutos}m${segs}s`;
+        iframe.src = urlConTiempo;
+        
+        // Mostrar notificación
+        mostrarNotificacionASMR(`⏱️ Saltando a ${minutos}:${segs.toString().padStart(2, '0')}`);
+    }
+}
+
+function mostrarNotificacionASMR(mensaje) {
+    const notif = document.createElement('div');
+    notif.textContent = mensaje;
+    notif.style.cssText = `
+        position: fixed;
+        top: 100px;
+        right: 20px;
+        background: linear-gradient(135deg, #9C27B0, #673AB7);
+        color: white;
+        padding: 15px 25px;
+        border-radius: 50px;
+        font-weight: bold;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+        z-index: 1001;
+        animation: slideIn 0.3s ease, fadeOut 0.3s ease 2s forwards;
+        font-size: 1.1rem;
+        border: 2px solid white;
+    `;
+    
+    document.body.appendChild(notif);
+    setTimeout(() => notif.remove(), 2500);
+}
+
+// ====================
+// FUNCIONES COMPARTIDAS MANGAS/VIDEOS/ASMR
 // ====================
 
 function cargarSubcontenedores(contenedor) {
@@ -875,11 +1202,12 @@ function mostrarPalabraQuiz() {
     let icono = '📚';
     if (modoActual === 'anime') icono = '🎌';
     if (modoActual === 'audio') icono = '🎵';
+    if (modoActual === 'asmr') icono = '🎧';
     
     quizSection.innerHTML = `
         <div class="quiz-container">
             <h2 style="text-align: center; color: #8A5AF7; margin-bottom: 20px;">
-                ${icono} ${modoActual === 'audio' ? 'AUDIO' : modoActual.toUpperCase()} • Mazo ${mazoActual} • Palabra ${indicePalabraActual + 1}/${palabrasActuales.length}
+                ${icono} ${modoActual === 'asmr' ? 'ASMR' : modoActual === 'audio' ? 'AUDIO' : modoActual.toUpperCase()} • Mazo ${mazoActual} • Palabra ${indicePalabraActual + 1}/${palabrasActuales.length}
             </h2>
             
             <div class="palabra-japonesa" id="palabra-japonesa">
@@ -1050,6 +1378,8 @@ function finalizarQuiz() {
         funcionVolver = () => cargarMazosAnimes(contenedorActual, subcontenedorActual);
     } else if (modoActual === 'audio') {
         funcionVolver = () => cargarMazosAudios(contenedorActual, subcontenedorActual);
+    } else if (modoActual === 'asmr') {
+        funcionVolver = () => volverAlInicio(); // ASMR no tiene quiz por ahora
     } else {
         funcionVolver = () => cargarMazos(contenedorActual, subcontenedorActual);
     }
@@ -1100,6 +1430,8 @@ function cancelarQuiz() {
             cargarMazosAnimes(contenedorActual, subcontenedorActual);
         } else if (modoActual === 'audio') {
             cargarMazosAudios(contenedorActual, subcontenedorActual);
+        } else if (modoActual === 'asmr') {
+            volverAlInicio();
         } else {
             cargarMazos(contenedorActual, subcontenedorActual);
         }
@@ -1113,6 +1445,8 @@ function volverAMazos() {
         cargarMazosAnimes(contenedorActual, subcontenedorActual);
     } else if (modoActual === 'audio') {
         cargarMazosAudios(contenedorActual, subcontenedorActual);
+    } else if (modoActual === 'asmr') {
+        volverAlInicio();
     } else {
         cargarMazos(contenedorActual, subcontenedorActual);
     }
@@ -1180,8 +1514,9 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     console.log('✅ Sistema completo cargado correctamente');
-    console.log('📚 Mangas, 🎬 Videos, 🎌 Animes, 🎵 Audios');
+    console.log('📚 Mangas, 🎬 Videos, 🎌 Animes, 🎵 Audios, 🎧 ASMR');
     console.log('📖 Lector de manga integrado');
     console.log('🏠 Botón casa configurado');
     console.log('💰 Sistema de dinero activo');
+    console.log('🎧 Sistema ASMR activo con timestamps');
 });
