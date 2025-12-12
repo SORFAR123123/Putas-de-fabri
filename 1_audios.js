@@ -10,7 +10,7 @@ const audiosDatabase = {
     // Sub-contenedor 1.1
     '1_1': {
         titulo: "🎌 Shingeki no Kyojin - Opening 1",
-        driveId: "1aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe", // REEMPLAZA con ID real MP3
+        driveId: "1tS-gKr6bf4MY5Yrw7zRvP2uP_zq9rsLl", // REEMPLAZA con ID real MP3
         descripcion: "Opening 1: 'Guren no Yumiya' by Linked Horizon",
         duracion: "1:30",
         artista: "Linked Horizon",
