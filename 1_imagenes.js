@@ -24,7 +24,8 @@ const sistemaDescriptivo = {
         // SUB-CONTENEDORES (5 por cada contenedor)
         subcontenedores: {
             // Contenedor 1
-            '1_1': { imagen: '', descripcion: '', nivel: '' },
+            '1_1': { imagen: 'https://pbs.twimg.com/media/G75foT0XgAERE6s?format=jpg&name=large',
+                    descripcion: 'Miku puta cachonda quiere hacer porno porque es una fracasada en la cocina y quiere kachar con sus hermanas en una porno', nivel: '' },
             '1_2': { imagen: '', descripcion: '', nivel: '' },
             '1_3': { imagen: '', descripcion: '', nivel: '' },
             '1_4': { imagen: '', descripcion: '', nivel: '' },
