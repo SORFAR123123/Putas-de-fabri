@@ -19,11 +19,13 @@ class QuintillizasRPG {
     inicializar() {
         console.log('🎮 RPG Quintillizas con imágenes inicializado');
         
+        // Exponer funciones al global scope
         window.seleccionarPersonajeRPG = (personajeId) => this.seleccionarPersonajeUI(personajeId);
         window.intentarMomentoIntimoRPG = (personajeId, momentoId) => this.intentarMomentoIntimo(personajeId, momentoId);
         window.comprarActividadRPG = (personajeId, actividadId) => this.comprarActividad(personajeId, actividadId);
         window.comprarCondonesRPG = (cantidad) => this.comprarCondones(cantidad);
-        window.verActividadRPG = (personajeId, actividadId) => this.cargarVideoActividad(personajeId, actividadId);
+        window.verVideoActividad = (personajeId, actividadId) => this.cargarVideoActividad(personajeId, actividadId);
+        window.cargarVideoNivel = (personajeId, nivel) => this.cargarVideoNivel(personajeId, nivel);
     }
 
     inicializarDatosPersonajes() {
@@ -212,7 +214,7 @@ class QuintillizasRPG {
                     },
                     { 
                         id: 'abrazo', 
-                        nombre: '🤗 Abrazo Protector', 
+                        nome: '🤗 Abrazo Protector', 
                         condonesRequeridos: 1,
                         videoId: '1tS-gKr6bf4MY5Yrw7zRvP2uP_zq9rsLl', 
                         afinidad: 12, 
@@ -529,15 +531,15 @@ class QuintillizasRPG {
                         Los condones son necesarios para momentos íntimos. Cada uno cuesta S/.20
                     </p>
                     <div style="display: flex; gap: 15px; flex-wrap: wrap;">
-                        <button class="card-button" onclick="quintillizasRPG.comprarCondones(1)" 
+                        <button class="card-button" onclick="comprarCondonesRPG(1)" 
                                 style="background: linear-gradient(135deg, #4CAF50, #2E7D32);">
                             1 Condón - S/.20
                         </button>
-                        <button class="card-button" onclick="quintillizasRPG.comprarCondones(5)" 
+                        <button class="card-button" onclick="comprarCondonesRPG(5)" 
                                 style="background: linear-gradient(135deg, #5864F5, #8A5AF7);">
                             5 Condones - S/.100
                         </button>
-                        <button class="card-button" onclick="quintillizasRPG.comprarCondones(10)" 
+                        <button class="card-button" onclick="comprarCondonesRPG(10)" 
                                 style="background: linear-gradient(135deg, #FF6B6B, #FFD166);">
                             10 Condones - S/.200
                         </button>
@@ -570,8 +572,8 @@ class QuintillizasRPG {
             
             return `
                 <div class="personaje-card" 
-                     style="border-color: ${personaje.color}; ${esSeleccionado ? 'border-width: 4px;' : ''}; background: rgba(255,255,255,0.05);"
-                     onclick="quintillizasRPG.seleccionarPersonajeUI('${id}')">
+                     style="border: 2px solid ${personaje.color}; ${esSeleccionado ? 'border-width: 4px; box-shadow: 0 0 20px ' + personaje.color + '50;' : ''}; background: rgba(255,255,255,0.05); border-radius: 15px; padding: 20px; cursor: pointer; transition: all 0.3s ease;"
+                     onclick="seleccionarPersonajeRPG('${id}')">
                     <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
                         <!-- IMAGEN DEL PERSONAJE -->
                         <div style="position: relative;">
@@ -753,8 +755,8 @@ class QuintillizasRPG {
                                         Éxito: ${probabilidadReal}%
                                     </p>
                                     <button class="card-button" 
-                                            onclick="quintillizasRPG.intentarMomentoIntimo('${this.personajeSeleccionado}', '${momento.id}')"
-                                            style="padding: 12px 20px; font-size: 1rem; background: linear-gradient(135deg, ${personaje.color}, #FF1493); width: 100%;"
+                                            onclick="intentarMomentoIntimoRPG('${this.personajeSeleccionado}', '${momento.id}')"
+                                            style="padding: 12px 20px; font-size: 1rem; background: linear-gradient(135deg, ${personaje.color}, #FF1493); width: 100%; border: none; border-radius: 10px; color: white; cursor: pointer; font-weight: bold;"
                                             ${!tieneCondones ? 'disabled style="opacity: 0.5; cursor: not-allowed;"' : ''}>
                                         ${tieneCondones ? '💖 INTENTAR' : `❌ NECESITAS ${momento.condonesRequeridos} CONDONES`}
                                     </button>
@@ -794,14 +796,14 @@ class QuintillizasRPG {
                                     ${yaComprada ? 
                                         `<div style="margin-top: 10px; padding: 10px; background: rgba(76, 175, 80, 0.2); border-radius: 8px; text-align: center;">
                                             <span style="color: #4CAF50; font-weight: bold;">✅ ACTIVIDAD COMPRADA</span>
-                                            <button class="card-button" onclick="quintillizasRPG.verVideoActividad('${this.personajeSeleccionado}', '${actividad.id}')"
-                                                    style="padding: 8px 15px; font-size: 0.9rem; background: linear-gradient(135deg, #5864F5, #8A5AF7); margin-top: 10px; width: 100%;">
+                                            <button class="card-button" onclick="verVideoActividad('${this.personajeSeleccionado}', '${actividad.id}')"
+                                                    style="padding: 8px 15px; font-size: 0.9rem; background: linear-gradient(135deg, #5864F5, #8A5AF7); margin-top: 10px; width: 100%; border: none; border-radius: 10px; color: white; cursor: pointer; font-weight: bold;">
                                                 🎬 VER VIDEO
                                             </button>
                                         </div>` 
                                         : 
-                                        `<button class="card-button" onclick="quintillizasRPG.comprarActividad('${this.personajeSeleccionado}', '${actividad.id}')"
-                                                style="padding: 12px 20px; font-size: 1rem; background: linear-gradient(135deg, #4CAF50, #2E7D32); margin-top: 10px;"
+                                        `<button class="card-button" onclick="comprarActividadRPG('${this.personajeSeleccionado}', '${actividad.id}')"
+                                                style="padding: 12px 20px; font-size: 1rem; background: linear-gradient(135deg, #4CAF50, #2E7D32); margin-top: 10px; border: none; border-radius: 10px; color: white; cursor: pointer; font-weight: bold;"
                                                 ${dinero < actividad.costo ? 'disabled style="opacity: 0.5; cursor: not-allowed;"' : ''}>
                                             ${dinero < actividad.costo ? '💰 DINERO INSUFICIENTE' : '✨ COMPRAR ACTIVIDAD'}
                                         </button>`
@@ -818,8 +820,8 @@ class QuintillizasRPG {
                     ${personaje.videosDisponibles.length > 0 ? 
                         `<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 15px;">
                             ${personaje.videosDisponibles.map((video, index) => `
-                                <div style="background: rgba(255,255,255,0.08); padding: 15px; border-radius: 10px; text-align: center; cursor: pointer;"
-                                     onclick="quintillizasRPG.cargarVideoNivel('${this.personajeSeleccionado}', ${index + 1})">
+                                <div style="background: rgba(255,255,255,0.08); padding: 15px; border-radius: 10px; text-align: center; cursor: pointer; transition: all 0.3s ease; border: 1px solid rgba(88, 100, 245, 0.3);"
+                                     onclick="cargarVideoNivel('${this.personajeSeleccionado}', ${index + 1})">
                                     <div style="font-size: 2rem; margin-bottom: 10px;">🎥</div>
                                     <div style="font-weight: bold;">${video.nombre}</div>
                                     <div style="font-size: 0.8rem; opacity: 0.7; margin-top: 5px;">Nivel ${index + 1}</div>
@@ -1014,10 +1016,6 @@ class QuintillizasRPG {
         return true;
     }
 
-    verVideoActividad(personajeId, actividadId) {
-        this.cargarVideoActividad(personajeId, actividadId);
-    }
-
     cargarVideoActividad(personajeId, actividadId) {
         const personaje = this.datosPersonajes[personajeId];
         const actividad = personaje.actividadesEspeciales.find(a => a.id === actividadId);
@@ -1067,7 +1065,10 @@ class QuintillizasRPG {
         console.log(`🛒 Comprados ${cantidad} condones por S/.${costoTotal}`);
         this.mostrarNotificacion(`🛍️ +${cantidad} condones comprados`);
         
-        this.actualizarVistaConPersonaje();
+        // Actualizar vista si estamos en vista de personaje
+        if (this.personajeSeleccionado) {
+            this.actualizarVistaConPersonaje();
+        }
         
         return true;
     }
@@ -1078,7 +1079,7 @@ class QuintillizasRPG {
 
     mostrarReproductorVideo(video, personaje) {
         const html = `
-            <div class="reproductor-container">
+            <div class="reproductor-container" style="max-width: 800px; margin: 0 auto; padding: 30px;">
                 <div style="text-align: center; margin-bottom: 20px;">
                     <img src="${personaje.imagen}" 
                          alt="${personaje.nombre}"
@@ -1091,20 +1092,20 @@ class QuintillizasRPG {
                     </p>
                 </div>
                 
-                <div class="video-wrapper">
+                <div class="video-wrapper" style="margin: 30px 0;">
                     <iframe 
                         id="rpg-video-iframe"
                         src="https://drive.google.com/file/d/${video.driveId}/preview"
                         frameborder="0"
                         allow="autoplay; encrypted-media"
                         allowfullscreen
-                        class="drive-iframe"
+                        style="width: 100%; height: 400px; border-radius: 15px; border: 3px solid ${personaje.color};"
                     ></iframe>
                 </div>
                 
                 <div style="text-align: center; margin-top: 30px;">
                     <button class="card-button" onclick="quintillizasRPG.volverAPersonaje()" 
-                            style="background: linear-gradient(135deg, ${personaje.color}, ${this.oscurecerColor(personaje.color)});">
+                            style="background: linear-gradient(135deg, ${personaje.color}, ${this.oscurecerColor(personaje.color)}); padding: 15px 30px; border: none; border-radius: 10px; color: white; cursor: pointer; font-weight: bold; font-size: 1.1rem;">
                         ↩️ Volver a ${personaje.nombre.split(' ')[0]}
                     </button>
                 </div>
@@ -1159,7 +1160,17 @@ class QuintillizasRPG {
     }
 
     oscurecerColor(color) {
-        return color;
+        // Convertir color hex a RGB
+        const r = parseInt(color.slice(1, 3), 16);
+        const g = parseInt(color.slice(3, 5), 16);
+        const b = parseInt(color.slice(5, 7), 16);
+        
+        // Oscurecer un 20%
+        const darkR = Math.max(0, r - 50);
+        const darkG = Math.max(0, g - 50);
+        const darkB = Math.max(0, b - 50);
+        
+        return `#${darkR.toString(16).padStart(2, '0')}${darkG.toString(16).padStart(2, '0')}${darkB.toString(16).padStart(2, '0')}`;
     }
 
     mostrarNotificacion(mensaje) {
@@ -1322,5 +1333,5 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log('🖼️ Imágenes cargadas para las 5 hermanas');
     console.log('💖 Sistema de momentos íntimos activo: Beso, Abrazo, Caricia, Levantar en el Aire, Confesión');
     console.log('🎬 Cada momento tiene su propio video y probabilidad de éxito');
+    console.log('💰 Sistema integrado con dinero del estudio');
 });
-[file content end]
