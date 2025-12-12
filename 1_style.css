@@ -883,3 +883,302 @@ body {
     font-size: 1.1rem;
     border: 2px solid white;
 }
+/* ================================================
+   ESTILOS PARA LECTOR DE MANGA
+   ================================================ */
+
+.lector-manga-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, #0a0a1a, #1a1a2e);
+    z-index: 9999;
+    overflow-y: auto;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* BARRA SUPERIOR */
+.lector-header {
+    position: sticky;
+    top: 0;
+    background: rgba(20, 20, 40, 0.95);
+    backdrop-filter: blur(15px);
+    padding: 15px 25px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 3px solid #8A5AF7;
+    z-index: 100;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+}
+
+.lector-btn {
+    background: linear-gradient(135deg, #FF6B6B, #FFD166);
+    color: #333;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 50px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+    border: 2px solid white;
+}
+
+.lector-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4);
+}
+
+.lector-info h2 {
+    color: #FFD166;
+    font-size: 1.5rem;
+    margin-bottom: 5px;
+    text-align: center;
+}
+
+.lector-info p {
+    color: rgba(255, 255, 255, 0.8);
+    font-size: 1.1rem;
+    text-align: center;
+}
+
+.lector-metadata {
+    display: flex;
+    gap: 15px;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 0.9rem;
+}
+
+/* VISOR DE MANGA */
+.visor-manga {
+    max-width: 1200px;
+    margin: 20px auto;
+    padding: 0 20px;
+}
+
+.manga-imagen-container {
+    position: relative;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    overflow: hidden;
+    min-height: 500px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+    border: 3px solid rgba(255, 255, 255, 0.1);
+}
+
+.manga-imagen {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: opacity 0.5s ease;
+}
+
+.manga-cargando {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    font-size: 1.2rem;
+}
+
+.spinner {
+    width: 50px;
+    height: 50px;
+    border: 5px solid rgba(255, 255, 255, 0.2);
+    border-top: 5px solid #8A5AF7;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin-bottom: 20px;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+/* CONTROLES FLOTANTES */
+.controles-flotantes {
+    position: fixed;
+    bottom: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 20px;
+    background: rgba(20, 20, 40, 0.9);
+    backdrop-filter: blur(10px);
+    padding: 15px 30px;
+    border-radius: 50px;
+    border: 2px solid #8A5AF7;
+    z-index: 100;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.control-btn {
+    background: linear-gradient(135deg, #5864F5, #8A5AF7);
+    color: white;
+    border: none;
+    padding: 12px 25px;
+    border-radius: 50px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    min-width: 120px;
+}
+
+.control-btn:hover:not(:disabled) {
+    background: linear-gradient(135deg, #8A5AF7, #FF6B6B);
+    transform: scale(1.05);
+}
+
+.control-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.contador-pagina {
+    color: #FFD166;
+    font-weight: bold;
+    font-size: 1.3rem;
+    min-width: 100px;
+    text-align: center;
+}
+
+/* MENÚ INFERIOR */
+.menu-inferior {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin: 30px 0;
+    flex-wrap: wrap;
+}
+
+.menu-btn {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 10px 20px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 0.9rem;
+}
+
+.menu-btn:hover:not(:disabled) {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-3px);
+}
+
+.menu-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+.menu-select {
+    background: rgba(255, 255, 255, 0.1);
+    color: white;
+    border: 1px solid #8A5AF7;
+    padding: 10px 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    min-width: 150px;
+}
+
+.menu-select option {
+    background: #1a1a2e;
+    color: white;
+}
+
+/* DESCRIPCIÓN */
+.manga-descripcion {
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 15px;
+    padding: 25px;
+    margin: 30px 0;
+    border-left: 5px solid #4CAF50;
+}
+
+.manga-descripcion p {
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.6;
+    margin-bottom: 10px;
+}
+
+.manga-aviso {
+    color: #FFD166 !important;
+    font-size: 0.9rem;
+    font-style: italic;
+    margin-top: 15px !important;
+}
+
+/* RESPONSIVE PARA LECTOR */
+@media (max-width: 768px) {
+    .lector-header {
+        flex-direction: column;
+        gap: 15px;
+        text-align: center;
+        padding: 15px;
+    }
+    
+    .controles-flotantes {
+        bottom: 80px;
+        padding: 12px 20px;
+        gap: 10px;
+    }
+    
+    .control-btn {
+        padding: 10px 15px;
+        min-width: 100px;
+        font-size: 0.9rem;
+    }
+    
+    .menu-inferior {
+        gap: 10px;
+    }
+    
+    .menu-btn, .menu-select {
+        font-size: 0.8rem;
+        padding: 8px 12px;
+    }
+    
+    .manga-imagen-container {
+        min-height: 300px;
+    }
+}
+
+@media (max-width: 480px) {
+    .controles-flotantes {
+        flex-direction: column;
+        width: 90%;
+        bottom: 60px;
+    }
+    
+    .control-btn {
+        width: 100%;
+    }
+    
+    .menu-inferior {
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    .menu-btn, .menu-select {
+        width: 100%;
+        max-width: 250px;
+    }
+}
