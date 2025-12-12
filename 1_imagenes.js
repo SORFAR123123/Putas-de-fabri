@@ -10,9 +10,9 @@ const sistemaDescriptivo = {
         // CONTENEDORES PRINCIPALES (1-10) - CON NOMBRES PERSONALIZADOS
         contenedores: {
             1: { 
-                nombre: 'CONTAINER 1',  // NOMBRE PERSONALIZADO
+                nombre: 'Quinti porneras ',  // NOMBRE PERSONALIZADO
                 imagen: 'https://pbs.twimg.com/media/GztU8Y3XsAA5Yzm?format=png&name=small', 
-                descripcion: 'Contenedor principal de mangas',
+                descripcion: 'Las mas culonas putas culonas',
                 tipo: 'manga'
             },
             2: { 
