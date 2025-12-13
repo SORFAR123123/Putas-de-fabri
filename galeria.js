@@ -5,7 +5,7 @@
 // ============ CONTENEDORES DE GALERÍA ============
 const contenedoresGaleria = {
     1: {
-        nombre: "Quintillizas putas de re mierda hijas de puta culonas tetoas buenos ortos buenas conchas buenas tetas buenas curvas",
+        nombre: "Nino mi novia putona",
         imagen: "https://pbs.twimg.com/media/G7qfpGZXAAAib4A?format=png&name=small",
         descripcion: "Rico orto rosado rica conch rosada tetas ricas",
         categoria: "La puta de fabrizio"
@@ -54,7 +54,7 @@ const galeriaDatabase = {
     },
     
     '1_2': {
-        titulo: "Galería de Arte",
+        titulo: "Nino Parque de las putas",
         descripcion: "Imágenes artísticas variadas",
         categoria: "Arte",
         imagen: "https://images.unsplash.com/photo-1545569341-9eb8b30979d9",
