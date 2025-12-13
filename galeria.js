@@ -5,16 +5,16 @@
 // ============ CONTENEDORES DE GALERÍA ============
 const contenedoresGaleria = {
     1: {
-        nombre: "Nino la mas hija de perra potona culona tetona buenas curvas lo tiene todo esa puta de 15 años dios que rico orto 1",
+        nombre: "Quintillizas putas de re mierda hijas de puta culonas tetoas buenos ortos buenas conchas buenas tetas buenas curvas",
         imagen: "https://pbs.twimg.com/media/G7qfpGZXAAAib4A?format=png&name=small",
         descripcion: "Rico orto rosado rica conch rosada tetas ricas",
         categoria: "La puta de fabrizio"
     },
     2: {
-        nombre: "GALERÍA 2",
-        imagen: "https://images.unsplash.com/photo-1513364776144-60967b0f800f",
-        descripcion: "Colecciones temáticas variadas",
-        categoria: "Temática"
+        nombre: "Kana mi hija putita ",
+        imagen: "https://pbs.twimg.com/media/G7fxVIUXsAA2Eom?format=png&name=900x900",
+        descripcion: "MI hija actriz saco la puteria de su madre Nino",
+        categoria: "Nuestra hija putita"
     },
     3: {
         nombre: "GALERÍA 3",
@@ -40,13 +40,13 @@ const contenedoresGaleria = {
 const galeriaDatabase = {
     // CONTENEDOR 1
     '1_1': {
-        titulo: "Quintillizas Gallery",
-        descripcion: "Colección especial de imágenes",
-        categoria: "Especial",
-        imagen: "https://pbs.twimg.com/media/G7wgYR9XQAAwo0T?format=jpg&name=large",
+        titulo: " Nino mi novia puta culona tetona putona buen culo buen  orto buena concha orto y conchas rosada buenas curvas mi putita putona",
+        descripcion: "Mi culona rica concha apretada suave que rica concha dios ",
+        categoria: "MI puta novia culonatetona buen culo",
+        imagen: "https://pbs.twimg.com/media/G7fsiFCXQAAhtKq?format=png&name=900x900",
         imagenes: [
-            { id: 1, url: "https://pbs.twimg.com/media/G7wgYR9XQAAwo0T?format=jpg&name=large" },
-            { id: 2, url: "https://pbs.twimg.com/media/G7wfStPXUAA1Ra2?format=png&name=360x360" },
+            { id: 1, url: "https://pbs.twimg.com/media/G22_08VWUAABii4?format=jpg&name=medium" },
+            { id: 2, url: "https://pbs.twimg.com/media/G22_08VWUAABii4?format=jpg&name=medium" },
             { id: 3, url: "https://pbs.twimg.com/media/G7wgF7aW4AAYsOQ?format=jpg&name=large" },
             { id: 4, url: "https://pbs.twimg.com/media/GztU8Y3XsAA5Yzm?format=png&name=small" },
             { id: 5, url: "https://pbs.twimg.com/media/G75foT0XgAERE6s?format=jpg&name=large" }
@@ -111,13 +111,13 @@ const galeriaDatabase = {
     
     // CONTENEDOR 2
     '2_1': {
-        titulo: "Colección Abstracta",
-        descripcion: "Arte abstracto y conceptual",
+        titulo: "Kaz mi hija zorrra",
+        descripcion: "Heredo la puteria de sumadre  y ",
         categoria: "Abstracto",
-        imagen: "https://images.unsplash.com/photo-1541961017774-22349e4a1262",
+        imagen: "https://pbs.twimg.com/media/G7fxREHW0AAxf0_?format=png&name=900x900",
         imagenes: [
-            { id: 1, url: "https://images.unsplash.com/photo-1541961017774-22349e4a1262" },
-            { id: 2, url: "https://images.unsplash.com/photo-1513364776144-60967b0f800f" },
+            { id: 1, url: "https://pbs.twimg.com/media/G7fxbA5WsAAMcky?format=png&name=900x900" },
+            { id: 2, url: "https://pbs.twimg.com/media/G7fxREHW0AAxf0_?format=png&name=900x900" },
             { id: 3, url: "https://images.unsplash.com/photo-1543857778-c4a1a569e388" },
             { id: 4, url: "https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0" },
             { id: 5, url: "https://images.unsplash.com/photo-1518834103328-371bb64201b4" }
