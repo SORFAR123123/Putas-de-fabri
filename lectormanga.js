@@ -108,7 +108,7 @@ let subcontenedorManga = null;
 // FUNCIONES PRINCIPALES
 // ================================================
 
-function iniciarLectorManga(contenedor, subcontenedor) {
+window.iniciarLectorManga = function(contenedor, subcontenedor) {
     contenedorManga = contenedor;
     subcontenedorManga = subcontenedor;
     
