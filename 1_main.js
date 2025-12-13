@@ -2123,38 +2123,6 @@ function verificarVocabularioDisponible(contenedor, subcontenedor, mazo) {
 }
 
 // ====================
-// FUNCIONES PARA LECTOR DE MANGA - CONECTADAS AL LECTOR REAL
-// ====================
-
-function iniciarLectorManga(contenedor, subcontenedor) {
-    // Verificar si el sistema del lector está cargado
-    if (typeof window.iniciarLectorManga === 'function') {
-        // Llamar a la función del lector (la de lectormanga.js)
-        window.iniciarLectorManga(contenedor, subcontenedor);
-    } else {
-        // Si no está cargado, cargar el script dinámicamente
-        console.log(`📖 Cargando lector de manga para ${contenedor}_${subcontenedor}`);
-        
-        // Crear un script para el lector si no existe
-        if (!document.getElementById('lectormanga-script')) {
-            const script = document.createElement('script');
-            script.id = 'lectormanga-script';
-            script.src = 'lectormanga.js';
-            script.onload = function() {
-                // Esperar un momento y luego iniciar el lector
-                setTimeout(() => {
-                    window.iniciarLectorManga(contenedor, subcontenedor);
-                }, 100);
-            };
-            document.head.appendChild(script);
-        } else {
-            // Si ya existe, llamar directamente
-            window.iniciarLectorManga(contenedor, subcontenedor);
-        }
-    }
-}
-
-// ====================
 // INICIALIZACIÓN COMPLETA
 // ====================
 
