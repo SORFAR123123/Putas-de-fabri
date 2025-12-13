@@ -2121,7 +2121,28 @@ function verificarVocabularioDisponible(contenedor, subcontenedor, mazo) {
     const vocabulario = obtenerVocabulario(contenedor, subcontenedor, mazo);
     return vocabulario && vocabulario.length > 0;
 }
+// ====================
+// NUEVO: FUNCIÓN PARA GALERÍA DE FOTOS
+// ====================
 
+function cargarPaginaGaleria() {
+    modoActual = 'galeria';
+    modoMazoDificil = false;
+    ocultarHeader();
+    
+    const mangaSection = document.getElementById('manga-section');
+    mangaSection.style.display = 'block';
+    
+    // Inicializar galería si no existe
+    if (typeof galeria === 'undefined') {
+        window.galeria = new GaleriaFotos().inicializar();
+    }
+    
+    mangaSection.innerHTML = galeria.crearUIContenedores();
+    
+    const botonVolver = crearBotonVolver(volverAlInicio);
+    mangaSection.insertBefore(botonVolver, mangaSection.firstChild);
+}
 // ====================
 // INICIALIZACIÓN COMPLETA
 // ====================
