@@ -1,5 +1,5 @@
 // ================================================
-// RPG COMPLETO: LAS QUINTILLIZAS NAKANO - SISTEMA DIFICULTOSO
+// RPG COMPLETO: LAS QUINTILLIZAS NAKANO - SISTEMA DIFICULTOSO (CORREGIDO)
 // ================================================
 
 class QuintillizasRPG {
@@ -35,15 +35,14 @@ class QuintillizasRPG {
                 imagen: 'https://pbs.twimg.com/media/G7qfcGRWkAAV74w?format=png&name=small',
                 nivel: 1,
                 exp: 0,
-                expNecesaria: 1000, // AUMENTADO: 1000 EXP para nivel 2
+                expNecesaria: 1000,
                 estadoAnimo: 'neutral',
                 afinidad: 0,
                 descripcion: 'La hermana mayor, responsable y coqueta. Le gusta cuidar a los demás.',
                 dificultad: 'media',
-                probabilidadBase: 40, // REDUCIDO: Más difícil
+                probabilidadBase: 40,
                 videosDisponibles: [],
-                nivelRequeridoParaIntimos: 3, // NUEVO: Nivel mínimo para momentos íntimos
-                // PRECIOS AUMENTADOS: Acorde a lo que ganas (2-3 soles por mazo)
+                nivelRequeridoParaIntimos: 3,
                 actividadesEspeciales: [
                     { id: 'cafe_romantico', nombre: '☕ Café Romántico', costo: 500, videoId: '1aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe', afinidad: 25, exp: 80, descripcion: 'Tómate un café íntimo con Ichika' },
                     { id: 'estudio_juntos', nombre: '📚 Estudio Juntos', costo: 300, videoId: '1-wYJYTaw0ZOKQy8BBPR7Fmhlzs0IVx9K', afinidad: 20, exp: 60, descripcion: 'Estudia con Ichika después de clases' },
@@ -59,8 +58,7 @@ class QuintillizasRPG {
                         afinidad: 50, 
                         exp: 200, 
                         descripcion: 'Una mamada profunda y apasionada',
-                        probabilidadExito: 30, // MUY BAJA
-                        probabilidadBase: 30,
+                        probabilidadBase: 0,
                         nivelRequerido: 3
                     },
                     { 
@@ -72,8 +70,7 @@ class QuintillizasRPG {
                         afinidad: 40, 
                         exp: 150, 
                         descripcion: 'Sexo oral hasta que se corra en tu boca',
-                        probabilidadExito: 25,
-                        probabilidadBase: 25,
+                        probabilidadBase: 0,
                         nivelRequerido: 4
                     },
                     { 
@@ -85,8 +82,7 @@ class QuintillizasRPG {
                         afinidad: 20, 
                         exp: 80, 
                         descripcion: 'Una caricia en sus partes más íntimas',
-                        probabilidadExito: 40,
-                        probabilidadBase: 40,
+                        probabilidadBase: 5,
                         nivelRequerido: 2
                     },
                     { 
@@ -98,8 +94,7 @@ class QuintillizasRPG {
                         afinidad: 80, 
                         exp: 300, 
                         descripcion: 'Dale duro hasta que grite tu nombre',
-                        probabilidadExito: 15, // MUY DIFÍCIL
-                        probabilidadBase: 15,
+                        probabilidadBase: 0,
                         nivelRequerido: 5
                     },
                     { 
@@ -111,8 +106,7 @@ class QuintillizasRPG {
                         afinidad: 100, 
                         exp: 500, 
                         descripcion: 'El momento final, correrse dentro de ella',
-                        probabilidadExito: 10, // EXTREMADAMENTE DIFÍCIL
-                        probabilidadBase: 10,
+                        probabilidadBase: 0,
                         nivelRequerido: 6
                     }
                 ]
@@ -123,14 +117,14 @@ class QuintillizasRPG {
                 imagen: 'https://pbs.twimg.com/media/G7qfpGZXAAAib4A?format=png&name=small',
                 nivel: 1,
                 exp: 0,
-                expNecesaria: 1200, // AÚN MÁS DIFÍCIL
+                expNecesaria: 1200,
                 estadoAnimo: 'tsundere',
-                afinidad: -50, // EMPIEZA CON AFINIDAD NEGATIVA
+                afinidad: -50,
                 descripcion: 'Tsundere clásica, difícil de conquistar. Cocina increíblemente bien.',
                 dificultad: 'alta',
-                probabilidadBase: 20, // MUY BAJA
+                probabilidadBase: 20,
                 videosDisponibles: [],
-                nivelRequeridoParaIntimos: 4, // MÁS ALTO QUE LAS DEMÁS
+                nivelRequeridoParaIntimos: 4,
                 actividadesEspeciales: [
                     { id: 'clases_cocina', nombre: '👩‍🍳 Clases de Cocina', costo: 600, videoId: '1tS-gKr6bf4MY5Yrw7zRvP2uP_zq9rsLl', afinidad: 40, exp: 90, descripcion: 'Aprende a cocinar con Nino' },
                     { id: 'pelicula_hogar', nombre: '🎬 Película en Casa', costo: 400, videoId: '1aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe', afinidad: 25, exp: 70, descripcion: 'Ve una película romántica en el sofá' },
@@ -146,8 +140,7 @@ class QuintillizasRPG {
                         afinidad: 60, 
                         exp: 250, 
                         descripcion: 'Una mamada a regañadientes pero intensa',
-                        probabilidadExito: 20,
-                        probabilidadBase: 20,
+                        probabilidadBase: 0,
                         nivelRequerido: 4
                     },
                     { 
@@ -159,8 +152,7 @@ class QuintillizasRPG {
                         afinidad: 90, 
                         exp: 400, 
                         descripcion: 'Dale duro mientras dice "no es que me guste"',
-                        probabilidadExito: 12,
-                        probabilidadBase: 12,
+                        probabilidadBase: 0,
                         nivelRequerido: 6
                     },
                     { 
@@ -172,8 +164,7 @@ class QuintillizasRPG {
                         afinidad: 120, 
                         exp: 600, 
                         descripcion: 'Correrse en su cara mientras te mira con odio',
-                        probabilidadExito: 8,
-                        probabilidadBase: 8,
+                        probabilidadBase: 0,
                         nivelRequerido: 7
                     }
                 ]
@@ -184,7 +175,7 @@ class QuintillizasRPG {
                 imagen: 'https://pbs.twimg.com/media/G7qfrrKWsAAv6ZT?format=png&name=small',
                 nivel: 1,
                 exp: 0,
-                expNecesaria: 800, // ALGO MÁS FÁCIL
+                expNecesaria: 800,
                 estadoAnimo: 'tímida',
                 afinidad: 10,
                 descripcion: 'Tímida y reservada, le gusta la historia japonesa y los audífonos.',
@@ -207,8 +198,7 @@ class QuintillizasRPG {
                         afinidad: 40, 
                         exp: 180, 
                         descripcion: 'Una mamada suave y llena de timidez',
-                        probabilidadExito: 35,
-                        probabilidadBase: 35,
+                        probabilidadBase: 5,
                         nivelRequerido: 2
                     },
                     { 
@@ -220,8 +210,7 @@ class QuintillizasRPG {
                         afinidad: 60, 
                         exp: 250, 
                         descripcion: 'Sexo lento y romántico',
-                        probabilidadExito: 30,
-                        probabilidadBase: 30,
+                        probabilidadBase: 0,
                         nivelRequerido: 3
                     },
                     { 
@@ -233,8 +222,7 @@ class QuintillizasRPG {
                         afinidad: 80, 
                         exp: 350, 
                         descripcion: 'Correrse dentro mientras te abraza',
-                        probabilidadExito: 20,
-                        probabilidadBase: 20,
+                        probabilidadBase: 0,
                         nivelRequerido: 5
                     }
                 ]
@@ -245,7 +233,7 @@ class QuintillizasRPG {
                 imagen: 'https://pbs.twimg.com/media/G7qfupkXUAAX0aS?format=png&name=small',
                 nivel: 1,
                 exp: 0,
-                expNecesaria: 700, // LA MÁS FÁCIL
+                expNecesaria: 700,
                 estadoAnimo: 'energica',
                 afinidad: 30,
                 descripcion: 'La más enérgica y deportista. Siempre lista para ayudar.',
@@ -268,8 +256,7 @@ class QuintillizasRPG {
                         afinidad: 45, 
                         exp: 200, 
                         descripcion: 'Una mamada llena de energía y entusiasmo',
-                        probabilidadExito: 40,
-                        probabilidadBase: 40,
+                        probabilidadBase: 10,
                         nivelRequerido: 2
                     },
                     { 
@@ -281,8 +268,7 @@ class QuintillizasRPG {
                         afinidad: 70, 
                         exp: 300, 
                         descripcion: 'Sexo rápido y apasionado',
-                        probabilidadExito: 35,
-                        probabilidadBase: 35,
+                        probabilidadBase: 0,
                         nivelRequerido: 3
                     },
                     { 
@@ -294,8 +280,7 @@ class QuintillizasRPG {
                         afinidad: 100, 
                         exp: 500, 
                         descripcion: 'Doble penetración con otra hermana (fantasía)',
-                        probabilidadExito: 15,
-                        probabilidadBase: 15,
+                        probabilidadBase: 0,
                         nivelRequerido: 6
                     }
                 ]
@@ -329,8 +314,7 @@ class QuintillizasRPG {
                         afinidad: 50, 
                         exp: 220, 
                         descripcion: 'Una mamada que sabe a fresas',
-                        probabilidadExito: 38,
-                        probabilidadBase: 38,
+                        probabilidadBase: 5,
                         nivelRequerido: 3
                     },
                     { 
@@ -342,8 +326,7 @@ class QuintillizasRPG {
                         afinidad: 65, 
                         exp: 280, 
                         descripcion: 'Sexo mientras come algo dulce',
-                        probabilidadExito: 32,
-                        probabilidadBase: 32,
+                        probabilidadBase: 0,
                         nivelRequerido: 4
                     },
                     { 
@@ -355,8 +338,7 @@ class QuintillizasRPG {
                         afinidad: 90, 
                         exp: 400, 
                         descripcion: 'Correrse en su boca y que se lo trague',
-                        probabilidadExito: 18,
-                        probabilidadBase: 18,
+                        probabilidadBase: 0,
                         nivelRequerido: 6
                     }
                 ]
@@ -391,7 +373,7 @@ class QuintillizasRPG {
         const personaje = this.datosPersonajes[personajeId];
         personaje.nivel += 1;
         personaje.exp = personaje.exp - personaje.expNecesaria;
-        personaje.expNecesaria = Math.round(personaje.expNecesaria * 1.8); // AUMENTADO: 80% más por nivel
+        personaje.expNecesaria = Math.round(personaje.expNecesaria * 1.8);
         
         console.log(`🎉 ¡${personaje.nombre} subió al nivel ${personaje.nivel}!`);
         this.mostrarNotificacion(`🎉 ${personaje.nombre} nivel ${personaje.nivel}! (Necesitas ${personaje.expNecesaria} EXP para el siguiente)`);
@@ -433,14 +415,14 @@ class QuintillizasRPG {
     }
 
     // ====================
-    // SISTEMA CON LÍMITES + CONDÓN 0.01 ESPECIAL
+    // SISTEMA CON LÍMITES FIJOS - CORREGIDO
     // ====================
 
     calcularProbabilidadMomento(personaje, momento, usarCondonEspecial = false) {
         // ============================================
-        // CONFIGURACIÓN DE LÍMITES
+        // CONFIGURACIÓN DE LÍMITES FIJOS - CORREGIDO
         // ============================================
-        const MAX_AFINIDAD = 200;     // AFINIDAD MÁXIMA POSIBLE
+        const MAX_AFINIDAD = 200;     // AFINIDAD MÁXIMA POSIBLE - NO SE PUEDE SOBREPASAR
         const MAX_NIVEL = 10;         // NIVEL MÁXIMO POSIBLE
         const MAX_EXITO_BASE = 80;    // ÉXITO MÁXIMO SIN CONDÓN ESPECIAL
         const MAX_EXITO_CON_CONDON = 100; // ÉXITO MÁXIMO CON CONDÓN 0.01
@@ -449,14 +431,20 @@ class QuintillizasRPG {
         const usarLimiteEspecial = usarCondonEspecial || momento.condones001Requeridos > 0;
         const limiteMaximo = usarLimiteEspecial ? MAX_EXITO_CON_CONDON : MAX_EXITO_BASE;
         
-        let probabilidad = momento.probabilidadBase;
+        // ============================================
+        // 0. PROBABILIDAD BASE DEL MOMENTO (máx 10%)
+        // ============================================
+        // Solo algunos momentos tienen probabilidad base (5-10%)
+        let probabilidad = Math.min(momento.probabilidadBase, 10);
         
         // ============================================
         // 1. CONTRIBUCIÓN POR AFINIDAD (máx 40%)
         // ============================================
-        // Ajustar afinidad: Nino empieza con -50, así que normalizamos
-        let afinidadEfectiva = Math.max(personaje.afinidad, 0); // No negativa
+        // Aplicar límite de 200 puntos máximo
+        let afinidadEfectiva = Math.max(personaje.afinidad, 0);
         afinidadEfectiva = Math.min(afinidadEfectiva, MAX_AFINIDAD);
+        
+        // Contribución: 0% a 40% según afinidad (0-200)
         const porcentajeAfinidad = (afinidadEfectiva / MAX_AFINIDAD) * 40;
         probabilidad += porcentajeAfinidad;
         
@@ -468,24 +456,24 @@ class QuintillizasRPG {
         probabilidad += porcentajeNivel;
         
         // ============================================
-        // 3. BONUS POR CONDÓN 0.01 (+30% y límite 100%)
+        // 3. BONUS POR CONDÓN 0.01 (+20% y límite 100%)
         // ============================================
         if (usarLimiteEspecial) {
-            probabilidad += 30; // +30% por condón 0.01
+            probabilidad += 20; // +20% por condón 0.01 (reducido de 30% para balance)
         }
         
         // ============================================
         // 4. AJUSTES POR ESTADO DE ÁNIMO (varía)
         // ============================================
         const ajustesEstado = {
-            'feliz': 15,      // +15% si está feliz
+            'feliz': 15,
             'neutral': 0,
-            'triste': -25,    // -25% si está triste
-            'enojada': -40,   // -40% si está enojada
-            'tsundere': -30,  // Nino especial
-            'tímida': -15,    // Miku especial
-            'energica': 10,   // Yotsuba especial
-            'glotona': 12     // Itsuki especial
+            'triste': -25,
+            'enojada': -40,
+            'tsundere': -30,
+            'tímida': -15,
+            'energica': 10,
+            'glotona': 12
         };
         
         probabilidad += ajustesEstado[personaje.estadoAnimo] || 0;
@@ -493,21 +481,21 @@ class QuintillizasRPG {
         // ============================================
         // 5. APLICAR LÍMITES Y REDONDEAR
         // ============================================
-        // Límite mínimo (nunca menos de 5% de éxito)
-        probabilidad = Math.max(5, probabilidad);
+        // Límite mínimo (nunca menos de 1% de éxito)
+        probabilidad = Math.max(1, probabilidad);
         
         // Límite máximo (80% sin condón, 100% con condón)
         probabilidad = Math.min(probabilidad, limiteMaximo);
         
-        // Redondear
+        // Redondear a entero
         const probabilidadFinal = Math.round(probabilidad);
         
         console.log(`🎯 Probabilidad ${momento.nombre}:`);
-        console.log(`   Base: ${momento.probabilidadBase}%`);
-        console.log(`   Afinidad: +${porcentajeAfinidad.toFixed(1)}%`);
-        console.log(`   Nivel: +${porcentajeNivel.toFixed(1)}%`);
+        console.log(`   Base momento: ${momento.probabilidadBase}%`);
+        console.log(`   Afinidad (${afinidadEfectiva}/200): +${porcentajeAfinidad.toFixed(1)}%`);
+        console.log(`   Nivel (${personaje.nivel}/10): +${porcentajeNivel.toFixed(1)}%`);
         console.log(`   Estado: ${ajustesEstado[personaje.estadoAnimo] || 0}%`);
-        console.log(`   Condón 0.01: ${usarLimiteEspecial ? '+30%' : 'No'}`);
+        console.log(`   Condón 0.01: ${usarLimiteEspecial ? '+20%' : 'No'}`);
         console.log(`   Límite: ${limiteMaximo}% → Final: ${probabilidadFinal}%`);
         
         return probabilidadFinal;
@@ -548,20 +536,16 @@ class QuintillizasRPG {
         let usarCondonEspecial = false;
         if (this.condones001 > 0 && momento.condones001Requeridos === 0) {
             const mensaje = `💎 ¿Quieres usar un CONDÓN 0.01?\n\n` +
-                           `• +30% probabilidad de éxito\n` +
-                           `• +80% afinidad obtenida (antes era 50%)\n` +
+                           `• +20% probabilidad de éxito\n` +
+                           `• +80% afinidad obtenida\n` +
                            `• Puede superar el límite del 80% (hasta 100%)\n` +
                            `• Se sentirá MÁS RICO para ${personaje.nombre.split(' ')[0]}\n\n` +
                            `Tienes: ${this.condones001} condones 0.01 disponibles`;
             
             usarCondonEspecial = confirm(mensaje);
-            
-            if (usarCondonEspecial) {
-                momento.condones001Requeridos = 1; // Temporalmente requerido
-            }
         }
         
-        // Calcular probabilidad real CON el nuevo sistema
+        // Calcular probabilidad real CON el sistema corregido
         const probabilidadReal = this.calcularProbabilidadMomento(personaje, momento, usarCondonEspecial);
         
         // Mostrar mensaje especial si es con condón 0.01
@@ -573,10 +557,10 @@ class QuintillizasRPG {
         const exito = Math.random() * 100 < probabilidadReal;
         
         if (exito) {
-            // ÉXITO - AUMENTAR BONUS POR CONDÓN ESPECIAL
+            // ÉXITO
             this.condones -= momento.condonesRequeridos;
             if (usarCondonEspecial || momento.condones001Requeridos > 0) {
-                this.condones001 -= momento.condones001Requeridos;
+                this.condones001 -= (usarCondonEspecial ? 1 : momento.condones001Requeridos);
             }
             this.guardarCondones();
             this.guardarCondones001();
@@ -586,25 +570,25 @@ class QuintillizasRPG {
             
             // BONUS ESPECIAL POR CONDÓN 0.01
             if (usarCondonEspecial || momento.condones001Requeridos > 0) {
-                afinidadGanada = Math.round(afinidadGanada * 1.8); // ¡+80% afinidad! (antes era 50%)
-                expGanada = Math.round(expGanada * 1.5); // +50% EXP
-                this.mostrarNotificacion(`💎 ¡CONDÓN 0.01! +80% afinidad, +50% EXP, +30% éxito`);
+                afinidadGanada = Math.round(afinidadGanada * 1.8);
+                expGanada = Math.round(expGanada * 1.5);
+                this.mostrarNotificacion(`💎 ¡CONDÓN 0.01! +80% afinidad, +50% EXP, +20% éxito`);
                 
-                // MENSAJE ESPECIAL: Se siente más rico
                 const mensajesRico = [
                     `💖 ${personaje.nombre.split(' ')[0]} gime más fuerte con el condón 0.01`,
                     `✨ ${personaje.nombre.split(' ')[0]} siente cada movimiento intensificado`,
                     `🔥 La sensación es tan buena que ${personaje.nombre.split(' ')[0]} tiembla`,
-                    `🎇 El condón 0.01 hace que ${personaje.nombre.split(' ')[0]} llegue al orgasmo más rápido`,
-                    `🥵 ${personaje.nombre.split(' ')[0]} no puede contener sus gemidos por lo rico que se siente`,
-                    `💦 ${personaje.nombre.split(' ')[0]} se corre más fuerte gracias al condón especial`
+                    `🎇 El condón 0.01 hace que ${personaje.nombre.split(' ')[0]} llegue al orgasmo más rápido`
                 ];
                 const mensajeAleatorio = mensajesRico[Math.floor(Math.random() * mensajesRico.length)];
                 this.mostrarNotificacion(mensajeAleatorio);
             }
             
             this.agregarEXP(personajeId, expGanada);
-            personaje.afinidad += afinidadGanada;
+            
+            // APLICAR LÍMITE DE AFINIDAD (200 máximo)
+            personaje.afinidad = Math.min(personaje.afinidad + afinidadGanada, 200);
+            
             personaje.estadoAnimo = 'feliz';
             
             console.log(`✅ ¡${momento.nombre} exitoso con ${personaje.nombre}!`);
@@ -617,13 +601,16 @@ class QuintillizasRPG {
             // FALLO
             this.condones -= momento.condonesRequeridos;
             if (usarCondonEspecial || momento.condones001Requeridos > 0) {
-                this.condones001 -= momento.condones001Requeridos;
+                this.condones001 -= (usarCondonEspecial ? 1 : momento.condones001Requeridos);
             }
             this.guardarCondones();
             this.guardarCondones001();
             
             personaje.estadoAnimo = 'enojada';
-            personaje.afinidad -= Math.floor(momento.afinidad / 3);
+            
+            // Pérdida de afinidad limitada (mínimo -100)
+            const perdidaAfinidad = Math.floor(momento.afinidad / 3);
+            personaje.afinidad = Math.max(personaje.afinidad - perdidaAfinidad, -100);
             
             console.log(`❌ ${momento.nombre} falló con ${personaje.nombre}`);
             this.mostrarNotificacion(`😠 ${momento.nombre} falló. ${personaje.nombre} se enojó. Pérdida de afinidad.`);
@@ -690,7 +677,7 @@ class QuintillizasRPG {
                     <h3 style="color: #5864F5; margin-bottom: 20px;">🛍️ TIENDA DE CONDONES</h3>
                     <p style="opacity: 0.8; margin-bottom: 20px;">
                         <strong>Condones Normales (S/.50):</strong> Para momentos íntimos básicos<br>
-                        <strong>Condones 0.01 (S/.200):</strong> ¡ESPECIAL! +30% éxito, +80% afinidad, hasta 100% de éxito
+                        <strong>Condones 0.01 (S/.200):</strong> ¡ESPECIAL! +20% éxito, +80% afinidad, hasta 100% de éxito
                     </p>
                     
                     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 30px;">
@@ -714,7 +701,7 @@ class QuintillizasRPG {
                             <h4 style="color: #5864F5; margin-bottom: 15px;">💎 Condones 0.01 ESPECIALES</h4>
                             <p style="font-size: 0.9rem; opacity: 0.8; margin-bottom: 15px;">
                                 <strong>¡EFECTOS ESPECIALES!</strong><br>
-                                • +30% probabilidad de éxito<br>
+                                • +20% probabilidad de éxito<br>
                                 • +80% afinidad obtenida<br>
                                 • Puede superar límite 80% (hasta 100%)<br>
                                 • ¡Se siente MÁS RICO para ellas!
@@ -737,25 +724,20 @@ class QuintillizasRPG {
                     </p>
                 </div>
                 
-                <!-- BOTÓN MISIONES -->
-                <div style="text-align: center; margin-bottom: 30px;">
-                    <button class="card-button" onclick="cargarPaginaMisiones()" 
-                            style="background: linear-gradient(135deg, #FFD166, #FF6B6B); padding: 15px 30px; font-size: 1.1rem;">
-                        🎯 VER MISIONES DIARIAS Y SEMANALES
-                    </button>
-                </div>
-                
                 <!-- INSTRUCCIONES ACTUALIZADAS -->
                 <div style="background: rgba(255, 209, 102, 0.1); border-radius: 20px; padding: 25px; border-left: 5px solid #FFD166;">
-                    <h4 style="color: #FFD166; margin-bottom: 15px;">📖 ¿CÓMO FUNCIONA EL SISTEMA CON LÍMITES?</h4>
+                    <h4 style="color: #FFD166; margin-bottom: 15px;">📖 SISTEMA CORREGIDO - ¡AHORA SÍ FUNCIONA!</h4>
                     <ol style="padding-left: 20px; opacity: 0.8;">
-                        <li><strong>Límite de éxito:</strong> Máximo 80% sin condón 0.01</li>
-                        <li><strong>Condón 0.01:</strong> ¡Puede llegar al 100%! +30% éxito</li>
-                        <li><strong>Afinidad:</strong> Contribuye hasta 40% (máx 200 puntos)</li>
-                        <li><strong>Nivel:</strong> Contribuye hasta 30% (máx nivel 10)</li>
+                        <li><strong>Éxito máximo:</strong> 80% sin condón | 100% con condón 0.01</li>
+                        <li><strong>Afinidad (0-200):</strong> Contribuye 40% máximo (solo con 200 puntos)</li>
+                        <li><strong>Nivel (1-10):</strong> Contribuye 30% máximo (solo nivel 10)</li>
+                        <li><strong>Condón 0.01:</strong> +20% éxito, +80% afinidad obtenida</li>
                         <li><strong>Estado de ánimo:</strong> Afecta de -40% a +15%</li>
-                        <li><strong>Condón especial:</strong> +80% afinidad obtenida (antes 50%)</li>
+                        <li><strong>Probabilidad base:</strong> Solo algunos momentos (0-10%)</li>
                     </ol>
+                    <p style="margin-top: 15px; color: #4CAF50; font-weight: bold;">
+                        ✅ ¡CORRECTO! Solo se llega al 80% con afinidad 200 y nivel 10
+                    </p>
                 </div>
             </div>
         `;
@@ -866,11 +848,15 @@ class QuintillizasRPG {
         const personaje = this.datosPersonajes[this.personajeSeleccionado];
         const dinero = sistemaEconomia.obtenerDinero();
         
-        // Calcular máximo de afinidad (200) y nivel (10)
         const maxAfinidad = 200;
         const maxNivel = 10;
         const porcentajeAfinidad = Math.min((personaje.afinidad / maxAfinidad) * 100, 100);
         const porcentajeNivel = Math.min((personaje.nivel / maxNivel) * 100, 100);
+        
+        // Calcular contribución actual
+        const contribucionAfinidad = (Math.min(Math.max(personaje.afinidad, 0), maxAfinidad) / maxAfinidad) * 40;
+        const contribucionNivel = (personaje.nivel / maxNivel) * 30;
+        const contribucionTotal = contribucionAfinidad + contribucionNivel;
         
         return `
             <div style="max-width: 1000px; margin: 0 auto; padding: 20px;">
@@ -945,11 +931,11 @@ class QuintillizasRPG {
                     </div>
                 </div>
                 
-                <!-- SISTEMA DE CONTRIBUCIÓN -->
+                <!-- SISTEMA DE CONTRIBUCIÓN CORREGIDO -->
                 <div style="background: rgba(88, 100, 245, 0.1); border-radius: 15px; padding: 25px; margin-bottom: 30px; border: 2px solid #5864F5;">
                     <h3 style="color: #5864F5; margin-bottom: 15px;">📊 SISTEMA DE CONTRIBUCIÓN AL ÉXITO</h3>
                     <p style="opacity: 0.8; margin-bottom: 20px;">
-                        Tu afinidad y nivel contribuyen al éxito de momentos íntimos:
+                        <strong>¡SISTEMA CORREGIDO!</strong> Solo se llega al 80% con afinidad 200 y nivel 10:
                     </p>
                     
                     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
@@ -963,7 +949,10 @@ class QuintillizasRPG {
                                 <div style="background: #4CAF50; width: ${porcentajeAfinidad}%; height: 100%;"></div>
                             </div>
                             <p style="text-align: center; opacity: 0.8; font-size: 0.9rem;">
-                                Contribuye: <strong>${Math.round(porcentajeAfinidad * 0.4)}%</strong> de 40% máximo
+                                Contribución: <strong>${contribucionAfinidad.toFixed(1)}%</strong> de 40% máximo
+                            </p>
+                            <p style="text-align: center; color: #FFD166; font-size: 0.8rem; margin-top: 5px;">
+                                ${personaje.afinidad >= 200 ? '✅ MÁXIMO ALCANZADO' : `Faltan ${200 - Math.max(personaje.afinidad, 0)} puntos`}
                             </p>
                         </div>
                         
@@ -977,14 +966,32 @@ class QuintillizasRPG {
                                 <div style="background: #FF1493; width: ${porcentajeNivel}%; height: 100%;"></div>
                             </div>
                             <p style="text-align: center; opacity: 0.8; font-size: 0.9rem;">
-                                Contribuye: <strong>${Math.round(porcentajeNivel * 0.3)}%</strong> de 30% máximo
+                                Contribución: <strong>${contribucionNivel.toFixed(1)}%</strong> de 30% máximo
+                            </p>
+                            <p style="text-align: center; color: #FFD166; font-size: 0.8rem; margin-top: 5px;">
+                                ${personaje.nivel >= 10 ? '✅ MÁXIMO ALCANZADO' : `Faltan ${10 - personaje.nivel} niveles`}
                             </p>
                         </div>
                     </div>
                     
-                    <div style="background: rgba(255, 209, 102, 0.1); padding: 15px; border-radius: 10px; text-align: center;">
-                        <p style="color: #FFD166; font-weight: bold;">
-                            💎 Con condón 0.01: +30% éxito, límite 100% | Sin condón: límite 80%
+                    <div style="background: rgba(255, 209, 102, 0.1); padding: 15px; border-radius: 10px; text-align: center; margin-bottom: 15px;">
+                        <p style="color: #FFD166; font-weight: bold; font-size: 1.1rem;">
+                            📊 CONTRIBUCIÓN TOTAL: ${contribucionTotal.toFixed(1)}% / 70%
+                        </p>
+                        <div style="background: rgba(255,255,255,0.1); height: 8px; border-radius: 4px; margin: 10px 0; overflow: hidden;">
+                            <div style="background: linear-gradient(135deg, #4CAF50, #FF1493); width: ${(contribucionTotal / 70) * 100}%; height: 100%;"></div>
+                        </div>
+                        <p style="font-size: 0.9rem; opacity: 0.8;">
+                            ${contribucionTotal >= 70 ? '✅ ¡MÁXIMA CONTRIBUCIÓN POSIBLE!' : `Faltan ${(70 - contribucionTotal).toFixed(1)}% para el máximo`}
+                        </p>
+                    </div>
+                    
+                    <div style="background: rgba(88, 100, 245, 0.2); padding: 15px; border-radius: 10px; text-align: center;">
+                        <p style="color: #5864F5; font-weight: bold;">
+                            💎 Con condón 0.01: +20% éxito, límite 100% | Sin condón: límite 80%
+                        </p>
+                        <p style="font-size: 0.9rem; opacity: 0.8; margin-top: 5px;">
+                            ✅ Estado de ánimo: ${this.obtenerEmojiEstado(personaje.estadoAnimo)} ${personaje.estadoAnimo}
                         </p>
                     </div>
                 </div>
@@ -994,8 +1001,7 @@ class QuintillizasRPG {
                     <div style="background: rgba(255, 20, 147, 0.1); border-radius: 15px; padding: 25px; margin-bottom: 30px; border: 2px solid #FF1493;">
                         <h3 style="color: #FF1493; margin-bottom: 15px;">💖 MOMENTOS ÍNTIMOS (🔞 +18)</h3>
                         <p style="opacity: 0.8; margin-bottom: 20px;">
-                            Intenta momentos íntimos con ${personaje.nombre.split(' ')[0]}. 
-                            <strong>Límite normal:</strong> 80% | <strong>Con condón 0.01:</strong> 100%
+                            <strong>¡SISTEMA CORREGIDO!</strong> Solo 80% con afinidad 200 y nivel 10. Con condón 0.01: 100%
                         </p>
                         
                         <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 15px; margin-bottom: 20px;">
@@ -1006,7 +1012,6 @@ class QuintillizasRPG {
                                 const puedeIntentar = tieneCondonesNormales && tieneCondonesEspeciales;
                                 const nivelSuficiente = personaje.nivel >= (momento.nivelRequerido || 1);
                                 
-                                // Mostrar límite con/sin condón
                                 const limiteMostrar = momento.condones001Requeridos > 0 ? "100%" : "80%";
                                 
                                 return `
@@ -1047,7 +1052,16 @@ class QuintillizasRPG {
                                 Condones disponibles: ${this.condones}🛒 | Condones 0.01: ${this.condones001}💎
                             </p>
                             <p style="text-align: center; opacity: 0.7; font-size: 0.8rem; margin-top: 5px;">
-                                💎 <strong>Condón 0.01:</strong> +30% éxito, +80% afinidad, límite 100%
+                                💎 <strong>Condón 0.01:</strong> +20% éxito, +80% afinidad, límite 100%
+                            </p>
+                        </div>
+                        
+                        <div style="background: rgba(76, 175, 80, 0.1); padding: 15px; border-radius: 10px;">
+                            <p style="text-align: center; color: #4CAF50; font-weight: bold;">
+                                ✅ ¡SISTEMA CORREGIDO! Solo 80% con AFINIDAD 200 y NIVEL 10
+                            </p>
+                            <p style="text-align: center; font-size: 0.9rem; opacity: 0.8; margin-top: 5px;">
+                                Tu contribución: ${contribucionTotal.toFixed(1)}% (Afinidad: ${contribucionAfinidad.toFixed(1)}% + Nivel: ${contribucionNivel.toFixed(1)}%)
                             </p>
                         </div>
                     </div>
@@ -1130,9 +1144,9 @@ class QuintillizasRPG {
                         <div style="background: rgba(255,255,255,0.08); padding: 15px; border-radius: 10px;">
                             <div style="color: ${personaje.color}; font-size: 0.9rem;">CONTRIBUCIÓN</div>
                             <div style="font-size: 1.5rem; font-weight: bold;">
-                                ${Math.round((personaje.afinidad/200)*40 + (personaje.nivel/10)*30)}%
+                                ${contribucionTotal.toFixed(1)}%
                             </div>
-                            <div style="font-size: 0.8rem; opacity: 0.7;">Afinidad+Nivel</div>
+                            <div style="font-size: 0.8rem; opacity: 0.7;">Afinidad+Nivel / 70%</div>
                         </div>
                         <div style="background: rgba(255,255,255,0.08); padding: 15px; border-radius: 10px;">
                             <div style="color: ${personaje.color}; font-size: 0.9rem;">VIDEOS</div>
@@ -1173,7 +1187,8 @@ class QuintillizasRPG {
         
         sistemaEconomia.agregarDinero(-actividad.costo);
         
-        personaje.afinidad += actividad.afinidad;
+        // APLICAR LÍMITE DE AFINIDAD (200 máximo)
+        personaje.afinidad = Math.min(personaje.afinidad + actividad.afinidad, 200);
         this.agregarEXP(personajeId, actividad.exp);
         personaje.estadoAnimo = 'feliz';
         
@@ -1270,7 +1285,7 @@ class QuintillizasRPG {
         this.guardarCondones001();
         
         console.log(`💎 Comprados ${cantidad} condones 0.01 por S/.${costoTotal}`);
-        this.mostrarNotificacion(`💎 +${cantidad} condones 0.01 comprados (+30% éxito, +80% afinidad, límite 100%)`);
+        this.mostrarNotificacion(`💎 +${cantidad} condones 0.01 comprados (+20% éxito, +80% afinidad, límite 100%)`);
         
         if (this.personajeSeleccionado) {
             this.actualizarVistaConPersonaje();
@@ -1492,7 +1507,7 @@ sistemaEconomia.agregarDinero = function(cantidad) {
     const resultado = agregarDineroOriginal.call(this, cantidad);
     
     if (cantidad > 0 && window.quintillizasRPG && window.quintillizasRPG.personajeSeleccionado) {
-        const expPorSoles = 10; // REDUCIDO: 10 EXP por sol (antes 20)
+        const expPorSoles = 10;
         const expGanada = Math.round(cantidad * expPorSoles);
         
         window.quintillizasRPG.agregarEXP(
@@ -1515,9 +1530,9 @@ const quintillizasRPG = new QuintillizasRPG();
 // Inicializar al cargar
 document.addEventListener('DOMContentLoaded', function() {
     quintillizasRPG.inicializar();
-    console.log('🎮 RPG Quintillizas - Sistema con límites activado');
-    console.log('📊 Límites: Afinidad 0-200 | Nivel 1-10');
-    console.log('🎯 Éxito máximo: 80% sin condón | 100% con condón 0.01');
-    console.log('💎 Condón 0.01: +30% éxito, +80% afinidad, se siente más rico');
-    console.log('💖 Contribución: Afinidad (40% max) + Nivel (30% max) + Estado (+/-) + Condón (+30%)');
+    console.log('🎮 RPG Quintillizas - Sistema CORREGIDO activado');
+    console.log('✅ Límites fijos: Afinidad 0-200 | Nivel 1-10');
+    console.log('✅ Éxito máximo: 80% sin condón (solo con afinidad 200 y nivel 10)');
+    console.log('✅ Condón 0.01: +20% éxito, +80% afinidad, límite 100%');
+    console.log('✅ Probabilidades base: 0-10% (solo momentos fáciles)');
 });
