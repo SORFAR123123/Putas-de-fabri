@@ -46,7 +46,7 @@ const galeriaDatabase = {
         imagen: "https://pbs.twimg.com/media/G7fsiFCXQAAhtKq?format=png&name=900x900",
         imagenes: [
             { id: 1, url: "https://pbs.twimg.com/media/GrNWikuWsAAVYtt?format=jpg&name=4096x4096" },
-            { id: 2, url: "https://pbs.twimg.com/media/G22_08VWUAABii4?format=jpg&name=medium" },
+            { id: 2, url: "https://cdn.discordapp.com/attachments/612403179140808705/1449452873040662768/G8D0bWpXQAYSH9s.png?ex=693ef3ae&is=693da22e&hm=c49ffe7ddcd537a0ad59726d707499324bd1cfe9f7ae1fe340ade7d8f0a2b415&" },
             { id: 3, url: "https://pbs.twimg.com/media/G7wgF7aW4AAYsOQ?format=jpg&name=large" },
             { id: 4, url: "https://pbs.twimg.com/media/GztU8Y3XsAA5Yzm?format=png&name=small" },
             { id: 5, url: "https://pbs.twimg.com/media/G75foT0XgAERE6s?format=jpg&name=large" }
