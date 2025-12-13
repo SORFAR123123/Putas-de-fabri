@@ -17,8 +17,8 @@ class FantasiaRPG {
                 statPreferido: 'fuerza',
                 statSecundario: 'defensa',
                 descripcion: 'Le gustan los hombres fuertes y protectores',
-                bonusPorStat: 2.5, // % extra por cada punto del stat preferido
-                bonusMaximo: 25, // % máximo extra
+                bonusPorStat: 2.5,
+                bonusMaximo: 25,
                 frase: '💖 Ichika se siente más atraída por tu fuerza...'
             },
             'nino': {
@@ -69,15 +69,15 @@ class FantasiaRPG {
                 vidaMaxima: 100,
                 energia: 50,
                 energiaMaxima: 50,
-                fuerza: 10,      // ATAQUE FÍSICO
-                defensa: 5,      // REDUCCIÓN DE DAÑO
-                velocidad: 8,    // QUIÉN ATACA PRIMERO
-                inteligencia: 6, // ATAQUE MÁGICO
-                resistencia: 7,  // RESISTENCIA A EFECTOS
-                carisma: 5       // PARA CONVENCER/ESQUIVAR
+                fuerza: 10,
+                defensa: 5,
+                velocidad: 8,
+                inteligencia: 6,
+                resistencia: 7,
+                carisma: 5
             },
             
-            // EQUIPO (se implementará después)
+            // EQUIPO
             equipo: {
                 arma: null,
                 armadura: null,
@@ -106,7 +106,7 @@ class FantasiaRPG {
     }
 
     // ====================
-    // SISTEMA DE STATS MANUALES (POR EJERCICIO REAL)
+    // SISTEMA DE STATS MANUALES
     // ====================
 
     subirStat(stat) {
@@ -125,7 +125,6 @@ class FantasiaRPG {
             
             this.mostrarNotificacion(`↑ ${nombresStats[stat] || stat}: ${this.jugador.stats[stat]}`);
             
-            // Recalcular bonificaciones con la novia actual
             if (this.noviaSeleccionada) {
                 this.mostrarBonusStatsNovia();
             }
@@ -147,79 +146,7 @@ class FantasiaRPG {
     }
 
     // ====================
-    // BONIFICACIONES POR STATS CON NOVIAS
-    // ====================
-
-    calcularBonusStatsNovia(personajeId) {
-        if (!personajeId || !this.preferenciasStats[personajeId]) {
-            return 0;
-        }
-        
-        const preferencia = this.preferenciasStats[personajeId];
-        const statPreferido = this.jugador.stats[preferencia.statPreferido] || 0;
-        const statSecundario = this.jugador.stats[preferencia.statSecundario] || 0;
-        
-        // Bonus principal por stat preferido
-        let bonusPrincipal = Math.min(
-            statPreferido * preferencia.bonusPorStat,
-            preferencia.bonusMaximo
-        );
-        
-        // Bonus secundario (50% del principal)
-        let bonusSecundario = Math.min(
-            statSecundario * (preferencia.bonusPorStat * 0.5),
-            preferencia.bonusMaximo * 0.5
-        );
-        
-        const bonusTotal = bonusPrincipal + bonusSecundario;
-        
-        console.log(`💖 Bonus ${personajeId}: ${bonusTotal.toFixed(1)}%`);
-        console.log(`   ${preferencia.statPreferido}: ${statPreferido} → ${bonusPrincipal.toFixed(1)}%`);
-        console.log(`   ${preferencia.statSecundario}: ${statSecundario} → ${bonusSecundario.toFixed(1)}%`);
-        
-        return Math.round(bonusTotal);
-    }
-
-    mostrarBonusStatsNovia() {
-        if (!this.noviaSeleccionada || !this.preferenciasStats[this.noviaSeleccionada]) {
-            return;
-        }
-        
-        const preferencia = this.preferenciasStats[this.noviaSeleccionada];
-        const bonus = this.calcularBonusStatsNovia(this.noviaSeleccionada);
-        
-        if (bonus > 0) {
-            this.mostrarNotificacion(
-                `${preferencia.frase}\n` +
-                `✨ +${bonus}% en momentos íntimos`
-            );
-        }
-    }
-
-    // ====================
-    // INTEGRACIÓN CON RPG QUINTILLIZAS
-    // ====================
-
-    obtenerBonusMomentoIntimo(personajeId) {
-        const bonus = this.calcularBonusStatsNovia(personajeId);
-        
-        // También aplicar bonus por nivel del jugador
-        const bonusNivel = this.jugador.nivel * 0.5; // +0.5% por nivel
-        const bonusTotal = bonus + bonusNivel;
-        
-        console.log(`🎯 Bonus total para ${personajeId}: ${bonusTotal.toFixed(1)}%`);
-        
-        return {
-            porcentaje: bonusTotal,
-            desglose: {
-                stats: bonus,
-                nivel: bonusNivel
-            }
-        };
-    }
-
-    // ====================
-    // SISTEMA DE COMBATE MEJORADO
+    // SISTEMA DE COMBATE CORREGIDO
     // ====================
 
     iniciarCombate(tipoEnemigo) {
@@ -289,7 +216,7 @@ class FantasiaRPG {
         this.enemigoActual = JSON.parse(JSON.stringify(enemigos[tipoEnemigo] || enemigos['slime']));
         
         this.combateActual = {
-            enTurno: 'jugador', // jugador o enemigo
+            enTurno: 'jugador',
             turno: 1,
             jugadorVivo: true,
             enemigoVivo: true,
@@ -298,69 +225,81 @@ class FantasiaRPG {
         
         this.mensajesCombate = [];
         this.agregarMensajeCombate(`⚔️ COMBATE INICIADO: ${this.jugador.nombre} vs ${this.enemigoActual.nombre}`);
+        this.agregarMensajeCombate(`🎯 Turno del jugador. ¡Ataca primero!`);
         
         return this.enemigoActual;
     }
 
     atacarEnemigo(habilidadId = 'ataque_basico') {
-        if (!this.combateActual || !this.combateActual.jugadorVivo) return false;
+        if (!this.combateActual || !this.combateActual.jugadorVivo) {
+            console.error("No hay combate activo o jugador no vivo");
+            return false;
+        }
+        
+        if (!this.enemigoActual) {
+            console.error("No hay enemigo actual");
+            return false;
+        }
         
         const habilidad = this.jugador.habilidades.find(h => h.id === habilidadId) || 
                          this.jugador.habilidades[0];
         
-        // Calcular daño basado en fuerza y habilidad
         let daño = Math.floor(this.jugador.stats.fuerza * (habilidad.poder || 1.0));
-        
-        // Reducir por defensa enemiga
+        daño = Math.floor(daño * (0.8 + Math.random() * 0.4));
         daño = Math.max(1, daño - this.enemigoActual.defensa);
         
-        // Aplicar daño
         this.enemigoActual.vida = Math.max(0, this.enemigoActual.vida - daño);
         
-        this.agregarMensajeCombate(
-            `🎯 ${this.jugador.nombre} usa ${habilidad.nombre} y causa ${daño} de daño!`
-        );
+        this.agregarMensajeCombate(`🎯 ${this.jugador.nombre} usa ${habilidad.nombre} y causa ${daño} de daño!`);
         
-        // Verificar si enemigo murió
         if (this.enemigoActual.vida <= 0) {
             this.enemigoActual.vida = 0;
             this.combateActual.enemigoVivo = false;
             this.agregarMensajeCombate(`💀 ${this.enemigoActual.nombre} ha sido derrotado!`);
             
-            // Dar recompensas
             this.darRecompensaCombate();
+            
+            setTimeout(() => {
+                this.finalizarCombate('victoria');
+                this.actualizarUI();
+            }, 2000);
             
             return 'victoria';
         }
         
-        // Turno del enemigo
-        this.turnoEnemigo();
+        this.agregarMensajeCombate(`❤️ ${this.enemigoActual.nombre}: ${this.enemigoActual.vida}/${this.enemigoActual.vidaMaxima} HP`);
+        
+        setTimeout(() => {
+            this.turnoEnemigo();
+            this.actualizarUI();
+        }, 1000);
         
         return 'continuar';
     }
 
     turnoEnemigo() {
-        if (!this.combateActual.enemigoVivo) return;
+        if (!this.combateActual.enemigoVivo) return 'enemigo_muerto';
         
-        // Enemigo ataca
-        const dañoEnemigo = Math.max(1, this.enemigoActual.fuerza - this.jugador.stats.defensa);
-        this.jugador.stats.vida = Math.max(0, this.jugador.stats.vida - dañoEnemigo);
+        const dañoEnemigo = Math.floor(this.enemigoActual.fuerza * (0.8 + Math.random() * 0.4));
+        let dañoFinal = Math.max(1, dañoEnemigo - this.jugador.stats.defensa);
         
-        this.agregarMensajeCombate(
-            `👹 ${this.enemigoActual.nombre} ataca y causa ${dañoEnemigo} de daño!`
-        );
+        this.jugador.stats.vida = Math.max(0, this.jugador.stats.vida - dañoFinal);
         
-        // Verificar si jugador murió
+        this.agregarMensajeCombate(`👹 ${this.enemigoActual.nombre} ataca y causa ${dañoFinal} de daño!`);
+        
         if (this.jugador.stats.vida <= 0) {
             this.jugador.stats.vida = 0;
             this.combateActual.jugadorVivo = false;
             this.agregarMensajeCombate(`💀 ${this.jugador.nombre} ha sido derrotado...`);
             
-            // Penalización por muerte
-            this.muerteJugador();
+            setTimeout(() => {
+                this.muerteJugador();
+            }, 1500);
             
             return 'derrota';
         }
+        
+        this.agregarMensajeCombate(`❤️ ${this.jugador.nombre}: ${this.jugador.stats.vida}/${this.jugador.stats.vidaMaxima} HP`);
         
         return 'continuar';
     }
@@ -377,8 +316,10 @@ class FantasiaRPG {
             this.agregarMensajeCombate(`❤️ Usas poción de vida: +${curacion} HP`);
             this.guardarJugador();
             
-            // Turno del enemigo después de curarse
-            this.turnoEnemigo();
+            setTimeout(() => {
+                this.turnoEnemigo();
+                this.actualizarUI();
+            }, 1000);
             
             return true;
         }
@@ -407,10 +348,14 @@ class FantasiaRPG {
         if (exito) {
             this.agregarMensajeCombate(`🏃‍♂️ ¡Logras huir del combate!`);
             this.finalizarCombate('huida');
+            setTimeout(() => this.actualizarUI(), 1000);
             return true;
         } else {
             this.agregarMensajeCombate(`❌ Intentas huir pero fallas...`);
-            this.turnoEnemigo();
+            setTimeout(() => {
+                this.turnoEnemigo();
+                this.actualizarUI();
+            }, 1000);
             return false;
         }
     }
@@ -420,67 +365,58 @@ class FantasiaRPG {
     // ====================
 
     darRecompensaCombate() {
-        // Experiencia
-        this.jugador.exp += this.enemigoActual.exp;
+        if (!this.enemigoActual) return;
         
-        // Dinero
+        const expGanada = this.enemigoActual.exp;
         const dineroGanado = this.enemigoActual.dinero;
-        this.jugador.dinero += dineroGanado;
         
-        // Estadísticas
+        this.jugador.exp += expGanada;
+        this.jugador.dinero += dineroGanado;
         this.jugador.enemigosDerrotados += 1;
         this.jugador.combatesGanados += 1;
         
-        // Verificar subida de nivel
         this.verificarSubidaNivel();
-        
-        // Guardar progreso
         this.guardarJugador();
         
-        // Mostrar recompensas
+        this.agregarMensajeCombate(`🎉 ¡VICTORIA!`);
         this.agregarMensajeCombate(`💰 Obtienes ${dineroGanado} monedas`);
-        this.agregarMensajeCombate(`⭐ Obtienes ${this.enemigoActual.exp} EXP`);
+        this.agregarMensajeCombate(`⭐ Obtienes ${expGanada} EXP`);
         
-        // Dar EXP a la novia seleccionada (si hay)
         if (this.noviaSeleccionada && window.quintillizasRPG) {
-            const expParaNovia = Math.floor(this.enemigoActual.exp * 0.5); // 50% del EXP
+            const expParaNovia = Math.floor(expGanada * 0.5);
             window.quintillizasRPG.agregarEXP(this.noviaSeleccionada, expParaNovia);
             this.agregarMensajeCombate(`💖 ${expParaNovia} EXP para tu novia`);
         }
         
-        // Agregar al historial
         this.historialCombates.push({
             fecha: new Date().toISOString(),
             enemigo: this.enemigoActual.nombre,
             resultado: 'victoria',
-            exp: this.enemigoActual.exp,
+            exp: expGanada,
             dinero: dineroGanado
         });
         this.guardarHistorial();
         
-        // Video de victoria (si hay novia seleccionada)
-        setTimeout(() => {
-            this.mostrarVideoVictoria();
-        }, 1500);
+        if (this.noviaSeleccionada) {
+            setTimeout(() => {
+                this.mostrarVideoVictoria();
+            }, 2000);
+        }
     }
 
     muerteJugador() {
-        // Penalización por muerte
         this.jugador.muertes += 1;
         this.jugador.combatesPerdidos += 1;
         
-        // Pérdida de dinero (10% o mínimo 5 monedas)
         const perdidaDinero = Math.max(5, Math.floor(this.jugador.dinero * 0.1));
-        this.jugador.dinero = Math.max(0, this.jugador.dinero - perdidaDinero);
-        
-        // Pérdida de EXP (5% o mínimo 10)
         const perdidaExp = Math.max(10, Math.floor(this.jugador.exp * 0.05));
+        
+        this.jugador.dinero = Math.max(0, this.jugador.dinero - perdidaDinero);
         this.jugador.exp = Math.max(0, this.jugador.exp - perdidaExp);
         
         this.agregarMensajeCombate(`💀 Has muerto...`);
         this.agregarMensajeCombate(`📉 Pierdes ${perdidaDinero} monedas y ${perdidaExp} EXP`);
         
-        // Agregar al historial
         this.historialCombates.push({
             fecha: new Date().toISOString(),
             enemigo: this.enemigoActual.nombre,
@@ -490,12 +426,16 @@ class FantasiaRPG {
         });
         this.guardarHistorial();
         
-        // Mostrar opción de revivir
         setTimeout(() => {
             this.mostrarVideoDerrota();
-        }, 2000);
+        }, 1500);
         
         this.guardarJugador();
+    }
+
+    finalizarCombate(resultado) {
+        this.combateActual = null;
+        this.enemigoActual = null;
     }
 
     revivirJugador() {
@@ -503,10 +443,11 @@ class FantasiaRPG {
         
         if (this.jugador.dinero >= costoRevivir) {
             this.jugador.dinero -= costoRevivir;
-            this.jugador.stats.vida = Math.floor(this.jugador.stats.vidaMaxima * 0.5); // Revive al 50%
+            this.jugador.stats.vida = Math.floor(this.jugador.stats.vidaMaxima * 0.5);
             this.guardarJugador();
             
             this.mostrarNotificacion(`✨ Revivido por ${costoRevivir} monedas`);
+            this.actualizarUI();
             return true;
         } else {
             this.mostrarNotificacion(`❌ Necesitas ${costoRevivir} monedas para revivir`);
@@ -515,131 +456,61 @@ class FantasiaRPG {
     }
 
     // ====================
-    // VIDEOS POR NOVIA
+    // BONIFICACIONES POR STATS CON NOVIAS
     // ====================
 
-    mostrarVideoVictoria() {
-        if (!this.noviaSeleccionada) return;
+    calcularBonusStatsNovia(personajeId) {
+        if (!personajeId || !this.preferenciasStats[personajeId]) {
+            return 0;
+        }
         
-        const videosVictoria = {
-            'ichika': [
-                { id: 'victoria_ichika_1', nombre: 'Ichika te felicita' },
-                { id: 'victoria_ichika_2', nombre: 'Ichika orgullosa' },
-                { id: 'victoria_ichika_3', nombre: 'Ichika te anima' },
-                { id: 'victoria_ichika_4', nombre: 'Ichika celebra' },
-                { id: 'victoria_ichika_5', nombre: 'Ichika especial' }
-            ],
-            'nino': [
-                { id: 'victoria_nino_1', nombre: 'Nino (no tan) indiferente' },
-                { id: 'victoria_nino_2', nombre: 'Nino tsundere' },
-                { id: 'victoria_nino_3', nombre: 'Nino te mira' },
-                { id: 'victoria_nino_4', nombre: 'Nino sorprendida' },
-                { id: 'victoria_nino_5', nombre: 'Nino especial' }
-            ],
-            'miku': [
-                { id: 'victoria_miku_1', nombre: 'Miku tímida' },
-                { id: 'victoria_miku_2', nombre: 'Miku alegre' },
-                { id: 'victoria_miku_3', nombre: 'Miku sonriendo' },
-                { id: 'victoria_miku_4', nombre: 'Miku feliz' },
-                { id: 'victoria_miku_5', nombre: 'Miku especial' }
-            ],
-            'yotsuba': [
-                { id: 'victoria_yotsuba_1', nombre: 'Yotsuba energética' },
-                { id: 'victoria_yotsuba_2', nombre: 'Yotsuba saltando' },
-                { id: 'victoria_yotsuba_3', nombre: 'Yotsuba celebrando' },
-                { id: 'victoria_yotsuba_4', nombre: 'Yotsuba feliz' },
-                { id: 'victoria_yotsuba_5', nombre: 'Yotsuba especial' }
-            ],
-            'itsuki': [
-                { id: 'victoria_itsuki_1', nombre: 'Itsuki comiendo' },
-                { id: 'victoria_itsuki_2', nombre: 'Itsuki contenta' },
-                { id: 'victoria_itsuki_3', nombre: 'Itsuki sonriendo' },
-                { id: 'victoria_itsuki_4', nombre: 'Itsuki feliz' },
-                { id: 'victoria_itsuki_5', nombre: 'Itsuki especial' }
-            ]
-        };
+        const preferencia = this.preferenciasStats[personajeId];
+        const statPreferido = this.jugador.stats[preferencia.statPreferido] || 0;
+        const statSecundario = this.jugador.stats[preferencia.statSecundario] || 0;
         
-        const videos = videosVictoria[this.noviaSeleccionada] || videosVictoria['ichika'];
-        const videoAleatorio = videos[Math.floor(Math.random() * videos.length)];
+        let bonusPrincipal = Math.min(
+            statPreferido * preferencia.bonusPorStat,
+            preferencia.bonusMaximo
+        );
         
-        this.mostrarReproductorVideo({
-            id: videoAleatorio.id,
-            nombre: `Victoria - ${videoAleatorio.nombre}`,
-            descripcion: 'Tu novia celebra tu victoria'
-        });
+        let bonusSecundario = Math.min(
+            statSecundario * (preferencia.bonusPorStat * 0.5),
+            preferencia.bonusMaximo * 0.5
+        );
+        
+        const bonusTotal = bonusPrincipal + bonusSecundario;
+        
+        return Math.round(bonusTotal);
     }
 
-    mostrarVideoDerrota() {
-        if (!this.noviaSeleccionada) return;
+    mostrarBonusStatsNovia() {
+        if (!this.noviaSeleccionada || !this.preferenciasStats[this.noviaSeleccionada]) {
+            return;
+        }
         
-        const videosDerrota = {
-            'ichika': [
-                { id: 'derrota_ichika_1', nombre: 'Ichika preocupada' },
-                { id: 'derrota_ichika_2', nombre: 'Ichika te cuida' },
-                { id: 'derrota_ichika_3', nombre: 'Ichika triste' },
-                { id: 'derrota_ichika_4', nombre: 'Ichika animándote' },
-                { id: 'derrota_ichika_5', nombre: 'Ichika especial' }
-            ],
-            'nino': [
-                { id: 'derrota_nino_1', nombre: 'Nino (preocupada)' },
-                { id: 'derrota_nino_2', nombre: 'Nino tsundere cuidando' },
-                { id: 'derrota_nino_3', nombre: 'Nino seria' },
-                { id: 'derrota_nino_4', nombre: 'Nino ayudando' },
-                { id: 'derrota_nino_5', nombre: 'Nino especial' }
-            ],
-            'miku': [
-                { id: 'derrota_miku_1', nombre: 'Miku asustada' },
-                { id: 'derrota_miku_2', nombre: 'Miku preocupada' },
-                { id: 'derrota_miku_3', nombre: 'Miku cuidándote' },
-                { id: 'derrota_miku_4', nombre: 'Miku animándote' },
-                { id: 'derrota_miku_5', nombre: 'Miku especial' }
-            ],
-            'yotsuba': [
-                { id: 'derrota_yotsuba_1', nombre: 'Yotsuba motivando' },
-                { id: 'derrota_yotsuba_2', nombre: 'Yotsuba ayudando' },
-                { id: 'derrota_yotsuba_3', nombre: 'Yotsuba curando' },
-                { id: 'derrota_yotsuba_4', nombre: 'Yotsuba fuerte' },
-                { id: 'derrota_yotsuba_5', nombre: 'Yotsuba especial' }
-            ],
-            'itsuki': [
-                { id: 'derrota_itsuki_1', nombre: 'Itsuki con comida' },
-                { id: 'derrota_itsuki_2', nombre: 'Itsuki alimentándote' },
-                { id: 'derrota_itsuki_3', nombre: 'Itsuki cuidando' },
-                { id: 'derrota_itsuki_4', nombre: 'Itsuki animando' },
-                { id: 'derrota_itsuki_5', nombre: 'Itsuki especial' }
-            ]
+        const preferencia = this.preferenciasStats[this.noviaSeleccionada];
+        const bonus = this.calcularBonusStatsNovia(this.noviaSeleccionada);
+        
+        if (bonus > 0) {
+            this.mostrarNotificacion(
+                `${preferencia.frase}\n` +
+                `✨ +${bonus}% en momentos íntimos`
+            );
+        }
+    }
+
+    obtenerBonusMomentoIntimo(personajeId) {
+        const bonus = this.calcularBonusStatsNovia(personajeId);
+        const bonusNivel = this.jugador.nivel * 0.5;
+        const bonusTotal = bonus + bonusNivel;
+        
+        return {
+            porcentaje: bonusTotal,
+            desglose: {
+                stats: bonus,
+                nivel: bonusNivel
+            }
         };
-        
-        const videos = videosDerrota[this.noviaSeleccionada] || videosDerrota['ichika'];
-        const videoAleatorio = videos[Math.floor(Math.random() * videos.length)];
-        
-        const html = `
-            <div class="reproductor-container">
-                <h2 style="color: #FF6B6B; text-align: center;">💀 Has sido derrotado</h2>
-                <p style="text-align: center; opacity: 0.8; margin-bottom: 20px;">
-                    ${videoAleatorio.nombre}
-                </p>
-                
-                <div style="text-align: center; margin: 30px 0;">
-                    <button class="card-button" onclick="fantasiaRPG.revivirJugador()" 
-                            style="background: linear-gradient(135deg, #4CAF50, #2E7D32);">
-                        💰 Revivir (${20 + (this.jugador.nivel * 5)} monedas)
-                    </button>
-                    <p style="opacity: 0.7; margin-top: 10px; font-size: 0.9rem;">
-                        Dinero actual: ${this.jugador.dinero} monedas
-                    </p>
-                </div>
-                
-                <div style="text-align: center;">
-                    <button class="btn-atras-especifico" onclick="fantasiaRPG.cargarUI()">
-                        ↩️ Volver al RPG
-                    </button>
-                </div>
-            </div>
-        `;
-        
-        const mangaSection = document.getElementById('manga-section');
-        mangaSection.innerHTML = html;
     }
 
     // ====================
@@ -657,7 +528,6 @@ class FantasiaRPG {
         this.jugador.exp -= this.jugador.expParaSiguienteNivel;
         this.jugador.expParaSiguienteNivel = Math.floor(this.jugador.expParaSiguienteNivel * 1.5);
         
-        // Mejora de stats automática por nivel
         this.jugador.stats.vidaMaxima += 10;
         this.jugador.stats.vida = this.jugador.stats.vidaMaxima;
         this.jugador.stats.energiaMaxima += 5;
@@ -671,6 +541,102 @@ class FantasiaRPG {
         
         this.mostrarNotificacion(`🎉 ¡Subiste al nivel ${this.jugador.nivel}!`);
         this.guardarJugador();
+    }
+
+    // ====================
+    // VIDEOS POR NOVIA
+    // ====================
+
+    mostrarVideoVictoria() {
+        if (!this.noviaSeleccionada) return;
+        
+        const videosVictoria = {
+            'ichika': [
+                { id: 'victoria_ichika_1', nombre: 'Ichika te felicita' },
+                { id: 'victoria_ichika_2', nombre: 'Ichika orgullosa' }
+            ],
+            'nino': [
+                { id: 'victoria_nino_1', nombre: 'Nino (no tan) indiferente' },
+                { id: 'victoria_nino_2', nombre: 'Nino tsundere' }
+            ],
+            'miku': [
+                { id: 'victoria_miku_1', nombre: 'Miku tímida' },
+                { id: 'victoria_miku_2', nombre: 'Miku alegre' }
+            ],
+            'yotsuba': [
+                { id: 'victoria_yotsuba_1', nombre: 'Yotsuba energética' },
+                { id: 'victoria_yotsuba_2', nombre: 'Yotsuba saltando' }
+            ],
+            'itsuki': [
+                { id: 'victoria_itsuki_1', nombre: 'Itsuki comiendo' },
+                { id: 'victoria_itsuki_2', nombre: 'Itsuki contenta' }
+            ]
+        };
+        
+        const videos = videosVictoria[this.noviaSeleccionada] || videosVictoria['ichika'];
+        const videoAleatorio = videos[Math.floor(Math.random() * videos.length)];
+        
+        const html = `
+            <div class="reproductor-container" style="text-align: center; padding: 40px;">
+                <h2 style="color: #4CAF50;">🎉 ¡VICTORIA!</h2>
+                <p style="font-size: 1.2rem; margin: 20px 0;">
+                    ${videoAleatorio.nombre}
+                </p>
+                <div style="background: rgba(76, 175, 80, 0.1); padding: 20px; border-radius: 15px; margin: 30px 0;">
+                    <h3 style="color: #FFD166;">Recompensas obtenidas:</h3>
+                    <p>💰 ${this.enemigoActual?.dinero || 0} monedas</p>
+                    <p>⭐ ${this.enemigoActual?.exp || 0} EXP</p>
+                    <p>💖 +${Math.floor((this.enemigoActual?.exp || 0) * 0.5)} EXP para tu novia</p>
+                </div>
+                <button class="card-button" onclick="fantasiaRPG.actualizarUI()" 
+                        style="background: linear-gradient(135deg, #4CAF50, #2E7D32); padding: 15px 30px;">
+                    ↩️ Continuar
+                </button>
+            </div>
+        `;
+        
+        const mangaSection = document.getElementById('manga-section');
+        if (mangaSection) {
+            mangaSection.innerHTML = html;
+        }
+    }
+
+    mostrarVideoDerrota() {
+        if (!this.noviaSeleccionada) {
+            this.actualizarUI();
+            return;
+        }
+        
+        const html = `
+            <div class="reproductor-container" style="text-align: center; padding: 40px;">
+                <h2 style="color: #FF6B6B;">💀 Has sido derrotado</h2>
+                <p style="opacity: 0.8; margin-bottom: 30px;">
+                    Tu novia está preocupada por ti...
+                </p>
+                
+                <div style="background: rgba(255, 107, 107, 0.1); padding: 25px; border-radius: 15px; margin: 30px 0; border: 2px solid #FF6B6B;">
+                    <h3 style="color: #FFD166; margin-bottom: 15px;">💰 Opciones de Revivir</h3>
+                    <button class="card-button" onclick="fantasiaRPG.revivirJugador()" 
+                            style="background: linear-gradient(135deg, #4CAF50, #2E7D32); margin-bottom: 15px;">
+                        💰 Revivir (${20 + (this.jugador.nivel * 5)} monedas)
+                    </button>
+                    <p style="opacity: 0.7; margin-top: 10px;">
+                        Dinero actual: ${this.jugador.dinero} monedas
+                    </p>
+                </div>
+                
+                <div style="text-align: center;">
+                    <button class="btn-atras-especifico" onclick="fantasiaRPG.actualizarUI()">
+                        ↩️ Volver al RPG
+                    </button>
+                </div>
+            </div>
+        `;
+        
+        const mangaSection = document.getElementById('manga-section');
+        if (mangaSection) {
+            mangaSection.innerHTML = html;
+        }
     }
 
     // ====================
@@ -714,10 +680,11 @@ class FantasiaRPG {
                                 <div style="background: rgba(88, 100, 245, 0.1); padding: 20px; border-radius: 15px; margin-top: 20px; border: 2px solid #5864F5;">
                                     <h4 style="color: #5864F5; margin-bottom: 10px;">💖 NOVIA ACTUAL</h4>
                                     <div style="display: flex; align-items: center; gap: 15px;">
-                                        <img src="${window.quintillizasRPG.datosPersonajes[this.noviaSeleccionada].imagen}" 
-                                             style="width: 50px; height: 50px; border-radius: 50%; border: 3px solid ${window.quintillizasRPG.datosPersonajes[this.noviaSeleccionada].color};">
+                                        <div style="width: 50px; height: 50px; border-radius: 50%; background: linear-gradient(135deg, #FF6B6B, #FF1493); display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">
+                                            ${this.noviaSeleccionada.charAt(0).toUpperCase()}
+                                        </div>
                                         <div>
-                                            <div style="font-weight: bold;">${window.quintillizasRPG.datosPersonajes[this.noviaSeleccionada].nombre}</div>
+                                            <div style="font-weight: bold;">${this.noviaSeleccionada.toUpperCase()}</div>
                                             <div style="font-size: 0.9rem; opacity: 0.8;">
                                                 Prefiere: ${this.preferenciasStats[this.noviaSeleccionada].statPreferido}
                                             </div>
@@ -804,8 +771,8 @@ class FantasiaRPG {
                         <div style="font-size: 0.9rem; opacity: 0.8;">${emoji}</div>
                         <div style="font-size: 1.8rem; font-weight: bold; margin: 5px 0;">${stats[stat]}</div>
                         <div style="display: flex; gap: 10px; justify-content: center;">
-                            <button class="stat-btn" onclick="fantasiaRPG.subirStat('${stat}')" style="background: #4CAF50;">↑</button>
-                            <button class="stat-btn" onclick="fantasiaRPG.bajarStat('${stat}')" style="background: #FF6B6B;">↓</button>
+                            <button class="stat-btn" onclick="fantasiaRPG.subirStat('${stat}')" style="background: #4CAF50; padding: 8px 15px; border-radius: 5px; border: none; color: white; cursor: pointer;">↑</button>
+                            <button class="stat-btn" onclick="fantasiaRPG.bajarStat('${stat}')" style="background: #FF6B6B; padding: 8px 15px; border-radius: 5px; border: none; color: white; cursor: pointer;">↓</button>
                         </div>
                     </div>
                 `).join('')}
@@ -870,7 +837,7 @@ class FantasiaRPG {
                             <span>${enemigo.dificultad}</span>
                         </div>
                         <div style="margin-top: 15px;">
-                            <button class="card-button" style="background: linear-gradient(135deg, ${enemigo.color}, ${this.oscurecerColor(enemigo.color)});">
+                            <button class="card-button" style="background: linear-gradient(135deg, ${enemigo.color}, ${this.oscurecerColor(enemigo.color)}); padding: 10px 15px; border-radius: 8px; border: none; color: white; cursor: pointer;">
                                 ⚔️ Combatir
                             </button>
                         </div>
@@ -896,6 +863,9 @@ class FantasiaRPG {
             return this.crearUISeleccionEnemigo();
         }
         
+        const vidaJugadorPorcentaje = (this.jugador.stats.vida / this.jugador.stats.vidaMaxima) * 100;
+        const vidaEnemigoPorcentaje = (this.enemigoActual.vida / this.enemigoActual.vidaMaxima) * 100;
+        
         return `
             <!-- ESTADO DEL COMBATE -->
             <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-bottom: 30px;">
@@ -904,17 +874,17 @@ class FantasiaRPG {
                     <h4 style="color: #5864F5; margin-bottom: 15px;">🎮 ${this.jugador.nombre}</h4>
                     <div style="margin-bottom: 15px;">
                         <div style="color: #FF6B6B; font-size: 0.9rem;">❤️ VIDA</div>
-                        <div style="background: rgba(255,255,255,0.1); height: 15px; border-radius: 10px; overflow: hidden; margin-top: 5px;">
+                        <div style="background: rgba(255,255,255,0.1); height: 20px; border-radius: 10px; overflow: hidden; margin-top: 5px;">
                             <div style="background: linear-gradient(135deg, #FF6B6B, #FF1493); 
-                                      width: ${(this.jugador.stats.vida / this.jugador.stats.vidaMaxima) * 100}%; 
-                                      height: 100%;"></div>
+                                      width: ${vidaJugadorPorcentaje}%; 
+                                      height: 100%; transition: width 0.5s ease;"></div>
                         </div>
                         <div style="text-align: right; font-size: 0.9rem; margin-top: 5px;">
                             ${this.jugador.stats.vida}/${this.jugador.stats.vidaMaxima}
                         </div>
                     </div>
                     <div style="font-size: 0.9rem; opacity: 0.8; margin-top: 10px;">
-                        Turno: ${this.combateActual.enTurno === 'jugador' ? '✅ TU TURNO' : '⏳ Esperando'}
+                        ${this.combateActual.enTurno === 'jugador' ? '✅ TU TURNO' : '⏳ Enemigo atacando...'}
                     </div>
                 </div>
                 
@@ -923,10 +893,10 @@ class FantasiaRPG {
                     <h4 style="color: #FF6B6B; margin-bottom: 15px;">👹 ${this.enemigoActual.nombre}</h4>
                     <div style="margin-bottom: 15px;">
                         <div style="color: #FF6B6B; font-size: 0.9rem;">❤️ VIDA</div>
-                        <div style="background: rgba(255,255,255,0.1); height: 15px; border-radius: 10px; overflow: hidden; margin-top: 5px;">
+                        <div style="background: rgba(255,255,255,0.1); height: 20px; border-radius: 10px; overflow: hidden; margin-top: 5px;">
                             <div style="background: linear-gradient(135deg, #FF1493, #8A5AF7); 
-                                      width: ${(this.enemigoActual.vida / this.enemigoActual.vidaMaxima) * 100}%; 
-                                      height: 100%;"></div>
+                                      width: ${vidaEnemigoPorcentaje}%; 
+                                      height: 100%; transition: width 0.5s ease;"></div>
                         </div>
                         <div style="text-align: right; font-size: 0.9rem; margin-top: 5px;">
                             ${this.enemigoActual.vida}/${this.enemigoActual.vidaMaxima}
@@ -949,19 +919,19 @@ class FantasiaRPG {
             ${this.combateActual.jugadorVivo && this.combateActual.enemigoVivo ? `
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; margin-bottom: 20px;">
                     <button class="card-button" onclick="fantasiaRPG.atacarEnemigoUI()" 
-                            style="background: linear-gradient(135deg, #FF6B6B, #FF1493);">
+                            style="background: linear-gradient(135deg, #FF6B6B, #FF1493); padding: 15px; border-radius: 10px; border: none; color: white; cursor: pointer;">
                         ⚔️ Ataque Básico
                     </button>
                     <button class="card-button" onclick="fantasiaRPG.usarPocionUI('vida')" 
-                            ${this.jugador.inventario.pocionesVida > 0 ? '' : 'disabled style="opacity: 0.5; cursor: not-allowed;"'}>
+                            ${this.jugador.inventario.pocionesVida > 0 ? '' : 'disabled style="opacity: 0.5; cursor: not-allowed;"'} style="padding: 15px; border-radius: 10px; border: none; color: white; cursor: pointer; background: linear-gradient(135deg, #4CAF50, #2E7D32);">
                         ❤️ Poción Vida (${this.jugador.inventario.pocionesVida})
                     </button>
                     <button class="card-button" onclick="fantasiaRPG.usarPocionUI('energia')" 
-                            ${this.jugador.inventario.pocionesEnergia > 0 ? '' : 'disabled style="opacity: 0.5; cursor: not-allowed;"'}>
+                            ${this.jugador.inventario.pocionesEnergia > 0 ? '' : 'disabled style="opacity: 0.5; cursor: not-allowed;"'} style="padding: 15px; border-radius: 10px; border: none; color: white; cursor: pointer; background: linear-gradient(135deg, #FFD700, #FF9800);">
                         ⚡ Poción Energía (${this.jugador.inventario.pocionesEnergia})
                     </button>
                     <button class="card-button" onclick="fantasiaRPG.huirCombateUI()" 
-                            style="background: linear-gradient(135deg, #5864F5, #8A5AF7);">
+                            style="background: linear-gradient(135deg, #5864F5, #8A5AF7); padding: 15px; border-radius: 10px; border: none; color: white; cursor: pointer;">
                         🏃‍♂️ Intentar Huir
                     </button>
                 </div>
@@ -969,14 +939,8 @@ class FantasiaRPG {
             
             ${!this.combateActual.jugadorVivo || !this.combateActual.enemigoVivo ? `
                 <div style="text-align: center; margin-top: 30px;">
-                    ${!this.combateActual.jugadorVivo ? `
-                        <button class="card-button" onclick="fantasiaRPG.revivirJugador()" 
-                                style="background: linear-gradient(135deg, #4CAF50, #2E7D32); padding: 15px 30px; font-size: 1.1rem;">
-                            💰 Revivir (${20 + (this.jugador.nivel * 5)} monedas)
-                        </button>
-                    ` : ''}
                     <button class="card-button" onclick="fantasiaRPG.finalizarCombateUI()" 
-                            style="background: linear-gradient(135deg, #FFD166, #FF9800); margin-left: 20px; padding: 15px 30px; font-size: 1.1rem;">
+                            style="background: linear-gradient(135deg, #FFD166, #FF9800); padding: 15px 30px; font-size: 1.1rem; border-radius: 10px; border: none; color: white; cursor: pointer;">
                         ↩️ Volver al RPG
                     </button>
                 </div>
@@ -996,10 +960,6 @@ class FantasiaRPG {
     atacarEnemigoUI() {
         const resultado = this.atacarEnemigo();
         this.actualizarUI();
-        
-        if (resultado === 'victoria') {
-            setTimeout(() => this.actualizarUI(), 1000);
-        }
     }
 
     usarPocionUI(tipo) {
@@ -1009,16 +969,11 @@ class FantasiaRPG {
     }
 
     huirCombateUI() {
-        if (this.huirCombate()) {
-            setTimeout(() => this.actualizarUI(), 1000);
-        } else {
-            this.actualizarUI();
-        }
+        this.huirCombate();
     }
 
     finalizarCombateUI() {
-        this.combateActual = null;
-        this.enemigoActual = null;
+        this.finalizarCombate('abandonado');
         this.actualizarUI();
     }
 
@@ -1042,7 +997,6 @@ class FantasiaRPG {
 
     mostrarNotificacion(mensaje) {
         const notif = document.createElement('div');
-        notif.className = 'notificacion-fantasia';
         notif.textContent = mensaje;
         notif.style.cssText = `
             position: fixed;
@@ -1080,6 +1034,83 @@ class FantasiaRPG {
         const darkB = Math.max(0, b - 40);
         
         return `#${darkR.toString(16).padStart(2, '0')}${darkG.toString(16).padStart(2, '0')}${darkB.toString(16).padStart(2, '0')}`;
+    }
+
+    // ====================
+    // ESTADÍSTICAS E INVENTARIO
+    // ====================
+
+    crearUIEstadisticas() {
+        return `
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px;">
+                <div style="text-align: center;">
+                    <div style="color: #4CAF50; font-size: 0.9rem;">💰 DINERO</div>
+                    <div style="font-size: 1.5rem; font-weight: bold;">${this.jugador.dinero}</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="color: #FF6B6B; font-size: 0.9rem;">💀 MUERTES</div>
+                    <div style="font-size: 1.5rem; font-weight: bold;">${this.jugador.muertes}</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="color: #FFD166; font-size: 0.9rem;">👹 DERROTADOS</div>
+                    <div style="font-size: 1.5rem; font-weight: bold;">${this.jugador.enemigosDerrotados}</div>
+                </div>
+                <div style="text-align: center;">
+                    <div style="color: #8A5AF7; font-size: 0.9rem;">⚔️ COMBATES</div>
+                    <div style="font-size: 1.5rem; font-weight: bold;">${this.jugador.combatesGanados}/${this.jugador.combatesGanados + this.jugador.combatesPerdidos}</div>
+                </div>
+            </div>
+            
+            ${this.historialCombates.length > 0 ? `
+                <div style="margin-top: 25px;">
+                    <h4 style="color: #FFD166; margin-bottom: 15px;">📜 ÚLTIMOS COMBATES</h4>
+                    <div style="max-height: 200px; overflow-y: auto; background: rgba(255,255,255,0.05); border-radius: 10px; padding: 15px;">
+                        ${this.historialCombates.slice(-5).reverse().map(combate => `
+                            <div style="padding: 10px; border-bottom: 1px solid rgba(255,255,255,0.1);">
+                                <div style="display: flex; justify-content: space-between;">
+                                    <span>${combate.enemigo}</span>
+                                    <span style="color: ${combate.resultado === 'victoria' ? '#4CAF50' : '#FF6B6B'}">
+                                        ${combate.resultado === 'victoria' ? '✅' : '❌'}
+                                    </span>
+                                </div>
+                                <div style="font-size: 0.9rem; opacity: 0.7; margin-top: 5px;">
+                                    ${new Date(combate.fecha).toLocaleDateString()} • 
+                                    ${combate.exp ? `+${combate.exp} EXP` : ''}
+                                    ${combate.dinero ? `• +${combate.dinero}💰` : ''}
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                </div>
+            ` : ''}
+        `;
+    }
+
+    crearUIInventario() {
+        return `
+            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px;">
+                <div style="background: rgba(255, 107, 107, 0.1); padding: 15px; border-radius: 10px; text-align: center;">
+                    <div style="font-size: 2rem; margin-bottom: 10px;">❤️</div>
+                    <div style="font-weight: bold;">Poción de Vida</div>
+                    <div style="font-size: 1.2rem; margin-top: 5px;">${this.jugador.inventario.pocionesVida}</div>
+                    <div style="font-size: 0.9rem; opacity: 0.7;">+30 HP</div>
+                </div>
+                
+                <div style="background: rgba(255, 215, 0, 0.1); padding: 15px; border-radius: 10px; text-align: center;">
+                    <div style="font-size: 2rem; margin-bottom: 10px;">⚡</div>
+                    <div style="font-weight: bold;">Poción de Energía</div>
+                    <div style="font-size: 1.2rem; margin-top: 5px;">${this.jugador.inventario.pocionesEnergia}</div>
+                    <div style="font-size: 0.9rem; opacity: 0.7;">+20 EP</div>
+                </div>
+                
+                <div style="background: rgba(76, 175, 80, 0.1); padding: 15px; border-radius: 10px; text-align: center;">
+                    <div style="font-size: 2rem; margin-bottom: 10px;">✨</div>
+                    <div style="font-weight: bold;">Poción de Revivir</div>
+                    <div style="font-size: 1.2rem; margin-top: 5px;">${this.jugador.inventario.revivir}</div>
+                    <div style="font-size: 0.9rem; opacity: 0.7;">+50% HP</div>
+                </div>
+            </div>
+        `;
     }
 
     // ====================
@@ -1160,101 +1191,6 @@ class FantasiaRPG {
         
         return true;
     }
-
-    // Métodos UI que faltaban
-    crearUIEstadisticas() {
-        return `
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px;">
-                <div style="text-align: center;">
-                    <div style="color: #4CAF50; font-size: 0.9rem;">💰 DINERO</div>
-                    <div style="font-size: 1.5rem; font-weight: bold;">${this.jugador.dinero}</div>
-                </div>
-                <div style="text-align: center;">
-                    <div style="color: #FF6B6B; font-size: 0.9rem;">💀 MUERTES</div>
-                    <div style="font-size: 1.5rem; font-weight: bold;">${this.jugador.muertes}</div>
-                </div>
-                <div style="text-align: center;">
-                    <div style="color: #FFD166; font-size: 0.9rem;">👹 DERROTADOS</div>
-                    <div style="font-size: 1.5rem; font-weight: bold;">${this.jugador.enemigosDerrotados}</div>
-                </div>
-                <div style="text-align: center;">
-                    <div style="color: #8A5AF7; font-size: 0.9rem;">⚔️ COMBATES</div>
-                    <div style="font-size: 1.5rem; font-weight: bold;">${this.jugador.combatesGanados}/${this.jugador.combatesGanados + this.jugador.combatesPerdidos}</div>
-                </div>
-            </div>
-            
-            ${this.historialCombates.length > 0 ? `
-                <div style="margin-top: 25px;">
-                    <h4 style="color: #FFD166; margin-bottom: 15px;">📜 ÚLTIMOS COMBATES</h4>
-                    <div style="max-height: 200px; overflow-y: auto; background: rgba(255,255,255,0.05); border-radius: 10px; padding: 15px;">
-                        ${this.historialCombastes.slice(-5).reverse().map(combate => `
-                            <div style="padding: 10px; border-bottom: 1px solid rgba(255,255,255,0.1);">
-                                <div style="display: flex; justify-content: space-between;">
-                                    <span>${combate.enemigo}</span>
-                                    <span style="color: ${combate.resultado === 'victoria' ? '#4CAF50' : '#FF6B6B'}">
-                                        ${combate.resultado === 'victoria' ? '✅' : '❌'}
-                                    </span>
-                                </div>
-                                <div style="font-size: 0.9rem; opacity: 0.7; margin-top: 5px;">
-                                    ${new Date(combate.fecha).toLocaleDateString()} • 
-                                    ${combate.exp ? `+${combate.exp} EXP` : ''}
-                                    ${combate.dinero ? `• +${combate.dinero}💰` : ''}
-                                </div>
-                            </div>
-                        `).join('')}
-                    </div>
-                </div>
-            ` : ''}
-        `;
-    }
-
-    crearUIInventario() {
-        return `
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px;">
-                <div style="background: rgba(255, 107, 107, 0.1); padding: 15px; border-radius: 10px; text-align: center;">
-                    <div style="font-size: 2rem; margin-bottom: 10px;">❤️</div>
-                    <div style="font-weight: bold;">Poción de Vida</div>
-                    <div style="font-size: 1.2rem; margin-top: 5px;">${this.jugador.inventario.pocionesVida}</div>
-                    <div style="font-size: 0.9rem; opacity: 0.7;">+30 HP</div>
-                </div>
-                
-                <div style="background: rgba(255, 215, 0, 0.1); padding: 15px; border-radius: 10px; text-align: center;">
-                    <div style="font-size: 2rem; margin-bottom: 10px;">⚡</div>
-                    <div style="font-weight: bold;">Poción de Energía</div>
-                    <div style="font-size: 1.2rem; margin-top: 5px;">${this.jugador.inventario.pocionesEnergia}</div>
-                    <div style="font-size: 0.9rem; opacity: 0.7;">+20 EP</div>
-                </div>
-                
-                <div style="background: rgba(76, 175, 80, 0.1); padding: 15px; border-radius: 10px; text-align: center;">
-                    <div style="font-size: 2rem; margin-bottom: 10px;">✨</div>
-                    <div style="font-weight: bold;">Poción de Revivir</div>
-                    <div style="font-size: 1.2rem; margin-top: 5px;">${this.jugador.inventario.revivir}</div>
-                    <div style="font-size: 0.9rem; opacity: 0.7;">+50% HP</div>
-                </div>
-            </div>
-        `;
-    }
-
-    mostrarReproductorVideo(video) {
-        const html = `
-            <div class="reproductor-container">
-                <h2 style="color: #FF1493; text-align: center;">${video.nombre}</h2>
-                <p style="text-align: center; opacity: 0.8; margin-bottom: 20px;">
-                    ${video.descripcion}
-                </p>
-                
-                <div style="text-align: center; margin: 30px 0;">
-                    <button class="card-button" onclick="fantasiaRPG.actualizarUI()" 
-                            style="background: linear-gradient(135deg, #FF1493, #FF6B6B); padding: 15px 30px;">
-                        ↩️ Continuar
-                    </button>
-                </div>
-            </div>
-        `;
-        
-        const mangaSection = document.getElementById('manga-section');
-        mangaSection.innerHTML = html;
-    }
 }
 
 // ================================================
@@ -1262,91 +1198,49 @@ class FantasiaRPG {
 // ================================================
 
 // Modificar la función de momentos íntimos para incluir bonus de stats
-const intentarMomentoIntimoOriginal = QuintillizasRPG.prototype.intentarMomentoIntimo;
-
-QuintillizasRPG.prototype.intentarMomentoIntimo = function(personajeId, momentoId) {
-    const personaje = this.datosPersonajes[personajeId];
-    const momento = personaje.momentosIntimos.find(m => m.id === momentoId);
+if (typeof QuintillizasRPG !== 'undefined') {
+    const intentarMomentoIntimoOriginal = QuintillizasRPG.prototype.intentarMomentoIntimo;
     
-    if (!momento) {
-        this.mostrarNotificacion('❌ Momento íntimo no encontrado');
-        return false;
-    }
-    
-    // ... (código original de verificación) ...
-    
-    // Calcular probabilidad base
-    const probabilidadBase = this.calcularProbabilidadMomento(personaje, momento, usarCondonEspecial);
-    
-    // AGREGAR BONUS DE STATS DEL RPG FANTASÍA
-    let bonusStats = 0;
-    if (typeof fantasiaRPG !== 'undefined') {
-        const bonusFantasia = fantasiaRPG.obtenerBonusMomentoIntimo(personajeId);
-        bonusStats = bonusFantasia.porcentaje;
+    QuintillizasRPG.prototype.intentarMomentoIntimo = function(personajeId, momentoId) {
+        const personaje = this.datosPersonajes[personajeId];
+        const momento = personaje.momentosIntimos.find(m => m.id === momentoId);
         
-        console.log(`💖 Bonus RPG Fantasía para ${personaje.nombre}: +${bonusStats}%`);
-        console.log(`   Stats: +${bonusFantasia.desglose.stats}%`);
-        console.log(`   Nivel: +${bonusFantasia.desglose.nivel}%`);
-    }
-    
-    const probabilidadReal = Math.min(probabilidadBase + bonusStats, 
-        usarCondonEspecial || momento.condones001Requeridos > 0 ? 100 : 80);
-    
-    // Mostrar bonus si existe
-    if (bonusStats > 0) {
-        this.mostrarNotificacion(`✨ Bonus RPG Fantasía: +${bonusStats}% éxito`);
-    }
-    
-    console.log(`🎯 Probabilidad final para ${momento.nombre}: ${probabilidadReal}%`);
-    const exito = Math.random() * 100 < probabilidadReal;
-    
-    // ... (resto del código original) ...
-    
-    return intentarMomentoIntimoOriginal.call(this, personajeId, momentoId);
-};
+        if (!momento) {
+            this.mostrarNotificacion('❌ Momento íntimo no encontrado');
+            return false;
+        }
+        
+        // Calcular probabilidad base
+        const probabilidadBase = this.calcularProbabilidadMomento(personaje, momento, false);
+        
+        // AGREGAR BONUS DE STATS DEL RPG FANTASÍA
+        let bonusStats = 0;
+        if (typeof fantasiaRPG !== 'undefined') {
+            const bonusFantasia = fantasiaRPG.obtenerBonusMomentoIntimo(personajeId);
+            bonusStats = bonusFantasia.porcentaje;
+            
+            console.log(`💖 Bonus RPG Fantasía para ${personaje.nombre}: +${bonusStats}%`);
+        }
+        
+        const probabilidadReal = Math.min(probabilidadBase + bonusStats, 80);
+        
+        if (bonusStats > 0) {
+            this.mostrarNotificacion(`✨ Bonus RPG Fantasía: +${bonusStats}% éxito`);
+        }
+        
+        console.log(`🎯 Probabilidad final para ${momento.nombre}: ${probabilidadReal}%`);
+        const exito = Math.random() * 100 < probabilidadReal;
+        
+        if (typeof intentarMomentoIntimoOriginal === 'function') {
+            return intentarMomentoIntimoOriginal.call(this, personajeId, momentoId);
+        }
+        
+        return exito;
+    };
+}
 
 // ================================================
 // INSTANCIA GLOBAL
 // ================================================
 
 const fantasiaRPG = new FantasiaRPG();
-
-// Integrar con botón en la UI principal
-function cargarPaginaFantasiaRPG() {
-    modoActual = 'fantasia';
-    modoMazoDificil = false;
-    ocultarHeader();
-    
-    const mangaSection = document.getElementById('manga-section');
-    mangaSection.style.display = 'block';
-    mangaSection.innerHTML = fantasiaRPG.cargarUI();
-    
-    const botonVolver = crearBotonVolver(volverAlInicio);
-    mangaSection.insertBefore(botonVolver, mangaSection.firstChild);
-}
-
-// Agregar botón al menú principal (debes agregarlo en tu HTML)
-document.addEventListener('DOMContentLoaded', function() {
-    // Crear botón en el menú si no existe
-    if (!document.getElementById('boton-fantasia')) {
-        const botonFantasia = document.createElement('button');
-        botonFantasia.id = 'boton-fantasia';
-        botonFantasia.className = 'nav-button';
-        botonFantasia.innerHTML = '⚔️ RPG Fantasía';
-        botonFantasia.onclick = cargarPaginaFantasiaRPG;
-        botonFantasia.style.background = 'linear-gradient(135deg, #FF6B6B, #FF1493)';
-        
-        const nav = document.querySelector('.nav-buttons');
-        if (nav) {
-            nav.appendChild(botonFantasia);
-        }
-    }
-    
-    console.log('🎮 RPG Fantasía cargado');
-    console.log('💖 Sistema de stats por ejercicio real');
-    console.log('⚔️ Combate por turnos con 5 enemigos');
-    console.log('💰 Gana/pierde dinero al ganar/perder');
-    console.log('💀 Revive pagando monedas');
-    console.log('✨ Bonus de stats para momentos íntimos');
-    console.log('🎬 5 videos diferentes por cada novia');
-});
