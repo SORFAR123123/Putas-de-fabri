@@ -1288,3 +1288,48 @@ body {
 .personaje-miku { border-color: #6A5ACD; }
 .personaje-yotsuba { border-color: #4CAF50; }
 .personaje-itsuki { border-color: #FFD166; }
+/* Estilos para RPG Fantasía */
+.enemigo-card:hover {
+    transform: translateY(-5px) scale(1.05);
+    box-shadow: 0 10px 20px rgba(255, 107, 107, 0.3);
+}
+
+.stat-btn {
+    width: 35px;
+    height: 35px;
+    border: none;
+    border-radius: 50%;
+    color: white;
+    font-weight: bold;
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.stat-btn:hover {
+    transform: scale(1.1);
+    box-shadow: 0 5px 10px rgba(0,0,0,0.3);
+}
+
+.notificacion-fantasia {
+    animation: slideIn 0.3s ease, fadeOut 0.3s ease 2.5s forwards;
+}
+
+/* Barra de scroll personalizada */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.1);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: linear-gradient(135deg, #FF6B6B, #FF1493);
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: linear-gradient(135deg, #FF1493, #FF6B6B);
+}
