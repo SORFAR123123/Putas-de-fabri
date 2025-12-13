@@ -1333,3 +1333,145 @@ body {
 ::-webkit-scrollbar-thumb:hover {
     background: linear-gradient(135deg, #FF1493, #FF6B6B);
 }
+/* ================================================
+   ESTILOS PARA GALERÍA
+   ================================================ */
+
+.imagenes-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 20px;
+    margin-top: 30px;
+    padding: 20px;
+    background: rgba(0, 0, 0, 0.05);
+    border-radius: 15px;
+}
+
+.imagen-item {
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.imagen-item:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.imagen-container {
+    position: relative;
+    width: 100%;
+    height: 250px;
+    overflow: hidden;
+}
+
+.imagen-container img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+
+.imagen-container:hover img {
+    transform: scale(1.05);
+}
+
+.imagen-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.imagen-container:hover .imagen-overlay {
+    opacity: 1;
+}
+
+.btn-expand {
+    background: linear-gradient(135deg, #4285F4, #34A853);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.3s ease;
+}
+
+.btn-expand:hover {
+    background: linear-gradient(135deg, #3367D6, #2E7D32);
+}
+
+.imagen-desc {
+    padding: 15px;
+    text-align: center;
+    font-size: 14px;
+    color: #666;
+    margin: 0;
+}
+
+.no-imagenes {
+    text-align: center;
+    padding: 40px;
+    color: #888;
+    font-size: 18px;
+    grid-column: 1 / -1;
+}
+
+/* Modal para imágenes expandidas */
+.imagen-modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.95);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.imagen-modal img {
+    max-width: 90%;
+    max-height: 90%;
+    border-radius: 10px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.5);
+}
+
+/* Botón de volver en galería */
+.btn-back {
+    background: linear-gradient(135deg, #FF6B6B, #FF8E53);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-bottom: 20px;
+    transition: background 0.3s ease;
+}
+
+.btn-back:hover {
+    background: linear-gradient(135deg, #FF4757, #FF7F50);
+}
+
+/* Estilo para tarjeta de galería en la página principal */
+.card-container .card:nth-child(8) .card-img {
+    background-image: url('https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=400&h=400&fit=crop');
+}
