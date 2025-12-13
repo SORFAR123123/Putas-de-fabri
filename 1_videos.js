@@ -9,7 +9,7 @@ const videosDatabase = {
     
     // Sub-contenedor 1.1
     '1_1': {
-        titulo: "🎌 Introducción al Japonés Básico",
+        titulo: "🎌Nino petera de mierda",
         driveId: "1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS", // REEMPLAZA con tu ID real de Drive
         descripcion: "Video introductorio para principiantes. Aprende saludos básicos y presentaciones.",
         timestamps: [
@@ -25,7 +25,7 @@ const videosDatabase = {
     
     // Sub-contenedor 1.2
     '1_2': {
-        titulo: "✍️ Aprendiendo Hiragana",
+        titulo: "✍️  Yotsuba petera que rico petea yotsuba",
         driveId: "1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS", // REEMPLAZA con tu ID real de Drive
         descripcion: "Tutorial completo del sistema Hiragana con ejercicios de escritura.",
         timestamps: [
@@ -41,7 +41,7 @@ const videosDatabase = {
     
     // Sub-contenedor 1.3
     '1_3': {
-        titulo: "🗣️ Conversación Básica N5",
+        titulo: "🗣️ Miku culona nocaCos",
         driveId: "1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS", // REEMPLAZA con tu ID real de Drive
         descripcion: "Diálogos prácticos para nivel N5 del JLPT. Situaciones cotidianas.",
         timestamps: [
