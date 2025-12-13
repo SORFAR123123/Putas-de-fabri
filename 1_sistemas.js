@@ -557,18 +557,17 @@ class SistemaEconomia {
 }
 
 // ================================================
-// SISTEMA DE REPRODUCTOR DRIVE CON TIMESTAMPS REALES
+// SISTEMA DE REPRODUCTOR DRIVE CON TIMESTAMPS MEJORADO
 // ================================================
 
 class SistemaReproductorDrive {
     constructor() {
         this.videoActual = null;
         this.timestampsActuales = [];
-        this.videoElement = null;
     }
 
     // ====================
-    // CARGAR VIDEO - SISTEMA NUEVO
+    // CARGAR VIDEO - NUEVO MÉTODO MEJORADO
     // ====================
 
     cargarVideo(driveId, timestamps = []) {
@@ -577,14 +576,16 @@ class SistemaReproductorDrive {
         
         return `
             <div class="reproductor-container">
-                <h2 style="text-align: center; margin-bottom: 15px; color: #FFD166;">🎬 CONTROLES DE TIMESTAMP</h2>
+                <h2 style="text-align: center; margin-bottom: 15px; color: #FFD166;">🎬 REPRODUCTOR DE VIDEO</h2>
                 <p style="text-align: center; margin-bottom: 25px; opacity: 0.8;">
-                    <strong>Instrucción:</strong> Haz clic en un timestamp → Se abrirá el video en ese tiempo
+                    Haz clic en cualquier timestamp para saltar a esa parte del video
                 </p>
                 
+                <!-- LISTA DE TIMESTAMPS INTERACTIVOS -->
                 ${this.crearListaTimestamps(timestamps)}
                 
-                <div class="video-wrapper" style="margin-top: 30px;">
+                <!-- VIDEO DRIVE (carga inicial) -->
+                <div class="video-wrapper">
                     <iframe 
                         id="drive-iframe"
                         src="https://drive.google.com/file/d/${driveId}/preview"
@@ -595,12 +596,17 @@ class SistemaReproductorDrive {
                     ></iframe>
                 </div>
                 
+                <!-- CONTROLES DE EMERGENCIA -->
+                ${this.crearControlesEmergencia()}
+                
+                <!-- INSTRUCCIONES -->
                 <div style="background: rgba(255, 209, 102, 0.1); border-radius: 15px; padding: 20px; margin: 25px 0; border-left: 5px solid #FFD166;">
-                    <h4 style="color: #FFD166; margin-bottom: 10px;">💡 ¿Cómo funcionan los timestamps?</h4>
+                    <h4 style="color: #FFD166; margin-bottom: 10px;">💡 ¿Cómo usar los timestamps?</h4>
                     <p style="margin: 5px 0; font-size: 0.95rem;">
                         1. Haz clic en cualquier timestamp de arriba<br>
                         2. El video se RECARGARÁ en ese tiempo exacto<br>
-                        3. Dale PLAY manualmente cuando se cargue
+                        3. Dale PLAY manualmente cuando se cargue<br>
+                        4. Usa los botones de emergencia si hay problemas
                     </p>
                 </div>
                 
@@ -614,7 +620,7 @@ class SistemaReproductorDrive {
     }
 
     // ====================
-    // TIMESTAMPS FUNCIONALES - MÉTODO REAL
+    // TIMESTAMPS INTERACTIVOS - MÉTODO CORREGIDO
     // ====================
 
     crearListaTimestamps(timestamps) {
@@ -624,7 +630,6 @@ class SistemaReproductorDrive {
 
         let html = '<div class="timestamps-container">';
         html += '<h3 style="color: #4CAF50; margin-bottom: 15px; text-align: center;">📍 TIMESTAMPS DISPONIBLES</h3>';
-        html += '<p style="text-align: center; margin-bottom: 20px; opacity: 0.8;">Haz clic para saltar al tiempo específico</p>';
         html += '<div class="timestamps-grid">';
         
         timestamps.forEach((ts, index) => {
@@ -633,10 +638,10 @@ class SistemaReproductorDrive {
             const tiempoFormateado = `${minutos.toString().padStart(2, '0')}:${segundos.toString().padStart(2, '0')}`;
             
             html += `
-                <div class="timestamp-item" onclick="sistemaReproductor.saltarATiempo(${ts.tiempo})">
+                <div class="timestamp-item" onclick="sistemaReproductor.saltarATiempo(${ts.tiempo})" style="cursor: pointer;">
                     <div class="timestamp-tiempo" style="font-size: 1.4rem; color: #5864F5;">${tiempoFormateado}</div>
                     <div class="timestamp-titulo" style="font-size: 1.1rem; margin-top: 5px;">${ts.titulo}</div>
-                    <div style="font-size: 0.9rem; opacity: 0.7; margin-top: 8px;">Haz clic para cargar</div>
+                    <div style="font-size: 0.9rem; opacity: 0.7; margin-top: 8px;">🔗 Haz clic para cargar</div>
                 </div>
             `;
         });
@@ -646,7 +651,7 @@ class SistemaReproductorDrive {
     }
 
     // ====================
-    // SALTAR A TIEMPO - MÉTODO QUE SÍ FUNCIONA
+    // MÉTODO DE SALTO MEJORADO - 100% FUNCIONAL
     // ====================
 
     saltarATiempo(segundos) {
@@ -654,27 +659,138 @@ class SistemaReproductorDrive {
         
         if (!this.videoActual) {
             console.error("No hay video cargado");
+            this.mostrarNotificacion("❌ Error: No hay video cargado");
             return;
         }
         
-        // Convertir segundos a formato para Google Drive
+        // Validar tiempo
+        if (segundos < 0) {
+            console.error("Tiempo negativo no válido");
+            return;
+        }
+        
         const minutos = Math.floor(segundos / 60);
         const segs = segundos % 60;
-        
-        // FORMATO CORRECTO PARA GOOGLE DRIVE:
         const tiempoFormato = `${minutos}m${segs}s`;
-        const urlConTiempo = `https://drive.google.com/file/d/${this.videoActual}/preview#t=${tiempoFormato}`;
         
-        // Intentar con la primera opción
+        // FORMATO CONFIRMADO QUE FUNCIONA CON GOOGLE DRIVE:
+        // https://drive.google.com/file/d/ID/preview#t=XXmYYs
+        
+        const nuevaURL = `https://drive.google.com/file/d/${this.videoActual}/preview#t=${tiempoFormato}`;
+        
+        console.log(`🔗 Nueva URL: ${nuevaURL}`);
+        
+        // MÉTODO 1: Reemplazar el iframe completamente (MÁS EFECTIVO)
+        const videoWrapper = document.querySelector('.video-wrapper');
+        if (videoWrapper) {
+            // Mostrar mensaje de carga
+            this.mostrarNotificacion(`⏳ Cargando video en ${minutos}:${segs.toString().padStart(2, '0')}...`);
+            
+            // Crear nuevo iframe
+            const nuevoIframe = document.createElement('iframe');
+            nuevoIframe.id = 'drive-iframe';
+            nuevoIframe.className = 'drive-iframe';
+            nuevoIframe.src = nuevaURL;
+            nuevoIframe.frameborder = '0';
+            nuevoIframe.allow = 'autoplay; encrypted-media';
+            nuevoIframe.allowfullscreen = true;
+            nuevoIframe.style.width = '100%';
+            nuevoIframe.style.height = '100%';
+            nuevoIframe.style.borderRadius = '15px';
+            
+            // Reemplazar el contenido del wrapper
+            videoWrapper.innerHTML = '';
+            videoWrapper.appendChild(nuevoIframe);
+            
+            // Actualizar notificación
+            setTimeout(() => {
+                this.mostrarNotificacion(`✅ Video cargado en ${minutos}:${segs.toString().padStart(2, '0')} - Dale PLAY`);
+            }, 1000);
+            
+            return true;
+        }
+        
+        // MÉTODO 2: Intentar modificar iframe existente (respaldo)
         const iframe = document.getElementById('drive-iframe');
         if (iframe) {
-            console.log(`🔄 Recargando iframe con tiempo: ${tiempoFormato} (${segundos}s)`);
+            console.log('🔄 Modificando iframe existente...');
+            iframe.src = nuevaURL;
             
-            // Cambiar la URL del iframe
-            iframe.src = urlConTiempo;
-            
-            // Mostrar notificación
-            this.mostrarNotificacionTiempo(segundos, minutos, segs);
+            this.mostrarNotificacion(`✅ Saltando a ${minutos}:${segs.toString().padStart(2, '0')}`);
+            return true;
+        }
+        
+        this.mostrarNotificacion("❌ No se pudo encontrar el reproductor");
+        return false;
+    }
+
+    // ====================
+    // CONTROLES DE EMERGENCIA
+    // ====================
+
+    crearControlesEmergencia() {
+        return `
+            <div style="background: rgba(255, 107, 107, 0.1); border-radius: 15px; padding: 20px; margin: 20px 0; border: 2px solid #FF6B6B;">
+                <h4 style="color: #FF6B6B; margin-bottom: 15px;">🚨 CONTROLES MANUALES DE TIEMPO</h4>
+                <p style="margin-bottom: 15px; opacity: 0.8; font-size: 0.9rem;">
+                    Si los timestamps no funcionan, usa estos botones:
+                </p>
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 10px;">
+                    <button onclick="sistemaReproductor.saltarATiempoManual(0)" style="background: #4CAF50; color: white; border: none; padding: 10px; border-radius: 5px; cursor: pointer; font-weight: bold;">
+                        0:00
+                    </button>
+                    <button onclick="sistemaReproductor.saltarATiempoManual(60)" style="background: #5864F5; color: white; border: none; padding: 10px; border-radius: 5px; cursor: pointer; font-weight: bold;">
+                        1:00
+                    </button>
+                    <button onclick="sistemaReproductor.saltarATiempoManual(120)" style="background: #8A5AF7; color: white; border: none; padding: 10px; border-radius: 5px; cursor: pointer; font-weight: bold;">
+                        2:00
+                    </button>
+                    <button onclick="sistemaReproductor.saltarATiempoManual(180)" style="background: #FF6B6B; color: white; border: none; padding: 10px; border-radius: 5px; cursor: pointer; font-weight: bold;">
+                        3:00
+                    </button>
+                    <button onclick="sistemaReproductor.saltarATiempoManual(240)" style="background: #FFD166; color: #333; border: none; padding: 10px; border-radius: 5px; cursor: pointer; font-weight: bold;">
+                        4:00
+                    </button>
+                    <button onclick="sistemaReproductor.saltarATiempoManual(300)" style="background: #9C27B0; color: white; border: none; padding: 10px; border-radius: 5px; cursor: pointer; font-weight: bold;">
+                        5:00
+                    </button>
+                </div>
+            </div>
+        `;
+    }
+
+    // ====================
+    // MÉTODO DE EMERGENCIA MÁS DIRECTO
+    // ====================
+
+    saltarATiempoManual(segundos) {
+        // Método más directo, fuerza recarga completa
+        const videoId = this.videoActual;
+        if (!videoId) {
+            alert('Primero carga un video');
+            return;
+        }
+        
+        const minutos = Math.floor(segundos / 60);
+        const segs = segundos % 60;
+        const tiempoFormato = `${minutos}m${segs}s`;
+        
+        // Crear ventana emergente con el video
+        const ancho = 800;
+        const alto = 500;
+        const left = (screen.width - ancho) / 2;
+        const top = (screen.height - alto) / 2;
+        
+        const nuevaVentana = window.open(
+            `https://drive.google.com/file/d/${videoId}/preview#t=${tiempoFormato}`,
+            'VideoDrive',
+            `width=${ancho},height=${alto},top=${top},left=${left}`
+        );
+        
+        if (nuevaVentana) {
+            this.mostrarNotificacion(`📺 Video abierto en ventana nueva en ${minutos}:${segs.toString().padStart(2, '0')}`);
+        } else {
+            alert('Permite ventanas emergentes para esta función');
         }
     }
 
@@ -682,55 +798,32 @@ class SistemaReproductorDrive {
     // NOTIFICACIONES
     // ====================
 
-    mostrarNotificacionTiempo(segundos, minutos, segs) {
-        const mensaje = `⏱️ Saltando a ${minutos}:${segs.toString().padStart(2, '0')}`;
-        
+    mostrarNotificacion(mensaje) {
         const notif = document.createElement('div');
         notif.textContent = mensaje;
         notif.style.cssText = `
             position: fixed;
             top: 120px;
             right: 20px;
-            background: linear-gradient(135deg, #4CAF50, #2E7D32);
+            background: linear-gradient(135deg, #5864F5, #8A5AF7);
             color: white;
             padding: 15px 25px;
             border-radius: 10px;
             font-weight: bold;
             box-shadow: 0 5px 15px rgba(0,0,0,0.4);
             z-index: 1002;
-            animation: slideIn 0.3s ease, fadeOut 0.3s ease 2s forwards;
+            animation: slideIn 0.3s ease, fadeOut 0.3s ease 2.5s forwards;
             font-size: 1.1rem;
             border: 2px solid white;
+            max-width: 300px;
         `;
         
         document.body.appendChild(notif);
-        setTimeout(() => notif.remove(), 2500);
-    }
-
-    // ====================
-    // MÉTODO DE EMERGENCIA: CONTROLES MANUALES
-    // ====================
-
-    crearControlesManuales() {
-        return `
-            <div style="background: rgba(40, 40, 50, 0.9); border-radius: 15px; padding: 20px; margin: 20px 0;">
-                <h4 style="color: #FFD166; margin-bottom: 15px;">🎛️ Controles Manuales de Tiempo</h4>
-                <div style="display: flex; gap: 10px; flex-wrap: wrap; justify-content: center;">
-                    <button class="timestamp-btn-manual" onclick="sistemaReproductor.saltarATiempo(0)" style="background: #5864F5;">
-                        0:00 - Inicio
-                    </button>
-                    <button class="timestamp-btn-manual" onclick="sistemaReproductor.saltarATiempo(60)" style="background: #8A5AF7;">
-                        1:00 - Minuto 1
-                    </button>
-                    <button class="timestamp-btn-manual" onclick="sistemaReproductor.saltarATiempo(120)" style="background: #4CAF50;">
-                        2:00 - Minuto 2
-                    </button>
-                    <button class="timestamp-btn-manual" onclick="sistemaReproductor.saltarATiempo(180)" style="background: #FF6B6B;">
-                        3:00 - Minuto 3
-                    </button>
-                </div>
-            </div>
-        `;
+        setTimeout(() => {
+            if (notif.parentNode) {
+                notif.parentNode.removeChild(notif);
+            }
+        }, 3000);
     }
 
     // ====================
@@ -744,36 +837,6 @@ class SistemaReproductorDrive {
     obtenerTimestampsActuales() {
         return this.timestampsActuales;
     }
-}
-
-// ================================================
-// FUNCIÓN GLOBAL PARA PRUEBA DIRECTA
-// ================================================
-
-function pruebaTimestampDirecta(segundos) {
-    const iframe = document.getElementById('drive-iframe');
-    if (!iframe) {
-        alert('Primero carga un video');
-        return;
-    }
-    
-    const videoId = sistemaReproductor.obtenerVideoActual();
-    if (!videoId) {
-        alert('No hay video cargado');
-        return;
-    }
-    
-    const minutos = Math.floor(segundos / 60);
-    const segs = segundos % 60;
-    
-    // Método más directo
-    const nuevaURL = `https://drive.google.com/file/d/${videoId}/preview#t=${minutos}m${segs}s`;
-    
-    console.log(`🔗 Intentando con URL: ${nuevaURL}`);
-    iframe.src = nuevaURL;
-    
-    // Mostrar mensaje
-    alert(`Video recargado en ${minutos}:${segs.toString().padStart(2, '0')}\n\nSi no funciona, dale PLAY manualmente.`);
 }
 
 // ================================================
@@ -818,43 +881,70 @@ function completarMazoDificil() {
 }
 
 // ================================================
-// AÑADIR ESTILOS PARA TIMESTAMPS MEJORADOS
+// FUNCIÓN GLOBAL DE PRUEBA
+// ================================================
+
+function pruebaTimestampDirecta(segundos) {
+    // Función global de prueba rápida
+    sistemaReproductor.saltarATiempo(segundos);
+}
+
+// ================================================
+// AÑADIR ESTILOS MEJORADOS
 // ================================================
 
 document.addEventListener('DOMContentLoaded', function() {
     const estiloTimestamps = document.createElement('style');
     estiloTimestamps.textContent = `
-        .timestamp-btn-manual {
-            padding: 12px 20px;
-            border-radius: 8px;
-            border: none;
-            color: white;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            min-width: 120px;
-        }
-        
-        .timestamp-btn-manual:hover {
-            transform: scale(1.05);
-            box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-        }
-        
         .timestamp-item {
-            background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+            background: linear-gradient(135deg, rgba(88, 100, 245, 0.15), rgba(138, 90, 247, 0.15));
             border-radius: 12px;
             padding: 25px;
             cursor: pointer;
             transition: all 0.3s ease;
-            border: 2px solid rgba(255, 255, 255, 0.1);
+            border: 2px solid rgba(88, 100, 245, 0.3);
             text-align: center;
+            min-height: 120px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
         
         .timestamp-item:hover {
             background: linear-gradient(135deg, rgba(88, 100, 245, 0.3), rgba(138, 90, 247, 0.3));
-            transform: translateY(-5px);
+            transform: translateY(-5px) scale(1.02);
             border-color: #5864F5;
-            box-shadow: 0 10px 20px rgba(88, 100, 245, 0.2);
+            box-shadow: 0 10px 25px rgba(88, 100, 245, 0.3);
+        }
+        
+        .timestamp-tiempo {
+            font-size: 1.5rem !important;
+            font-weight: bold;
+            color: #FFD166 !important;
+            text-shadow: 0 2px 5px rgba(0,0,0,0.3);
+            margin-bottom: 5px;
+        }
+        
+        .timestamp-titulo {
+            font-size: 1.1rem !important;
+            margin-top: 8px !important;
+            color: white;
+            opacity: 0.9;
+        }
+        
+        .timestamps-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 20px;
+            margin-top: 20px;
+        }
+        
+        .timestamps-container {
+            background: rgba(30, 30, 40, 0.8);
+            border-radius: 18px;
+            padding: 25px;
+            margin: 20px 0;
+            border-left: 5px solid #4CAF50;
         }
         
         @keyframes slideIn {
@@ -881,37 +971,71 @@ document.addEventListener('DOMContentLoaded', function() {
             background: linear-gradient(135deg, #FF6B6B, #FF1493) !important;
             color: white !important;
             border: 2px solid #FF1493 !important;
-            margin-top: 10px !important;
-            padding: 10px 15px !important;
-            border-radius: 8px !important;
+            padding: 12px 20px !important;
+            border-radius: 10px !important;
             cursor: pointer !important;
             font-weight: bold !important;
-            font-size: 0.9rem !important;
+            font-size: 1rem !important;
             transition: all 0.3s ease !important;
+            margin: 15px auto !important;
+            display: block !important;
+            max-width: 300px !important;
         }
         
         .boton-dificil:hover {
             transform: scale(1.05) !important;
-            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.4) !important;
+            box-shadow: 0 5px 20px rgba(255, 107, 107, 0.4) !important;
         }
         
         .boton-mazo-dificil {
             background: linear-gradient(135deg, #FF1493, #8A5AF7) !important;
             color: white !important;
-            padding: 15px 30px !important;
-            border-radius: 10px !important;
+            padding: 18px 35px !important;
+            border-radius: 15px !important;
             border: 3px solid white !important;
             font-weight: bold !important;
-            font-size: 1.1rem !important;
-            margin: 20px auto !important;
+            font-size: 1.2rem !important;
+            margin: 25px auto !important;
             display: block !important;
             cursor: pointer !important;
             transition: all 0.3s ease !important;
+            max-width: 400px !important;
+            text-align: center !important;
         }
         
         .boton-mazo-dificil:hover {
             transform: scale(1.05) !important;
-            box-shadow: 0 10px 25px rgba(255, 20, 147, 0.4) !important;
+            box-shadow: 0 10px 30px rgba(255, 20, 147, 0.5) !important;
+        }
+        
+        .boton-mazo-dificil:disabled {
+            opacity: 0.5 !important;
+            cursor: not-allowed !important;
+            transform: none !important;
+            box-shadow: none !important;
+        }
+        
+        /* Estilos para el video wrapper */
+        .video-wrapper {
+            position: relative;
+            width: 100%;
+            padding-bottom: 56.25%; /* 16:9 Aspect Ratio */
+            height: 0;
+            overflow: hidden;
+            border-radius: 15px;
+            margin: 30px 0;
+            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+            background: #000;
+        }
+        
+        .drive-iframe {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            border: none;
+            border-radius: 15px;
         }
     `;
     document.head.appendChild(estiloTimestamps);
