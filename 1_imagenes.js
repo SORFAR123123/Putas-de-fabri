@@ -400,7 +400,7 @@ const sistemaDescriptivo = {
         // CONTENEDORES PRINCIPALES (1-10)
         contenedores: {
             1: { 
-                nombre: 'ANIME CONTAINER 1',
+                nombre: 'Rusa culona 1',
                 imagen: '', 
                 descripcion: 'Animes de acción y aventura',
                 categoria: 'acción'
@@ -465,7 +465,7 @@ const sistemaDescriptivo = {
         subcontenedores: {
             // Contenedor 1
             '1_1': { 
-                nombre: 'Anime 1',
+                nombre: ' hERMANA RUSA CULONA',
                 imagen: '', 
                 descripcion: '', 
                 episodios: '' 
@@ -1294,9 +1294,9 @@ const sistemaDescriptivo = {
         // CONTENEDORES PRINCIPALES (1-10)
         contenedores: {
             1: { 
-                nombre: 'VIDEO CONTAINER 1',
+                nombre: 'Quinti zorras',
                 imagen: 'https://pbs.twimg.com/media/GztU8Y3XsAA5Yzm?format=png&name=small', 
-                descripcion: 'Videos educativos de japonés',
+                descripcion: 'Las mas culona de japon y mis putas seran mias esas putas conchas rosadas anos rosados culonas tetonas buenas curvas les hare hijos peruanos',
                 tematica: 'educativo'
             },
             2: { 
