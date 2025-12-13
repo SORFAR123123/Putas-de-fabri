@@ -4,12 +4,11 @@
 // ================================================
 
 const galeriaDatabase = {
-    // ============ MODO: GALERÍA ============
+    // ============ GALERÍA ============
     galeria: {
-        // CONTENEDORES PRINCIPALES (1-10) - CON NOMBRES PERSONALIZADOS
         contenedores: {
             1: { 
-                nombre: 'PAISAJES DE JAPÓN',  // NOMBRE PERSONALIZADO
+                nombre: 'PAISAJES DE JAPÓN',
                 imagen: 'https://images.unsplash.com/photo-1526481280693-3bfa7568e0f3?w=400&h=400&fit=crop', 
                 descripcion: 'Colección de paisajes naturales de Japón',
                 categoria: 'naturaleza'
@@ -70,9 +69,7 @@ const galeriaDatabase = {
             }
         },
         
-        // SUB-CONTENEDORES (5 por cada contenedor) - CON NOMBRES PERSONALIZADOS
         subcontenedores: {
-            // Contenedor 1 - PAISAJES
             '1_1': { 
                 nombre: 'MONTAÑAS SAGRADAS',
                 imagen: 'https://images.unsplash.com/photo-1528164344705-47542687000d?w=300&h=300&fit=crop',
@@ -100,410 +97,8 @@ const galeriaDatabase = {
                     'https://images.unsplash.com/photo-1545569341-9eb8b30979d9?w=800&h=600&fit=crop',
                     'https://images.unsplash.com/photo-1526481280693-3bfa7568e0f3?w=800&h=600&fit=crop'
                 ]
-            },
-            '1_4': { 
-                nombre: 'BOSQUES BAMBÚ', 
-                imagen: 'https://images.unsplash.com/photo-1558865869-c93f6f8482af?w=300&h=300&fit=crop',
-                descripcion: 'Bosques de bambú y senderos naturales',
-                imagenes: [
-                    'https://images.unsplash.com/photo-1542051841857-5f90071e7989?w=800&h=600&fit=crop'
-                ]
-            },
-            '1_5': { 
-                nombre: 'VOLCANES', 
-                imagen: 'https://images.unsplash.com/photo-1528164344705-47542687000d?w=300&h=300&fit=crop',
-                descripcion: 'Volcanes activos y termales naturales',
-                imagenes: [
-                    'https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=800&h=600&fit=crop'
-                ]
-            },
-            
-            // Contenedor 2 - ARQUITECTURA
-            '2_1': { 
-                nombre: 'CASTILLOS', 
-                imagen: 'https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=300&h=300&fit=crop',
-                descripcion: 'Castillos feudales y fortalezas históricas',
-                imagenes: [
-                    'https://images.unsplash.com/photo-1525874684015-58379d421aee?w=800&h=600&fit=crop',
-                    'https://images.unsplash.com/photo-1563492065599-3520f775eeed?w=800&h=600&fit=crop'
-                ]
-            },
-            '2_2': { 
-                nombre: 'CASAS TRADICIONALES', 
-                imagen: 'https://images.unsplash.com/photo-1555993539-1732b0258225?w=300&h=300&fit=crop',
-                descripcion: 'Viviendas tradicionales japonesas',
-                imagenes: [
-                    'https://images.unsplash.com/photo-1545569341-9eb8b30979d9?w=800&h=600&fit=crop'
-                ]
-            },
-            '2_3': { 
-                nombre: 'PUENTES', 
-                imagen: 'https://images.unsplash.com/photo-1526481280693-3bfa7568e0f3?w=300&h=300&fit=crop',
-                descripcion: 'Puentes tradicionales y modernos',
-                imagenes: [
-                    'https://images.unsplash.com/photo-1542051841857-5f90071e7989?w=800&h=600&fit=crop'
-                ]
-            },
-            '2_4': { 
-                nombre: 'RASCACIELOS', 
-                imagen: 'https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=300&h=300&fit=crop',
-                descripcion: 'Edificios modernos y rascacielos',
-                imagenes: [
-                    'https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&h=600&fit=crop'
-                ]
-            },
-            '2_5': { 
-                nombre: 'ESTACIONES', 
-                imagen: 'https://images.unsplash.com/photo-1558865869-c93f6f8482af?w=300&h=300&fit=crop',
-                descripcion: 'Estaciones de tren y metro',
-                imagenes: [
-                    'https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=800&h=600&fit=crop'
-                ]
-            },
-            
-            // Contenedor 3 - CIUDADES
-            '3_1': { 
-                nombre: 'TOKIO', 
-                imagen: 'https://images.unsplash.com/photo-1542051841857-5f90071e7989?w=300&h=300&fit=crop',
-                descripcion: 'La capital moderna de Japón',
-                imagenes: [
-                    'https://images.unsplash.com/photo-1525874684015-58379d421aee?w=800&h=600&fit=crop',
-                    'https://images.unsplash.com/photo-1563492065599-3520f775eeed?w=800&h=600&fit=crop'
-                ]
-            },
-            '3_2': { 
-                nombre: 'KIOTO', 
-                imagen: 'https://images.unsplash.com/photo-1555993539-1732b0258225?w=300&h=300&fit=crop',
-                descripcion: 'Capital histórica y cultural',
-                imagenes: [
-                    'https://images.unsplash.com/photo-1545569341-9eb8b30979d9?w=800&h=600&fit=crop'
-                ]
-            },
-            '3_3': { 
-                nombre: 'OSAKA', 
-                imagen: 'https://images.unsplash.com/photo-1526481280693-3bfa7568e0f3?w=300&h=300&fit=crop',
-                descripcion: 'Ciudad comercial y gastronómica',
-                imagenes: [
-                    'https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=800&h=600&fit=crop'
-                ]
-            },
-            '3_4': { 
-                nombre: 'HIROSHIMA', 
-                imagen: 'https://images.unsplash.com/photo-1528164344705-47542687000d?w=300&h=300&fit=crop',
-                descripcion: 'Ciudad de paz y reconstrucción',
-                imagenes: [
-                    'https://images.unsplash.com/photo-1558865869-c93f6f8482af?w=800&h=600&fit=crop'
-                ]
-            },
-            '3_5': { 
-                nombre: 'NAGOYA', 
-                imagen: 'https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=300&h=300&fit=crop',
-                descripcion: 'Centro industrial y tecnológico',
-                imagenes: [
-                    'https://images.unsplash.com/photo-1542051841857-5f90071e7989?w=800&h=600&fit=crop'
-                ]
-            },
-            
-            // Contenedor 4 - TRADICIONES
-            '4_1': { 
-                nombre: 'FESTIVALES', 
-                imagen: 'https://images.unsplash.com/photo-1555993539-1732b0258225?w=300&h=300&fit=crop',
-                descripcion: 'Matsuri y festividades tradicionales',
-                imagenes: [
-                    'https://images.unsplash.com/photo-1525874684015-58379d421aee?w=800&h=600&fit=crop',
-                    'https://images.unsplash.com/photo-1563492065599-3520f775eeed?w=800&h=600&fit=crop'
-                ]
-            },
-            '4_2': { 
-                nombre: 'CEREMONIA TÉ', 
-                imagen: 'https://images.unsplash.com/photo-1545569341-9eb8b30979d9?w=300&h=300&fit=crop',
-                descripcion: 'Ceremonia del té japonesa',
-                imagenes: [
-                    'https://images.unsplash.com/photo-1526481280693-3bfa7568e0f3?w=800&h=600&fit=crop'
-                ]
-            },
-            '4_3': { 
-                nombre: 'KIMONOS', 
-                imagen: 'https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=300&h=300&fit=crop',
-                descripcion: 'Vestimenta tradicional japonesa',
-                imagenes: [
-                    'https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&h=600&fit=crop'
-                ]
-            },
-            '4_4': { 
-                nombre: 'ARTES MARCIALES', 
-                imagen: 'https://images.unsplash.com/photo-1558865869-c93f6f8482af?w=300&h=300&fit=crop',
-                descripcion: 'Karate, Judo, Kendo y otras artes',
-                imagenes: [
-                    'https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=800&h=600&fit=crop'
-                ]
-            },
-            '4_5': { 
-                nombre: 'GEISHAS', 
-                imagen: 'https://images.unsplash.com/photo-1542051841857-5f90071e7989?w=300&h=300&fit=crop',
-                descripcion: 'Artistas tradicionales japonesas',
-                imagenes: [
-                    'https://images.unsplash.com/photo-1555993539-1732b0258225?w=800&h=600&fit=crop'
-                ]
-            },
-            
-            // Contenedor 5 - GASTRONOMÍA
-            '5_1': { 
-                nombre: 'SUSHI', 
-                imagen: 'https://images.unsplash.com/photo-1545569341-9eb8b30979d9?w=300&h=300&fit=crop',
-                descripcion: 'Plato emblemático de la cocina japonesa',
-                imagenes: [
-                    'https://images.unsplash.com/photo-1525874684015-58379d421aee?w=800&h=600&fit=crop',
-                    'https://images.unsplash.com/photo-1563492065599-3520f775eeed?w=800&h=600&fit=crop'
-                ]
-            },
-            '5_2': { 
-                nombre: 'RAMEN', 
-                imagen: 'https://images.unsplash.com/photo-1526481280693-3bfa7568e0f3?w=300&h=300&fit=crop',
-                descripcion: 'Sopa de fideos tradicional',
-                imagenes: [
-                    'https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=800&h=600&fit=crop'
-                ]
-            },
-            '5_3': { 
-                nombre: 'TEMPURA', 
-                imagen: 'https://images.unsplash.com/photo-1528164344705-47542687000d?w=300&h=300&fit=crop',
-                descripcion: 'Frituras ligeras de marisco y vegetales',
-                imagenes: [
-                    'https://images.unsplash.com/photo-1558865869-c93f6f8482af?w=800&h=600&fit=crop'
-                ]
-            },
-            '5_4': { 
-                nombre: 'DULCES', 
-                imagen: 'https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=300&h=300&fit=crop',
-                descripcion: 'Dulces tradicionales japoneses',
-                imagenes: [
-                    'https://images.unsplash.com/photo-1542051841857-5f90071e7989?w=800&h=600&fit=crop'
-                ]
-            },
-            '5_5': { 
-                nombre: 'BEBIDAS', 
-                imagen: 'https://images.unsplash.com/photo-1555993539-1732b0258225?w=300&h=300&fit=crop',
-                descripcion: 'Sake, té verde y otras bebidas',
-                imagenes: [
-                    'https://images.unsplash.com/photo-1525874684015-58379d421aee?w=800&h=600&fit=crop'
-                ]
-            },
-            
-            // Contenedor 6 - ARTE
-            '6_1': { 
-                nombre: 'CALIGRAFÍA', 
-                imagen: 'https://images.unsplash.com/photo-1545569341-9eb8b30979d9?w=300&h=300&fit=crop',
-                descripcion: 'Arte de la escritura japonesa',
-                imagenes: [
-                    'https://images.unsplash.com/photo-1563492065599-3520f775eeed?w=800&h=600&fit=crop',
-                    'https://images.unsplash.com/photo-1526481280693-3bfa7568e0f3?w=800&h=600&fit=crop'
-                ]
-            },
-            '6_2': { 
-                nombre: 'CERÁMICA', 
-                imagen: 'https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=300&h=300&fit=crop',
-                descripcion: 'Alfarería y cerámica tradicional',
-                imagenes: [
-                    'https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&h=600&fit=crop'
-                ]
-            },
-            '6_3': { 
-                nombre: 'UÑOS', 
-                imagen: 'https://images.unsplash.com/photo-1558865869-c93f6f8482af?w=300&h=300&fit=crop',
-                descripcion: 'Pinturas tradicionales japonesas',
-                imagenes: [
-                    'https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=800&h=600&fit=crop'
-                ]
-            },
-            '6_4': { 
-                nombre: 'ESCULTURAS', 
-                imagen: 'https://images.unsplash.com/photo-1542051841857-5f90071e7989?w=300&h=300&fit=crop',
-                descripcion: 'Esculturas budistas y decorativas',
-                imagenes: [
-                    'https://images.unsplash.com/photo-1555993539-1732b0258225?w=800&h=600&fit=crop'
-                ]
-            },
-            '6_5': { 
-                nombre: 'GRABADOS', 
-                imagen: 'https://images.unsplash.com/photo-1525874684015-58379d421aee?w=300&h=300&fit=crop',
-                descripcion: 'Grabados en madera ukiyo-e',
-                imagenes: [
-                    'https://images.unsplash.com/photo-1545569341-9eb8b30979d9?w=800&h=600&fit=crop'
-                ]
-            },
-            
-            // Contenedor 7 - FLORES
-            '7_1': { 
-                nombre: 'CEREZOS', 
-                imagen: 'https://images.unsplash.com/photo-1526481280693-3bfa7568e0f3?w=300&h=300&fit=crop',
-                descripcion: 'Sakura en flor durante la primavera',
-                imagenes: [
-                    'https://images.unsplash.com/photo-1563492065599-3520f775eeed?w=800&h=600&fit=crop',
-                    'https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=800&h=600&fit=crop'
-                ]
-            },
-            '7_2': { 
-                nombre: 'LOTOS', 
-                imagen: 'https://images.unsplash.com/photo-1528164344705-47542687000d?w=300&h=300&fit=crop',
-                descripcion: 'Flores de loto en estanques',
-                imagenes: [
-                    'https://images.unsplash.com/photo-1558865869-c93f6f8482af?w=800&h=600&fit=crop'
-                ]
-            },
-            '7_3': { 
-                nombre: 'CRISANTEMOS', 
-                imagen: 'https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=300&h=300&fit=crop',
-                descripcion: 'Flor imperial de Japón',
-                imagenes: [
-                    'https://images.unsplash.com/photo-1542051841857-5f90071e7989?w=800&h=600&fit=crop'
-                ]
-            },
-            '7_4': { 
-                nombre: 'GIRASOLES', 
-                imagen: 'https://images.unsplash.com/photo-1555993539-1732b0258225?w=300&h=300&fit=crop',
-                descripcion: 'Campos de girasoles en verano',
-                imagenes: [
-                    'https://images.unsplash.com/photo-1525874684015-58379d421aee?w=800&h=600&fit=crop'
-                ]
-            },
-            '7_5': { 
-                nombre: 'ORQUÍDEAS', 
-                imagen: 'https://images.unsplash.com/photo-1545569341-9eb8b30979d9?w=300&h=300&fit=crop',
-                descripcion: 'Orquídeas en jardines botánicos',
-                imagenes: [
-                    'https://images.unsplash.com/photo-1526481280693-3bfa7568e0f3?w=800&h=600&fit=crop'
-                ]
-            },
-            
-            // Contenedor 8 - TEMPLOS
-            '8_1': { 
-                nombre: 'KIOTO', 
-                imagen: 'https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=300&h=300&fit=crop',
-                descripcion: 'Templos históricos de Kioto',
-                imagenes: [
-                    'https://images.unsplash.com/photo-1528164344705-47542687000d?w=800&h=600&fit=crop',
-                    'https://images.unsplash.com/photo-1558865869-c93f6f8482af?w=800&h=600&fit=crop'
-                ]
-            },
-            '8_2': { 
-                nombre: 'NARA', 
-                imagen: 'https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=300&h=300&fit=crop',
-                descripcion: 'Templos antiguos de Nara',
-                imagenes: [
-                    'https://images.unsplash.com/photo-1542051841857-5f90071e7989?w=800&h=600&fit=crop'
-                ]
-            },
-            '8_3': { 
-                nombre: 'NIKKO', 
-                imagen: 'https://images.unsplash.com/photo-1555993539-1732b0258225?w=300&h=300&fit=crop',
-                descripcion: 'Santuarios de Nikko',
-                imagenes: [
-                    'https://images.unsplash.com/photo-1525874684015-58379d421aee?w=800&h=600&fit=crop'
-                ]
-            },
-            '8_4': { 
-                nombre: 'KAMAKURA', 
-                imagen: 'https://images.unsplash.com/photo-1545569341-9eb8b30979d9?w=300&h=300&fit=crop',
-                descripcion: 'Templos zen de Kamakura',
-                imagenes: [
-                    'https://images.unsplash.com/photo-1563492065599-3520f775eeed?w=800&h=600&fit=crop'
-                ]
-            },
-            '8_5': { 
-                nombre: 'MONTANOSOS', 
-                imagen: 'https://images.unsplash.com/photo-1526481280693-3bfa7568e0f3?w=300&h=300&fit=crop',
-                descripcion: 'Templos en montañas remotas',
-                imagenes: [
-                    'https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=800&h=600&fit=crop'
-                ]
-            },
-            
-            // Contenedor 9 - MODERNO
-            '9_1': { 
-                nombre: 'TECNOLOGÍA', 
-                imagen: 'https://images.unsplash.com/photo-1528164344705-47542687000d?w=300&h=300&fit=crop',
-                descripcion: 'Innovación tecnológica japonesa',
-                imagenes: [
-                    'https://images.unsplash.com/photo-1558865869-c93f6f8482af?w=800&h=600&fit=crop',
-                    'https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=800&h=600&fit=crop'
-                ]
-            },
-            '9_2': { 
-                nombre: 'MODO', 
-                imagen: 'https://images.unsplash.com/photo-1542051841857-5f90071e7989?w=300&h=300&fit=crop',
-                descripcion: 'Moda contemporánea japonesa',
-                imagenes: [
-                    'https://images.unsplash.com/photo-1555993539-1732b0258225?w=800&h=600&fit=crop'
-                ]
-            },
-            '9_3': { 
-                nombre: 'ARQUITECTURA', 
-                imagen: 'https://images.unsplash.com/photo-1525874684015-58379d421aee?w=300&h=300&fit=crop',
-                descripcion: 'Edificios modernos y diseño',
-                imagenes: [
-                    'https://images.unsplash.com/photo-1545569341-9eb8b30979d9?w=800&h=600&fit=crop'
-                ]
-            },
-            '9_4': { 
-                nombre: 'TRANSPORTE', 
-                imagen: 'https://images.unsplash.com/photo-1526481280693-3bfa7568e0f3?w=300&h=300&fit=crop',
-                descripcion: 'Transporte moderno en Japón',
-                imagenes: [
-                    'https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=800&h=600&fit=crop'
-                ]
-            },
-            '9_5': { 
-                nombre: 'ENTRETENIMIENTO', 
-                imagen: 'https://images.unsplash.com/photo-1528164344705-47542687000d?w=300&h=300&fit=crop',
-                descripcion: 'Cultura pop y entretenimiento',
-                imagenes: [
-                    'https://images.unsplash.com/photo-1558865869-c93f6f8482af?w=800&h=600&fit=crop'
-                ]
-            },
-            
-            // Contenedor 10 - NOCTURNO
-            '10_1': { 
-                nombre: 'TOKIO DE NOCHE', 
-                imagen: 'https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=300&h=300&fit=crop',
-                descripcion: 'Luces de neón en Tokio nocturno',
-                imagenes: [
-                    'https://images.unsplash.com/photo-1542051841857-5f90071e7989?w=800&h=600&fit=crop',
-                    'https://images.unsplash.com/photo-1555993539-1732b0258225?w=800&h=600&fit=crop'
-                ]
-            },
-            '10_2': { 
-                nombre: 'TEMPLOS ILUMINADOS', 
-                imagen: 'https://images.unsplash.com/photo-1525874684015-58379d421aee?w=300&h=300&fit=crop',
-                descripcion: 'Templos iluminados por la noche',
-                imagenes: [
-                    'https://images.unsplash.com/photo-1545569341-9eb8b30979d9?w=800&h=600&fit=crop'
-                ]
-            },
-            '10_3': { 
-                nombre: 'CALLES', 
-                imagen: 'https://images.unsplash.com/photo-1526481280693-3bfa7568e0f3?w=300&h=300&fit=crop',
-                descripcion: 'Calles comerciales nocturnas',
-                imagenes: [
-                    'https://images.unsplash.com/photo-1570077188670-e3a8d69ac5ff?w=800&h=600&fit=crop'
-                ]
-            },
-            '10_4': { 
-                nombre: 'PUEBLOS', 
-                imagen: 'https://images.unsplash.com/photo-1528164344705-47542687000d?w=300&h=300&fit=crop',
-                descripcion: 'Pueblos tradicionales de noche',
-                imagenes: [
-                    'https://images.unsplash.com/photo-1558865869-c93f6f8482af?w=800&h=600&fit=crop'
-                ]
-            },
-            '10_5': { 
-                nombre: 'FUEGOS', 
-                imagen: 'https://images.unsplash.com/photo-1493976040374-85c8e12f0c0e?w=300&h=300&fit=crop',
-                descripcion: 'Festivales de fuegos artificiales',
-                imagenes: [
-                    'https://images.unsplash.com/photo-1542051841857-5f90071e7989?w=800&h=600&fit=crop'
-                ]
             }
+            // ... puedes añadir más subcontenedores aquí
         }
     }
 };
@@ -512,7 +107,6 @@ const galeriaDatabase = {
 // FUNCIONES DE ACCESO PARA GALERÍA
 // ================================================
 
-// OBTENER CONTENEDOR DE GALERÍA
 function obtenerContenedorGaleria(numero) {
     return galeriaDatabase.galeria.contenedores[numero] || {
         nombre: `GALERÍA ${numero}`,
@@ -522,7 +116,6 @@ function obtenerContenedorGaleria(numero) {
     };
 }
 
-// OBTENER SUBCONTENEDOR DE GALERÍA
 function obtenerSubcontenedorGaleria(contenedor, subcontenedor) {
     const key = `${contenedor}_${subcontenedor}`;
     return galeriaDatabase.galeria.subcontenedores[key] || {
@@ -533,25 +126,204 @@ function obtenerSubcontenedorGaleria(contenedor, subcontenedor) {
     };
 }
 
-// OBTENER IMÁGENES DE UN SUBCONTENEDOR
 function obtenerImagenesSubcontenedor(contenedor, subcontenedor) {
     const sub = obtenerSubcontenedorGaleria(contenedor, subcontenedor);
     return sub.imagenes || [];
 }
 
-// OBTENER NOMBRE DEL CONTENEDOR
-function obtenerNombreContenedorGaleria(numero) {
-    const contenedor = obtenerContenedorGaleria(numero);
-    return contenedor.nombre;
+// ================================================
+// FUNCIONES DE INTERFAZ PARA GALERÍA
+// ================================================
+
+function cargarPaginaGaleria() {
+    console.log("Cargando página de galería...");
+    
+    // Ocultar otras secciones
+    document.querySelector('.especial-section').style.display = 'none';
+    const mangaSection = document.getElementById('manga-section');
+    if (mangaSection) mangaSection.style.display = 'none';
+    
+    const quizSection = document.getElementById('quiz-section');
+    if (quizSection) quizSection.style.display = 'none';
+    
+    // Crear o mostrar sección de galería
+    let galeriaSection = document.getElementById('galeria-section');
+    
+    if (!galeriaSection) {
+        galeriaSection = document.createElement('section');
+        galeriaSection.id = 'galeria-section';
+        document.body.appendChild(galeriaSection);
+    }
+    
+    galeriaSection.style.display = 'block';
+    galeriaSection.innerHTML = `
+        <div class="manga-section">
+            <div class="manga-header">
+                <h2>🖼️ GALERÍA DE IMÁGENES</h2>
+                <p>Selecciona un contenedor para ver las colecciones de imágenes</p>
+            </div>
+            
+            <div class="manga-controls">
+                <div class="search-container">
+                    <input type="text" id="galeria-search" placeholder="🔍 Buscar imágenes..." class="search-input">
+                </div>
+            </div>
+            
+            <div class="contenedores-grid" id="galeria-contenedores"></div>
+            
+            <!-- Vista de subcontenedores -->
+            <div id="galeria-subcontenedores-view" style="display: none;">
+                <button class="btn-back" onclick="volverAGaleriaPrincipal()">← Volver a contenedores</button>
+                <h3 id="galeria-contenedor-titulo"></h3>
+                <div class="subcontenedores-grid" id="galeria-subcontenedores"></div>
+            </div>
+            
+            <!-- Vista de imágenes -->
+            <div id="galeria-imagenes-view" style="display: none;">
+                <button class="btn-back" onclick="volverASubcontenedoresGaleria()">← Volver a subcontenedores</button>
+                <h3 id="galeria-subcontenedor-titulo"></h3>
+                <div class="imagenes-grid" id="galeria-imagenes"></div>
+            </div>
+        </div>
+    `;
+    
+    // Cargar contenedores de galería
+    cargarContenedoresGaleria();
 }
 
-// OBTENER NOMBRE DEL SUBCONTENEDOR
-function obtenerNombreSubcontenedorGaleria(contenedor, subcontenedor) {
-    const sub = obtenerSubcontenedorGaleria(contenedor, subcontenedor);
-    return sub.nombre;
+function cargarContenedoresGaleria() {
+    const contenedoresGrid = document.getElementById('galeria-contenedores');
+    if (!contenedoresGrid) return;
+    
+    contenedoresGrid.innerHTML = '';
+    
+    for (let i = 1; i <= 10; i++) {
+        const contenedor = obtenerContenedorGaleria(i);
+        
+        const contenedorElement = document.createElement('div');
+        contenedorElement.className = 'contenedor-item';
+        contenedorElement.innerHTML = `
+            <div class="contenedor-img" style="background-image: url('${contenedor.imagen}')"></div>
+            <h3>${contenedor.nombre}</h3>
+            <p>${contenedor.descripcion}</p>
+            <button class="btn-ver" onclick="abrirSubcontenedoresGaleria(${i})">Ver colección</button>
+        `;
+        
+        contenedoresGrid.appendChild(contenedorElement);
+    }
 }
 
-// EDITAR CONTENEDOR DE GALERÍA
+function abrirSubcontenedoresGaleria(contenedorId) {
+    document.getElementById('galeria-contenedores').style.display = 'none';
+    document.getElementById('galeria-subcontenedores-view').style.display = 'block';
+    
+    const contenedor = obtenerContenedorGaleria(contenedorId);
+    document.getElementById('galeria-contenedor-titulo').textContent = contenedor.nombre;
+    
+    const subcontenedoresGrid = document.getElementById('galeria-subcontenedores');
+    subcontenedoresGrid.innerHTML = '';
+    
+    for (let i = 1; i <= 5; i++) {
+        const subcontenedor = obtenerSubcontenedorGaleria(contenedorId, i);
+        
+        const subElement = document.createElement('div');
+        subElement.className = 'subcontenedor-item';
+        subElement.innerHTML = `
+            <div class="subcontenedor-img" style="background-image: url('${subcontenedor.imagen}')"></div>
+            <h4>${subcontenedor.nombre}</h4>
+            <p>${subcontenedor.descripcion}</p>
+            <button class="btn-ver" onclick="abrirImagenesGaleria(${contenedorId}, ${i})">
+                Ver imágenes (${subcontenedor.imagenes ? subcontenedor.imagenes.length : 0})
+            </button>
+        `;
+        
+        subcontenedoresGrid.appendChild(subElement);
+    }
+}
+
+function abrirImagenesGaleria(contenedorId, subcontenedorId) {
+    document.getElementById('galeria-subcontenedores-view').style.display = 'none';
+    document.getElementById('galeria-imagenes-view').style.display = 'block';
+    
+    const subcontenedor = obtenerSubcontenedorGaleria(contenedorId, subcontenedorId);
+    document.getElementById('galeria-subcontenedor-titulo').textContent = subcontenedor.nombre;
+    
+    const imagenesGrid = document.getElementById('galeria-imagenes');
+    imagenesGrid.innerHTML = '';
+    
+    const imagenes = obtenerImagenesSubcontenedor(contenedorId, subcontenedorId);
+    
+    if (imagenes.length === 0) {
+        imagenesGrid.innerHTML = '<p class="no-imagenes">No hay imágenes en esta colección</p>';
+        return;
+    }
+    
+    imagenes.forEach((imagenUrl, index) => {
+        const imgElement = document.createElement('div');
+        imgElement.className = 'imagen-item';
+        imgElement.innerHTML = `
+            <div class="imagen-container">
+                <img src="${imagenUrl}" alt="Imagen ${index + 1}" loading="lazy">
+                <div class="imagen-overlay">
+                    <button class="btn-expand" onclick="expandirImagen('${imagenUrl}')">🔍 Ampliar</button>
+                </div>
+            </div>
+            <p class="imagen-desc">Imagen ${index + 1}</p>
+        `;
+        imagenesGrid.appendChild(imgElement);
+    });
+}
+
+function volverAGaleriaPrincipal() {
+    document.getElementById('galeria-subcontenedores-view').style.display = 'none';
+    document.getElementById('galeria-imagenes-view').style.display = 'none';
+    document.getElementById('galeria-contenedores').style.display = 'grid';
+}
+
+function volverASubcontenedoresGaleria() {
+    document.getElementById('galeria-imagenes-view').style.display = 'none';
+    document.getElementById('galeria-subcontenedores-view').style.display = 'block';
+}
+
+function expandirImagen(url) {
+    const modal = document.createElement('div');
+    modal.className = 'imagen-modal';
+    modal.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0,0,0,0.9);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        z-index: 1000;
+    `;
+    
+    modal.innerHTML = `
+        <img src="${url}" style="max-width: 90%; max-height: 90%; border-radius: 10px;">
+        <button onclick="this.parentElement.remove()" style="
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            background: #ff4757;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+        ">✕ Cerrar</button>
+    `;
+    
+    document.body.appendChild(modal);
+}
+
+// ================================================
+// FUNCIONES DE EDITAR
+// ================================================
+
 function editarContenedorGaleria(numero, nuevosDatos) {
     if (!galeriaDatabase.galeria.contenedores[numero]) {
         console.error(`Contenedor ${numero} no existe en galería`);
@@ -563,16 +335,15 @@ function editarContenedorGaleria(numero, nuevosDatos) {
         ...nuevosDatos
     };
     
-    console.log(`✅ Contenedor ${numero} actualizado en galería:`, nuevosDatos);
+    console.log(`✅ Contenedor ${numero} actualizado:`, nuevosDatos);
     return true;
 }
 
-// EDITAR SUBCONTENEDOR DE GALERÍA
 function editarSubcontenedorGaleria(contenedor, subcontenedor, nuevosDatos) {
     const key = `${contenedor}_${subcontenedor}`;
     
     if (!galeriaDatabase.galeria.subcontenedores[key]) {
-        console.error(`Subcontenedor ${key} no existe en galería`);
+        console.error(`Subcontenedor ${key} no existe`);
         return false;
     }
     
@@ -581,16 +352,15 @@ function editarSubcontenedorGaleria(contenedor, subcontenedor, nuevosDatos) {
         ...nuevosDatos
     };
     
-    console.log(`✅ Subcontenedor ${key} actualizado en galería:`, nuevosDatos);
+    console.log(`✅ Subcontenedor ${key} actualizado:`, nuevosDatos);
     return true;
 }
 
-// AÑADIR IMAGEN A SUBCONTENEDOR
 function añadirImagenSubcontenedor(contenedor, subcontenedor, urlImagen) {
     const key = `${contenedor}_${subcontenedor}`;
     
     if (!galeriaDatabase.galeria.subcontenedores[key]) {
-        console.error(`Subcontenedor ${key} no existe en galería`);
+        console.error(`Subcontenedor ${key} no existe`);
         return false;
     }
     
@@ -599,128 +369,28 @@ function añadirImagenSubcontenedor(contenedor, subcontenedor, urlImagen) {
     }
     
     galeriaDatabase.galeria.subcontenedores[key].imagenes.push(urlImagen);
-    
-    console.log(`✅ Imagen añadida al subcontenedor ${key}:`, urlImagen);
+    console.log(`✅ Imagen añadida a ${key}`);
     return true;
 }
 
-// ELIMINAR IMAGEN DE SUBCONTENEDOR
-function eliminarImagenSubcontenedor(contenedor, subcontenedor, indice) {
-    const key = `${contenedor}_${subcontenedor}`;
-    
-    if (!galeriaDatabase.galeria.subcontenedores[key]) {
-        console.error(`Subcontenedor ${key} no existe en galería`);
-        return false;
-    }
-    
-    if (!galeriaDatabase.galeria.subcontenedores[key].imagenes ||
-        indice < 0 || indice >= galeriaDatabase.galeria.subcontenedores[key].imagenes.length) {
-        console.error(`Índice ${indice} no válido para subcontenedor ${key}`);
-        return false;
-    }
-    
-    const eliminada = galeriaDatabase.galeria.subcontenedores[key].imagenes.splice(indice, 1);
-    
-    console.log(`✅ Imagen eliminada del subcontenedor ${key}:`, eliminada[0]);
-    return true;
-}
-
-// OBTENER TODAS LAS IMÁGENES DE LA GALERÍA (para búsqueda)
-function obtenerTodasImagenesGaleria() {
-    const todasImagenes = [];
-    
-    Object.keys(galeriaDatabase.galeria.subcontenedores).forEach(key => {
-        const sub = galeriaDatabase.galeria.subcontenedores[key];
-        if (sub.imagenes && sub.imagenes.length > 0) {
-            sub.imagenes.forEach(url => {
-                todasImagenes.push({
-                    url: url,
-                    subcontenedor: sub.nombre,
-                    contenedor: key.split('_')[0]
-                });
-            });
-        }
-    });
-    
-    return todasImagenes;
-}
-
 // ================================================
-// FUNCIONES DE UTILIDAD
+// INICIALIZACIÓN
 // ================================================
 
-// MOSTRAR INFO CONTENEDOR EN CONSOLA
-function mostrarInfoContenedorGaleria(numero) {
-    const contenedor = obtenerContenedorGaleria(numero);
-    
-    console.log(`📦 Contenedor ${numero} (Galería):`);
-    console.log(`   Nombre: ${contenedor.nombre}`);
-    console.log(`   Imagen: ${contenedor.imagen || '(sin imagen)'}`);
-    console.log(`   Descripción: ${contenedor.descripcion}`);
-    console.log(`   Categoría: ${contenedor.categoria || 'N/A'}`);
-}
+console.log('✅ Galería.js cargado correctamente');
+console.log('🖼️ Sistema de galería listo para usar');
 
-// MOSTRAR INFO SUBCONTENEDOR EN CONSOLA
-function mostrarInfoSubcontenedorGaleria(contenedor, subcontenedor) {
-    const key = `${contenedor}_${subcontenedor}`;
-    const sub = obtenerSubcontenedorGaleria(contenedor, subcontenedor);
-    
-    console.log(`📦 Subcontenedor ${key} (Galería):`);
-    console.log(`   Nombre: ${sub.nombre}`);
-    console.log(`   Imagen: ${sub.imagen || '(sin imagen)'}`);
-    console.log(`   Descripción: ${sub.descripcion || '(sin descripción)'}`);
-    console.log(`   Número de imágenes: ${sub.imagenes ? sub.imagenes.length : 0}`);
-    
-    if (sub.imagenes && sub.imagenes.length > 0) {
-        console.log(`   Imágenes:`);
-        sub.imagenes.forEach((img, index) => {
-            console.log(`     ${index + 1}. ${img}`);
-        });
-    }
-}
-
-// ================================================
-// EJEMPLOS DE USO
-// ================================================
-
-// EJEMPLO 1: Cambiar nombre de un contenedor
+// Ejemplo de uso:
 /*
+// Cambiar nombre de contenedor:
 editarContenedorGaleria(1, {
-    nombre: 'MIS PAISAJES FAVORITOS',
-    descripcion: 'Mis fotos personales de paisajes',
-    categoria: 'personal'
-});
-*/
-
-// EJEMPLO 2: Cambiar nombre de un subcontenedor y añadir imágenes
-/*
-editarSubcontenedorGaleria(1, 1, {
-    nombre: 'MIS FOTOS DEL MONTE FUJI',
-    descripcion: 'Fotos que tomé durante mi viaje'
+    nombre: 'MIS FOTOS PERSONALES',
+    descripcion: 'Mi colección personal de fotos'
 });
 
-añadirImagenSubcontenedor(1, 1, 'https://misitio.com/mi-foto-fuji.jpg');
-añadirImagenSubcontenedor(1, 1, 'https://misitio.com/mi-foto-fuji2.jpg');
-*/
+// Añadir imágenes a subcontenedor:
+añadirImagenSubcontenedor(1, 1, 'https://ejemplo.com/mi-foto.jpg');
 
-// EJEMPLO 3: Ver información en consola
-/*
-mostrarInfoContenedorGaleria(1);
-mostrarInfoSubcontenedorGaleria(1, 1);
+// Para usar la galería, añadir en index.html:
+<button onclick="cargarPaginaGaleria()">Ver Galería</button>
 */
-
-console.log('✅ Galería de imágenes cargada correctamente');
-console.log('📸 Contenedores: 10 contenedores con nombres personalizados');
-console.log('🖼️ Subcontenedores: 50 subcontenedores con colecciones de imágenes');
-console.log('');
-console.log('🔄 Funciones disponibles:');
-console.log('   - obtenerContenedorGaleria(numero)');
-console.log('   - obtenerSubcontenedorGaleria(contenedor, subcontenedor)');
-console.log('   - obtenerImagenesSubcontenedor(contenedor, subcontenedor)');
-console.log('   - editarContenedorGaleria(numero, {nombre, imagen, descripcion, categoria})');
-console.log('   - editarSubcontenedorGaleria(contenedor, subcontenedor, {nombre, imagen, descripcion, imagenes})');
-console.log('   - añadirImagenSubcontenedor(contenedor, subcontenedor, urlImagen)');
-console.log('   - eliminarImagenSubcontenedor(contenedor, subcontenedor, indice)');
-console.log('   - obtenerTodasImagenesGaleria()');
-console.log('   - mostrarInfoContenedorGaleria(numero)');
-console.log('   - mostrarInfoSubcontenedorGaleria(contenedor, subcontenedor)');
