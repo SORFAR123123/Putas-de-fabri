@@ -45,7 +45,7 @@ const galeriaDatabase = {
         categoria: "MI puta novia culonatetona buen culo",
         imagen: "https://pbs.twimg.com/media/G7fsiFCXQAAhtKq?format=png&name=900x900",
         imagenes: [
-            { id: 1, url: "https://pbs.twimg.com/media/G22_08VWUAABii4?format=jpg&name=medium" },
+            { id: 1, url: "https://pbs.twimg.com/media/GrNWikuWsAAVYtt?format=jpg&name=4096x4096" },
             { id: 2, url: "https://pbs.twimg.com/media/G22_08VWUAABii4?format=jpg&name=medium" },
             { id: 3, url: "https://pbs.twimg.com/media/G7wgF7aW4AAYsOQ?format=jpg&name=large" },
             { id: 4, url: "https://pbs.twimg.com/media/GztU8Y3XsAA5Yzm?format=png&name=small" },
