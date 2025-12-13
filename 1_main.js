@@ -15,7 +15,7 @@ let modoMazoDificil = false;
 let palabrasDificilesQuiz = [];
 
 // Variables para videos y animes
-let modoActual = 'manga'; // 'manga', 'video', 'anime', 'audio', 'asmr', 'rpg', 'misiones'
+let modoActual = 'manga'; // 'manga', 'video', 'anime', 'audio', 'asmr', 'rpg', 'misiones', 'fantasia'
 let idiomaVideoActual = 'espanol'; // 'espanol', 'japones'
 
 // ====================
@@ -353,6 +353,37 @@ function cargarPaginaRPG() {
             <div style="text-align: center; padding: 100px 20px;">
                 <h2 style="color: #FF1493; margin-bottom: 20px;">🎮 RPG QUINTILLIZAS</h2>
                 <p style="opacity: 0.8; margin-bottom: 30px;">El sistema RPG no se cargó correctamente.</p>
+                <button class="btn-atras-especifico" onclick="volverAlInicio()">
+                    ↩️ Volver al inicio
+                </button>
+            </div>
+        `;
+    }
+    
+    const botonVolver = crearBotonVolver(volverAlInicio);
+    mangaSection.insertBefore(botonVolver, mangaSection.firstChild);
+}
+
+// ====================
+// NUEVO: FUNCIÓN PARA RPG FANTASÍA
+// ====================
+
+function cargarPaginaFantasiaRPG() {
+    modoActual = 'fantasia';
+    modoMazoDificil = false;
+    ocultarHeader();
+    
+    const mangaSection = document.getElementById('manga-section');
+    mangaSection.style.display = 'block';
+    
+    // Verificar si el sistema está cargado
+    if (typeof fantasiaRPG !== 'undefined') {
+        mangaSection.innerHTML = fantasiaRPG.cargarUI();
+    } else {
+        mangaSection.innerHTML = `
+            <div style="text-align: center; padding: 100px 20px;">
+                <h2 style="color: #FF1493; margin-bottom: 20px;">⚔️ RPG FANTASÍA</h2>
+                <p style="opacity: 0.8; margin-bottom: 30px;">El sistema RPG Fantasía no se cargó correctamente.</p>
                 <button class="btn-atras-especifico" onclick="volverAlInicio()">
                     ↩️ Volver al inicio
                 </button>
@@ -1448,11 +1479,12 @@ function mostrarPalabraQuiz() {
     if (modoActual === 'audio') icono = '🎵';
     if (modoActual === 'asmr') icono = '🎧';
     if (modoActual === 'rpg') icono = '🎮';
+    if (modoActual === 'fantasia') icono = '⚔️';
     
     quizSection.innerHTML = `
         <div class="quiz-container">
             <h2 style="text-align: center; color: #8A5AF7; margin-bottom: 20px;">
-                ${icono} ${modoActual === 'asmr' ? 'ASMR' : modoActual === 'audio' ? 'AUDIO' : modoActual === 'rpg' ? 'RPG' : modoActual.toUpperCase()} • Mazo ${mazoActual} • Palabra ${indicePalabraActual + 1}/${palabrasActuales.length}
+                ${icono} ${modoActual === 'asmr' ? 'ASMR' : modoActual === 'audio' ? 'AUDIO' : modoActual === 'rpg' ? 'RPG' : modoActual === 'fantasia' ? 'FANTASÍA' : modoActual.toUpperCase()} • Mazo ${mazoActual} • Palabra ${indicePalabraActual + 1}/${palabrasActuales.length}
             </h2>
             
             <div class="palabra-japonesa" id="palabra-japonesa">
@@ -1788,6 +1820,8 @@ function finalizarQuiz() {
         funcionVolver = () => volverAlInicio();
     } else if (modoActual === 'rpg') {
         funcionVolver = () => cargarPaginaRPG();
+    } else if (modoActual === 'fantasia') {
+        funcionVolver = () => cargarPaginaFantasiaRPG();
     } else {
         funcionVolver = () => cargarMazos(contenedorActual, subcontenedorActual);
     }
@@ -1829,7 +1863,7 @@ function finalizarQuiz() {
             ` : ''}
             
             <div class="quiz-controls">
-                <button class="quiz-btn btn-volver" onclick="${modoActual === 'anime' ? `cargarMazosAnimes(${contenedorActual}, ${subcontenedorActual})` : (modoActual === 'audio' ? `cargarMazosAudios(${contenedorActual}, ${subcontenedorActual})` : (modoActual === 'rpg' ? `cargarPaginaRPG()` : `cargarMazos(${contenedorActual}, ${subcontenedorActual})`))}">
+                <button class="quiz-btn btn-volver" onclick="${modoActual === 'anime' ? `cargarMazosAnimes(${contenedorActual}, ${subcontenedorActual})` : (modoActual === 'audio' ? `cargarMazosAudios(${contenedorActual}, ${subcontenedorActual})` : (modoActual === 'rpg' ? `cargarPaginaRPG()` : (modoActual === 'fantasia' ? `cargarPaginaFantasiaRPG()` : `cargarMazos(${contenedorActual}, ${subcontenedorActual})`)))}">
                     ↩️ Volver a Mazos
                 </button>
                 <button class="quiz-btn btn-siguiente" onclick="repetirQuiz()">
@@ -1919,6 +1953,8 @@ function cancelarQuiz() {
             volverAlInicio();
         } else if (modoActual === 'rpg') {
             cargarPaginaRPG();
+        } else if (modoActual === 'fantasia') {
+            cargarPaginaFantasiaRPG();
         } else {
             cargarMazos(contenedorActual, subcontenedorActual);
         }
@@ -1947,6 +1983,8 @@ function volverAMazos() {
         volverAlInicio();
     } else if (modoActual === 'rpg') {
         cargarPaginaRPG();
+    } else if (modoActual === 'fantasia') {
+        cargarPaginaFantasiaRPG();
     } else {
         cargarMazos(contenedorActual, subcontenedorActual);
     }
@@ -2116,6 +2154,10 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log('🎮 RPG Quintillizas inicializado');
     }
     
+    if (typeof fantasiaRPG !== 'undefined') {
+        console.log('⚔️ RPG Fantasía inicializado');
+    }
+    
     document.querySelectorAll('.card').forEach(card => {
         card.addEventListener('mouseenter', function() {
             this.style.transform = 'translateY(-10px) scale(1.02)';
@@ -2127,7 +2169,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     console.log('✅ Sistema completo cargado correctamente');
-    console.log('📚 Mangas, 🎬 Videos, 🎌 Animes, 🎵 Audios, 🎧 ASMR, 🎮 RPG, 🎯 Misiones');
+    console.log('📚 Mangas, 🎬 Videos, 🎌 Animes, 🎵 Audios, 🎧 ASMR, 🎮 RPG, ⚔️ Fantasía, 🎯 Misiones');
     console.log('🎯 Sistema de misiones activo');
     console.log('⚠️ Sistema de palabras difíciles activo');
     console.log('🔄 Reinicio automático a las 3 AM configurado');
