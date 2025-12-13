@@ -40,8 +40,8 @@ const contenedoresGaleria = {
 const galeriaDatabase = {
     // CONTENEDOR 1
     '1_1': {
-        titulo: " Nino mi novia puta culona tetona putona buen culo buen  orto buena concha orto y conchas rosada buenas curvas mi putita putona",
-        descripcion: "Mi culona rica concha apretada suave que rica concha dios ",
+        titulo: "Nino mi novia putona ",
+        descripcion: "Nino mi novia puta culona tetona putona buen culo buen  orto buena concha orto y conchas rosada buenas curvas mi putita putona ",
         categoria: "MI puta novia culonatetona buen culo",
         imagen: "https://pbs.twimg.com/media/G7fsiFCXQAAhtKq?format=png&name=900x900",
         imagenes: [
