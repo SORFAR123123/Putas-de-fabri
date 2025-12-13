@@ -5,10 +5,10 @@
 // ============ CONTENEDORES DE GALERÍA ============
 const contenedoresGaleria = {
     1: {
-        nombre: "GALERÍA 1",
-        imagen: "https://images.unsplash.com/photo-1541961017774-22349e4a1262",
-        descripcion: "5 sub-contenedores con imágenes diversas",
-        categoria: "General"
+        nombre: "Nino la mas hija de perra potona culona tetona buenas curvas lo tiene todo esa puta de 15 años dios que rico orto 1",
+        imagen: "https://pbs.twimg.com/media/G7qfpGZXAAAib4A?format=png&name=small",
+        descripcion: "Rico orto rosado rica conch rosada tetas ricas",
+        categoria: "La puta de fabrizio"
     },
     2: {
         nombre: "GALERÍA 2",
