@@ -15,7 +15,7 @@ let modoMazoDificil = false;
 let palabrasDificilesQuiz = [];
 
 // Variables para videos y animes
-let modoActual = 'manga'; // 'manga', 'video', 'anime', 'audio', 'asmr', 'rpg', 'misiones', 'fantasia'
+let modoActual = 'manga'; // 'manga', 'video', 'anime', 'audio', 'asmr', 'rpg', 'misiones', 'fantasia', 'galeria'
 let idiomaVideoActual = 'espanol'; // 'espanol', 'japones'
 
 // ====================
