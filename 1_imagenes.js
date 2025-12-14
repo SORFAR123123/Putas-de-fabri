@@ -81,9 +81,9 @@ const sistemaDescriptivo = {
                 nivel: 'principiante'
             },
             '1_2': { 
-                nombre: 'Sub-contenedor 2',
-                imagen: '', 
-                descripcion: 'Subcontenedor de manga básico',
+                nombre: 'Ichika Y Nino putas',
+                imagen: 'https://pbs.twimg.com/media/G8GA7J6X0AMNQb-?format=png&name=small', 
+                descripcion: 'Ichika y nino despechadas buscan verga',
                 nivel: 'principiante'
             },
             '1_3': { 
