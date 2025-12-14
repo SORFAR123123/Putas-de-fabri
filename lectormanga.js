@@ -38,7 +38,7 @@ const mangaDatabase = {
     '1_2': {
         titulo: "Ichika y Nino zorras putas",
         descripcion: "Estan despechadas y entregan el culo a cualquiera",
-        paginas: 42,
+        paginas: 43,
         año: 2015,
         autor: "Akira Toriyama",
         paginasUrls: [
@@ -83,7 +83,9 @@ const mangaDatabase = {
             "https://s4.3hentai.net/d654238/41.jpg",
             "https://s4.3hentai.net/d654238/42.jpg",
             "https://s4.3hentai.net/d654238/43.jpg",
-            "https://s4.3hentai.net/d654238/44.jpg"
+            "https://s4.3hentai.net/d654238/44.jpg",
+             "https://s4.3hentai.net/d654238/48.jpg"
+            
             
         ]
     },
