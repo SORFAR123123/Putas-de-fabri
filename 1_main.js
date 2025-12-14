@@ -19,6 +19,41 @@ let modoActual = 'manga'; // 'manga', 'video', 'anime', 'audio', 'asmr', 'rpg', 
 let idiomaVideoActual = 'espanol'; // 'espanol', 'japones'
 
 // ====================
+// FUNCIÓN AUXILIAR PARA CONTAR MAZOS DISPONIBLES
+// ====================
+
+// Función para contar mazos disponibles en un subcontenedor
+function contarMazosDisponibles(contenedor, subcontenedor) {
+    let count = 0;
+    
+    if (modoActual === 'anime') {
+        for (let mazo = 1; mazo <= 100; mazo++) { // Hasta 100 como máximo
+            if (existeVocabularioAnime(contenedor, subcontenedor, mazo)) {
+                count++;
+            } else {
+                // Si encontramos un mazo vacío, seguimos buscando por si hay más adelante
+                continue;
+            }
+        }
+    } else if (modoActual === 'audio') {
+        for (let mazo = 1; mazo <= 100; mazo++) {
+            if (existeVocabularioAudio(contenedor, subcontenedor, mazo)) {
+                count++;
+            }
+        }
+    } else {
+        // Modo manga/video normal
+        for (let mazo = 1; mazo <= 100; mazo++) {
+            if (verificarVocabularioDisponible(contenedor, subcontenedor, mazo)) {
+                count++;
+            }
+        }
+    }
+    
+    return count || 10; // Mínimo 10 para mantener compatibilidad
+}
+
+// ====================
 // FUNCIONES HEADER Y DINERO
 // ====================
 
@@ -711,9 +746,13 @@ function crearMazosAnimesUI(contenedor, subcontenedor) {
         </p>`;
     }
     
+    // Contar mazos disponibles
+    const mazosDisponibles = contarMazosDisponibles(contenedor, subcontenedor);
+    const maxMazos = Math.max(10, mazosDisponibles); // Mostrar al menos 10 o los que haya
+    
     html += '<div class="mazos-container">';
     
-    for (let i = 1; i <= 10; i++) {
+    for (let i = 1; i <= maxMazos; i++) {
         const tieneVocabulario = existeVocabularioAnime(contenedor, subcontenedor, i);
         const progreso = sistemaEconomia.obtenerProgreso(contenedor, subcontenedor, i);
         
@@ -927,9 +966,13 @@ function crearMazosAudiosUI(contenedor, subcontenedor) {
         </p>`;
     }
     
+    // Contar mazos disponibles
+    const mazosDisponibles = contarMazosDisponibles(contenedor, subcontenedor);
+    const maxMazos = Math.max(10, mazosDisponibles); // Mostrar al menos 10 o los que haya
+    
     html += '<div class="mazos-container">';
     
-    for (let i = 1; i <= 10; i++) {
+    for (let i = 1; i <= maxMazos; i++) {
         const tieneVocabulario = existeVocabularioAudio(contenedor, subcontenedor, i);
         const progreso = sistemaEconomia.obtenerProgreso(contenedor, subcontenedor, i);
         
@@ -1404,16 +1447,29 @@ function crearMazosUI(contenedor, subcontenedor) {
         `;
     }
     
+    // Contar mazos disponibles
+    const mazosDisponibles = contarMazosDisponibles(contenedor, subcontenedor);
+    const maxMazos = Math.max(10, mazosDisponibles); // Mostrar al menos 10 o los que haya
+    
     html += '<div class="mazos-container">';
     
-    for (let i = 1; i <= 10; i++) {
+    for (let i = 1; i <= maxMazos; i++) {
         const tieneVocabulario = verificarVocabularioDisponible(contenedor, subcontenedor, i);
+        const progreso = sistemaEconomia.obtenerProgreso(contenedor, subcontenedor, i);
         
         html += `
             <div class="mazo-item" onclick="${tieneVocabulario ? `iniciarQuiz(${contenedor}, ${subcontenedor}, ${i})` : 'alert("Este mazo aún no tiene vocabulario. Agrégalo en 1_vocabulario.js")'}">
                 <h3>MAZO ${i}</h3>
                 <p>10 palabras japonesas</p>
-                ${tieneVocabulario ? '' : '<p style="color: #FF6B6B; font-size: 0.9rem; margin-top: 5px;">(Vacío)</p>'}
+                ${progreso > 0 ? 
+                    `<div style="margin-top: 10px;">
+                        <div style="background: rgba(255,255,255,0.1); height: 8px; border-radius: 4px; overflow: hidden;">
+                            <div style="background: linear-gradient(135deg, #4CAF50, #2E7D32); width: ${progreso}%; height: 100%;"></div>
+                        </div>
+                        <p style="font-size: 0.9rem; margin-top: 5px; color: #4CAF50;">${progreso}% completado</p>
+                    </div>` 
+                    : ''}
+                ${!tieneVocabulario ? '<p style="color: #FF6B6B; font-size: 0.9rem; margin-top: 5px;">(Vacío)</p>' : ''}
             </div>
         `;
     }
@@ -2098,7 +2154,7 @@ function calcularProgresoSubcontenedor(contenedor, subcontenedor) {
     let totalProgreso = 0;
     let mazosConVocabulario = 0;
     
-    for (let mazo = 1; mazo <= 10; mazo++) {
+    for (let mazo = 1; mazo <= 100; mazo++) { // Buscar hasta 100 mazos
         if (verificarVocabularioDisponible(contenedor, subcontenedor, mazo)) {
             totalProgreso += sistemaEconomia.obtenerProgreso(contenedor, subcontenedor, mazo);
             mazosConVocabulario++;
@@ -2109,7 +2165,7 @@ function calcularProgresoSubcontenedor(contenedor, subcontenedor) {
 }
 
 function tieneVocabularioEnSubcontenedor(contenedor, subcontenedor) {
-    for (let mazo = 1; mazo <= 10; mazo++) {
+    for (let mazo = 1; mazo <= 100; mazo++) { // Buscar hasta 100 mazos
         if (verificarVocabularioDisponible(contenedor, subcontenedor, mazo)) {
             return true;
         }
@@ -2161,4 +2217,5 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log('💖 EXP por quiz activado: +20 EXP/palabra correcta, +15-100 EXP/mazo completo');
     console.log('💰 Recompensas: 2-3 soles por mazo al 100%');
     console.log('🔞 RPG dificultoso: Niveles altos, probabilidades bajas, precios realistas');
+    console.log('✅ CORRECCIÓN APLICADA: Sistema ahora muestra TODOS los mazos disponibles (hasta 100 por subcontenedor)');
 });
