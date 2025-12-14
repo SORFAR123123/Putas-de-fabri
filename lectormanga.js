@@ -45,7 +45,7 @@ const mangaDatabase = {
             "https://pbs.twimg.com/media/G8F_PvmXAAM_4S_?format=png&name=large",
             "https://pbs.twimg.com/media/G8F_RCLWQAARnWG?format=png&name=large",
             "https://pbs.twimg.com/media/G8F_Tp-WsAMZ3dl?format=png&name=large",
-            "https://images.unsplash.com/photo-1565598621680-94c48b04e56f?w=1200&h=1800&fit=crop&auto=format",
+            "https://pbs.twimg.com/media/G8GAiYTXwAAYFEC?format=png&name=large",
             "https://images.unsplash.com/photo-1635805737707-575885ab0820?w=1200&h=1800&fit=crop&auto=format",
             "https://images.unsplash.com/photo-1639322537228-f710d846310a?w=1200&h=1800&fit=crop&auto=format",
             "https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=1200&h=1800&fit=crop&auto=format",
