@@ -1,5 +1,4 @@
-[file name]: 1_vocabulario.js
-[file content begin]
+
 // ================================================
 // BASE DE DATOS DE VOCABULARIO
 // ================================================
@@ -267,4 +266,4 @@ function obtenerVocabulario(contenedor, subcontenedor, mazo) {
     }
     return []; // Retorna array vacío si no existe
 }
-[file content end]
+
