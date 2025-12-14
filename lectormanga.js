@@ -36,15 +36,15 @@ const mangaDatabase = {
     
     // Sub-contenedor 1.2
     '1_2': {
-        titulo: "🐉 Dragon Ball Super - Arco del Torneo del Poder",
-        descripcion: "Goku y sus amigos luchan por la supervivencia del universo 7.",
+        titulo: "Ichika y Nino zorras putas",
+        descripcion: "Estan despechadas y entregan el culo a cualquiera",
         paginas: 10,
         año: 2015,
         autor: "Akira Toriyama",
         paginasUrls: [
-            "https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=1200&h=1800&fit=crop&auto=format",
-            "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=1200&h=1800&fit=crop&auto=format",
-            "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=1200&h=1800&fit=crop&auto=format",
+            "https://pbs.twimg.com/media/G8F_PvmXAAM_4S_?format=png&name=large",
+            "https://pbs.twimg.com/media/G8F_RCLWQAARnWG?format=png&name=large",
+            "https://pbs.twimg.com/media/G8F_Tp-WsAMZ3dl?format=png&name=large",
             "https://images.unsplash.com/photo-1565598621680-94c48b04e56f?w=1200&h=1800&fit=crop&auto=format",
             "https://images.unsplash.com/photo-1635805737707-575885ab0820?w=1200&h=1800&fit=crop&auto=format",
             "https://images.unsplash.com/photo-1639322537228-f710d846310a?w=1200&h=1800&fit=crop&auto=format",
