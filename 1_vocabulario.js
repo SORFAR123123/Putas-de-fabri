@@ -433,6 +433,40 @@ const vocabularioDatabase = {
             { japones: 'さび', lectura: 'sabi', opciones: ['Belleza del desgaste/pasado', 'Novedad', 'Brillo', 'Colorido'], respuesta: 0 },
             { japones: '不易流行', lectura: 'fueki ryuukou', opciones: ['Lo eterno y lo contemporáneo (estética)', 'Tradicionalismo', 'Modernismo', 'Eclecticismo'], respuesta: 0 }
         ]
+    },
+    
+    // Sub-contenedor 1.3
+    'sub1_3': {
+        // MAZOS NORMALES
+        1: [
+            { japones: '付き合ってん', lectura: 'tsukiatte n', opciones: ['Están saliendo', 'Están peleando', 'Están trabajando', 'Están estudiando'], respuesta: 0 },
+            { japones: 'なんだかんだで', lectura: 'nandakanda de', opciones: ['Al fin y al cabo', 'De repente', 'Por casualidad', 'De ninguna manera'], respuesta: 0 },
+            { japones: '絡んでる', lectura: 'karande ru', opciones: ['Se meten / Interactúan (contracción)', 'Se ignoran', 'Se evitan', 'Se ayudan'], respuesta: 0 },
+            { japones: '態度', lectura: 'taido', opciones: ['Actitud', 'Habilidad', 'Conocimiento', 'Experiencia'], respuesta: 0 },
+            { japones: '仮に', lectura: 'kari ni', opciones: ['Aunque / Suponiendo que', 'Definitivamente', 'Raramente', 'Normalmente'], respuesta: 0 },
+            { japones: '様子', lectura: 'yōsu', opciones: ['Apariencia / Actitud', 'Edad', 'Altura', 'Peso'], respuesta: 0 },
+            { japones: 'うまく', lectura: 'umaku', opciones: ['Bien', 'Mal', 'Rápido', 'Lento'], respuesta: 0 },
+            { japones: 'いってねー', lectura: 'itte nē', opciones: ['No va', 'Va bien', 'Es fácil', 'Es difícil'], respuesta: 0 },
+            { japones: 'よ', lectura: 'yo', opciones: ['¿Sabes? (partícula enfática)', '¿Entiendes?', '¿Verdad?', '¿No?'], respuesta: 0 },
+            { japones: '昼休み', lectura: 'hiruyasumi', opciones: ['Hora del almuerzo / Recreo', 'Hora de trabajo', 'Hora de estudio', 'Hora de dormir'], respuesta: 0 }
+        ],
+        
+        // ====================
+        // MAZOS DIFÍCILES ESPECIALES - Subcontenedor 1.3
+        // ====================
+        
+        'D1': [
+            { japones: '話し言葉の縮約形', lectura: 'hanashikotoba no shukuyakukei', opciones: ['Formas contraídas del lenguaje hablado', 'Formas formales', 'Formas literarias', 'Formas arcaicas'], respuesta: 0 },
+            { japones: '終助詞の微妙な用法', lectura: 'shuujoshi no bimyou na youhou', opciones: ['Usos sutiles de partículas finales', 'Usos básicos', 'Usos incorrectos', 'Usos formales'], respuesta: 0 },
+            { japones: '若者言葉の変化', lectura: 'wakamonokotoba no henka', opciones: ['Cambios en el lenguaje juvenil', 'Lenguaje tradicional', 'Lenguaje formal', 'Dialectos regionales'], respuesta: 0 },
+            { japones: '会話の省略パターン', lectura: 'kaiwa no shouryaku patān', opciones: ['Patrones de omisión en conversación', 'Expresiones completas', 'Lenguaje escrito', 'Discurso formal'], respuesta: 0 },
+            { japones: '間投詞の感情表現', lectura: 'kantoushi no kanjou hyougen', opciones: ['Expresión emocional con interjecciones', 'Expresión neutral', 'Expresión formal', 'Expresión técnica'], respuesta: 0 },
+            { japones: '語気のニュアンス', lectura: 'goki no nyuansu', opciones: ['Matices en el tono de voz', 'Significado literal', 'Gramática formal', 'Vocabulario básico'], respuesta: 0 },
+            { japones: '相槌のバリエーション', lectura: 'aizuchi no bariēshon', opciones: ['Variaciones en respuestas de conversación', 'Respuestas simples', 'Silencio', 'Preguntas'], respuesta: 0 },
+            { japones: '婉曲な断り表現', lectura: 'enkyoku na kotowari hyougen', opciones: ['Expresiones indirectas de rechazo', 'Rechazos directos', 'Aceptaciones', 'Peticiones'], respuesta: 0 },
+            { japones: 'ぼかし表現', lectura: 'bokashi hyougen', opciones: ['Expresiones vagas o evasivas', 'Expresiones claras', 'Afirmaciones directas', 'Órdenes'], respuesta: 0 },
+            { japones: '日本語のポライトネス理論', lectura: 'nihongo no poraitonesu riron', opciones: ['Teoría de la cortesía en japonés', 'Gramática básica', 'Vocabulario simple', 'Pronunciación'], respuesta: 0 }
+        ]
     }
 };
 
