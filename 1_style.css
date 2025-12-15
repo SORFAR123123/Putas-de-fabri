@@ -1477,25 +1477,118 @@ body {
 }
 
 /* ================================================
-   ESTILOS PARA ZOOM DEL MANGA
+   ESTILOS PARA ZOOM DEL MANGA (PROFESIONAL)
    ================================================ */
 
+.manga-imagen-container {
+    position: relative;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    overflow: hidden;
+    min-height: 500px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+    border: 3px solid rgba(255, 255, 255, 0.1);
+    cursor: crosshair;
+}
+
 .manga-imagen {
-    cursor: zoom-in;
-    transition: transform 0.3s ease;
-    max-width: 100%;
+    width: 100%;
     height: auto;
     display: block;
-    margin: 0 auto;
+    transition: transform 0.1s ease;
+    transform-origin: 0 0;
+    user-select: none;
+    -webkit-user-drag: none;
 }
 
-.manga-imagen.zoom-activo {
-    transform: scale(1.5);
-    cursor: zoom-out;
-    transform-origin: center;
+/* Lupa flotante */
+.lupa-container {
+    position: absolute;
+    width: 300px;
+    height: 300px;
+    border: 3px solid #FFD166;
+    border-radius: 50%;
+    overflow: hidden;
+    box-shadow: 0 0 30px rgba(255, 209, 102, 0.5);
+    pointer-events: none;
+    z-index: 100;
+    display: none;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(5px);
 }
 
-.manga-imagen-container {
-    overflow: auto;
-    max-height: 85vh;
+.lupa-imagen {
+    position: absolute;
+    transform-origin: 0 0;
+    pointer-events: none;
+}
+
+/* Modo zoom completo */
+.modo-zoom-completo {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100% !important;
+    height: 100% !important;
+    z-index: 10000 !important;
+    background: rgba(0, 0, 0, 0.95) !important;
+    display: flex !important;
+    justify-content: center !important;
+    align-items: center !important;
+    cursor: grab !important;
+    overflow: hidden !important;
+    border: none !important;
+    border-radius: 0 !important;
+}
+
+.modo-zoom-completo .manga-imagen {
+    transform: scale(3) !important;
+    cursor: grab !important;
+    max-width: none !important;
+    max-height: none !important;
+}
+
+.modo-zoom-completo .manga-imagen:active {
+    cursor: grabbing !important;
+}
+
+/* Botón para zoom completo */
+.btn-zoom-completo {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    background: linear-gradient(135deg, #FF6B6B, #FFD166);
+    color: #333;
+    border: none;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    font-size: 1.5rem;
+    cursor: pointer;
+    z-index: 101;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.4);
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-zoom-completo:hover {
+    transform: scale(1.2);
+    background: linear-gradient(135deg, #FFD166, #FF6B6B);
+}
+
+/* Indicador de zoom */
+.zoom-indicador {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 8px 15px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    z-index: 101;
+    border: 2px solid #8A5AF7;
+    display: none;
 }
