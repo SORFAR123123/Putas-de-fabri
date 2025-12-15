@@ -92,29 +92,10 @@ const mangaDatabase = {
     '1_3': {
         titulo: "Naruto Shippuden - Volumen 25",
         descripcion: "¡Agrega tus propias imágenes de manga aquí!",
-        paginas: 20,
+        paginas: 0,
         año: 2007,
         autor: "Masashi Kishimoto",
-        paginasUrls: [
-            "https://n1.kemono.cr/data/fe/6e/fe6e2e72678907ddde2603a33211bedcda7b7ee0cb9ef310ef0bb9cf3261443d.jpg?f=JW6sEhEFq2IjpF7pplmHtIep.jpeg",
-            "https://n1.kemono.cr/data/f8/8b/f88b23d9c5e1b2c55e4f0b3a3b9204b0abb4191248ed5db6bfaccfe6e5852141.jpg?f=X7uEbXgS1EqPj6aEJwLrVhXk.jpeg",
-            "https://n4.kemono.cr/data/e1/f2/e1f24bf0ef7d10d9fc51a1d791985a04ed2dcba97f176f5f96c259c3bffe6086.jpg?f=MabLqYU0DJyBINbbutc0S5L2.jpeg",
-            "https://n1.kemono.cr/data/73/4f/734f6c65dfff67019fb9e25a1e19d340b8b4d63f1f45b00641f41755bf24e4df.jpg?f=jakkYWZFAI3zXJLEDtndsvDj.jpeg",
-            "https://n3.kemono.cr/data/55/a8/55a8b608a8667f2575244bdb0ef490d4a8e25d1d0482c0ae388be52e9cbc3c61.jpg?f=Nw87jbOR13VHDLdTr14Nb2nc.jpeg",
-            "https://n4.kemono.cr/data/e2/e7/e2e7e97b948ea5a82ce75d3aed0e81ac4a3a8ef33c3c2c077d9baae194bbfeb1.jpg?f=xgqkwmvLE7f7vhIxjMdfkcSd.jpeg",
-            "https://n2.kemono.cr/data/8e/73/8e73862fde19c5fcee66c3ed6ccc6b8ce77f8ef595e73374358a4905435c0514.jpg?f=hkawHy3nQ97s5yeqDAyXskAG.jpeg",
-            "https://pbs.twimg.com/media/G8O8-NaWMAgc4jo?format=jpg&name=large",
-             "https://pbs.twimg.com/media/G8O8_bIWgAwR-o8?format=jpg&name=large",
-             "https://pbs.twimg.com/media/G8O9AotWAAI_etC?format=jpg&name=large",
-             "https://pbs.twimg.com/media/G8O9CttWgK0aIHg?format=jpg&name=large",
-             "https://s4.3hentai.net/d654238/44.jpg",
-             "https://s4.3hentai.net/d654238/44.jpg",
-             "https://s4.3hentai.net/d654238/44.jpg",
-             "https://s4.3hentai.net/d654238/44.jpg",
-             "https://s4.3hentai.net/d654238/44.jpg",
-             "https://s4.3hentai.net/d654238/44.jpg",
-             "https://s4.3hentai.net/d654238/48.jpg"
-        ]
+        paginasUrls: []
     },
     
     // ================================================
@@ -157,9 +138,14 @@ let contenedorManga = null;
 let subcontenedorManga = null;
 
 // ================================================
-// VARIABLES DE ZOOM
+// VARIABLES DE ZOOM Y ARRASTRE
 // ================================================
 let zoomLevel = 1; // 1 = normal, 2 = 2x, 3 = 3x, 4 = 4x
+let isDragging = false;
+let dragStartX = 0;
+let dragStartY = 0;
+let scrollStartLeft = 0;
+let scrollStartTop = 0;
 
 // ================================================
 // FUNCIONES PRINCIPALES
@@ -235,7 +221,7 @@ function mostrarLectorManga() {
         
         <!-- VISOR DE MANGA -->
         <div class="visor-manga">
-            <div class="manga-imagen-container">
+            <div class="manga-imagen-container" id="manga-contenedor">
                 <img id="manga-imagen" src="" alt="Página ${paginaActual}" class="manga-imagen">
                 <div class="manga-cargando" id="manga-cargando">
                     <div class="spinner"></div>
@@ -251,6 +237,11 @@ function mostrarLectorManga() {
                 <button class="reset-zoom-btn" id="reset-zoom-btn" title="Resetear zoom (R)">
                     ↺
                 </button>
+                
+                <!-- Mensaje de ayuda para arrastre -->
+                <div class="zoom-help" id="zoom-help">
+                    Arrastra para moverte por la imagen
+                </div>
             </div>
             
             <!-- CONTROLES FLOTANTES -->
@@ -288,7 +279,7 @@ function mostrarLectorManga() {
             <!-- DESCRIPCIÓN -->
             <div class="manga-descripcion">
                 <p>${mangaActual.descripcion}</p>
-                <p class="manga-aviso">💡 Click en imagen para zoom | Doble click para más zoom | Rueda para navegar</p>
+                <p class="manga-aviso">💡 Click en imagen para zoom | Arrastra para moverte | R para resetear</p>
             </div>
         </div>
     `;
@@ -312,25 +303,31 @@ function cargarPaginaManga() {
     // Scroll al inicio (IMPORTANTE: cada página empieza desde arriba)
     window.scrollTo(0, 0);
     
-    // Resetear zoom
+    // Resetear zoom y arrastre
     zoomLevel = 1;
+    isDragging = false;
     
     // Mostrar cargando
     const cargando = document.getElementById('manga-cargando');
     const imagen = document.getElementById('manga-imagen');
+    const contenedor = document.getElementById('manga-contenedor');
     const zoomLevelDisplay = document.getElementById('zoom-level');
     const resetBtn = document.getElementById('reset-zoom-btn');
+    const zoomHelp = document.getElementById('zoom-help');
     
     if (cargando) cargando.style.display = 'flex';
-    if (imagen) imagen.style.opacity = '0';
+    if (imagen) {
+        imagen.style.opacity = '0';
+        imagen.classList.remove('zoom-2x', 'zoom-3x', 'zoom-4x');
+    }
+    if (contenedor) {
+        contenedor.style.cursor = 'zoom-in';
+        contenedor.scrollLeft = 0;
+        contenedor.scrollTop = 0;
+    }
     if (zoomLevelDisplay) zoomLevelDisplay.style.display = 'none';
     if (resetBtn) resetBtn.style.display = 'none';
-    
-    // Quitar clases de zoom anteriores
-    if (imagen) {
-        imagen.classList.remove('zoom-2x', 'zoom-3x', 'zoom-4x');
-        imagen.style.cursor = 'zoom-in';
-    }
+    if (zoomHelp) zoomHelp.style.display = 'none';
     
     // Cargar imagen
     const urlImagen = mangaActual.paginasUrls[paginaActual - 1];
@@ -345,8 +342,8 @@ function cargarPaginaManga() {
             // Actualizar controles
             actualizarControlesLector();
             
-            // Configurar eventos de zoom
-            configurarZoom();
+            // Configurar eventos de zoom y arrastre
+            configurarZoomYArrastre();
         };
         
         imagen.onerror = function() {
@@ -355,7 +352,7 @@ function cargarPaginaManga() {
             
             // Configurar zoom incluso con imagen de error
             setTimeout(() => {
-                configurarZoom();
+                configurarZoomYArrastre();
             }, 100);
         };
     }
@@ -369,34 +366,80 @@ function cargarPaginaManga() {
     if (selector) selector.value = paginaActual;
 }
 
-function configurarZoom() {
+function configurarZoomYArrastre() {
     const imagen = document.getElementById('manga-imagen');
+    const contenedor = document.getElementById('manga-contenedor');
     const zoomLevelDisplay = document.getElementById('zoom-level');
     const resetBtn = document.getElementById('reset-zoom-btn');
+    const zoomHelp = document.getElementById('zoom-help');
     
-    if (!imagen) return;
+    if (!imagen || !contenedor) return;
     
-    // Click para alternar entre niveles de zoom
+    // Configurar eventos de arrastre
+    function iniciarArrastre(e) {
+        if (zoomLevel > 1) {
+            isDragging = true;
+            contenedor.style.cursor = 'grabbing';
+            
+            // Guardar posición inicial
+            dragStartX = e.clientX;
+            dragStartY = e.clientY;
+            scrollStartLeft = contenedor.scrollLeft;
+            scrollStartTop = contenedor.scrollTop;
+            
+            e.preventDefault();
+        }
+    }
+    
+    function hacerArrastre(e) {
+        if (!isDragging) return;
+        
+        // Calcular distancia arrastrada
+        const deltaX = e.clientX - dragStartX;
+        const deltaY = e.clientY - dragStartY;
+        
+        // Aplicar scroll inverso (arrastrar hacia la derecha = mover imagen a la izquierda)
+        contenedor.scrollLeft = scrollStartLeft - deltaX;
+        contenedor.scrollTop = scrollStartTop - deltaY;
+    }
+    
+    function detenerArrastre() {
+        isDragging = false;
+        contenedor.style.cursor = zoomLevel > 1 ? 'grab' : 'zoom-in';
+    }
+    
+    // Asignar eventos de arrastre
+    contenedor.addEventListener('mousedown', iniciarArrastre);
+    contenedor.addEventListener('mousemove', hacerArrastre);
+    contenedor.addEventListener('mouseup', detenerArrastre);
+    contenedor.addEventListener('mouseleave', detenerArrastre);
+    
+    // Click para zoom
     imagen.addEventListener('click', function(e) {
+        if (zoomLevel > 1) {
+            // Si ya hay zoom, click simple no hace nada (solo arrastre)
+            return;
+        }
+        
         e.stopPropagation();
         
         // Rotar entre niveles: 1x → 2x → 3x → 4x → 1x
         if (zoomLevel === 1) {
-            aplicarZoom(2);
+            aplicarZoom(2, e);
         } else if (zoomLevel === 2) {
-            aplicarZoom(3);
+            aplicarZoom(3, e);
         } else if (zoomLevel === 3) {
-            aplicarZoom(4);
+            aplicarZoom(4, e);
         } else {
             quitarZoom();
         }
     });
     
-    // Doble click para zoom directo a 4x
+    // Doble click para zoom máximo
     imagen.addEventListener('dblclick', function(e) {
         e.stopPropagation();
         if (zoomLevel === 1) {
-            aplicarZoom(4); // Doble click = zoom máximo
+            aplicarZoom(4, e); // Doble click = zoom máximo
         } else {
             quitarZoom(); // Doble click con zoom activo = quitar zoom
         }
@@ -409,14 +452,19 @@ function configurarZoom() {
             quitarZoom();
         };
     }
+    
+    // Configurar cursor inicial
+    contenedor.style.cursor = 'zoom-in';
 }
 
-function aplicarZoom(nivel) {
+function aplicarZoom(nivel, clickEvent = null) {
     const imagen = document.getElementById('manga-imagen');
+    const contenedor = document.getElementById('manga-contenedor');
     const zoomLevelDisplay = document.getElementById('zoom-level');
     const resetBtn = document.getElementById('reset-zoom-btn');
+    const zoomHelp = document.getElementById('zoom-help');
     
-    if (!imagen) return;
+    if (!imagen || !contenedor) return;
     
     // Quitar clases anteriores
     imagen.classList.remove('zoom-2x', 'zoom-3x', 'zoom-4x');
@@ -424,21 +472,46 @@ function aplicarZoom(nivel) {
     // Aplicar nueva clase
     if (nivel === 2) {
         imagen.classList.add('zoom-2x');
-        imagen.style.cursor = 'zoom-out';
         zoomLevel = 2;
     } else if (nivel === 3) {
         imagen.classList.add('zoom-3x');
-        imagen.style.cursor = 'zoom-out';
         zoomLevel = 3;
     } else if (nivel === 4) {
         imagen.classList.add('zoom-4x');
-        imagen.style.cursor = 'zoom-out';
         zoomLevel = 4;
+    }
+    
+    // Cambiar cursor
+    contenedor.style.cursor = 'grab';
+    
+    // Calcular posición de scroll si hay click
+    if (clickEvent && contenedor) {
+        // Obtener dimensiones
+        const contenedorRect = contenedor.getBoundingClientRect();
+        const imagenRect = imagen.getBoundingClientRect();
+        
+        // Calcular posición relativa del click
+        const clickX = clickEvent.clientX - contenedorRect.left;
+        const clickY = clickEvent.clientY - contenedorRect.top;
+        
+        // Calcular porcentajes
+        const percentX = clickX / contenedorRect.width;
+        const percentY = clickY / contenedorRect.height;
+        
+        // Calcular nueva posición de scroll para centrar en el click
+        const nuevoScrollLeft = (percentX * imagenRect.width) - (contenedorRect.width / 2);
+        const nuevoScrollTop = (percentY * imagenRect.height) - (contenedorRect.height / 2);
+        
+        // Aplicar scroll suavemente
+        setTimeout(() => {
+            contenedor.scrollLeft = Math.max(0, nuevoScrollLeft);
+            contenedor.scrollTop = Math.max(0, nuevoScrollTop);
+        }, 10);
     }
     
     // Mostrar indicador
     if (zoomLevelDisplay) {
-        zoomLevelDisplay.textContent = `Zoom: ${nivel}x`;
+        zoomLevelDisplay.textContent = `Zoom: ${nivel}x (Arrastra para moverte)`;
         zoomLevelDisplay.style.display = 'block';
     }
     
@@ -446,19 +519,38 @@ function aplicarZoom(nivel) {
     if (resetBtn) {
         resetBtn.style.display = 'flex';
     }
+    
+    // Mostrar ayuda de arrastre
+    if (zoomHelp) {
+        zoomHelp.style.display = 'block';
+        // Ocultar ayuda después de 5 segundos
+        setTimeout(() => {
+            if (zoomHelp) zoomHelp.style.display = 'none';
+        }, 5000);
+    }
 }
 
 function quitarZoom() {
     const imagen = document.getElementById('manga-imagen');
+    const contenedor = document.getElementById('manga-contenedor');
     const zoomLevelDisplay = document.getElementById('zoom-level');
     const resetBtn = document.getElementById('reset-zoom-btn');
+    const zoomHelp = document.getElementById('zoom-help');
     
-    if (!imagen) return;
+    if (!imagen || !contenedor) return;
     
     // Quitar todas las clases de zoom
     imagen.classList.remove('zoom-2x', 'zoom-3x', 'zoom-4x');
-    imagen.style.cursor = 'zoom-in';
+    contenedor.style.cursor = 'zoom-in';
     zoomLevel = 1;
+    isDragging = false;
+    
+    // Resetear scroll suavemente
+    contenedor.scrollTo({
+        top: 0,
+        left: 0,
+        behavior: 'smooth'
+    });
     
     // Ocultar indicador
     if (zoomLevelDisplay) {
@@ -468,6 +560,11 @@ function quitarZoom() {
     // Ocultar botón reset
     if (resetBtn) {
         resetBtn.style.display = 'none';
+    }
+    
+    // Ocultar ayuda
+    if (zoomHelp) {
+        zoomHelp.style.display = 'none';
     }
 }
 
@@ -522,6 +619,7 @@ function irAPagina(numero) {
 function cerrarLectorManga() {
     lectorActivo = false;
     zoomLevel = 1;
+    isDragging = false;
     
     // Ocultar lector
     const lectorContainer = document.getElementById('lector-manga-container');
@@ -663,5 +761,5 @@ function existeManga(contenedor, subcontenedor) {
 // INICIALIZAR ESTILOS DEL LECTOR
 // ================================================
 document.addEventListener('DOMContentLoaded', function() {
-    console.log('📖 Lector de Manga con Zoom Simple cargado y listo');
+    console.log('📖 Lector de Manga con Zoom y Arrastre cargado y listo');
 });
