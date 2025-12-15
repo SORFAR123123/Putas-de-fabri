@@ -88,7 +88,7 @@ const sistemaDescriptivo = {
             },
             '1_3': { 
                 nombre: 'High Cheese :D ',
-                imagen: 'https://irwqkno.tumrtbpocdtq.hath.network:43456/h/51c379e5330cc4b2fe106e1166d3c9cb78299f34-185020-1280-1631-wbp/keystamp=1765825500-3b7b455324;fileindex=146856181;xres=1280/75.webp', 
+                imagen: 'https://pbs.twimg.com/media/G8O8sqHXsAQ5DCH?format=png&name=small', 
                 descripcion: 'Quinti trolas', 
                 nivel: '' 
             },
