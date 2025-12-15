@@ -1447,6 +1447,41 @@ function crearMazosUI(contenedor, subcontenedor) {
         `;
     }
     
+    // SECCIÓN DE MAZOS DIFÍCILES ESPECIALES
+    const mazosDificiles = obtenerMazosDificilesSubcontenedor(contenedor, subcontenedor);
+    if (mazosDificiles.length > 0) {
+        html += `
+            <div style="background: linear-gradient(135deg, rgba(255, 20, 147, 0.1), rgba(255, 107, 107, 0.1)); 
+                      border-radius: 15px; padding: 25px; margin-bottom: 30px; border: 3px solid #FF1493;">
+                <h3 style="color: #FFD166; margin-bottom: 20px; text-align: center;">
+                    ⚠️ MAZOS DIFÍCILES ESPECIALES
+                </h3>
+                <p style="text-align: center; opacity: 0.8; margin-bottom: 20px;">
+                    Vocabulario avanzado y expresiones complejas. ¡Doble recompensa!
+                </p>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+        `;
+        
+        mazosDificiles.forEach(mazo => {
+            html += `
+                <div class="mazo-item" onclick="iniciarQuizDificil(${contenedor}, ${subcontenedor}, '${mazo.id}')" 
+                      style="border-color: #FF1493; background: rgba(255, 20, 147, 0.05);">
+                    <h3 style="color: #FF1493;">${mazo.nombre}</h3>
+                    <p style="color: #FF6B6B;">${mazo.palabras.length} palabras avanzadas</p>
+                    <p style="font-size: 0.9rem; opacity: 0.7; margin-top: 10px;">
+                        ⭐ Expresiones complejas
+                    </p>
+                    <div style="margin-top: 15px; padding: 8px 12px; background: rgba(255, 20, 147, 0.2); 
+                              border-radius: 8px; font-size: 0.9rem; text-align: center; color: #FFD166;">
+                        +5 soles de bonificación
+                    </div>
+                </div>
+            `;
+        });
+        
+        html += `</div></div>`;
+    }
+    
     // Contar mazos disponibles
     const mazosDisponibles = contarMazosDisponibles(contenedor, subcontenedor);
     const maxMazos = Math.max(10, mazosDisponibles); // Mostrar al menos 10 o los que haya
@@ -1526,6 +1561,37 @@ function iniciarQuiz(contenedor, subcontenedor, mazo) {
     mostrarPalabraQuiz();
 }
 
+// FUNCIÓN PARA INICIAR QUIZ DE MAZOS DIFÍCILES ESPECIALES
+function iniciarQuizDificil(contenedor, subcontenedor, mazoId) {
+    contenedorActual = contenedor;
+    subcontenedorActual = subcontenedor;
+    mazoActual = mazoId;
+    
+    // Obtener palabras del mazo difícil
+    palabrasActuales = obtenerVocabulario(contenedor, subcontenedor, mazoId);
+    
+    if (palabrasActuales.length === 0) {
+        alert('No hay palabras en este mazo difícil');
+        return;
+    }
+    
+    // Resetear contadores
+    indicePalabraActual = 0;
+    aciertos = 0;
+    errores = 0;
+    esperandoSiguiente = false;
+    
+    // Marcar como mazo difícil para dar bonificación extra
+    modoMazoDificil = true;
+    
+    // Ocultar sección de mangas, mostrar quiz
+    document.getElementById('manga-section').style.display = 'none';
+    document.getElementById('quiz-section').style.display = 'block';
+    
+    // Cargar primera palabra
+    mostrarPalabraQuizDificil();
+}
+
 function mostrarPalabraQuiz() {
     const quizSection = document.getElementById('quiz-section');
     const palabra = palabrasActuales[indicePalabraActual];
@@ -1568,6 +1634,53 @@ function mostrarPalabraQuiz() {
             
             <div class="quiz-controls">
                 <button class="quiz-btn btn-volver" onclick="cancelarQuiz()">
+                    ❌ Cancelar
+                </button>
+            </div>
+        </div>
+    `;
+    
+    // Crear opciones
+    crearOpcionesQuiz(palabra);
+}
+
+function mostrarPalabraQuizDificil() {
+    const quizSection = document.getElementById('quiz-section');
+    const palabra = palabrasActuales[indicePalabraActual];
+    
+    quizSection.innerHTML = `
+        <div class="quiz-container">
+            <h2 style="text-align: center; color: #FF1493; margin-bottom: 20px;">
+                ⚠️ MAZO DIFÍCIL ESPECIAL • ${mazoActual} • Palabra ${indicePalabraActual + 1}/${palabrasActuales.length}
+                <div style="font-size: 0.9rem; color: #FFD166; margin-top: 5px;">
+                    Vocabulario avanzado - ¡Doble recompensa!
+                </div>
+            </h2>
+            
+            <div class="palabra-japonesa" id="palabra-japonesa" style="border-color: #FF1493; background: rgba(255, 20, 147, 0.05);">
+                ${palabra.japones}
+            </div>
+            
+            <div class="romaji-debajo" id="romaji-debajo" style="display: none;">
+                <div class="romaji-text">${palabra.lectura}</div>
+            </div>
+            
+            <div id="opciones-container">
+                <!-- Opciones se cargan dinámicamente -->
+            </div>
+            
+            <div style="text-align: center; margin: 20px 0; padding: 15px; background: rgba(255, 20, 147, 0.1); border-radius: 10px;">
+                <p style="color: #FFD166; font-size: 0.9rem;">
+                    ⭐ Este mazo difícil otorga <strong>+5 soles</strong> de bonificación adicional
+                </p>
+            </div>
+            
+            <div id="resultado-container" style="display: none;">
+                <!-- Resultado se muestra después de responder -->
+            </div>
+            
+            <div class="quiz-controls">
+                <button class="quiz-btn btn-volver" onclick="cancelarQuiz()" style="background: linear-gradient(135deg, #FF1493, #8A5AF7);">
                     ❌ Cancelar
                 </button>
             </div>
@@ -1911,6 +2024,24 @@ function finalizarQuiz() {
                 </p>
             </div>
             
+            <!-- BONIFICACIÓN EXTRA POR MAZO DIFÍCIL -->
+            ${modoMazoDificil ? `
+                <div style="background: linear-gradient(135deg, rgba(255, 20, 147, 0.1), rgba(255, 107, 107, 0.1)); padding: 25px; border-radius: 15px; margin: 20px 0; border: 2px solid #FF1493;">
+                    <h3 style="color: #FFD166; margin-bottom: 15px;">🏆 ¡Bonificación por Mazo Difícil!</h3>
+                    <p style="text-align: center; font-size: 1.5rem; color: #FFD166;">
+                        +5 soles adicionales
+                    </p>
+                    <p style="text-align: center; opacity: 0.8; margin-top: 10px;">
+                        Has completado un mazo difícil con vocabulario avanzado
+                    </p>
+                </div>
+                <script>
+                    // Dar bonificación extra
+                    sistemaEconomia.agregarDinero(5);
+                    actualizarContadorDineroInicio();
+                </script>
+            ` : ''}
+            
             <!-- BOTÓN PARA MAZO DIFÍCIL SI HAY PALABRAS MARCADAS -->
             ${sistemaEconomia.obtenerMazoDificil().length > 0 ? `
                 <div style="text-align: center; margin: 20px 0;">
@@ -2226,4 +2357,5 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log('💰 Recompensas: 2-3 soles por mazo al 100%');
     console.log('🔞 RPG dificultoso: Niveles altos, probabilidades bajas, precios realistas');
     console.log('✅ CORRECCIÓN APLICADA: Sistema ahora muestra TODOS los mazos disponibles (hasta 100 por subcontenedor)');
+    console.log('⚠️ NUEVO: Mazos difíciles especiales agregados con bonificación +5 soles');
 });
