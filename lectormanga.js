@@ -99,7 +99,7 @@ const mangaDatabase = {
         autor: "Masashi Kishimoto",
         paginasUrls: [ 
             
-            "https://pbs.twimg.com/media/G8O8sqHXsAQ5DCH?format=png&name=small",
+            "https://n1.kemono.cr/data/fe/6e/fe6e2e72678907ddde2603a33211bedcda7b7ee0cb9ef310ef0bb9cf3261443d.jpg?f=JW6sEhEFq2IjpF7pplmHtIep.jpeg",
             "https://pbs.twimg.com/media/G8O8vl4WgCY3J_O?format=png&name=small",
             "https://pbs.twimg.com/media/G8O8yb6WsAAFtqp?format=png&name=small",
             "https://pbs.twimg.com/media/G8O80sUXwAAoWK5?format=jpg&name=large",
