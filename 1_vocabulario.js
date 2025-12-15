@@ -435,21 +435,217 @@ const vocabularioDatabase = {
         ]
     },
     
-    // Sub-contenedor 1.3
-    'sub1_3': {
-        // MAZOS NORMALES
-        1: [
-            { japones: '付き合ってん', lectura: 'tsukiatte n', opciones: ['Están saliendo', 'Están peleando', 'Están trabajando', 'Están estudiando'], respuesta: 0 },
-            { japones: 'なんだかんだで', lectura: 'nandakanda de', opciones: ['Al fin y al cabo', 'De repente', 'Por casualidad', 'De ninguna manera'], respuesta: 0 },
-            { japones: '絡んでる', lectura: 'karande ru', opciones: ['Se meten / Interactúan (contracción)', 'Se ignoran', 'Se evitan', 'Se ayudan'], respuesta: 0 },
-            { japones: '態度', lectura: 'taido', opciones: ['Actitud', 'Habilidad', 'Conocimiento', 'Experiencia'], respuesta: 0 },
-            { japones: '仮に', lectura: 'kari ni', opciones: ['Aunque / Suponiendo que', 'Definitivamente', 'Raramente', 'Normalmente'], respuesta: 0 },
-            { japones: '様子', lectura: 'yōsu', opciones: ['Apariencia / Actitud', 'Edad', 'Altura', 'Peso'], respuesta: 0 },
-            { japones: 'うまく', lectura: 'umaku', opciones: ['Bien', 'Mal', 'Rápido', 'Lento'], respuesta: 0 },
-            { japones: 'いってねー', lectura: 'itte nē', opciones: ['No va', 'Va bien', 'Es fácil', 'Es difícil'], respuesta: 0 },
-            { japones: 'よ', lectura: 'yo', opciones: ['¿Sabes? (partícula enfática)', '¿Entiendes?', '¿Verdad?', '¿No?'], respuesta: 0 },
-            { japones: '昼休み', lectura: 'hiruyasumi', opciones: ['Hora del almuerzo / Recreo', 'Hora de trabajo', 'Hora de estudio', 'Hora de dormir'], respuesta: 0 }
-        ],
+    /// Sub-contenedor 1.3
+'sub1_3': {
+    // MAZOS NORMALES
+    1: [
+        { japones: '付き合ってん', lectura: 'tsukiatte n', opciones: ['Están saliendo', 'Están peleando', 'Están trabajando', 'Están estudiando'], respuesta: 0 },
+        { japones: 'なんだかんだで', lectura: 'nandakanda de', opciones: ['Al fin y al cabo', 'De repente', 'Por casualidad', 'De ninguna manera'], respuesta: 0 },
+        { japones: '絡んでる', lectura: 'karande ru', opciones: ['Se meten / Interactúan (contracción)', 'Se ignoran', 'Se evitan', 'Se ayudan'], respuesta: 0 },
+        { japones: '態度', lectura: 'taido', opciones: ['Actitud', 'Habilidad', 'Conocimiento', 'Experiencia'], respuesta: 0 },
+        { japones: '仮に', lectura: 'kari ni', opciones: ['Aunque / Suponiendo que', 'Definitivamente', 'Raramente', 'Normalmente'], respuesta: 0 },
+        { japones: '様子', lectura: 'yōsu', opciones: ['Apariencia / Actitud', 'Edad', 'Altura', 'Peso'], respuesta: 0 },
+        { japones: 'うまく', lectura: 'umaku', opciones: ['Bien', 'Mal', 'Rápido', 'Lento'], respuesta: 0 },
+        { japones: 'いってねー', lectura: 'itte nē', opciones: ['No va', 'Va bien', 'Es fácil', 'Es difícil'], respuesta: 0 },
+        { japones: 'よ', lectura: 'yo', opciones: ['¿Sabes? (partícula enfática)', '¿Entiendes?', '¿Verdad?', '¿No?'], respuesta: 0 },
+        { japones: '昼休み', lectura: 'hiruyasumi', opciones: ['Hora del almuerzo / Recreo', 'Hora de trabajo', 'Hora de estudio', 'Hora de dormir'], respuesta: 0 }
+    ],
+    
+    2: [
+        { japones: '流石に', lectura: 'sasuga ni', opciones: ['Lógico / Claro', 'Sorprendentemente', 'Por casualidad', 'Raramente'], respuesta: 0 },
+        { japones: '足', lectura: 'ashi', opciones: ['Piernas', 'Brazos', 'Cabeza', 'Mano'], respuesta: 0 },
+        { japones: 'どけて', lectura: 'dokete', opciones: ['Quita / Aparta (imperativo)', 'Pon', 'Dale', 'Espera'], respuesta: 0 },
+        { japones: 'おい少し落ち', lectura: 'oi sukoshi ochi', opciones: ['Oye cálmate un poco', 'Oye apúrate', 'Oye espera', 'Oye ven aquí'], respuesta: 0 },
+        { japones: '赤ちゃんデデちゃう', lectura: 'akachan dedechau', opciones: ['Se hace bebé (onomatopeya)', 'Llora fuerte', 'Se ríe', 'Duerme'], respuesta: 0 },
+        { japones: '一度', lectura: 'ichido', opciones: ['Una vez', 'Dos veces', 'Muchas veces', 'Nunca'], respuesta: 0 },
+        { japones: '練習', lectura: 'renshū', opciones: ['Practicar', 'Estudiar', 'Trabajar', 'Descansar'], respuesta: 0 },
+        { japones: '経験豊富', lectura: 'keiken hōfu', opciones: ['Experimentada', 'Principiante', 'Inexperta', 'Intermedia'], respuesta: 0 },
+        { japones: 'リード', lectura: 'rīdo', opciones: ['Liderar / Guiar', 'Seguir', 'Observar', 'Esperar'], respuesta: 0 },
+        { japones: '安心', lectura: 'anshin', opciones: ['Tranquilidad', 'Ansiedad', 'Miedo', 'Emoción'], respuesta: 0 }
+    ],
+    
+    3: [
+        { japones: '甘い', lectura: 'amai', opciones: ['Ingenuo / Dulce', 'Salado', 'Amargo', 'Ácido'], respuesta: 0 },
+        { japones: 'キステク', lectura: 'kisu teku', opciones: ['Técnica de beso', 'Técnica de hablar', 'Técnica de baile', 'Técnica de canto'], respuesta: 0 },
+        { japones: '悩殺', lectura: 'nōsatsu', opciones: ['Seducir fatalmente', 'Ignorar', 'Rechazar', 'Asustar'], respuesta: 0 },
+        { japones: 'みたら', lectura: 'mitara', opciones: ['Si pruebo', 'Si veo', 'Si escucho', 'Si huelo'], respuesta: 0 },
+        { japones: '3秒', lectura: 'sanbyō', opciones: ['3 segundos', '3 minutos', '3 horas', '3 días'], respuesta: 0 },
+        { japones: '堕ちた', lectura: 'ochita', opciones: ['Cayó / Se rindió', 'Resistió', 'Ganó', 'Huyó'], respuesta: 0 },
+        { japones: '並べて', lectura: 'narabete', opciones: ['Alineando / Poniendo en fila', 'Separando', 'Mezclando', 'Escondiendo'], respuesta: 0 },
+        { japones: '五つ子', lectura: 'itsutsugo', opciones: ['Quintillizas', 'Gemelas', 'Trillizas', 'Cuatrillizas'], respuesta: 0 },
+        { japones: '犯す', lectura: 'okasu', opciones: ['Violar / Agredir sexualmente', 'Proteger', 'Respetar', 'Ignorar'], respuesta: 0 },
+        { japones: 'スポズポ', lectura: 'supozupo', opciones: ['Entrando y saliendo (onomatopeya de pistoneo)', 'Estático', 'Girando', 'Vibrando'], respuesta: 0 }
+    ],
+    
+    4: [
+        { japones: 'しやすく', lectura: 'shiyasuku', opciones: ['Fácil de hacer', 'Difícil de hacer', 'Imposible de hacer', 'Peligroso de hacer'], respuesta: 0 },
+        { japones: 'しといて', lectura: 'shitoite', opciones: ['Prepárate (imperativo)', 'Espera', 'Olvida', 'Cancela'], respuesta: 0 },
+        { japones: '手に入ったら', lectura: 'te ni hairattara', opciones: ['Si lo consigo', 'Si lo pierdo', 'Si lo rompo', 'Si lo regalo'], respuesta: 0 },
+        { japones: '見せちゃう', lectura: 'misechau', opciones: ['Se lo muestre (contracción de てしまう)', 'Se lo escondo', 'Se lo doy', 'Se lo quito'], respuesta: 0 },
+        { japones: '変態', lectura: 'hentai', opciones: ['Pervertido', 'Normal', 'Inocente', 'Tímido'], respuesta: 0 },
+        { japones: 'たまんねぇ', lectura: 'tamannē', opciones: ['Increíble / Insoportable', 'Aburrido', 'Normal', 'Desagradable'], respuesta: 0 },
+        { japones: 'オホ声', lectura: 'oho-goe', opciones: ['Voz oho (gemido gutural bajo y porcino)', 'Voz aguda', 'Voz tranquila', 'Voz cantarina'], respuesta: 0 },
+        { japones: '鳴く', lectura: 'naku', opciones: ['Gemir / "Cantar" (metáfora animal)', 'Callar', 'Hablar', 'Gritar'], respuesta: 0 },
+        { japones: '絶対', lectura: 'zettai', opciones: ['Absolutamente', 'Quizás', 'Nunca', 'Raramente'], respuesta: 0 },
+        { japones: '気', lectura: 'ki', opciones: ['Carácter / Espíritu', 'Cuerpo', 'Mente', 'Alma'], respuesta: 0 }
+    ],
+    
+    5: [
+        { japones: '強い', lectura: 'tsuyoi', opciones: ['Fuerte', 'Débil', 'Normal', 'Variable'], respuesta: 0 },
+        { japones: 'ほど', lectura: 'hodo', opciones: ['Cuanto más', 'Cuanto menos', 'Igual', 'Diferente'], respuesta: 0 },
+        { japones: '激しく', lectura: 'hageshiku', opciones: ['Intensamente / Con fuerza', 'Suavemente', 'Lentamente', 'Rápidamente'], respuesta: 0 },
+        { japones: '突く', lectura: 'tsuku', opciones: ['Embestir / Follar', 'Acariciar', 'Tocar', 'Observar'], respuesta: 0 },
+        { japones: '情けない', lectura: 'nasakenai', opciones: ['Patético / Lamentable', 'Admirable', 'Normal', 'Felicidad'], respuesta: 0 },
+        { japones: 'ひくひく', lectura: 'hiku hiku', opciones: ['Palpitando / Contrayéndose', 'Inmóvil', 'Relajado', 'Rígido'], respuesta: 0 },
+        { japones: 'してて', lectura: 'shitete', opciones: ['Está (forma te continua)', 'No está', 'Estaba', 'Estará'], respuesta: 0 },
+        { japones: '後', lectura: 'ato', opciones: ['Después', 'Antes', 'Durante', 'Mientras'], respuesta: 0 },
+        { japones: '挿れて', lectura: 'irete', opciones: ['Meticndo', 'Sacando', 'Tocando', 'Lamiendo'], respuesta: 0 },
+        { japones: '開発', lectura: 'kaihatsu', opciones: ['Desarrollar (entrenar el ano)', 'Destruir', 'Ignorar', 'Proteger'], respuesta: 0 }
+    ],
+    
+    6: [
+        { japones: '楽しみ', lectura: 'tanoshimi', opciones: ['Disfrute / Anticipación', 'Miedo', 'Aburrimiento', 'Indiferencia'], respuesta: 0 },
+        { japones: 'ご自慢', lectura: 'go-jiman', opciones: ['De la que alardeas', 'De la que te avergüenzas', 'Normal', 'Común'], respuesta: 0 },
+        { japones: '演技力', lectura: 'engiryoku', opciones: ['Habilidad actoral', 'Habilidad deportiva', 'Habilidad musical', 'Habilidad artística'], respuesta: 0 },
+        { japones: '上', lectura: 'ue', opciones: ['Arriba', 'Abajo', 'Derecha', 'Izquierda'], respuesta: 0 },
+        { japones: '下', lectura: 'shita', opciones: ['Abajo', 'Arriba', 'Centro', 'Lateral'], respuesta: 0 },
+        { japones: '大人しく', lectura: 'otonashiku', opciones: ['Callada / Quieta', 'Ruidosa', 'Activa', 'Nerviosa'], respuesta: 0 },
+        { japones: 'させて', lectura: 'sasete', opciones: ['Hacer que', 'Impedir que', 'Dejar que', 'Ver que'], respuesta: 0 },
+        { japones: 'みろ', lectura: 'miro', opciones: ['Intenta (imperativo rudo)', 'No intentes', 'Espera', 'Olvídalo'], respuesta: 0 },
+        { japones: '髪型', lectura: 'kamigata', opciones: ['Peinado', 'Rostro', 'Cuerpo', 'Ropa'], respuesta: 0 },
+        { japones: '統一', lectura: 'tōitsu', opciones: ['Unificar', 'Separar', 'Dividir', 'Mezclar'], respuesta: 0 }
+    ],
+    
+    7: [
+        { japones: '見分け', lectura: 'miwake', opciones: ['Distinguir', 'Confundir', 'Ignorar', 'Unir'], respuesta: 0 },
+        { japones: 'つかない', lectura: 'tsukanai', opciones: ['No se puede', 'Se puede', 'Quizás', 'Fácilmente'], respuesta: 0 },
+        { japones: '歴戦', lectura: 'rekisen', opciones: ['Veterano de muchas batallas', 'Novato', 'Intermedio', 'Inactivo'], respuesta: 0 },
+        { japones: 'ヤリチン', lectura: 'yarichin', opciones: ['Putero / Follador experimentado', 'Virgen', 'Casual', 'Abstinente'], respuesta: 0 },
+        { japones: '当たってる', lectura: 'atatteru', opciones: ['Acertando', 'Fallando', 'Dudando', 'Ignorando'], respuesta: 0 },
+        { japones: '髪', lectura: 'kami', opciones: ['Pelo', 'Piel', 'Uñas', 'Ojos'], respuesta: 0 },
+        { japones: '長さ', lectura: 'nagasa', opciones: ['Longitud', 'Anchura', 'Altura', 'Profundidad'], respuesta: 0 },
+        { japones: '2択', lectura: 'nitaku', opciones: ['Dos opciones', 'Tres opciones', 'Muchas opciones', 'Sin opciones'], respuesta: 0 },
+        { japones: '突っ込んで', lectura: 'tsukkonde', opciones: ['Meticndo / Embistiendo', 'Sacando', 'Tocando', 'Observando'], respuesta: 0 },
+        { japones: '30秒', lectura: 'sanjū-byō', opciones: ['30 segundos', '30 minutos', '30 horas', '30 días'], respuesta: 0 }
+    ],
+    
+    8: [
+        { japones: 'ビショビショ', lectura: 'bishobisho', opciones: ['Empapado / Chorreando', 'Seco', 'Húmedo', 'Pegajoso'], respuesta: 0 },
+        { japones: '雑魚', lectura: 'zako', opciones: ['Débil / Perdedor', 'Fuerte / Ganador', 'Intermedio', 'Experto'], respuesta: 0 },
+        { japones: 'かなぁ', lectura: 'kanā', opciones: ['¿Será que...? (duda suave)', '¡Definitivamente!', 'No sé', 'Tal vez'], respuesta: 0 },
+        { japones: 'アレ', lectura: 'are', opciones: ['Eso / Aquello', 'Esto', 'Aquello lejano', 'Nada'], respuesta: 0 },
+        { japones: '露出度', lectura: 'roshutsudo', opciones: ['Nivel de exposición', 'Nivel de cobertura', 'Nivel de calidad', 'Nivel de precio'], respuesta: 0 },
+        { japones: '抜いて', lectura: 'nuite', opciones: ['Pajearme / Correrme', 'Contenerme', 'Ignorar', 'Disfrutar'], respuesta: 0 },
+        { japones: '全裸', lectura: 'zenra', opciones: ['Desnudez total', 'Parcialmente vestido', 'Completamente vestido', 'En ropa interior'], respuesta: 0 },
+        { japones: '変わんない', lectura: 'kawannai', opciones: ['No difiere (contracción casual)', 'Difiere mucho', 'Es igual', 'Cambia'], respuesta: 0 },
+        { japones: '隣', lectura: 'tonari', opciones: ['Al lado / Vecino', 'Lejos', 'Frente', 'Detrás'], respuesta: 0 },
+        { japones: '趣味', lectura: 'shumi', opciones: ['Fetiche / Gusto', 'Obligación', 'Trabajo', 'Estudio'], respuesta: 0 }
+    ],
+    
+    9: [
+        { japones: '後ろ', lectura: 'ushiro', opciones: ['Detrás', 'Delante', 'Lado', 'Arriba'], respuesta: 0 },
+        { japones: 'なんて', lectura: 'nante', opciones: ['Cosas como / ¡Vaya!', 'Nada especial', 'Algo normal', 'Algo aburrido'], respuesta: 0 },
+        { japones: '丸出し', lectura: 'marudashi', opciones: ['Totalmente expuesto', 'Parcialmente tapado', 'Completamente tapado', 'Semi-expuesto'], respuesta: 0 },
+        { japones: 'ぶちこみ', lectura: 'buchikomi', opciones: ['Meter a saco / Embutir', 'Sacar suavemente', 'Tocar ligeramente', 'Evitar'], respuesta: 0 },
+        { japones: 'ナンパ', lectura: 'nanpa', opciones: ['Ligar / Abordar', 'Ignorar', 'Evitar', 'Rechazar'], respuesta: 0 },
+        { japones: '速攻', lectura: 'sokkō', opciones: ['Al instante', 'Lentamente', 'Después', 'Nunca'], respuesta: 0 },
+        { japones: 'まくって', lectura: 'makutte', opciones: ['A saco / Sin parar', 'Suavemente', 'Intermitentemente', 'Nunca'], respuesta: 0 },
+        { japones: 'やん', lectura: 'yan', opciones: ['Haría (contracción)', 'No haría', 'Quizás haría', 'Nunca haría'], respuesta: 0 },
+        { japones: '紐', lectura: 'himo', opciones: ['Hilos / Cordones', 'Botones', 'Cremalleras', 'Hebillas'], respuesta: 0 },
+        { japones: 'しか', lectura: 'shika', opciones: ['Solo', 'También', 'Además', 'Incluso'], respuesta: 0 }
+    ],
+    
+    10: [
+        { japones: '逆に', lectura: 'gyaku ni', opciones: ['Al contrario', 'Igualmente', 'Similarmente', 'Paralelamente'], respuesta: 0 },
+        { japones: '堂々', lectura: 'dōdō', opciones: ['Con naturalidad / Audazmente', 'Tímidamente', 'Nerviosamente', 'Secretamente'], respuesta: 0 },
+        { japones: '目立たない', lectura: 'medatanai', opciones: ['No destacar', 'Destacar mucho', 'Ser normal', 'Ser invisible'], respuesta: 0 },
+        { japones: '必死', lectura: 'hisshi', opciones: ['Desesperadamente', 'Tranquilamente', 'Indiferentemente', 'Felizmente'], respuesta: 0 },
+        { japones: 'プルンプルン', lectura: 'purunpurun', opciones: ['Temblorosas / Jugosas', 'Firmes', 'Flácidas', 'Secas'], respuesta: 0 },
+        { japones: 'ニップルシール', lectura: 'nippuru shīru', opciones: ['Pezoneras / Pasties', 'Sujetador', 'Top', 'Bikini'], respuesta: 0 },
+        { japones: 'はがして', lectura: 'hagashite', opciones: ['Arrancando', 'Pegando', 'Cubriendo', 'Dibujando'], respuesta: 0 },
+        { japones: 'むしゃぶりつき', lectura: 'mushaburitsuki', opciones: ['Chupar con avidez', 'Lamer suavemente', 'Morder ligeramente', 'Tocar'], respuesta: 0 },
+        { japones: '映画', lectura: 'eiga', opciones: ['Película', 'Serie', 'Documental', 'Animación'], respuesta: 0 },
+        { japones: 'でてた', lectura: 'deteta', opciones: ['Salió (pasado casual)', 'No salió', 'Quizás salió', 'Saldrá'], respuesta: 0 }
+    ],
+    
+    11: [
+        { japones: 'てことは', lectura: 'te koto wa', opciones: ['Entonces / Eso significa', 'Pero', 'Aunque', 'Porque'], respuesta: 0 },
+        { japones: '撮影', lectura: 'satsuei', opciones: ['Rodaje', 'Fotografía', 'Pintura', 'Escultura'], respuesta: 0 },
+        { japones: '格好', lectura: 'kakkō', opciones: ['Atuendo / Apariencia', 'Personalidad', 'Habilidad', 'Conocimiento'], respuesta: 0 },
+        { japones: '男優', lectura: 'danyū', opciones: ['Actor (porno masculino)', 'Actriz', 'Director', 'Productor'], respuesta: 0 },
+        { japones: 'ふりケツ', lectura: 'furi ketsu', opciones: ['Culazo (que se mueve mucho)', 'Culo plano', 'Culo normal', 'Culo pequeño'], respuesta: 0 },
+        { japones: '好き放題', lectura: 'suki hōdai', opciones: ['A discreción / Lo que quiera', 'Con límites', 'Con permiso', 'Con restricciones'], respuesta: 0 },
+        { japones: '随分', lectura: 'zuibun', opciones: ['Bastante / Considerablemente', 'Poco', 'Nada', 'Demasiado'], respuesta: 0 },
+        { japones: 'ぶっとんだ', lectura: 'buttonda', opciones: ['Loco / Extravagante', 'Normal', 'Aburrido', 'Serio'], respuesta: 0 },
+        { japones: 'してる', lectura: 'shiteru', opciones: ['Está llevando', 'No está', 'Estaba', 'Estará'], respuesta: 0 },
+        { japones: '左', lectura: 'hidari', opciones: ['Izquierdo', 'Derecho', 'Central', 'Lateral'], respuesta: 0 }
+    ],
+    
+    12: [
+        { japones: '絆創膏', lectura: 'bansōkō', opciones: ['Apósito / Tirita', 'Vendaje', 'Yeso', 'Pomada'], respuesta: 0 },
+        { japones: 'はがれ', lectura: 'hagare', opciones: ['Despegarse', 'Pegarse', 'Quedarse', 'Romper'], respuesta: 0 },
+        { japones: 'かけてる', lectura: 'kaketeru', opciones: ['A punto de', 'Lejos de', 'Después de', 'Antes de'], respuesta: 0 },
+        { japones: 'ぷっくり', lectura: 'pukkuri', opciones: ['Hinchado / Gordito', 'Delgado', 'Plano', 'Hueco'], respuesta: 0 },
+        { japones: 'スク水', lectura: 'suku mizu', opciones: ['School swimsuit (bañador escolar)', 'Uniforme escolar', 'Ropa casual', 'Ropa deportiva'], respuesta: 0 },
+        { japones: '部分', lectura: 'bubun', opciones: ['Partes', 'Todo', 'Nada', 'Algo'], respuesta: 0 },
+        { japones: '開けて', lectura: 'akete', opciones: ['Haciendo', 'Cerrando', 'Tapando', 'Ocultando'], respuesta: 0 },
+        { japones: '貼る', lectura: 'haru', opciones: ['Pegar', 'Quitar', 'Romper', 'Dibujar'], respuesta: 0 },
+        { japones: '天才', lectura: 'tensai', opciones: ['Genio', 'Tonto', 'Normal', 'Inteligente'], respuesta: 0 },
+        { japones: '発想', lectura: 'hassō', opciones: ['Idea / Concepto', 'Realidad', 'Hecho', 'Teoría'], respuesta: 0 }
+    ],
+    
+    13: [
+        { japones: 'もじもじ', lectura: 'mojimoji', opciones: ['Retorcerse / Inquietarse', 'Quedarse quieto', 'Relajarse', 'Dormir'], respuesta: 0 },
+        { japones: '恥ずかしがってる', lectura: 'hazukashigatteru', opciones: ['Estar avergonzada', 'Estar orgullosa', 'Estar feliz', 'Estar enojada'], respuesta: 0 },
+        { japones: 'たまんね~', lectura: 'tamannē', opciones: ['Irresistible / Insoportable de bueno', 'Aburrido', 'Normal', 'Desagradable'], respuesta: 0 },
+        { japones: '割れ目', lectura: 'wareme', opciones: ['Raja / Hendidura', 'Superficie lisa', 'Protuberancia', 'Hueco'], respuesta: 0 },
+        { japones: 'ふんどし', lectura: 'fundoshi', opciones: ['Fundoshi (tanga tradicional)', 'Calzoncillo', 'Boxer', 'Suspensorio'], respuesta: 0 },
+        { japones: '目立つ', lectura: 'medatsu', opciones: ['Destacar', 'Pasar desapercibido', 'Esconderse', 'Camuflarse'], respuesta: 0 },
+        { japones: 'なるべく', lectura: 'narubeku', opciones: ['Lo máximo posible', 'Lo mínimo posible', 'Normalmente', 'Nunca'], respuesta: 0 },
+        { japones: '視線', lectura: 'shisen', opciones: ['Miradas', 'Voces', 'Toques', 'Sonidos'], respuesta: 0 },
+        { japones: 'いかない', lectura: 'ikanai', opciones: ['No vayan', 'Vayan', 'Quizás vayan', 'Nunca vayan'], respuesta: 0 },
+        { japones: 'ように', lectura: 'yō ni', opciones: ['Para que', 'Aunque', 'Porque', 'Si'], respuesta: 0 }
+    ],
+    
+    14: [
+        { japones: '生地', lectura: 'kiji', opciones: ['Tela / Tejido', 'Plástico', 'Metal', 'Madera'], respuesta: 0 },
+        { japones: '薄い', lectura: 'usui', opciones: ['Fina', 'Gruesa', 'Dura', 'Suave'], respuesta: 0 },
+        { japones: 'せい', lectura: 'sei', opciones: ['Culpa / Por', 'Mérito', 'Accidente', 'Destino'], respuesta: 0 },
+        { japones: 'めっちゃ', lectura: 'meccha', opciones: ['Un montón / Súper', 'Poco', 'Nada', 'Algo'], respuesta: 0 },
+        { japones: '透けて', lectura: 'sukete', opciones: ['Transparentándose', 'Opacándose', 'Cubriéndose', 'Ocultándose'], respuesta: 0 },
+        { japones: '祭', lectura: 'matsuri', opciones: ['Festival (matsuri japonés)', 'Ceremonia', 'Reunión', 'Concierto'], respuesta: 0 },
+        { japones: '純粋', lectura: 'junsui', opciones: ['Pura', 'Corrupta', 'Mixta', 'Falsa'], respuesta: 0 },
+        { japones: '元気っ娘', lectura: 'genki-kko', opciones: ['Chica enérgica', 'Chica tímida', 'Chica seria', 'Chica triste'], respuesta: 0 },
+        { japones: '着てる', lectura: 'kiteru', opciones: ['Llevando', 'Quitándose', 'Comprando', 'Lavando'], respuesta: 0 },
+        { japones: '興奮', lectura: 'kōfun', opciones: ['Excitación', 'Aburrimiento', 'Calma', 'Sueño'], respuesta: 0 }
+    ],
+    
+    15: [
+        { japones: 'やたら', lectura: 'yatara', opciones: ['Excesivamente / Súper', 'Moderadamente', 'Poco', 'Nada'], respuesta: 0 },
+        { japones: '調教', lectura: 'chōkyō', opciones: ['Entrenar / Domar (BDSM)', 'Liberar', 'Ignorar', 'Proteger'], respuesta: 0 },
+        { japones: '生きられない', lectura: 'ikirarenai', opciones: ['No pueda vivir', 'Pueda vivir', 'Quiera vivir', 'Prefiera vivir'], respuesta: 0 },
+        { japones: 'なし', lectura: 'nashi', opciones: ['Sin', 'Con', 'Con mucho', 'Con poco'], respuesta: 0 },
+        { japones: 'やべぇ', lectura: 'yabē', opciones: ['Loca / Peligrosa', 'Normal', 'Aburrida', 'Segura'], respuesta: 0 },
+        { japones: '綺麗', lectura: 'kirei', opciones: ['Bonito / Limpio', 'Feo / Sucio', 'Normal', 'Extraño'], respuesta: 0 },
+        { japones: 'おかしい', lectura: 'okashii', opciones: ['Loco / Extraño', 'Normal', 'Aburrido', 'Serio'], respuesta: 0 },
+        { japones: 'まったく', lectura: 'mattaku', opciones: ['Para nada', 'Totalmente', 'Parcialmente', 'A medias'], respuesta: 0 },
+        { japones: '黒ずんで', lectura: 'kurozunde', opciones: ['Oscurecidos / Pigmentados', 'Aclarados', 'Blancos', 'Rojos'], respuesta: 0 },
+        { japones: '上玉', lectura: 'jōtama', opciones: ['Joya / Chica de primera', 'Chica normal', 'Chica fea', 'Chica promedio'], respuesta: 0 }
+    ],
+    
+    16: [
+        { japones: 'なかなか', lectura: 'nakanaka', opciones: ['Fácilmente / Todos los días', 'Raramente', 'Nunca', 'A veces'], respuesta: 0 },
+        { japones: 'いねえ', lectura: 'inē', opciones: ['No hay (contracción casual)', 'Hay', 'Habrá', 'Hubo'], respuesta: 0 },
+        { japones: '逮捕', lectura: 'taiho', opciones: ['Arrestar', 'Liberar', 'Interrogar', 'Ignorar'], respuesta: 0 },
+        { japones: '草むら', lectura: 'kusamura', opciones: ['Matorral / Hierba alta', 'Camino', 'Edificio', 'Playa'], respuesta: 0 },
+        { japones: '連れ込んで', lectura: 'tsurekonde', opciones: ['Arrastrando / Llevando', 'Soltando', 'Dejando', 'Expulsando'], respuesta: 0 },
+        { japones: 'ぶち犯して', lectura: 'buchi okashite', opciones: ['Violar a saco', 'Respetar', 'Ignorar', 'Proteger'], respuesta: 0 }
+    ],
+    
+    // ====================
+    // MAZOS DIFÍCILES ESPECIALES - Subcontenedor 1.3
+    // ====================
+ 
         
         // ====================
         // MAZOS DIFÍCILES ESPECIALES - Subcontenedor 1.3
