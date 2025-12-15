@@ -92,7 +92,7 @@ const mangaDatabase = {
     '1_3': {
         titulo: "Naruto Shippuden - Volumen 25",
         descripcion: "¡Agrega tus propias imágenes de manga aquí!",
-        paginas: 0,
+        paginas: 20,
         año: 2007,
         autor: "Masashi Kishimoto",
         paginasUrls: [
@@ -102,7 +102,7 @@ const mangaDatabase = {
             "https://n1.kemono.cr/data/73/4f/734f6c65dfff67019fb9e25a1e19d340b8b4d63f1f45b00641f41755bf24e4df.jpg?f=jakkYWZFAI3zXJLEDtndsvDj.jpeg",
             "https://n3.kemono.cr/data/55/a8/55a8b608a8667f2575244bdb0ef490d4a8e25d1d0482c0ae388be52e9cbc3c61.jpg?f=Nw87jbOR13VHDLdTr14Nb2nc.jpeg",
             "https://n4.kemono.cr/data/e2/e7/e2e7e97b948ea5a82ce75d3aed0e81ac4a3a8ef33c3c2c077d9baae194bbfeb1.jpg?f=xgqkwmvLE7f7vhIxjMdfkcSd.jpeg",
-            "https://pbs.twimg.com/media/G8O88ThWgCw0LZQ?format=jpg&name=large",
+            "https://n2.kemono.cr/data/8e/73/8e73862fde19c5fcee66c3ed6ccc6b8ce77f8ef595e73374358a4905435c0514.jpg?f=hkawHy3nQ97s5yeqDAyXskAG.jpeg",
             "https://pbs.twimg.com/media/G8O8-NaWMAgc4jo?format=jpg&name=large",
              "https://pbs.twimg.com/media/G8O8_bIWgAwR-o8?format=jpg&name=large",
              "https://pbs.twimg.com/media/G8O9AotWAAI_etC?format=jpg&name=large",
