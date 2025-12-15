@@ -92,7 +92,7 @@ const mangaDatabase = {
     '1_3': {
         titulo: "Naruto Shippuden - Volumen 25",
         descripcion: "¡Agrega tus propias imágenes de manga aquí!",
-        paginas: 0,
+        paginas: 20,
         año: 2007,
         autor: "Masashi Kishimoto",
         paginasUrls: [
