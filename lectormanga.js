@@ -92,30 +92,10 @@ const mangaDatabase = {
     '1_3': {
         titulo: "Naruto Shippuden - Volumen 25",
         descripcion: "¡Agrega tus propias imágenes de manga aquí!",
-        paginas: 20,
+        paginas: 0,
         año: 2007,
         autor: "Masashi Kishimoto",
-        paginasUrls: [
-            "https://n1.kemono.cr/data/fe/6e/fe6e2e72678907ddde2603a33211bedcda7b7ee0cb9ef310ef0bb9cf3261443d.jpg?f=JW6sEhEFq2IjpF7pplmHtIep.jpeg",
-            "https://n1.kemono.cr/data/f8/8b/f88b23d9c5e1b2c55e4f0b3a3b9204b0abb4191248ed5db6bfaccfe6e5852141.jpg?f=X7uEbXgS1EqPj6aEJwLrVhXk.jpeg",
-            "https://n4.kemono.cr/data/e1/f2/e1f24bf0ef7d10d9fc51a1d791985a04ed2dcba97f176f5f96c259c3bffe6086.jpg?f=MabLqYU0DJyBINbbutc0S5L2.jpeg",
-            "https://n1.kemono.cr/data/73/4f/734f6c65dfff67019fb9e25a1e19d340b8b4d63f1f45b00641f41755bf24e4df.jpg?f=jakkYWZFAI3zXJLEDtndsvDj.jpeg",
-            "https://n3.kemono.cr/data/55/a8/55a8b608a8667f2575244bdb0ef490d4a8e25d1d0482c0ae388be52e9cbc3c61.jpg?f=Nw87jbOR13VHDLdTr14Nb2nc.jpeg",
-            "https://n4.kemono.cr/data/e2/e7/e2e7e97b948ea5a82ce75d3aed0e81ac4a3a8ef33c3c2c077d9baae194bbfeb1.jpg?f=xgqkwmvLE7f7vhIxjMdfkcSd.jpeg",
-            "https://pbs.twimg.com/media/G8O88ThWgCw0LZQ?format=jpg&name=large",
-            "https://pbs.twimg.com/media/G8O8-NaWMAgc4jo?format=jpg&name=large",
-             "https://pbs.twimg.com/media/G8O8_bIWgAwR-o8?format=jpg&name=large",
-             "https://pbs.twimg.com/media/G8O9AotWAAI_etC?format=jpg&name=large",
-             "https://pbs.twimg.com/media/G8O9CttWgK0aIHg?format=jpg&name=large",
-             "https://s4.3hentai.net/d654238/44.jpg",
-             "https://s4.3hentai.net/d654238/44.jpg",
-             "https://s4.3hentai.net/d654238/44.jpg",
-             "https://s4.3hentai.net/d654238/44.jpg",
-             "https://s4.3hentai.net/d654238/44.jpg",
-             "https://s4.3hentai.net/d654238/44.jpg",
-             "https://s4.3hentai.net/d654238/48.jpg"
-            
-        ]
+        paginasUrls: []
     },
     
     // ================================================
@@ -158,6 +138,17 @@ let contenedorManga = null;
 let subcontenedorManga = null;
 
 // ================================================
+// VARIABLES DE ZOOM PROFESIONAL
+// ================================================
+let zoomActivo = false;
+let lupaVisible = false;
+let zoomScale = 1;
+let modoZoomCompleto = false;
+let isDragging = false;
+let startX = 0, startY = 0;
+let translateX = 0, translateY = 0;
+
+// ================================================
 // FUNCIONES PRINCIPALES
 // ================================================
 
@@ -176,6 +167,11 @@ window.iniciarLectorManga = function(contenedor, subcontenedor) {
     lectorActivo = true;
     paginaActual = 1; // Empezar en página 1
     totalPaginas = mangaActual.paginas;
+    
+    // Resetear variables de zoom
+    zoomActivo = false;
+    modoZoomCompleto = false;
+    zoomScale = 1;
     
     // Ocultar todo y mostrar el lector
     ocultarTodoParaLector();
@@ -230,11 +226,26 @@ function mostrarLectorManga() {
         
         <!-- VISOR DE MANGA (OCUPA CASI TODA LA PANTALLA) -->
         <div class="visor-manga">
-            <div class="manga-imagen-container">
+            <div class="manga-imagen-container" id="manga-contenedor">
                 <img id="manga-imagen" src="" alt="Página ${paginaActual}" class="manga-imagen">
                 <div class="manga-cargando" id="manga-cargando">
                     <div class="spinner"></div>
                     <p>Cargando página...</p>
+                </div>
+                
+                <!-- Lupa para zoom -->
+                <div class="lupa-container" id="lupa-container">
+                    <img class="lupa-imagen" id="lupa-imagen" src="" alt="Zoom">
+                </div>
+                
+                <!-- Botón zoom completo -->
+                <button class="btn-zoom-completo" id="btn-zoom-completo" title="Modo zoom completo (Z)">
+                    🔍
+                </button>
+                
+                <!-- Indicador de zoom -->
+                <div class="zoom-indicador" id="zoom-indicador">
+                    Zoom: 1x
                 </div>
             </div>
             
@@ -273,7 +284,7 @@ function mostrarLectorManga() {
             <!-- DESCRIPCIÓN -->
             <div class="manga-descripcion">
                 <p>${mangaActual.descripcion}</p>
-                <p class="manga-aviso">💡 Cada página nueva comienza desde arriba automáticamente</p>
+                <p class="manga-aviso">💡 Click en la imagen para zoom | Rueda para ajustar | Tecla Z para zoom completo</p>
             </div>
         </div>
     `;
@@ -297,18 +308,30 @@ function cargarPaginaManga() {
     // Scroll al inicio (IMPORTANTE: cada página empieza desde arriba)
     window.scrollTo(0, 0);
     
-    // Quitar zoom si existe en la imagen anterior
-    const imagenActual = document.getElementById('manga-imagen');
-    if (imagenActual && imagenActual.classList.contains('zoom-activo')) {
-        imagenActual.classList.remove('zoom-activo');
-    }
+    // Resetear zoom al cambiar de página
+    zoomActivo = false;
+    modoZoomCompleto = false;
+    zoomScale = 1;
     
     // Mostrar cargando
     const cargando = document.getElementById('manga-cargando');
     const imagen = document.getElementById('manga-imagen');
+    const contenedor = document.getElementById('manga-contenedor');
+    const lupaContainer = document.getElementById('lupa-container');
+    const zoomIndicador = document.getElementById('zoom-indicador');
     
     if (cargando) cargando.style.display = 'flex';
     if (imagen) imagen.style.opacity = '0';
+    if (contenedor) {
+        contenedor.classList.remove('modo-zoom-completo');
+        contenedor.style.cursor = 'crosshair';
+    }
+    if (lupaContainer) lupaContainer.style.display = 'none';
+    if (zoomIndicador) zoomIndicador.style.display = 'none';
+    
+    // Resetear posición de arrastre
+    translateX = 0;
+    translateY = 0;
     
     // Cargar imagen
     const urlImagen = mangaActual.paginasUrls[paginaActual - 1];
@@ -320,31 +343,24 @@ function cargarPaginaManga() {
             if (cargando) cargando.style.display = 'none';
             imagen.style.opacity = '1';
             
+            // Resetear transformación de imagen
+            imagen.style.transform = 'scale(1)';
+            
             // Actualizar controles
             actualizarControlesLector();
             
-            // Agregar evento click para zoom
-            imagen.onclick = function() {
-                if (imagen.classList.contains('zoom-activo')) {
-                    imagen.classList.remove('zoom-activo');
-                } else {
-                    imagen.classList.add('zoom-activo');
-                }
-            };
+            // INICIALIZAR ZOOM PROFESIONAL
+            inicializarZoomProfesional();
         };
         
         imagen.onerror = function() {
             if (cargando) cargando.innerHTML = '<p>❌ Error al cargar la página</p>';
             imagen.src = 'https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=1200&h=1800&fit=crop&auto=format';
             
-            // Aún así agregar evento click para zoom en caso de error
-            imagen.onclick = function() {
-                if (imagen.classList.contains('zoom-activo')) {
-                    imagen.classList.remove('zoom-activo');
-                } else {
-                    imagen.classList.add('zoom-activo');
-                }
-            };
+            // Inicializar zoom incluso con imagen de error
+            setTimeout(() => {
+                inicializarZoomProfesional();
+            }, 100);
         };
     }
     
@@ -407,6 +423,12 @@ function irAPagina(numero) {
 
 function cerrarLectorManga() {
     lectorActivo = false;
+    zoomActivo = false;
+    modoZoomCompleto = false;
+    
+    // Remover event listeners de arrastre
+    document.removeEventListener('mousemove', manejarArrastre);
+    document.removeEventListener('mouseup', detenerArrastre);
     
     // Ocultar lector
     const lectorContainer = document.getElementById('lector-manga-container');
@@ -425,7 +447,264 @@ function cerrarLectorManga() {
 }
 
 // ================================================
-// TECLAS DEL TECLADO PARA NAVEGACIÓN
+// SISTEMA DE ZOOM PROFESIONAL
+// ================================================
+
+function inicializarZoomProfesional() {
+    const imagen = document.getElementById('manga-imagen');
+    const contenedor = document.getElementById('manga-contenedor');
+    const lupaContainer = document.getElementById('lupa-container');
+    const lupaImagen = document.getElementById('lupa-imagen');
+    const btnZoomCompleto = document.getElementById('btn-zoom-completo');
+    const zoomIndicador = document.getElementById('zoom-indicador');
+    
+    if (!imagen || !contenedor) return;
+    
+    // Configurar cursor inicial
+    contenedor.style.cursor = 'crosshair';
+    
+    // Configurar lupa
+    if (lupaImagen && imagen.src) {
+        lupaImagen.src = imagen.src;
+    }
+    
+    // Evento para mostrar lupa al mover ratón
+    contenedor.addEventListener('mousemove', function(e) {
+        if (!modoZoomCompleto && zoomActivo) {
+            mostrarLupa(e);
+        }
+    });
+    
+    // Evento para entrar/salir del contenedor
+    contenedor.addEventListener('mouseenter', function() {
+        if (!modoZoomCompleto && zoomActivo) {
+            lupaVisible = true;
+            if (lupaContainer) lupaContainer.style.display = 'block';
+        }
+    });
+    
+    contenedor.addEventListener('mouseleave', function() {
+        lupaVisible = false;
+        if (lupaContainer) lupaContainer.style.display = 'none';
+    });
+    
+    // Click para activar/desactivar zoom con lupa
+    contenedor.addEventListener('click', function(e) {
+        if (!modoZoomCompleto) {
+            zoomActivo = !zoomActivo;
+            
+            if (zoomActivo) {
+                contenedor.style.cursor = 'crosshair';
+                lupaVisible = true;
+                if (lupaContainer) lupaContainer.style.display = 'block';
+                mostrarLupa(e);
+                if (zoomIndicador) {
+                    zoomIndicador.style.display = 'block';
+                    const zoomTotal = (3 * zoomScale).toFixed(1);
+                    zoomIndicador.textContent = `Zoom: ${zoomTotal}x (Click para quitar)`;
+                }
+            } else {
+                contenedor.style.cursor = 'crosshair';
+                lupaVisible = false;
+                if (lupaContainer) lupaContainer.style.display = 'none';
+                if (zoomIndicador) zoomIndicador.style.display = 'none';
+            }
+        }
+    });
+    
+    // Botón zoom completo
+    if (btnZoomCompleto) {
+        btnZoomCompleto.onclick = function(e) {
+            e.stopPropagation();
+            toggleZoomCompleto();
+        };
+    }
+    
+    // Rueda del ratón para ajustar zoom
+    contenedor.addEventListener('wheel', function(e) {
+        if (zoomActivo && !modoZoomCompleto) {
+            e.preventDefault();
+            ajustarZoomRueda(e.deltaY);
+        }
+    });
+}
+
+function mostrarLupa(e) {
+    const imagen = document.getElementById('manga-imagen');
+    const contenedor = document.getElementById('manga-contenedor');
+    const lupaContainer = document.getElementById('lupa-container');
+    const lupaImagen = document.getElementById('lupa-imagen');
+    
+    if (!lupaVisible || !imagen || !contenedor || !lupaContainer || !lupaImagen) return;
+    
+    // Posición del ratón relativa al contenedor
+    const rect = contenedor.getBoundingClientRect();
+    let x = e.clientX - rect.left;
+    let y = e.clientY - rect.top;
+    
+    // Asegurar que las coordenadas estén dentro del contenedor
+    x = Math.max(0, Math.min(x, rect.width));
+    y = Math.max(0, Math.min(y, rect.height));
+    
+    // Tamaño de la lupa
+    const lupaSize = 300;
+    
+    // Posicionar lupa (centrada en el cursor)
+    let lupaX = x - lupaSize / 2;
+    let lupaY = y - lupaSize / 2;
+    
+    // Mantener lupa dentro de los límites del contenedor
+    lupaX = Math.max(10, Math.min(lupaX, rect.width - lupaSize - 10));
+    lupaY = Math.max(10, Math.min(lupaY, rect.height - lupaSize - 10));
+    
+    lupaContainer.style.left = lupaX + 'px';
+    lupaContainer.style.top = lupaY + 'px';
+    
+    // Calcular zoom (3x por defecto, ajustable con rueda)
+    const zoomLevel = 3 * zoomScale;
+    
+    // Calcular posición relativa en la imagen original
+    const imgRect = imagen.getBoundingClientRect();
+    const relativeX = x / rect.width;
+    const relativeY = y / rect.height;
+    
+    // Calcular posición de la imagen dentro de la lupa
+    const imgX = relativeX * imgRect.width;
+    const imgY = relativeY * imgRect.height;
+    
+    // Aplicar zoom a la imagen dentro de la lupa
+    lupaImagen.style.width = (imgRect.width * zoomLevel) + 'px';
+    lupaImagen.style.height = (imgRect.height * zoomLevel) + 'px';
+    
+    // Posicionar la imagen dentro de la lupa para mostrar el área correcta
+    lupaImagen.style.left = -(imgX * zoomLevel - lupaSize / 2) + 'px';
+    lupaImagen.style.top = -(imgY * zoomLevel - lupaSize / 2) + 'px';
+}
+
+function ajustarZoomRueda(deltaY) {
+    // Ajustar nivel de zoom con rueda
+    if (deltaY > 0) {
+        // Rueda hacia abajo = reducir zoom
+        zoomScale = Math.max(0.5, zoomScale - 0.2);
+    } else {
+        // Rueda hacia arriba = aumentar zoom
+        zoomScale = Math.min(5, zoomScale + 0.2); // Hasta 15x de zoom total (3 x 5)
+    }
+    
+    const zoomIndicador = document.getElementById('zoom-indicador');
+    if (zoomIndicador) {
+        const zoomTotal = (3 * zoomScale).toFixed(1);
+        zoomIndicador.textContent = `Zoom: ${zoomTotal}x (Click para quitar)`;
+    }
+}
+
+function toggleZoomCompleto() {
+    const contenedor = document.getElementById('manga-contenedor');
+    const imagen = document.getElementById('manga-imagen');
+    const btnZoomCompleto = document.getElementById('btn-zoom-completo');
+    const lupaContainer = document.getElementById('lupa-container');
+    const zoomIndicador = document.getElementById('zoom-indicador');
+    
+    if (!contenedor || !imagen) return;
+    
+    modoZoomCompleto = !modoZoomCompleto;
+    
+    if (modoZoomCompleto) {
+        // Activar zoom completo
+        contenedor.classList.add('modo-zoom-completo');
+        contenedor.style.cursor = 'grab';
+        
+        // Desactivar lupa normal
+        zoomActivo = false;
+        lupaVisible = false;
+        
+        if (lupaContainer) lupaContainer.style.display = 'none';
+        
+        if (btnZoomCompleto) {
+            btnZoomCompleto.textContent = '✕';
+            btnZoomCompleto.title = 'Salir del zoom completo (Z)';
+        }
+        
+        if (zoomIndicador) {
+            zoomIndicador.style.display = 'block';
+            zoomIndicador.textContent = 'Modo zoom completo - Arrastra para mover (Z para salir)';
+            zoomIndicador.style.top = '10px';
+            zoomIndicador.style.right = '10px';
+        }
+        
+        // Resetear posición de arrastre
+        translateX = 0;
+        translateY = 0;
+        imagen.style.transform = 'scale(3)';
+        
+        // Configurar arrastre
+        configurarArrastreZoomCompleto();
+        
+    } else {
+        // Desactivar zoom completo
+        contenedor.classList.remove('modo-zoom-completo');
+        contenedor.style.cursor = 'crosshair';
+        
+        // Resetear imagen
+        imagen.style.transform = 'scale(1)';
+        
+        if (btnZoomCompleto) {
+            btnZoomCompleto.textContent = '🔍';
+            btnZoomCompleto.title = 'Modo zoom completo (Z)';
+        }
+        
+        if (zoomIndicador) {
+            zoomIndicador.style.display = 'none';
+            zoomIndicador.style.top = '20px';
+            zoomIndicador.style.right = '20px';
+        }
+        
+        // Remover event listeners de arrastre
+        document.removeEventListener('mousemove', manejarArrastre);
+        document.removeEventListener('mouseup', detenerArrastre);
+    }
+}
+
+function configurarArrastreZoomCompleto() {
+    const contenedor = document.getElementById('manga-contenedor');
+    const imagen = document.getElementById('manga-imagen');
+    
+    if (!contenedor || !imagen) return;
+    
+    // Remover listeners anteriores si existen
+    contenedor.removeEventListener('mousedown', iniciarArrastre);
+    document.removeEventListener('mousemove', manejarArrastre);
+    document.removeEventListener('mouseup', detenerArrastre);
+    
+    contenedor.addEventListener('mousedown', iniciarArrastre);
+    
+    function iniciarArrastre(e) {
+        isDragging = true;
+        startX = e.clientX - translateX;
+        startY = e.clientY - translateY;
+        contenedor.style.cursor = 'grabbing';
+        e.preventDefault();
+    }
+    
+    window.manejarArrastre = function(e) {
+        if (!isDragging) return;
+        e.preventDefault();
+        translateX = e.clientX - startX;
+        translateY = e.clientY - startY;
+        imagen.style.transform = `scale(3) translate(${translateX}px, ${translateY}px)`;
+    }
+    
+    window.detenerArrastre = function() {
+        isDragging = false;
+        contenedor.style.cursor = 'grab';
+    }
+    
+    document.addEventListener('mousemove', manejarArrastre);
+    document.addEventListener('mouseup', detenerArrastre);
+}
+
+// ================================================
+// TECLAS DEL TECLADO PARA NAVEGACIÓN Y ZOOM
 // ================================================
 
 document.addEventListener('keydown', function(event) {
@@ -455,6 +734,36 @@ document.addEventListener('keydown', function(event) {
             
         case 'End':
             irAPagina(totalPaginas);
+            break;
+            
+        case 'z':
+        case 'Z':
+            event.preventDefault();
+            toggleZoomCompleto();
+            break;
+            
+        case '+':
+        case '=':
+            if (zoomActivo && !modoZoomCompleto) {
+                zoomScale = Math.min(5, zoomScale + 0.2);
+                const zoomIndicador = document.getElementById('zoom-indicador');
+                if (zoomIndicador) {
+                    const zoomTotal = (3 * zoomScale).toFixed(1);
+                    zoomIndicador.textContent = `Zoom: ${zoomTotal}x (Click para quitar)`;
+                }
+            }
+            break;
+            
+        case '-':
+        case '_':
+            if (zoomActivo && !modoZoomCompleto) {
+                zoomScale = Math.max(0.5, zoomScale - 0.2);
+                const zoomIndicador = document.getElementById('zoom-indicador');
+                if (zoomIndicador) {
+                    const zoomTotal = (3 * zoomScale).toFixed(1);
+                    zoomIndicador.textContent = `Zoom: ${zoomTotal}x (Click para quitar)`;
+                }
+            }
             break;
     }
 });
@@ -487,6 +796,5 @@ function existeManga(contenedor, subcontenedor) {
 // INICIALIZAR ESTILOS DEL LECTOR
 // ================================================
 document.addEventListener('DOMContentLoaded', function() {
-    // Los estilos están en 1_style.css
-    console.log('📖 Lector de Manga cargado y listo');
+    console.log('📖 Lector de Manga con Zoom Profesional cargado y listo');
 });
