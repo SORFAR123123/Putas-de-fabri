@@ -538,7 +538,7 @@ function crearContenedoresAudios() {
         
         html += `
             <div class="contenedor-item" onclick="cargarSubcontenedoresAudios(${i})">
-                <div class="contenedor-img" style="background-image: url('${contenedorData.imagen}')"></div>
+                <div class="contenedor-img" style="background-image: url('${subData.imagen}')"></div>
                 <div class="contenedor-numero">AUDIO CONTAINER ${i}</div>
                 <p>${desc}</p>
                 <div class="card-button" style="background: linear-gradient(135deg, #FF6B6B, #FFD166);">
@@ -897,7 +897,7 @@ function crearReproductorAudioUI(audioInfo) {
                     ></iframe>
                 </div>
                 <p style="opacity: 0.7; font-size: 0.9rem; margin-top: 15px;">
-                    Si no se reproduce automáticamente, hace clic en el botón de play
+                    Si no se reproduce automáticamente, haz clic en el botón de play
                 </p>
             </div>
             
@@ -1007,7 +1007,6 @@ function cargarSubcontenedoresASMR(contenedor) {
     modoMazoDificil = false;
     
     const mangaSection = document.getElementById('manga-section');
-    mangaSection.style.display = 'block';
     mangaSection.innerHTML = crearSubcontenedoresASMRUI(contenedor);
     
     const botonVolver = crearBotonVolver(cargarPaginaASMR);
@@ -1868,6 +1867,26 @@ function finalizarQuiz() {
     const dineroAhora = sistemaEconomia.obtenerDinero();
     const recompensa = dineroAhora - dineroAntes;
     
+    // Definir función de volver aquí mismo para evitar problemas de scope
+    const funcionVolver = () => {
+        document.getElementById('quiz-section').style.display = 'none';
+        document.getElementById('manga-section').style.display = 'block';
+        
+        if (modoActual === 'anime') {
+            cargarMazosAnimes(contenedorActual, subcontenedorActual);
+        } else if (modoActual === 'audio') {
+            cargarMazosAudios(contenedorActual, subcontenedorActual);
+        } else if (modoActual === 'asmr') {
+            volverAlInicio();
+        } else if (modoActual === 'rpg') {
+            cargarPaginaRPG();
+        } else if (modoActual === 'fantasia') {
+            cargarPaginaFantasiaRPG();
+        } else {
+            cargarMazos(contenedorActual, subcontenedorActual);
+        }
+    };
+    
     document.getElementById('quiz-section').innerHTML = `
         <div class="quiz-container">
             <h2 style="text-align: center; color: #FFD166;">🎉 QUIZ COMPLETADO</h2>
@@ -1905,7 +1924,7 @@ function finalizarQuiz() {
             ` : ''}
             
             <div class="quiz-controls">
-                <button class="quiz-btn btn-volver" id="btn-volver-mazos">
+                <button class="quiz-btn btn-volver" onclick="funcionVolver()">
                     ↩️ Volver a Mazos
                 </button>
                 <button class="quiz-btn btn-siguiente" onclick="repetirQuiz()">
@@ -1915,27 +1934,8 @@ function finalizarQuiz() {
         </div>
     `;
     
-    // Configurar el botón "Volver a Mazos" dinámicamente
-    setTimeout(() => {
-        const btnVolver = document.getElementById('btn-volver-mazos');
-        if (btnVolver) {
-            btnVolver.onclick = function() {
-                if (modoActual === 'anime') {
-                    cargarMazosAnimes(contenedorActual, subcontenedorActual);
-                } else if (modoActual === 'audio') {
-                    cargarMazosAudios(contenedorActual, subcontenedorActual);
-                } else if (modoActual === 'rpg') {
-                    cargarPaginaRPG();
-                } else if (modoActual === 'fantasia') {
-                    cargarPaginaFantasiaRPG();
-                } else if (modoActual === 'asmr') {
-                    volverAlInicio();
-                } else {
-                    cargarMazos(contenedorActual, subcontenedorActual);
-                }
-            };
-        }
-    }, 100);
+    // Hacer que funcionVolver sea accesible globalmente solo para este caso
+    window.funcionVolver = funcionVolver;
     
     actualizarContadorDineroInicio();
 }
