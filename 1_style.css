@@ -1477,47 +1477,62 @@ body {
 }
 
 /* ================================================
-   ZOOM SIMPLE PERO POTENTE PARA MANGA
+   ZOOM CON ARRASTRE PARA MANGA
    ================================================ */
 
-/* Imagen del manga con zoom */
-.manga-imagen {
-    cursor: zoom-in;
-    transition: transform 0.3s ease;
-    max-width: 100%;
-    height: auto;
-    display: block;
-    margin: 0 auto;
-}
-
-/* Estados de zoom */
-.manga-imagen.zoom-2x {
-    transform: scale(2);
-    cursor: zoom-out;
-    transform-origin: center;
-}
-
-.manga-imagen.zoom-3x {
-    transform: scale(3);
-    cursor: zoom-out;
-    transform-origin: center;
-}
-
-.manga-imagen.zoom-4x {
-    transform: scale(4);
-    cursor: zoom-out;
-    transform-origin: center;
-}
-
-/* Contenedor para permitir scroll cuando hay zoom */
+/* Contenedor de imagen con scroll para zoom */
 .manga-imagen-container {
+    position: relative;
     overflow: auto;
-    max-height: 85vh;
+    background: rgba(0, 0, 0, 0.5);
+    border-radius: 10px;
+    min-height: 500px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.6);
+    border: 3px solid rgba(255, 255, 255, 0.1);
     cursor: grab;
 }
 
 .manga-imagen-container:active {
     cursor: grabbing;
+}
+
+/* Imagen del manga */
+.manga-imagen {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.3s ease;
+    cursor: zoom-in;
+    user-select: none;
+    -webkit-user-drag: none;
+}
+
+/* Estados de zoom CON CENTRO EN CURSOR */
+.manga-imagen.zoom-2x {
+    transform: scale(2);
+    cursor: grab;
+    transform-origin: 0 0;
+    width: 200%;
+    height: auto;
+    min-width: 100%;
+}
+
+.manga-imagen.zoom-3x {
+    transform: scale(3);
+    cursor: grab;
+    transform-origin: 0 0;
+    width: 300%;
+    height: auto;
+    min-width: 100%;
+}
+
+.manga-imagen.zoom-4x {
+    transform: scale(4);
+    cursor: grab;
+    transform-origin: 0 0;
+    width: 400%;
+    height: auto;
+    min-width: 100%;
 }
 
 /* Indicador de zoom */
@@ -1560,4 +1575,20 @@ body {
 .reset-zoom-btn:hover {
     transform: scale(1.2);
     background: linear-gradient(135deg, #FFD166, #FF6B6B);
+}
+
+/* Mensaje de ayuda para arrastre */
+.zoom-help {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(0, 0, 0, 0.7);
+    color: white;
+    padding: 10px 20px;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    z-index: 100;
+    border: 2px solid #8A5AF7;
+    display: none;
 }
