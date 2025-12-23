@@ -749,7 +749,7 @@ const vocabularioDatabase = {
         // MAZOS DIFÍCILES ESPECIALES - Subcontenedor 2.3
         'D1': []
     }
-};
+
 };
 
 // Función para obtener vocabulario (modificada para manejar mazos difíciles)
