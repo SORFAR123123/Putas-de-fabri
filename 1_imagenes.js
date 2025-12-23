@@ -16,8 +16,8 @@ const sistemaDescriptivo = {
                 tipo: 'manga'
             },
             2: { 
-                nombre: 'CONTAINER 2',
-                imagen: '', 
+                nombre: 'Twitter ',
+                imagen: 'https://img.freepik.com/free-vector/new-2023-twitter-logo-x-icon-design_1017-45418.jpg?semt=ais_hybrid&w=740&q=80', 
                 descripcion: 'Segundo contenedor de mangas',
                 tipo: 'manga'
             },
