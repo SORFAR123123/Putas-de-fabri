@@ -47,7 +47,7 @@ const alfabetoRuso = {
     
     // Letras especiales y signos
     4: [
-        { ruso: 'Ъ ъ', nombre: 'Signo duro', pronunciacion: 'silenciosa', ejemplo: 'Объявление (ob'yavlenie) - anuncio', opciones: ['signo duro (no suena)', 'signo suave', 'vocal', 'consonante'], respuesta: 0 },
+        { ruso: 'Ъ ъ', nombre: 'Signo duro', pronunciacion: 'silenciosa', ejemplo: 'Объявление (obyavlenie) - anuncio', opciones: ['signo duro (no suena)', 'signo suave', 'vocal', 'consonante'], respuesta: 0 },
         { ruso: 'Ь ь', nombre: 'Signo suave', pronunciacion: 'suaviza', ejemplo: 'День (den) - día', opciones: ['signo suave', 'signo duro', 'vocal', 'consonante'], respuesta: 0 },
         { ruso: 'Й й', nombre: 'I kratkoye', pronunciacion: 'y/i corta', ejemplo: 'Май (mai) - mayo', opciones: ['y/i corta', 'i', 'ye', 'ya'], respuesta: 0 },
         
