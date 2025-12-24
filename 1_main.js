@@ -15,7 +15,7 @@ let modoMazoDificil = false;
 let palabrasDificilesQuiz = [];
 
 // Variables para videos y animes
-let modoActual = 'manga'; // 'manga', 'video', 'anime', 'audio', 'asmr', 'rpg', 'misiones', 'fantasia'
+let modoActual = 'manga'; // 'manga', 'video', 'anime', 'audio', 'asmr', 'rpg', 'misiones', 'fantasia', 'ruso'
 let idiomaVideoActual = 'espanol'; // 'espanol', 'japones'
 
 // ====================
@@ -302,6 +302,377 @@ function iniciarMazoDificilDesdeUI() {
         // Cargar primera palabra del mazo difícil
         mostrarPalabraMazoDificil();
     }
+}
+
+// ====================
+// NUEVO: RUSO ALFABETO
+// ====================
+
+function cargarPaginaRuso() {
+    modoActual = 'ruso';
+    modoMazoDificil = false;
+    ocultarHeader();
+    
+    const mangaSection = document.getElementById('manga-section');
+    mangaSection.style.display = 'block';
+    mangaSection.innerHTML = crearMazosRusoUI();
+    
+    const botonVolver = crearBotonVolver(volverAlInicio);
+    mangaSection.insertBefore(botonVolver, mangaSection.firstChild);
+}
+
+function crearMazosRusoUI() {
+    const totalMazos = contarMazosRusoDisponibles();
+    
+    let html = `
+        <div style="max-width: 1000px; margin: 0 auto; padding: 20px;">
+            <h2 style="text-align: center; color: #FFD166; margin-bottom: 10px;">🇷🇺 APRENDE EL ALFABETO CIRÍLICO RUSO</h2>
+            <p style="text-align: center; opacity: 0.8; margin-bottom: 30px;">
+                4 mazos con todas las letras del alfabeto cirílico y pronunciación
+            </p>
+            
+            <!-- INFORMACIÓN -->
+            <div style="background: rgba(255, 20, 147, 0.1); border-radius: 15px; padding: 20px; margin-bottom: 30px; border: 2px solid #FF1493;">
+                <h3 style="color: #FFD166; margin-bottom: 15px;">📚 Cómo funciona</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+                    <div style="text-align: center;">
+                        <div style="font-size: 2rem; color: #5864F5;">33</div>
+                        <div style="font-size: 0.9rem; opacity: 0.8;">Letras totales</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 2rem; color: #4CAF50;">10</div>
+                        <div style="font-size: 0.9rem; opacity: 0.8;">Letras por mazo</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 2rem; color: #FFD166;">4</div>
+                        <div style="font-size: 0.9rem; opacity: 0.8;">Mazos totales</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 2rem; color: #8A5AF7;">+💰</div>
+                        <div style="font-size: 0.9rem; opacity: 0.8;">Gana dinero</div>
+                    </div>
+                </div>
+            </div>
+            
+            <h3 style="text-align: center; color: #8A5AF7; margin-bottom: 25px;">📦 MAZOS DISPONIBLES</h3>
+            <div class="mazos-container">
+    `;
+    
+    for (let i = 1; i <= totalMazos; i++) {
+        const letras = obtenerLetrasRuso(i);
+        const nombre = obtenerNombreMazoRuso(i);
+        
+        html += `
+            <div class="mazo-item" onclick="iniciarQuizRuso(${i})" style="border-color: #8A5AF7; background: rgba(88, 100, 245, 0.05);">
+                <h3 style="color: #8A5AF7;">${nombre}</h3>
+                <p>${letras.length} letras/palabras</p>
+                <p style="font-size: 0.9rem; opacity: 0.7; margin-top: 10px;">
+                    ${i === 1 ? 'А, Е, Ё, И, О...' : 
+                      i === 2 ? 'Б, В, Г, Д, Ж...' : 
+                      i === 3 ? 'П, Р, С, Т, Ф...' : 
+                      'Ъ, Ь, Й, Привет, Спасибо...'}
+                </p>
+                <div style="margin-top: 15px; padding: 8px 12px; background: rgba(88, 100, 245, 0.2); 
+                          border-radius: 8px; font-size: 0.9rem; text-align: center; color: #FFD166;">
+                    🇷🇺 Practicar
+                </div>
+            </div>
+        `;
+    }
+    
+    html += `
+            </div>
+            
+            <!-- TABLA RESUMEN -->
+            <div style="background: rgba(255, 255, 255, 0.05); border-radius: 15px; padding: 25px; margin-top: 40px;">
+                <h3 style="color: #FFD166; margin-bottom: 20px;">📊 Alfabeto Cirílico Ruso - Resumen</h3>
+                <div style="overflow-x: auto;">
+                    <table style="width: 100%; border-collapse: collapse;">
+                        <thead>
+                            <tr style="background: rgba(88, 100, 245, 0.2);">
+                                <th style="padding: 12px; text-align: left; color: #FFD166;">Letra</th>
+                                <th style="padding: 12px; text-align: left; color: #FFD166;">Nombre</th>
+                                <th style="padding: 12px; text-align: left; color: #FFD166;">Pronunciación</th>
+                                <th style="padding: 12px; text-align: left; color: #FFD166;">Ejemplo</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr style="border-bottom: 1px solid rgba(255,255,255,0.1);">
+                                <td style="padding: 12px; font-size: 1.5rem; font-weight: bold;">А а</td>
+                                <td style="padding: 12px;">A</td>
+                                <td style="padding: 12px;">a</td>
+                                <td style="padding: 12px;">Ананас (ananás)</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid rgba(255,255,255,0.1);">
+                                <td style="padding: 12px; font-size: 1.5rem; font-weight: bold;">Б б</td>
+                                <td style="padding: 12px;">Be</td>
+                                <td style="padding: 12px;">b</td>
+                                <td style="padding: 12px;">Банк (bank)</td>
+                            </tr>
+                            <tr style="border-bottom: 1px solid rgba(255,255,255,0.1);">
+                                <td style="padding: 12px; font-size: 1.5rem; font-weight: bold;">В в</td>
+                                <td style="padding: 12px;">Ve</td>
+                                <td style="padding: 12px;">v</td>
+                                <td style="padding: 12px;">Вода (voda)</td>
+                            </tr>
+                            <tr>
+                                <td colspan="4" style="padding: 12px; text-align: center; opacity: 0.7;">
+                                    ... y 30 letras más. ¡Completa los mazos para aprenderlas todas!
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    return html;
+}
+
+function iniciarQuizRuso(mazo) {
+    contenedorActual = null;
+    subcontenedorActual = null;
+    mazoActual = mazo;
+    modoActual = 'ruso';
+    modoMazoDificil = false;
+    
+    // Obtener letras del mazo ruso
+    palabrasActuales = obtenerLetrasRuso(mazo);
+    
+    if (palabrasActuales.length === 0) {
+        alert('No hay letras en este mazo');
+        return;
+    }
+    
+    // Resetear contadores
+    indicePalabraActual = 0;
+    aciertos = 0;
+    errores = 0;
+    esperandoSiguiente = false;
+    
+    // Ocultar sección, mostrar quiz
+    document.getElementById('manga-section').style.display = 'none';
+    document.getElementById('quiz-section').style.display = 'block';
+    
+    // Cargar primera letra
+    mostrarPalabraRuso();
+}
+
+function mostrarPalabraRuso() {
+    const quizSection = document.getElementById('quiz-section');
+    const letra = palabrasActuales[indicePalabraActual];
+    
+    quizSection.innerHTML = `
+        <div class="quiz-container">
+            <h2 style="text-align: center; color: #8A5AF7; margin-bottom: 20px;">
+                🇷🇺 ALFABETO RUSO • Mazo ${obtenerNombreMazoRuso(mazoActual)} • Letra ${indicePalabraActual + 1}/${palabrasActuales.length}
+            </h2>
+            
+            <div class="palabra-japonesa" id="palabra-rusa" style="font-size: 5rem; border-color: #8A5AF7;">
+                ${letra.ruso}
+            </div>
+            
+            <div id="informacion-letra" style="text-align: center; margin: 20px 0; padding: 15px; background: rgba(88, 100, 245, 0.1); border-radius: 10px;">
+                <p style="color: #FFD166; margin-bottom: 5px;">📝 ${letra.nombre}</p>
+                <p style="opacity: 0.8;">Ejemplo: ${letra.ejemplo}</p>
+            </div>
+            
+            <div id="pregunta-container" style="text-align: center; margin: 25px 0;">
+                <h3 style="color: #FFD166; margin-bottom: 15px;">¿Cómo se pronuncia esta letra?</h3>
+            </div>
+            
+            <div id="opciones-container">
+                <!-- Opciones se cargan dinámicamente -->
+            </div>
+            
+            <div id="resultado-container" style="display: none;">
+                <!-- Resultado se muestra después de responder -->
+            </div>
+            
+            <div class="quiz-controls">
+                <button class="quiz-btn btn-volver" onclick="cancelarQuizRuso()">
+                    ❌ Cancelar
+                </button>
+            </div>
+        </div>
+    `;
+    
+    // Crear opciones
+    crearOpcionesRuso(letra);
+}
+
+function crearOpcionesRuso(letra) {
+    const opcionesContainer = document.getElementById('opciones-container');
+    
+    const opcionesMezcladas = [...letra.opciones];
+    for (let i = opcionesMezcladas.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [opcionesMezcladas[i], opcionesMezcladas[j]] = [opcionesMezcladas[j], opcionesMezcladas[i]];
+    }
+    
+    const nuevaPosicionCorrecta = opcionesMezcladas.indexOf(letra.opciones[letra.respuesta]);
+    
+    opcionesContainer.innerHTML = `
+        <div class="opciones-grid">
+            <div class="opcion-fila">
+                <button class="opcion-btn" onclick="verificarRespuestaRuso(0, ${nuevaPosicionCorrecta})" style="border-color: #8A5AF7;">
+                    ${opcionesMezcladas[0]}
+                </button>
+                <button class="opcion-btn" onclick="verificarRespuestaRuso(1, ${nuevaPosicionCorrecta})" style="border-color: #8A5AF7;">
+                    ${opcionesMezcladas[1]}
+                </button>
+            </div>
+            <div class="opcion-fila">
+                <button class="opcion-btn" onclick="verificarRespuestaRuso(2, ${nuevaPosicionCorrecta})" style="border-color: #8A5AF7;">
+                    ${opcionesMezcladas[2]}
+                </button>
+                <button class="opcion-btn" onclick="verificarRespuestaRuso(3, ${nuevaPosicionCorrecta})" style="border-color: #8A5AF7;">
+                    ${opcionesMezcladas[3]}
+                </button>
+            </div>
+        </div>
+    `;
+}
+
+function verificarRespuestaRuso(opcionSeleccionada, posicionCorrecta) {
+    if (esperandoSiguiente) return;
+    
+    const letra = palabrasActuales[indicePalabraActual];
+    const opcionesBtns = document.querySelectorAll('.opcion-btn');
+    const correcta = opcionSeleccionada === posicionCorrecta;
+    
+    opcionesBtns.forEach((btn, index) => {
+        if (index === posicionCorrecta) {
+            btn.classList.add('correcta');
+        } else if (index === opcionSeleccionada && !correcta) {
+            btn.classList.add('incorrecta');
+        }
+        btn.disabled = true;
+    });
+    
+    const resultadoContainer = document.getElementById('resultado-container');
+    resultadoContainer.style.display = 'block';
+    resultadoContainer.innerHTML = `
+        <div class="romaji-container">
+            <p style="margin-top: 10px; opacity: 0.8; font-size: 1.2rem; color: ${correcta ? '#4CAF50' : '#FF6B6B'};">
+                ${correcta ? '✅ ¡Correcto!' : '❌ Incorrecto. La pronunciación correcta es: ' + letra.pronunciacion}
+            </p>
+            <p style="opacity: 0.7; margin-top: 10px;">
+                Nombre: <strong>${letra.nombre}</strong> • Pronunciación: <strong>${letra.pronunciacion}</strong>
+            </p>
+            <p style="opacity: 0.8; margin-top: 5px; font-style: italic;">
+                "${letra.ejemplo}"
+            </p>
+        </div>
+    `;
+    
+    if (correcta) {
+        aciertos++;
+    } else {
+        errores++;
+    }
+    
+    const controls = document.querySelector('.quiz-controls');
+    controls.innerHTML = '';
+    
+    if (correcta) {
+        controls.innerHTML = `<div style="text-align: center; padding: 20px; color: #4CAF50;">
+            <p>✅ ¡Correcto! Pasando a la siguiente letra...</p>
+        </div>`;
+        
+        esperandoSiguiente = true;
+        setTimeout(pasarSiguienteLetraRuso, 1500);
+    } else {
+        controls.innerHTML = `
+            <button class="quiz-btn btn-volver" onclick="cancelarQuizRuso()">
+                ❌ Cancelar
+            </button>
+            <button class="quiz-btn btn-siguiente" onclick="pasarSiguienteLetraRuso()">
+                ⏭️ Siguiente Letra
+            </button>
+        `;
+        esperandoSiguiente = true;
+    }
+}
+
+function pasarSiguienteLetraRuso() {
+    indicePalabraActual++;
+    
+    if (indicePalabraActual < palabrasActuales.length) {
+        esperandoSiguiente = false;
+        mostrarPalabraRuso();
+    } else {
+        finalizarQuizRuso();
+    }
+}
+
+function finalizarQuizRuso() {
+    const porcentaje = Math.round((aciertos / palabrasActuales.length) * 100);
+    const dineroAntes = sistemaEconomia.obtenerDinero();
+    
+    // Dar recompensa por completar mazo ruso
+    let recompensa = 0;
+    if (porcentaje >= 100) {
+        recompensa = 3;
+    } else if (porcentaje >= 90) {
+        recompensa = 2;
+    } else if (porcentaje >= 70) {
+        recompensa = 1;
+    } else if (porcentaje >= 50) {
+        recompensa = 0.5;
+    }
+    
+    if (recompensa > 0) {
+        sistemaEconomia.agregarDinero(recompensa);
+        actualizarContadorDineroInicio();
+    }
+    
+    const dineroAhora = sistemaEconomia.obtenerDinero();
+    
+    document.getElementById('quiz-section').innerHTML = `
+        <div class="quiz-container">
+            <h2 style="text-align: center; color: #FFD166;">🎉 MAZO RUSO COMPLETADO</h2>
+            
+            <div style="text-align: center; margin: 40px 0;">
+                <div style="font-size: 4rem; margin-bottom: 20px; color: #8A5AF7;">${porcentaje}%</div>
+                <p style="font-size: 1.2rem; color: #FFD166;">
+                    ${aciertos} aciertos • ${errores} errores
+                </p>
+            </div>
+            
+            ${recompensa > 0 ? `
+                <div style="background: rgba(88, 100, 245, 0.1); padding: 25px; border-radius: 15px; margin: 20px 0; border: 2px solid #8A5AF7;">
+                    <h3 style="color: #FFD166; margin-bottom: 15px;">💰 Recompensa Obtenida</h3>
+                    <div style="font-size: 2.5rem; text-align: center; color: #FFD166;">
+                        +${recompensa.toFixed(2)} soles
+                    </div>
+                    <p style="text-align: center; margin-top: 10px; opacity: 0.8;">
+                        Ahora tienes: ${dineroAhora.toFixed(2)} soles
+                    </p>
+                </div>
+            ` : ''}
+            
+            <div class="quiz-controls">
+                <button class="quiz-btn btn-volver" onclick="cargarPaginaRuso()">
+                    ↩️ Volver a Mazos Ruso
+                </button>
+                <button class="quiz-btn btn-siguiente" onclick="repetirQuizRuso()">
+                    🔄 Repetir Mazo
+                </button>
+            </div>
+        </div>
+    `;
+}
+
+function cancelarQuizRuso() {
+    if (confirm('¿Seguro que quieres cancelar el quiz? Se perderá el progreso actual.')) {
+        cargarPaginaRuso();
+    }
+}
+
+function repetirQuizRuso() {
+    iniciarQuizRuso(mazoActual);
 }
 
 // ====================
@@ -1426,7 +1797,7 @@ function cargarMazos(contenedor, subcontenedor) {
 function crearMazosUI(contenedor, subcontenedor) {
     let html = `<h2 style="text-align: center; margin-bottom: 30px; color: #FFD166;">
         📚 CONTENEDOR ${contenedor} • SUB-CONTENEDOR ${subcontenedor} - MAZOS
-    </h2>`;
+    </h2>';
     
     // BOTÓN PARA LEER MANGA EN CABECERA
     const tieneManga = existeManga(contenedor, subcontenedor);
@@ -1995,6 +2366,8 @@ function finalizarQuiz() {
             cargarPaginaRPG();
         } else if (modoActual === 'fantasia') {
             cargarPaginaFantasiaRPG();
+        } else if (modoActual === 'ruso') {
+            cargarPaginaRuso();
         } else {
             cargarMazos(contenedorActual, subcontenedorActual);
         }
@@ -2150,6 +2523,8 @@ function cancelarQuiz() {
             cargarPaginaRPG();
         } else if (modoActual === 'fantasia') {
             cargarPaginaFantasiaRPG();
+        } else if (modoActual === 'ruso') {
+            cargarPaginaRuso();
         } else {
             cargarMazos(contenedorActual, subcontenedorActual);
         }
@@ -2159,6 +2534,12 @@ function cancelarQuiz() {
 function cancelarQuizMazoDificil() {
     if (confirm('¿Seguro que quieres cancelar el mazo difícil? Podrás volver a intentarlo más tarde.')) {
         cargarPaginaMisiones();
+    }
+}
+
+function cancelarQuizRuso() {
+    if (confirm('¿Seguro que quieres cancelar el quiz? Se perderá el progreso actual.')) {
+        cargarPaginaRuso();
     }
 }
 
@@ -2180,6 +2561,8 @@ function volverAMazos() {
         cargarPaginaRPG();
     } else if (modoActual === 'fantasia') {
         cargarPaginaFantasiaRPG();
+    } else if (modoActual === 'ruso') {
+        cargarPaginaRuso();
     } else {
         cargarMazos(contenedorActual, subcontenedorActual);
     }
@@ -2191,6 +2574,10 @@ function repetirQuiz() {
     } else {
         iniciarQuiz(contenedorActual, subcontenedorActual, mazoActual);
     }
+}
+
+function repetirQuizRuso() {
+    iniciarQuizRuso(mazoActual);
 }
 
 // ====================
@@ -2349,7 +2736,7 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     console.log('✅ Sistema completo cargado correctamente');
-    console.log('📚 Mangas, 🎬 Videos, 🎌 Animes, 🎵 Audios, 🎧 ASMR, 🎮 RPG, ⚔️ Fantasía, 🎯 Misiones');
+    console.log('📚 Mangas, 🎬 Videos, 🎌 Animes, 🎵 Audios, 🎧 ASMR, 🎮 RPG, ⚔️ Fantasía, 🎯 Misiones, 🇷🇺 Ruso');
     console.log('🎯 Sistema de misiones activo');
     console.log('⚠️ Sistema de palabras difíciles activo');
     console.log('🔄 Reinicio automático a las 3 AM configurado');
@@ -2358,4 +2745,5 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log('🔞 RPG dificultoso: Niveles altos, probabilidades bajas, precios realistas');
     console.log('✅ CORRECCIÓN APLICADA: Sistema ahora muestra TODOS los mazos disponibles (hasta 100 por subcontenedor)');
     console.log('⚠️ NUEVO: Mazos difíciles especiales agregados con bonificación +5 soles');
+    console.log('🇷🇺 NUEVO: Sistema de alfabeto ruso agregado con 4 mazos');
 });
