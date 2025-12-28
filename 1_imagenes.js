@@ -796,7 +796,7 @@ const sistemaDescriptivo = {
                 genero: 'clásico'
             },
             2: { 
-                nombre: 'AUDIO CONTAINER 2',
+                nombre: 'Ado',
                 imagen: 'https://pbs.twimg.com/media/G7whKvWXkAAhMuQ?format=png&name=900x900', 
                 descripcion: 'Openings de anime modernos',
                 genero: 'moderno'
