@@ -107,8 +107,8 @@ const sistemaDescriptivo = {
             
             // Contenedor 2
             '2_1': { 
-                nombre: 'Sub-contenedor 1',
-                imagen: '', 
+                nombre: '7b shiki',
+                imagen: 'https://pbs.twimg.com/profile_images/1942467815061012480/owU6EAy9_400x400.jpg', 
                 descripcion: '', 
                 nivel: '' 
             },
