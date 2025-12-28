@@ -790,8 +790,8 @@ const sistemaDescriptivo = {
         // CONTENEDORES PRINCIPALES (1-10)
         contenedores: {
             1: { 
-                nombre: 'AUDIO CONTAINER 1',
-                imagen: '', 
+                nombre: 'Openings',
+                imagen: 'https://culturageek.com.ar/wp-content/uploads/2024/07/Openings-de-anime-culturageek.com_.ar_-scaled.webp', 
                 descripcion: 'Openings de anime clásicos',
                 genero: 'clásico'
             },
