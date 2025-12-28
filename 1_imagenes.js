@@ -791,19 +791,19 @@ const sistemaDescriptivo = {
         contenedores: {
             1: { 
                 nombre: 'Openings',
-                imagen: 'https://culturageek.com.ar/wp-content/uploads/2024/07/Openings-de-anime-culturageek.com_.ar_-scaled.webp', 
+                imagen: 'https://pbs.twimg.com/media/G7whKvWXkAAhMuQ?format=png&name=900x900', 
                 descripcion: 'Openings de anime clásicos',
                 genero: 'clásico'
             },
             2: { 
                 nombre: 'AUDIO CONTAINER 2',
-                imagen: '', 
+                imagen: 'https://pbs.twimg.com/media/G7whKvWXkAAhMuQ?format=png&name=900x900', 
                 descripcion: 'Openings de anime modernos',
                 genero: 'moderno'
             },
             3: { 
                 nombre: 'AUDIO CONTAINER 3',
-                imagen: '', 
+                imagen: 'https://pbs.twimg.com/media/G7whKvWXkAAhMuQ?format=png&name=900x900', 
                 descripcion: 'Openings de anime de romance',
                 genero: 'romance'
             },
