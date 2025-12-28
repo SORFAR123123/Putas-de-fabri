@@ -456,13 +456,13 @@ function crearContenedoresMangas() {
     
     for (let i = 1; i <= 10; i++) {
         const contenedorData = obtenerContenedorManga(i);
-        const nombre = contenedorData.nombre || `CONTAINER ${i}`; // USAR NOMBRE PERSONALIZADO
+        const nombre = contenedorData.nombre || `CONTAINER ${i}`;
         const desc = contenedorData.descripcion || '5 sub-contenedores con vocabulario y manga';
         
         html += `
             <div class="contenedor-item" onclick="cargarSubcontenedores(${i})">
                 <div class="contenedor-img" style="background-image: url('${contenedorData.imagen || obtenerImagenContenedor(i)}')"></div>
-                <div class="contenedor-numero">${nombre}</div> <!-- USAR NOMBRE AQUÍ -->
+                <div class="contenedor-numero">${nombre}</div>
                 <p>${desc}</p>
                 <div class="card-button">Abrir</div>
             </div>
@@ -479,13 +479,13 @@ function crearContenedoresVideos() {
     
     for (let i = 1; i <= 10; i++) {
         const contenedorData = obtenerContenedorVideo(i);
-        const nombre = contenedorData.nombre || `VIDEO CONTAINER ${i}`; // USAR NOMBRE PERSONALIZADO
+        const nombre = contenedorData.nombre || `VIDEO CONTAINER ${i}`;
         const desc = contenedorData.descripcion || 'Videos privados con timestamps';
         
         html += `
             <div class="contenedor-item" onclick="cargarSubcontenedoresVideos(${i})">
                 <div class="contenedor-img" style="background-image: url('${contenedorData.imagen || obtenerImagenContenedor(i)}')"></div>
-                <div class="contenedor-numero">${nombre}</div> <!-- USAR NOMBRE AQUÍ -->
+                <div class="contenedor-numero">${nombre}</div>
                 <p>${desc}</p>
                 <div class="card-button">Ver videos</div>
             </div>
@@ -535,14 +535,8 @@ function crearContenedoresAudios() {
         const tieneAudios = contenedores[i] && contenedores[i].length > 0;
         const desc = tieneAudios ? contenedores[i].length + ' sub-contenedores con openings' : '5 sub-contenedores disponibles';
         
-        // CORRECCIÓN APLICADA: Usar función específica para audio
-        let imagenContenedor;
-        if (typeof obtenerImagenContenedorAudio !== 'undefined') {
-            imagenContenedor = obtenerImagenContenedorAudio(i);
-        } else {
-            // Fallback a la función de manga
-            imagenContenedor = obtenerContenedorAudio(i).imagen || obtenerImagenContenedor(i);
-        }
+        // Usar función específica para audio
+        let imagenContenedor = obtenerImagenContenedorAudio(i);
         
         html += `
             <div class="contenedor-item" onclick="cargarSubcontenedoresAudios(${i})">
@@ -812,14 +806,8 @@ function crearSubcontenedoresAudiosUI(contenedor) {
     
     for (let i = 1; i <= 5; i++) {
         const tieneAudio = subcontenedoresDisponibles.includes(i.toString());
-        // CORRECCIÓN APLICADA: Usar función específica para audio
-        let imagenSubcontenedor;
-        if (typeof obtenerImagenSubcontenedorAudio !== 'undefined') {
-            imagenSubcontenedor = obtenerImagenSubcontenedorAudio(contenedor, i);
-        } else {
-            // Fallback a la función de manga
-            imagenSubcontenedor = obtenerImagenSubcontenedor(contenedor, i);
-        }
+        // Usar función específica para audio
+        let imagenSubcontenedor = obtenerImagenSubcontenedorAudio(contenedor, i);
         const desc = tieneAudio ? 'Opening disponible' : '(Sin audio configurado)';
         const audioInfo = tieneAudio ? obtenerAudio(contenedor, i) : null;
         
@@ -1045,7 +1033,7 @@ function crearSubcontenedoresASMRUI(contenedor) {
         
         html += `
             <div class="subcontenedor-item" onclick="${tieneASMR ? `seleccionarAccionASMR(${contenedor}, ${i})` : 'alert("Este sub-contenedor no tiene audio ASMR disponible")'}">
-                <div class="subcontenedor-img" style="background-image: url('${subData.imagen}')"></div>
+                <div class="subcontenedor-img" style="background-image: url('${subData.imagen || obtenerImagenSubcontenedorASMR(contenedor, i)}')"></div>
                 <h3>${tieneASMR ? asmrInfo.titulo.split(' ')[0] : `ASMR ${i}`}</h3>
                 ${tieneASMR ? 
                     `<p><strong>${asmrInfo.titulo}</strong></p>
@@ -1317,7 +1305,7 @@ function crearSubcontenedoresUI(contenedor) {
     
     for (let i = 1; i <= 5; i++) {
         const subData = obtenerSubcontenedorManga(contenedor, i);
-        const nombre = subData.nombre || `Sub-contenedor ${i}`; // USAR NOMBRE PERSONALIZADO
+        const nombre = subData.nombre || `Sub-contenedor ${i}`;
         const desc = subData.descripcion || '10 mazos de vocabulario';
         const tieneContenido = tieneVocabularioEnSubcontenedor(contenedor, i);
         const tieneManga = existeManga(contenedor, i);
@@ -1325,7 +1313,7 @@ function crearSubcontenedoresUI(contenedor) {
         html += `
             <div class="subcontenedor-item">
                 <div class="subcontenedor-img" style="background-image: url('${subData.imagen || obtenerImagenSubcontenedor(contenedor, i)}')"></div>
-                <h3>${nombre}</h3> <!-- USAR NOMBRE AQUÍ -->
+                <h3>${nombre}</h3>
                 <p>${desc}</p>
                 ${tieneContenido ? '' : '<p style="color: #FF6B6B; font-size: 0.9rem;">(Sin vocabulario)</p>'}
                 
@@ -2333,7 +2321,49 @@ function verificarVocabularioDisponible(contenedor, subcontenedor, mazo) {
 }
 
 // ====================
-// INICIALIZACIÓN COMPLETA
+// FUNCIONES ESPECÍFICAS PARA AUDIOS (FALTANTES)
+// ====================
+
+// Función para obtener imagen de subcontenedor de audio
+function obtenerImagenSubcontenedorAudio(contenedor, subcontenedor) {
+    const key = `${contenedor}_${subcontenedor}`;
+    const subData = sistemaDescriptivo.audios.subcontenedores[key];
+    
+    if (subData && subData.imagen) {
+        return subData.imagen;
+    }
+    
+    // Si no hay imagen específica, usar la del contenedor
+    const contenedorData = obtenerContenedorAudio(contenedor);
+    return contenedorData.imagen || 'https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=300&h=300&fit=crop';
+}
+
+// Función para obtener imagen de contenedor de audio
+function obtenerImagenContenedorAudio(numero) {
+    const audioData = obtenerContenedorAudio(numero);
+    return audioData.imagen || 'https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=400&h=400&fit=crop';
+}
+
+// ====================
+// FUNCIONES ESPECÍFICAS PARA ASMR (FALTANTES)
+// ====================
+
+// Función para obtener imagen de subcontenedor de ASMR
+function obtenerImagenSubcontenedorASMR(contenedor, subcontenedor) {
+    const key = `${contenedor}_${subcontenedor}`;
+    const subData = sistemaDescriptivo.asmr.subcontenedores[key];
+    
+    if (subData && subData.imagen) {
+        return subData.imagen;
+    }
+    
+    // Si no hay imagen específica, usar la del contenedor
+    const contenedorData = obtenerContenedorASMR(contenedor);
+    return contenedorData.imagen || 'https://images.unsplash.com/photo-1572860177022-8fda92a90b95?w=300&h=300&fit=crop';
+}
+
+// ====================
+// INICIALIZACIÓN COMPLETA (ACTUALIZADA)
 // ====================
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -2344,6 +2374,12 @@ document.addEventListener('DOMContentLoaded', function() {
         botonCasa.onclick = volverAlInicio;
     }
     
+    // Verificar que las funciones de imágenes estén disponibles
+    console.log('🖼️ Funciones de imágenes cargadas:');
+    console.log('- obtenerImagenSubcontenedorAudio:', typeof obtenerImagenSubcontenedorAudio);
+    console.log('- obtenerImagenContenedorAudio:', typeof obtenerImagenContenedorAudio);
+    console.log('- obtenerImagenSubcontenedorASMR:', typeof obtenerImagenSubcontenedorASMR);
+    
     if (typeof quintillizasRPG !== 'undefined') {
         quintillizasRPG.inicializar();
         console.log('🎮 RPG Quintillizas inicializado');
@@ -2353,6 +2389,7 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log('⚔️ RPG Fantasía inicializado');
     }
     
+    // Efectos hover en tarjetas
     document.querySelectorAll('.card').forEach(card => {
         card.addEventListener('mouseenter', function() {
             this.style.transform = 'translateY(-10px) scale(1.02)';
@@ -2365,12 +2402,9 @@ document.addEventListener('DOMContentLoaded', function() {
     
     console.log('✅ Sistema completo cargado correctamente');
     console.log('📚 Mangas, 🎬 Videos, 🎌 Animes, 🎵 Audios, 🎧 ASMR, 🎮 RPG, ⚔️ Fantasía, 🎯 Misiones');
+    console.log('🖼️ Sistema de imágenes personalizadas activado para todos los modos');
     console.log('🎯 Sistema de misiones activo');
     console.log('⚠️ Sistema de palabras difíciles activo');
-    console.log('🔄 Reinicio automático a las 3 AM configurado');
     console.log('💖 EXP por quiz activado: +20 EXP/palabra correcta, +15-100 EXP/mazo completo');
     console.log('💰 Recompensas: 2-3 soles por mazo al 100%');
-    console.log('🔞 RPG dificultoso: Niveles altos, probabilidades bajas, precios realistas');
-    console.log('✅ CORRECCIÓN APLICADA: Sistema ahora muestra TODOS los mazos disponibles (hasta 100 por subcontenedor)');
-    console.log('⚠️ NUEVO: Mazos difíciles especiales agregados con bonificación +5 soles');
 });
