@@ -23,7 +23,7 @@ const sistemaDescriptivo = {
             },
             3: { 
                 nombre: 'CONTAINER 3',
-                imagen: '', 
+                imagen: 'https://pbs.twimg.com/profile_banners/255188747/1744818853/1500x500', 
                 descripcion: 'Contenedor de mangas shonen',
                 tipo: 'shonen'
             },
