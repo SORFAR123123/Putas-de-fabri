@@ -1300,8 +1300,8 @@ const sistemaDescriptivo = {
                 tematica: 'educativo'
             },
             2: { 
-                nombre: 'VIDEO CONTAINER 2',
-                imagen: '', 
+                nombre: 'ganyu cosplay xd',
+                imagen: 'https://pbs.twimg.com/media/G7wkBDjWEAAPM8B?format=png&name=900x900', 
                 descripcion: 'Videos de cultura japonesa',
                 tematica: 'cultura'
             },
