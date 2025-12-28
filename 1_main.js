@@ -535,13 +535,19 @@ function crearContenedoresAudios() {
         const tieneAudios = contenedores[i] && contenedores[i].length > 0;
         const desc = tieneAudios ? contenedores[i].length + ' sub-contenedores con openings' : '5 sub-contenedores disponibles';
         
-        // Usar la función que YA TIENES para obtener imagen del contenedor
-        const imagenContenedor = obtenerImagenContenedor(i);
+        // CORRECCIÓN APLICADA: Usar función específica para audio
+        let imagenContenedor;
+        if (typeof obtenerImagenContenedorAudio !== 'undefined') {
+            imagenContenedor = obtenerImagenContenedorAudio(i);
+        } else {
+            // Fallback a la función de manga
+            imagenContenedor = obtenerContenedorAudio(i).imagen || obtenerImagenContenedor(i);
+        }
         
         html += `
             <div class="contenedor-item" onclick="cargarSubcontenedoresAudios(${i})">
                 <div class="contenedor-img" style="background-image: url('${imagenContenedor}')"></div>
-                <div class="contenedor-numero">AUDIO CONTAINER ${i}</div>
+                <div class="contenedor-numero">${obtenerContenedorAudio(i).nombre || `AUDIO CONTAINER ${i}`}</div>
                 <p>${desc}</p>
                 <div class="card-button" style="background: linear-gradient(135deg, #FF6B6B, #FFD166);">
                     ${tieneAudios ? '🎵 Escuchar audios' : 'Explorar'}
@@ -570,7 +576,7 @@ function crearContenedoresASMR() {
         html += `
             <div class="contenedor-item" onclick="cargarSubcontenedoresASMR(${i})">
                 <div class="contenedor-img" style="background-image: url('${contenedorData.imagen}')"></div>
-                <div class="contenedor-numero">ASMR CONTAINER ${i}</div>
+                <div class="contenedor-numero">${contenedorData.nombre || `ASMR CONTAINER ${i}`}</div>
                 <p>${desc}</p>
                 <div class="card-button" style="background: linear-gradient(135deg, #9C27B0, #673AB7);">
                     ${tieneAudios ? '🎧 Escuchar ASMR' : 'Explorar'}
@@ -806,8 +812,14 @@ function crearSubcontenedoresAudiosUI(contenedor) {
     
     for (let i = 1; i <= 5; i++) {
         const tieneAudio = subcontenedoresDisponibles.includes(i.toString());
-        // USAR LA FUNCIÓN QUE YA TIENES
-        const imagenSubcontenedor = obtenerImagenSubcontenedor(contenedor, i);
+        // CORRECCIÓN APLICADA: Usar función específica para audio
+        let imagenSubcontenedor;
+        if (typeof obtenerImagenSubcontenedorAudio !== 'undefined') {
+            imagenSubcontenedor = obtenerImagenSubcontenedorAudio(contenedor, i);
+        } else {
+            // Fallback a la función de manga
+            imagenSubcontenedor = obtenerImagenSubcontenedor(contenedor, i);
+        }
         const desc = tieneAudio ? 'Opening disponible' : '(Sin audio configurado)';
         const audioInfo = tieneAudio ? obtenerAudio(contenedor, i) : null;
         
