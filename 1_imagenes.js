@@ -856,19 +856,19 @@ const sistemaDescriptivo = {
             // Contenedor 1
             '1_1': { 
                 nombre: 'Opening 1',
-                imagen: '', 
+                imagen: 'https://pbs.twimg.com/media/G7whKvWXkAAhMuQ?format=png&name=900x900', 
                 descripcion: '', 
                 artista: '' 
             },
             '1_2': { 
                 nombre: 'Opening 2',
-                imagen: '', 
+                imagen: 'https://pbs.twimg.com/media/G7whKvWXkAAhMuQ?format=png&name=900x900', 
                 descripcion: '', 
                 artista: '' 
             },
             '1_3': { 
                 nombre: 'Opening 3',
-                imagen: '', 
+                imagen: 'https://pbs.twimg.com/media/G7whKvWXkAAhMuQ?format=png&name=900x900', 
                 descripcion: '', 
                 artista: '' 
             },
@@ -1181,19 +1181,19 @@ const sistemaDescriptivo = {
         contenedores: {
             1: { 
                 nombre: 'ASMR CONTAINER 1',
-                imagen: '', 
+                imagen: 'https://pbs.twimg.com/media/G7wfStPXUAA1Ra2?format=png&name=900x900', 
                 descripcion: 'ASMR de susurros',
                 ambiente: 'susurros'
             },
             2: { 
                 nombre: 'ASMR CONTAINER 2',
-                imagen: '', 
+                imagen: 'https://pbs.twimg.com/media/G7wfStPXUAA1Ra2?format=png&name=900x900', 
                 descripcion: 'ASMR de tapping',
                 ambiente: 'tapping'
             },
             3: { 
                 nombre: 'ASMR CONTAINER 3',
-                imagen: '', 
+                imagen: 'https://pbs.twimg.com/media/G7wfStPXUAA1Ra2?format=png&name=900x900', 
                 descripcion: 'ASMR de roleplay',
                 ambiente: 'roleplay'
             },
