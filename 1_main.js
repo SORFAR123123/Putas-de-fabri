@@ -532,13 +532,15 @@ function crearContenedoresAudios() {
     const totalContenedores = Object.keys(contenedores).length || 10;
     
     for (let i = 1; i <= Math.max(totalContenedores, 10); i++) {
-        const contenedorData = obtenerContenedorAudio(i);
         const tieneAudios = contenedores[i] && contenedores[i].length > 0;
-        const desc = contenedorData.descripcion || (tieneAudios ? contenedores[i].length + ' sub-contenedores con openings' : '5 sub-contenedores disponibles');
+        const desc = tieneAudios ? contenedores[i].length + ' sub-contenedores con openings' : '5 sub-contenedores disponibles';
+        
+        // Usar la función que YA TIENES para obtener imagen del contenedor
+        const imagenContenedor = obtenerImagenContenedor(i);
         
         html += `
             <div class="contenedor-item" onclick="cargarSubcontenedoresAudios(${i})">
-                <div class="contenedor-img" style="background-image: url('${subData.imagen}')"></div>
+                <div class="contenedor-img" style="background-image: url('${imagenContenedor}')"></div>
                 <div class="contenedor-numero">AUDIO CONTAINER ${i}</div>
                 <p>${desc}</p>
                 <div class="card-button" style="background: linear-gradient(135deg, #FF6B6B, #FFD166);">
@@ -804,13 +806,14 @@ function crearSubcontenedoresAudiosUI(contenedor) {
     
     for (let i = 1; i <= 5; i++) {
         const tieneAudio = subcontenedoresDisponibles.includes(i.toString());
-        const subData = obtenerSubcontenedorAudio(contenedor, i);
-        const desc = subData.descripcion || (tieneAudio ? 'Opening disponible' : '(Sin audio configurado)');
+        // USAR LA FUNCIÓN QUE YA TIENES
+        const imagenSubcontenedor = obtenerImagenSubcontenedor(contenedor, i);
+        const desc = tieneAudio ? 'Opening disponible' : '(Sin audio configurado)';
         const audioInfo = tieneAudio ? obtenerAudio(contenedor, i) : null;
         
         html += `
             <div class="subcontenedor-item" onclick="${tieneAudio ? `seleccionarAccionAudio(${contenedor}, ${i})` : `cargarMazosAudios(${contenedor}, ${i})`}">
-                <div class="subcontenedor-img" style="background-image: url('${subData.imagen}')"></div>
+                <div class="subcontenedor-img" style="background-image: url('${imagenSubcontenedor}')"></div>
                 <h3>${tieneAudio ? audioInfo.titulo.split('-')[0] : `Audio ${i}`}</h3>
                 ${tieneAudio ? 
                     `<p><strong>${audioInfo.titulo}</strong></p>
