@@ -856,19 +856,19 @@ const sistemaDescriptivo = {
             // Contenedor 1
             '1_1': { 
                 nombre: 'Opening 1',
-                imagen: 'https://pbs.twimg.com/media/G7whKvWXkAAhMuQ?format=png&name=900x900', 
+                imagen: 'https://pbs.twimg.com/media/G9QqBwpb0AErVWe?format=jpg&name=small', 
                 descripcion: '', 
                 artista: '' 
             },
             '1_2': { 
                 nombre: 'Opening 2',
-                imagen: 'https://pbs.twimg.com/media/G7whKvWXkAAhMuQ?format=png&name=900x900', 
+                imagen: 'https://pbs.twimg.com/media/G9QqBwpb0AErVWe?format=jpg&name=small', 
                 descripcion: '', 
                 artista: '' 
             },
             '1_3': { 
                 nombre: 'Opening 3',
-                imagen: 'https://pbs.twimg.com/media/G7whKvWXkAAhMuQ?format=png&name=900x900', 
+                imagen: 'https://pbs.twimg.com/media/G9QqBwpb0AErVWe?format=jpg&name=small', 
                 descripcion: '', 
                 artista: '' 
             },
