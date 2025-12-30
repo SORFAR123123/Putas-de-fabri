@@ -766,7 +766,110 @@ const vocabularioDatabase = {
         { japones: '象徴', lectura: 'shouchou', opciones: ['Símbolo', 'Personaje', 'Escenario', 'Diálogo'], respuesta: 0 },
         { japones: 'モチーフ', lectura: 'mochiifu', opciones: ['Motivo recurrente', 'Personaje principal', 'Título', 'Autor'], respuesta: 0 }
     ]
-}
+},
+ // ================================================
+    // CONTENEDOR 3 (NUEVO)
+    // ================================================
+    
+// Sub-contenedor 3.1 (NUEVO)
+'sub3_1': {
+    // MAZOS NORMALES
+    1: [
+        { japones: '小説', lectura: 'shousetsu', opciones: ['Novela', 'Poesía', 'Ensayo', 'Teatro'], respuesta: 0 },
+        { japones: '現代の', lectura: 'gendai no', opciones: ['Contemporáneo/moderno', 'Antiguo', 'Futurista', 'Medieval'], respuesta: 0 },
+        { japones: '正社員', lectura: 'seishain', opciones: ['Empleado fijo', 'Empleado temporal', 'Freelance', 'Desempleado'], respuesta: 0 },
+        { japones: '通して', lectura: 'tooshite', opciones: ['A través de/por medio de', 'A pesar de', 'Debido a', 'Antes de'], respuesta: 0 },
+        { japones: '疑問に思いました', lectura: 'gimon ni omoimashita', opciones: ['Me pregunté/tuve dudas', 'Estaba seguro', 'Me emocioné', 'Me asusté'], respuesta: 0 },
+        { japones: '共感できる', lectura: 'kyoukan dekiru', opciones: ['Poder identificarse con', 'No entender', 'Discrepar', 'Ignorar'], respuesta: 0 },
+        { japones: '扱っている', lectura: 'atsukatteiru', opciones: ['Tratando/manejando', 'Ignorando', 'Destruyendo', 'Creando'], respuesta: 0 },
+        { japones: '挟まれ', lectura: 'hasamare', opciones: ['Estar atrapado entre', 'Ser liberado de', 'Elevarse por encima', 'Separarse de'], respuesta: 0 },
+        { japones: '性夜', lectura: 'seiya', opciones: ['Noche sexual', 'Día de trabajo', 'Mañana tranquila', 'Tarde lluviosa'], respuesta: 0 },
+        { japones: '様々な', lectura: 'samazama na', opciones: ['Varios/diversos', 'Único', 'Pocos', 'Similares'], respuesta: 0 }
+    ],
+    
+    // MAZO 2 - Palabras nuevas (parte 1)
+    2: [
+        { japones: '新刊', lectura: 'shinkan', opciones: ['Nueva publicación', 'Libro antiguo', 'Artículo usado', 'Borrador'], respuesta: 0 },
+        { japones: 'かなり', lectura: 'kanari', opciones: ['Bastante / Muy', 'Un poco', 'Casi no', 'Absolutamente'], respuesta: 0 },
+        { japones: '厳しい', lectura: 'kibishii', opciones: ['Estricto / Difícil / Ajustado', 'Fácil', 'Flexible', 'Generoso'], respuesta: 0 },
+        { japones: '間に', lectura: 'mani', opciones: ['A tiempo', 'Tarde', 'Demasiado pronto', 'Fuera de plazo'], respuesta: 0 },
+        { japones: '合わなかった', lectura: 'awanakatta', opciones: ['No llegó / No coincidió', 'Llegó perfecto', 'Se retrasó', 'Se canceló'], respuesta: 0 },
+        { japones: '場合', lectura: 'baai', opciones: ['Caso / Situación', 'Excepción', 'Regla', 'Problema'], respuesta: 0 },
+        { japones: 'マシ', lectura: 'mashi', opciones: ['Mejor (que nada)', 'Peor', 'Igual', 'Inaceptable'], respuesta: 0 },
+        { japones: '現状', lectura: 'genjō', opciones: ['Situación actual', 'Situación pasada', 'Expectativas futuras', 'Plan ideal'], respuesta: 0 },
+        { japones: 'お見せ', lectura: 'o mise', opciones: ['Mostrar (honorífico)', 'Esconder', 'Regalar', 'Vender'], respuesta: 0 },
+        { japones: '準備本', lectura: 'junbi bon', opciones: ['Libro de preparación', 'Libro final', 'Libro de muestra', 'Libro digital'], respuesta: 0 }
+    ],
+    
+    // MAZO 3 - Palabras nuevas (parte 2)
+    3: [
+        { japones: '部数', lectura: 'busū', opciones: ['Número de copias', 'Número de páginas', 'Número de capítulos', 'Número de autores'], respuesta: 0 },
+        { japones: '少なめ', lectura: 'sukuname', opciones: ['Pocas / En cantidad reducida', 'Abundante', 'Exacto', 'Limitado'], respuesta: 0 },
+        { japones: '持っていきます', lectura: 'motte ikimasu', opciones: ['Llevaré / Iré llevando', 'Dejaré', 'Olvidaré', 'Enviaré'], respuesta: 0 },
+        { japones: '完成', lectura: 'kansei', opciones: ['Completado / Terminado', 'Empezado', 'Cancelado', 'Pospuesto'], respuesta: 0 },
+        { japones: '通販', lectura: 'tsūhan', opciones: ['Venta por correo / Online', 'Venta en tienda', 'Subasta', 'Alquiler'], respuesta: 0 },
+        { japones: 'お求め', lectura: 'o motome', opciones: ['Buscar / Querer comprar (honorífico)', 'Regatear', 'Devolver', 'Reservar'], respuesta: 0 },
+        { japones: 'そちら', lectura: 'sochira', opciones: ['Eso / Allí', 'Aquí / Esto', 'Más allá', 'En todas partes'], respuesta: 0 },
+        { japones: 'ご利用', lectura: 'go riyō', opciones: ['Usar (honorífico)', 'Descartar', 'Compartir', 'Guardar'], respuesta: 0 }
+    ],
+4: [
+        { japones: 'モテモテ', lectura: 'motemote', opciones: ['Muy popular (con el sexo opuesto)', 'Impopular', 'Promedio', 'Famoso profesionalmente'], respuesta: 0 },
+        { japones: '帰省', lectura: 'kisei', opciones: ['Regreso a casa (por vacaciones)', 'Viaje de negocios', 'Viaje al extranjero', 'Excursión'], respuesta: 0 },
+        { japones: '更新', lectura: 'kōshin', opciones: ['Actualización', 'Cancelación', 'Suspensión', 'Creación inicial'], respuesta: 0 },
+        { japones: '概念', lectura: 'gainen', opciones: ['Concepto', 'Detalle', 'Ejemplo', 'Realidad concreta'], respuesta: 0 },
+        { japones: '会場', lectura: 'kaijō', opciones: ['Recinto / Lugar del evento', 'Oficina', 'Casa', 'Tienda'], respuesta: 0 },
+        { japones: '頒布', lectura: 'hanpu', opciones: ['Distribución (especialmente doujinshi)', 'Venta minorista', 'Alquiler', 'Subasta'], respuesta: 0 },
+        { japones: '脱稿', lectura: 'dakkō', opciones: ['Finalización del manuscrito', 'Comienzo del manuscrito', 'Corrección de pruebas', 'Publicación'], respuesta: 0 },
+        { japones: '正月', lectura: 'shōgatsu', opciones: ['Año Nuevo japonés', 'Navidad', 'Verano', 'Otoño'], respuesta: 0 },
+        { japones: '返上', lectura: 'henjō', opciones: ['Renunciar a / Sacrificar', 'Aceptar', 'Aumentar', 'Mantener'], respuesta: 0 },
+        { japones: '報告', lectura: 'hōkoku', opciones: ['Reporte / Informe', 'Propuesta', 'Pregunta', 'Queja'], respuesta: 0 }
+    ],
+    
+    // MAZO 5 - Nuevas palabras (parte 2)
+    5: [
+        { japones: '表紙', lectura: 'hyōshi', opciones: ['Portada', 'Contraportada', 'Página interior', 'Sobrecubierta'], respuesta: 0 },
+        { japones: '雰囲気', lectura: 'fun\'iki', opciones: ['Atmósfera / Ambiente', 'Estructura', 'Contenido', 'Precio'], respuesta: 0 },
+        { japones: '人気', lectura: 'ninki', opciones: ['Popularidad', 'Odio', 'Indiferencia', 'Controversia'], respuesta: 0 },
+        { japones: '締切', lectura: 'shimekiri', opciones: ['Fecha límite', 'Fecha de inicio', 'Fecha de publicación', 'Fecha de revisión'], respuesta: 0 },
+        { japones: '同人誌', lectura: 'dōjinshi', opciones: ['Doujinshi (publicación amateur)', 'Revista comercial', 'Libro de texto', 'Periódico'], respuesta: 0 },
+        { japones: '即売会', lectura: 'sokubaikai', opciones: ['Venta directa en evento', 'Venta online', 'Venta por catálogo', 'Subasta'], respuesta: 0 },
+        { japones: '原稿', lectura: 'genkō', opciones: ['Manuscrito original', 'Copia impresa', 'Versión digital', 'Borrador'], respuesta: 0 },
+        { japones: '出版社', lectura: 'shuppansha', opciones: ['Editorial', 'Librería', 'Biblioteca', 'Impresora'], respuesta: 0 },
+        { japones: '読者', lectura: 'dokusha', opciones: ['Lector', 'Autor', 'Editor', 'Crítico'], respuesta: 0 },
+        { japones: '評価', lectura: 'hyōka', opciones: ['Evaluación / Crítica', 'Venta', 'Producción', 'Distribución'], respuesta: 0 }
+    ],
+    
+    // MAZO 6 - Nuevas palabras (parte 3 - vocabulario editorial adicional)
+    6: [
+        { japones: '校了', lectura: 'kōryō', opciones: ['Finalización de correcciones', 'Inicio de escritura', 'Primer borrador', 'Distribución'], respuesta: 0 },
+        { japones: '初版', lectura: 'shohan', opciones: ['Primera edición', 'Reimpresión', 'Edición especial', 'Edición digital'], respuesta: 0 },
+        { japones: '重版', lectura: 'jūhan', opciones: ['Reimpresión', 'Primera edición', 'Edición agotada', 'Cancelación'], respuesta: 0 },
+        { japones: '帯', lectura: 'obi', opciones: ['Faja del libro', 'Portada', 'Lomo', 'Contraportada'], respuesta: 0 },
+        { japones: '宣伝', lectura: 'senden', opciones: ['Publicidad / Promoción', 'Producción', 'Distribución', 'Venta'], respuesta: 0 },
+        { japones: '印税', lectura: 'inzei', opciones: ['Regalías (del autor)', 'Salario fijo', 'Pago por proyecto', 'Donación'], respuesta: 0 },
+        { japones: '文庫', lectura: 'bunko', opciones: ['Edición de bolsillo', 'Edición de lujo', 'Edición digital', 'Edición limitada'], respuesta: 0 },
+        { japones: '新書', lectura: 'shinsho', opciones: ['Libro nuevo / Formato específico', 'Libro usado', 'Revista', 'Periódico'], respuesta: 0 },
+        { japones: '単行本', lectura: 'tankōbon', opciones: ['Volumen individual', 'Serie completa', 'Revista', 'E-book'], respuesta: 0 },
+        { japones: '書店', lectura: 'shoten', opciones: ['Librería', 'Biblioteca', 'Editorial', 'Imprenta'], respuesta: 0 }
+    ],
+    
+    // ====================
+    // MAZOS DIFÍCILES ESPECIALES - Subcontenedor 2.1
+    // ====================
+    
+    'D1': [
+        { japones: '文学用語', lectura: 'bungaku yougo', opciones: ['Términos literarios', 'Términos científicos', 'Jerga juvenil', 'Términos técnicos'], respuesta: 0 },
+        { japones: '比喩表現', lectura: 'hiyu hyougen', opciones: ['Expresiones metafóricas', 'Expresiones literales', 'Expresiones coloquiales', 'Expresiones formales'], respuesta: 0 },
+        { japones: '心理描写', lectura: 'shinri byousha', opciones: ['Descripción psicológica', 'Descripción física', 'Descripción ambiental', 'Descripción histórica'], respuesta: 0 },
+        { japones: '登場人物', lectura: 'toujou jinbutsu', opciones: ['Personajes de la obra', 'Autores', 'Editores', 'Críticos'], respuesta: 0 },
+        { japones: '物語構造', lectura: 'monogatari kouzou', opciones: ['Estructura narrativa', 'Diseño de portada', 'Tipo de letra', 'Formato de publicación'], respuesta: 0 },
+        { japones: '社会批判', lectura: 'shakai hihan', opciones: ['Crítica social', 'Elogio social', 'Indiferencia social', 'Participación social'], respuesta: 0 },
+        { japones: '文体', lectura: 'buntai', opciones: ['Estilo de escritura', 'Contenido', 'Tema', 'Longitud'], respuesta: 0 },
+        { japones: '視点', lectura: 'shiten', opciones: ['Punto de vista', 'Conclusión', 'Introducción', 'Epílogo'], respuesta: 0 },
+        { japones: '象徴', lectura: 'shouchou', opciones: ['Símbolo', 'Personaje', 'Escenario', 'Diálogo'], respuesta: 0 },
+        { japones: 'モチーフ', lectura: 'mochiifu', opciones: ['Motivo recurrente', 'Personaje principal', 'Título', 'Autor'], respuesta: 0 }
+    ]
+}    
 };
 
 
