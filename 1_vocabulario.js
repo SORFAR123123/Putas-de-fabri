@@ -800,64 +800,6 @@ const vocabularioDatabase = {
         { japones: '企画', lectura: 'kikaku', opciones: ['Proyecto / Planning', 'Ejecución', 'Evaluación', 'Cancelación'], respuesta: 0 },
         { japones: '竿役', lectura: 'saoyaku', opciones: ['Actor masculino en AV', 'Actor de teatro', 'Actor de cine', 'Actor de voz'], respuesta: 0 }
     ],
-    
-    // MAZO 3 - Vacío (manteniendo estructura vacía)
-    3: [
-        { japones: '', lectura: '', opciones: ['', '', '', ''], respuesta: 0 },
-        { japones: '', lectura: '', opciones: ['', '', '', ''], respuesta: 0 },
-        { japones: '', lectura: '', opciones: ['', '', '', ''], respuesta: 0 },
-        { japones: '', lectura: '', opciones: ['', '', '', ''], respuesta: 0 },
-        { japones: '', lectura: '', opciones: ['', '', '', ''], respuesta: 0 },
-        { japones: '', lectura: '', opciones: ['', '', '', ''], respuesta: 0 },
-        { japones: '', lectura: '', opciones: ['', '', '', ''], respuesta: 0 },
-        { japones: '', lectura: '', opciones: ['', '', '', ''], respuesta: 0 },
-        { japones: '', lectura: '', opciones: ['', '', '', ''], respuesta: 0 },
-        { japones: '', lectura: '', opciones: ['', '', '', ''], respuesta: 0 }
-    ],
-    
-    // MAZO 4 - Vacío
-    4: [
-        { japones: '', lectura: '', opciones: ['', '', '', ''], respuesta: 0 },
-        { japones: '', lectura: '', opciones: ['', '', '', ''], respuesta: 0 },
-        { japones: '', lectura: '', opciones: ['', '', '', ''], respuesta: 0 },
-        { japones: '', lectura: '', opciones: ['', '', '', ''], respuesta: 0 },
-        { japones: '', lectura: '', opciones: ['', '', '', ''], respuesta: 0 },
-        { japones: '', lectura: '', opciones: ['', '', '', ''], respuesta: 0 },
-        { japones: '', lectura: '', opciones: ['', '', '', ''], respuesta: 0 },
-        { japones: '', lectura: '', opciones: ['', '', '', ''], respuesta: 0 },
-        { japones: '', lectura: '', opciones: ['', '', '', ''], respuesta: 0 },
-        { japones: '', lectura: '', opciones: ['', '', '', ''], respuesta: 0 }
-    ],
-    
-    // MAZO 5 - Vacío
-    5: [
-        { japones: '', lectura: '', opciones: ['', '', '', ''], respuesta: 0 },
-        { japones: '', lectura: '', opciones: ['', '', '', ''], respuesta: 0 },
-        { japones: '', lectura: '', opciones: ['', '', '', ''], respuesta: 0 },
-        { japones: '', lectura: '', opciones: ['', '', '', ''], respuesta: 0 },
-        { japones: '', lectura: '', opciones: ['', '', '', ''], respuesta: 0 },
-        { japones: '', lectura: '', opciones: ['', '', '', ''], respuesta: 0 },
-        { japones: '', lectura: '', opciones: ['', '', '', ''], respuesta: 0 },
-        { japones: '', lectura: '', opciones: ['', '', '', ''], respuesta: 0 },
-        { japones: '', lectura: '', opciones: ['', '', '', ''], respuesta: 0 },
-        { japones: '', lectura: '', opciones: ['', '', '', ''], respuesta: 0 }
-    ],
-    
-    // MAZO 6 - Vacío
-    6: [
-        { japones: '', lectura: '', opciones: ['', '', '', ''], respuesta: 0 },
-        { japones: '', lectura: '', opciones: ['', '', '', ''], respuesta: 0 },
-        { japones: '', lectura: '', opciones: ['', '', '', ''], respuesta: 0 },
-        { japones: '', lectura: '', opciones: ['', '', '', ''], respuesta: 0 },
-        { japones: '', lectura: '', opciones: ['', '', '', ''], respuesta: 0 },
-        { japones: '', lectura: '', opciones: ['', '', '', ''], respuesta: 0 },
-        { japones: '', lectura: '', opciones: ['', '', '', ''], respuesta: 0 },
-        { japones: '', lectura: '', opciones: ['', '', '', ''], respuesta: 0 },
-        { japones: '', lectura: '', opciones: ['', '', '', ''], respuesta: 0 },
-        { japones: '', lectura: '', opciones: ['', '', '', ''], respuesta: 0 }
-    ]
-},
-    
     // ====================
     // MAZOS DIFÍCILES ESPECIALES - Subcontenedor 3.1
     // ====================
@@ -874,7 +816,7 @@ const vocabularioDatabase = {
         { japones: '象徴', lectura: 'shouchou', opciones: ['Símbolo', 'Personaje', 'Escenario', 'Diálogo'], respuesta: 0 },
         { japones: 'モチーフ', lectura: 'mochiifu', opciones: ['Motivo recurrente', 'Personaje principal', 'Título', 'Autor'], respuesta: 0 }
     ]
-},    
+}    
 };
 
 
