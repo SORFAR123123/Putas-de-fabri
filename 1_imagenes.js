@@ -22,8 +22,8 @@ const sistemaDescriptivo = {
                 tipo: 'manga'
             },
             3: { 
-                nombre: 'CONTAINER 3',
-                imagen: 'https://pbs.twimg.com/profile_banners/255188747/1744818853/1500x500', 
+                nombre: ' Hentais xD',
+                imagen: 'https://i4.nhentai.net/galleries/3711976/1.webp', 
                 descripcion: 'Contenedor de mangas shonen',
                 tipo: 'shonen'
             },
@@ -139,8 +139,8 @@ const sistemaDescriptivo = {
             
             // Contenedor 3
             '3_1': { 
-                nombre: 'Sub-contenedor 1',
-                imagen: '', 
+                nombre: '妹の同級生が推しのKカップ配信者で竿役に選ばれてしまった僕1',
+                imagen: 'https://i1.nhentai.net/galleries/3711976/2.webp', 
                 descripcion: '', 
                 nivel: '' 
             },
