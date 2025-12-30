@@ -854,7 +854,7 @@ const vocabularioDatabase = {
         { japones: '間違い', lectura: 'machigai', opciones: ['Error', 'Acierto', 'Duda', 'Certera'], respuesta: 0 }
     
     ],
-},
+
     // ====================
     // MAZOS DIFÍCILES ESPECIALES - Subcontenedor 3.1
     // ====================
