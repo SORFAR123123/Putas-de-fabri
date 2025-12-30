@@ -874,7 +874,7 @@ const vocabularioDatabase = {
         { japones: '象徴', lectura: 'shouchou', opciones: ['Símbolo', 'Personaje', 'Escenario', 'Diálogo'], respuesta: 0 },
         { japones: 'モチーフ', lectura: 'mochiifu', opciones: ['Motivo recurrente', 'Personaje principal', 'Título', 'Autor'], respuesta: 0 }
     ]
-}    
+},    
 };
 
 
