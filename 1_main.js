@@ -15,8 +15,813 @@ let modoMazoDificil = false;
 let palabrasDificilesQuiz = [];
 
 // Variables para videos y animes
-let modoActual = 'manga'; // 'manga', 'video', 'anime', 'audio', 'asmr', 'rpg', 'misiones', 'fantasia'
+let modoActual = 'manga'; // 'manga', 'video', 'anime', 'audio', 'asmr', 'rpg', 'misiones', 'fantasia', 'srs'
 let idiomaVideoActual = 'espanol'; // 'espanol', 'japones'
+
+// ====================
+// NUEVO: SISTEMA SRS (Spaced Repetition System)
+// ====================
+
+// Almacenamiento local para palabras SRS
+let srsDatabase = {
+    palabras: [], // Array de objetos palabra SRS
+    estadisticas: {
+        totalAprendidas: 0,
+        totalRepasadas: 0,
+        proximaRepeticion: null,
+        rachaActual: 0,
+        mejorRacha: 0
+    }
+};
+
+// Inicializar SRS desde localStorage
+function inicializarSRS() {
+    const savedSRS = localStorage.getItem('japonesSRS');
+    if (savedSRS) {
+        srsDatabase = JSON.parse(savedSRS);
+        console.log('📊 SRS cargado:', srsDatabase.palabras.length, 'palabras');
+    }
+    
+    // Verificar repeticiones pendientes
+    verificarRepeticionesPendientes();
+}
+
+// Guardar SRS en localStorage
+function guardarSRS() {
+    localStorage.setItem('japonesSRS', JSON.stringify(srsDatabase));
+    console.log('💾 SRS guardado:', srsDatabase.palabras.length, 'palabras');
+}
+
+// Agregar palabra al sistema SRS cuando se falla
+function agregarPalabraSRS(palabraData) {
+    // Verificar si ya existe
+    const existe = srsDatabase.palabras.some(p => 
+        p.japones === palabraData.japones && 
+        p.contenedor === palabraData.contenedor &&
+        p.subcontenedor === palabraData.subcontenedor &&
+        p.mazo === palabraData.mazo
+    );
+    
+    if (existe) {
+        console.log('⚠️ Palabra ya está en SRS:', palabraData.japones);
+        return false;
+    }
+    
+    // Crear objeto palabra SRS
+    const palabraSRS = {
+        id: Date.now() + Math.random(),
+        japones: palabraData.japones,
+        lectura: palabraData.lectura,
+        significado: palabraData.significado,
+        opciones: palabraData.opciones,
+        respuesta: palabraData.respuesta,
+        
+        // Metadatos de origen
+        contenedor: palabraData.contenedor,
+        subcontenedor: palabraData.subcontenedor,
+        mazo: palabraData.mazo,
+        fechaAgregada: new Date().toISOString(),
+        
+        // Sistema de repeticiones
+        nivel: 0, // 0=nueva, 1=fácil, 2=medio, 3=dura
+        siguienteRepeticion: new Date().toISOString(), // Repetir en 1 hora
+        intervalo: 1, // horas hasta próxima repetición
+        repeticiones: 0,
+        fallos: 0,
+        aciertosConsecutivos: 0,
+        
+        // Estadísticas
+        ultimaRevision: null,
+        facilidad: 2.5, // Factor de facilidad (2.5 = estándar)
+        tiempoEstudio: 0 // segundos totales estudiando esta palabra
+    };
+    
+    srsDatabase.palabras.push(palabraSRS);
+    srsDatabase.estadisticas.totalRepasadas++;
+    
+    // Actualizar próxima repetición más temprana
+    actualizarProximaRepeticionSRS();
+    
+    guardarSRS();
+    
+    console.log('✅ Palabra agregada a SRS:', palabraData.japones);
+    mostrarNotificacionSRS(`📝 "${palabraData.japones}" agregada al SRS`);
+    
+    return true;
+}
+
+// Actualizar próxima repetición más temprana
+function actualizarProximaRepeticionSRS() {
+    const palabrasPendientes = srsDatabase.palabras.filter(p => 
+        new Date(p.siguienteRepeticion) <= new Date()
+    );
+    
+    if (palabrasPendientes.length > 0) {
+        // Ordenar por fecha más antigua
+        palabrasPendientes.sort((a, b) => 
+            new Date(a.siguienteRepeticion) - new Date(b.siguienteRepeticion)
+        );
+        srsDatabase.estadisticas.proximaRepeticion = palabrasPendientes[0].siguienteRepeticion;
+    } else {
+        srsDatabase.estadisticas.proximaRepeticion = null;
+    }
+}
+
+// Verificar repeticiones pendientes
+function verificarRepeticionesPendientes() {
+    const ahora = new Date();
+    const palabrasPendientes = srsDatabase.palabras.filter(p => 
+        new Date(p.siguienteRepeticion) <= ahora
+    );
+    
+    if (palabrasPendientes.length > 0) {
+        console.log('⏰ SRS: Hay', palabrasPendientes.length, 'palabras para repasar');
+        mostrarNotificacionSRS(`⏰ ${palabrasPendientes.length} palabras pendientes en SRS`);
+    }
+    
+    return palabrasPendientes.length;
+}
+
+// Obtener palabras para repasar ahora
+function obtenerPalabrasParaRepasar() {
+    const ahora = new Date();
+    return srsDatabase.palabras.filter(p => 
+        new Date(p.siguienteRepeticion) <= ahora
+    ).sort((a, b) => 
+        new Date(a.siguienteRepeticion) - new Date(b.siguienteRepeticion)
+    );
+}
+
+// Calcular siguiente intervalo basado en respuesta
+function calcularSiguienteIntervalo(palabra, calidad) {
+    // Calidad: 0=olvidado, 1=difícil, 2=regular, 3=fácil, 4=muy fácil
+    
+    if (calidad < 3) {
+        // Falló o fue difícil, repetir pronto
+        palabra.nivel = Math.max(0, palabra.nivel - 1);
+        palabra.aciertosConsecutivos = 0;
+        palabra.fallos++;
+        
+        if (calidad === 0) {
+            // Olvidado completamente, empezar de nuevo
+            return 0.0167; // 1 minuto
+        } else if (calidad === 1) {
+            return 0.0833; // 5 minutos
+        } else {
+            return 0.25; // 15 minutos
+        }
+    } else {
+        // Acertó
+        palabra.aciertosConsecutivos++;
+        palabra.repeticiones++;
+        
+        if (palabra.nivel === 0) {
+            // Primera vez que acierta
+            palabra.nivel = 1;
+            return 1; // 1 hora
+        } else if (palabra.nivel === 1) {
+            palabra.nivel = 2;
+            return 6; // 6 horas
+        } else if (palabra.nivel === 2) {
+            palabra.nivel = 3;
+            return 24; // 1 día
+        } else if (palabra.nivel === 3) {
+            return 72; // 3 días
+        } else if (palabra.nivel === 4) {
+            return 168; // 1 semana
+        } else if (palabra.nivel === 5) {
+            return 336; // 2 semanas
+        } else {
+            // Nivel 6+
+            return 720; // 1 mes
+        }
+    }
+}
+
+// Procesar respuesta en SRS
+function procesarRespuestaSRS(palabra, acerto) {
+    const calidad = acerto ? 4 : 1; // 4=muy fácil (si acertó), 1=difícil (si falló)
+    
+    // Calcular nuevo intervalo
+    const intervaloHoras = calcularSiguienteIntervalo(palabra, calidad);
+    
+    // Calcular nueva fecha de repetición
+    const ahora = new Date();
+    palabra.ultimaRevision = ahora.toISOString();
+    palabra.siguienteRepeticion = new Date(ahora.getTime() + intervaloHoras * 60 * 60 * 1000).toISOString();
+    
+    // Actualizar estadísticas
+    if (acerto) {
+        palabra.aciertosConsecutivos++;
+        if (palabra.aciertosConsecutivos > 5 && palabra.nivel >= 3) {
+            // Palabra dominada, marcar como aprendida
+            srsDatabase.estadisticas.totalAprendidas++;
+            mostrarNotificacionSRS(`🎉 ¡Dominaste "${palabra.japones}"!`);
+        }
+    } else {
+        palabra.fallos++;
+    }
+    
+    // Actualizar racha
+    if (acerto) {
+        srsDatabase.estadisticas.rachaActual++;
+        if (srsDatabase.estadisticas.rachaActual > srsDatabase.estadisticas.mejorRacha) {
+            srsDatabase.estadisticas.mejorRacha = srsDatabase.estadisticas.rachaActual;
+        }
+    } else {
+        srsDatabase.estadisticas.rachaActual = 0;
+    }
+    
+    // Actualizar próxima repetición
+    actualizarProximaRepeticionSRS();
+    
+    guardarSRS();
+    
+    return intervaloHoras;
+}
+
+// Eliminar palabra del SRS (cuando se domina)
+function eliminarPalabraSRS(id) {
+    const index = srsDatabase.palabras.findIndex(p => p.id === id);
+    if (index !== -1) {
+        srsDatabase.palabras.splice(index, 1);
+        guardarSRS();
+        return true;
+    }
+    return false;
+}
+
+// ====================
+// NUEVO: INTERFAZ SRS
+// ====================
+
+function cargarPaginaSRS() {
+    modoActual = 'srs';
+    modoMazoDificil = false;
+    ocultarHeader();
+    
+    const mangaSection = document.getElementById('manga-section');
+    mangaSection.style.display = 'block';
+    mangaSection.innerHTML = crearUISRS();
+    
+    const botonVolver = crearBotonVolver(volverAlInicio);
+    mangaSection.insertBefore(botonVolver, mangaSection.firstChild);
+}
+
+function crearUISRS() {
+    const palabrasParaRepasar = obtenerPalabrasParaRepasar();
+    const totalPalabras = srsDatabase.palabras.length;
+    const aprendidas = srsDatabase.estadisticas.totalAprendidas;
+    
+    let html = `
+        <div style="max-width: 1000px; margin: 0 auto; padding: 20px;">
+            <h1 style="text-align: center; color: #4CAF50; margin-bottom: 10px;">📚 SISTEMA SRS INTENSIVO</h1>
+            <p style="text-align: center; opacity: 0.8; margin-bottom: 30px;">
+                Repetición espaciada para dominar palabras difíciles
+            </p>
+            
+            <!-- RESUMEN ESTADÍSTICAS -->
+            <div style="background: rgba(76, 175, 80, 0.1); border-radius: 15px; padding: 25px; margin-bottom: 30px; border: 2px solid #4CAF50;">
+                <h3 style="color: #4CAF50; margin-bottom: 20px;">📊 ESTADÍSTICAS SRS</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 20px;">
+                    <div style="text-align: center;">
+                        <div style="font-size: 2.5rem; color: #4CAF50; font-weight: bold;">${totalPalabras}</div>
+                        <div style="font-size: 0.9rem; opacity: 0.8;">Palabras en SRS</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 2.5rem; color: #2196F3; font-weight: bold;">${palabrasParaRepasar.length}</div>
+                        <div style="font-size: 0.9rem; opacity: 0.8;">Para repasar ahora</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 2.5rem; color: #FF9800; font-weight: bold;">${aprendidas}</div>
+                        <div style="font-size: 0.9rem; opacity: 0.8;">Dominadas</div>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 2.5rem; color: #9C27B0; font-weight: bold;">${srsDatabase.estadisticas.rachaActual}</div>
+                        <div style="font-size: 0.9rem; opacity: 0.8;">Racha actual</div>
+                    </div>
+                </div>
+                
+                ${palabrasParaRepasar.length > 0 ? 
+                    `<div style="margin-top: 20px; text-align: center;">
+                        <div style="background: #4CAF50; color: white; padding: 10px 20px; border-radius: 50px; display: inline-block; font-weight: bold;">
+                            ⏰ ${palabrasParaRepasar.length} palabras esperando
+                        </div>
+                    </div>` 
+                    : ''}
+            </div>
+            
+            <!-- BOTÓN INICIAR REPASO -->
+            <div style="text-align: center; margin: 30px 0;">
+                <button class="boton-srs-iniciar" onclick="iniciarRepasoSRS()" 
+                        ${palabrasParaRepasar.length === 0 ? 'disabled style="opacity: 0.5; cursor: not-allowed;"' : ''}>
+                    ${palabrasParaRepasar.length === 0 ? 
+                        '✅ No hay palabras para repasar ahora' : 
+                        `🚀 INICIAR REPASO SRS (${palabrasParaRepasar.length} palabras)`}
+                </button>
+                <p style="opacity: 0.7; margin-top: 10px; font-size: 0.9rem;">
+                    El sistema SRS te mostrará palabras en intervalos inteligentes
+                </p>
+            </div>
+            
+            <!-- LISTA DE PALABRAS EN SRS -->
+            <div style="background: rgba(33, 150, 243, 0.1); border-radius: 15px; padding: 25px; margin-bottom: 30px; border: 2px solid #2196F3;">
+                <h3 style="color: #2196F3; margin-bottom: 20px;">
+                    📝 PALABRAS EN SISTEMA SRS
+                    <span style="font-size: 0.9rem; opacity: 0.8; margin-left: 10px;">
+                        Total: ${totalPalabras}
+                    </span>
+                </h3>
+                
+                ${totalPalabras === 0 ? 
+                    `<div style="text-align: center; padding: 40px;">
+                        <div style="font-size: 4rem; opacity: 0.3;">📚</div>
+                        <h4 style="color: #FF9800; margin: 20px 0;">No hay palabras en el SRS</h4>
+                        <p style="opacity: 0.7;">Las palabras que falles en los quizzes se agregarán automáticamente aquí.</p>
+                    </div>` 
+                    : `
+                    <div style="max-height: 400px; overflow-y: auto; padding-right: 10px;">
+                        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 15px;">
+                            ${srsDatabase.palabras.slice(0, 50).map(palabra => {
+                                const siguiente = new Date(palabra.siguienteRepeticion);
+                                const ahora = new Date();
+                                const pendiente = siguiente <= ahora;
+                                const horasRestantes = Math.max(0, (siguiente - ahora) / (1000 * 60 * 60));
+                                
+                                return `
+                                    <div class="palabra-srs-item" style="background: rgba(255,255,255,0.05); border-radius: 10px; padding: 15px; border-left: 5px solid ${pendiente ? '#FF9800' : '#4CAF50'};">
+                                        <div style="font-weight: bold; color: #FFD166; font-size: 1.1rem; margin-bottom: 5px;">
+                                            ${palabra.japones}
+                                        </div>
+                                        <div style="font-size: 0.9rem; opacity: 0.8; margin-bottom: 5px;">
+                                            ${palabra.lectura}
+                                        </div>
+                                        <div style="font-size: 0.9rem; color: #4CAF50; margin-bottom: 10px;">
+                                            ${palabra.significado}
+                                        </div>
+                                        
+                                        <div style="display: flex; justify-content: space-between; font-size: 0.8rem; opacity: 0.7;">
+                                            <div>
+                                                <span style="color: #${palabra.aciertosConsecutivos >= 3 ? '4CAF50' : 'FF9800'};">✓${palabra.aciertosConsecutivos}</span>
+                                                <span style="margin-left: 10px; color: #F44336;">✗${palabra.fallos}</span>
+                                            </div>
+                                            <div style="color: ${pendiente ? '#FF9800' : '#2196F3'}">
+                                                ${pendiente ? '⏰ AHORA' : `en ${Math.round(horasRestantes)}h`}
+                                            </div>
+                                        </div>
+                                        
+                                        <div style="margin-top: 10px; display: flex; gap: 10px;">
+                                            <button class="btn-srs-accion" onclick="eliminarPalabraSRS(${palabra.id}); location.reload();" 
+                                                    style="background: rgba(244, 67, 54, 0.2); color: #F44336; padding: 5px 10px; border-radius: 5px; border: none; font-size: 0.8rem; cursor: pointer;">
+                                                Eliminar
+                                            </button>
+                                            <button class="btn-srs-accion" onclick="repetirPalabraSRS(${palabra.id})" 
+                                                    style="background: rgba(33, 150, 243, 0.2); color: #2196F3; padding: 5px 10px; border-radius: 5px; border: none; font-size: 0.8rem; cursor: pointer;">
+                                                Repetir
+                                            </button>
+                                        </div>
+                                    </div>
+                                `;
+                            }).join('')}
+                        </div>
+                    </div>
+                    
+                    ${totalPalabras > 50 ? 
+                        `<div style="text-align: center; margin-top: 20px; padding: 15px; background: rgba(255,255,255,0.05); border-radius: 10px;">
+                            <p style="opacity: 0.7; font-size: 0.9rem;">
+                                Mostrando 50 de ${totalPalabras} palabras. Continúa practicando para ver más.
+                            </p>
+                        </div>` 
+                        : ''}
+                `}
+            </div>
+            
+            <!-- CÓMO FUNCIONA -->
+            <div style="background: rgba(255, 152, 0, 0.1); border-radius: 15px; padding: 25px; border: 2px solid #FF9800;">
+                <h3 style="color: #FF9800; margin-bottom: 20px;">ℹ️ ¿CÓMO FUNCIONA EL SRS?</h3>
+                
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
+                    <div style="text-align: center;">
+                        <div style="font-size: 2rem; margin-bottom: 10px;">1️⃣</div>
+                        <h4 style="color: #FFD166; margin-bottom: 10px;">Fallar palabra</h4>
+                        <p style="font-size: 0.9rem; opacity: 0.8;">Cuando fallas en un quiz, se agrega automáticamente al SRS</p>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 2rem; margin-bottom: 10px;">2️⃣</div>
+                        <h4 style="color: #FFD166; margin-bottom: 10px;">Repetición inteligente</h4>
+                        <p style="font-size: 0.9rem; opacity: 0.8;">El sistema calcula cuándo la olvidarás y te la muestra justo antes</p>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 2rem; margin-bottom: 10px;">3️⃣</div>
+                        <h4 style="color: #FFD166; margin-bottom: 10px;">Intervalos crecientes</h4>
+                        <p style="font-size: 0.9rem; opacity: 0.8;">1h → 6h → 1d → 3d → 1sem → 1mes</p>
+                    </div>
+                    <div style="text-align: center;">
+                        <div style="font-size: 2rem; margin-bottom: 10px;">4️⃣</div>
+                        <h4 style="color: #FFD166; margin-bottom: 10px;">Dominio completo</h4>
+                        <p style="font-size: 0.9rem; opacity: 0.8;">Después de 5 aciertos seguidos, la palabra se considera dominada</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    `;
+    
+    return html;
+}
+
+// Función para iniciar repaso SRS
+function iniciarRepasoSRS() {
+    const palabrasParaRepasar = obtenerPalabrasParaRepasar();
+    
+    if (palabrasParaRepasar.length === 0) {
+        mostrarNotificacionSRS('✅ No hay palabras para repasar ahora. ¡Buen trabajo!');
+        return;
+    }
+    
+    // Configurar variables para el quiz SRS
+    modoActual = 'srs';
+    palabrasActuales = palabrasParaRepasar.slice(0, 20); // Máximo 20 por sesión
+    indicePalabraActual = 0;
+    aciertos = 0;
+    errores = 0;
+    esperandoSiguiente = false;
+    
+    // Ocultar sección de mangas, mostrar quiz
+    document.getElementById('manga-section').style.display = 'none';
+    document.getElementById('quiz-section').style.display = 'block';
+    
+    // Cargar primera palabra del SRS
+    mostrarPalabraSRS();
+}
+
+// Mostrar palabra en quiz SRS
+function mostrarPalabraSRS() {
+    const quizSection = document.getElementById('quiz-section');
+    const palabra = palabrasActuales[indicePalabraActual];
+    
+    quizSection.innerHTML = `
+        <div class="quiz-container">
+            <h2 style="text-align: center; color: #4CAF50; margin-bottom: 20px;">
+                📚 SRS INTENSIVO • Palabra ${indicePalabraActual + 1}/${palabrasActuales.length}
+                <div style="font-size: 0.9rem; color: #FFD166; margin-top: 5px;">
+                    Nivel ${palabra.nivel} • Aciertos seguidos: ${palabra.aciertosConsecutivos}
+                </div>
+            </h2>
+            
+            <div class="palabra-japonesa" id="palabra-japonesa" style="border-color: #4CAF50;">
+                ${palabra.japones}
+            </div>
+            
+            <div class="romaji-debajo" id="romaji-debajo" style="display: none;">
+                <div class="romaji-text">${palabra.lectura}</div>
+            </div>
+            
+            <div id="opciones-container">
+                <!-- Opciones se cargan dinámicamente -->
+            </div>
+            
+            <!-- INFO PALABRA SRS -->
+            <div style="background: rgba(76, 175, 80, 0.1); border-radius: 10px; padding: 15px; margin: 20px 0; text-align: center;">
+                <div style="display: flex; justify-content: space-around; font-size: 0.9rem;">
+                    <div>
+                        <div style="color: #4CAF50;">Repeticiones</div>
+                        <div style="font-weight: bold;">${palabra.repeticiones}</div>
+                    </div>
+                    <div>
+                        <div style="color: #4CAF50;">Aciertos</div>
+                        <div style="font-weight: bold; color: #4CAF50;">${palabra.aciertosConsecutivos}</div>
+                    </div>
+                    <div>
+                        <div style="color: #F44336;">Fallos</div>
+                        <div style="font-weight: bold; color: #F44336;">${palabra.fallos}</div>
+                    </div>
+                    <div>
+                        <div style="color: #FF9800;">Nivel</div>
+                        <div style="font-weight: bold;">${palabra.nivel}</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="resultado-container" style="display: none;">
+                <!-- Resultado se muestra después de responder -->
+            </div>
+            
+            <div class="quiz-controls">
+                <button class="quiz-btn btn-volver" onclick="cancelarQuizSRS()">
+                    ❌ Cancelar SRS
+                </button>
+            </div>
+        </div>
+    `;
+    
+    // Crear opciones para la palabra SRS
+    crearOpcionesSRS(palabra);
+}
+
+// Crear opciones para palabra SRS
+function crearOpcionesSRS(palabra) {
+    const opcionesContainer = document.getElementById('opciones-container');
+    
+    // Crear opciones falsas (distractores)
+    const opcionesFalsas = [];
+    
+    // Obtener algunas palabras aleatorias del SRS para opciones falsas
+    const otrasPalabras = srsDatabase.palabras
+        .filter(p => p.id !== palabra.id)
+        .sort(() => Math.random() - 0.5)
+        .slice(0, 2)
+        .map(p => p.significado);
+    
+    // Agregar opciones genéricas
+    opcionesFalsas.push(...otrasPalabras);
+    
+    // Si no hay suficientes opciones falsas, agregar algunas genéricas
+    while (opcionesFalsas.length < 3) {
+        opcionesFalsas.push(getSignificadoAleatorio());
+    }
+    
+    // Mezclar todas las opciones
+    const todasOpciones = [palabra.significado, ...opcionesFalsas.slice(0, 3)];
+    for (let i = todasOpciones.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [todasOpciones[i], todasOpciones[j]] = [todasOpciones[j], todasOpciones[i]];
+    }
+    
+    const posicionCorrecta = todasOpciones.indexOf(palabra.significado);
+    
+    opcionesContainer.innerHTML = `
+        <div class="opciones-grid">
+            <div class="opcion-fila">
+                <button class="opcion-btn" onclick="verificarRespuestaSRS(0, ${posicionCorrecta})" style="border-color: #4CAF50;">
+                    ${todasOpciones[0]}
+                </button>
+                <button class="opcion-btn" onclick="verificarRespuestaSRS(1, ${posicionCorrecta})" style="border-color: #4CAF50;">
+                    ${todasOpciones[1]}
+                </button>
+            </div>
+            <div class="opcion-fila">
+                <button class="opcion-btn" onclick="verificarRespuestaSRS(2, ${posicionCorrecta})" style="border-color: #4CAF50;">
+                    ${todasOpciones[2]}
+                </button>
+                <button class="opcion-btn" onclick="verificarRespuestaSRS(3, ${posicionCorrecta})" style="border-color: #4CAF50;">
+                    ${todasOpciones[3]}
+                </button>
+            </div>
+        </div>
+    `;
+}
+
+// Verificar respuesta en SRS
+function verificarRespuestaSRS(opcionSeleccionada, posicionCorrecta) {
+    if (esperandoSiguiente) return;
+    
+    const palabra = palabrasActuales[indicePalabraActual];
+    const opcionesBtns = document.querySelectorAll('.opcion-btn');
+    const correcta = opcionSeleccionada === posicionCorrecta;
+    
+    const romajiDebajo = document.getElementById('romaji-debajo');
+    romajiDebajo.style.display = 'block';
+    
+    opcionesBtns.forEach((btn, index) => {
+        if (index === posicionCorrecta) {
+            btn.classList.add('correcta');
+        } else if (index === opcionSeleccionada && !correcta) {
+            btn.classList.add('incorrecta');
+        }
+        btn.disabled = true;
+    });
+    
+    const resultadoContainer = document.getElementById('resultado-container');
+    resultadoContainer.style.display = 'block';
+    resultadoContainer.innerHTML = `
+        <div class="romaji-container">
+            <p style="margin-top: 10px; opacity: 0.8; font-size: 1.2rem;">
+                ${correcta ? '✅ ¡Correcto!' : '❌ Incorrecto'}
+            </p>
+            <p style="margin-top: 10px; font-size: 1.1rem; color: #FFD166;">
+                ${palabra.lectura}
+            </p>
+            <p style="margin-top: 5px; font-size: 1rem; color: #4CAF50;">
+                Significado: ${palabra.significado}
+            </p>
+        </div>
+    `;
+    
+    // Procesar respuesta en el sistema SRS
+    const intervaloHoras = procesarRespuestaSRS(palabra, correcta);
+    
+    if (correcta) {
+        aciertos++;
+        mostrarNotificacionSRS(`✅ ¡Correcto! Próxima repetición en ${intervaloHoras >= 24 ? Math.round(intervaloHoras/24) + ' días' : Math.round(intervaloHoras) + ' horas'}`);
+    } else {
+        errores++;
+        mostrarNotificacionSRS(`❌ Fallaste. Repetirás en ${Math.round(intervaloHoras*60)} minutos`);
+    }
+    
+    const controls = document.querySelector('.quiz-controls');
+    controls.innerHTML = '';
+    
+    // Crear botones de calidad para SRS
+    if (correcta) {
+        controls.innerHTML = `
+            <div style="display: flex; gap: 10px; justify-content: center;">
+                <button class="quiz-btn" onclick="calidadRespuestaSRS(3)" style="background: #4CAF50;">
+                    😊 Fácil
+                </button>
+                <button class="quiz-btn" onclick="calidadRespuestaSRS(4)" style="background: #2196F3;">
+                    😄 Muy fácil
+                </button>
+            </div>
+            <button class="quiz-btn btn-siguiente" onclick="pasarSiguientePalabraSRS()">
+                ⏭️ Siguiente Palabra
+            </button>
+        `;
+    } else {
+        controls.innerHTML = `
+            <div style="display: flex; gap: 10px; justify-content: center;">
+                <button class="quiz-btn" onclick="calidadRespuestaSRS(0)" style="background: #F44336;">
+                    😞 Olvidado
+                </button>
+                <button class="quiz-btn" onclick="calidadRespuestaSRS(1)" style="background: #FF9800;">
+                    😓 Difícil
+                </button>
+            </div>
+            <button class="quiz-btn btn-siguiente" onclick="pasarSiguientePalabraSRS()">
+                ⏭️ Siguiente Palabra
+            </button>
+        `;
+    }
+    
+    esperandoSiguiente = true;
+}
+
+// Calidad de respuesta para SRS (más preciso)
+function calidadRespuestaSRS(calidad) {
+    const palabra = palabrasActuales[indicePalabraActual];
+    
+    // Recalcular intervalo basado en calidad específica
+    const intervaloHoras = calcularSiguienteIntervalo(palabra, calidad);
+    
+    // Actualizar palabra
+    const ahora = new Date();
+    palabra.ultimaRevision = ahora.toISOString();
+    palabra.siguienteRepeticion = new Date(ahora.getTime() + intervaloHoras * 60 * 60 * 1000).toISOString();
+    
+    guardarSRS();
+    
+    let mensaje = '';
+    switch(calidad) {
+        case 0: mensaje = '😞 Olvidado completamente'; break;
+        case 1: mensaje = '😓 Difícil'; break;
+        case 3: mensaje = '😊 Fácil'; break;
+        case 4: mensaje = '😄 Muy fácil'; break;
+    }
+    
+    mostrarNotificacionSRS(`${mensaje} - Próxima en ${intervaloHoras >= 24 ? Math.round(intervaloHoras/24) + ' días' : Math.round(intervaloHoras) + ' horas'}`);
+}
+
+// Pasar a siguiente palabra en SRS
+function pasarSiguientePalabraSRS() {
+    indicePalabraActual++;
+    
+    if (indicePalabraActual < palabrasActuales.length) {
+        esperandoSiguiente = false;
+        mostrarPalabraSRS();
+    } else {
+        finalizarSRS();
+    }
+}
+
+// Finalizar sesión SRS
+function finalizarSRS() {
+    const porcentaje = Math.round((aciertos / palabrasActuales.length) * 100);
+    
+    document.getElementById('quiz-section').innerHTML = `
+        <div class="quiz-container">
+            <h2 style="text-align: center; color: #4CAF50;">🎉 SESIÓN SRS COMPLETADA</h2>
+            
+            <div style="text-align: center; margin: 40px 0;">
+                <div style="font-size: 4rem; margin-bottom: 20px; color: #4CAF50;">${porcentaje}%</div>
+                <p style="font-size: 1.2rem; color: #8A5AF7;">
+                    ${aciertos} aciertos • ${errores} errores
+                </p>
+                <p style="opacity: 0.8; margin-top: 15px; max-width: 600px; margin-left: auto; margin-right: auto;">
+                    Has repasado ${palabrasActuales.length} palabras difíciles
+                </p>
+            </div>
+            
+            <!-- RECOMPENSA POR SRS -->
+            <div style="background: linear-gradient(135deg, rgba(76, 175, 80, 0.1), rgba(33, 150, 243, 0.1)); padding: 25px; border-radius: 15px; margin: 20px 0; border: 2px solid #4CAF50;">
+                <h3 style="color: #FFD166; margin-bottom: 15px;">💰 Recompensa por práctica intensiva</h3>
+                <div style="font-size: 2rem; text-align: center; color: #FFD166;">
+                    +${(aciertos * 0.5).toFixed(1)} soles
+                </div>
+                <p style="text-align: center; opacity: 0.8; margin-top: 10px;">
+                    Ganaste ${(aciertos * 0.5).toFixed(1)} soles por repasar palabras difíciles
+                </p>
+            </div>
+            
+            <!-- PRÓXIMA REPETICIÓN -->
+            <div style="background: rgba(255, 152, 0, 0.1); border-radius: 15px; padding: 20px; margin: 20px 0;">
+                <h4 style="color: #FF9800; margin-bottom: 15px;">⏰ Próxima repetición</h4>
+                <p style="text-align: center; opacity: 0.8;">
+                    Las palabras que acertaste volverán en intervalos más largos.
+                    Las que fallaste reaparecerán pronto para reforzar.
+                </p>
+            </div>
+            
+            <div class="quiz-controls">
+                <button class="quiz-btn btn-volver" onclick="volverASRS()" style="background: linear-gradient(135deg, #4CAF50, #2196F3);">
+                    ↩️ Volver al SRS
+                </button>
+                <button class="quiz-btn btn-siguiente" onclick="iniciarRepasoSRS()">
+                    🔄 Otra sesión SRS
+                </button>
+            </div>
+        </div>
+    `;
+    
+    // Dar recompensa
+    const recompensa = aciertos * 0.5;
+    sistemaEconomia.agregarDinero(recompensa);
+    actualizarContadorDineroInicio();
+}
+
+// Cancelar quiz SRS
+function cancelarQuizSRS() {
+    if (confirm('¿Seguro que quieres cancelar la sesión SRS? El progreso se guardará.')) {
+        guardarSRS();
+        cargarPaginaSRS();
+    }
+}
+
+// Volver al menú SRS
+function volverASRS() {
+    document.getElementById('quiz-section').style.display = 'none';
+    document.getElementById('manga-section').style.display = 'block';
+    cargarPaginaSRS();
+}
+
+// Repetir palabra específica del SRS
+function repetirPalabraSRS(id) {
+    const palabra = srsDatabase.palabras.find(p => p.id === id);
+    if (!palabra) return;
+    
+    // Crear quiz con solo esta palabra
+    palabrasActuales = [palabra];
+    indicePalabraActual = 0;
+    aciertos = 0;
+    errores = 0;
+    esperandoSiguiente = false;
+    
+    // Ocultar sección de mangas, mostrar quiz
+    document.getElementById('manga-section').style.display = 'none';
+    document.getElementById('quiz-section').style.display = 'block';
+    
+    // Mostrar palabra
+    mostrarPalabraSRS();
+}
+
+// Notificación para SRS
+function mostrarNotificacionSRS(mensaje) {
+    const notif = document.createElement('div');
+    notif.textContent = mensaje;
+    notif.style.cssText = `
+        position: fixed;
+        top: 150px;
+        right: 20px;
+        background: linear-gradient(135deg, #4CAF50, #2196F3);
+        color: white;
+        padding: 12px 20px;
+        border-radius: 50px;
+        font-weight: bold;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+        z-index: 1002;
+        animation: slideIn 0.3s ease, fadeOut 0.3s ease 2s forwards;
+        font-size: 1rem;
+        border: 2px solid white;
+        white-space: nowrap;
+    `;
+    
+    document.body.appendChild(notif);
+    
+    setTimeout(() => {
+        if (notif.parentNode) {
+            notif.parentNode.removeChild(notif);
+        }
+    }, 2500);
+}
+
+// Obtener significado aleatorio para opciones falsas
+function getSignificadoAleatorio() {
+    const significados = [
+        'Casa', 'Escuela', 'Libro', 'Mesa', 'Silla', 'Ventana',
+        'Puerta', 'Comida', 'Agua', 'Tiempo', 'Persona', 'Lugar',
+        'Día', 'Noche', 'Año', 'Mes', 'Semana', 'Hora',
+        'Minuto', 'Segundo', 'País', 'Ciudad', 'Calle', 'Parque'
+    ];
+    return significados[Math.floor(Math.random() * significados.length)];
+}
 
 // ====================
 // FUNCIÓN AUXILIAR PARA CONTAR MAZOS DISPONIBLES
@@ -251,7 +1056,7 @@ function crearUIMisiones() {
                     <div style="font-weight: bold; color: #FFD166;">+${mision.recompensa} soles</div>
                 </div>
                 <div style="background: rgba(255,255,255,0.1); height: 8px; border-radius: 4px; margin-bottom: 10px;">
-                    <div style="background: ${mision.completada ? '#4CAF50' : '#5864F5'}; width: ${Math.min(porcentaje, 100)}%; height: 100%; border-radius: 4px;"></div>
+                    <div style="background: ${mision.completada ? '#4CAF50' : '#5864F50'}; width: ${Math.min(porcentaje, 100)}%; height: 100%; border-radius: 4px;"></div>
                 </div>
                 <div style="display: flex; justify-content: space-between; font-size: 0.9rem;">
                     <span>${mision.progreso}/${mision.objetivo}</span>
@@ -1010,6 +1815,7 @@ function cargarSubcontenedoresASMR(contenedor) {
     modoMazoDificil = false;
     
     const mangaSection = document.getElementById('manga-section');
+    mangaSection.style.display = 'block';
     mangaSection.innerHTML = crearSubcontenedoresASMRUI(contenedor);
     
     const botonVolver = crearBotonVolver(cargarPaginaASMR);
@@ -1525,7 +2331,7 @@ function crearBotonVolver(funcionClick) {
 }
 
 // ====================
-// SISTEMA DE QUIZ (CON PALABRAS DIFÍCILES)
+// SISTEMA DE QUIZ (CON PALABRAS DIFÍCILES Y SRS)
 // ====================
 
 function iniciarQuiz(contenedor, subcontenedor, mazo) {
@@ -1605,11 +2411,12 @@ function mostrarPalabraQuiz() {
     if (modoActual === 'asmr') icono = '🎧';
     if (modoActual === 'rpg') icono = '🎮';
     if (modoActual === 'fantasia') icono = '⚔️';
+    if (modoActual === 'srs') icono = '🔄';
     
     quizSection.innerHTML = `
         <div class="quiz-container">
             <h2 style="text-align: center; color: #8A5AF7; margin-bottom: 20px;">
-                ${icono} ${modoActual === 'asmr' ? 'ASMR' : modoActual === 'audio' ? 'AUDIO' : modoActual === 'rpg' ? 'RPG' : modoActual === 'fantasia' ? 'FANTASÍA' : modoActual.toUpperCase()} • Mazo ${mazoActual} • Palabra ${indicePalabraActual + 1}/${palabrasActuales.length}
+                ${icono} ${modoActual === 'asmr' ? 'ASMR' : modoActual === 'audio' ? 'AUDIO' : modoActual === 'rpg' ? 'RPG' : modoActual === 'fantasia' ? 'FANTASÍA' : modoActual === 'srs' ? 'SRS' : modoActual.toUpperCase()} • Mazo ${mazoActual} • Palabra ${indicePalabraActual + 1}/${palabrasActuales.length}
             </h2>
             
             <div class="palabra-japonesa" id="palabra-japonesa">
@@ -1825,6 +2632,7 @@ function crearOpcionesMazoDificil(palabra) {
     `;
 }
 
+// MODIFICADA: Ahora detecta cuando fallas y agrega al SRS
 function verificarRespuesta(opcionSeleccionada, posicionCorrecta) {
     if (esperandoSiguiente) return;
     
@@ -1859,6 +2667,24 @@ function verificarRespuesta(opcionSeleccionada, posicionCorrecta) {
         darExpPorPalabraCorrecta(true);
     } else {
         errores++;
+        
+        // NUEVO: Agregar palabra fallada al sistema SRS
+        const palabraData = {
+            contenedor: contenedorActual,
+            subcontenedor: subcontenedorActual,
+            mazo: mazoActual,
+            indice: indicePalabraActual,
+            japones: palabra.japones,
+            lectura: palabra.lectura,
+            significado: palabra.opciones[palabra.respuesta],
+            opciones: palabra.opciones,
+            respuesta: palabra.respuesta
+        };
+        
+        agregarPalabraSRS(palabraData);
+        
+        // Mostrar notificación
+        mostrarNotificacionQuiz(`📝 Palabra agregada al SRS: ${palabra.japones}`);
     }
     
     const controls = document.querySelector('.quiz-controls');
@@ -1998,6 +2824,8 @@ function finalizarQuiz() {
             cargarPaginaRPG();
         } else if (modoActual === 'fantasia') {
             cargarPaginaFantasiaRPG();
+        } else if (modoActual === 'srs') {
+            cargarPaginaSRS();
         } else {
             cargarMazos(contenedorActual, subcontenedorActual);
         }
@@ -2043,6 +2871,18 @@ function finalizarQuiz() {
                     sistemaEconomia.agregarDinero(5);
                     actualizarContadorDineroInicio();
                 </script>
+            ` : ''}
+            
+            <!-- BOTÓN PARA SRS SI HAY PALABRAS FALLADAS -->
+            ${srsDatabase.palabras.length > 0 ? `
+                <div style="text-align: center; margin: 20px 0;">
+                    <button class="boton-srs-iniciar" onclick="cargarPaginaSRS()">
+                        🔄 IR AL SRS (${srsDatabase.palabras.length} palabras para repasar)
+                    </button>
+                    <p style="opacity: 0.7; margin-top: 10px; font-size: 0.9rem;">
+                        Tienes palabras en el sistema de repetición espaciada
+                    </p>
+                </div>
             ` : ''}
             
             <!-- BOTÓN PARA MAZO DIFÍCIL SI HAY PALABRAS MARCADAS -->
@@ -2153,6 +2993,8 @@ function cancelarQuiz() {
             cargarPaginaRPG();
         } else if (modoActual === 'fantasia') {
             cargarPaginaFantasiaRPG();
+        } else if (modoActual === 'srs') {
+            cargarPaginaSRS();
         } else {
             cargarMazos(contenedorActual, subcontenedorActual);
         }
@@ -2183,6 +3025,8 @@ function volverAMazos() {
         cargarPaginaRPG();
     } else if (modoActual === 'fantasia') {
         cargarPaginaFantasiaRPG();
+    } else if (modoActual === 'srs') {
+        cargarPaginaSRS();
     } else {
         cargarMazos(contenedorActual, subcontenedorActual);
     }
@@ -2363,7 +3207,7 @@ function obtenerImagenSubcontenedorASMR(contenedor, subcontenedor) {
 }
 
 // ====================
-// INICIALIZACIÓN COMPLETA (ACTUALIZADA)
+// INICIALIZACIÓN COMPLETA (ACTUALIZADA CON SRS)
 // ====================
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -2373,6 +3217,9 @@ document.addEventListener('DOMContentLoaded', function() {
     if (botonCasa) {
         botonCasa.onclick = volverAlInicio;
     }
+    
+    // Inicializar sistema SRS
+    inicializarSRS();
     
     // Verificar que las funciones de imágenes estén disponibles
     console.log('🖼️ Funciones de imágenes cargadas:');
@@ -2401,10 +3248,19 @@ document.addEventListener('DOMContentLoaded', function() {
     });
     
     console.log('✅ Sistema completo cargado correctamente');
-    console.log('📚 Mangas, 🎬 Videos, 🎌 Animes, 🎵 Audios, 🎧 ASMR, 🎮 RPG, ⚔️ Fantasía, 🎯 Misiones');
+    console.log('📚 Mangas, 🎬 Videos, 🎌 Animes, 🎵 Audios, 🎧 ASMR, 🎮 RPG, ⚔️ Fantasía, 🎯 Misiones, 🔄 SRS');
     console.log('🖼️ Sistema de imágenes personalizadas activado para todos los modos');
     console.log('🎯 Sistema de misiones activo');
     console.log('⚠️ Sistema de palabras difíciles activo');
+    console.log('🔄 Sistema SRS activo: ' + srsDatabase.palabras.length + ' palabras para repasar');
     console.log('💖 EXP por quiz activado: +20 EXP/palabra correcta, +15-100 EXP/mazo completo');
     console.log('💰 Recompensas: 2-3 soles por mazo al 100%');
+    
+    // Mostrar notificación si hay palabras pendientes en SRS
+    setTimeout(() => {
+        const pendientes = verificarRepeticionesPendientes();
+        if (pendientes > 0) {
+            mostrarNotificacionQuiz(`🔄 Tienes ${pendientes} palabras pendientes en el SRS`);
+        }
+    }, 2000);
 });
