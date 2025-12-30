@@ -139,7 +139,7 @@ const sistemaDescriptivo = {
             
             // Contenedor 3
             '3_1': { 
-                nombre: '妹の同級生が推しのKカップ配信者で竿役に選ばれてしまった僕1',
+                nombre: 'Amiga de mi hermana streamer es putona',
                 imagen: 'https://i1.nhentai.net/galleries/3711976/2.webp', 
                 descripcion: '', 
                 nivel: '' 
