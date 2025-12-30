@@ -141,7 +141,72 @@ const mangaDatabase = {
     // ================================================
     // MÁS CONTENEDORES VACÍOS (LISTOS PARA RELLENAR)
     // ================================================
-    '3_1': { titulo: "Manga disponible próximamente", descripcion: "", paginas: 0, año: "", autor: "", paginasUrls: [] },
+    '3_1': {
+        titulo: "妹の同級生が推しのKカップ配信者で竿役に選ばれてしまった僕",
+        descripcion: "amiga trola",
+        paginas: 51,
+        año: "",
+        autor: "",
+        paginasUrls: [
+        "https://i2.nhentai.net/galleries/3711976/1.webp",
+        "https://i1.nhentai.net/galleries/3711976/2.webp",  
+        "https://i2.nhentai.net/galleries/3711976/3.webp",
+        "https://i2.nhentai.net/galleries/3711976/4.webp",
+        "https://i2.nhentai.net/galleries/3711976/5.webp",
+        "https://i2.nhentai.net/galleries/3711976/6.webp",
+        "https://i2.nhentai.net/galleries/3711976/7.webp",
+        "https://i1.nhentai.net/galleries/3711976/8.webp",
+        "https://i3.nhentai.net/galleries/3711976/9.webp",
+        "https://i4.nhentai.net/galleries/3711976/10.webp",
+        "https://i2.nhentai.net/galleries/3711976/1.webp",
+        "https://i2.nhentai.net/galleries/3711976/1.webp",
+        "https://i2.nhentai.net/galleries/3711976/1.webp",
+        "https://i2.nhentai.net/galleries/3711976/1.webp",  
+        "https://i2.nhentai.net/galleries/3711976/1.webp",
+        "https://i2.nhentai.net/galleries/3711976/1.webp",
+        "https://i2.nhentai.net/galleries/3711976/1.webp",
+        "https://i2.nhentai.net/galleries/3711976/1.webp",
+        "https://i2.nhentai.net/galleries/3711976/1.webp",
+        "https://i2.nhentai.net/galleries/3711976/1.webp",
+        "https://i2.nhentai.net/galleries/3711976/1.webp",
+        "https://i2.nhentai.net/galleries/3711976/1.webp",
+        "https://i2.nhentai.net/galleries/3711976/1.webp",
+        "https://i2.nhentai.net/galleries/3711976/1.webp",
+        "https://i2.nhentai.net/galleries/3711976/1.webp",
+        "https://i2.nhentai.net/galleries/3711976/1.webp",  
+        "https://i2.nhentai.net/galleries/3711976/1.webp",
+        "https://i2.nhentai.net/galleries/3711976/1.webp",
+        "https://i2.nhentai.net/galleries/3711976/1.webp",
+        "https://i2.nhentai.net/galleries/3711976/1.webp",
+        "https://i2.nhentai.net/galleries/3711976/1.webp",
+        "https://i2.nhentai.net/galleries/3711976/1.webp",
+        "https://i2.nhentai.net/galleries/3711976/1.webp",
+        "https://i2.nhentai.net/galleries/3711976/1.webp",
+        "https://i2.nhentai.net/galleries/3711976/1.webp",
+        "https://i2.nhentai.net/galleries/3711976/1.webp",
+        "https://i2.nhentai.net/galleries/3711976/1.webp",
+        "https://i2.nhentai.net/galleries/3711976/1.webp",  
+        "https://i2.nhentai.net/galleries/3711976/1.webp",
+        "https://i2.nhentai.net/galleries/3711976/1.webp",
+        "https://i2.nhentai.net/galleries/3711976/1.webp",
+        "https://i2.nhentai.net/galleries/3711976/1.webp",
+        "https://i2.nhentai.net/galleries/3711976/1.webp",
+        "https://i2.nhentai.net/galleries/3711976/1.webp",
+        "https://i2.nhentai.net/galleries/3711976/1.webp",
+        "https://i2.nhentai.net/galleries/3711976/1.webp",
+        "https://i2.nhentai.net/galleries/3711976/1.webp",
+        "https://i2.nhentai.net/galleries/3711976/1.webp",  
+        "https://i2.nhentai.net/galleries/3711976/1.webp",
+        "https://i2.nhentai.net/galleries/3711976/1.webp", 
+        "https://i2.nhentai.net/galleries/3711976/1.webp",  
+        "https://i1.nhentai.net/galleries/3711976/2.webp"
+        
+
+
+
+            
+        ]
+    },
     '4_1': { titulo: "Manga disponible próximamente", descripcion: "", paginas: 0, año: "", autor: "", paginasUrls: [] },
     '5_1': { titulo: "Manga disponible próximamente", descripcion: "", paginas: 0, año: "", autor: "", paginasUrls: [] }
 };
