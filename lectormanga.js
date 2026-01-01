@@ -118,7 +118,7 @@ const mangaDatabase = {
     },
 
       // Sub-contenedor 1.4 (VACÍO - EJEMPLO)
-    '1_3': {
+    '1_4': {
         titulo: "[鍋屋敷 (ナベシキ)] ニノラレ×ミクラレ 加筆版 (五等分の花嫁) [DL版]",
         descripcion: "¡Agrega tus propias imágenes de manga aquí!",
         paginas: 37,
