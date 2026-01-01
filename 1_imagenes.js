@@ -93,8 +93,8 @@ const sistemaDescriptivo = {
                 nivel: '' 
             },
             '1_4': { 
-                nombre: 'Sub-contenedor 4',
-                imagen: '', 
+                nombre: 'Nino y miku estan putitas para pasar el año',
+                imagen: 'https://i1.nhentai.net/galleries/2786098/1.jpg', 
                 descripcion: '', 
                 nivel: '' 
             },
