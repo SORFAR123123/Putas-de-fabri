@@ -23,7 +23,7 @@ const sistemaDescriptivo = {
             },
             3: { 
                 nombre: ' Hentais xD',
-                imagen: 'https://i4.nhentai.net/galleries/3711976/1.webp', 
+                imagen: 'https://i2.nhentai.net/galleries/3712667/1.webp', 
                 descripcion: 'Contenedor de mangas shonen',
                 tipo: 'shonen'
             },
@@ -145,8 +145,8 @@ const sistemaDescriptivo = {
                 nivel: '' 
             },
             '3_2': { 
-                nombre: 'Sub-contenedor 2',
-                imagen: '', 
+                nombre: 'Alumna Putita',
+                imagen: 'https://i3.nhentai.net/galleries/3712667/14.webp', 
                 descripcion: '', 
                 nivel: '' 
             },
