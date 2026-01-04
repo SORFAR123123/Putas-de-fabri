@@ -1094,16 +1094,16 @@ const vocabularioDatabase = {
 'sub3_2': {
     // MAZO 1 - Animales y términos básicos
     1: [
-        { japones: '種牛', lectura: 'taneushi', opciones: ['Toro semental', 'Vaca lechera', 'Becerro', 'Caballo'], respuesta: 0 },
-        { japones: '牝牛', lectura: 'mesuushi', opciones: ['Vaca hembra', 'Toro', 'Oveja', 'Cabra'], respuesta: 0 },
-        { japones: '乳搾', lectura: 'chichishibori', opciones: ['Ordeño de pechos', 'Alimentación', 'Crianza', 'Transporte'], respuesta: 0 },
-        { japones: '溢美', lectura: 'Yumi', opciones: ['Yumi (nombre)', 'Sakura', 'Hana', 'Aki'], respuesta: 0 },
-        { japones: 'ズリズリ', lectura: 'zurizuri', opciones: ['Onomatopeya de masturbación', 'Sonido de lluvia', 'Ruido de pasos', 'Canto de pájaros'], respuesta: 0 },
-        { japones: '種子', lectura: 'shushi', opciones: ['Semilla / Semen', 'Flor', 'Fruto', 'Raíz'], respuesta: 0 },
-        { japones: '射精', lectura: 'shasei', opciones: ['Eyaculación', 'Orina', 'Sudor', 'Sangre'], respuesta: 0 },
-        { japones: 'シコチャ', lectura: 'shikocha', opciones: ['Chat de masturbación', 'Chat de cocina', 'Chat de estudio', 'Chat de deportes'], respuesta: 0 },
-        { japones: '推し', lectura: 'oshi', opciones: ['Favorita / Ídolo', 'Enemiga', 'Compañera', 'Desconocida'], respuesta: 0 },
-        { japones: '系', lectura: 'kei', opciones: ['Estilo / Tipo', 'Color', 'Tamaño', 'Edad'], respuesta: 0 }
+        { japones: '部活', lectura: 'bukatsu', opciones: ['Club de actividades extracurriculares', 'Clase principal', 'Tiempo libre', 'Reunión familiar'], respuesta: 0 },
+        { japones: '余った', lectura: 'amatta', opciones: ['Sobró', 'Faltó', 'Se perdió', 'Se compró'], respuesta: 0 },
+        { japones: '毎回', lectura: 'maikai', opciones: ['Cada vez', 'A veces', 'La primera vez', 'La última vez'], respuesta: 0 },
+        { japones: '貰って', lectura: 'moratte', opciones: ['Recibiendo', 'Dando', 'Vendiendo', 'Buscando'], respuesta: 0 },
+        { japones: '申し訳ない', lectura: 'mōshiwakenai', opciones: ['Lo siento / Inexcusable', 'Gracias', 'Hola', 'Adiós'], respuesta: 0 },
+        { japones: '残念', lectura: 'zannen', opciones: ['Lamentable / Desafortunado', 'Feliz', 'Aburrido', 'Interesante'], respuesta: 0 },
+        { japones: 'ながら', lectura: 'nagara', opciones: ['Aunque / Mientras', 'Después', 'Antes', 'Porque'], respuesta: 0 },
+        { japones: 'お菓子', lectura: 'okashi', opciones: ['Dulces / Snacks', 'Comida principal', 'Bebidas', 'Fruta'], respuesta: 0 },
+        { japones: '渡す', lectura: 'watasu', opciones: ['Entregar / Pasar', 'Recibir', 'Esconder', 'Romper'], respuesta: 0 },
+        { japones: '口実', lectura: 'kōjitsu', opciones: ['Pretexto / Excusa', 'Verdad', 'Promesa', 'Secreto'], respuesta: 0 }
     ],
     
     // MAZO 2 - Streamers y terminología
