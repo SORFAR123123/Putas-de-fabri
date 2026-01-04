@@ -1085,7 +1085,113 @@ const vocabularioDatabase = {
         { japones: '象徴', lectura: 'shouchou', opciones: ['Símbolo', 'Personaje', 'Escenario', 'Diálogo'], respuesta: 0 },
         { japones: 'モチーフ', lectura: 'mochiifu', opciones: ['Motivo recurrente', 'Personaje principal', 'Título', 'Autor'], respuesta: 0 }
     ]
-}    
+},
+// ================================================
+// CONTENEDOR 3 (NUEVO) - VOCABULARIO ESPECÍFICO
+// ================================================
+
+// Sub-contenedor 3.2 (NUEVO)
+'sub3_2': {
+    // MAZO 1 - Animales y términos básicos
+    1: [
+        { japones: '種牛', lectura: 'taneushi', opciones: ['Toro semental', 'Vaca lechera', 'Becerro', 'Caballo'], respuesta: 0 },
+        { japones: '牝牛', lectura: 'mesuushi', opciones: ['Vaca hembra', 'Toro', 'Oveja', 'Cabra'], respuesta: 0 },
+        { japones: '乳搾', lectura: 'chichishibori', opciones: ['Ordeño de pechos', 'Alimentación', 'Crianza', 'Transporte'], respuesta: 0 },
+        { japones: '溢美', lectura: 'Yumi', opciones: ['Yumi (nombre)', 'Sakura', 'Hana', 'Aki'], respuesta: 0 },
+        { japones: 'ズリズリ', lectura: 'zurizuri', opciones: ['Onomatopeya de masturbación', 'Sonido de lluvia', 'Ruido de pasos', 'Canto de pájaros'], respuesta: 0 },
+        { japones: '種子', lectura: 'shushi', opciones: ['Semilla / Semen', 'Flor', 'Fruto', 'Raíz'], respuesta: 0 },
+        { japones: '射精', lectura: 'shasei', opciones: ['Eyaculación', 'Orina', 'Sudor', 'Sangre'], respuesta: 0 },
+        { japones: 'シコチャ', lectura: 'shikocha', opciones: ['Chat de masturbación', 'Chat de cocina', 'Chat de estudio', 'Chat de deportes'], respuesta: 0 },
+        { japones: '推し', lectura: 'oshi', opciones: ['Favorita / Ídolo', 'Enemiga', 'Compañera', 'Desconocida'], respuesta: 0 },
+        { japones: '系', lectura: 'kei', opciones: ['Estilo / Tipo', 'Color', 'Tamaño', 'Edad'], respuesta: 0 }
+    ],
+    
+    // MAZO 2 - Streamers y terminología
+    2: [
+        { japones: '配信者', lectura: 'haishinsha', opciones: ['Streamer', 'Youtuber', 'Actor', 'Cantante'], respuesta: 0 },
+        { japones: '恒例', lectura: 'kōrei', opciones: ['Habitual / Tradicional', 'Excepcional', 'Nuevo', 'Raro'], respuesta: 0 },
+        { japones: '先週', lectura: 'senshū', opciones: ['Semana pasada', 'Esta semana', 'Próxima semana', 'Hace un mes'], respuesta: 0 },
+        { japones: 'ヒップ', lectura: 'hippu', opciones: ['Caderas', 'Hombros', 'Rodillas', 'Tobillos'], respuesta: 0 },
+        { japones: '増え', lectura: 'fue', opciones: ['Aumentar', 'Disminuir', 'Estable', 'Desaparecer'], respuesta: 0 },
+        { japones: '食い込ん', lectura: 'kuikun', opciones: ['Clavarse / Penetrar', 'Salir', 'Flotar', 'Deslizar'], respuesta: 0 },
+        { japones: 'ウエスト', lectura: 'uesuto', opciones: ['Cintura', 'Cuello', 'Muñeca', 'Tobillo'], respuesta: 0 },
+        { japones: 'バスト', lectura: 'basuto', opciones: ['Busto', 'Espalda', 'Abdomen', 'Piernas'], respuesta: 0 },
+        { japones: '企画', lectura: 'kikaku', opciones: ['Proyecto / Planning', 'Ejecución', 'Evaluación', 'Cancelación'], respuesta: 0 },
+        { japones: '竿役', lectura: 'saoyaku', opciones: ['Actor masculino en AV', 'Actor de teatro', 'Actor de cine', 'Actor de voz'], respuesta: 0 }
+    ],
+    
+    // MAZO 3 - Nuevas palabras (parte 1)
+    3: [
+        { japones: '決まっ', lectura: 'kimat', opciones: ['Decidido / Determinado', 'Indeciso', 'Cancelado', 'Posponido'], respuesta: 0 },
+        { japones: '応募', lectura: 'ōbo', opciones: ['Solicitud / Aplicación', 'Rechazo', 'Aceptación', 'Renuncia'], respuesta: 0 },
+        { japones: '数', lectura: 'sū', opciones: ['Número', 'Letra', 'Símbolo', 'Color'], respuesta: 0 },
+        { japones: '硬く', lectura: 'kataku', opciones: ['Duro', 'Blando', 'Flexible', 'Frágil'], respuesta: 0 },
+        { japones: '黒光り', lectura: 'kurokagayaki', opciones: ['Brillo negro / Lustroso negro', 'Opaco negro', 'Blanco brillante', 'Color mate'], respuesta: 0 },
+        { japones: '搾乳', lectura: 'sakunyū', opciones: ['Ordeño', 'Alimentación', 'Limpieza', 'Transporte'], respuesta: 0 },
+        { japones: 'ターイム', lectura: 'tāimu', opciones: ['Time (tiempo)', 'Pausa', 'Fin', 'Comienzo'], respuesta: 0 },
+        { japones: 'ぱんぱん', lectura: 'panpan', opciones: ['Lleno a reventar', 'Vacío', 'Medio lleno', 'Casi vacío'], respuesta: 0 },
+        { japones: '搾っ', lectura: 'shibor', opciones: ['Ordeñar / Exprimir', 'Beber', 'Verter', 'Guardar'], respuesta: 0 },
+        { japones: '詰まっ', lectura: 'tsumat', opciones: ['Atascado / Lleno', 'Vacío', 'Fluyendo', 'Abierto'], respuesta: 0 }
+    ],
+    
+    // MAZO 4 - Nuevas palabras (parte 2)
+    4: [
+        { japones: '搾れる', lectura: 'shiboreru', opciones: ['Poder ordeñar', 'No poder ordeñar', 'Beber leche', 'Derramar leche'], respuesta: 0 },
+        { japones: '予感', lectura: 'yokan', opciones: ['Presentimiento', 'Memoria', 'Hecho', 'Realidad'], respuesta: 0 },
+        { japones: '兄貴', lectura: 'Aniki', opciones: ['Hermano mayor', 'Hermano menor', 'Padre', 'Tío'], respuesta: 0 },
+        { japones: '牛乳', lectura: 'gyūnyū', opciones: ['Leche (de vaca)', 'Agua', 'Jugo', 'Cerveza'], respuesta: 0 },
+        { japones: 'ながら', lectura: 'nagara', opciones: ['Mientras', 'Antes', 'Después', 'Durante'], respuesta: 0 },
+        { japones: '5倍', lectura: 'go-bai', opciones: ['5 veces', '2 veces', '10 veces', 'Mitad'], respuesta: 0 },
+        { japones: '最悪', lectura: 'saiaku', opciones: ['Lo peor / Fatal', 'Lo mejor', 'Normal', 'Regular'], respuesta: 0 },
+        { japones: 'おじゃまします', lectura: 'ojamashimasu', opciones: ['Disculpe la molestia', 'Hola', 'Adiós', 'Gracias'], respuesta: 0 },
+        { japones: '挨拶', lectura: 'aisatsu', opciones: ['Saludo', 'Despedida', 'Pregunta', 'Respuesta'], respuesta: 0 },
+        { japones: '奴', lectura: 'yatsu', opciones: ['Tipo / Sujeto', 'Amigo', 'Enemigo', 'Extraño'], respuesta: 0 }
+    ],
+    
+    // MAZO 5 - Nuevas palabras (parte 3)
+    5: [
+        { japones: '玲奈', lectura: 'Reina', opciones: ['Reina (nombre)', 'Yumi', 'Sakura', 'Miku'], respuesta: 0 },
+        { japones: '居たんだ', lectura: 'itanda', opciones: ['Estaba (enfático)', 'Irá', 'Venía', 'Salió'], respuesta: 0 },
+        { japones: '黒歴史', lectura: 'kurorekishi', opciones: ['Black history (pasado vergonzoso)', 'Historia gloriosa', 'Futuro prometedor', 'Presente feliz'], respuesta: 0 },
+        { japones: 'ツヤツヤ', lectura: 'tsuyatsuya', opciones: ['Brillante / Lustroso', 'Opaco', 'Rugoso', 'Seco'], respuesta: 0 },
+        { japones: '目下', lectura: 'mokka', opciones: ['Justo debajo del ojo', 'Frente', 'Mejilla', 'Barbilla'], respuesta: 0 },
+        { japones: 'ほくろ', lectura: 'hokuro', opciones: ['Lunar / Topo', 'Cicatriz', 'Arruga', 'Pecas'], respuesta: 0 },
+        { japones: 'クリっと', lectura: 'kuritto', opciones: ['Redondo y brillante', 'Cuadrado y opaco', 'Ovalado y mate', 'Triangular'], respuesta: 0 },
+        { japones: '瞳', lectura: 'hitomi', opciones: ['Pupilas / Ojos', 'Nariz', 'Boca', 'Orejas'], respuesta: 0 },
+        { japones: '色素', lectura: 'shikiso', opciones: ['Pigmento', 'Agua', 'Aceite', 'Proteína'], respuesta: 0 },
+        { japones: '薄い', lectura: 'usui', opciones: ['Tenue / Diluido', 'Espesor', 'Concentrado', 'Oscuro'], respuesta: 0 }
+    ],
+    
+    // MAZO 6 - Nuevas palabras (parte 4)
+    6: [
+        { japones: '色白', lectura: 'irojiro', opciones: ['Piel clara / Pálida', 'Piel oscura', 'Piel bronceada', 'Piel rojiza'], respuesta: 0 },
+        { japones: '肌', lectura: 'hada', opciones: ['Piel', 'Hueso', 'Músculo', 'Grasa'], respuesta: 0 },
+        { japones: 'まつ毛', lectura: 'matsuge', opciones: ['Pestañas', 'Cejas', 'Cabello', 'Vello corporal'], respuesta: 0 },
+        { japones: '溢れん', lectura: 'afuren', opciones: ['A punto de desbordar', 'Completamente vacío', 'A la mitad', 'Goteando'], respuesta: 0 },
+        { japones: 'ばかり', lectura: 'bakari', opciones: ['Tanto que / Hasta el punto de', 'Un poco', 'Nada', 'Exactamente'], respuesta: 0 },
+        { japones: '爆乳', lectura: 'bakunyū', opciones: ['Pechos explosivos / Enormes', 'Pechos pequeños', 'Pechos medianos', 'Pechos planos'], respuesta: 0 },
+        { japones: '間違い', lectura: 'machigai', opciones: ['Error', 'Acierto', 'Duda', 'Certera'], respuesta: 0 }
+    
+    ],
+
+    // ====================
+    // MAZOS DIFÍCILES ESPECIALES - Subcontenedor 3.2
+    // ====================
+    
+    'D1': [
+        { japones: '文学用語', lectura: 'bungaku yougo', opciones: ['Términos literarios', 'Términos científicos', 'Jerga juvenil', 'Términos técnicos'], respuesta: 0 },
+        { japones: '比喩表現', lectura: 'hiyu hyougen', opciones: ['Expresiones metafóricas', 'Expresiones literales', 'Expresiones coloquiales', 'Expresiones formales'], respuesta: 0 },
+        { japones: '心理描写', lectura: 'shinri byousha', opciones: ['Descripción psicológica', 'Descripción física', 'Descripción ambiental', 'Descripción histórica'], respuesta: 0 },
+        { japones: '登場人物', lectura: 'toujou jinbutsu', opciones: ['Personajes de la obra', 'Autores', 'Editores', 'Críticos'], respuesta: 0 },
+        { japones: '物語構造', lectura: 'monogatari kouzou', opciones: ['Estructura narrativa', 'Diseño de portada', 'Tipo de letra', 'Formato de publicación'], respuesta: 0 },
+        { japones: '社会批判', lectura: 'shakai hihan', opciones: ['Crítica social', 'Elogio social', 'Indiferencia social', 'Participación social'], respuesta: 0 },
+        { japones: '文体', lectura: 'buntai', opciones: ['Estilo de escritura', 'Contenido', 'Tema', 'Longitud'], respuesta: 0 },
+        { japones: '視点', lectura: 'shiten', opciones: ['Punto de vista', 'Conclusión', 'Introducción', 'Epílogo'], respuesta: 0 },
+        { japones: '象徴', lectura: 'shouchou', opciones: ['Símbolo', 'Personaje', 'Escenario', 'Diálogo'], respuesta: 0 },
+        { japones: 'モチーフ', lectura: 'mochiifu', opciones: ['Motivo recurrente', 'Personaje principal', 'Título', 'Autor'], respuesta: 0 }
+    ]
+}
+    
 };
 
 
