@@ -247,14 +247,56 @@ const mangaDatabase = {
         "https://i2.nhentai.net/galleries/3711976/49.webp",
         "https://i4.nhentai.net/galleries/3711976/50.webp", 
         "https://i1.nhentai.net/galleries/3711976/51.webp" 
-       
-        
-
-
-
-            
         ]
     },
+  '3_2': {
+        titulo: "[ホイホイこーろ] Weekend Shagger Rush! (ブルーアーカイブ) [DL版]",
+        descripcion: "Estudiante putita culona rico orto",
+        paginas: 36,
+        año: "",
+        autor: "",
+        paginasUrls: [
+        "https://i2.nhentai.net/galleries/3711976/1.webp",
+        "https://i1.nhentai.net/galleries/3711976/2.webp",  
+        "https://i2.nhentai.net/galleries/3711976/3.webp",
+        "https://i2.nhentai.net/galleries/3711976/4.webp",
+        "https://i2.nhentai.net/galleries/3711976/5.webp",
+        "https://i2.nhentai.net/galleries/3711976/6.webp",
+        "https://i2.nhentai.net/galleries/3711976/7.webp",
+        "https://i1.nhentai.net/galleries/3711976/8.webp",
+        "https://i3.nhentai.net/galleries/3711976/9.webp",
+        "https://i4.nhentai.net/galleries/3711976/10.webp",
+        "https://i4.nhentai.net/galleries/3711976/11.webp",
+        "https://i2.nhentai.net/galleries/3711976/12.webp",
+        "https://i2.nhentai.net/galleries/3711976/13.webp",
+        "https://i1.nhentai.net/galleries/3711976/14.webp",  
+        "https://i2.nhentai.net/galleries/3711976/15.webp",
+        "https://i2.nhentai.net/galleries/3711976/16.webp",
+        "https://i3.nhentai.net/galleries/3711976/17.webp",
+        "https://i1.nhentai.net/galleries/3711976/18.webp",
+        "https://i3.nhentai.net/galleries/3711976/19.webp",
+        "https://i1.nhentai.net/galleries/3711976/20.webp",
+        "https://i2.nhentai.net/galleries/3711976/21.webp",
+        "https://i3.nhentai.net/galleries/3711976/22.webp",
+        "https://i4.nhentai.net/galleries/3711976/23.webp",
+        "https://i4.nhentai.net/galleries/3711976/24.webp",
+        "https://i1.nhentai.net/galleries/3711976/25.webp",
+        "https://i2.nhentai.net/galleries/3711976/26.webp",  
+        "https://i4.nhentai.net/galleries/3711976/27.webp",
+        "https://i3.nhentai.net/galleries/3711976/28.webp",
+        "https://i2.nhentai.net/galleries/3711976/29.webp",
+        "https://i4.nhentai.net/galleries/3711976/30.webp",
+        "https://i4.nhentai.net/galleries/3711976/31.webp",
+        "https://i3.nhentai.net/galleries/3711976/32.webp",
+        "https://i4.nhentai.net/galleries/3711976/33.webp",
+        "https://i2.nhentai.net/galleries/3711976/34.webp",
+        "https://i4.nhentai.net/galleries/3711976/35.webp",
+        "https://i1.nhentai.net/galleries/3711976/36.webp"
+        ]
+    },
+
+
+    
     '4_1': { titulo: "Manga disponible próximamente", descripcion: "", paginas: 0, año: "", autor: "", paginasUrls: [] },
     '5_1': { titulo: "Manga disponible próximamente", descripcion: "", paginas: 0, año: "", autor: "", paginasUrls: [] }
 };
