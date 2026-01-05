@@ -1092,7 +1092,7 @@ const vocabularioDatabase = {
 
 // Sub-contenedor 3.2 (NUEVO)
 'sub3_2': {
-    // MAZO 1 - Animales y términos básicos
+    // MAZO 1 - Animales y términos básicos (ORIGINAL - SIN CAMBIOS)
     1: [
         { japones: '部活', lectura: 'bukatsu', opciones: ['Club de actividades extracurriculares', 'Clase principal', 'Tiempo libre', 'Reunión familiar'], respuesta: 0 },
         { japones: '余った', lectura: 'amatta', opciones: ['Sobró', 'Faltó', 'Se perdió', 'Se compró'], respuesta: 0 },
@@ -1106,73 +1106,282 @@ const vocabularioDatabase = {
         { japones: '口実', lectura: 'kōjitsu', opciones: ['Pretexto / Excusa', 'Verdad', 'Promesa', 'Secreto'], respuesta: 0 }
     ],
     
-    // MAZO 2 - Streamers y terminología
+    // MAZO 2 - Nuevas palabras
     2: [
-        { japones: '配信者', lectura: 'haishinsha', opciones: ['Streamer', 'Youtuber', 'Actor', 'Cantante'], respuesta: 0 },
-        { japones: '恒例', lectura: 'kōrei', opciones: ['Habitual / Tradicional', 'Excepcional', 'Nuevo', 'Raro'], respuesta: 0 },
-        { japones: '先週', lectura: 'senshū', opciones: ['Semana pasada', 'Esta semana', 'Próxima semana', 'Hace un mes'], respuesta: 0 },
-        { japones: 'ヒップ', lectura: 'hippu', opciones: ['Caderas', 'Hombros', 'Rodillas', 'Tobillos'], respuesta: 0 },
-        { japones: '増え', lectura: 'fue', opciones: ['Aumentar', 'Disminuir', 'Estable', 'Desaparecer'], respuesta: 0 },
-        { japones: '食い込ん', lectura: 'kuikun', opciones: ['Clavarse / Penetrar', 'Salir', 'Flotar', 'Deslizar'], respuesta: 0 },
-        { japones: 'ウエスト', lectura: 'uesuto', opciones: ['Cintura', 'Cuello', 'Muñeca', 'Tobillo'], respuesta: 0 },
-        { japones: 'バスト', lectura: 'basuto', opciones: ['Busto', 'Espalda', 'Abdomen', 'Piernas'], respuesta: 0 },
-        { japones: '企画', lectura: 'kikaku', opciones: ['Proyecto / Planning', 'Ejecución', 'Evaluación', 'Cancelación'], respuesta: 0 },
-        { japones: '竿役', lectura: 'saoyaku', opciones: ['Actor masculino en AV', 'Actor de teatro', 'Actor de cine', 'Actor de voz'], respuesta: 0 }
+        { japones: '週末', lectura: 'shūmatsu', opciones: ['Fin de semana', 'Día de semana', 'Mañana', 'Noche'], respuesta: 0 },
+        { japones: '会い', lectura: 'ai', opciones: ['Encontrarse', 'Separarse', 'Ignorar', 'Esperar'], respuesta: 0 },
+        { japones: 'ほぼ', lectura: 'hobo', opciones: ['Casi', 'Completamente', 'Apenas', 'Nunca'], respuesta: 0 },
+        { japones: '邪魔', lectura: 'jama', opciones: ['Molestia / Estorbo', 'Ayuda', 'Bendición', 'Sorpresa'], respuesta: 0 },
+        { japones: 'とんでもない', lectura: 'tondemonai', opciones: ['¡Ni hablar! / ¡De ninguna manera!', 'Por supuesto', 'Quizás', 'Lo siento'], respuesta: 0 },
+        { japones: 'そろそろ', lectura: 'sorosoro', opciones: ['Poco a poco / Ya es hora', 'De repente', 'Más tarde', 'Nunca'], respuesta: 0 },
+        { japones: 'お暇', lectura: 'o-hima', opciones: ['Retirarse (educado)', 'Llegar', 'Quedarse', 'Hablar'], respuesta: 0 },
+        { japones: 'おいで', lectura: 'oide', opciones: ['Ven (imperativo educado)', 'Vete', 'Espera', 'Siéntate'], respuesta: 0 },
+        { japones: 'オカズ', lectura: 'okazu', opciones: ['Acompañamiento (eufemismo erótico)', 'Comida principal', 'Postre', 'Bebida'], respuesta: 0 },
+        { japones: 'なっちゃった', lectura: 'natchatta', opciones: ['Se convirtió en (lamentación)', 'Se evitó', 'Se planeó', 'Se olvidó'], respuesta: 0 }
     ],
     
-    // MAZO 3 - Nuevas palabras (parte 1)
+    // MAZO 3 - Nuevas palabras
     3: [
-        { japones: '決まっ', lectura: 'kimat', opciones: ['Decidido / Determinado', 'Indeciso', 'Cancelado', 'Posponido'], respuesta: 0 },
-        { japones: '応募', lectura: 'ōbo', opciones: ['Solicitud / Aplicación', 'Rechazo', 'Aceptación', 'Renuncia'], respuesta: 0 },
-        { japones: '数', lectura: 'sū', opciones: ['Número', 'Letra', 'Símbolo', 'Color'], respuesta: 0 },
-        { japones: '硬く', lectura: 'kataku', opciones: ['Duro', 'Blando', 'Flexible', 'Frágil'], respuesta: 0 },
-        { japones: '黒光り', lectura: 'kurokagayaki', opciones: ['Brillo negro / Lustroso negro', 'Opaco negro', 'Blanco brillante', 'Color mate'], respuesta: 0 },
-        { japones: '搾乳', lectura: 'sakunyū', opciones: ['Ordeño', 'Alimentación', 'Limpieza', 'Transporte'], respuesta: 0 },
-        { japones: 'ターイム', lectura: 'tāimu', opciones: ['Time (tiempo)', 'Pausa', 'Fin', 'Comienzo'], respuesta: 0 },
-        { japones: 'ぱんぱん', lectura: 'panpan', opciones: ['Lleno a reventar', 'Vacío', 'Medio lleno', 'Casi vacío'], respuesta: 0 },
-        { japones: '搾っ', lectura: 'shibor', opciones: ['Ordeñar / Exprimir', 'Beber', 'Verter', 'Guardar'], respuesta: 0 },
-        { japones: '詰まっ', lectura: 'tsumat', opciones: ['Atascado / Lleno', 'Vacío', 'Fluyendo', 'Abierto'], respuesta: 0 }
+        { japones: '治らない', lectura: 'naoranai', opciones: ['No se cura', 'Se cura', 'Empeora', 'Mejora'], respuesta: 0 },
+        { japones: '恋心', lectura: 'koigokoro', opciones: ['Sentimientos de amor', 'Odio', 'Indiferencia', 'Amistad'], respuesta: 0 },
+        { japones: '発情期', lectura: 'hatsujōki', opciones: ['Período de celo / Heat', 'Período de calma', 'Enfermedad', 'Vacaciones'], respuesta: 0 },
+        { japones: '段々と', lectura: 'dandan', opciones: ['Progresivamente', 'De repente', 'Rápidamente', 'Lentamente'], respuesta: 0 },
+        { japones: '悪化', lectura: 'akka', opciones: ['Empeorar', 'Mejorar', 'Estancarse', 'Curarse'], respuesta: 0 },
+        { japones: '面倒くさい', lectura: 'mendōkusai', opciones: ['Molesto / Fastidioso', 'Fácil', 'Divertido', 'Interesante'], respuesta: 0 },
+        { japones: '状態', lectura: 'jōtai', opciones: ['Estado', 'Causa', 'Resultado', 'Solución'], respuesta: 0 },
+        { japones: '会えない', lectura: 'aenai', opciones: ['No poder encontrarse', 'Poder encontrarse', 'Evitar', 'Buscar'], respuesta: 0 },
+        { japones: '襲い', lectura: 'osoi', opciones: ['Atacar / Abalanzarse', 'Defender', 'Ignorar', 'Saludar'], respuesta: 0 },
+        { japones: 'トリニティ', lectura: 'Toriniti', opciones: ['Trinity (nombre propio)', 'Unidad', 'Dualidad', 'Escuela'], respuesta: 0 }
     ],
     
-    // MAZO 4 - Nuevas palabras (parte 2)
+    // MAZO 4 - Nuevas palabras
     4: [
-        { japones: '搾れる', lectura: 'shiboreru', opciones: ['Poder ordeñar', 'No poder ordeñar', 'Beber leche', 'Derramar leche'], respuesta: 0 },
-        { japones: '予感', lectura: 'yokan', opciones: ['Presentimiento', 'Memoria', 'Hecho', 'Realidad'], respuesta: 0 },
-        { japones: '兄貴', lectura: 'Aniki', opciones: ['Hermano mayor', 'Hermano menor', 'Padre', 'Tío'], respuesta: 0 },
-        { japones: '牛乳', lectura: 'gyūnyū', opciones: ['Leche (de vaca)', 'Agua', 'Jugo', 'Cerveza'], respuesta: 0 },
-        { japones: 'ながら', lectura: 'nagara', opciones: ['Mientras', 'Antes', 'Después', 'Durante'], respuesta: 0 },
-        { japones: '5倍', lectura: 'go-bai', opciones: ['5 veces', '2 veces', '10 veces', 'Mitad'], respuesta: 0 },
-        { japones: '最悪', lectura: 'saiaku', opciones: ['Lo peor / Fatal', 'Lo mejor', 'Normal', 'Regular'], respuesta: 0 },
-        { japones: 'おじゃまします', lectura: 'ojamashimasu', opciones: ['Disculpe la molestia', 'Hola', 'Adiós', 'Gracias'], respuesta: 0 },
-        { japones: '挨拶', lectura: 'aisatsu', opciones: ['Saludo', 'Despedida', 'Pregunta', 'Respuesta'], respuesta: 0 },
-        { japones: '奴', lectura: 'yatsu', opciones: ['Tipo / Sujeto', 'Amigo', 'Enemigo', 'Extraño'], respuesta: 0 }
+        { japones: '用事', lectura: 'yōji', opciones: ['Asunto / Recado', 'Ocio', 'Juego', 'Descanso'], respuesta: 0 },
+        { japones: 'より', lectura: 'yori', opciones: ['Más que / En lugar de', 'Menos que', 'Igual que', 'Junto con'], respuesta: 0 },
+        { japones: '体調', lectura: 'taichō', opciones: ['Condición física', 'Estado mental', 'Ropa', 'Comida'], respuesta: 0 },
+        { japones: '悪そう', lectura: 'warusō', opciones: ['Parece malo', 'Parece bueno', 'Parece normal', 'Parece extraño'], respuesta: 0 },
+        { japones: '盛り上がって', lectura: 'mori agatte', opciones: ['Intensificarse / Excitarse', 'Calmarse', 'Empezar', 'Terminar'], respuesta: 0 },
+        { japones: '送って', lectura: 'okutte', opciones: ['Acompañar / Llevar', 'Dejar', 'Recoger', 'Esperar'], respuesta: 0 },
+        { japones: '貰っちゃった', lectura: 'moratchatta', opciones: ['Recibir (lamentación casual)', 'Dar', 'Perder', 'Rechazar'], respuesta: 0 },
+        { japones: '二人きり', lectura: 'futari kiri', opciones: ['A solas (dos personas)', 'En grupo', 'Solo', 'Con muchos'], respuesta: 0 },
+        { japones: '倒し', lectura: 'taoshi', opciones: ['Derribar / Tirar', 'Levantar', 'Ayudar', 'Ignorar'], respuesta: 0 },
+        { japones: '落ち着け', lectura: 'ochitsuke', opciones: ['Cálmate (imperativo)', 'Excítate', 'Corre', 'Duerme'], respuesta: 0 }
     ],
     
-    // MAZO 5 - Nuevas palabras (parte 3)
+    // MAZO 5 - Nuevas palabras
     5: [
-        { japones: '玲奈', lectura: 'Reina', opciones: ['Reina (nombre)', 'Yumi', 'Sakura', 'Miku'], respuesta: 0 },
-        { japones: '居たんだ', lectura: 'itanda', opciones: ['Estaba (enfático)', 'Irá', 'Venía', 'Salió'], respuesta: 0 },
-        { japones: '黒歴史', lectura: 'kurorekishi', opciones: ['Black history (pasado vergonzoso)', 'Historia gloriosa', 'Futuro prometedor', 'Presente feliz'], respuesta: 0 },
-        { japones: 'ツヤツヤ', lectura: 'tsuyatsuya', opciones: ['Brillante / Lustroso', 'Opaco', 'Rugoso', 'Seco'], respuesta: 0 },
-        { japones: '目下', lectura: 'mokka', opciones: ['Justo debajo del ojo', 'Frente', 'Mejilla', 'Barbilla'], respuesta: 0 },
-        { japones: 'ほくろ', lectura: 'hokuro', opciones: ['Lunar / Topo', 'Cicatriz', 'Arruga', 'Pecas'], respuesta: 0 },
-        { japones: 'クリっと', lectura: 'kuritto', opciones: ['Redondo y brillante', 'Cuadrado y opaco', 'Ovalado y mate', 'Triangular'], respuesta: 0 },
-        { japones: '瞳', lectura: 'hitomi', opciones: ['Pupilas / Ojos', 'Nariz', 'Boca', 'Orejas'], respuesta: 0 },
-        { japones: '色素', lectura: 'shikiso', opciones: ['Pigmento', 'Agua', 'Aceite', 'Proteína'], respuesta: 0 },
-        { japones: '薄い', lectura: 'usui', opciones: ['Tenue / Diluido', 'Espesor', 'Concentrado', 'Oscuro'], respuesta: 0 }
+        { japones: '追い討ち', lectura: 'oiuchi', opciones: ['Remate / Golpe final', 'Primer golpe', 'Ayuda', 'Defensa'], respuesta: 0 },
+        { japones: '遠慮', lectura: 'enryo', opciones: ['Contención / Reserva', 'Descaro', 'Ataque', 'Confesión'], respuesta: 0 },
+        { japones: '勢い', lectura: 'ikioi', opciones: ['Impulso / Momentum', 'Debilidad', 'Pausa', 'Calma'], respuesta: 0 },
+        { japones: '凄い', lectura: 'sugoi', opciones: ['Increíble / Intenso', 'Débil', 'Aburrido', 'Normal'], respuesta: 0 },
+        { japones: '頼ん', lectura: 'tanon', opciones: ['Pedir', 'Rechazar', 'Ofrecer', 'Ignorar'], respuesta: 0 },
+        { japones: '弄り', lectura: 'ijiri', opciones: ['Toquetear / Jugar con', 'Respetar', 'Observar', 'Evitar'], respuesta: 0 },
+        { japones: '勝手に', lectura: 'katte ni', opciones: ['Por mi cuenta / Arbitrariamente', 'Con permiso', 'Junto con otros', 'Nunca'], respuesta: 0 },
+        { japones: '物欲しそう', lectura: 'monohoshisō', opciones: ['Parecer hambriento / Deseoso', 'Satisfecho', 'Indiferente', 'Enojado'], respuesta: 0 },
+        { japones: '察し', lectura: 'sasshi', opciones: ['Intuición / Leer entre líneas', 'Ignorancia', 'Pregunta', 'Afirmación'], respuesta: 0 },
+        { japones: '手慣れてる', lectura: 'tenareteru', opciones: ['Estar acostumbrado / Tener experiencia', 'Ser nuevo', 'Ser torpe', 'Ser joven'], respuesta: 0 }
     ],
     
-    // MAZO 6 - Nuevas palabras (parte 4)
+    // MAZO 6 - Nuevas palabras
     6: [
-        { japones: '色白', lectura: 'irojiro', opciones: ['Piel clara / Pálida', 'Piel oscura', 'Piel bronceada', 'Piel rojiza'], respuesta: 0 },
-        { japones: '肌', lectura: 'hada', opciones: ['Piel', 'Hueso', 'Músculo', 'Grasa'], respuesta: 0 },
-        { japones: 'まつ毛', lectura: 'matsuge', opciones: ['Pestañas', 'Cejas', 'Cabello', 'Vello corporal'], respuesta: 0 },
-        { japones: '溢れん', lectura: 'afuren', opciones: ['A punto de desbordar', 'Completamente vacío', 'A la mitad', 'Goteando'], respuesta: 0 },
-        { japones: 'ばかり', lectura: 'bakari', opciones: ['Tanto que / Hasta el punto de', 'Un poco', 'Nada', 'Exactamente'], respuesta: 0 },
-        { japones: '爆乳', lectura: 'bakunyū', opciones: ['Pechos explosivos / Enormes', 'Pechos pequeños', 'Pechos medianos', 'Pechos planos'], respuesta: 0 },
-        { japones: '間違い', lectura: 'machigai', opciones: ['Error', 'Acierto', 'Duda', 'Certera'], respuesta: 0 }
-    
+        { japones: '甘~い', lectura: 'amai~', opciones: ['Dulce / Suave (alargado)', 'Amargo', 'Salado', 'Picante'], respuesta: 0 },
+        { japones: '低刺激', lectura: 'tei shigeki', opciones: ['Estímulo bajo / Suave', 'Estímulo fuerte', 'Sin estímulo', 'Estímulo doloroso'], respuesta: 0 },
+        { japones: 'ガシマン', lectura: 'gashiman', opciones: ['Estímulo fuerte y directo', 'Caricia suave', 'Ignorar', 'Observar'], respuesta: 0 },
+        { japones: '緩急', lectura: 'kankyū', opciones: ['Cambio de ritmo (suave-fuerte)', 'Ritmo constante', 'Solo rápido', 'Solo lento'], respuesta: 0 },
+        { japones: 'アクメ', lectura: 'akume', opciones: ['Orgasmo / Clímax', 'Inicio', 'Pausa', 'Frustración'], respuesta: 0 },
+        { japones: '誘い', lectura: 'sasoi', opciones: ['Provocar / Inducir', 'Rechazar', 'Ignorar', 'Temer'], respuesta: 0 },
+        { japones: '潮', lectura: 'shio', opciones: ['Marea / Squirt', 'Sequía', 'Lluvia', 'Viento'], respuesta: 0 },
+        { japones: 'お預け', lectura: 'oazuke', opciones: ['Suspenso / Dejar en espera', 'Permiso inmediato', 'Rechazo total', 'Sorpresa'], respuesta: 0 },
+        { japones: '折角', lectura: 'sekka', opciones: ['Por fin / Con tanto esfuerzo', 'Fácilmente', 'Sin esfuerzo', 'Por accidente'], respuesta: 0 },
+        { japones: '仕上がってる', lectura: 'shiagatteru', opciones: ['Estar perfectamente preparado/excitado', 'Estar crudo', 'Estar frío', 'Estar indiferente'], respuesta: 0 }
     ],
+
+        // MAZO 7 - Nuevas palabras
+    7: [
+        { japones: '幻滅', lectura: 'genmetsu', opciones: ['Desilusión / Decepción', 'Ilusión', 'Esperanza', 'Aceptación'], respuesta: 0 },
+        { japones: '満更', lectura: 'manzara', opciones: ['Del todo / Completamente', 'Apenas', 'Medianamente', 'Nada'], respuesta: 0 },
+        { japones: '優し', lectura: 'yasashi', opciones: ['Amable', 'Cruel', 'Indiferente', 'Grosero'], respuesta: 0 },
+        { japones: 'ますます', lectura: 'masumasu', opciones: ['Cada vez más', 'Cada vez menos', 'Igual', 'De repente'], respuesta: 0 },
+        { japones: '腰', lectura: 'koshi', opciones: ['Cadera', 'Hombro', 'Rodilla', 'Cuello'], respuesta: 0 },
+        { japones: '動いた', lectura: 'ugoita', opciones: ['Se movió', 'Se quedó quieto', 'Durmió', 'Habló'], respuesta: 0 },
+        { japones: '責め', lectura: 'seme', opciones: ['Atacar / Torturar (sexual)', 'Proteger', 'Ignorar', 'Mimar'], respuesta: 0 },
+        { japones: 'しょっぱい', lectura: 'shoppai', opciones: ['Salado', 'Dulce', 'Amargo', 'Ácido'], respuesta: 0 },
+        { japones: 'プリップリ', lectura: 'purippuri', opciones: ['Viscoso / Gelatinoso / Lleno y firme', 'Seco', 'Duro', 'Blando'], respuesta: 0 },
+        { japones: '濃っ厚', lectura: 'nokkou', opciones: ['Espesor / Densidad', 'Ligereza', 'Delgadez', 'Transparencia'], respuesta: 0 }
+    ],
+    
+    // MAZO 8 - Nuevas palabras
+    8: [
+        { japones: 'いっそ', lectura: 'isso', opciones: ['De una vez / Mejor', 'Lentamente', 'Nunca', 'Quizás'], respuesta: 0 },
+        { japones: '絶好調', lectura: 'zekkōchō', opciones: ['En perfecta condición / Óptimo', 'En mal estado', 'Normal', 'Inestable'], respuesta: 0 },
+        { japones: 'とろっとろ', lectura: 'torottoro', opciones: ['Derretido / Muy mojado y blando', 'Seco', 'Duro', 'Frío'], respuesta: 0 },
+        { japones: '挿れたら', lectura: 'iretara', opciones: ['Si insertas / Metes', 'Si sacas', 'Si observas', 'Si ignoras'], respuesta: 0 },
+        { japones: 'いつの間にか', lectura: 'itsu no ma ni ka', opciones: ['Sin darme cuenta / En algún momento', 'Con atención', 'Intencionalmente', 'Nunca'], respuesta: 0 },
+        { japones: '脱がされてる', lectura: 'nugasareteru', opciones: ['Me han quitado (pasivo progresivo)', 'Me he puesto', 'He guardado', 'He roto'], respuesta: 0 },
+        { japones: 'ウブ', lectura: 'ubu', opciones: ['Inocente / Virgen', 'Experto', 'Cínico', 'Indiferente'], respuesta: 0 },
+        { japones: 'フリ', lectura: 'furi', opciones: ['Fingir / Actuar', 'Ser genuino', 'Confesar', 'Negar'], respuesta: 0 },
+        { japones: 'どうせ', lectura: 'dōse', opciones: ['De todos modos / Seguro que', 'Quizás', 'Nunca', 'A veces'], respuesta: 0 },
+        { japones: '裏', lectura: 'ura', opciones: ['Detrás / En secreto', 'En frente', 'Abiertamente', 'Públicamente'], respuesta: 0 }
+    ],
+    
+    // MAZO 9 - Nuevas palabras
+    9: [
+        { japones: '結構', lectura: 'kekkō', opciones: ['Bastante', 'Poco', 'Nada', 'Demasiado'], respuesta: 0 },
+        { japones: '嘘', lectura: 'uso', opciones: ['Mentira', 'Verdad', 'Secreto', 'Promesa'], respuesta: 0 },
+        { japones: '素直', lectura: 'sunao', opciones: ['Honesto / Sincero', 'Mentiroso', 'Tímido', 'Agresivo'], respuesta: 0 },
+        { japones: 'ねじ込んで', lectura: 'nejikonde', opciones: ['Girando / Forzando', 'Sacando suavemente', 'Observando', 'Ignorando'], respuesta: 0 },
+        { japones: 'ようやく', lectura: 'yōyaku', opciones: ['Por fin', 'Recién', 'Nunca', 'Siempre'], respuesta: 0 },
+        { japones: '挿入', lectura: 'sōnyū', opciones: ['Inserción', 'Extracción', 'Observación', 'Preparación'], respuesta: 0 },
+        { japones: '凄っ', lectura: 'suge', opciones: ['Increíble (abreviatura)', 'Normal', 'Aburrido', 'Malo'], respuesta: 0 },
+        { japones: 'する度', lectura: 'suru tabi', opciones: ['Cada vez que', 'La primera vez', 'La última vez', 'Nunca'], respuesta: 0 },
+        { japones: '馴染んで', lectura: 'najinde', opciones: ['Se está adaptando / Encajando', 'Resistiendo', 'Doliendo', 'Separándose'], respuesta: 0 },
+        { japones: 'どんどん', lectura: 'dondon', opciones: ['Cada vez más', 'Cada vez menos', 'Estable', 'Irregularmente'], respuesta: 0 }
+    ],
+    
+    // MAZO 10 - Nuevas palabras
+    10: [
+        { japones: '思わせ振り', lectura: 'omowaseburi', opciones: ['Ambiguo / Que hace ilusionarse', 'Directo', 'Claro', 'Obvio'], respuesta: 0 },
+        { japones: '責任', lectura: 'sekinin', opciones: ['Responsabilidad', 'Irresponsabilidad', 'Libertad', 'Obligación'], respuesta: 0 },
+        { japones: 'ヘイロー', lectura: 'heiro', opciones: ['Halo (del juego)', 'Espada', 'Escudo', 'Hechizo'], respuesta: 0 },
+        { japones: '雑魚', lectura: 'zako', opciones: ['Débil / Basura', 'Fuerte', 'Experto', 'Líder'], respuesta: 0 },
+        { japones: '退いて', lectura: 'hite', opciones: ['Sácale / Retírate', 'Acércate', 'Espera', 'Ayuda'], respuesta: 0 },
+        { japones: '妊娠', lectura: 'ninshin', opciones: ['Embarazo', 'Menstruación', 'Esterilidad', 'Enfermedad'], respuesta: 0 },
+        { japones: '安心', lectura: 'anshin', opciones: ['Tranquilo / Sin preocupación', 'Preocupado', 'Asustado', 'Enojado'], respuesta: 0 },
+        { japones: '決まった', lectura: 'kimatta', opciones: ['Está decidido / Ocurrió', 'Está pendiente', 'Se canceló', 'Se pospuso'], respuesta: 0 },
+        { japones: '生徒', lectura: 'seito', opciones: ['Alumna / Estudiante', 'Profesora', 'Directora', 'Madre'], respuesta: 0 },
+        { japones: '魅力的な', lectura: 'miryokuteki na', opciones: ['Atractiva', 'Repulsiva', 'Ordinaria', 'Aburrida'], respuesta: 0 }
+    ],
+    
+    // MAZO 11 - Nuevas palabras
+    11: [
+        { japones: '囲まれて', lectura: 'kakomarete', opciones: ['Estar rodeado', 'Estar solo', 'Estar arriba', 'Estar abajo'], respuesta: 0 },
+        { japones: '手遅れ', lectura: 'teokure', opciones: ['Demasiado tarde / Irreversible', 'A tiempo', 'Temprano', 'Prevenido'], respuesta: 0 },
+        { japones: '溜まって', lectura: 'tamatte', opciones: ['Acumulado', 'Disminuido', 'Vaciado', 'Perdido'], respuesta: 0 },
+        { japones: '意味', lectura: 'imi', opciones: ['Sentido', 'Sin sentido', 'Acción', 'Palabra'], respuesta: 0 },
+        { japones: '出したく', lectura: 'dashitaku', opciones: ['Querer poner', 'Querer sacar', 'Querer guardar', 'Querer romper'], respuesta: 0 },
+        { japones: 'その気', lectura: 'sono ki', opciones: ['Esa intención / Dispuesta', 'Indiferente', 'Reacia', 'Confundida'], respuesta: 0 },
+        { japones: '遠慮なく', lectura: 'enryo naku', opciones: ['Sin contención', 'Con timidez', 'Con miedo', 'Con respeto'], respuesta: 0 },
+        { japones: '雄', lectura: 'osu', opciones: ['Macho / Dominante', 'Hembra', 'Neutro', 'Sumiso'], respuesta: 0 },
+        { japones: 'さっき', lectura: 'sakki', opciones: ['Hace un rato', 'Ahora', 'Más tarde', 'Ayer'], respuesta: 0 },
+        { japones: '全然', lectura: 'zenzen', opciones: ['Completamente', 'Un poco', 'Medianamente', 'Nada'], respuesta: 0 }
+    ],
+    
+    // MAZO 12 - Nuevas palabras
+    12: [
+        { japones: '違う', lectura: 'chigau', opciones: ['Diferente', 'Igual', 'Similar', 'Opuesto'], respuesta: 0 },
+        { japones: 'もしかして', lectura: 'moshikashite', opciones: ['No me digas que / Acaso', 'Definitivamente', 'Nunca', 'Obviamente'], respuesta: 0 },
+        { japones: '挿れた', lectura: 'ireta', opciones: ['Meter / Insertar', 'Sacar', 'Tocar', 'Observar'], respuesta: 0 },
+        { japones: 'もどかしい', lectura: 'modokashii', opciones: ['Frustrante', 'Satisfactorio', 'Aburrido', 'Emocionante'], respuesta: 0 },
+        { japones: 'これから', lectura: 'korekara', opciones: ['A partir de ahora', 'Hasta ahora', 'Nunca', 'Siempre'], respuesta: 0 },
+        { japones: 'ナメた', lectura: 'nameta', opciones: ['Insolente / Subestimar', 'Respetar', 'Temer', 'Admirar'], respuesta: 0 },
+        { japones: '化け物', lectura: 'bakemono', opciones: ['Monstruo', 'Ángel', 'Humano', 'Animal'], respuesta: 0 },
+        { japones: '呼び', lectura: 'yobi', opciones: ['Llamar / Despertar', 'Ignorar', 'Dormir', 'Silenciar'], respuesta: 0 },
+        { japones: 'からかった', lectura: 'karakatta', opciones: ['Burlarse / Provocar', 'Alabar', 'Consolar', 'Ignorar'], respuesta: 0 },
+        { japones: '罰', lectura: 'batsu', opciones: ['Castigo', 'Premio', 'Indiferencia', 'Perdón'], respuesta: 0 }
+    ],
+    
+    // MAZO 13 - Nuevas palabras
+    13: [
+        { japones: '必死', lectura: 'hisshi', opciones: ['Desesperado', 'Tranquilo', 'Indiferente', 'Confidente'], respuesta: 0 },
+        { japones: '吐き出す', lectura: 'hakidashi', opciones: ['Expulsar / Liberar', 'Retener', 'Tragar', 'Esconder'], respuesta: 0 },
+        { japones: '付き合って', lectura: 'tsukiatte', opciones: ['Acompañar', 'Abandonar', 'Ignorar', 'Rechazar'], respuesta: 0 },
+        { japones: 'おねだり', lectura: 'onedari', opciones: ['Súplica / Petición (coqueta)', 'Rechazo', 'Orden', 'Silencio'], respuesta: 0 },
+        { japones: 'どっか', lectura: 'dokka', opciones: ['A algún lado', 'Aquí mismo', 'A ningún lado', 'A casa'], respuesta: 0 },
+        { japones: 'ガニ股', lectura: 'ganimata', opciones: ['Piernas abiertas en V', 'Piernas cerradas', 'Piernas cruzadas', 'De pie'], respuesta: 0 },
+        { japones: '耕して', lectura: 'tagayashite', opciones: ['Arar / Cultivar (metáfora sexual)', 'Descansar', 'Observar', 'Abandonar'], respuesta: 0 },
+        { japones: '速すぎい', lectura: 'hayasugii', opciones: ['Demasiado rápido', 'Demasiado lento', 'Perfecto', 'Irregular'], respuesta: 0 },
+        { japones: '獣', lectura: 'kemono', opciones: ['Bestia/Animal', 'Humano', 'Ángel', 'Demonio'], respuesta: 0 },
+        { japones: '喘いで', lectura: 'ainde', opciones: ['Gimiendo/Jadeando', 'Callada', 'Hablando', 'Riéndose'], respuesta: 0 }
+    ],
+    
+    // MAZO 14 - Nuevas palabras
+    14: [
+        { japones: '垂れ流し', lectura: 'tare nagashi', opciones: ['Dejar fluir/Goteando libremente', 'Contener', 'Limpiar', 'Secar'], respuesta: 0 },
+        { japones: 'ガチ', lectura: 'gachi', opciones: ['Real/Auténtico/Serio', 'Falso', 'Broma', 'Práctica'], respuesta: 0 },
+        { japones: '上って', lectura: 'agatte', opciones: ['Subiendo', 'Bajando', 'Estable', 'Caendo'], respuesta: 0 },
+        { japones: '来ちゃった', lectura: 'kichatta', opciones: ['Vino/Llegó (con arrepentimiento leve)', 'Se fue', 'Esperó', 'Canceló'], respuesta: 0 },
+        { japones: '動物', lectura: 'dōbutsu', opciones: ['Animal', 'Planta', 'Mineral', 'Humano'], respuesta: 0 },
+        { japones: 'ヤってる', lectura: 'yatteru', opciones: ['Follando/Teniendo sexo', 'Durmiendo', 'Trabajando', 'Estudiando'], respuesta: 0 },
+        { japones: 'まったく', lectura: 'mattaku', opciones: ['Realmente/Completamente', 'Un poco', 'Nada', 'Medianamente'], respuesta: 0 },
+        { japones: '躾け', lectura: 'shitsuke', opciones: ['Entrenar/Disciplinar', 'Malcriar', 'Ignorar', 'Liberar'], respuesta: 0 },
+        { japones: '甲斐', lectura: 'kai', opciones: ['Vale la pena', 'Inútil', 'Normal', 'Peligroso'], respuesta: 0 },
+        { japones: 'つねって', lectura: 'tsunette', opciones: ['Pellizcar', 'Acariciar', 'Golpear', 'Besar'], respuesta: 0 }
+    ],
+    
+    // MAZO 15 - Nuevas palabras
+    15: [
+        { japones: '思いっきり', lectura: 'omoikkiri', opciones: ['Con todas las fuerzas/Intensamente', 'Suavemente', 'Lentamente', 'A medias'], respuesta: 0 },
+        { japones: '中毒', lectura: 'chūdoku', opciones: ['Adicción/Intoxicación', 'Cura', 'Prevención', 'Indiferencia'], respuesta: 0 },
+        { japones: '凄く', lectura: 'sugoku', opciones: ['Muy/Extremadamente', 'Poco', 'Nada', 'Medianamente'], respuesta: 0 },
+        { japones: '性欲', lectura: 'seiyoku', opciones: ['Deseo sexual/Libido', 'Hambre', 'Sueño', 'Sed'], respuesta: 0 },
+        { japones: '強い', lectura: 'tsuyoi', opciones: ['Fuerte', 'Débil', 'Normal', 'Variable'], respuesta: 0 },
+        { japones: '立場上', lectura: 'tachiba ue', opciones: ['Por mi posición/Por mi rol', 'Personalmente', 'Accidentalmente', 'Intencionalmente'], respuesta: 0 },
+        { japones: '生徒たち', lectura: 'seito-tachi', opciones: ['Las alumnas/Los alumnos', 'Los profesores', 'Los padres', 'Los amigos'], respuesta: 0 },
+        { japones: '誘惑', lectura: 'yūwaku', opciones: ['Tentación/Seducción', 'Rechazo', 'Indiferencia', 'Asco'], respuesta: 0 },
+        { japones: '耐えないと', lectura: 'taenaito', opciones: ['Tengo que resistir', 'Puedo ceder', 'No importa', 'Es fácil'], respuesta: 0 },
+        { japones: '辛い', lectura: 'tsurai', opciones: ['Duro/Difícil/Doloroso', 'Fácil', 'Placentero', 'Aburrido'], respuesta: 0 }
+    ],
+    
+    // MAZO 16 - Nuevas palabras
+    16: [
+        { japones: '相談', lectura: 'sōdan', opciones: ['Consulta/Pedir consejo', 'Decisión', 'Orden', 'Secreto'], respuesta: 0 },
+        { japones: 'コッソリ', lectura: 'kossori', opciones: ['En secreto/Discretamente', 'Abiertamente', 'Ruidosamente', 'Públicamente'], respuesta: 0 },
+        { japones: '周り', lectura: 'mawari', opciones: ['Los alrededores/Los demás', 'Yo mismo', 'El centro', 'Lejos'], respuesta: 0 },
+        { japones: '大変', lectura: 'taihen', opciones: ['Grave/Problema grande', 'Pequeño', 'Normal', 'Sin importancia'], respuesta: 0 },
+        { japones: 'ほじって', lectura: 'hojitte', opciones: ['Hurgar/Revolver/Excavar', 'Limpiar', 'Cubrir', 'Ignorar'], respuesta: 0 },
+        { japones: '宣言', lectura: 'sengen', opciones: ['Declaración', 'Secreto', 'Pregunta', 'Negación'], respuesta: 0 },
+        { japones: '隠れ', lectura: 'kakure', opciones: ['Secreto/Oculto', 'Público', 'Obvio', 'Conocido'], respuesta: 0 },
+        { japones: '約束', lectura: 'yakusoku', opciones: ['Promesa', 'Mentira', 'Amenaza', 'Sugerencia'], respuesta: 0 },
+        { japones: '忘れない', lectura: 'wasurenai', opciones: ['No olvidar', 'Olvidar', 'Recordar', 'Ignorar'], respuesta: 0 },
+        { japones: '指切り', lectura: 'yubikiri', opciones: ['Juramento con meñiques', 'Apretón de manos', 'Abrazo', 'Beso'], respuesta: 0 }
+    ],
+    
+    // MAZO 17 - Nuevas palabras
+    17: [
+        { japones: '契約', lectura: 'keiyaku', opciones: ['Contrato', 'Romper', 'Negociar', 'Rechazar'], respuesta: 0 },
+        { japones: '断れ', lectura: 'kotoware', opciones: ['Rechazar', 'Aceptar', 'Considerar', 'Ignorar'], respuesta: 0 },
+        { japones: 'ズルい', lectura: 'zurui', opciones: ['Trampa/Sucio (injusto)', 'Justo', 'Honesto', 'Inocente'], respuesta: 0 },
+        { japones: '秘密', lectura: 'himitsu', opciones: ['Secreto', 'Público', 'Conocido', 'Obvio'], respuesta: 0 },
+        { japones: 'オシャレな', lectura: 'oshare na', opciones: ['Elegantes/Modernos', 'Antiguos', 'Simples', 'Descuidados'], respuesta: 0 },
+        { japones: 'スイーツ', lectura: 'suītsu', opciones: ['Dulces/Postres', 'Salados', 'Amargos', 'Picantes'], respuesta: 0 },
+        { japones: 'コンビニ', lectura: 'konbini', opciones: ['Tienda de conveniencia', 'Supermercado', 'Restaurante', 'Mercado'], respuesta: 0 },
+        { japones: 'やつ', lectura: 'yatsu', opciones: ['Cosas/Tipo', 'Persona', 'Lugar', 'Tiempo'], respuesta: 0 },
+        { japones: '履いてる', lectura: 'haite ru', opciones: ['Llevo puesto (ropa interior)', 'Me he quitado', 'He lavado', 'He comprado'], respuesta: 0 },
+        { japones: '待ちきれない', lectura: 'machikirenai', opciones: ['No poder esperar', 'Paciente', 'Indiferente', 'Olvidadizo'], respuesta: 0 }
+    ],
+    
+    // MAZO 18 - Nuevas palabras
+    18: [
+        { japones: '週末', lectura: 'shūmatsu', opciones: ['Fines de semana', 'Días de semana', 'Vacaciones', 'Festivos'], respuesta: 0 },
+        { japones: 'おしゃべり', lectura: 'o-shaberi', opciones: ['Charlar', 'Guardar silencio', 'Estudiar', 'Trabajar'], respuesta: 0 },
+        { japones: '日', lectura: 'hi', opciones: ['Día', 'Noche', 'Semana', 'Mes'], respuesta: 0 },
+        { japones: '用事', lectura: 'yōji', opciones: ['Asuntos/Tareas', 'Ocio', 'Diversión', 'Descanso'], respuesta: 0 },
+        { japones: '立て込ん', lectura: 'tatekon', opciones: ['Acumularse', 'Disminuir', 'Organizar', 'Limpiar'], respuesta: 0 },
+        { japones: 'お互いの', lectura: 'otagai no', opciones: ['Mutuo/De ambos', 'Solo mío', 'Solo tuyo', 'De nadie'], respuesta: 0 },
+        { japones: 'ぶつけ合う', lectura: 'butsuke au', opciones: ['Chocar/Desahogar uno contra el otro', 'Evitar', 'Ignorar', 'Ayudar'], respuesta: 0 },
+        { japones: 'あとがき', lectura: 'atogaki', opciones: ['Posfacio / Nota del autor', 'Prefacio', 'Capítulo', 'Conclusión'], respuesta: 0 },
+        { japones: 'まずは', lectura: 'mazu wa', opciones: ['Ante todo / Primero', 'Al final', 'Mientras', 'Después'], respuesta: 0 },
+        { japones: 'この本', lectura: 'kono hon', opciones: ['Este libro', 'Ese libro', 'Mi libro', 'Tu libro'], respuesta: 0 }
+    ],
+    
+    // MAZO 19 - Nuevas palabras
+    19: [
+        { japones: '誠に', lectura: 'makoto ni', opciones: ['Sinceramente / Verdaderamente', 'Falsamente', 'Parcialmente', 'Accidentalmente'], respuesta: 0 },
+        { japones: 'を描く', lectura: 'o kaku', opciones: ['Dibujar', 'Borrar', 'Leer', 'Escribir'], respuesta: 0 },
+        { japones: '個人的', lectura: 'kojinteki', opciones: ['Personal', 'Público', 'General', 'Colectivo'], respuesta: 0 },
+        { japones: '感情', lectura: 'kanjō', opciones: ['Sentimiento / Deseo', 'Pensamiento', 'Acción', 'Palabra'], respuesta: 0 },
+        { japones: '顔アリ', lectura: 'kao ari', opciones: ['Con rostro visible', 'Anónimo', 'Con máscara', 'Sin rostro'], respuesta: 0 },
+        { japones: '変に', lectura: 'hen ni', opciones: ['De forma extraña / Demasiado', 'Normalmente', 'Ligeramente', 'Apenas'], respuesta: 0 },
+        { japones: 'セリフ', lectura: 'serifu', opciones: ['Diálogos', 'Acciones', 'Pensamientos', 'Descripciones'], respuesta: 0 },
+        { japones: '言わせ', lectura: 'iwa se', opciones: ['Hacer decir', 'Hacer callar', 'Escuchar', 'Ignorar'], respuesta: 0 },
+        { japones: '空気感', lectura: 'kūki kan', opciones: ['Atmósfera', 'Lugar', 'Tiempo', 'Objeto'], respuesta: 0 },
+        { japones: '言葉選び', lectura: 'kotoba erabi', opciones: ['Elección de palabras', 'Uso de imágenes', 'Elección de colores', 'Composición'], respuesta: 0 }
+    ],
+    
+    // MAZO 20 - Nuevas palabras
+    20: [
+        { japones: 'なかなか', lectura: 'nakanaka', opciones: ['Bastante / Considerablemente', 'Poco', 'Nada', 'Demasiado'], respuesta: 0 },
+        { japones: '難しかった', lectura: 'muzukashikatta', opciones: ['Difícil', 'Fácil', 'Aburrido', 'Interesante'], respuesta: 0 },
+        { japones: 'おかげで', lectura: 'okage de', opciones: ['Gracias a', 'A pesar de', 'Debido a', 'Sin'], respuesta: 0 },
+        { japones: '創作', lectura: 'sōsaku', opciones: ['Creación', 'Destrucción', 'Copia', 'Observación'], respuesta: 0 },
+        { japones: '感想', lectura: 'kansō', opciones: ['Impresiones / Comentarios', 'Críticas', 'Elogios', 'Insultos'], respuesta: 0 },
+        { japones: '声をかけて', lectura: 'koe o kakete', opciones: ['Dirigirme la palabra', 'Ignorarme', 'Evitarme', 'Criticarme'], respuesta: 0 },
+        { japones: '一つ一つ', lectura: 'hitotsu hitotsu', opciones: ['Uno por uno', 'Todos juntos', 'Algunos', 'Ninguno'], respuesta: 0 },
+        { japones: '思える', lectura: 'omoeru', opciones: ['Poder pensar', 'Poder hacer', 'Poder decir', 'Poder ver'], respuesta: 0 },
+        { japones: '大きな', lectura: 'ōkina', opciones: ['Grande', 'Pequeño', 'Mediano', 'Enorme'], respuesta: 0 },
+        { japones: '力', lectura: 'chikara', opciones: ['Fuerza', 'Debilidad', 'Energía', 'Poder'], respuesta: 0 }
+    ],
+    
+    // MAZO 21 - Últimas palabras
+    21: [
+        { japones: 'まだまだ', lectura: 'mada mada', opciones: ['Todavía mucho', 'Ya está bien', 'Suficiente', 'Demasiado'], respuesta: 0 },
+        { japones: '描きたい', lectura: 'kakitai', opciones: ['Quiero dibujar', 'Quiero borrar', 'Quiero leer', 'Quiero escribir'], respuesta: 0 },
+        { japones: '活動', lectura: 'katsudō', opciones: ['Actividad / Creación', 'Descanso', 'Inactividad', 'Pausa'], respuesta: 0 },
+        { japones: 'お会い', lectura: 'o-ai', opciones: ['Encontrarnos (humilde)', 'Separarnos', 'Ignorarnos', 'Evitarnos'], respuesta: 0 },
+        { japones: '嬉しい', lectura: 'ureshii', opciones: ['Feliz', 'Triste', 'Enojado', 'Indiferente'], respuesta: 0 },
+        { japones: '今後とも', lectura: 'kongotomo', opciones: ['En el futuro también', 'Solo esta vez', 'Nunca más', 'Hasta luego'], respuesta: 0 }
+    ],
+
 
     // ====================
     // MAZOS DIFÍCILES ESPECIALES - Subcontenedor 3.2
