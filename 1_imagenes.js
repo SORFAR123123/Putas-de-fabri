@@ -28,13 +28,13 @@ const sistemaDescriptivo = {
                 tipo: 'shonen'
             },
             4: { 
-                nombre: 'Hentais',
+                nombre: 'Hanabi',
                 imagen: 'https://i3.nhentai.net/galleries/3731090/1.webp', 
                 descripcion: 'Contenedor de mangas shojo',
                 tipo: 'shojo'
             },
             5: { 
-                nombre: 'CONTAINER 5',
+                nombre: 'Hentai',
                 imagen: '', 
                 descripcion: 'Contenedor de mangas seinen',
                 tipo: 'seinen'
