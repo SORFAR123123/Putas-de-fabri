@@ -2834,6 +2834,55 @@ function pasarSiguientePalabraMazoDificil() {
     }
 }
 
+// ====================
+// FUNCIÓN PARA NAVEGAR A MAZOS ADYACENTES
+// ====================
+
+function irAMazo(direccion) {
+    let nuevoMazo = parseInt(mazoActual) + (direccion === 'siguiente' ? 1 : -1);
+    
+    // Determinar el número máximo de mazos disponibles
+    const mazosDisponibles = contarMazosDisponibles(contenedorActual, subcontenedorActual);
+    const maxMazos = Math.max(10, mazosDisponibles);
+    
+    // Verificar límites
+    if (nuevoMazo < 1) {
+        nuevoMazo = maxMazos;
+    } else if (nuevoMazo > maxMazos) {
+        nuevoMazo = 1;
+    }
+    
+    // Verificar si el mazo tiene vocabulario
+    const tieneVocabulario = verificarVocabularioDisponible(contenedorActual, subcontenedorActual, nuevoMazo);
+    
+    if (tieneVocabulario) {
+        iniciarQuiz(contenedorActual, subcontenedorActual, nuevoMazo);
+    } else {
+        // Buscar el siguiente mazo con vocabulario
+        let mazoEncontrado = false;
+        let intentos = 0;
+        
+        while (!mazoEncontrado && intentos < maxMazos) {
+            nuevoMazo += (direccion === 'siguiente' ? 1 : -1);
+            
+            if (nuevoMazo < 1) nuevoMazo = maxMazos;
+            if (nuevoMazo > maxMazos) nuevoMazo = 1;
+            
+            if (verificarVocabularioDisponible(contenedorActual, subcontenedorActual, nuevoMazo)) {
+                mazoEncontrado = true;
+            }
+            
+            intentos++;
+        }
+        
+        if (mazoEncontrado) {
+            iniciarQuiz(contenedorActual, subcontenedorActual, nuevoMazo);
+        } else {
+            alert("No hay más mazos disponibles con vocabulario en este subcontenedor.");
+        }
+    }
+}
+
 function finalizarQuiz() {
     const porcentaje = Math.round((aciertos / palabrasActuales.length) * 100);
     
@@ -2884,6 +2933,9 @@ function finalizarQuiz() {
                 <p style="font-size: 1.2rem; color: #8A5AF7;">
                     ${aciertos} aciertos • ${errores} errores
                 </p>
+                <p style="opacity: 0.8; margin-top: 10px;">
+                    Mazo ${mazoActual} completado
+                </p>
             </div>
             
             <div style="background: rgba(255, 255, 255, 0.05); padding: 25px; border-radius: 15px; margin: 20px 0;">
@@ -2917,6 +2969,21 @@ function finalizarQuiz() {
                 </script>
             ` : ''}
             
+            <!-- NAVEGACIÓN ENTRE MAZOS -->
+            <div style="text-align: center; margin: 30px 0;">
+                <div style="display: flex; justify-content: center; gap: 15px; margin-bottom: 15px;">
+                    <button class="quiz-btn" onclick="irAMazo('anterior')" style="background: linear-gradient(135deg, #5864F5, #8A5AF7);">
+                        ⬅️ Mazo Anterior
+                    </button>
+                    <button class="quiz-btn" onclick="irAMazo('siguiente')" style="background: linear-gradient(135deg, #4CAF50, #2E7D32);">
+                        Mazo Siguiente ➡️
+                    </button>
+                </div>
+                <p style="opacity: 0.7; font-size: 0.9rem;">
+                    Navega rápidamente entre mazos sin volver al menú
+                </p>
+            </div>
+            
             <!-- BOTÓN PARA SRS SI HAY PALABRAS FALLADAS -->
             ${srsDatabase.palabras.length > 0 ? `
                 <div style="text-align: center; margin: 20px 0;">
@@ -2946,13 +3013,13 @@ function finalizarQuiz() {
                     ↩️ Volver a Mazos
                 </button>
                 <button class="quiz-btn btn-siguiente" onclick="repetirQuiz()">
-                    🔄 Repetir Mazo
+                    🔄 Repetir Mazo Actual
                 </button>
             </div>
         </div>
     `;
     
-    // Hacer que funcionVolver sea accesible globalmente solo para este caso
+    // Hacer que las funciones sean accesibles globalmente
     window.funcionVolver = funcionVolver;
     
     actualizarContadorDineroInicio();
