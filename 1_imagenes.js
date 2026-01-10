@@ -139,8 +139,8 @@ const sistemaDescriptivo = {
             
             // Contenedor 3
             '3_1': { 
-                nombre: 'Amiga de mi hermana streamer es putona',
-                imagen: 'https://i1.nhentai.net/galleries/3711976/2.webp', 
+                nombre: 'Nonomi cachonda puta',
+                imagen: 'https://i2.nhentai.net/galleries/3727945/24.webp', 
                 descripcion: '', 
                 nivel: '' 
             },
