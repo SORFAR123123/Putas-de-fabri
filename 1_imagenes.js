@@ -22,14 +22,14 @@ const sistemaDescriptivo = {
                 tipo: 'manga'
             },
             3: { 
-                nombre: ' Hentais xD',
+                nombre: ' Blue archive xD',
                 imagen: 'https://i2.nhentai.net/galleries/3712667/1.webp', 
                 descripcion: 'Contenedor de mangas shonen',
                 tipo: 'shonen'
             },
             4: { 
-                nombre: 'CONTAINER 4',
-                imagen: '', 
+                nombre: 'Hentais',
+                imagen: 'https://i3.nhentai.net/galleries/3731090/1.webp', 
                 descripcion: 'Contenedor de mangas shojo',
                 tipo: 'shojo'
             },
