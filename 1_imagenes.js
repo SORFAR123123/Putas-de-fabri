@@ -108,7 +108,7 @@ const sistemaDescriptivo = {
             // TESTING
             '1_6': { 
                 nombre: 'Testing',
-                imagen: '', 
+                imagen: 'https://i2.nhentai.net/galleries/3731090/20.webp', 
                 descripcion: '', 
                 nivel: '' 
             },
