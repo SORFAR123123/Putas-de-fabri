@@ -1456,19 +1456,21 @@ function crearSubcontenedoresAnimesUI(contenedor) {
     for (let i = 1; i <= subcontenedoresConfigurados; i++) {
         const tieneConfiguracion = subcontenedoresDisponibles.includes(i);
         const subData = obtenerSubcontenedorAnime(contenedor, i);
-        const desc = subData.descripcion || (tieneConfiguracion ? 'Anime disponible' : '(Sin anime configurado)');
         const animeInfo = tieneConfiguracion ? obtenerAnime(contenedor, i) : null;
+        const tieneAnime = tieneConfiguracion && animeInfo !== null; // ← CORRECCIÓN CLAVE
+        
+        const desc = subData.descripcion || (tieneAnime ? 'Anime disponible' : '(Sin anime configurado)');
         
         html += `
-            <div class="subcontenedor-item" onclick="${tieneConfiguracion ? `seleccionarAccionAnime(${contenedor}, ${i})` : `cargarMazosAnimes(${contenedor}, ${i})`}">
+            <div class="subcontenedor-item" onclick="${tieneAnime ? `seleccionarAccionAnime(${contenedor}, ${i})` : `cargarMazosAnimes(${contenedor}, ${i})`}">
                 <div class="subcontenedor-img" style="background-image: url('${subData.imagen || obtenerImagenSubcontenedorAnime(contenedor, i)}')"></div>
-                <h3>${tieneConfiguracion ? animeInfo.titulo.split(' ')[0] : `Anime ${i}`}</h3>
-                ${tieneConfiguracion ? 
+                <h3>${tieneAnime ? animeInfo.titulo.split(' ')[0] : `Anime ${i}`}</h3>
+                ${tieneAnime ? 
                     `<p><strong>${animeInfo.titulo}</strong></p>
                      <p style="font-size: 0.9rem; opacity: 0.8;">${animeInfo.duracion} • ${animeInfo.categoria}</p>` 
                     : `<p style="color: #FF6B6B;">${desc}</p>`}
                 <div class="card-button" style="margin-top: 10px; padding: 10px 20px; font-size: 0.9rem;">
-                    ${tieneConfiguracion ? '🎬 Ver opciones' : '📚 Solo vocabulario'}
+                    ${tieneAnime ? '🎬 Ver opciones' : '📚 Solo vocabulario'}
                 </div>
             </div>
         `;
@@ -1653,19 +1655,21 @@ function crearSubcontenedoresAudiosUI(contenedor) {
     for (let i = 1; i <= subcontenedoresConfigurados; i++) {
         const tieneConfiguracion = subcontenedoresDisponibles.includes(i);
         let imagenSubcontenedor = obtenerImagenSubcontenedorAudio(contenedor, i);
-        const desc = tieneConfiguracion ? 'Opening disponible' : '(Sin audio configurado)';
         const audioInfo = tieneConfiguracion ? obtenerAudio(contenedor, i) : null;
+        const tieneAudio = tieneConfiguracion && audioInfo !== null; // ← CORRECCIÓN CLAVE
+        
+        const desc = tieneAudio ? audioInfo.descripcion : '(Sin audio configurado)';
         
         html += `
-            <div class="subcontenedor-item" onclick="${tieneConfiguracion ? `seleccionarAccionAudio(${contenedor}, ${i})` : `cargarMazosAudios(${contenedor}, ${i})`}">
+            <div class="subcontenedor-item" onclick="${tieneAudio ? `seleccionarAccionAudio(${contenedor}, ${i})` : `cargarMazosAudios(${contenedor}, ${i})`}">
                 <div class="subcontenedor-img" style="background-image: url('${imagenSubcontenedor}')"></div>
-                <h3>${tieneConfiguracion ? audioInfo.titulo.split('-')[0] : `Audio ${i}`}</h3>
-                ${tieneConfiguracion ? 
+                <h3>${tieneAudio ? audioInfo.titulo.split('-')[0] : `Audio ${i}`}</h3>
+                ${tieneAudio ? 
                     `<p><strong>${audioInfo.titulo}</strong></p>
                      <p style="font-size: 0.9rem; opacity: 0.8;">${audioInfo.artista} • ${audioInfo.duracion}</p>` 
                     : `<p style="color: #FF6B6B;">${desc}</p>`}
                 <div class="card-button" style="margin-top: 10px; padding: 10px 20px; font-size: 0.9rem; background: linear-gradient(135deg, #FF6B6B, #FFD166);">
-                    ${tieneConfiguracion ? '🎵 Ver opciones' : '📚 Solo vocabulario'}
+                    ${tieneAudio ? '🎵 Ver opciones' : '📚 Solo vocabulario'}
                 </div>
             </div>
         `;
@@ -1875,20 +1879,22 @@ function crearSubcontenedoresASMRUI(contenedor) {
     for (let i = 1; i <= subcontenedoresConfigurados; i++) {
         const tieneConfiguracion = subcontenedoresDisponibles.includes(i);
         const subData = obtenerSubcontenedorASMR(contenedor, i);
-        const desc = subData.descripcion || (tieneConfiguracion ? 'ASMR disponible' : '(Sin audio ASMR configurado)');
         const asmrInfo = tieneConfiguracion ? obtenerASMR(contenedor, i) : null;
+        const tieneASMR = tieneConfiguracion && asmrInfo !== null; // ← CORRECCIÓN CLAVE
+        
+        const desc = subData.descripcion || (tieneASMR ? 'ASMR disponible' : '(Sin audio ASMR configurado)');
         
         html += `
-            <div class="subcontenedor-item" onclick="${tieneConfiguracion ? `seleccionarAccionASMR(${contenedor}, ${i})` : 'alert("Este sub-contenedor no tiene audio ASMR disponible")'}">
+            <div class="subcontenedor-item" onclick="${tieneASMR ? `seleccionarAccionASMR(${contenedor}, ${i})` : 'alert("Este sub-contenedor no tiene audio ASMR disponible")'}">
                 <div class="subcontenedor-img" style="background-image: url('${subData.imagen || obtenerImagenSubcontenedorASMR(contenedor, i)}')"></div>
-                <h3>${tieneConfiguracion ? asmrInfo.titulo.split(' ')[0] : `ASMR ${i}`}</h3>
-                ${tieneConfiguracion ? 
+                <h3>${tieneASMR ? asmrInfo.titulo.split(' ')[0] : `ASMR ${i}`}</h3>
+                ${tieneASMR ? 
                     `<p><strong>${asmrInfo.titulo}</strong></p>
                      <p style="font-size: 0.9rem; opacity: 0.8;">${asmrInfo.duracion} • ${asmrInfo.categoria}</p>
                      <p style="font-size: 0.8rem; opacity: 0.7;">🎤 ${asmrInfo.tipoVoz}</p>` 
                     : `<p style="color: #FF6B6B;">${desc}</p>`}
                 <div class="card-button" style="margin-top: 10px; padding: 10px 20px; font-size: 0.9rem; background: linear-gradient(135deg, #9C27B0, #673AB7);">
-                    ${tieneConfiguracion ? '🎧 Escuchar ASMR' : 'Vacío'}
+                    ${tieneASMR ? '🎧 Escuchar ASMR' : 'Vacío'}
                 </div>
             </div>
         `;
@@ -2210,19 +2216,21 @@ function crearSubcontenedoresVideosUI(contenedor) {
     for (let i = 1; i <= subcontenedoresConfigurados; i++) {
         const tieneConfiguracion = subcontenedoresDisponibles.includes(i);
         const subData = obtenerSubcontenedorVideo(contenedor, i);
-        const desc = subData.descripcion || (tieneConfiguracion ? 'Video disponible' : '(Sin video)');
         const videoInfo = tieneConfiguracion ? obtenerVideo(contenedor, i) : null;
+        const tieneVideo = tieneConfiguracion && videoInfo !== null; // ← CORRECCIÓN CLAVE
+        
+        const desc = tieneVideo ? videoInfo.descripcion : subData.descripcion || '(Sin video)';
         
         html += `
-            <div class="subcontenedor-item" onclick="${tieneConfiguracion ? `cargarVideo(${contenedor}, ${i})` : 'alert("Este sub-contenedor no tiene video disponible")'}">
+            <div class="subcontenedor-item" onclick="${tieneVideo ? `cargarVideo(${contenedor}, ${i})` : 'alert("Este sub-contenedor no tiene video disponible")'}">
                 <div class="subcontenedor-img" style="background-image: url('${subData.imagen || obtenerImagenSubcontenedor(contenedor, i)}')"></div>
-                <h3>Video ${i}</h3>
-                ${tieneConfiguracion ? 
+                <h3>${tieneVideo ? videoInfo.titulo.split(' ')[0] : `Video ${i}`}</h3>
+                ${tieneVideo ? 
                     `<p><strong>${videoInfo.titulo}</strong></p>
                      <p style="font-size: 0.9rem; opacity: 0.8;">${videoInfo.duracion} • ${videoInfo.categoria}</p>` 
                     : `<p style="color: #FF6B6B;">${desc}</p>`}
                 <div class="card-button" style="margin-top: 10px; padding: 10px 20px; font-size: 0.9rem;">
-                    ${tieneConfiguracion ? '▶️ Ver video' : 'Vacío'}
+                    ${tieneVideo ? '▶️ Ver video' : 'Vacío'}
                 </div>
             </div>
         `;
@@ -2441,7 +2449,7 @@ function iniciarQuizDificil(contenedor, subcontenedor, mazoId) {
     document.getElementById('manga-section').style.display = 'none';
     document.getElementById('quiz-section').style.display = 'block';
     
-    // Cargar primera palabra
+    // Cargar primera palabra del mazo difícil
     mostrarPalabraQuizDificil();
 }
 
