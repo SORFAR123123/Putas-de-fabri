@@ -1212,7 +1212,69 @@ const vocabularioDatabase = {
         { japones: '舌', lectura: 'shita', opciones: ['Lengua', 'Labios', 'Dientes', 'Garganta'], respuesta: 0 },
         { japones: '舐め取り', lectura: 'nametori', opciones: ['Limpiar lamiendo / Lamer y tragar', 'Escupir', 'Ignorar', 'Limpiar con paño'], respuesta: 0 },
         { japones: 'なさい', lectura: 'nasai', opciones: ['Hazlo (imperativo suave/formal)', 'No lo hagas', 'Espera', 'Olvídalo'], respuesta: 0 }
+    ],
+    
+    
+    'D1': [
+        { japones: '強制退去', lectura: 'kyōsei taikyo', opciones: ['Desalojo forzoso / Expulsión', 'Invitación voluntaria', 'Permiso de entrada', 'Contrato de alquiler'], respuesta: 0 },
+        { japones: '生活費', lectura: 'seikatsu-hi', opciones: ['Gastos de vida / Costo de vida', 'Ingresos extras', 'Ahorros personales', 'Deudas pendientes'], respuesta: 0 },
+        { japones: '稼げると', lectura: 'kasegeru to', opciones: ['Que se puede ganar (dinero)', 'Que se puede perder', 'Que se debe ahorrar', 'Que se debe invertir'], respuesta: 0 },
+        { japones: '話題の', lectura: 'wadai no', opciones: ['Que está de moda / Que es tema', 'Que está olvidado', 'Que es secreto', 'Que es impopular'], respuesta: 0 },
+        { japones: '馴れ馴れしい', lectura: 'narenare shii', opciones: ['Demasiado familiar / Confianzudo', 'Excesivamente tímido', 'Profesionalmente distante', 'Cortésmente reservado'], respuesta: 0 },
+        { japones: '奇遇', lectura: 'kigū', opciones: ['Casualidad / Coincidencia', 'Encuentro planeado', 'Cita programada', 'Evitación intencional'], respuesta: 0 },
+        { japones: '到着した', lectura: 'tōchaku shita', opciones: ['He llegado', 'Me he ido', 'Me he perdido', 'Me he retrasado'], respuesta: 0 },
+        { japones: '特徴', lectura: 'tokuchō', opciones: ['Características distintivas', 'Defectos notables', 'Ventajas competitivas', 'Similitudes comunes'], respuesta: 0 },
+        { japones: '移動', lectura: 'idō', opciones: ['Moverse / Cambiar de lugar', 'Permanecer quieto', 'Establecerse fijo', 'Anclarse en sitio'], respuesta: 0 },
+        { japones: 'ご休意', lectura: 'go-kyūi', opciones: ['Descanso / Relax (término de hotel de amor)', 'Trabajo intenso', 'Actividad física', 'Reunión formal'], respuesta: 0 }
+    ],
+    
+    'D2': [
+        { japones: 'ご宿泊', lectura: 'go-shukuhaku', opciones: ['Hospedaje / Pernoctar', 'Visita diurna', 'Reunión breve', 'Salida inmediata'], respuesta: 0 },
+        { japones: '最大', lectura: 'saidai', opciones: ['Máximo', 'Mínimo indispensable', 'Promedio estándar', 'Límite inferior'], respuesta: 0 },
+        { japones: 'ご入室', lectura: 'go-nyūshitsu', opciones: ['Ingreso / Entrada a la habitación', 'Salida del cuarto', 'Limpieza del espacio', 'Reserva cancelada'], respuesta: 0 },
+        { japones: '黙っていて', lectura: 'damatte ite', opciones: ['Guarda silencio / No digas nada', 'Habla libremente', 'Expresa opiniones', 'Discute abiertamente'], respuesta: 0 },
+        { japones: '次第', lectura: 'shidai', opciones: ['Depende de / Según', 'Independiente de', 'Contrario a', 'Similar a'], respuesta: 0 },
+        { japones: '指示', lectura: 'shiji', opciones: ['Instrucciones / Órdenes', 'Sugerencias opcionales', 'Peticiones informales', 'Consultas dudosas'], respuesta: 0 },
+        { japones: '亀頭', lectura: 'kitō', opciones: ['Glande / Cabeza del pene', 'Cuerpo del pene', 'Testículos completos', 'Precum líquido'], respuesta: 0 },
+        { japones: '意識', lectura: 'ishiki', opciones: ['Conciencia / Ser consciente', 'Estado inconsciente', 'Despiste temporal', 'Sueño profundo'], respuesta: 0 },
+        { japones: '丁寧に', lectura: 'teinei ni', opciones: ['Cortésmente / Con cuidado', 'Descuidada y rápidamente', 'Groseramente', 'Indiferentemente'], respuesta: 0 },
+        { japones: '熟成された', lectura: 'jukusei sareta', opciones: ['Madurado / Fermentado', 'Crudo y fresco', 'Podrido y viejo', 'Inmaduro y verde'], respuesta: 0 }
+    ],
+    
+    'D3': [
+        { japones: '咥えやがって', lectura: 'kue yagatte', opciones: ['Lo estás metiendo en la boca (despectivo)', 'Lo estás escupiendo', 'Lo estás ignorando', 'Lo estás guardando'], respuesta: 0 },
+        { japones: '雄', lectura: 'osu', opciones: ['Macho (animal)', 'Hembra adulta', 'Cría joven', 'Animal neutro'], respuesta: 0 },
+        { japones: '染み付いてくる', lectura: 'shimitsuite kuru', opciones: ['Se impregna / Penetra profundamente', 'Se evapora rápidamente', 'Se queda superficial', 'Desaparece completamente'], respuesta: 0 },
+        { japones: '窄めて', lectura: 'tsumamete', opciones: ['Estrechando / Apretando (te-forma)', 'Abriendo ampliamente', 'Relajando suavemente', 'Dejando igual'], respuesta: 0 },
+        { japones: '頬張り', lectura: 'hoobari', opciones: ['Llenar las mejillas / Meter en la boca', 'Vaciar la boca', 'Masticar lento', 'Escupir contenido'], respuesta: 0 },
+        { japones: '上下に', lectura: 'jōge ni', opciones: ['Arriba y abajo', 'Izquierda y derecha', 'Adentro y afuera', 'Delante y detrás'], respuesta: 0 },
+        { japones: 'むせ返る', lectura: 'musekaeru', opciones: ['Abrumador / Sofocante (olor fuerte)', 'Aroma suave', 'Falta de olor', 'Fragancia ligera'], respuesta: 0 },
+        { japones: '膣穴', lectura: 'chitsuketsu', opciones: ['Agujero vaginal / Vagina', 'Entrada anal', 'Abertura uretral', 'Cavidad bucal'], respuesta: 0 },
+        { japones: 'アクメ', lectura: 'akume', opciones: ['Orgasmo / Clímax (término erótico)', 'Inicio de la excitación', 'Punto de frustración', 'Estado de calma'], respuesta: 0 },
+        { japones: '限る', lectura: 'kagiru', opciones: ['Limitarse a / Ser lo mejor', 'Ser lo peor opción', 'Ser promedio normal', 'Ser igual que otros'], respuesta: 0 }
+    ],
+    
+    'D4': [
+        { japones: '次女', lectura: 'jijo', opciones: ['Segunda hija (en quintillizas: Nino)', 'Primogénita', 'Hija menor', 'Hija única'], respuesta: 0 },
+        { japones: '名器', lectura: 'meiki', opciones: ['Vagina de primera clase / "Famosa" (término erótico)', 'Vagina común', 'Vagina estrecha', 'Vagina inexperta'], respuesta: 0 },
+        { japones: '侮れん', lectura: 'anadoren', opciones: ['No subestimar / No despreciar (forma contraída)', 'Subestimar fácilmente', 'Sobreestimar erróneamente', 'Ignorar completamente'], respuesta: 0 },
+        { japones: '溜め込みました', lectura: 'tamekomimashita', opciones: ['He acumulado (pasado formal)', 'He derrochado', 'He distribuido', 'He perdido'], respuesta: 0 },
+        { japones: '仕込んだ', lectura: 'shiikonda', opciones: ['Entrenó / Preparó (en sentido sexual)', 'Descuidó el entrenamiento', 'Olvidó enseñar', 'Abandonó la preparación'], respuesta: 0 },
+        { japones: '極上', lectura: 'gokujō', opciones: ['De primera clase / Supremo', 'De calidad inferior', 'Promedio normal', 'Defectuoso'], respuesta: 0 },
+        { japones: '進んで', lectura: 'susunde', opciones: ['Avanzando / Lanzándose', 'Retrocediendo con miedo', 'Quedándose quieto', 'Evitando participar'], respuesta: 0 },
+        { japones: '教育', lectura: 'kyōiku', opciones: ['Educación / Enseñanza', 'Ignorancia voluntaria', 'Malentendido', 'Desinformación'], respuesta: 0 },
+        { japones: '行き届いて', lectura: 'yukitodoite', opciones: ['Ha llegado / Ha sido impartida completamente', 'Ha fallado en llegar', 'Ha sido parcial', 'Ha sido rechazada'], respuesta: 0 },
+        { japones: '証拠', lectura: 'shōko', opciones: ['Prueba / Evidencia concreta', 'Mentira fabricada', 'Excusa pobre', 'Negación vacía'], respuesta: 0 }
+    ],
+    
+    'D5': [
+        { japones: '教育指導', lectura: 'kyōiku shidō', opciones: ['Guía educativa (irónico por entrenamiento sexual)', 'Abandono educativo', 'Mal consejo', 'Falta de dirección'], respuesta: 0 },
+        { japones: '教頭先生', lectura: 'kyōtō-sensei', opciones: ['Subdirector / Vicedirector (del colegio)', 'Director principal', 'Profesor ordinario', 'Estudiante avanzado'], respuesta: 0 },
+        { japones: '会場限定', lectura: 'kaijō gentei', opciones: ['Exclusivo del evento / Venue-limited', 'Disponible en todo lugar', 'Versión en línea', 'Edición general'], respuesta: 0 },
+        { japones: '鍋屋敷', lectura: 'Nabe Yashiki', opciones: ['(Título o círculo del doujinshi)', 'Editorial comercial grande', 'Tienda minorista', 'Biblioteca pública'], respuesta: 0 },
+        { japones: '舐め取り', lectura: 'nametori', opciones: ['Limpiar lamiendo / Lamer y tragar', 'Escupir despreciativamente', 'Ignorar el fluido', 'Limpiar con toalla'], respuesta: 0 }
     ]
+
 },
     // ================================================
     // CONTENEDOR 2 (NUEVO)
