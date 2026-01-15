@@ -99,8 +99,8 @@ const sistemaDescriptivo = {
                 nivel: '' 
             },
             '1_5': { 
-                nombre: 'Sub-contenedor 5',
-                imagen: '', 
+                nombre: 'Nino quiere plata y me la cacho',
+                imagen: 'https://i2.nhentai.net/galleries/1547347/1.jpg', 
                 descripcion: '', 
                 nivel: '' 
                 
