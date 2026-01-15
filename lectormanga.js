@@ -165,6 +165,36 @@ const mangaDatabase = {
          
         ]
     },
+
+     // Sub-contenedor 1.5
+    '1_5': {
+        titulo: "🎌 Quintillizas Porneras",
+        descripcion: "Nino mi puta quiere plata.",
+        paginas: 21,
+        año: 2024,
+        autor: "Chikell ",
+        paginasUrls: [
+            "https://i2.nhentai.net/galleries/1547347/1.jpg", // Página 1
+             "https://i1.nhentai.net/galleries/1547347/2.jpg", // Página 1
+             "https://i2.nhentai.net/galleries/1547347/3.jpg", // Página 1
+             "https://i2.nhentai.net/galleries/1547347/4.jpg", // Página 1
+             "https://i1.nhentai.net/galleries/1547347/5.jpg", // Página 1
+             "https://i4.nhentai.net/galleries/1547347/6.jpg", // Página 1
+             "https://i3.nhentai.net/galleries/1547347/7.jpg", // Página 1
+             "https://i2.nhentai.net/galleries/1547347/8.jpg", // Página 1
+             "https://i2.nhentai.net/galleries/1547347/9.jpg", // Página 1
+             "https://i2.nhentai.net/galleries/1547347/10.jpg", // Página 1
+             "https://i4.nhentai.net/galleries/1547347/11.jpg", // Página 1
+             "https://i2.nhentai.net/galleries/1547347/12.jpg", // Página 1
+             "https://i4.nhentai.net/galleries/1547347/13.jpg", // Página 1
+             "https://i2.nhentai.net/galleries/1547347/14.jpg", // Página 1
+             "https://i2.nhentai.net/galleries/1547347/15.jpg", // Página 1
+             "https://i2.nhentai.net/galleries/1547347/16.jpg", // Página 1
+             "https://i1.nhentai.net/galleries/1547347/17.jpg", // Página 1
+             "https://i3.nhentai.net/galleries/1573274/19.jpg", // Página 1
+             "https://i3.nhentai.net/galleries/1547347/20.jpg" // Página 1    
+        ]
+    },
     // ================================================
     // CONTENEDOR 2 (VACÍO - LISTO PARA RELLENAR)
     // ================================================
