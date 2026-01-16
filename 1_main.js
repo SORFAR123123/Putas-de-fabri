@@ -571,7 +571,7 @@ function crearOpcionesSRS(palabra) {
     `;
 }
 
-// Verificar respuesta en SRS
+// MODIFICADO: Ahora pasa automáticamente si la respuesta es correcta
 function verificarRespuestaSRS(opcionSeleccionada, posicionCorrecta) {
     if (esperandoSiguiente) return;
     
@@ -621,24 +621,24 @@ function verificarRespuestaSRS(opcionSeleccionada, posicionCorrecta) {
     const controls = document.querySelector('.quiz-controls');
     controls.innerHTML = '';
     
-    // Crear botones de calidad para SRS
+    // MODIFICACIÓN CLAVE: Si es correcta, pasar automáticamente después de 1.5 segundos
     if (correcta) {
         controls.innerHTML = `
-            <div style="display: flex; gap: 10px; justify-content: center;">
-                <button class="quiz-btn" onclick="calidadRespuestaSRS(3)" style="background: #4CAF50;">
-                    😊 Fácil
-                </button>
-                <button class="quiz-btn" onclick="calidadRespuestaSRS(4)" style="background: #2196F3;">
-                    😄 Muy fácil
-                </button>
+            <div style="text-align: center; padding: 20px; color: #4CAF50;">
+                <p>✅ ¡Correcto! Pasando a la siguiente palabra...</p>
             </div>
-            <button class="quiz-btn btn-siguiente" onclick="pasarSiguientePalabraSRS()">
-                ⏭️ Siguiente Palabra
-            </button>
         `;
+        
+        esperandoSiguiente = true;
+        
+        // Pasar automáticamente después de 1.5 segundos
+        setTimeout(() => {
+            pasarSiguientePalabraSRS();
+        }, 1500);
     } else {
+        // Si falla, mostrar botones de calidad
         controls.innerHTML = `
-            <div style="display: flex; gap: 10px; justify-content: center;">
+            <div style="display: flex; gap: 10px; justify-content: center; margin-bottom: 15px;">
                 <button class="quiz-btn" onclick="calidadRespuestaSRS(0)" style="background: #F44336;">
                     😞 Olvidado
                 </button>
@@ -650,9 +650,9 @@ function verificarRespuestaSRS(opcionSeleccionada, posicionCorrecta) {
                 ⏭️ Siguiente Palabra
             </button>
         `;
+        
+        esperandoSiguiente = true;
     }
-    
-    esperandoSiguiente = true;
 }
 
 // Calidad de respuesta para SRS (más preciso)
@@ -673,11 +673,14 @@ function calidadRespuestaSRS(calidad) {
     switch(calidad) {
         case 0: mensaje = '😞 Olvidado completamente'; break;
         case 1: mensaje = '😓 Difícil'; break;
-        case 3: mensaje = '😊 Fácil'; break;
-        case 4: mensaje = '😄 Muy fácil'; break;
     }
     
     mostrarNotificacionSRS(`${mensaje} - Próxima en ${intervaloHoras >= 24 ? Math.round(intervaloHoras/24) + ' días' : Math.round(intervaloHoras) + ' horas'}`);
+    
+    // Pasar automáticamente después de seleccionar calidad
+    setTimeout(() => {
+        pasarSiguientePalabraSRS();
+    }, 1000);
 }
 
 // Pasar a siguiente palabra en SRS
@@ -2717,6 +2720,11 @@ function verificarRespuesta(opcionSeleccionada, posicionCorrecta) {
     if (correcta) {
         aciertos++;
         darExpPorPalabraCorrecta(true);
+        
+        // Pasar automáticamente si es correcta
+        setTimeout(() => {
+            pasarSiguientePalabra();
+        }, 1500);
     } else {
         errores++;
         
@@ -2748,7 +2756,6 @@ function verificarRespuesta(opcionSeleccionada, posicionCorrecta) {
         </div>`;
         
         esperandoSiguiente = true;
-        setTimeout(pasarSiguientePalabra, 1500);
     } else {
         controls.innerHTML = `
             <button class="quiz-btn btn-volver" onclick="cancelarQuiz()">
@@ -2793,6 +2800,11 @@ function verificarRespuestaMazoDificil(opcionSeleccionada, posicionCorrecta) {
     
     if (correcta) {
         aciertos++;
+        
+        // Pasar automáticamente si es correcta
+        setTimeout(() => {
+            pasarSiguientePalabraMazoDificil();
+        }, 1500);
     } else {
         errores++;
     }
@@ -2806,7 +2818,6 @@ function verificarRespuestaMazoDificil(opcionSeleccionada, posicionCorrecta) {
         </div>`;
         
         esperandoSiguiente = true;
-        setTimeout(pasarSiguientePalabraMazoDificil, 1500);
     } else {
         controls.innerHTML = `
             <button class="quiz-btn btn-volver" onclick="cancelarQuizMazoDificil()">
@@ -2889,6 +2900,24 @@ function irAMazo(direccion) {
             alert("No hay más mazos disponibles con vocabulario en este subcontenedor.");
         }
     }
+}
+
+// MODIFICADA: Ahora también funciona para mazos difíciles
+function irAMazoDificil(direccion) {
+    if (!modoMazoDificil || !palabrasDificilesQuiz || palabrasDificilesQuiz.length === 0) {
+        console.log("No hay mazo difícil activo");
+        return;
+    }
+    
+    // Aquí puedes implementar lógica para navegar entre mazos difíciles
+    // Por ahora, simplemente mostramos un mensaje
+    alert("Navegación entre mazos difíciles - Esta funcionalidad está en desarrollo.");
+    
+    // Ejemplo de implementación futura:
+    // 1. Obtener lista de todos los mazos difíciles disponibles
+    // 2. Encontrar el índice actual
+    // 3. Navegar al siguiente/anterior
+    // 4. Reiniciar quiz con el nuevo mazo difícil
 }
 
 function finalizarQuiz() {
