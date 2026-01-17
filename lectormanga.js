@@ -204,25 +204,31 @@ const mangaDatabase = {
         año: 2024,
         autor: "Chikell ",
         paginasUrls: [
-            "https://i2.nhentai.net/galleries/1547347/1.jpg", // Página 1
-             "https://i1.nhentai.net/galleries/1547347/2.jpg", // Página 1
-             "https://i2.nhentai.net/galleries/1547347/3.jpg", // Página 1
-             "https://i2.nhentai.net/galleries/1547347/4.jpg", // Página 1
-             "https://i1.nhentai.net/galleries/1547347/5.jpg", // Página 1
-             "https://i4.nhentai.net/galleries/1547347/6.jpg", // Página 1
-             "https://i3.nhentai.net/galleries/1547347/7.jpg", // Página 1
-             "https://i2.nhentai.net/galleries/1547347/8.jpg", // Página 1
-             "https://i2.nhentai.net/galleries/1547347/9.jpg", // Página 1
-             "https://i2.nhentai.net/galleries/1547347/10.jpg", // Página 1
-             "https://i4.nhentai.net/galleries/1547347/11.jpg", // Página 1
-             "https://i2.nhentai.net/galleries/1547347/12.jpg", // Página 1
-             "https://i4.nhentai.net/galleries/1547347/13.jpg", // Página 1
-             "https://i2.nhentai.net/galleries/1547347/14.jpg", // Página 1
-             "https://i2.nhentai.net/galleries/1547347/15.jpg", // Página 1
-             "https://i2.nhentai.net/galleries/1547347/16.jpg", // Página 1
-             "https://i1.nhentai.net/galleries/1547347/17.jpg", // Página 1
-             "https://i3.nhentai.net/galleries/1573274/19.jpg", // Página 1
-             "https://i3.nhentai.net/galleries/1547347/20.jpg" // Página 1    
+            "https://i3.nhentai.net/galleries/3223568/1.webp", // Página 1
+             "https://i2.nhentai.net/galleries/3223568/3.webp", // Página 1
+             "https://i1.nhentai.net/galleries/3223568/4.webp", // Página 1
+             "https://i1.nhentai.net/galleries/3223568/5.webp", // Página 1
+             "https://i2.nhentai.net/galleries/3223568/6.webp", // Página 1
+             "https://i1.nhentai.net/galleries/3223568/7.webp", // Página 1
+             "https://i1.nhentai.net/galleries/3223568/8.webp", // Página 1
+             "https://i2.nhentai.net/galleries/3223568/9.webp", // Página 1
+             "https://i2.nhentai.net/galleries/3223568/10.webp", // Página 1
+             "https://i3.nhentai.net/galleries/3223568/11.webp", // Página 1
+             "https://i3.nhentai.net/galleries/3223568/12.webp", // Página 1
+             "https://i1.nhentai.net/galleries/3223568/13.webp", // Página 1
+             "https://i2.nhentai.net/galleries/3223568/14.webp", // Página 1
+             "https://i1.nhentai.net/galleries/3223568/15.webp", // Página 1
+             "https://i3.nhentai.net/galleries/3223568/16.webp", // Página 1
+             "https://i4.nhentai.net/galleries/3223568/17.webp", // Página 1
+             "https://i4.nhentai.net/galleries/3223568/18.webp", // Página 1
+             "https://i3.nhentai.net/galleries/3223568/19.webp", // Página 1
+             "https://i3.nhentai.net/galleries/3223568/20.webp", // Página 1
+             "https://i1.nhentai.net/galleries/3223568/21.webp", // Página 1
+             "https://i2.nhentai.net/galleries/3223568/22.webp", // Página 1
+             "https://i4.nhentai.net/galleries/3223568/23.webp", // Página 1
+             "https://i3.nhentai.net/galleries/3223568/24.webp", // Página 1    
+            "https://i4.nhentai.net/galleries/3223568/25.webp", // Página 1
+             "https://i3.nhentai.net/galleries/3223568/26.webp" // Página 1    
         ]
     },
     // ================================================
