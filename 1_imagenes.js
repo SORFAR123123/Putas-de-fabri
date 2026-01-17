@@ -1326,7 +1326,7 @@ const sistemaDescriptivo = {
             3: { 
                 nombre: ' ORTOS',
                 imagen: 'https://pbs.twimg.com/media/G-4OkHAaIAArSm5?format=jpg&name=large', 
-                descripcion: 'Videos de viajes a Japón',
+                descripcion: 'Ricos ortos',
                 tematica: 'viajes'
             },
             4: { 
@@ -1441,9 +1441,9 @@ const sistemaDescriptivo = {
             
             // Contenedor 3
             '3_1': { 
-                nombre: 'Video 1',
-                imagen: '', 
-                descripcion: '', 
+                nombre: ' Zahiry potona',
+                imagen: 'https://pbs.twimg.com/media/G-3Z47lXYAAZBYK?format=jpg&name=large', 
+                descripcion: 'SII DESCRIPCION', 
                 duracion: '' 
             },
             '3_2': { 
