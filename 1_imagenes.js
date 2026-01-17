@@ -112,7 +112,16 @@ const sistemaDescriptivo = {
                 descripcion: '', 
                 nivel: '' 
             },
-            // TESTING
+
+            //Miku putona
+            '1_7': { 
+                nombre: 'Miku putona kachera del profe',
+                imagen: 'https://i4.nhentai.net/galleries/1464410/1.jpg', 
+                descripcion: '', 
+                nivel: '' 
+            },
+          
+            
             
             // Contenedor 2
             '2_1': { 
