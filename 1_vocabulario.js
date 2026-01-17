@@ -1471,107 +1471,216 @@ const vocabularioDatabase = {
             { japones: '※援交プレイ', lectura: '※en kō purei', opciones: ['※Juego de compensated dating / enjo kōsai roleplay', '※Juego de citas normales', '※Juego de amigos', '※Juego de familia'], respuesta: 0 }
         ]
     },
-    // Sub-contenedor 1.7
+        // Sub-contenedor 1.7 (ACTUALIZADO CON TUS PALABRAS)
     'sub1_7': {
-        // MAZOS NORMALES
+        // MAZO 1
         1: [
-            { japones: '今はちょうど', lectura: 'ima wa choudo', opciones: ['Justo ahora', 'Ya terminó', 'Hace mucho', 'Más tarde'], respuesta: 0 },
-            { japones: '芸能', lectura: 'geinou', opciones: ['Entretenimiento', 'Deporte', 'Política', 'Academia'], respuesta: 0 },
-            { japones: '活動', lectura: 'katsudou', opciones: ['Actividad', 'Descanso', 'Pausa', 'Inactividad'], respuesta: 0 },
-            { japones: '時期', lectura: 'jikan', opciones: ['Período/Época', 'Lugar', 'Persona', 'Razón'], respuesta: 0 },
-            { japones: 'せっかく 来れたのに', lectura: 'sekkaku korareta noni', opciones: ['Aunque vine con dificultad...', 'Porque fue fácil venir', 'Ya que no pude venir', 'Como no tenía planes'], respuesta: 0 },
-            { japones: '水の泡', lectura: 'mizu no awa', opciones: ['En vano/Agua pasada', 'Gran éxito', 'Sorpresa', 'Ceremonia'], respuesta: 0 },
-            { japones: 'そうなったら', lectura: 'sou nattara', opciones: ['Si eso sucede', 'Antes de que suceda', 'Aunque no suceda', 'Porque sucedió'], respuesta: 0 },
-            { japones: 'すればいい', lectura: 'sureba ii', opciones: ['Deberías hacer (sugerencia)', 'No deberías hacer', 'Es imposible hacer', 'Es obligatorio hacer'], respuesta: 0 },
-            { japones: '未来の明るい', lectura: 'mirai no akarui', opciones: ['Con un futuro brillante', 'Con un futuro oscuro', 'Sin futuro', 'Con un futuro incierto'], respuesta: 0 },
-            { japones: '元女優が', lectura: 'moto joyuu ga', opciones: ['Una ex actriz', 'Una actriz principiante', 'Una actriz famosa', 'Una directora'], respuesta: 0 }
+            { japones: '補習', lectura: 'hoshū', opciones: ['clase de refuerzo / tutoría', 'clase normal', 'examen', 'vacaciones'], respuesta: 0 },
+            { japones: '帰って', lectura: 'kaette', opciones: ['volver (forma -te)', 'irse', 'quedarse', 'dormir'], respuesta: 0 },
+            { japones: 'いつもの', lectura: 'itsumo no', opciones: ['lo de siempre / lo habitual', 'algo nuevo', 'algo raro', 'algo especial'], respuesta: 0 },
+            { japones: 'アレ', lectura: 'are', opciones: ['eso / aquello (eufemismo para algo secreto)', 'esto', 'algo', 'nada'], respuesta: 0 },
+            { japones: '頼む', lectura: 'tanomu', opciones: ['por favor / te pido', 'rechazo', 'ignoro', 'acepto'], respuesta: 0 },
+            { japones: 'やってんだ', lectura: 'yatten da', opciones: ['estoy haciendo (contraído coloquial)', 'no hago', 'voy a hacer', 'hice'], respuesta: 0 },
+            { japones: '一週間', lectura: 'isshūkan', opciones: ['una semana', 'un día', 'un mes', 'un año'], respuesta: 0 },
+            { japones: '溜めてきた', lectura: 'tamete kita', opciones: ['he estado acumulando (semen)', 'he estado gastando', 'he estado perdiendo', 'he estado ignorando'], respuesta: 0 },
+            { japones: '付き合って', lectura: 'tsukiatte', opciones: ['acompañar / aguantar', 'ignorar', 'rechazar', 'ayudar'], respuesta: 0 },
+            { japones: 'だが', lectura: 'daga', opciones: ['pero', 'y', 'porque', 'entonces'], respuesta: 0 }
         ],
         
+        // MAZO 2
         2: [
-            { japones: '引退になって', lectura: 'intai ni natte', opciones: ['Haberse retirado', 'Haberse unido', 'Haberse graduado', 'Haberse mudado'], respuesta: 0 },
-            { japones: 'しまいに', lectura: 'shimai ni', opciones: ['Al final/ Finalmente', 'Al principio', 'De repente', 'Raramente'], respuesta: 0 },
-            { japones: '業界', lectura: 'gyoukai', opciones: ['Industria/Rubio', 'País', 'Escuela', 'Familia'], respuesta: 0 },
-            { japones: '華麗', lectura: 'karei', opciones: ['Elegante/Espléndido', 'Simple', 'Ordinario', 'Feo'], respuesta: 0 },
-            { japones: 'これはいける', lectura: 'kore wa ikeru', opciones: ['Esto puede funcionar/Es prometedor', 'Esto es imposible', 'Esto es peligroso', 'Esto es aburrido'], respuesta: 0 },
-            { japones: '初出演', lectura: 'hatsu shutsuen', opciones: ['Primera aparición', 'Última aparición', 'Aparición especial', 'Aparición casual'], respuesta: 0 },
-            { japones: '元芸能人', lectura: 'moto geinoujin', opciones: ['Ex celebridad', 'Nueva celebridad', 'Periodista', 'Fan'], respuesta: 0 },
-            { japones: '世にも珍しい', lectura: 'yo ni mo mezurashii', opciones: ['Extraño en el mundo/Inaudito', 'Muy común', 'Muy aburrido', 'Muy caro'], respuesta: 0 },
-            { japones: '話題になる', lectura: 'wadai ni naru', opciones: ['Convertirse en tema de conversación', 'Ser olvidado', 'Ser criticado', 'Ser ignorado'], respuesta: 0 },
-            { japones: '革命', lectura: 'kakumei', opciones: ['Revolución', 'Evolución', 'Tradición', 'Estancamiento'], respuesta: 0 }
+            { japones: '生ぬるい', lectura: 'namanurui', opciones: ['tibia / poco intensa', 'muy caliente', 'fría', 'perfecta'], respuesta: 0 },
+            { japones: 'いつまでたっても', lectura: 'itsu made tatte mo', opciones: ['no importa cuánto tiempo pase', 'solo por un momento', 'nunca', 'rápidamente'], respuesta: 0 },
+            { japones: '調子に乗る', lectura: 'chōshi ni noru', opciones: ['ponerse arrogante / envalentonarse', 'ser humilde', 'ser tímido', 'ser indiferente'], respuesta: 0 },
+            { japones: '夢中で', lectura: 'muchū de', opciones: ['con pasión / obsesivamente', 'sin interés', 'con pereza', 'con miedo'], respuesta: 0 },
+            { japones: '昇ってきた', lectura: 'nobotte kita', opciones: ['está subiendo / viniendo (el semen)', 'está bajando', 'está quieto', 'se fue'], respuesta: 0 },
+            { japones: '窄めて', lectura: 'sebamete', opciones: ['estrecha / aprieta', 'abre', 'relaja', 'ignora'], respuesta: 0 },
+            { japones: '熟成', lectura: 'jukusei', opciones: ['madurado / fermentado', 'crudo', 'fresco', 'podrido'], respuesta: 0 },
+            { japones: '味わえ', lectura: 'ajiwae', opciones: ['prueba / saborea (imperativo rudo)', 'escúpelo', 'guárdalo', 'ignóralo'], respuesta: 0 },
+            { japones: '離さねえ', lectura: 'hanasanee', opciones: ['no suelta (negativo coloquial)', 'suelta', 'aprieta', 'ignora'], respuesta: 0 },
+            { japones: '一週間ぶり', lectura: 'isshūkan buri', opciones: ['después de una semana', 'por primera vez', 'nunca', 'siempre'], respuesta: 0 }
         ],
         
+        // MAZO 3
         3: [
-            { japones: '起こせる', lectura: 'okoseru', opciones: ['Poder causar/Lograr', 'Poder prevenir', 'Poder olvidar', 'Poder ignorar'], respuesta: 0 },
-            { japones: '活躍さえ', lectura: 'katsuyaku sae', opciones: ['Incluso la actividad exitosa', 'Fracaso constante', 'Primer intento', 'Sin esfuerzo'], respuesta: 0 },
-            { japones: '調理学校', lectura: 'chouri gakkou', opciones: ['Escuela de cocina', 'Escuela de arte', 'Escuela de negocios', 'Escuela de idiomas'], respuesta: 0 },
-            { japones: 'きつい', lectura: 'kitsui', opciones: ['Difícil/Duro', 'Fácil', 'Relajado', 'Lento'], respuesta: 0 },
-            { japones: '他の道を', lectura: 'hoka no michi wo', opciones: ['Otro camino', 'El mismo camino', 'Un atajo', 'Un callejón sin salida'], respuesta: 0 },
-            { japones: '毎日', lectura: 'mainichi', opciones: ['Todos los días', 'Rara vez', 'A veces', 'Nunca'], respuesta: 0 },
-            { japones: '試作', lectura: 'shisaku', opciones: ['Prototipo/Prueba de fabricación', 'Producto final', 'Venta', 'Consumo'], respuesta: 0 },
-            { japones: 'お菓子', lectura: 'okashi', opciones: ['Dulces/Golosinas', 'Plato principal', 'Bebida', 'Sopa'], respuesta: 0 },
-            { japones: 'お腹', lectura: 'onaka', opciones: ['Estómago', 'Cabeza', 'Mano', 'Corazón'], respuesta: 0 },
-            { japones: '試食', lectura: 'shishoku', opciones: ['Degustación', 'Cocción', 'Compra', 'Desperdicio'], respuesta: 0 }
+            { japones: '帰らせねぇ', lectura: 'kaerasenē', opciones: ['no te dejo ir (negativo coloquial)', 'te dejo ir', 'te espero', 'te ignoro'], respuesta: 0 },
+            { japones: 'たっぷり', lectura: 'tappuri', opciones: ['un montón / abundantemente', 'poco', 'nada', 'justo'], respuesta: 0 },
+            { japones: '数週間', lectura: 'sū shūkan', opciones: ['unas semanas / varios semanas', 'unos días', 'unos meses', 'unos años'], respuesta: 0 },
+            { japones: '前', lectura: 'mae', opciones: ['antes / hace', 'después', 'durante', 'nunca'], respuesta: 0 },
+            { japones: '家', lectura: 'ie', opciones: ['casa', 'escuela', 'trabajo', 'parque'], respuesta: 0 },
+            { japones: '出して', lectura: 'dashite', opciones: ['saliendo / dejando (forma -te)', 'entrando', 'guardando', 'escondiendo'], respuesta: 0 },
+            { japones: 'パン屋', lectura: 'pan\'ya', opciones: ['panadería', 'carnicería', 'frutería', 'supermercado'], respuesta: 0 },
+            { japones: '生活費', lectura: 'seikatsuhi', opciones: ['gastos de vida / manutención', 'ahorros', 'deudas', 'ingresos'], respuesta: 0 },
+            { japones: '足りず', lectura: 'tarizu', opciones: ['no alcanza / insuficiente', 'sobra', 'es justo', 'es demasiado'], respuesta: 0 },
+            { japones: 'どうしたものかと', lectura: 'dō shita mono ka to', opciones: ['qué hacer / cómo resolverlo', 'no hay problema', 'es fácil', 'no importa'], respuesta: 0 }
         ],
         
+        // MAZO 4
         4: [
-            { japones: '将来', lectura: 'shourai', opciones: ['Futuro', 'Pasado', 'Presente', 'Ayer'], respuesta: 0 },
-            { japones: '喫茶店', lectura: 'kissaten', opciones: ['Cafetería', 'Hospital', 'Tienda', 'Estación'], respuesta: 0 },
-            { japones: '写真', lectura: 'shashin', opciones: ['Fotografía', 'Pintura', 'Escultura', 'Película'], respuesta: 0 },
-            { japones: '写っている', lectura: 'utsu tte iru', opciones: ['Estar salido (en una foto)', 'Estar escondido', 'Estar borrado', 'Estar pintado'], respuesta: 0 },
-            { japones: '報酬', lectura: 'houshuu', opciones: ['Recompensa/Pago', 'Castigo', 'Regalo', 'Deuda'], respuesta: 0 },
-            { japones: '今後', lectura: 'kongo', opciones: ['De ahora en adelante', 'Hasta ahora', 'Recientemente', 'En el pasado lejano'], respuesta: 0 },
-            { japones: '食レポ', lectura: 'shoku repo', opciones: ['Reportaje gastronómico', 'Reportaje deportivo', 'Reportaje político', 'Crítica literaria'], respuesta: 0 },
-            { japones: '代わって', lectura: 'kawatte', opciones: ['En lugar de/Como sustituto', 'Junto con', 'En contra de', 'A pesar de'], respuesta: 0 },
-            { japones: '真剣に', lectura: 'shinken ni', opciones: ['En serio', 'En broma', 'Despreocupadamente', 'Tristemente'], respuesta: 0 },
-            { japones: '大食い系', lectura: 'oogui kei', opciones: ['Tipo comedor abundante', 'Tipo que come poco', 'Vegetariano', 'Gourmet'], respuesta: 0 }
+            { japones: '困っていた', lectura: 'komatte ita', opciones: ['estaba preocupada / en apuros (pasado continuo)', 'estaba feliz', 'estaba tranquila', 'estaba enojada'], respuesta: 0 },
+            { japones: '持ち掛けられた', lectura: 'mochikakerareta', opciones: ['me fue ofrecida / me propusieron (pasivo)', 'rechacé', 'ignoré', 'sugerí'], respuesta: 0 },
+            { japones: '聞きつけた', lectura: 'kikitsuketa', opciones: ['se enteró / oyó hablar', 'ignoró', 'olvidó', 'escondió'], respuesta: 0 },
+            { japones: '要求', lectura: 'yōkyū', opciones: ['exigencia / demanda', 'ofrecimiento', 'rechazo', 'pregunta'], respuesta: 0 },
+            { japones: 'お父さん', lectura: 'otōsan', opciones: ['papá', 'mamá', 'hermano', 'amigo'], respuesta: 0 },
+            { japones: '頼れない', lectura: 'tanorenai', opciones: ['no puedo depender', 'puedo depender', 'debo depender', 'quiero depender'], respuesta: 0 },
+            { japones: '減らしたい', lectura: 'herashitai', opciones: ['quiero reducir', 'quiero aumentar', 'quiero mantener', 'quiero eliminar'], respuesta: 0 },
+            { japones: '焦っていた', lectura: 'asette ita', opciones: ['estaba desesperada / ansiosa', 'estaba calmada', 'estaba feliz', 'estaba aburrida'], respuesta: 0 },
+            { japones: '万円', lectura: 'man en', opciones: ['decenas de miles de yenes (cantidad grande)', 'pocos yenes', 'centavos', 'dólares'], respuesta: 0 },
+            { japones: '卒業', lectura: 'sotsugyō', opciones: ['graduación', 'ingreso', 'abandono', 'suspensión'], respuesta: 0 }
         ],
         
+        // MAZO 5
         5: [
-            { japones: '企画', lectura: 'kikaku', opciones: ['Plan/Proyecto', 'Accidente', 'Rutina', 'Error'], respuesta: 0 },
-            { japones: 'いい加減', lectura: 'ii kagen', opciones: ['Ya basta/De una vez', 'Con cuidado', 'Por primera vez', 'Sin prisa'], respuesta: 0 },
-            { japones: '傳説', lectura: 'densetsu', opciones: ['Leyenda', 'Historia real', 'Noticia', 'Chisme'], respuesta: 0 },
-            { japones: 'もんかな', lectura: 'mon ka na', opciones: ['¿De verdad? (coloquial, duda)', '¡Claro que sí!', 'Absolutamente no', 'Tal vez'], respuesta: 0 },
-            { japones: '今夜', lectura: 'kon\'ya', opciones: ['Esta noche', 'Esta mañana', 'Ayer', 'Mañana'], respuesta: 0 },
-            { japones: '完璧', lectura: 'kanpeki', opciones: ['Perfección', 'Desastre', 'Normalidad', 'Mediocridad'], respuesta: 0 },
-            { japones: '任務', lectura: 'ninmu', opciones: ['Misión/Tarea', 'Juego', 'Vacación', 'Sueño'], respuesta: 0 },
-            { japones: '遂行', lectura: 'suikou', opciones: ['Cumplimiento', 'Abandono', 'Retraso', 'Planificación'], respuesta: 0 },
-            { japones: '初体験と', lectura: 'hatsu taiken to', opciones: ['Con la primera experiencia', 'Con la última experiencia', 'Sin experiencia', 'Con mucha experiencia'], respuesta: 0 },
-            { japones: 'いうことで', lectura: 'iu koto de', opciones: ['Así que... / Por lo tanto', 'Sin embargo', 'Además', 'Por ejemplo'], respuesta: 0 }
+            { japones: '期限付き', lectura: 'kigen tsuki', opciones: ['con límite de tiempo / temporal', 'permanente', 'indefinido', 'cancelable'], respuesta: 0 },
+            { japones: '普通の', lectura: 'futsū no', opciones: ['normal / ordinario', 'extraordinario', 'raro', 'especial'], respuesta: 0 },
+            { japones: '何倍も', lectura: 'nanbai mo', opciones: ['varias veces más', 'igual', 'menos', 'nada'], respuesta: 0 },
+            { japones: '金銭', lectura: 'kinsen', opciones: ['dinero / suma de dinero', 'amor', 'tiempo', 'esfuerzo'], respuesta: 0 },
+            { japones: '提示され', lectura: 'teiji sare', opciones: ['me fue ofrecido / me propusieron (pasivo)', 'rechacé', 'ignoré', 'pedí'], respuesta: 0 },
+            { japones: 'シたり', lectura: 'shitari', opciones: ['hacer (eufemismo deformado de する)', 'decir', 'ver', 'escuchar'], respuesta: 0 },
+            { japones: '性奴隷', lectura: 'sei dorei', opciones: ['esclava sexual', 'empleada', 'estudiante', 'ama de casa'], respuesta: 0 },
+            { japones: '日', lectura: 'hi', opciones: ['día', 'noche', 'semana', 'mes'], respuesta: 0 },
+            { japones: '追う', lectura: 'ou', opciones: ['seguir / perseguir', 'huir', 'ignorar', 'esperar'], respuesta: 0 },
+            { japones: 'ごとに', lectura: 'goto ni', opciones: ['cada / día a día', 'nunca', 'a veces', 'siempre'], respuesta: 0 }
         ],
         
+        // MAZO 6
         6: [
-            { japones: '最終日', lectura: 'saishuu bi', opciones: ['Día final', 'Primer día', 'Día festivo', 'Día ordinario'], respuesta: 0 },
-            { japones: '両等分', lectura: 'ryoutou bun', opciones: ['División en dos partes iguales', 'División desigual', 'Unificación', 'Multiplicación'], respuesta: 0 }
+            { japones: 'エスカレート', lectura: 'esukareeto', opciones: ['escalar / intensificar', 'disminuir', 'mantener', 'detener'], respuesta: 0 },
+            { japones: '一度', lectura: 'ichido', opciones: ['una vez', 'muchas veces', 'nunca', 'siempre'], respuesta: 0 },
+            { japones: '止めよう', lectura: 'yameyō', opciones: ['parar / detener', 'continuar', 'empezar', 'ignorar'], respuesta: 0 },
+            { japones: 'バラす', lectura: 'barasu', opciones: ['revelar / contar', 'esconder', 'guardar', 'olvidar'], respuesta: 0 },
+            { japones: '脅された', lectura: 'odosareta', opciones: ['fui amenazada (pasivo)', 'fui elogiada', 'fui ignorada', 'fui ayudada'], respuesta: 0 },
+            { japones: 'いいなり', lectura: 'ii nari', opciones: ['obedecer / ser marioneta', 'rebelarse', 'ignorar', 'dirigir'], respuesta: 0 },
+            { japones: '選択肢', lectura: 'sentakushi', opciones: ['opciones / alternativas', 'obligación', 'prohibición', 'sorpresa'], respuesta: 0 },
+            { japones: '無くなっていた', lectura: 'nakunatte ita', opciones: ['no quedaba / desapareció (pasado continuo)', 'sobraba', 'estaba igual', 'aumentaba'], respuesta: 0 },
+            { japones: '色々な', lectura: 'iroiro na', opciones: ['muchas / varias / diferentes', 'pocas', 'iguales', 'ninguna'], respuesta: 0 },
+            { japones: '絶頂', lectura: 'zecchō', opciones: ['clímax / orgasmo', 'inicio', 'pausa', 'final'], respuesta: 0 }
+        ],
+        
+        // MAZO 7
+        7: [
+            { japones: 'こうやって', lectura: 'kō yatte', opciones: ['así / de esta forma', 'de otra forma', 'sin método', 'accidentalmente'], respuesta: 0 },
+            { japones: 'すぐに', lectura: 'sugu ni', opciones: ['inmediatamente', 'después', 'nunca', 'lentamente'], respuesta: 0 },
+            { japones: '覚えた', lectura: 'oboeta', opciones: ['aprendí / memoricé', 'olvidé', 'ignoré', 'confundí'], respuesta: 0 },
+            { japones: '一体', lectura: 'ittai', opciones: ['qué demonios / exactamente', 'probablemente', 'quizás', 'nunca'], respuesta: 0 },
+            { japones: 'つもり', lectura: 'tsumori', opciones: ['intención / pretensión', 'accidente', 'obligación', 'suerte'], respuesta: 0 },
+            { japones: 'まには', lectura: 'ma ni wa', opciones: ['de vez en cuando', 'siempre', 'nunca', 'rara vez'], respuesta: 0 },
+            { japones: '丸見え', lectura: 'marumie', opciones: ['completamente visible / al descubierto', 'escondido', 'parcialmente visible', 'tapado'], respuesta: 0 },
+            { japones: '素直に', lectura: 'sunao ni', opciones: ['honestamente / fácilmente', 'con dificultad', 'con mentiras', 'con resistencia'], respuesta: 0 },
+            { japones: '受け入れている', lectura: 'ukeirete iru', opciones: ['estoy aceptando', 'estoy rechazando', 'estoy ignorando', 'estoy dudando'], respuesta: 0 },
+            { japones: 'イヤになる', lectura: 'iya ni naru', opciones: ['me odio / me disgusta', 'me encanta', 'me da igual', 'me sorprende'], respuesta: 0 }
+        ],
+        
+        // MAZO 8
+        8: [
+            { japones: '自分', lectura: 'jibun', opciones: ['yo misma', 'otra persona', 'todos', 'nadie'], respuesta: 0 },
+            { japones: '正直', lectura: 'shōjiki', opciones: ['honestamente', 'mintiendo', 'exagerando', 'ocultando'], respuesta: 0 },
+            { japones: '裸', lectura: 'hadaka', opciones: ['desnuda', 'vestida', 'semi-vestida', 'disfrazada'], respuesta: 0 },
+            { japones: '非日常', lectura: 'hijōjō', opciones: ['no cotidiano / fuera de lo normal', 'rutinario', 'aburrido', 'común'], respuesta: 0 },
+            { japones: '期待して', lectura: 'kitai shite', opciones: ['esperando / anticipando', 'temiedo', 'ignorando', 'rechazando'], respuesta: 0 },
+            { japones: '事実', lectura: 'jijitsu', opciones: ['hecho / realidad', 'mentira', 'suposición', 'fantasía'], respuesta: 0 },
+            { japones: '知らない', lectura: 'shiranai', opciones: ['no sé / no conozco', 'sé bien', 'recuerdo', 'olvidé'], respuesta: 0 },
+            { japones: '強がってんだ', lectura: 'tsuyogatten da', opciones: ['fingiendo fuerte / haciéndose la dura', 'siendo débil', 'siendo honesta', 'siendo tímida'], respuesta: 0 },
+            { japones: '来やがった', lectura: 'kiyagatta', opciones: ['viniste (insulto coloquial)', 'te fuiste', 'esperaste', 'ignoraste'], respuesta: 0 },
+            { japones: '見透かされてる', lectura: 'misukasarete ru', opciones: ['se ve a través / te han calado', 'te están elogiando', 'te están ignorando', 'te están ayudando'], respuesta: 0 }
+        ],
+        
+        // MAZO 9
+        9: [
+            { japones: '期待', lectura: 'kitai', opciones: ['expectativa / espera', 'desilusión', 'sorpresa', 'indiferencia'], respuesta: 0 },
+            { japones: 'しまくって', lectura: 'shimakutte', opciones: ['esperando mucho / con ansias', 'evitando', 'ignorando', 'temiedo'], respuesta: 0 },
+            { japones: 'お預け', lectura: 'oazuke', opciones: ['en espera / privado', 'inmediato', 'cancelado', 'permitido'], respuesta: 0 },
+            { japones: 'ご褒美', lectura: 'gohōbi', opciones: ['recompensa', 'castigo', 'crítica', 'ignorancia'], respuesta: 0 },
+            { japones: '責任持って', lectura: 'sekinin motte', opciones: ['hacerme responsable', 'evadir responsabilidad', 'ignorar', 'culpar a otro'], respuesta: 0 },
+            { japones: '面倒', lectura: 'mendō', opciones: ['cuidado / atención', 'abandono', 'negligencia', 'indiferencia'], respuesta: 0 },
+            { japones: 'みないと', lectura: 'minai to', opciones: ['tengo que cuidar', 'puedo ignorar', 'debo evitar', 'quiero abandonar'], respuesta: 0 },
+            { japones: '今夜', lectura: 'konya', opciones: ['esta noche', 'esta mañana', 'mañana', 'ayer'], respuesta: 0 },
+            { japones: '一晩中', lectura: 'ippanchū', opciones: ['toda la noche', 'un rato', 'un momento', 'nunca'], respuesta: 0 },
+            { japones: '覚悟', lectura: 'kakugo', opciones: ['prepárate / asume', 'relájate', 'huye', 'ignora'], respuesta: 0 }
+        ],
+        
+        // MAZO 10
+        10: [
+            { japones: '芯', lectura: 'shin', opciones: ['núcleo / firmeza', 'superficie', 'debilidad', 'flexibilidad'], respuesta: 0 },
+            { japones: '入った', lectura: 'haitta', opciones: ['entró / está firme', 'salió', 'se dobló', 'se rompió'], respuesta: 0 },
+            { japones: 'フェラテク', lectura: 'feratekku', opciones: ['técnica de felación', 'técnica de beso', 'técnica de abrazo', 'técnica de masaje'], respuesta: 0 },
+            { japones: '勃起させた', lectura: 'bokki saseta', opciones: ['hice erecto', 'hice flácido', 'ignoré', 'detuve'], respuesta: 0 },
+            { japones: '言っておく', lectura: 'itte oku', opciones: ['te lo digo de una vez', 'me lo guardo', 'lo niego', 'lo olvido'], respuesta: 0 },
+            { japones: '熱くて', lectura: 'atsukute', opciones: ['caliente', 'frío', 'tibio', 'helado'], respuesta: 0 },
+            { japones: '硬い', lectura: 'katai', opciones: ['duro', 'blando', 'flexible', 'quebradizo'], respuesta: 0 },
+            { japones: '付ける', lectura: 'tsukeru', opciones: ['poner / usar', 'quitar', 'perder', 'ignorar'], respuesta: 0 },
+            { japones: '欲しく', lectura: 'hoshiku', opciones: ['quiero / deseo', 'rechazo', 'ignoro', 'temgo miedo'], respuesta: 0 },
+            { japones: '従順で', lectura: 'jūjun de', opciones: ['sumisa / obediente', 'rebelde', 'indiferente', 'dominante'], respuesta: 0 }
+        ],
+        
+        // MAZO 11
+        11: [
+            { japones: '求めていた', lectura: 'motomete ita', opciones: ['estaba buscando', 'estaba evitando', 'estaba ignorando', 'estaba rechazando'], respuesta: 0 },
+            { japones: '関係', lectura: 'kankei', opciones: ['relación', 'separación', 'indiferencia', 'oposición'], respuesta: 0 },
+            { japones: '今月分', lectura: 'kongetsu bun', opciones: ['este mes', 'el mes pasado', 'el próximo mes', 'todos los meses'], respuesta: 0 },
+            { japones: '払わん', lectura: 'harawan', opciones: ['no pagaré', 'pagaré', 'debo pagar', 'pagué'], respuesta: 0 },
+            { japones: '安心しろ', lectura: 'anshin shiro', opciones: ['tranquila / no te preocupes', 'preocúpate', 'alerta', 'huye'], respuesta: 0 },
+            { japones: 'ビルくらいは', lectura: 'biru kurai wa', opciones: ['al menos el edificio', 'todo el edificio', 'nada del edificio', 'solo el edificio'], respuesta: 0 },
+            { japones: '支給してやる', lectura: 'shikyū shite yaru', opciones: ['te daré / te proporcionaré', 'te quitaré', 'te negaré', 'te ignoraré'], respuesta: 0 },
+            { japones: '断ったら', lectura: 'kotowattara', opciones: ['si rechazo', 'si acepto', 'si ignoro', 'si dudo'], respuesta: 0 },
+            { japones: '生活', lectura: 'seikatsu', opciones: ['vida / modo de vida', 'muerte', 'sueño', 'trabajo'], respuesta: 0 },
+            { japones: 'ボツ', lectura: 'botsu', opciones: ['¡no! / cancelado (efecto o rechazo)', '¡sí! / aprobado', 'tal vez', 'espera'], respuesta: 0 }
+        ],
+        
+        // MAZO 12
+        12: [
+            { japones: '無しじゃ', lectura: 'nashi ja', opciones: ['sin él', 'con él', 'a pesar de él', 'gracias a él'], respuesta: 0 },
+            { japones: '捨てないで', lectura: 'sutenai de', opciones: ['no me abandones', 'abándoname', 'ignórame', 'ayúdame'], respuesta: 0 },
+            { japones: 'こんだけ', lectura: 'kon dake', opciones: ['con tanto / tanto así', 'con poco', 'con nada', 'con exactitud'], respuesta: 0 },
+            { japones: '濡れてりゃ', lectura: 'nureterya', opciones: ['estás mojada (contraído coloquial)', 'estás seca', 'estás limpia', 'estás sucia'], respuesta: 0 },
+            { japones: 'すんなり', lectura: 'sunnari', opciones: ['sin problemas / fácilmente', 'con dificultad', 'con fuerza', 'nunca'], respuesta: 0 },
+            { japones: '入りそう', lectura: 'hairisō', opciones: ['parece que entrará', 'no entrará', 'ya entró', 'salió'], respuesta: 0 },
+            { japones: '飲み込み', lectura: 'nomikomi', opciones: ['se tragó / absorbió', 'escupió', 'guardó', 'ignoró'], respuesta: 0 },
+            { japones: 'あったけぇ', lectura: 'attakē', opciones: ['está caliente (deformado cute)', 'está frío', 'está tibio', 'está helado'], respuesta: 0 },
+            { japones: '隙間なく', lectura: 'sukima naku', opciones: ['sin espacios', 'con espacios', 'parcialmente', 'completamente'], respuesta: 0 },
+            { japones: '押し広げられてる', lectura: 'oshihirogerarete ru', opciones: ['está siendo abierto / expandido', 'está cerrado', 'está igual', 'está encogido'], respuesta: 0 }
+        ],
+        
+        // MAZO 13
+        13: [
+            { japones: '惚れてん', lectura: 'horeten', opciones: ['está enamorada (contraído coloquial)', 'odia', 'ignora', 'temne'], respuesta: 0 },
+            { japones: '食わねぇ', lectura: 'kuwanē', opciones: ['no se la come / no la folla (coloquial rudo)', 'se la come', 'la ignora', 'la ayuda'], respuesta: 0 },
+            { japones: 'もったいねぇ', lectura: 'mottainē', opciones: ['qué desperdicio / lástima', 'qué suerte', 'qué normal', 'qué raro'], respuesta: 0 },
+            { japones: 'おかげで', lectura: 'okage de', opciones: ['gracias a', 'por culpa de', 'a pesar de', 'además de'], respuesta: 0 },
+            { japones: '隠してんだ', lectura: 'kakushiten da', opciones: ['¿te estás escondiendo? (contraído)', 'te estás mostrando', 'te estás yendo', 'te estás quedando'], respuesta: 0 },
+            { japones: '建前', lectura: 'tatemae', opciones: ['excusa / pretexto', 'verdad', 'mentira', 'duda'], respuesta: 0 },
+            { japones: '本当は', lectura: 'hontō wa', opciones: ['en realidad', 'en apariencia', 'nunca', 'siempre'], respuesta: 0 },
+            { japones: '欲しい', lectura: 'hoshii', opciones: ['quieres', 'no quieres', 'dudas', 'ignoras'], respuesta: 0 },
+            { japones: 'どハマリ', lectura: 'do hamari', opciones: ['adicción extrema / obsesión', 'desinterés', 'indiferencia', 'repulsión'], respuesta: 0 },
+            { japones: '甘め', lectura: 'amame', opciones: ['dulce / cremoso (referencia a semen)', 'amargo', 'salado', 'ácido'], respuesta: 0 }
+        ],
+        
+        // MAZO 14
+        14: [
+            { japones: '受け止めろ', lectura: 'uketomero', opciones: ['recíbelo (imperativo rudo)', 'recházalo', 'ignóralo', 'tíralo'], respuesta: 0 },
+            { japones: '限る', lectura: 'kagiru', opciones: ['es lo mejor / solo eso vale', 'es lo peor', 'es igual', 'es diferente'], respuesta: 0 },
+            { japones: 'へばってる', lectura: 'hebatteru', opciones: ['jadeando / agotada', 'descansada', 'energética', 'dormida'], respuesta: 0 },
+            { japones: '暇', lectura: 'hima', opciones: ['tiempo / oportunidad', 'ocupación', 'urgencia', 'pereza'], respuesta: 0 },
+            { japones: '金玉', lectura: 'kintama', opciones: ['huevos / testículos', 'pene', 'vagina', 'pecho'], respuesta: 0 },
+            { japones: 'からっぽ', lectura: 'karappo', opciones: ['vacío / completamente vacío', 'lleno', 'medio lleno', 'desbordando'], respuesta: 0 },
+            { japones: '帰らせない', lectura: 'kaerasenai', opciones: ['no te dejo ir', 'te dejo ir', 'te ayudo a ir', 'te obligo a ir'], respuesta: 0 }
         ],
         
         // ====================
-        // MAZOS DIFÍCILES ESPECIALES - Subcontenedor 1.1
+        // MAZOS DIFÍCILES ESPECIALES - Subcontenedor 1.7
         // ====================
         
         'D1': [
-            { japones: '難解な表現', lectura: 'nankai na hyougen', opciones: ['Expresión difícil', 'Expresión fácil', 'Expresión común', 'Expresión informal'], respuesta: 0 },
-            { japones: '微妙なニュアンス', lectura: 'bimyou na nyuansu', opciones: ['Matiz sutil', 'Significado claro', 'Expresión directa', 'Palabra simple'], respuesta: 0 },
-            { japones: '慣用句', lectura: 'kanyouku', opciones: ['Modismo', 'Palabra simple', 'Verbo compuesto', 'Adjetivo básico'], respuesta: 0 },
-            { japones: '比喩的表現', lectura: 'hiyuteki hyougen', opciones: ['Expresión metafórica', 'Expresión literal', 'Expresión técnica', 'Expresión coloquial'], respuesta: 0 },
-            { japones: '故事成語', lectura: 'koji seigo', opciones: ['Proverbio chino', 'Palabra moderna', 'Expresión juvenil', 'Término técnico'], respuesta: 0 },
-            { japones: '四字熟語', lectura: 'yoji jukugo', opciones: ['Palabra de cuatro caracteres', 'Palabra de dos caracteres', 'Expresión extranjera', 'Término científico'], respuesta: 0 },
-            { japones: '古典的表現', lectura: 'kotenteki hyougen', opciones: ['Expresión clásica', 'Expresión moderna', 'Jerga juvenil', 'Término de internet'], respuesta: 0 },
-            { japones: '文語表現', lectura: 'bun-go hyougen', opciones: ['Lenguaje literario', 'Lenguaje hablado', 'Jerga', 'Dialecto'], respuesta: 0 },
-            { japones: '抽象的表現', lectura: 'chuushouteki hyougen', opciones: ['Expresión abstracta', 'Expresión concreta', 'Descripción detallada', 'Instrucción clara'], respuesta: 0 },
-            { japones: '複合動詞', lectura: 'fukugou doushi', opciones: ['Verbo compuesto', 'Verbo simple', 'Sustantivo', 'Adjetivo'], respuesta: 0 }
-        ],
-        
-        'D2': [
-            { japones: '擬態語', lectura: 'gitaigo', opciones: ['Palabra mimética (estado)', 'Onomatopeya (sonido)', 'Sustantivo', 'Verbo'], respuesta: 0 },
-            { japones: '擬音語', lectura: 'giongo', opciones: ['Onomatopeya (sonido)', 'Palabra mimética (estado)', 'Adjetivo', 'Adverbio'], respuesta: 0 },
-            { japones: '助詞の特殊用法', lectura: 'joshi no tokushu youhou', opciones: ['Uso especial de partículas', 'Uso básico de verbos', 'Conjugación simple', 'Orden de palabras básico'], respuesta: 0 },
-            { japones: '尊敬語の複雑形', lectura: 'sonkeigo no fukuzatsukei', opciones: ['Forma compleja de lenguaje honorífico', 'Lenguaje casual', 'Lenguaje simple', 'Dialecto regional'], respuesta: 0 },
-            { japones: '謙譲語の特殊形', lectura: 'kenjougo no tokushukei', opciones: ['Forma especial de lenguaje humilde', 'Lenguaje arrogante', 'Lenguaje neutral', 'Jerga juvenil'], respuesta: 0 },
-            { japones: '丁寧語の変化形', lectura: 'teineigo no henkakei', opciones: ['Variante de lenguaje formal', 'Lenguaje informal', 'Lenguaje directo', 'Dialecto'], respuesta: 0 },
-            { japones: '古語', lectura: 'kogo', opciones: ['Lenguaje antiguo', 'Lenguaje moderno', 'Lenguaje de internet', 'Jerga'], respuesta: 0 },
-            { japones: '漢文調表現', lectura: 'kanbunchou hyougen', opciones: ['Estilo de chino clásico', 'Estilo moderno', 'Estilo coloquial', 'Estilo técnico'], respuesta: 0 },
-            { japones: '和製漢語', lectura: 'wasei kango', opciones: ['Palabras chinas creadas en Japón', 'Palabras extranjeras', 'Palabras nativas japonesas', 'Neologismos'], respuesta: 0 },
-            { japones: '難読漢字', lectura: 'nandoku kanji', opciones: ['Kanji de lectura difícil', 'Kanji básico', 'Hiragana', 'Katakana'], respuesta: 0 }
+            { japones: '補習', lectura: 'hoshū', opciones: ['clase de refuerzo / tutoría', 'clase avanzada', 'clase opcional', 'clase práctica'], respuesta: 0 },
+            { japones: '生ぬるい', lectura: 'namanurui', opciones: ['tibia / poco intensa', 'excesivamente caliente', 'perfectamente templada', 'totalmente fría'], respuesta: 0 },
+            { japones: '調子に乗る', lectura: 'chōshi ni noru', opciones: ['ponerse arrogante / envalentonarse', 'mantener la humildad', 'mostrar timidez', 'actuar con cautela'], respuesta: 0 },
+            { japones: '性奴隷', lectura: 'sei dorei', opciones: ['esclava sexual', 'trabajadora sexual voluntaria', 'novia', 'esposa'], respuesta: 0 },
+            { japones: 'エスカレート', lectura: 'esukareeto', opciones: ['escalar / intensificar', 'mantener el nivel', 'disminuir gradualmente', 'detener por completo'], respuesta: 0 },
+            { japones: '非日常', lectura: 'hijōjō', opciones: ['no cotidiano / fuera de lo normal', 'totalmente rutinario', 'ligeramente diferente', 'completamente ordinario'], respuesta: 0 },
+            { japones: 'フェラテク', lectura: 'feratekku', opciones: ['técnica de felación', 'técnica de beso', 'técnica de masaje', 'técnica de conversación'], respuesta: 0 },
+            { japones: 'どハマリ', lectura: 'do hamari', opciones: ['adicción extrema / obsesión', 'ligero interés', 'total desinterés', 'aversión completa'], respuesta: 0 },
+            { japones: '金玉', lectura: 'kintama', opciones: ['huevos / testículos', 'pene completo', 'glándulas', 'semen'], respuesta: 0 },
+            { japones: 'からっぽ', lectura: 'karappo', opciones: ['vacío / completamente vacío', 'rebosante / lleno', 'medio vacío', 'tapado'], respuesta: 0 }
         ]
     },
     
