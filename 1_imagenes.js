@@ -1318,14 +1318,14 @@ const sistemaDescriptivo = {
                 tematica: 'educativo'
             },
             2: { 
-                nombre: 'ganyu cosplay xd',
+                nombre: 'Cosplay genshin',
                 imagen: 'https://pbs.twimg.com/media/G7wkBDjWEAAPM8B?format=png&name=900x900', 
                 descripcion: 'Videos de cultura japonesa',
                 tematica: 'cultura'
             },
             3: { 
-                nombre: 'VIDEO CONTAINER 3',
-                imagen: '', 
+                nombre: ' ORTOS',
+                imagen: 'https://pbs.twimg.com/media/G-4OkHAaIAArSm5?format=jpg&name=large', 
                 descripcion: 'Videos de viajes a Japón',
                 tematica: 'viajes'
             },
