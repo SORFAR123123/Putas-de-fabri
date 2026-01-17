@@ -104,9 +104,9 @@ const videosDatabase = {
     
     // Sub-contenedor 3.1
     '3_1': {
-        titulo: "🎵 Japonés con Música",
+        titulo: "Orto de belinda",
         driveId: "1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS", // DEJA VACÍO si no tienes video
-        descripcion: "Aprende japonés a través de letras de canciones populares.",
+        descripcion: "Belinda te amo",
         timestamps: [],
         duracion: "0:00",
         categoria: "Música"
