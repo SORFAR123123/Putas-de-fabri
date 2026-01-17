@@ -107,8 +107,8 @@ const sistemaDescriptivo = {
             },
             // TESTING
             '1_6': { 
-                nombre: 'Testing',
-                imagen: 'https://i2.nhentai.net/galleries/3731090/20.webp', 
+                nombre: 'Ichika quiere rescatar a sus hermanas y la kacho en video',
+                imagen: 'https://i3.nhentai.net/galleries/3223568/1.webp', 
                 descripcion: '', 
                 nivel: '' 
             },
