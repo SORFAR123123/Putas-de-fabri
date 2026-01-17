@@ -196,7 +196,7 @@ const mangaDatabase = {
         ]
     },
 
-      // Sub-contenedor 1.5
+      // Sub-contenedor 1.6
     '1_6': {
         titulo: "🎌 Ichika putarda",
         descripcion: "Ichika",
@@ -229,6 +229,38 @@ const mangaDatabase = {
              "https://i3.nhentai.net/galleries/3223568/24.webp", // Página 1    
             "https://i4.nhentai.net/galleries/3223568/25.webp", // Página 1
              "https://i3.nhentai.net/galleries/3223568/26.webp" // Página 1    
+        ]
+    },
+          // Sub-contenedor 1.6
+    '1_7': {
+        titulo: "🎌 Miku kachera ",
+        descripcion: "Miku quiere plata",
+        paginas: 21,
+        año: 2024,
+        autor: "Chikell ",
+        paginasUrls: [
+            "https://i4.nhentai.net/galleries/1464410/1.jpg", // Página 1
+             "https://i2.nhentai.net/galleries/1464410/2.jpg", // Página 1
+             "https://i2.nhentai.net/galleries/1464410/3.jpg", // Página 1
+             "https://i4.nhentai.net/galleries/1464410/4.jpg", // Página 1
+             "https://i2.nhentai.net/galleries/1464410/5.jpg", // Página 1
+             "https://i2.nhentai.net/galleries/1464410/6.jpg", // Página 1
+             "https://i1.nhentai.net/galleries/1464410/7.jpg", // Página 1
+             "https://i2.nhentai.net/galleries/1464410/8.jpg", // Página 1
+             "https://i1.nhentai.net/galleries/1464410/9.jpg", // Página 1
+             "https://i1.nhentai.net/galleries/1464410/10.jpg", // Página 1
+             "https://i1.nhentai.net/galleries/1464410/11.jpg", // Página 1
+             "https://i1.nhentai.net/galleries/1464410/12.jpg", // Página 1
+             "https://i1.nhentai.net/galleries/1464410/13.jpg", // Página 1
+             "https://i2.nhentai.net/galleries/1464410/14.jpg", // Página 1
+             "https://i2.nhentai.net/galleries/1464410/15.jpg", // Página 1
+             "https://i4.nhentai.net/galleries/1464410/16.jpg", // Página 1
+             "https://i3.nhentai.net/galleries/1464410/17.jpg", // Página 1
+             "https://i2.nhentai.net/galleries/1464410/18.jpg", // Página 1
+             "https://i3.nhentai.net/galleries/1464410/19.jpg", // Página 1
+             "https://i2.nhentai.net/galleries/1464410/20.jpg", // Página 1
+             "https://i2.nhentai.net/galleries/1464410/21.jpg" // Página 1
+         
         ]
     },
     // ================================================
