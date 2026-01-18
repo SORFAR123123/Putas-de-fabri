@@ -152,7 +152,7 @@ function obtenerPalabrasParaRepasar() {
     );
 }
 
-// Calcular siguiente intervalo basado en respuesta
+// Calcular siguiente intervalo basado en respuesta - ¡CORREGIDO!
 function calcularSiguienteIntervalo(palabra, calidad) {
     // Calidad: 0=olvidado, 1=difícil, 2=regular, 3=fácil, 4=muy fácil
     
@@ -186,19 +186,31 @@ function calcularSiguienteIntervalo(palabra, calidad) {
             palabra.nivel = 3;
             return 24; // 1 día
         } else if (palabra.nivel === 3) {
+            palabra.nivel = 4;
             return 72; // 3 días
         } else if (palabra.nivel === 4) {
-            return 168; // 1 semana
+            palabra.nivel = 5;
+            return 168; // 1 semana (7 días) ← ¡AQUÍ PASA DE 3 A 7 DÍAS!
         } else if (palabra.nivel === 5) {
-            return 336; // 2 semanas
+            palabra.nivel = 6;
+            return 336; // 2 semanas (14 días)
+        } else if (palabra.nivel === 6) {
+            palabra.nivel = 7;
+            return 720; // 1 mes (~30 días)
+        } else if (palabra.nivel === 7) {
+            palabra.nivel = 8;
+            return 1440; // 2 meses
+        } else if (palabra.nivel === 8) {
+            palabra.nivel = 9;
+            return 2160; // 3 meses
         } else {
-            // Nivel 6+
-            return 720; // 1 mes
+            // Máximo: 6 meses para palabras totalmente dominadas
+            return 4320; // 6 meses
         }
     }
 }
 
-// Procesar respuesta en SRS
+// Procesar respuesta en SRS - ¡ACTUALIZADO!
 function procesarRespuestaSRS(palabra, acerto) {
     const calidad = acerto ? 4 : 1; // 4=muy fácil (si acertó), 1=difícil (si falló)
     
@@ -213,10 +225,10 @@ function procesarRespuestaSRS(palabra, acerto) {
     // Actualizar estadísticas
     if (acerto) {
         palabra.aciertosConsecutivos++;
-        if (palabra.aciertosConsecutivos > 5 && palabra.nivel >= 3) {
-            // Palabra dominada, marcar como aprendida
+        // Cambiar a 10 aciertos seguidos para considerar "dominada"
+        if (palabra.aciertosConsecutivos >= 10 && palabra.nivel >= 7) {
             srsDatabase.estadisticas.totalAprendidas++;
-            mostrarNotificacionSRS(`🎉 ¡Dominaste "${palabra.japones}"!`);
+            mostrarNotificacionSRS(`🎉 ¡Dominaste "${palabra.japones}"! (Nivel ${palabra.nivel})`);
         }
     } else {
         palabra.fallos++;
@@ -414,12 +426,15 @@ function crearUISRS() {
                     <div style="text-align: center;">
                         <div style="font-size: 2rem; margin-bottom: 10px;">3️⃣</div>
                         <h4 style="color: #FFD166; margin-bottom: 10px;">Intervalos crecientes</h4>
-                        <p style="font-size: 0.9rem; opacity: 0.8;">1h → 6h → 1d → 3d → 1sem → 1mes</p>
+                        <div style="font-size: 0.8rem; opacity: 0.8; background: rgba(255,255,255,0.1); padding: 10px; border-radius: 8px; margin-top: 5px;">
+                            <div>1h → 6h → 1d → 3d → 1sem → 2sem → 1mes</div>
+                            <div style="color: #FF9800; margin-top: 3px;">¡Ahora con progresión completa!</div>
+                        </div>
                     </div>
                     <div style="text-align: center;">
                         <div style="font-size: 2rem; margin-bottom: 10px;">4️⃣</div>
                         <h4 style="color: #FFD166; margin-bottom: 10px;">Dominio completo</h4>
-                        <p style="font-size: 0.9rem; opacity: 0.8;">Después de 5 aciertos seguidos, la palabra se considera dominada</p>
+                        <p style="font-size: 0.9rem; opacity: 0.8;">Después de 10 aciertos seguidos, la palabra se considera dominada</p>
                     </div>
                 </div>
             </div>
@@ -731,6 +746,11 @@ function finalizarSRS() {
                     Las palabras que acertaste volverán en intervalos más largos.
                     Las que fallaste reaparecerán pronto para reforzar.
                 </p>
+                <div style="text-align: center; margin-top: 15px; padding: 10px; background: rgba(255, 152, 0, 0.2); border-radius: 8px;">
+                    <p style="font-size: 0.9rem; color: #FFD166;">
+                        🎯 Progresión de intervalos: 1h → 6h → 1d → 3d → 1sem → 2sem → 1mes
+                    </p>
+                </div>
             </div>
             
             <div class="quiz-controls">
