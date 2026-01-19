@@ -1409,8 +1409,8 @@ const sistemaDescriptivo = {
             
             // Contenedor 2
             '2_1': { 
-                nombre: 'Video 1',
-                imagen: '', 
+                nombre: 'Ganyu y keching cacheras',
+                imagen: 'https://pbs.twimg.com/media/G7wkBDjWEAAPM8B?format=png&name=900x900', 
                 descripcion: '', 
                 duracion: '' 
             },
