@@ -515,8 +515,8 @@ const sistemaDescriptivo = {
             
             // Contenedor 2
             '2_1': { 
-                nombre: 'Anime 1',
-                imagen: '', 
+                nombre: 'Nikuen 1',
+                imagen: 'https://pbs.twimg.com/media/G_Dke5BW4AAT6rj?format=jpg&name=small', 
                 descripcion: '', 
                 episodios: '' 
             },
