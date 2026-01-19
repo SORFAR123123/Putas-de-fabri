@@ -19,7 +19,7 @@ let modoActual = 'manga'; // 'manga', 'video', 'anime', 'audio', 'asmr', 'rpg', 
 let idiomaVideoActual = 'espanol'; // 'espanol', 'japones'
 
 // ====================
-// NUEVO: SISTEMA SRS (Spaced Repetition System)
+// NUEVO: SISTEMA SRS (Spaced Repetition System) - CORREGIDO
 // ====================
 
 // Almacenamiento local para palabras SRS
@@ -82,8 +82,8 @@ function agregarPalabraSRS(palabraData) {
         mazo: palabraData.mazo,
         fechaAgregada: new Date().toISOString(),
         
-        // Sistema de repeticiones
-        nivel: 0, // 0=nueva, 1=fácil, 2=medio, 3=dura
+        // Sistema de repeticiones - INICIALIZADO CORRECTAMENTE
+        nivel: 0, // 0=nueva, 1=fácil, 2=medio, 3=difícil, 4=muy difícil, etc.
         siguienteRepeticion: new Date().toISOString(), // Repetir en 1 hora
         intervalo: 1, // horas hasta próxima repetición
         repeticiones: 0,
@@ -152,65 +152,74 @@ function obtenerPalabrasParaRepasar() {
     );
 }
 
-// Calcular siguiente intervalo basado en respuesta - ¡CORREGIDO!
+// Calcular siguiente intervalo basado en respuesta - ¡CORREGIDO COMPLETAMENTE!
 function calcularSiguienteIntervalo(palabra, calidad) {
     // Calidad: 0=olvidado, 1=difícil, 2=regular, 3=fácil, 4=muy fácil
     
+    // Si falló o fue difícil
     if (calidad < 3) {
-        // Falló o fue difícil, repetir pronto
-        palabra.nivel = Math.max(0, palabra.nivel - 1);
         palabra.aciertosConsecutivos = 0;
         palabra.fallos++;
         
         if (calidad === 0) {
             // Olvidado completamente, empezar de nuevo
-            return 0.0167; // 1 minuto
+            palabra.nivel = 0;
+            return 0.0167; // 1 minuto (1/60 horas)
         } else if (calidad === 1) {
-            return 0.0833; // 5 minutos
-        } else {
-            return 0.25; // 15 minutos
+            // Difícil - bajar un nivel o mantener en 0
+            palabra.nivel = Math.max(0, palabra.nivel - 1);
+            return 0.0833; // 5 minutos (5/60 horas)
+        } else if (calidad === 2) {
+            // Regular - bajar un poco
+            palabra.nivel = Math.max(0, palabra.nivel - 0.5);
+            return 0.25; // 15 minutos (15/60 horas)
         }
-    } else {
-        // Acertó
+    } 
+    // Si acertó (calidad 3 o 4)
+    else {
         palabra.aciertosConsecutivos++;
         palabra.repeticiones++;
         
-        if (palabra.nivel === 0) {
-            // Primera vez que acierta
-            palabra.nivel = 1;
-            return 1; // 1 hora
-        } else if (palabra.nivel === 1) {
-            palabra.nivel = 2;
-            return 6; // 6 horas
-        } else if (palabra.nivel === 2) {
-            palabra.nivel = 3;
-            return 24; // 1 día
-        } else if (palabra.nivel === 3) {
-            palabra.nivel = 4;
-            return 72; // 3 días
-        } else if (palabra.nivel === 4) {
-            palabra.nivel = 5;
-            return 168; // 1 semana (7 días) ← ¡AQUÍ PASA DE 3 A 7 DÍAS!
-        } else if (palabra.nivel === 5) {
-            palabra.nivel = 6;
-            return 336; // 2 semanas (14 días)
-        } else if (palabra.nivel === 6) {
-            palabra.nivel = 7;
-            return 720; // 1 mes (~30 días)
-        } else if (palabra.nivel === 7) {
-            palabra.nivel = 8;
-            return 1440; // 2 meses
-        } else if (palabra.nivel === 8) {
-            palabra.nivel = 9;
-            return 2160; // 3 meses
+        // Subir de nivel según la calidad de respuesta
+        if (calidad === 4) {
+            // Muy fácil - subir más rápido
+            palabra.nivel += 1.5;
+        } else if (calidad === 3) {
+            // Fácil - subir normalmente
+            palabra.nivel += 1;
+        }
+        
+        // Redondear nivel
+        palabra.nivel = Math.round(palabra.nivel * 10) / 10;
+        
+        // Calcular intervalo basado en nivel (progresión exponencial)
+        const intervalos = [
+            1,      // Nivel 0-1: 1 hora
+            6,      // Nivel 1-2: 6 horas
+            24,     // Nivel 2-3: 1 día
+            72,     // Nivel 3-4: 3 días (CORRECCIÓN: estaba en 24, ahora es 72)
+            168,    // Nivel 4-5: 7 días (¡CORREGIDO! de 3 días a 7 días)
+            336,    // Nivel 5-6: 14 días
+            720,    // Nivel 6-7: 30 días (~1 mes)
+            1440,   // Nivel 7-8: 60 días (~2 meses)
+            2160,   // Nivel 8-9: 90 días (~3 meses)
+            4320    // Nivel 9+: 180 días (~6 meses)
+        ];
+        
+        // Obtener intervalo según nivel (redondeado hacia abajo)
+        const nivelIndex = Math.floor(palabra.nivel);
+        
+        if (nivelIndex < 0) {
+            return intervalos[0];
+        } else if (nivelIndex >= intervalos.length) {
+            return intervalos[intervalos.length - 1];
         } else {
-            // Máximo: 6 meses para palabras totalmente dominadas
-            return 4320; // 6 meses
+            return intervalos[nivelIndex];
         }
     }
 }
 
-// Procesar respuesta en SRS - ¡ACTUALIZADO!
+// Procesar respuesta en SRS - ¡ACTUALIZADO CON LA CORRECCIÓN!
 function procesarRespuestaSRS(palabra, acerto) {
     const calidad = acerto ? 4 : 1; // 4=muy fácil (si acertó), 1=difícil (si falló)
     
@@ -221,14 +230,17 @@ function procesarRespuestaSRS(palabra, acerto) {
     const ahora = new Date();
     palabra.ultimaRevision = ahora.toISOString();
     palabra.siguienteRepeticion = new Date(ahora.getTime() + intervaloHoras * 60 * 60 * 1000).toISOString();
+    palabra.intervalo = intervaloHoras;
     
     // Actualizar estadísticas
     if (acerto) {
-        palabra.aciertosConsecutivos++;
         // Cambiar a 10 aciertos seguidos para considerar "dominada"
         if (palabra.aciertosConsecutivos >= 10 && palabra.nivel >= 7) {
-            srsDatabase.estadisticas.totalAprendidas++;
-            mostrarNotificacionSRS(`🎉 ¡Dominaste "${palabra.japones}"! (Nivel ${palabra.nivel})`);
+            if (!palabra.dominada) {
+                palabra.dominada = true;
+                srsDatabase.estadisticas.totalAprendidas++;
+                mostrarNotificacionSRS(`🎉 ¡Dominaste "${palabra.japones}"! (Nivel ${Math.round(palabra.nivel)})`);
+            }
         }
     } else {
         palabra.fallos++;
@@ -249,6 +261,8 @@ function procesarRespuestaSRS(palabra, acerto) {
     
     guardarSRS();
     
+    console.log(`🔄 SRS: Palabra "${palabra.japones}" - Nivel: ${palabra.nivel.toFixed(1)}, Intervalo: ${intervaloHoras}h, Próxima: ${new Date(palabra.siguienteRepeticion).toLocaleString()}`);
+    
     return intervaloHoras;
 }
 
@@ -256,6 +270,10 @@ function procesarRespuestaSRS(palabra, acerto) {
 function eliminarPalabraSRS(id) {
     const index = srsDatabase.palabras.findIndex(p => p.id === id);
     if (index !== -1) {
+        const palabra = srsDatabase.palabras[index];
+        if (palabra.dominada) {
+            srsDatabase.estadisticas.totalAprendidas--;
+        }
         srsDatabase.palabras.splice(index, 1);
         guardarSRS();
         return true;
@@ -427,8 +445,9 @@ function crearUISRS() {
                         <div style="font-size: 2rem; margin-bottom: 10px;">3️⃣</div>
                         <h4 style="color: #FFD166; margin-bottom: 10px;">Intervalos crecientes</h4>
                         <div style="font-size: 0.8rem; opacity: 0.8; background: rgba(255,255,255,0.1); padding: 10px; border-radius: 8px; margin-top: 5px;">
-                            <div>1h → 6h → 1d → 3d → 1sem → 2sem → 1mes</div>
-                            <div style="color: #FF9800; margin-top: 3px;">¡Ahora con progresión completa!</div>
+                            <div><strong>Progresión corregida:</strong></div>
+                            <div>1h → 6h → 1d → 3d → 7d → 14d → 30d → 60d → 90d → 180d</div>
+                            <div style="color: #4CAF50; margin-top: 3px;">¡Ahora con progresión correcta de 3d a 7d!</div>
                         </div>
                     </div>
                     <div style="text-align: center;">
@@ -479,7 +498,7 @@ function mostrarPalabraSRS() {
             <h2 style="text-align: center; color: #4CAF50; margin-bottom: 20px;">
                 📚 SRS INTENSIVO • Palabra ${indicePalabraActual + 1}/${palabrasActuales.length}
                 <div style="font-size: 0.9rem; color: #FFD166; margin-top: 5px;">
-                    Nivel ${palabra.nivel} • Aciertos seguidos: ${palabra.aciertosConsecutivos}
+                    Nivel ${palabra.nivel.toFixed(1)} • Aciertos seguidos: ${palabra.aciertosConsecutivos}
                 </div>
             </h2>
             
@@ -512,7 +531,7 @@ function mostrarPalabraSRS() {
                     </div>
                     <div>
                         <div style="color: #FF9800;">Nivel</div>
-                        <div style="font-weight: bold;">${palabra.nivel}</div>
+                        <div style="font-weight: bold;">${palabra.nivel.toFixed(1)}</div>
                     </div>
                 </div>
             </div>
@@ -627,10 +646,21 @@ function verificarRespuestaSRS(opcionSeleccionada, posicionCorrecta) {
     
     if (correcta) {
         aciertos++;
-        mostrarNotificacionSRS(`✅ ¡Correcto! Próxima repetición en ${intervaloHoras >= 24 ? Math.round(intervaloHoras/24) + ' días' : Math.round(intervaloHoras) + ' horas'}`);
+        
+        // Mostrar mensaje según el intervalo
+        let mensajeIntervalo;
+        if (intervaloHoras < 24) {
+            mensajeIntervalo = `${Math.round(intervaloHoras)} horas`;
+        } else if (intervaloHoras < 168) {
+            mensajeIntervalo = `${Math.round(intervaloHoras / 24)} días`;
+        } else {
+            mensajeIntervalo = `${Math.round(intervaloHoras / 24 / 7)} semanas`;
+        }
+        
+        mostrarNotificacionSRS(`✅ ¡Correcto! Próxima repetición en ${mensajeIntervalo}`);
     } else {
         errores++;
-        mostrarNotificacionSRS(`❌ Fallaste. Repetirás en ${Math.round(intervaloHoras*60)} minutos`);
+        mostrarNotificacionSRS(`❌ Fallaste. Repetirás en ${Math.round(intervaloHoras * 60)} minutos`);
     }
     
     const controls = document.querySelector('.quiz-controls');
@@ -681,6 +711,7 @@ function calidadRespuestaSRS(calidad) {
     const ahora = new Date();
     palabra.ultimaRevision = ahora.toISOString();
     palabra.siguienteRepeticion = new Date(ahora.getTime() + intervaloHoras * 60 * 60 * 1000).toISOString();
+    palabra.intervalo = intervaloHoras;
     
     guardarSRS();
     
@@ -688,9 +719,21 @@ function calidadRespuestaSRS(calidad) {
     switch(calidad) {
         case 0: mensaje = '😞 Olvidado completamente'; break;
         case 1: mensaje = '😓 Difícil'; break;
+        case 2: mensaje = '😐 Regular'; break;
+        case 3: mensaje = '😊 Fácil'; break;
+        case 4: mensaje = '😄 Muy fácil'; break;
     }
     
-    mostrarNotificacionSRS(`${mensaje} - Próxima en ${intervaloHoras >= 24 ? Math.round(intervaloHoras/24) + ' días' : Math.round(intervaloHoras) + ' horas'}`);
+    let mensajeIntervalo;
+    if (intervaloHoras < 24) {
+        mensajeIntervalo = `${Math.round(intervaloHoras)} horas`;
+    } else if (intervaloHoras < 168) {
+        mensajeIntervalo = `${Math.round(intervaloHoras / 24)} días`;
+    } else {
+        mensajeIntervalo = `${Math.round(intervaloHoras / 24 / 7)} semanas`;
+    }
+    
+    mostrarNotificacionSRS(`${mensaje} - Próxima en ${mensajeIntervalo}`);
     
     // Pasar automáticamente después de seleccionar calidad
     setTimeout(() => {
@@ -748,7 +791,7 @@ function finalizarSRS() {
                 </p>
                 <div style="text-align: center; margin-top: 15px; padding: 10px; background: rgba(255, 152, 0, 0.2); border-radius: 8px;">
                     <p style="font-size: 0.9rem; color: #FFD166;">
-                        🎯 Progresión de intervalos: 1h → 6h → 1d → 3d → 1sem → 2sem → 1mes
+                        🎯 Progresión corregida: 1h → 6h → 1d → 3d → 7d → 14d → 30d → 60d → 90d → 180d
                     </p>
                 </div>
             </div>
@@ -1340,7 +1383,7 @@ function crearContenedoresAnimes() {
         html += `
             <div class="contenedor-item" onclick="cargarSubcontenedoresAnimes(${i})">
                 <div class="contenedor-img" style="background-image: url('${contenedorData.imagen || obtenerImagenContenedorAnime(i)}')"></div>
-                <div class="contenedor-numero">ANIME CONTAINER ${i}</div>
+                <div class="contenedor-nero">ANIME CONTAINER ${i}</div>
                 <p>${desc}</p>
                 <div class="card-button">${tieneAnimes ? 'Ver animes' : 'Explorar'}</div>
             </div>
