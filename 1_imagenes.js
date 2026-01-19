@@ -1460,14 +1460,14 @@ const sistemaDescriptivo = {
                 duracion: '' 
             },
             '3_3': { 
-                nombre: 'Video 3',
-                imagen: '', 
+                nombre: 'Zahiry mi puta',
+                imagen: 'https://pbs.twimg.com/media/G_Dpf43WYAAbWYV?format=jpg&name=small', 
                 descripcion: '', 
                 duracion: '' 
             },
             '3_4': { 
-                nombre: 'Video 4',
-                imagen: '', 
+                nombre: 'Belinda mi zorra ',
+                imagen: 'https://pbs.twimg.com/media/G_DpUJhXYAA9Zn9?format=png&name=360x360', 
                 descripcion: '', 
                 duracion: '' 
             },
