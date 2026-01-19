@@ -189,8 +189,8 @@ const sistemaDescriptivo = {
             
             // Contenedor 4
             '4_1': { 
-                nombre: 'Sub-contenedor 1',
-                imagen: '', 
+                nombre: 'Zerotwo quiere nepe',
+                imagen: 'https://pbs.twimg.com/media/G_DzDM8XQAAd3dA?format=jpg&name=small', 
                 descripcion: '', 
                 nivel: '' 
             },
