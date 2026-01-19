@@ -1325,7 +1325,7 @@ const sistemaDescriptivo = {
             },
             3: { 
                 nombre: ' ORTOS',
-                imagen: 'https://pbs.twimg.com/media/G-4OkHAaIAArSm5?format=jpg&name=large', 
+                imagen: 'https://pbs.twimg.com/media/G7wjg6vW8AAhxc0?format=png&name=900x900', 
                 descripcion: 'Ricos ortos',
                 tematica: 'viajes'
             },
@@ -1442,13 +1442,13 @@ const sistemaDescriptivo = {
             // Contenedor 3
             '3_1': { 
                 nombre: ' Zahiry potona',
-                imagen: 'https://pbs.twimg.com/media/G-3Z47lXYAAZBYK?format=jpg&name=large', 
+                imagen: 'https://pbs.twimg.com/media/G7wjg6vW8AAhxc0?format=png&name=900x900', 
                 descripcion: 'SII DESCRIPCION', 
                 duracion: '' 
             },
             '3_2': { 
                 nombre: 'Video 2',
-                imagen: '', 
+                imagen: 'https://pbs.twimg.com/media/G7wi-5vXwAACmBr?format=png&name=900x900', 
                 descripcion: '', 
                 duracion: '' 
             },
