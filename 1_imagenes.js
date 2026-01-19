@@ -418,26 +418,26 @@ const sistemaDescriptivo = {
         // CONTENEDORES PRINCIPALES (1-10)
         contenedores: {
             1: { 
-                nombre: 'Rusa culona 1',
+                nombre: 'Rubias Putonas ',
                 imagen: 'https://pbs.twimg.com/media/G_CmgDlWMAss1Q_?format=png&name=small', 
                 descripcion: 'Animes de acción y aventura',
                 categoria: 'acción'
             },
             2: { 
-                nombre: 'ANIME CONTAINER 2',
-                imagen: '', 
+                nombre: 'Oyakodon',
+                imagen: 'https://pbs.twimg.com/media/G_DgWkOXIAENV1T?format=png&name=small', 
                 descripcion: 'Animes de romance',
                 categoria: 'romance'
             },
             3: { 
-                nombre: 'ANIME CONTAINER 3',
-                imagen: '', 
+                nombre: 'Gyarus ',
+                imagen: 'https://pbs.twimg.com/media/G_DgMgFW8AAMSNG?format=png&name=small', 
                 descripcion: 'Animes de comedia',
                 categoria: 'comedia'
             },
             4: { 
-                nombre: 'ANIME CONTAINER 4',
-                imagen: '', 
+                nombre: 'Shota',
+                imagen: 'https://pbs.twimg.com/media/G_Dgj29WQAECf4Z?format=png&name=small', 
                 descripcion: 'Animes de terror',
                 categoria: 'terror'
             },
