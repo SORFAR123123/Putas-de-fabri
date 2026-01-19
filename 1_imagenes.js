@@ -547,8 +547,8 @@ const sistemaDescriptivo = {
             
             // Contenedor 3
             '3_1': { 
-                nombre: 'Anime 1',
-                imagen: '', 
+                nombre: 'GYARY PUTITA VERDE XD',
+                imagen: 'https://pbs.twimg.com/media/G_Dhn2DWgAImJLK?format=png&name=small', 
                 descripcion: '', 
                 episodios: '' 
             },
