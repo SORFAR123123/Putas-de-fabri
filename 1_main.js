@@ -1378,13 +1378,12 @@ function crearContenedoresAnimes() {
     for (let i = 1; i <= Math.max(totalContenedores, 10); i++) {
         const contenedorData = obtenerContenedorAnime(i);
         const tieneAnimes = contenedores[i] && contenedores[i].length > 0;
-        const nombre = obtenerNombreContenedor('anime', i); // CORREGIDO: Usar la función de nombres
         const desc = contenedorData.descripcion || (tieneAnimes ? contenedores[i].length + ' sub-contenedores con animes' : '5 sub-contenedores disponibles');
         
         html += `
             <div class="contenedor-item" onclick="cargarSubcontenedoresAnimes(${i})">
                 <div class="contenedor-img" style="background-image: url('${contenedorData.imagen || obtenerImagenContenedorAnime(i)}')"></div>
-                <div class="contenedor-numero">${nombre}</div> <!-- CORREGIDO -->
+                <div class="contenedor-nero">ANIME CONTAINER ${i}</div>
                 <p>${desc}</p>
                 <div class="card-button">${tieneAnimes ? 'Ver animes' : 'Explorar'}</div>
             </div>
@@ -1405,7 +1404,6 @@ function crearContenedoresAudios() {
     
     for (let i = 1; i <= Math.max(totalContenedores, 10); i++) {
         const tieneAudios = contenedores[i] && contenedores[i].length > 0;
-        const nombre = obtenerNombreContenedor('audio', i); // CORREGIDO: Usar la función de nombres
         const desc = tieneAudios ? contenedores[i].length + ' sub-contenedores con openings' : '5 sub-contenedores disponibles';
         
         // Usar función específica para audio
@@ -1414,7 +1412,7 @@ function crearContenedoresAudios() {
         html += `
             <div class="contenedor-item" onclick="cargarSubcontenedoresAudios(${i})">
                 <div class="contenedor-img" style="background-image: url('${imagenContenedor}')"></div>
-                <div class="contenedor-numero">${nombre}</div> <!-- CORREGIDO -->
+                <div class="contenedor-numero">${obtenerContenedorAudio(i).nombre || `AUDIO CONTAINER ${i}`}</div>
                 <p>${desc}</p>
                 <div class="card-button" style="background: linear-gradient(135deg, #FF6B6B, #FFD166);">
                     ${tieneAudios ? '🎵 Escuchar audios' : 'Explorar'}
@@ -1438,13 +1436,12 @@ function crearContenedoresASMR() {
     for (let i = 1; i <= Math.max(totalContenedores, 4); i++) {
         const contenedorData = obtenerContenedorASMR(i);
         const tieneAudios = contenedores[i] && contenedores[i].length > 0;
-        const nombre = obtenerNombreContenedor('asmr', i); // CORREGIDO: Usar la función de nombres
         const desc = contenedorData.descripcion || (tieneAudios ? contenedores[i].length + ' sub-contenedores con audios' : '3 sub-contenedores disponibles');
         
         html += `
             <div class="contenedor-item" onclick="cargarSubcontenedoresASMR(${i})">
                 <div class="contenedor-img" style="background-image: url('${contenedorData.imagen}')"></div>
-                <div class="contenedor-numero">${nombre}</div> <!-- CORREGIDO -->
+                <div class="contenedor-numero">${contenedorData.nombre || `ASMR CONTAINER ${i}`}</div>
                 <p>${desc}</p>
                 <div class="card-button" style="background: linear-gradient(135deg, #9C27B0, #673AB7);">
                     ${tieneAudios ? '🎧 Escuchar ASMR' : 'Explorar'}
@@ -1497,7 +1494,7 @@ function obtenerSubcontenedoresDisponibles(modo, contenedor) {
 }
 
 // ====================
-// FUNCIONES PARA ANIMES (VERSIÓN DINÁMICA) - CORREGIDAS
+// FUNCIONES PARA ANIMES (VERSIÓN DINÁMICA)
 // ====================
 
 function cargarSubcontenedoresAnimes(contenedor) {
@@ -1514,7 +1511,7 @@ function cargarSubcontenedoresAnimes(contenedor) {
 
 function crearSubcontenedoresAnimesUI(contenedor) {
     let html = `<h2 style="text-align: center; margin-bottom: 30px; color: #FFD166;">
-        🎌 ${obtenerNombreContenedor('anime', contenedor)} - SUB-CONTENEDORES DE ANIMES
+        🎌 CONTENEDOR ${contenedor} - SUB-CONTENEDORES DE ANIMES
     </h2>`;
     html += '<div class="subcontenedores-grid">';
     
@@ -1526,15 +1523,14 @@ function crearSubcontenedoresAnimesUI(contenedor) {
         const tieneConfiguracion = subcontenedoresDisponibles.includes(i);
         const subData = obtenerSubcontenedorAnime(contenedor, i);
         const animeInfo = tieneConfiguracion ? obtenerAnime(contenedor, i) : null;
-        const tieneAnime = tieneConfiguracion && animeInfo !== null;
+        const tieneAnime = tieneConfiguracion && animeInfo !== null; // ← CORRECCIÓN CLAVE
         
-        const nombreSubcontenedor = obtenerNombreSubcontenedor('anime', contenedor, i); // CORREGIDO
         const desc = subData.descripcion || (tieneAnime ? 'Anime disponible' : '(Sin anime configurado)');
         
         html += `
             <div class="subcontenedor-item" onclick="${tieneAnime ? `seleccionarAccionAnime(${contenedor}, ${i})` : `cargarMazosAnimes(${contenedor}, ${i})`}">
                 <div class="subcontenedor-img" style="background-image: url('${subData.imagen || obtenerImagenSubcontenedorAnime(contenedor, i)}')"></div>
-                <h3>${nombreSubcontenedor}</h3> <!-- CORREGIDO -->
+                <h3>${tieneAnime ? animeInfo.titulo.split(' ')[0] : `Anime ${i}`}</h3>
                 ${tieneAnime ? 
                     `<p><strong>${animeInfo.titulo}</strong></p>
                      <p style="font-size: 0.9rem; opacity: 0.8;">${animeInfo.duracion} • ${animeInfo.categoria}</p>` 
@@ -1551,15 +1547,9 @@ function crearSubcontenedoresAnimesUI(contenedor) {
 }
 
 function seleccionarAccionAnime(contenedor, subcontenedor) {
-    const animeInfo = obtenerAnime(contenedor, subcontenedor);
-    const nombreSubcontenedor = obtenerNombreSubcontenedor('anime', contenedor, subcontenedor); // CORREGIDO
-    
     const accionesHTML = `
         <div style="text-align: center; margin: 40px 0;">
-            <h3 style="color: #8A5AF7; margin-bottom: 30px;">${nombreSubcontenedor}</h3>
-            <p style="opacity: 0.8; margin-bottom: 30px; max-width: 600px; margin-left: auto; margin-right: auto;">
-                ${animeInfo.descripcion}
-            </p>
+            <h3 style="color: #8A5AF7; margin-bottom: 30px;">¿Qué quieres hacer?</h3>
             <div style="display: flex; flex-direction: column; gap: 20px; max-width: 400px; margin: 0 auto;">
                 <button class="card-button" onclick="cargarVideoAnime(${contenedor}, ${subcontenedor})" style="background: linear-gradient(135deg, #4CAF50, #2E7D32);">
                     🎬 Ver Anime (Español)
@@ -1602,7 +1592,6 @@ function cargarVideoAnime(contenedor, subcontenedor) {
     
     const driveId = obtenerDriveIdPorIdioma(animeInfo, idiomaVideoActual);
     const timestamps = obtenerTimestampsPorIdioma(animeInfo, idiomaVideoActual);
-    const nombreSubcontenedor = obtenerNombreSubcontenedor('anime', contenedor, subcontenedor); // CORREGIDO
     
     if (!driveId) {
         alert(`No hay versión en ${idiomaVideoActual === 'japones' ? 'japonés' : 'español'} disponible`);
@@ -1615,7 +1604,7 @@ function cargarVideoAnime(contenedor, subcontenedor) {
     // Agregar controles de idioma
     const tituloDesc = `
         <div style="text-align: center; margin-bottom: 25px;">
-            <h2 style="color: #8A5AF7; margin-bottom: 10px;">${nombreSubcontenedor}</h2> <!-- CORREGIDO -->
+            <h2 style="color: #8A5AF7; margin-bottom: 10px;">${animeInfo.titulo}</h2>
             <p style="opacity: 0.8; max-width: 700px; margin: 0 auto;">${animeInfo.descripcion}</p>
             <div class="controles-idioma">
                 <button class="boton-idioma ${idiomaVideoActual === 'espanol' ? 'activo' : ''}" onclick="cambiarIdiomaYVerAnime(${contenedor}, ${subcontenedor}, 'espanol')">
@@ -1660,15 +1649,15 @@ function cargarMazosAnimes(contenedor, subcontenedor) {
 
 function crearMazosAnimesUI(contenedor, subcontenedor) {
     const animeInfo = obtenerAnime(contenedor, subcontenedor);
-    const nombreSubcontenedor = obtenerNombreSubcontenedor('anime', contenedor, subcontenedor); // CORREGIDO
+    const tituloAnime = animeInfo ? animeInfo.titulo : `Sub-contenedor ${subcontenedor}`;
     
     let html = `<h2 style="text-align: center; margin-bottom: 30px; color: #FFD166;">
-        📚 ${nombreSubcontenedor.toUpperCase()} - MAZOS DE VOCABULARIO
+        📚 ${tituloAnime.toUpperCase()} - MAZOS DE VOCABULARIO
     </h2>`;
     
     if (animeInfo) {
         html += `<p style="text-align: center; margin-bottom: 30px; opacity: 0.8; max-width: 800px; margin-left: auto; margin-right: auto;">
-            Practica vocabulario relacionado con ${animeInfo.titulo}. Gana dinero por cada mazo completado.
+            Practica vocabulario relacionado con este anime. Gana dinero por cada mazo completado.
         </p>`;
     }
     
@@ -1704,7 +1693,7 @@ function crearMazosAnimesUI(contenedor, subcontenedor) {
 }
 
 // ====================
-// FUNCIONES DINÁMICAS PARA AUDIOS - CORREGIDAS
+// FUNCIONES DINÁMICAS PARA AUDIOS
 // ====================
 
 function cargarSubcontenedoresAudios(contenedor) {
@@ -1721,7 +1710,7 @@ function cargarSubcontenedoresAudios(contenedor) {
 
 function crearSubcontenedoresAudiosUI(contenedor) {
     let html = `<h2 style="text-align: center; margin-bottom: 30px; color: #FFD166;">
-        🎵 ${obtenerNombreContenedor('audio', contenedor)} - SUB-CONTENEDORES DE OPENINGS
+        🎵 CONTENEDOR ${contenedor} - SUB-CONTENEDORES DE OPENINGS
     </h2>`;
     html += '<div class="subcontenedores-grid">';
     
@@ -1733,15 +1722,14 @@ function crearSubcontenedoresAudiosUI(contenedor) {
         const tieneConfiguracion = subcontenedoresDisponibles.includes(i);
         let imagenSubcontenedor = obtenerImagenSubcontenedorAudio(contenedor, i);
         const audioInfo = tieneConfiguracion ? obtenerAudio(contenedor, i) : null;
-        const tieneAudio = tieneConfiguracion && audioInfo !== null;
+        const tieneAudio = tieneConfiguracion && audioInfo !== null; // ← CORRECCIÓN CLAVE
         
-        const nombreSubcontenedor = obtenerNombreSubcontenedor('audio', contenedor, i); // CORREGIDO
         const desc = tieneAudio ? audioInfo.descripcion : '(Sin audio configurado)';
         
         html += `
             <div class="subcontenedor-item" onclick="${tieneAudio ? `seleccionarAccionAudio(${contenedor}, ${i})` : `cargarMazosAudios(${contenedor}, ${i})`}">
                 <div class="subcontenedor-img" style="background-image: url('${imagenSubcontenedor}')"></div>
-                <h3>${nombreSubcontenedor}</h3> <!-- CORREGIDO -->
+                <h3>${tieneAudio ? audioInfo.titulo.split('-')[0] : `Audio ${i}`}</h3>
                 ${tieneAudio ? 
                     `<p><strong>${audioInfo.titulo}</strong></p>
                      <p style="font-size: 0.9rem; opacity: 0.8;">${audioInfo.artista} • ${audioInfo.duracion}</p>` 
@@ -1759,11 +1747,10 @@ function crearSubcontenedoresAudiosUI(contenedor) {
 
 function seleccionarAccionAudio(contenedor, subcontenedor) {
     const audioInfo = obtenerAudio(contenedor, subcontenedor);
-    const nombreSubcontenedor = obtenerNombreSubcontenedor('audio', contenedor, subcontenedor); // CORREGIDO
     
     const accionesHTML = `
         <div style="text-align: center; margin: 40px 0;">
-            <h3 style="color: #FFD166; margin-bottom: 30px;">${nombreSubcontenedor}</h3> <!-- CORREGIDO -->
+            <h3 style="color: #FFD166; margin-bottom: 30px;">${audioInfo.titulo}</h3>
             <p style="opacity: 0.8; margin-bottom: 30px; max-width: 600px; margin-left: auto; margin-right: auto;">
                 ${audioInfo.descripcion}
             </p>
@@ -1799,19 +1786,17 @@ function cargarReproductorAudio(contenedor, subcontenedor) {
         return;
     }
     
-    const nombreSubcontenedor = obtenerNombreSubcontenedor('audio', contenedor, subcontenedor); // CORREGIDO
-    
     const mangaSection = document.getElementById('manga-section');
-    mangaSection.innerHTML = crearReproductorAudioUI(audioInfo, nombreSubcontenedor);
+    mangaSection.innerHTML = crearReproductorAudioUI(audioInfo);
     
     const botonVolver = crearBotonVolver(() => seleccionarAccionAudio(contenedor, subcontenedor));
     mangaSection.insertBefore(botonVolver, mangaSection.firstChild);
 }
 
-function crearReproductorAudioUI(audioInfo, nombreSubcontenedor) {
+function crearReproductorAudioUI(audioInfo) {
     return `
         <div class="reproductor-audio-container" style="max-width: 800px; margin: 40px auto; background: rgba(30, 30, 40, 0.95); border-radius: 25px; padding: 40px; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6); border: 3px solid #FF6B6B;">
-            <h2 style="text-align: center; color: #FFD166; margin-bottom: 10px;">${nombreSubcontenedor}</h2> <!-- CORREGIDO -->
+            <h2 style="text-align: center; color: #FFD166; margin-bottom: 10px;">${audioInfo.titulo}</h2>
             <p style="text-align: center; opacity: 0.8; margin-bottom: 30px;">
                 ${audioInfo.descripcion}
             </p>
@@ -1887,10 +1872,10 @@ function cargarMazosAudios(contenedor, subcontenedor) {
 
 function crearMazosAudiosUI(contenedor, subcontenedor) {
     const audioInfo = obtenerAudio(contenedor, subcontenedor);
-    const nombreSubcontenedor = obtenerNombreSubcontenedor('audio', contenedor, subcontenedor); // CORREGIDO
+    const tituloAudio = audioInfo ? audioInfo.titulo : `Sub-contenedor ${subcontenedor}`;
     
     let html = `<h2 style="text-align: center; margin-bottom: 30px; color: #FFD166;">
-        📚 ${nombreSubcontenedor.toUpperCase()} - MAZOS DE VOCABULARIO
+        📚 ${tituloAudio.toUpperCase()} - MAZOS DE VOCABULARIO
     </h2>`;
     
     if (audioInfo) {
@@ -1931,7 +1916,7 @@ function crearMazosAudiosUI(contenedor, subcontenedor) {
 }
 
 // ====================
-// FUNCIONES DINÁMICAS PARA ASMR - CORREGIDAS
+// FUNCIONES DINÁMICAS PARA ASMR
 // ====================
 
 function cargarSubcontenedoresASMR(contenedor) {
@@ -1949,7 +1934,7 @@ function cargarSubcontenedoresASMR(contenedor) {
 
 function crearSubcontenedoresASMRUI(contenedor) {
     let html = `<h2 style="text-align: center; margin-bottom: 30px; color: #FFD166;">
-        🎧 ${obtenerNombreContenedor('asmr', contenedor)} - SUB-CONTENEDORES DE ASMR
+        🎧 CONTENEDOR ${contenedor} - SUB-CONTENEDORES DE ASMR
     </h2>`;
     html += '<div class="subcontenedores-grid">';
     
@@ -1961,15 +1946,14 @@ function crearSubcontenedoresASMRUI(contenedor) {
         const tieneConfiguracion = subcontenedoresDisponibles.includes(i);
         const subData = obtenerSubcontenedorASMR(contenedor, i);
         const asmrInfo = tieneConfiguracion ? obtenerASMR(contenedor, i) : null;
-        const tieneASMR = tieneConfiguracion && asmrInfo !== null;
+        const tieneASMR = tieneConfiguracion && asmrInfo !== null; // ← CORRECCIÓN CLAVE
         
-        const nombreSubcontenedor = obtenerNombreSubcontenedor('asmr', contenedor, i); // CORREGIDO
         const desc = subData.descripcion || (tieneASMR ? 'ASMR disponible' : '(Sin audio ASMR configurado)');
         
         html += `
             <div class="subcontenedor-item" onclick="${tieneASMR ? `seleccionarAccionASMR(${contenedor}, ${i})` : 'alert("Este sub-contenedor no tiene audio ASMR disponible")'}">
                 <div class="subcontenedor-img" style="background-image: url('${subData.imagen || obtenerImagenSubcontenedorASMR(contenedor, i)}')"></div>
-                <h3>${nombreSubcontenedor}</h3> <!-- CORREGIDO -->
+                <h3>${tieneASMR ? asmrInfo.titulo.split(' ')[0] : `ASMR ${i}`}</h3>
                 ${tieneASMR ? 
                     `<p><strong>${asmrInfo.titulo}</strong></p>
                      <p style="font-size: 0.9rem; opacity: 0.8;">${asmrInfo.duracion} • ${asmrInfo.categoria}</p>
@@ -2019,7 +2003,7 @@ function calcularDuracionTotalASMRContenedor(contenedor) {
             const [minutos, segundos] = asmrInfo.duracion.split(':').map(Number);
             totalSegundos += minutos * 60 + segundos;
         }
-    }
+    });
     
     const minutos = Math.floor(totalSegundos / 60);
     return `${minutos} min`;
@@ -2027,11 +2011,10 @@ function calcularDuracionTotalASMRContenedor(contenedor) {
 
 function seleccionarAccionASMR(contenedor, subcontenedor) {
     const asmrInfo = obtenerASMR(contenedor, subcontenedor);
-    const nombreSubcontenedor = obtenerNombreSubcontenedor('asmr', contenedor, subcontenedor); // CORREGIDO
     
     const accionesHTML = `
         <div style="text-align: center; margin: 40px 0;">
-            <h3 style="color: #9C27B0; margin-bottom: 20px;">${nombreSubcontenedor}</h3> <!-- CORREGIDO -->
+            <h3 style="color: #9C27B0; margin-bottom: 20px;">${asmrInfo.titulo}</h3>
             <p style="opacity: 0.8; margin-bottom: 30px; max-width: 600px; margin-left: auto; margin-right: auto;">
                 ${asmrInfo.descripcion}
             </p>
@@ -2089,19 +2072,17 @@ function cargarReproductorASMR(contenedor, subcontenedor) {
         return;
     }
     
-    const nombreSubcontenedor = obtenerNombreSubcontenedor('asmr', contenedor, subcontenedor); // CORREGIDO
-    
     const mangaSection = document.getElementById('manga-section');
-    mangaSection.innerHTML = crearReproductorASMRUI(asmrInfo, nombreSubcontenedor);
+    mangaSection.innerHTML = crearReproductorASMRUI(asmrInfo);
     
     const botonVolver = crearBotonVolver(() => seleccionarAccionASMR(contenedor, subcontenedor));
     mangaSection.insertBefore(botonVolver, mangaSection.firstChild);
 }
 
-function crearReproductorASMRUI(asmrInfo, nombreSubcontenedor) {
+function crearReproductorASMRUI(asmrInfo) {
     return `
         <div class="reproductor-audio-container" style="max-width: 800px; margin: 40px auto; background: rgba(30, 30, 40, 0.95); border-radius: 25px; padding: 40px; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6); border: 3px solid #9C27B0;">
-            <h2 style="text-align: center; color: #FFD166; margin-bottom: 10px;">${nombreSubcontenedor}</h2> <!-- CORREGIDO -->
+            <h2 style="text-align: center; color: #FFD166; margin-bottom: 10px;">${asmrInfo.titulo}</h2>
             <p style="text-align: center; opacity: 0.8; margin-bottom: 30px;">
                 ${asmrInfo.descripcion}
             </p>
@@ -2219,7 +2200,7 @@ function mostrarNotificacionASMR(mensaje) {
 }
 
 // ====================
-// FUNCIONES DINÁMICAS PARA MANGAS/VIDEOS - CORREGIDAS
+// FUNCIONES DINÁMICAS PARA MANGAS/VIDEOS
 // ====================
 
 function cargarSubcontenedores(contenedor) {
@@ -2290,7 +2271,7 @@ function cargarSubcontenedoresVideos(contenedor) {
 
 function crearSubcontenedoresVideosUI(contenedor) {
     let html = `<h2 style="text-align: center; margin-bottom: 30px; color: #FFD166;">
-        🎬 ${obtenerNombreContenedor('video', contenedor)} - SUB-CONTENEDORES DE VIDEOS
+        🎬 CONTENEDOR ${contenedor} - SUB-CONTENEDORES DE VIDEOS
     </h2>`;
     html += '<div class="subcontenedores-grid">';
     
@@ -2302,15 +2283,14 @@ function crearSubcontenedoresVideosUI(contenedor) {
         const tieneConfiguracion = subcontenedoresDisponibles.includes(i);
         const subData = obtenerSubcontenedorVideo(contenedor, i);
         const videoInfo = tieneConfiguracion ? obtenerVideo(contenedor, i) : null;
-        const tieneVideo = tieneConfiguracion && videoInfo !== null;
+        const tieneVideo = tieneConfiguracion && videoInfo !== null; // ← CORRECCIÓN CLAVE
         
-        const nombreSubcontenedor = obtenerNombreSubcontenedor('video', contenedor, i); // CORREGIDO
         const desc = tieneVideo ? videoInfo.descripcion : subData.descripcion || '(Sin video)';
         
         html += `
             <div class="subcontenedor-item" onclick="${tieneVideo ? `cargarVideo(${contenedor}, ${i})` : 'alert("Este sub-contenedor no tiene video disponible")'}">
                 <div class="subcontenedor-img" style="background-image: url('${subData.imagen || obtenerImagenSubcontenedor(contenedor, i)}')"></div>
-                <h3>${nombreSubcontenedor}</h3> <!-- CORREGIDO -->
+                <h3>${tieneVideo ? videoInfo.titulo.split(' ')[0] : `Video ${i}`}</h3>
                 ${tieneVideo ? 
                     `<p><strong>${videoInfo.titulo}</strong></p>
                      <p style="font-size: 0.9rem; opacity: 0.8;">${videoInfo.duracion} • ${videoInfo.categoria}</p>` 
@@ -2336,14 +2316,12 @@ function cargarVideo(contenedor, subcontenedor) {
         return;
     }
     
-    const nombreSubcontenedor = obtenerNombreSubcontenedor('video', contenedor, subcontenedor); // CORREGIDO
-    
     const mangaSection = document.getElementById('manga-section');
     mangaSection.innerHTML = sistemaReproductor.cargarVideo(videoInfo.driveId, videoInfo.timestamps);
     
     const tituloDesc = `
         <div style="text-align: center; margin-bottom: 25px;">
-            <h2 style="color: #8A5AF7; margin-bottom: 10px;">${nombreSubcontenedor}</h2> <!-- CORREGIDO -->
+            <h2 style="color: #8A5AF7; margin-bottom: 10px;">${videoInfo.titulo}</h2>
             <p style="opacity: 0.8; max-width: 700px; margin: 0 auto;">${videoInfo.descripcion}</p>
         </div>
     `;
@@ -2373,10 +2351,8 @@ function cargarMazos(contenedor, subcontenedor) {
 }
 
 function crearMazosUI(contenedor, subcontenedor) {
-    const nombreSubcontenedor = obtenerNombreSubcontenedor('manga', contenedor, subcontenedor); // CORREGIDO
-    
     let html = `<h2 style="text-align: center; margin-bottom: 30px; color: #FFD166;">
-        📚 ${obtenerNombreContenedor('manga', contenedor)} • ${nombreSubcontenedor} - MAZOS
+        📚 CONTENEDOR ${contenedor} • SUB-CONTENEDOR ${subcontenedor} - MAZOS
     </h2>`;
     
     // BOTÓN PARA LEER MANGA EN CABECERA
@@ -2555,12 +2531,10 @@ function mostrarPalabraQuiz() {
     if (modoActual === 'fantasia') icono = '⚔️';
     if (modoActual === 'srs') icono = '🔄';
     
-    const nombreSubcontenedor = obtenerNombreSubcontenedor(modoActual, contenedorActual, subcontenedorActual); // CORREGIDO
-    
     quizSection.innerHTML = `
         <div class="quiz-container">
             <h2 style="text-align: center; color: #8A5AF7; margin-bottom: 20px;">
-                ${icono} ${modoActual === 'asmr' ? 'ASMR' : modoActual === 'audio' ? 'AUDIO' : modoActual === 'rpg' ? 'RPG' : modoActual === 'fantasia' ? 'FANTASÍA' : modoActual === 'srs' ? 'SRS' : modoActual.toUpperCase()} • ${nombreSubcontenedor} • Palabra ${indicePalabraActual + 1}/${palabrasActuales.length}
+                ${icono} ${modoActual === 'asmr' ? 'ASMR' : modoActual === 'audio' ? 'AUDIO' : modoActual === 'rpg' ? 'RPG' : modoActual === 'fantasia' ? 'FANTASÍA' : modoActual === 'srs' ? 'SRS' : modoActual.toUpperCase()} • Mazo ${mazoActual} • Palabra ${indicePalabraActual + 1}/${palabrasActuales.length}
             </h2>
             
             <div class="palabra-japonesa" id="palabra-japonesa">
@@ -2601,12 +2575,11 @@ function mostrarPalabraQuiz() {
 function mostrarPalabraQuizDificil() {
     const quizSection = document.getElementById('quiz-section');
     const palabra = palabrasActuales[indicePalabraActual];
-    const nombreSubcontenedor = obtenerNombreSubcontenedor('manga', contenedorActual, subcontenedorActual); // CORREGIDO
     
     quizSection.innerHTML = `
         <div class="quiz-container">
             <h2 style="text-align: center; color: #FF1493; margin-bottom: 20px;">
-                ⚠️ MAZO DIFÍCIL ESPECIAL • ${nombreSubcontenedor} • Palabra ${indicePalabraActual + 1}/${palabrasActuales.length}
+                ⚠️ MAZO DIFÍCIL ESPECIAL • ${mazoActual} • Palabra ${indicePalabraActual + 1}/${palabrasActuales.length}
                 <div style="font-size: 0.9rem; color: #FFD166; margin-top: 5px;">
                     Vocabulario avanzado - ¡Doble recompensa!
                 </div>
@@ -3051,11 +3024,9 @@ function finalizarQuiz() {
         }
     };
     
-    const nombreSubcontenedor = obtenerNombreSubcontenedor(modoActual, contenedorActual, subcontenedorActual); // CORREGIDO
-    
     document.getElementById('quiz-section').innerHTML = `
         <div class="quiz-container">
-            <h2 style="text-align: center; color: #FFD166;">🎉 QUIZ COMPLETADO - ${nombreSubcontenedor}</h2>
+            <h2 style="text-align: center; color: #FFD166;">🎉 QUIZ COMPLETADO</h2>
             
             <div style="text-align: center; margin: 40px 0;">
                 <div style="font-size: 4rem; margin-bottom: 20px;">${porcentaje}%</div>
@@ -3492,7 +3463,7 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    console.log('✅ Sistema completo cargado correctamente (VERSIÓN DINÁMICA CON NOMBRES CORREGIDOS)');
+    console.log('✅ Sistema completo cargado correctamente (VERSIÓN DINÁMICA)');
     console.log('📚 Mangas: 10 contenedores, subcontenedores dinámicos');
     console.log('🎬 Videos: 10 contenedores, subcontenedores dinámicos');
     console.log('🎌 Animes: 10 contenedores, subcontenedores dinámicos');
@@ -3504,10 +3475,6 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log('   - Detecta automáticamente cuántos subcontenedores hay configurados');
     console.log('   - Soporta hasta 100 subcontenedores por contenedor');
     console.log('   - Muestra solo los subcontenedores que tienen configuración');
-    console.log('');
-    console.log('🎯 NOMBRES PERSONALIZADOS ACTIVADOS:');
-    console.log('   - Usa funciones obtenerNombreContenedor() y obtenerNombreSubcontenedor()');
-    console.log('   - Todos los nombres ahora se toman de 1_imagenes (5).js');
     console.log('');
     console.log('🎯 Sistema de misiones activo');
     console.log('⚠️ Sistema de palabras difíciles activo');
@@ -3539,10 +3506,5 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log(`   - Audios contenedor 1: ${audiosSubs} subcontenedores configurados`);
         console.log(`   - ASMR contenedor 1: ${asmrSubs} subcontenedores configurados`);
         console.log(`   - Videos contenedor 1: ${videosSubs} subcontenedores configurados`);
-        
-        // Mostrar nombres personalizados de ejemplo
-        console.log('📝 Nombres personalizados de ejemplo:');
-        console.log(`   - Anime contenedor 1: ${obtenerNombreContenedor('anime', 1)}`);
-        console.log(`   - Anime subcontenedor 1_1: ${obtenerNombreSubcontenedor('anime', 1, 1)}`);
     }, 3000);
 });
