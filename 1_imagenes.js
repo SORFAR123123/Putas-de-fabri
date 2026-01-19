@@ -1330,8 +1330,8 @@ const sistemaDescriptivo = {
                 tematica: 'viajes'
             },
             4: { 
-                nombre: 'VIDEO CONTAINER 4',
-                imagen: '', 
+                nombre: 'Cosplays',
+                imagen: 'https://pbs.twimg.com/media/G_DyJMfXUAATtTE?format=png&name=small', 
                 descripcion: 'Videos de cocina japonesa',
                 tematica: 'cocina'
             },
