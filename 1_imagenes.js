@@ -579,14 +579,14 @@ const sistemaDescriptivo = {
             
             // Contenedor 4
             '4_1': { 
-                nombre: 'Anime 1',
-                imagen: '', 
+                nombre: 'nose el name xd 1',
+                imagen: 'https://pbs.twimg.com/media/G_DlLNbWoAA7ANu?format=png&name=small', 
                 descripcion: '', 
                 episodios: '' 
             },
             '4_2': { 
-                nombre: 'Anime 2',
-                imagen: '', 
+                nombre: 'nose el name 2 xd',
+                imagen: 'https://pbs.twimg.com/media/G_DlcpoXAAA7tbL?format=png&name=small', 
                 descripcion: '', 
                 episodios: '' 
             },
