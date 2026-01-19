@@ -2484,9 +2484,9 @@ const vocabularioDatabase = {
         { japones: 'まくってる', lectura: 'makutteru', opciones: ['Estar haciendo en exceso', 'Estar descansando', 'Estar planeando', 'Estar observando'], respuesta: 0 },
         { japones: '仕込んだ', lectura: 'shikonda', opciones: ['Preparé / Tramé', 'Olvidé', 'Encontré', 'Rompiendo'], respuesta: 0 },
         { japones: 'のに', lectura: 'no ni', opciones: ['Aunque / A pesar de', 'Porque', 'Para que', 'Mientras'], respuesta: 0 },
-        { japones: '清水', lectura: 'shimizu', opciones: ['Agua clara (apellido)', 'Montaña (apellido)', 'Bosque (apellido)', 'Campo (apellido)'], respuesta: 0 },
-        { japones: '雪', lectura: 'yuki', opciones: ['Nieve', 'Lluvia', 'Viento', 'Sol'], respuesta: 0 },
-        { japones: '岬', lectura: 'misaki', opciones: ['Cabo / Promontorio', 'Valle', 'Playa', 'Isla'], respuesta: 0 },
+        { japones: '清水', lectura: 'shimizu', opciones: ['shimizu (apellido)', 'Montaña (apellido)', 'Bosque (apellido)', 'Campo (apellido)'], respuesta: 0 },
+        { japones: '雪', lectura: 'yuki', opciones: ['Yuki (Nombre)', 'Lluvia', 'Viento', 'Sol'], respuesta: 0 },
+        { japones: '岬', lectura: 'misaki', opciones: ['misaki (Nombre)', 'Valle', 'Playa', 'Isla'], respuesta: 0 },
         { japones: '3年前まで', lectura: 'san-nen mae made', opciones: ['Hasta hace 3 años', 'Desde hace 3 años', 'Dentro de 3 años', 'Hace más de 3 años'], respuesta: 0 },
         { japones: '体', lectura: 'karada', opciones: ['Cuerpo', 'Mente', 'Alma', 'Corazón'], respuesta: 0 }
     ],
@@ -2524,7 +2524,7 @@ const vocabularioDatabase = {
         { japones: 'しか', lectura: 'shika', opciones: ['Solo / Únicamente', 'También', 'Especialmente', 'Probablemente'], respuesta: 0 },
         { japones: '話せない', lectura: 'hanasenai', opciones: ['No puedo hablar', 'Puedo hablar', 'Debo hablar', 'Quiero hablar'], respuesta: 0 },
         { japones: '僕', lectura: 'boku', opciones: ['Yo (pronombre masculino)', 'Tú', 'Él', 'Nosotros'], respuesta: 0 },
-        { japones: '咲', lectura: 'saki', opciones: ['Florecer (nombre)', 'Lluvia (nombre)', 'Luna (nombre)', 'Sol (nombre)'], respuesta: 0 },
+        { japones: '咲', lectura: 'saki', opciones: ['Saki (nombre)', 'Lluvia (nombre)', 'Luna (nombre)', 'Sol (nombre)'], respuesta: 0 },
         { japones: '思い出して', lectura: 'omoidashite', opciones: ['Recordar / Rememorar', 'Olvidar', 'Imaginar', 'Soñar'], respuesta: 0 },
         { japones: 'しまったり', lectura: 'shimattari', opciones: ['Terminar haciendo', 'Comenzar haciendo', 'Evitar hacer', 'Planear hacer'], respuesta: 0 },
         { japones: 'たまんなっ', lectura: 'tamanna', opciones: ['No aguanto / Irresistible', 'Aguanto fácilmente', 'Me da igual', 'Me disgusta'], respuesta: 0 }
