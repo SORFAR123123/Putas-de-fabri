@@ -1456,19 +1456,19 @@ const sistemaDescriptivo = {
             '3_2': { 
                 nombre: 'Video 2',
                 imagen: 'https://pbs.twimg.com/media/G7wi-5vXwAACmBr?format=png&name=900x900', 
-                descripcion: '', 
+                descripcion: 'culonasa', 
                 duracion: '' 
             },
             '3_3': { 
                 nombre: 'Zahiry mi puta',
                 imagen: 'https://pbs.twimg.com/media/G_Dpf43WYAAbWYV?format=jpg&name=small', 
-                descripcion: '', 
+                descripcion: 'culona zahiry tacneña', 
                 duracion: '' 
             },
             '3_4': { 
                 nombre: 'Belinda mi zorra ',
                 imagen: 'https://pbs.twimg.com/media/G_DpUJhXYAA9Zn9?format=png&name=360x360', 
-                descripcion: '', 
+                descripcion: 'Belinda de pocollay', 
                 duracion: '' 
             },
             '3_5': { 
