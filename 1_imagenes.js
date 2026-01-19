@@ -1415,20 +1415,20 @@ const sistemaDescriptivo = {
                 duracion: '' 
             },
             '2_2': { 
-                nombre: 'Video 2',
-                imagen: '', 
+                nombre: 'Raiden y yae trio putas',
+                imagen: 'https://pbs.twimg.com/media/G7wh28DXMAAw3CG?format=jpg&name=medium', 
                 descripcion: '', 
                 duracion: '' 
             },
             '2_3': { 
-                nombre: 'Video 3',
-                imagen: '', 
+                nombre: 'Yae Sweetdarling ',
+                imagen: 'https://pbs.twimg.com/media/G7whKvWXkAAhMuQ?format=png&name=900x900', 
                 descripcion: '', 
                 duracion: '' 
             },
             '2_4': { 
-                nombre: 'Video 4',
-                imagen: '', 
+                nombre: 'Yae rusa sweetiefox',
+                imagen: 'https://pbs.twimg.com/media/G7whSr6WQAASlUq?format=jpg&name=large', 
                 descripcion: '', 
                 duracion: '' 
             },
