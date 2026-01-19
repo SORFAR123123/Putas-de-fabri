@@ -1,3 +1,4 @@
+
 // ================================================
 // SISTEMA PRINCIPAL DE NAVEGACIÓN Y QUIZ - VERSIÓN DINÁMICA
 // ================================================
@@ -1367,6 +1368,10 @@ function crearContenedoresVideos() {
     return html;
 }
 
+// ====================
+// FUNCIÓN CORREGIDA: CREAR CONTENEDORES DE ANIMES CON NOMBRES PERSONALIZADOS
+// ====================
+
 function crearContenedoresAnimes() {
     let html = '<h2 style="text-align: center; margin-bottom: 30px; color: #FFD166;">🎌 CONTENEDORES DE ANIMES</h2>';
     html += '<p style="text-align: center; margin-bottom: 30px; opacity: 0.8;">Animes con videos en español/japonés + vocabulario</p>';
@@ -1380,10 +1385,11 @@ function crearContenedoresAnimes() {
         const tieneAnimes = contenedores[i] && contenedores[i].length > 0;
         const desc = contenedorData.descripcion || (tieneAnimes ? contenedores[i].length + ' sub-contenedores con animes' : '5 sub-contenedores disponibles');
         
+        // CORRECCIÓN AQUÍ: Usar el nombre personalizado en lugar de "ANIME CONTAINER ${i}"
         html += `
             <div class="contenedor-item" onclick="cargarSubcontenedoresAnimes(${i})">
                 <div class="contenedor-img" style="background-image: url('${contenedorData.imagen || obtenerImagenContenedorAnime(i)}')"></div>
-                <div class="contenedor-nero">ANIME CONTAINER ${i}</div>
+                <div class="contenedor-nero">${contenedorData.nombre || `ANIME CONTAINER ${i}`}</div>
                 <p>${desc}</p>
                 <div class="card-button">${tieneAnimes ? 'Ver animes' : 'Explorar'}</div>
             </div>
@@ -1509,9 +1515,14 @@ function cargarSubcontenedoresAnimes(contenedor) {
     mangaSection.insertBefore(botonVolver, mangaSection.firstChild);
 }
 
+// ====================
+// FUNCIÓN CORREGIDA: CREAR SUBCONTENEDORES DE ANIMES CON NOMBRES PERSONALIZADOS
+// ====================
+
 function crearSubcontenedoresAnimesUI(contenedor) {
+    const contenedorData = obtenerContenedorAnime(contenedor);
     let html = `<h2 style="text-align: center; margin-bottom: 30px; color: #FFD166;">
-        🎌 CONTENEDOR ${contenedor} - SUB-CONTENEDORES DE ANIMES
+        🎌 ${contenedorData.nombre || `CONTENEDOR ${contenedor}`} - SUB-CONTENEDORES DE ANIMES
     </h2>`;
     html += '<div class="subcontenedores-grid">';
     
@@ -1527,10 +1538,11 @@ function crearSubcontenedoresAnimesUI(contenedor) {
         
         const desc = subData.descripcion || (tieneAnime ? 'Anime disponible' : '(Sin anime configurado)');
         
+        // CORRECCIÓN AQUÍ: Usar el nombre personalizado del subcontenedor
         html += `
             <div class="subcontenedor-item" onclick="${tieneAnime ? `seleccionarAccionAnime(${contenedor}, ${i})` : `cargarMazosAnimes(${contenedor}, ${i})`}">
                 <div class="subcontenedor-img" style="background-image: url('${subData.imagen || obtenerImagenSubcontenedorAnime(contenedor, i)}')"></div>
-                <h3>${tieneAnime ? animeInfo.titulo.split(' ')[0] : `Anime ${i}`}</h3>
+                <h3>${subData.nombre || (tieneAnime ? animeInfo.titulo.split(' ')[0] : `Anime ${i}`)}</h3>
                 ${tieneAnime ? 
                     `<p><strong>${animeInfo.titulo}</strong></p>
                      <p style="font-size: 0.9rem; opacity: 0.8;">${animeInfo.duracion} • ${animeInfo.categoria}</p>` 
@@ -1649,7 +1661,8 @@ function cargarMazosAnimes(contenedor, subcontenedor) {
 
 function crearMazosAnimesUI(contenedor, subcontenedor) {
     const animeInfo = obtenerAnime(contenedor, subcontenedor);
-    const tituloAnime = animeInfo ? animeInfo.titulo : `Sub-contenedor ${subcontenedor}`;
+    const subData = obtenerSubcontenedorAnime(contenedor, subcontenedor);
+    const tituloAnime = animeInfo ? animeInfo.titulo : (subData.nombre || `Sub-contenedor ${subcontenedor}`);
     
     let html = `<h2 style="text-align: center; margin-bottom: 30px; color: #FFD166;">
         📚 ${tituloAnime.toUpperCase()} - MAZOS DE VOCABULARIO
