@@ -1198,14 +1198,14 @@ const sistemaDescriptivo = {
         // CONTENEDORES PRINCIPALES (1-4)
         contenedores: {
             1: { 
-                nombre: 'ASMR CONTAINER 1',
-                imagen: 'https://pbs.twimg.com/media/G7wfStPXUAA1Ra2?format=png&name=900x900', 
+                nombre: 'ASMR Español ',
+                imagen: 'https://pbs.twimg.com/media/G_CoVzcWkAAn8eY?format=jpg&name=small', 
                 descripcion: 'ASMR de susurros',
                 ambiente: 'susurros'
             },
             2: { 
-                nombre: 'ASMR CONTAINER 2',
-                imagen: 'https://pbs.twimg.com/media/G7wfStPXUAA1Ra2?format=png&name=900x900', 
+                nombre: 'ASMR Japones oyakodon',
+                imagen: 'https://pbs.twimg.com/media/G_CohvDXAAAvtpb?format=png&name=small', 
                 descripcion: 'ASMR de tapping',
                 ambiente: 'tapping'
             },
