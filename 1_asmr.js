@@ -10,7 +10,7 @@ const asmrDatabase = {
     
     // Sub-contenedor 1.1
     '1_1': {
-        titulo: "🎧 Meditación Guiada en Japonés",
+        titulo: "Vtuber me la chupa",
         driveId: "1tS-gKr6bf4MY5Yrw7zRvP2uP_zq9rsLl",
         descripcion: "Sesión de meditación guiada con voz suave en japonés para relajación profunda.",
         timestamps: [
