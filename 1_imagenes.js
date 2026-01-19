@@ -419,7 +419,7 @@ const sistemaDescriptivo = {
         contenedores: {
             1: { 
                 nombre: 'Rusa culona 1',
-                imagen: 'https://pbs.twimg.com/media/G7tC6SRWIAA2mLt?format=png&name=large', 
+                imagen: 'https://pbs.twimg.com/media/G_CmgDlWMAss1Q_?format=png&name=small', 
                 descripcion: 'Animes de acción y aventura',
                 categoria: 'acción'
             },
@@ -484,7 +484,7 @@ const sistemaDescriptivo = {
             // Contenedor 1
             '1_1': { 
                 nombre: ' hERMANA RUSA CULONA',
-                imagen: 'https://pbs.twimg.com/media/G7tC6SRWIAA2mLt?format=png&name=large', 
+                imagen: 'https://pbs.twimg.com/media/G_Cmai_WMA4-_Z4?format=png&name=small', 
                 descripcion: '', 
                 episodios: '' 
             },
