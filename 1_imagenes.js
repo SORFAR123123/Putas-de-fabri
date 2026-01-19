@@ -1433,11 +1433,18 @@ const sistemaDescriptivo = {
                 duracion: '' 
             },
             '2_5': { 
-                nombre: 'Video 5',
-                imagen: '', 
+                nombre: 'Ayaya petera ',
+                imagen: 'https://pbs.twimg.com/media/G_Cui1dXIAAplX_?format=png&name=small', 
                 descripcion: '', 
                 duracion: '' 
             },
+             '2_6': { 
+                nombre: 'Eula petera',
+                imagen: 'https://pbs.twimg.com/media/G_CvGiGWEAEo_UK?format=png&name=small', 
+                descripcion: '', 
+                duracion: '' 
+            },
+            
             
             // Contenedor 3
             '3_1': { 
