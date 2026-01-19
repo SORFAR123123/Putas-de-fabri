@@ -125,6 +125,33 @@ const videosDatabase = {
         duracion: "18:45",
         categoria: "Gramática"
     },
+     // Sub-contenedor 2.2
+    '2_5': {
+        titulo: "Ayaya petera ",
+        driveId: "1SyuKcIFauprH2Mtw7e-zi14_6wwNg4Fr", // REEMPLAZA con tu ID real de Drive
+        descripcion: "Explicación detallada de estructuras gramaticales esenciales.",
+        timestamps: [
+            { tiempo: 0, titulo: "📝 Partículas (wa, ga, o)" },
+            { tiempo: 180, titulo: "⏰ Tiempos verbales" },
+            { tiempo: 360, titulo: "💬 Formas negativas" },
+            { tiempo: 540, titulo: "❓ Preguntas y respuestas" }
+        ],
+        duracion: "18:45",
+        categoria: "Gramática"
+    },
+     '2_6': {
+        titulo: "Eula petera  parece emi xd",
+        driveId: "13HfTubyZAckS9h2aHW_TcSdxGJ-XCl5t", // REEMPLAZA con tu ID real de Drive
+        descripcion: "Explicación detallada de estructuras gramaticales esenciales.",
+        timestamps: [
+            { tiempo: 0, titulo: "📝 Partículas (wa, ga, o)" },
+            { tiempo: 180, titulo: "⏰ Tiempos verbales" },
+            { tiempo: 360, titulo: "💬 Formas negativas" },
+            { tiempo: 540, titulo: "❓ Preguntas y respuestas" }
+        ],
+        duracion: "18:45",
+        categoria: "Gramática"
+    },
     
     
     // ================================================
