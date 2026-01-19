@@ -1476,6 +1476,12 @@ const sistemaDescriptivo = {
                 imagen: '', 
                 descripcion: '', 
                 duracion: '' 
+            },
+            '4_1': { 
+                nombre: 'Zerotwo quiere pene',
+                imagen: 'https://pbs.twimg.com/media/G_DzDM8XQAAd3dA?format=jpg&name=small', 
+                descripcion: '', 
+                duracion: '' 
             }
             // ... puedes agregar más si necesitas
         }
