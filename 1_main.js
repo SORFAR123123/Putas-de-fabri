@@ -1385,11 +1385,11 @@ function crearContenedoresAnimes() {
         const tieneAnimes = contenedores[i] && contenedores[i].length > 0;
         const desc = contenedorData.descripcion || (tieneAnimes ? contenedores[i].length + ' sub-contenedores con animes' : '5 sub-contenedores disponibles');
         
-        // CORRECCIÓN AQUÍ: Usar el nombre personalizado en lugar de "ANIME CONTAINER ${i}"
+        // CORRECCIÓN AQUÍ: Cambiar de "contenedor-nero" a "contenedor-numero"
         html += `
             <div class="contenedor-item" onclick="cargarSubcontenedoresAnimes(${i})">
                 <div class="contenedor-img" style="background-image: url('${contenedorData.imagen || obtenerImagenContenedorAnime(i)}')"></div>
-                <div class="contenedor-nero">${contenedorData.nombre || `ANIME CONTAINER ${i}`}</div>
+                <div class="contenedor-numero">${contenedorData.nombre || `ANIME CONTAINER ${i}`}</div>
                 <p>${desc}</p>
                 <div class="card-button">${tieneAnimes ? 'Ver animes' : 'Explorar'}</div>
             </div>
