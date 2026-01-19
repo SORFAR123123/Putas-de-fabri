@@ -1227,8 +1227,8 @@ const sistemaDescriptivo = {
         subcontenedores: {
             // Contenedor 1
             '1_1': { 
-                nombre: 'ASMR 1',
-                imagen: '', 
+                nombre: 'Vtuber me la chupa ',
+                imagen: 'https://pbs.twimg.com/media/G6FDKZyX0AAPZWI?format=jpg&name=4096x4096', 
                 descripcion: '', 
                 tipoVoz: '' 
             },
