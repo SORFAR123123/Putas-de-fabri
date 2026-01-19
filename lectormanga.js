@@ -376,6 +376,65 @@ const mangaDatabase = {
 
     
     '4_1': { titulo: "Manga disponible próximamente", descripcion: "", paginas: 0, año: "", autor: "", paginasUrls: [] },
+
+ // Sub-contenedor 1.1
+    '4_3': {
+        titulo: " Hija y madre putona",
+        descripcion: "",
+        paginas: 42,
+        año: 2024,
+        autor: "Hanabi",
+        paginasUrls: [
+            "https://m10.imhentai.xxx/031/edpxso8wgl/1.webp", // Página 1
+            "https://m10.imhentai.xxx/031/edpxso8wgl/2.webp", // Página 2
+            "https://m10.imhentai.xxx/031/edpxso8wgl/3.webp", // Página 3
+            "https://m10.imhentai.xxx/031/edpxso8wgl/4.webp", // Página 4
+            "https://m10.imhentai.xxx/031/edpxso8wgl/5.webp", // Página 5
+            "https://m10.imhentai.xxx/031/edpxso8wgl/6.webp", // Página 6
+            "https://m10.imhentai.xxx/031/edpxso8wgl/7.webp", // Página 7
+            "https://m10.imhentai.xxx/031/edpxso8wgl/8.webp", // Página 8
+            "https://m10.imhentai.xxx/031/edpxso8wgl/9.webp", // Página 9
+            "https://m10.imhentai.xxx/031/edpxso8wgl/10.webp", // Página 10
+            "https://m10.imhentai.xxx/031/edpxso8wgl/11.webp", // Página 11
+            "https://m10.imhentai.xxx/031/edpxso8wgl/12.webp", // Página 12
+            "https://m10.imhentai.xxx/031/edpxso8wgl/13.webp", // Página 13
+            "https://m10.imhentai.xxx/031/edpxso8wgl/14.webp", // Página 14
+            "https://m10.imhentai.xxx/031/edpxso8wgl/15.webp",  // Página 15
+             "https://m10.imhentai.xxx/031/edpxso8wgl/16.webp", // Página 11
+            "https://m10.imhentai.xxx/031/edpxso8wgl/17.webp", // Página 12
+            "https://m10.imhentai.xxx/031/edpxso8wgl/18.webp", // Página 13
+            "https://m10.imhentai.xxx/031/edpxso8wgl/19.webp", // Página 14
+            "https://m10.imhentai.xxx/031/edpxso8wgl/20.webp",  // Página 15
+            "https://m10.imhentai.xxx/031/edpxso8wgl/21.webp", // Página 11
+            "https://m10.imhentai.xxx/031/edpxso8wgl/22.webp", // Página 12
+            "https://m10.imhentai.xxx/031/edpxso8wgl/23.webp", // Página 13
+            "https://m10.imhentai.xxx/031/edpxso8wgl/24.webp", // Página 14
+            "https://m10.imhentai.xxx/031/edpxso8wgl/25.webp",  // Página 15
+             "https://m10.imhentai.xxx/031/edpxso8wgl/26.webp", // Página 11
+            "https://m10.imhentai.xxx/031/edpxso8wgl/27.webp", // Página 12
+            "https://m10.imhentai.xxx/031/edpxso8wgl/28.webp", // Página 13
+            "https://m10.imhentai.xxx/031/edpxso8wgl/29.webp", // Página 14
+            "https://m10.imhentai.xxx/031/edpxso8wgl/30.webp",  // Página 15
+            "https://m10.imhentai.xxx/031/edpxso8wgl/31.webp", // Página 11
+            "https://m10.imhentai.xxx/031/edpxso8wgl/32.webp", // Página 12
+            "https://m10.imhentai.xxx/031/edpxso8wgl/33.webp", // Página 13
+            "https://m10.imhentai.xxx/031/edpxso8wgl/34.webp", // Página 14
+            "https://m10.imhentai.xxx/031/edpxso8wgl/35.webp",  // Página 15
+             "https://m10.imhentai.xxx/031/edpxso8wgl/36.webp", // Página 11
+            "https://m10.imhentai.xxx/031/edpxso8wgl/37.webp", // Página 12
+            "https://m10.imhentai.xxx/031/edpxso8wgl/38.webp", // Página 13
+            "https://m10.imhentai.xxx/031/edpxso8wgl/39.webp", // Página 14
+            "https://m10.imhentai.xxx/031/edpxso8wgl/40.webp",  // Página 15
+             "https://m10.imhentai.xxx/031/edpxso8wgl/41.webp", // Página 14
+            "https://m10.imhentai.xxx/031/edpxso8wgl/42.webp" // Página 42 xd
+        ]
+    },
+    
+
+
+
+
+    
     '5_1': { titulo: "Manga disponible próximamente", descripcion: "", paginas: 0, año: "", autor: "", paginasUrls: [] }
 };
 
