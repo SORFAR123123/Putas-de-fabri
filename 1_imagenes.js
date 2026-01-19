@@ -1395,8 +1395,8 @@ const sistemaDescriptivo = {
                 duracion: '' 
             },
             '1_4': { 
-                nombre: 'Video 4',
-                imagen: '', 
+                nombre: 'Nino petera',
+                imagen: 'https://pbs.twimg.com/media/G_Dh0LxWwAAg8Jy?format=png&name=small', 
                 descripcion: '', 
                 duracion: '' 
             },
