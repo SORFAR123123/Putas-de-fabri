@@ -1671,16 +1671,8 @@ const vocabularioDatabase = {
         // ====================
         
         'D1': [
-            { japones: '補習', lectura: 'hoshū', opciones: ['clase de refuerzo / tutoría', 'clase avanzada', 'clase opcional', 'clase práctica'], respuesta: 0 },
-            { japones: '生ぬるい', lectura: 'namanurui', opciones: ['tibia / poco intensa', 'excesivamente caliente', 'perfectamente templada', 'totalmente fría'], respuesta: 0 },
-            { japones: '調子に乗る', lectura: 'chōshi ni noru', opciones: ['ponerse arrogante / envalentonarse', 'mantener la humildad', 'mostrar timidez', 'actuar con cautela'], respuesta: 0 },
-            { japones: '性奴隷', lectura: 'sei dorei', opciones: ['esclava sexual', 'trabajadora sexual voluntaria', 'novia', 'esposa'], respuesta: 0 },
-            { japones: 'エスカレート', lectura: 'esukareeto', opciones: ['escalar / intensificar', 'mantener el nivel', 'disminuir gradualmente', 'detener por completo'], respuesta: 0 },
-            { japones: '非日常', lectura: 'hijōjō', opciones: ['no cotidiano / fuera de lo normal', 'totalmente rutinario', 'ligeramente diferente', 'completamente ordinario'], respuesta: 0 },
-            { japones: 'フェラテク', lectura: 'feratekku', opciones: ['técnica de felación', 'técnica de beso', 'técnica de masaje', 'técnica de conversación'], respuesta: 0 },
-            { japones: 'どハマリ', lectura: 'do hamari', opciones: ['adicción extrema / obsesión', 'ligero interés', 'total desinterés', 'aversión completa'], respuesta: 0 },
-            { japones: '金玉', lectura: 'kintama', opciones: ['huevos / testículos', 'pene completo', 'glándulas', 'semen'], respuesta: 0 },
-            { japones: 'からっぽ', lectura: 'karappo', opciones: ['vacío / completamente vacío', 'rebosante / lleno', 'medio vacío', 'tapado'], respuesta: 0 }
+            { japones: '隙間なく', lectura: 'sukima naku', opciones: ['sin espacios', 'con espacios', 'parcialmente', 'completamente'], respuesta: 0 },
+        
         ]
     },
     
