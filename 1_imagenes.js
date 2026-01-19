@@ -1401,8 +1401,8 @@ const sistemaDescriptivo = {
                 duracion: '' 
             },
             '1_5': { 
-                nombre: 'Video 5',
-                imagen: '', 
+                nombre: 'Icika petera',
+                imagen: 'https://pbs.twimg.com/media/G_DiacKW8AAHCYo?format=png&name=small', 
                 descripcion: '', 
                 duracion: '' 
             },
