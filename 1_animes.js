@@ -89,7 +89,7 @@ const animesDatabase = {
     // Sub-contenedor 2.1
     '2_1': {
         titulo: "🎓 Haikyuu!! - Primer Partido",
-        driveIdEsp: "1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS", // REEMPLAZA con ID real
+        driveIdEsp: "1dj-N3BFk6644HQGnIwmYox_gMPhybdkW", // REEMPLAZA con ID real
         driveIdJap: "1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS", // REEMPLAZA con ID real
         descripcion: "Primer partido oficial del equipo de Karasuno contra Date Tech.",
         timestampsEsp: [
