@@ -138,9 +138,9 @@ const animesDatabase = {
 
     // Sub-contenedor 3
     '3_1': {
-        titulo: "🔍 Death Note - Primer Encuentro",
+        titulo: "🔍 Nikuen 2",
         driveIdEsp: "1tNTs3cKMsdo9DXq3Kzh_2H1d2yR_1vTq", // REEMPLAZA con ID real
-        driveIdJap: "1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS", // REEMPLAZA con ID real
+        driveIdJap: "1rRfu1SSe3ISErFMSnEvwWzZ87py8E1ky", // REEMPLAZA con ID real
         descripcion: "Light Yagami encuentra el Death Note y conoce a Ryuk.",
         timestampsEsp: [
             { tiempo: 0, titulo: "📔 Encuentro con el cuaderno" },
