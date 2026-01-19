@@ -219,7 +219,19 @@ const videosDatabase = {
         timestamps: [],
         duracion: "0:00",
         categoria: "Música"
+    },
+//Contendeor 4 cosplays
+
+    
+    '4_1': {
+        titulo: "Zerotwo quiere pene",
+        driveId: "bc1q45x3hlckvlm7vv6l7mhkqdpny73ex9pexgsntj", // zero two
+        descripcion: "Belinda te amo",
+        timestamps: [],
+        duracion: "0:00",
+        categoria: "Música"
     }
+    
 };
 
 // ================================================
