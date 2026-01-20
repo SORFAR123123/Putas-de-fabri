@@ -263,6 +263,58 @@ const mangaDatabase = {
          
         ]
     },
+     '1_8': {
+        titulo: "Yotsuba sefure me la kacho ",
+        descripcion: "Rico orto",
+        paginas: 40,
+        año: 2024,
+        autor: "Chikell ",
+        paginasUrls: [
+            "https://s4.3hentai.net/d654232/1.jpg", // Página 1
+             "https://s4.3hentai.net/d654232/2.jpg", // Página 1
+             "https://s4.3hentai.net/d654232/3.jpg", // Página 1
+             "https://s4.3hentai.net/d654232/4.jpg", // Página 1
+             "https://s4.3hentai.net/d654232/5.jpg", // Página 1
+             "https://s4.3hentai.net/d654232/6.jpg", // Página 1
+             "https://s4.3hentai.net/d654232/7.jpg", // Página 1
+             "https://s4.3hentai.net/d654232/8.jpg", // Página 1
+             "https://s4.3hentai.net/d654232/9.jpg", // Página 1
+             "https://s4.3hentai.net/d654232/10.jpg", // Página 1
+             "https://s4.3hentai.net/d654232/11.jpg", // Página 1
+             "https://s4.3hentai.net/d654232/12.jpg", // Página 1
+             "https://s4.3hentai.net/d654232/13.jpg", // Página 1
+             "https://s4.3hentai.net/d654232/14.jpg", // Página 1
+             "https://s4.3hentai.net/d654232/15.jpg", // Página 1
+             "https://s4.3hentai.net/d654232/16.jpg", // Página 1
+             "https://s4.3hentai.net/d654232/17.jpg", // Página 1
+             "https://s4.3hentai.net/d654232/18.jpg", // Página 1
+             "https://s4.3hentai.net/d654232/19.jpg", // Página 1
+             "https://s4.3hentai.net/d654232/20.jpg", // Página 1
+             "https://s4.3hentai.net/d654232/21.jpg", // Página 1
+            "https://s4.3hentai.net/d654232/22.jpg", // Página 1
+            "https://s4.3hentai.net/d654232/23.jpg", // Página 1
+            "https://s4.3hentai.net/d654232/24.jpg", // Página 1
+            "https://s4.3hentai.net/d654232/25.jpg", // Página 1
+            "https://s4.3hentai.net/d654232/26.jpg", // Página 1
+            "https://s4.3hentai.net/d654232/27.jpg", // Página 1
+            "https://s4.3hentai.net/d654232/28.jpg", // Página 1
+            "https://s4.3hentai.net/d654232/29.jpg", // Página 1
+            "https://s4.3hentai.net/d654232/30.jpg", // Página 1
+            "https://s4.3hentai.net/d654232/31.jpg", // Página 1
+            "https://s4.3hentai.net/d654232/32.jpg", // Página 1
+            "https://s4.3hentai.net/d654232/33.jpg", // Página 1
+            "https://s4.3hentai.net/d654232/34.jpg", // Página 1
+            "https://s1.3hentai.net/d756411/1.jpg", // Página 1
+              "https://s1.3hentai.net/d756411/2.jpg", // Página 1
+              "https://s1.3hentai.net/d756411/3.jpg", // Página 1
+              "https://s1.3hentai.net/d756411/4.jpg", // Página 1
+              "https://s1.3hentai.net/d756411/5.jpg", // Página 1
+            "https://s1.3hentai.net/d756411/6.jpg" // Página 1
+            
+         
+        ]
+    },
+    
     // ================================================
     // CONTENEDOR 2 (VACÍO - LISTO PARA RELLENAR)
     // ================================================
