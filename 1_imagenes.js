@@ -1502,8 +1502,8 @@ const sistemaDescriptivo = {
                 duracion: '' 
             },
             '3_10': { 
-                nombre: ' Putarda',
-                imagen: 'https://pbs.twimg.com/media/G_HdT3aWEAAtoLB?format=jpg&name=small', 
+                nombre: ' Culona en mi depa',
+                imagen: 'https://pbs.twimg.com/media/G_HwunsWkAg3sV4?format=png&name=small', 
                 descripcion: '', 
                 duracion: '' 
             },
