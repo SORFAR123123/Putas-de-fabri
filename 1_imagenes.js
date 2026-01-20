@@ -442,8 +442,8 @@ const sistemaDescriptivo = {
                 categoria: 'terror'
             },
             5: { 
-                nombre: 'ANIME CONTAINER 5',
-                imagen: '', 
+                nombre: 'Variado',
+                imagen: 'https://pbs.twimg.com/media/G_IGX5OXoAARM2s?format=jpg&name=small', 
                 descripcion: 'Animes de ciencia ficción',
                 categoria: 'sci-fi'
             },
@@ -611,8 +611,8 @@ const sistemaDescriptivo = {
             
             // Contenedor 5
             '5_1': { 
-                nombre: 'Anime 1',
-                imagen: '', 
+                nombre: 'Profesora putona',
+                imagen: 'https://pbs.twimg.com/media/G_IGZWXXMAAo_SD?format=png&name=small', 
                 descripcion: '', 
                 episodios: '' 
             },
