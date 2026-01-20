@@ -591,14 +591,14 @@ const sistemaDescriptivo = {
                 episodios: '' 
             },
             '4_3': { 
-                nombre: 'Anime 3',
-                imagen: '', 
+                nombre: ' Tia putona me la chupa rico',
+                imagen: 'https://pbs.twimg.com/media/G_IDuy5XsAE7mXl?format=png&name=small', 
                 descripcion: '', 
                 episodios: '' 
             },
             '4_4': { 
-                nombre: 'Anime 4',
-                imagen: '', 
+                nombre: ' Amigo del colegio  se folla  a mi madre',
+                imagen: 'https://pbs.twimg.com/media/G_ID9V9WgAAOsyA?format=png&name=small', 
                 descripcion: '', 
                 episodios: '' 
             },
