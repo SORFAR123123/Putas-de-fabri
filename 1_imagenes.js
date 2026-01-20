@@ -120,6 +120,13 @@ const sistemaDescriptivo = {
                 descripcion: '', 
                 nivel: '' 
             },
+            //yotsuba sexffriend que rico 
+             '1_8': { 
+                nombre: 'Yotsuba sefure',
+                imagen: 'https://s4.3hentai.net/d654232/1.jpg', 
+                descripcion: '', 
+                nivel: '' 
+            },
           
             
             
