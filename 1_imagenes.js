@@ -1472,6 +1472,18 @@ const sistemaDescriptivo = {
                 duracion: '' 
             },
             '3_5': { 
+                nombre: 'Asiatica playa culona ',
+                imagen: 'https://pbs.twimg.com/media/G_HakSZXcAABAjz?format=png&name=small', 
+                descripcion: '', 
+                duracion: '' 
+            },
+             '3_6': { 
+                nombre: ' puta rosada',
+                imagen: 'https://pbs.twimg.com/media/G_HaFoiXUAA3DoX?format=png&name=small', 
+                descripcion: '', 
+                duracion: '' 
+            },
+             '3_7': { 
                 nombre: 'Video 5',
                 imagen: '', 
                 descripcion: '', 
