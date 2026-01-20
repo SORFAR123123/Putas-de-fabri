@@ -1489,6 +1489,48 @@ const sistemaDescriptivo = {
                 descripcion: '', 
                 duracion: '' 
             },
+            '3_8': { 
+                nombre: ' Putarda',
+                imagen: 'https://pbs.twimg.com/media/G_HdT3aWEAAtoLB?format=jpg&name=small', 
+                descripcion: '', 
+                duracion: '' 
+            },
+            '3_9': { 
+                nombre: ' Putarda',
+                imagen: 'https://pbs.twimg.com/media/G_HdT3aWEAAtoLB?format=jpg&name=small', 
+                descripcion: '', 
+                duracion: '' 
+            },
+            '3_10': { 
+                nombre: ' Putarda',
+                imagen: 'https://pbs.twimg.com/media/G_HdT3aWEAAtoLB?format=jpg&name=small', 
+                descripcion: '', 
+                duracion: '' 
+            },
+            '3_11': { 
+                nombre: ' Putarda',
+                imagen: 'https://pbs.twimg.com/media/G_HdT3aWEAAtoLB?format=jpg&name=small', 
+                descripcion: '', 
+                duracion: '' 
+            },
+            '3_12': { 
+                nombre: ' Putarda',
+                imagen: 'https://pbs.twimg.com/media/G_HdT3aWEAAtoLB?format=jpg&name=small', 
+                descripcion: '', 
+                duracion: '' 
+            },
+            '3_13': { 
+                nombre: ' Putarda',
+                imagen: 'https://pbs.twimg.com/media/G_HdT3aWEAAtoLB?format=jpg&name=small', 
+                descripcion: '', 
+                duracion: '' 
+            },
+            '3_14': { 
+                nombre: ' Putarda',
+                imagen: 'https://pbs.twimg.com/media/G_HdT3aWEAAtoLB?format=jpg&name=small', 
+                descripcion: '', 
+                duracion: '' 
+            },
             '4_1': { 
                 nombre: 'Zerotwo quiere pene',
                 imagen: 'https://pbs.twimg.com/media/G_DzDM8XQAAd3dA?format=jpg&name=small', 
