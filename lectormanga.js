@@ -12,7 +12,7 @@ const mangaDatabase = {
     '1_1': {
         titulo: "🎌 Quintillizas Porneras",
         descripcion: "Miku la mas puta quiere hacer porno con sus hermanas culonas.",
-        paginas: 15,
+        paginas: 6,
         año: 2024,
         autor: "Chikell ",
         paginasUrls: [
@@ -21,16 +21,7 @@ const mangaDatabase = {
             "https://pbs.twimg.com/media/G75WS8fW8AEldTx?format=png&name=large", // Página 3
             "https://pbs.twimg.com/media/G75WagZXUAMh8pQ?format=png&name=large", // Página 4
             "https://pbs.twimg.com/media/G75Wc1bXsAALyNr?format=png&name=large", // Página 5
-            "https://pbs.twimg.com/media/G75Wfl3WUAEYOfy?format=png&name=large", // Página 6
-            "https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=1200&h=1800&fit=crop&auto=format", // Página 7
-            "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=1200&h=1800&fit=crop&auto=format", // Página 8
-            "https://images.unsplash.com/photo-1635805737707-575885ab0820?w=1200&h=1800&fit=crop&auto=format", // Página 9
-            "https://images.unsplash.com/photo-1639322537228-f710d846310a?w=1200&h=1800&fit=crop&auto=format", // Página 10
-            "https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=1200&h=1800&fit=crop&auto=format", // Página 11
-            "https://images.unsplash.com/photo-1565598621680-94c48b04e56f?w=1200&h=1800&fit=crop&auto=format", // Página 12
-            "https://images.unsplash.com/photo-1518709268805-4e9042af2176?w=1200&h=1800&fit=crop&auto=format", // Página 13
-            "https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=1200&h=1800&fit=crop&auto=format", // Página 14
-            "https://images.unsplash.com/photo-1635805737707-575885ab0820?w=1200&h=1800&fit=crop&auto=format"  // Página 15
+            "https://pbs.twimg.com/media/G75Wfl3WUAEYOfy?format=png&name=large" // Página 6
         ]
     },
     
