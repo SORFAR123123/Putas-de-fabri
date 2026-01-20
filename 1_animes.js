@@ -34,8 +34,8 @@ const animesDatabase = {
     
     // Sub-contenedor 1.2
     '1_2': {
-        titulo: "🍡 Kimetsu no Yaiba (Guardianes de la Noche)",
-        driveIdEsp: "1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS", // REEMPLAZA con ID real
+        titulo: "Rubia petera",
+        driveIdEsp: "1agRPnJlh054WicnXmoCpsfZyy88mubW4", // REEMPLAZA con ID real
         driveIdJap: "1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS", // REEMPLAZA con ID real
         descripcion: "Episodio 1: Tanjiro encuentra a su familia atacada por demonios.",
         timestampsEsp: [
@@ -59,8 +59,8 @@ const animesDatabase = {
     
     // Sub-contenedor 1.3
     '1_3': {
-        titulo: "🐉 Dragon Ball Super - Torneo del Poder",
-        driveIdEsp: "1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS", // REEMPLAZA con ID real
+        titulo: "Rubia putona xd",
+        driveIdEsp: "1duic2iO9JVdm2cC3tnvKZOE0Y8QmX-kN", // REEMPLAZA con ID real
         driveIdJap: "1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS", // REEMPLAZA con ID real
         descripcion: "Pelea épica entre Goku y Jiren en el Torneo del Poder.",
         timestampsEsp: [
