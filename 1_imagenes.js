@@ -489,14 +489,14 @@ const sistemaDescriptivo = {
                 episodios: '' 
             },
             '1_2': { 
-                nombre: 'Anime 2',
-                imagen: '', 
+                nombre: 'Rubia petera',
+                imagen: 'https://pbs.twimg.com/media/G_ICl4vXYAAGV3F?format=png&name=small', 
                 descripcion: '', 
                 episodios: '' 
             },
             '1_3': { 
-                nombre: 'Anime 3',
-                imagen: '', 
+                nombre: ' Rubia putona',
+                imagen: 'https://pbs.twimg.com/media/G_ICwz4XIAE7k3y?format=png&name=small', 
                 descripcion: '', 
                 episodios: '' 
             },
