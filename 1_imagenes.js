@@ -1537,6 +1537,30 @@ const sistemaDescriptivo = {
                 descripcion: '', 
                 duracion: '' 
             },
+            '4_2': { 
+                nombre: 'Emilia quiere miverga ',
+                imagen: 'https://pbs.twimg.com/media/G_IbQpYXgAAaqoN?format=png&name=small', 
+                descripcion: '', 
+                duracion: '' 
+            },
+            '4_3': { 
+                nombre: 'Frieren petera',
+                imagen: 'https://pbs.twimg.com/media/G_IbUwyWYAABYq0?format=png&name=small', 
+                descripcion: '', 
+                duracion: '' 
+            },
+            '4_4': { 
+                nombre: 'Rem semen en cara ',
+                imagen: 'https://pbs.twimg.com/media/G_IbbavWwAApORt?format=png&name=small', 
+                descripcion: '', 
+                duracion: '' 
+            },
+            '4_5': { 
+                nombre: 'Sempai putarda',
+                imagen: 'https://pbs.twimg.com/media/G_IbjvhWYAAlCZ5?format=png&name=small', 
+                descripcion: '', 
+                duracion: '' 
+            },
             '5_1': { 
                 nombre: 'Colombianas putardas',
                 imagen: 'https://pbs.twimg.com/media/G_Hrih3WkAYINc8?format=jpg&name=small', 
