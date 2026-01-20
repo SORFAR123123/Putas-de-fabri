@@ -36,7 +36,7 @@ const videosDatabase = {
     // Sub-contenedor 1.2
     '1_2': {
         titulo: "✍️  Yotsuba petera que rico petea yotsuba",
-        driveId: "1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS", // REEMPLAZA con tu ID real de Drive
+        driveId: "1Hkzmk9M03_DMPp2znFhderLYNgUFCJ9R", // REEMPLAZA con tu ID real de Drive
         descripcion: "Tutorial completo del sistema Hiragana con ejercicios de escritura.",
         timestamps: [
             { tiempo: 0, titulo: "📖 Introducción a Hiragana" },
@@ -52,7 +52,7 @@ const videosDatabase = {
     // Sub-contenedor 1.3
     '1_3': {
         titulo: "🗣️ Miku culona nocaCos",
-        driveId: "1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS", // REEMPLAZA con tu ID real de Drive
+        driveId: "1n-U5gThXn-JIn17eDyyalAf2aelTbfEb", // REEMPLAZA con tu ID real de Drive
         descripcion: "Diálogos prácticos para nivel N5 del JLPT. Situaciones cotidianas.",
         timestamps: [
             { tiempo: 0, titulo: "🏪 En la tienda" },
