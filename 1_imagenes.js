@@ -1508,20 +1508,20 @@ const sistemaDescriptivo = {
                 duracion: '' 
             },
             '3_11': { 
-                nombre: ' Putarda',
-                imagen: 'https://pbs.twimg.com/media/G_HdT3aWEAAtoLB?format=jpg&name=small', 
+                nombre: ' De lado',
+                imagen: 'https://pbs.twimg.com/media/G_H1w2tWkA881TM?format=png&name=small', 
                 descripcion: '', 
                 duracion: '' 
             },
             '3_12': { 
-                nombre: ' Putarda',
-                imagen: 'https://pbs.twimg.com/media/G_HdT3aWEAAtoLB?format=jpg&name=small', 
+                nombre: ' Nalgadas ami puta ',
+                imagen: 'https://pbs.twimg.com/media/G_H1_QmWUAEbEV5?format=png&name=small', 
                 descripcion: '', 
                 duracion: '' 
             },
             '3_13': { 
-                nombre: ' Putarda',
-                imagen: 'https://pbs.twimg.com/media/G_HdT3aWEAAtoLB?format=jpg&name=small', 
+                nombre: ' Medias de miku',
+                imagen: 'https://pbs.twimg.com/media/G_H2drsW0AAiI6S?format=jpg&name=small', 
                 descripcion: '', 
                 duracion: '' 
             },
