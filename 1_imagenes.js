@@ -1484,8 +1484,8 @@ const sistemaDescriptivo = {
                 duracion: '' 
             },
              '3_7': { 
-                nombre: 'Video 5',
-                imagen: '', 
+                nombre: ' Putarda',
+                imagen: 'https://pbs.twimg.com/media/G_HdT3aWEAAtoLB?format=jpg&name=small', 
                 descripcion: '', 
                 duracion: '' 
             },
