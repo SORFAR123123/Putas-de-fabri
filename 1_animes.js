@@ -160,9 +160,9 @@ const animesDatabase = {
         categoria: "Misterio",
         año: 2006
     },
-      // Sub-contenedor 3
+      // Sub-contenedor 4
     '4_1': {
-        titulo: "🔍 Death Note - Primer Encuentro",
+        titulo: "Me kacho a mi hermana pelirroja",
         driveIdEsp: "1p4_xYNgyjjktmDPLfO9aauKkWvSSEB2C", // REEMPLAZA con ID real
         driveIdJap: "1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS", // REEMPLAZA con ID real
         descripcion: "Light Yagami encuentra el Death Note y conoce a Ryuk.",
@@ -184,8 +184,79 @@ const animesDatabase = {
         categoria: "Misterio",
         año: 2006
     },
-       // Sub-contenedor 3
+     
     '4_2': {
+        titulo: "Trio",
+        driveIdEsp: "1tCipxqqYFQh_s9LGRMSGMAh81Z6oTZpM", // REEMPLAZA con ID real
+        driveIdJap: "1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS", // REEMPLAZA con ID real
+        descripcion: "Light Yagami encuentra el Death Note y conoce a Ryuk.",
+        timestampsEsp: [
+            { tiempo: 0, titulo: "📔 Encuentro con el cuaderno" },
+            { tiempo: 180, titulo: "👻 Ryuk aparece" },
+            { tiempo: 360, titulo: "⚖️ Primera prueba" },
+            { tiempo: 540, titulo: "🎯 Decisión de usarlo" },
+            { tiempo: 720, titulo: "🕵️ Primer crimen" }
+        ],
+        timestampsJap: [
+            { tiempo: 0, titulo: "📔 ノートとの出会い" },
+            { tiempo: 180, titulo: "👻 リューク登場" },
+            { tiempo: 360, titulo: "⚖️ 最初のテスト" },
+            { tiempo: 540, titulo: "🎯 使用の決意" },
+            { tiempo: 720, titulo: "🕵️ 最初の犯罪" }
+        ],
+        duracion: "23:20",
+        categoria: "Misterio",
+        año: 2006
+    },
+  '4_3': {
+        titulo: "Tia putona me la chupa",
+        driveIdEsp: "1xY-SPaNGXCU4UM4Q5G--cDDirmHFH_K8", // REEMPLAZA con ID real
+        driveIdJap: "1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS", // REEMPLAZA con ID real
+        descripcion: "Light Yagami encuentra el Death Note y conoce a Ryuk.",
+        timestampsEsp: [
+            { tiempo: 0, titulo: "📔 Encuentro con el cuaderno" },
+            { tiempo: 180, titulo: "👻 Ryuk aparece" },
+            { tiempo: 360, titulo: "⚖️ Primera prueba" },
+            { tiempo: 540, titulo: "🎯 Decisión de usarlo" },
+            { tiempo: 720, titulo: "🕵️ Primer crimen" }
+        ],
+        timestampsJap: [
+            { tiempo: 0, titulo: "📔 ノートとの出会い" },
+            { tiempo: 180, titulo: "👻 リューク登場" },
+            { tiempo: 360, titulo: "⚖️ 最初のテスト" },
+            { tiempo: 540, titulo: "🎯 使用の決意" },
+            { tiempo: 720, titulo: "🕵️ 最初の犯罪" }
+        ],
+        duracion: "23:20",
+        categoria: "Misterio",
+        año: 2006
+    },
+    '4_4': {
+        titulo: "Amigo se folla a mi madre ",
+        driveIdEsp: "1o2sItvvJO63mvhO88CTEprE22dAmPrr8", // REEMPLAZA con ID real
+        driveIdJap: "1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS", // REEMPLAZA con ID real
+        descripcion: "Light Yagami encuentra el Death Note y conoce a Ryuk.",
+        timestampsEsp: [
+            { tiempo: 0, titulo: "📔 Encuentro con el cuaderno" },
+            { tiempo: 180, titulo: "👻 Ryuk aparece" },
+            { tiempo: 360, titulo: "⚖️ Primera prueba" },
+            { tiempo: 540, titulo: "🎯 Decisión de usarlo" },
+            { tiempo: 720, titulo: "🕵️ Primer crimen" }
+        ],
+        timestampsJap: [
+            { tiempo: 0, titulo: "📔 ノートとの出会い" },
+            { tiempo: 180, titulo: "👻 リューク登場" },
+            { tiempo: 360, titulo: "⚖️ 最初のテスト" },
+            { tiempo: 540, titulo: "🎯 使用の決意" },
+            { tiempo: 720, titulo: "🕵️ 最初の犯罪" }
+        ],
+        duracion: "23:20",
+        categoria: "Misterio",
+        año: 2006
+    },
+
+    
+       '5_1': {
         titulo: "🔍 Death Note - Primer Encuentro",
         driveIdEsp: "1tCipxqqYFQh_s9LGRMSGMAh81Z6oTZpM", // REEMPLAZA con ID real
         driveIdJap: "1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS", // REEMPLAZA con ID real
