@@ -1490,14 +1490,14 @@ const sistemaDescriptivo = {
                 duracion: '' 
             },
             '3_8': { 
-                nombre: ' Putarda',
-                imagen: 'https://pbs.twimg.com/media/G_HdT3aWEAAtoLB?format=jpg&name=small', 
+                nombre: ' Blanquita',
+                imagen: 'https://pbs.twimg.com/media/G_Hn7ZBWcAAW51_?format=png&name=small', 
                 descripcion: '', 
                 duracion: '' 
             },
             '3_9': { 
-                nombre: ' Putarda',
-                imagen: 'https://pbs.twimg.com/media/G_HdT3aWEAAtoLB?format=jpg&name=small', 
+                nombre: ' Cum espalda',
+                imagen: 'https://pbs.twimg.com/media/G_HoG5ZX0AEiTpp?format=jpg&name=small', 
                 descripcion: '', 
                 duracion: '' 
             },
