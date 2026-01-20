@@ -1336,8 +1336,8 @@ const sistemaDescriptivo = {
                 tematica: 'cocina'
             },
             5: { 
-                nombre: 'VIDEO CONTAINER 5',
-                imagen: '', 
+                nombre: 'Orgias',
+                imagen: 'https://pbs.twimg.com/media/G_HqwV0X0AQDJgJ?format=jpg&name=small', 
                 descripcion: 'Videos de historia japonesa',
                 tematica: 'historia'
             },
@@ -1533,6 +1533,30 @@ const sistemaDescriptivo = {
             },
             '4_1': { 
                 nombre: 'Zerotwo quiere pene',
+                imagen: 'https://pbs.twimg.com/media/G_DzDM8XQAAd3dA?format=jpg&name=small', 
+                descripcion: '', 
+                duracion: '' 
+            },
+            '5_1': { 
+                nombre: 'Colombianas putardas',
+                imagen: 'https://pbs.twimg.com/media/G_Hrih3WkAYINc8?format=jpg&name=small', 
+                descripcion: '', 
+                duracion: '' 
+            },
+            '5_2': { 
+                nombre: 'Peruaan y agentina',
+                imagen: 'https://pbs.twimg.com/media/G_Hr194W0AAe2lc?format=jpg&name=small', 
+                descripcion: '', 
+                duracion: '' 
+            },
+            '5_3': { 
+                nombre: ' Putas peruanas',
+                imagen: 'https://pbs.twimg.com/media/G_Hs-rZWkAAGVgY?format=jpg&name=small', 
+                descripcion: '', 
+                duracion: '' 
+            },
+              '6_1': { 
+                nombre: 'aaaaaaaa',
                 imagen: 'https://pbs.twimg.com/media/G_DzDM8XQAAd3dA?format=jpg&name=small', 
                 descripcion: '', 
                 duracion: '' 
