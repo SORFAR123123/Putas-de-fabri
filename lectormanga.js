@@ -295,12 +295,12 @@ const mangaDatabase = {
             "https://s4.3hentai.net/d654232/32.jpg", // Página 1
             "https://s4.3hentai.net/d654232/33.jpg", // Página 1
             "https://s4.3hentai.net/d654232/34.jpg", // Página 1
-            "https://s1.3hentai.net/d756411/1.jpg", // Página 1
-              "https://s1.3hentai.net/d756411/2.jpg", // Página 1
-              "https://s1.3hentai.net/d756411/3.jpg", // Página 1
-              "https://s1.3hentai.net/d756411/4.jpg", // Página 1
-              "https://s1.3hentai.net/d756411/5.jpg", // Página 1
-            "https://s1.3hentai.net/d756411/6.jpg" // Página 1
+            "https://i1.nhentai.net/galleries/2471402/1.jpg", // Página 1
+              "https://i4.nhentai.net/galleries/2471402/2.jpg", // Página 1
+              "https://i3.nhentai.net/galleries/2471402/3.jpg", // Página 1
+              "https://i1.nhentai.net/galleries/2471402/4.jpg", // Página 1
+              "https://i4.nhentai.net/galleries/2471402/5.jpg", // Página 1
+            "https://i2.nhentai.net/galleries/2471402/6.jpg" // Página 1
             
          
         ]
