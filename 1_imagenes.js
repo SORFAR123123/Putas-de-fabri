@@ -1712,6 +1712,126 @@ const sistemaDescriptivo = {
                 descripcion: '', 
                 duracion: '' 
             },
+             '6_21': { 
+                nombre: 'Me kacho a ichika hotel vista edificios',
+                imagen: 'https://pbs.twimg.com/media/G_S_Uh9XgAAH7tO?format=jpg&name=small', 
+                descripcion: '', 
+                duracion: '' 
+            },
+             '6_22': { 
+                nombre: 'Me kacho a ichika hotel vista edificios',
+                imagen: 'https://pbs.twimg.com/media/G_S_Uh9XgAAH7tO?format=jpg&name=small', 
+                descripcion: '', 
+                duracion: '' 
+            },
+             '6_23': { 
+                nombre: 'Me kacho a ichika hotel vista edificios',
+                imagen: 'https://pbs.twimg.com/media/G_S_Uh9XgAAH7tO?format=jpg&name=small', 
+                descripcion: '', 
+                duracion: '' 
+            },
+             '6_24': { 
+                nombre: 'Me kacho a ichika hotel vista edificios',
+                imagen: 'https://pbs.twimg.com/media/G_S_Uh9XgAAH7tO?format=jpg&name=small', 
+                descripcion: '', 
+                duracion: '' 
+            },
+             '6_25': { 
+                nombre: 'Me kacho a ichika hotel vista edificios',
+                imagen: 'https://pbs.twimg.com/media/G_S_Uh9XgAAH7tO?format=jpg&name=small', 
+                descripcion: '', 
+                duracion: '' 
+            },
+             '6_26': { 
+                nombre: 'Me kacho a ichika hotel vista edificios',
+                imagen: 'https://pbs.twimg.com/media/G_S_Uh9XgAAH7tO?format=jpg&name=small', 
+                descripcion: '', 
+                duracion: '' 
+            },
+             '6_27': { 
+                nombre: 'Me kacho a ichika hotel vista edificios',
+                imagen: 'https://pbs.twimg.com/media/G_S_Uh9XgAAH7tO?format=jpg&name=small', 
+                descripcion: '', 
+                duracion: '' 
+            },
+             '6_28': { 
+                nombre: 'Me kacho a ichika hotel vista edificios',
+                imagen: 'https://pbs.twimg.com/media/G_S_Uh9XgAAH7tO?format=jpg&name=small', 
+                descripcion: '', 
+                duracion: '' 
+            },
+             '6_29': { 
+                nombre: 'Me kacho a ichika hotel vista edificios',
+                imagen: 'https://pbs.twimg.com/media/G_S_Uh9XgAAH7tO?format=jpg&name=small', 
+                descripcion: '', 
+                duracion: '' 
+            },
+             '6_30': { 
+                nombre: 'Me kacho a ichika hotel vista edificios',
+                imagen: 'https://pbs.twimg.com/media/G_S_Uh9XgAAH7tO?format=jpg&name=small', 
+                descripcion: '', 
+                duracion: '' 
+            },
+             '6_31': { 
+                nombre: 'Me kacho a ichika hotel vista edificios',
+                imagen: 'https://pbs.twimg.com/media/G_S_Uh9XgAAH7tO?format=jpg&name=small', 
+                descripcion: '', 
+                duracion: '' 
+            },
+             '6_32': { 
+                nombre: 'Me kacho a ichika hotel vista edificios',
+                imagen: 'https://pbs.twimg.com/media/G_S_Uh9XgAAH7tO?format=jpg&name=small', 
+                descripcion: '', 
+                duracion: '' 
+            },
+             '6_33': { 
+                nombre: 'Me kacho a ichika hotel vista edificios',
+                imagen: 'https://pbs.twimg.com/media/G_S_Uh9XgAAH7tO?format=jpg&name=small', 
+                descripcion: '', 
+                duracion: '' 
+            },
+             '6_34': { 
+                nombre: 'Me kacho a ichika hotel vista edificios',
+                imagen: 'https://pbs.twimg.com/media/G_S_Uh9XgAAH7tO?format=jpg&name=small', 
+                descripcion: '', 
+                duracion: '' 
+            },
+             '6_35': { 
+                nombre: 'Me kacho a ichika hotel vista edificios',
+                imagen: 'https://pbs.twimg.com/media/G_S_Uh9XgAAH7tO?format=jpg&name=small', 
+                descripcion: '', 
+                duracion: '' 
+            },
+             '6_36': { 
+                nombre: 'Me kacho a ichika hotel vista edificios',
+                imagen: 'https://pbs.twimg.com/media/G_S_Uh9XgAAH7tO?format=jpg&name=small', 
+                descripcion: '', 
+                duracion: '' 
+            },
+             '6_37': { 
+                nombre: 'Me kacho a ichika hotel vista edificios',
+                imagen: 'https://pbs.twimg.com/media/G_S_Uh9XgAAH7tO?format=jpg&name=small', 
+                descripcion: '', 
+                duracion: '' 
+            },
+             '6_38': { 
+                nombre: 'Me kacho a ichika hotel vista edificios',
+                imagen: 'https://pbs.twimg.com/media/G_S_Uh9XgAAH7tO?format=jpg&name=small', 
+                descripcion: '', 
+                duracion: '' 
+            },
+             '6_39': { 
+                nombre: 'Me kacho a ichika hotel vista edificios',
+                imagen: 'https://pbs.twimg.com/media/G_S_Uh9XgAAH7tO?format=jpg&name=small', 
+                descripcion: '', 
+                duracion: '' 
+            },
+             '6_40': { 
+                nombre: 'Me kacho a ichika hotel vista edificios',
+                imagen: 'https://pbs.twimg.com/media/G_S_Uh9XgAAH7tO?format=jpg&name=small', 
+                descripcion: '', 
+                duracion: '' 
+            },
              '7_1': { 
                 nombre: 'Alya de la u',
                 imagen: 'https://pbs.twimg.com/media/G_SimAFXsAAwrel?format=png&name=small', 
