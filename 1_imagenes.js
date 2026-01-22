@@ -1647,32 +1647,32 @@ const sistemaDescriptivo = {
                 duracion: '' 
             },
             '6_10': { 
-                nombre: '  bolas',
-                imagen: 'https://pb.twimg.com/media/G_Shos6XUAInb9j?format=png&name=small', 
+                nombre: 'Me kacho a mis putas favoritas',
+                imagen: 'https://pbs.twimg.com/media/G_S02NHXUAE9VIl?format=jpg&name=small', 
                 descripcion: '', 
                 duracion: '' 
             },
             '6_11': { 
-                nombre: '  bolas',
-                imagen: 'https://pb.twimg.com/media/G_Shos6XUAInb9j?format=png&name=small', 
+                nombre: 'La mayor y la menor quieren mi leche',
+                imagen: 'https://pbs.twimg.com/media/G_S1bouWEAA1SHM?format=jpg&name=small', 
                 descripcion: '', 
                 duracion: '' 
             },
             '6_12': { 
-                nombre: '  bolas',
-                imagen: 'https://pb.twimg.com/media/G_Shos6XUAInb9j?format=png&name=small', 
+                nombre: 'Yotsuba me hace una pajita a escondidas',
+                imagen: 'https://pbs.twimg.com/media/G_S1_MmXEAER7_n?format=jpg&name=small', 
                 descripcion: '', 
                 duracion: '' 
             },
             '6_13': { 
-                nombre: '  bolas',
-                imagen: 'https://pb.twimg.com/media/G_Shos6XUAInb9j?format=png&name=small', 
+                nombre: 'Miku me la chupa Ichika me hace una paja y me la kacho y nino cachonda en la noche',
+                imagen: 'https://pbs.twimg.com/media/G_S2m8mWUAAAdw5?format=jpg&name=small', 
                 descripcion: '', 
                 duracion: '' 
             },
             '6_14': { 
-                nombre: '  bolas',
-                imagen: 'https://pb.twimg.com/media/G_Shos6XUAInb9j?format=png&name=small', 
+                nombre: 'Nino me pajea y la kacho itsuki y yotsuba me pajean tambien',
+                imagen: 'https://pbs.twimg.com/media/G_S3WK0WAAAsuBH?format=jpg&name=small', 
                 descripcion: '', 
                 duracion: '' 
             },
