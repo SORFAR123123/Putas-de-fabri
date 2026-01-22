@@ -1629,8 +1629,8 @@ const sistemaDescriptivo = {
                 duracion: '' 
             },
             '6_7': { 
-                nombre: 'Qulas',
-                imagen: 'https://pbs.wimg.com/media/G_Shos6XUAInb9j?format=png&name=small', 
+                nombre: 'Me kacho a las 5 pero que rico orto tiene ichika',
+                imagen: 'https://pbs.twimg.com/media/G_Ste5IXAAAMivE?format=png&name=small', 
                 descripcion: '', 
                 duracion: '' 
             },
