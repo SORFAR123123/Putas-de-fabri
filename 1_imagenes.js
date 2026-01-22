@@ -1653,14 +1653,14 @@ const sistemaDescriptivo = {
                 duracion: '' 
             },
              '7_1': { 
-                nombre: 'Alyde la u',
+                nombre: 'Alya de la u',
                 imagen: 'https://pbs.twimg.com/media/G_SimAFXsAAwrel?format=png&name=small', 
                 descripcion: '', 
                 duracion: '' 
             },
              '7_2': { 
-                nombre: 'Ade la u',
-                imagen: 'https://pbs.wimg.com/media/G_SimAFXsAAwrel?format=png&name=small', 
+                nombre: 'Rias perra',
+                imagen: 'https://pbs.twimg.com/media/G_SlS0oWEAAU80b?format=png&name=small', 
                 descripcion: '', 
                 duracion: '' 
             },
