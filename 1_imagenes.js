@@ -1713,122 +1713,122 @@ const sistemaDescriptivo = {
                 duracion: '' 
             },
              '6_21': { 
-                nombre: 'Me kacho a ichika hotel vista edificios',
-                imagen: 'https://pbs.twimg.com/media/G_S_Uh9XgAAH7tO?format=jpg&name=small', 
+                nombre: 'Me kacho a la profe itsuki',
+                imagen: 'https://pbs.twimg.com/media/G_TEW1-WcAIdIbD?format=jpg&name=small', 
                 descripcion: '', 
                 duracion: '' 
             },
              '6_22': { 
-                nombre: 'Me kacho a ichika hotel vista edificios',
-                imagen: 'https://pbs.twimg.com/media/G_S_Uh9XgAAH7tO?format=jpg&name=small', 
+                nombre: 'Nino me la chupa en el trabajo',
+                imagen: 'https://pbs.twimg.com/media/G_TE4vmWIAAlH3H?format=jpg&name=small', 
                 descripcion: '', 
                 duracion: '' 
             },
              '6_23': { 
-                nombre: 'Me kacho a ichika hotel vista edificios',
-                imagen: 'https://pbs.twimg.com/media/G_S_Uh9XgAAH7tO?format=jpg&name=small', 
+                nombre: 'Una kachadita con yotsuba en el gym',
+                imagen: 'https://pbs.twimg.com/media/G_TFou1WMAAom9q?format=jpg&name=small', 
                 descripcion: '', 
                 duracion: '' 
             },
              '6_24': { 
-                nombre: 'Me kacho a ichika hotel vista edificios',
-                imagen: 'https://pbs.twimg.com/media/G_S_Uh9XgAAH7tO?format=jpg&name=small', 
+                nombre: 'Miku me chupa las bolas',
+                imagen: 'https://pbs.twimg.com/media/G_TGdIRXQAAwsD8?format=jpg&name=small', 
                 descripcion: '', 
                 duracion: '' 
             },
              '6_25': { 
-                nombre: 'Me kacho a ichika hotel vista edificios',
-                imagen: 'https://pbs.twimg.com/media/G_S_Uh9XgAAH7tO?format=jpg&name=small', 
+                nombre: 'Yotsuba me ayuda a mejorar mis notas ',
+                imagen: 'https://pbs.twimg.com/media/G_THTeRXoAABk10?format=jpg&name=small', 
                 descripcion: '', 
                 duracion: '' 
             },
              '6_26': { 
-                nombre: 'Me kacho a ichika hotel vista edificios',
-                imagen: 'https://pbs.twimg.com/media/G_S_Uh9XgAAH7tO?format=jpg&name=small', 
+                nombre: 'Ichika me ayuda a subir mis notas',
+                imagen: 'https://pbs.twimg.com/media/G_TH9ffWgAA_ov9?format=jpg&name=small', 
                 descripcion: '', 
                 duracion: '' 
             },
              '6_27': { 
-                nombre: 'Me kacho a ichika hotel vista edificios',
-                imagen: 'https://pbs.twimg.com/media/G_S_Uh9XgAAH7tO?format=jpg&name=small', 
+                nombre: 'Itsuki putita me sube las notas',
+                imagen: 'https://pbs.twimg.com/media/G_TIQNRXkAEsjiG?format=jpg&name=small', 
                 descripcion: '', 
                 duracion: '' 
             },
              '6_28': { 
-                nombre: 'Me kacho a ichika hotel vista edificios',
-                imagen: 'https://pbs.twimg.com/media/G_S_Uh9XgAAH7tO?format=jpg&name=small', 
+                nombre: 'Nino me sube las notas kachando',
+                imagen: 'https://pbs.twimg.com/media/G_TIyiDWAAACQSB?format=jpg&name=small', 
                 descripcion: '', 
                 duracion: '' 
             },
              '6_29': { 
-                nombre: 'Me kacho a ichika hotel vista edificios',
-                imagen: 'https://pbs.twimg.com/media/G_S_Uh9XgAAH7tO?format=jpg&name=small', 
+                nombre: 'Kachando con mis putas nino <3',
+                imagen: 'https://pbs.twimg.com/media/G_TJugAW4AARo3v?format=jpg&name=small', 
                 descripcion: '', 
                 duracion: '' 
             },
              '6_30': { 
-                nombre: 'Me kacho a ichika hotel vista edificios',
-                imagen: 'https://pbs.twimg.com/media/G_S_Uh9XgAAH7tO?format=jpg&name=small', 
+                nombre: 'Yotsuba y miku me la chupan las menores',
+                imagen: 'https://pbs.twimg.com/media/G_TKWVZWYAA11Qa?format=jpg&name=small', 
                 descripcion: '', 
                 duracion: '' 
             },
              '6_31': { 
-                nombre: 'Me kacho a ichika hotel vista edificios',
-                imagen: 'https://pbs.twimg.com/media/G_S_Uh9XgAAH7tO?format=jpg&name=small', 
+                nombre: 'Kachando y grabando con nino',
+                imagen: 'https://pbs.twimg.com/media/G_TKtGnW4AEtWrz?format=jpg&name=small', 
                 descripcion: '', 
                 duracion: '' 
             },
              '6_32': { 
-                nombre: 'Me kacho a ichika hotel vista edificios',
-                imagen: 'https://pbs.twimg.com/media/G_S_Uh9XgAAH7tO?format=jpg&name=small', 
+                nombre: 'Le rompo las medias a mi puta',
+                imagen: 'https://pbs.twimg.com/media/G_TLL5FWUAAvgrY?format=jpg&name=small', 
                 descripcion: '', 
                 duracion: '' 
             },
              '6_33': { 
-                nombre: 'Me kacho a ichika hotel vista edificios',
-                imagen: 'https://pbs.twimg.com/media/G_S_Uh9XgAAH7tO?format=jpg&name=small', 
+                nombre: 'Me kacho a las 3 mayores ',
+                imagen: 'https://pbs.twimg.com/media/G_TMGuzXEAAKygQ?format=jpg&name=small', 
                 descripcion: '', 
                 duracion: '' 
             },
              '6_34': { 
-                nombre: 'Me kacho a ichika hotel vista edificios',
-                imagen: 'https://pbs.twimg.com/media/G_S_Uh9XgAAH7tO?format=jpg&name=small', 
+                nombre: 'Las 2 menores quieren poronga',
+                imagen: 'https://pbs.twimg.com/media/G_TMUyeXQAAaa9Z?format=jpg&name=small', 
                 descripcion: '', 
                 duracion: '' 
             },
              '6_35': { 
-                nombre: 'Me kacho a ichika hotel vista edificios',
-                imagen: 'https://pbs.twimg.com/media/G_S_Uh9XgAAH7tO?format=jpg&name=small', 
+                nombre: 'Itsuki me lame la verga',
+                imagen: 'https://pbs.twimg.com/media/G_TNlruXsAAS6Gg?format=jpg&name=small', 
                 descripcion: '', 
                 duracion: '' 
             },
              '6_36': { 
-                nombre: 'Me kacho a ichika hotel vista edificios',
-                imagen: 'https://pbs.twimg.com/media/G_S_Uh9XgAAH7tO?format=jpg&name=small', 
+                nombre: 'Hasta la garganta a yotsuba',
+                imagen: 'https://pbs.twimg.com/media/G_TOFYrXMAAJx67?format=jpg&name=small', 
                 descripcion: '', 
                 duracion: '' 
             },
              '6_37': { 
-                nombre: 'Me kacho a ichika hotel vista edificios',
-                imagen: 'https://pbs.twimg.com/media/G_S_Uh9XgAAH7tO?format=jpg&name=small', 
+                nombre: 'Miku mamadita ',
+                imagen: 'https://pbs.twimg.com/media/G_TOoloXkAAGRjL?format=jpg&name=small', 
                 descripcion: '', 
                 duracion: '' 
             },
              '6_38': { 
-                nombre: 'Me kacho a ichika hotel vista edificios',
-                imagen: 'https://pbs.twimg.com/media/G_S_Uh9XgAAH7tO?format=jpg&name=small', 
+                nombre: 'Rica cogidita con Nino Dios',
+                imagen: 'https://pbs.twimg.com/media/G_TPDG0XUAAfp0I?format=jpg&name=small', 
                 descripcion: '', 
                 duracion: '' 
             },
              '6_39': { 
-                nombre: 'Me kacho a ichika hotel vista edificios',
-                imagen: 'https://pbs.twimg.com/media/G_S_Uh9XgAAH7tO?format=jpg&name=small', 
+                nombre: 'UNa mamadita con lengua de Ichika',
+                imagen: 'https://pbs.twimg.com/media/G_TPQMmW8AAhVEF?format=jpg&name=small', 
                 descripcion: '', 
                 duracion: '' 
             },
              '6_40': { 
-                nombre: 'Me kacho a ichika hotel vista edificios',
-                imagen: 'https://pbs.twimg.com/media/G_S_Uh9XgAAH7tO?format=jpg&name=small', 
+                nombre: 'Nino y itsuki kachadas a todas y las grabo dios',
+                imagen: 'https://pbs.twimg.com/media/G_TP3mVWkAAanyR?format=jpg&name=small', 
                 descripcion: '', 
                 duracion: '' 
             },
