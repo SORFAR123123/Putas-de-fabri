@@ -1533,8 +1533,14 @@ const sistemaDescriptivo = {
                 duracion: '' 
             },
             '3_14': { 
-                nombre: ' Putarda',
-                imagen: 'https://pbs.twimg.com/media/G_HdT3aWEAAtoLB?format=jpg&name=small', 
+                nombre: ' Culona rica',
+                imagen: 'https://pbs.twimg.com/media/G_SerbXXsAAjzV1?format=png&name=small', 
+                descripcion: '', 
+                duracion: '' 
+            },
+            '3_15': { 
+                nombre: ' Rapidin antes de la escuela',
+                imagen: 'https://pbs.twimg.com/media/G_SelgVWYAABjKj?format=png&name=small', 
                 descripcion: '', 
                 duracion: '' 
             },
