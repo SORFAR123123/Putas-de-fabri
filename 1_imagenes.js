@@ -508,8 +508,8 @@ const sistemaDescriptivo = {
                 episodios: '' 
             },
             '1_4': { 
-                nombre: 'Anime 4',
-                imagen: '', 
+                nombre: 'Putita escolar',
+                imagen: 'https://pbs.twimg.com/media/G_SGWr2WAAEMBPh?format=jpg&name=small', 
                 descripcion: '', 
                 episodios: '' 
             },
@@ -656,8 +656,8 @@ const sistemaDescriptivo = {
                 episodios: '' 
             },
             '6_2': { 
-                nombre: 'Anime 2',
-                imagen: '', 
+                nombre: 'Rubia petera 2',
+                imagen: 'https://pbs.twimg.com/media/G_SF9OyWQAAQc5Q?format=png&name=small', 
                 descripcion: '', 
                 episodios: '' 
             },
