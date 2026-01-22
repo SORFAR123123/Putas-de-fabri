@@ -301,7 +301,54 @@ const animesDatabase = {
         duracion: "23:20",
         categoria: "Misterio",
         año: 2006
+    },
+    '7_1': {
+        titulo: "Profesora putona",
+        driveIdEsp: "1Z3dh2BFP1HXi8xX6jVG-dGEusis52fSi", // REEMPLAZA con ID real
+        driveIdJap: "1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS", // REEMPLAZA con ID real
+        descripcion: "Light Yagami encuentra el Death Note y conoce a Ryuk.",
+        timestampsEsp: [
+            { tiempo: 0, titulo: "📔 Encuentro con el cuaderno" },
+            { tiempo: 180, titulo: "👻 Ryuk aparece" },
+            { tiempo: 360, titulo: "⚖️ Primera prueba" },
+            { tiempo: 540, titulo: "🎯 Decisión de usarlo" },
+            { tiempo: 720, titulo: "🕵️ Primer crimen" }
+        ],
+        timestampsJap: [
+            { tiempo: 0, titulo: "📔 ノートとの出会い" },
+            { tiempo: 180, titulo: "👻 リューク登場" },
+            { tiempo: 360, titulo: "⚖️ 最初のテスト" },
+            { tiempo: 540, titulo: "🎯 使用の決意" },
+            { tiempo: 720, titulo: "🕵️ 最初の犯罪" }
+        ],
+        duracion: "23:20",
+        categoria: "Misterio",
+        año: 2006
+    },
+     '8_1': {
+        titulo: "Profesora putona",
+        driveIdEsp: "1Z3dh2BFP1HXi8xX6jVG-dGEusis52fSi", // REEMPLAZA con ID real
+        driveIdJap: "1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS", // REEMPLAZA con ID real
+        descripcion: "Light Yagami encuentra el Death Note y conoce a Ryuk.",
+        timestampsEsp: [
+            { tiempo: 0, titulo: "📔 Encuentro con el cuaderno" },
+            { tiempo: 180, titulo: "👻 Ryuk aparece" },
+            { tiempo: 360, titulo: "⚖️ Primera prueba" },
+            { tiempo: 540, titulo: "🎯 Decisión de usarlo" },
+            { tiempo: 720, titulo: "🕵️ Primer crimen" }
+        ],
+        timestampsJap: [
+            { tiempo: 0, titulo: "📔 ノートとの出会い" },
+            { tiempo: 180, titulo: "👻 リューク登場" },
+            { tiempo: 360, titulo: "⚖️ 最初のテスト" },
+            { tiempo: 540, titulo: "🎯 使用の決意" },
+            { tiempo: 720, titulo: "🕵️ 最初の犯罪" }
+        ],
+        duracion: "23:20",
+        categoria: "Misterio",
+        año: 2006
     }
+    
 };
 
 // ================================================
