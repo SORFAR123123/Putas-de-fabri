@@ -1832,6 +1832,127 @@ const sistemaDescriptivo = {
                 descripcion: '', 
                 duracion: '' 
             },
+
+         '6_41': { 
+                nombre: 'Nino y itsuki kachadas a todas y las grabo dios',
+                imagen: 'https://pbs.twimg.com/media/G_TP3mVWkAAanyR?format=jpg&name=small', 
+                descripcion: '', 
+                duracion: '' 
+            },
+             '6_42': { 
+                nombre: 'Nino y itsuki kachadas a todas y las grabo dios',
+                imagen: 'https://pbs.twimg.com/media/G_TP3mVWkAAanyR?format=jpg&name=small', 
+                descripcion: '', 
+                duracion: '' 
+            },
+             '6_43': { 
+                nombre: 'Nino y itsuki kachadas a todas y las grabo dios',
+                imagen: 'https://pbs.twimg.com/media/G_TP3mVWkAAanyR?format=jpg&name=small', 
+                descripcion: '', 
+                duracion: '' 
+            },
+             '6_44': { 
+                nombre: 'Nino y itsuki kachadas a todas y las grabo dios',
+                imagen: 'https://pbs.twimg.com/media/G_TP3mVWkAAanyR?format=jpg&name=small', 
+                descripcion: '', 
+                duracion: '' 
+            },
+             '6_45': { 
+                nombre: 'Nino y itsuki kachadas a todas y las grabo dios',
+                imagen: 'https://pbs.twimg.com/media/G_TP3mVWkAAanyR?format=jpg&name=small', 
+                descripcion: '', 
+                duracion: '' 
+            },
+             '6_46': { 
+                nombre: 'Nino y itsuki kachadas a todas y las grabo dios',
+                imagen: 'https://pbs.twimg.com/media/G_TP3mVWkAAanyR?format=jpg&name=small', 
+                descripcion: '', 
+                duracion: '' 
+            },
+             '6_47': { 
+                nombre: 'Nino y itsuki kachadas a todas y las grabo dios',
+                imagen: 'https://pbs.twimg.com/media/G_TP3mVWkAAanyR?format=jpg&name=small', 
+                descripcion: '', 
+                duracion: '' 
+            },
+             '6_48': { 
+                nombre: 'Nino y itsuki kachadas a todas y las grabo dios',
+                imagen: 'https://pbs.twimg.com/media/G_TP3mVWkAAanyR?format=jpg&name=small', 
+                descripcion: '', 
+                duracion: '' 
+            },
+             '6_49': { 
+                nombre: 'Nino y itsuki kachadas a todas y las grabo dios',
+                imagen: 'https://pbs.twimg.com/media/G_TP3mVWkAAanyR?format=jpg&name=small', 
+                descripcion: '', 
+                duracion: '' 
+            },
+             '6_50': { 
+                nombre: 'Nino y itsuki kachadas a todas y las grabo dios',
+                imagen: 'https://pbs.twimg.com/media/G_TP3mVWkAAanyR?format=jpg&name=small', 
+                descripcion: '', 
+                duracion: '' 
+            },
+             '6_51': { 
+                nombre: 'Nino y itsuki kachadas a todas y las grabo dios',
+                imagen: 'https://pbs.twimg.com/media/G_TP3mVWkAAanyR?format=jpg&name=small', 
+                descripcion: '', 
+                duracion: '' 
+            },
+             '6_52': { 
+                nombre: 'Nino y itsuki kachadas a todas y las grabo dios',
+                imagen: 'https://pbs.twimg.com/media/G_TP3mVWkAAanyR?format=jpg&name=small', 
+                descripcion: '', 
+                duracion: '' 
+            },
+             '6_53': { 
+                nombre: 'Nino y itsuki kachadas a todas y las grabo dios',
+                imagen: 'https://pbs.twimg.com/media/G_TP3mVWkAAanyR?format=jpg&name=small', 
+                descripcion: '', 
+                duracion: '' 
+            },
+             '6_54': { 
+                nombre: 'Nino y itsuki kachadas a todas y las grabo dios',
+                imagen: 'https://pbs.twimg.com/media/G_TP3mVWkAAanyR?format=jpg&name=small', 
+                descripcion: '', 
+                duracion: '' 
+            },
+             '6_55': { 
+                nombre: 'Nino y itsuki kachadas a todas y las grabo dios',
+                imagen: 'https://pbs.twimg.com/media/G_TP3mVWkAAanyR?format=jpg&name=small', 
+                descripcion: '', 
+                duracion: '' 
+            },
+             '6_56': { 
+                nombre: 'Nino y itsuki kachadas a todas y las grabo dios',
+                imagen: 'https://pbs.twimg.com/media/G_TP3mVWkAAanyR?format=jpg&name=small', 
+                descripcion: '', 
+                duracion: '' 
+            },
+             '6_57': { 
+                nombre: 'Nino y itsuki kachadas a todas y las grabo dios',
+                imagen: 'https://pbs.twimg.com/media/G_TP3mVWkAAanyR?format=jpg&name=small', 
+                descripcion: '', 
+                duracion: '' 
+            },
+             '6_58': { 
+                nombre: 'Nino y itsuki kachadas a todas y las grabo dios',
+                imagen: 'https://pbs.twimg.com/media/G_TP3mVWkAAanyR?format=jpg&name=small', 
+                descripcion: '', 
+                duracion: '' 
+            },
+             '6_59': { 
+                nombre: 'Nino y itsuki kachadas a todas y las grabo dios',
+                imagen: 'https://pbs.twimg.com/media/G_TP3mVWkAAanyR?format=jpg&name=small', 
+                descripcion: '', 
+                duracion: '' 
+            },
+             '6_60': { 
+                nombre: 'Nino y itsuki kachadas a todas y las grabo dios',
+                imagen: 'https://pbs.twimg.com/media/G_TP3mVWkAAanyR?format=jpg&name=small', 
+                descripcion: '', 
+                duracion: '' 
+            },
              '7_1': { 
                 nombre: 'Alya de la u',
                 imagen: 'https://pbs.twimg.com/media/G_SimAFXsAAwrel?format=png&name=small', 
