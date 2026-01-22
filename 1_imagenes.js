@@ -1598,9 +1598,117 @@ const sistemaDescriptivo = {
                 descripcion: '', 
                 duracion: '' 
             },
+            '6_2': { 
+                nombre: 'Quintlas',
+                imagen: 'https://pbs.timg.com/media/G_Shos6XUAInb9j?format=png&name=small', 
+                descripcion: '', 
+                duracion: '' 
+            },
+            '6_3': { 
+                nombre: 'Quintiolas',
+                imagen: 'https://pbs.twim.com/media/G_Shos6XUAInb9j?format=png&name=small', 
+                descripcion: '', 
+                duracion: '' 
+            },
+            '6_4': { 
+                nombre: 'Quintipupa bolas',
+                imagen: 'https://pbstwimg.com/media/G_Shos6XUAInb9j?format=png&name=small', 
+                descripcion: '', 
+                duracion: '' 
+            },
+            '6_5': { 
+                nombre: 'Quinas',
+                imagen: 'https://pbs.twmg.com/media/G_Shos6XUAInb9j?format=png&name=small', 
+                descripcion: '', 
+                duracion: '' 
+            },
+            '6_6': { 
+                nombre: 'Quintlas',
+                imagen: 'https://pbs.twim.com/media/G_Shos6XUAInb9j?format=png&name=small', 
+                descripcion: '', 
+                duracion: '' 
+            },
+            '6_7': { 
+                nombre: 'Qulas',
+                imagen: 'https://pbs.wimg.com/media/G_Shos6XUAInb9j?format=png&name=small', 
+                descripcion: '', 
+                duracion: '' 
+            },
+            '6_8': { 
+                nombre: 'Qs',
+                imagen: 'https://pbs.timg.com/media/G_Shos6XUAInb9j?format=png&name=small', 
+                descripcion: '', 
+                duracion: '' 
+            },
+            '6_9': { 
+                nombre: 'Qs',
+                imagen: 'https://pbs.twmg.com/media/G_Shos6XUAInb9j?format=png&name=small', 
+                descripcion: '', 
+                duracion: '' 
+            },
+            '6_10': { 
+                nombre: '  bolas',
+                imagen: 'https://pb.twimg.com/media/G_Shos6XUAInb9j?format=png&name=small', 
+                descripcion: '', 
+                duracion: '' 
+            },
              '7_1': { 
-                nombre: 'Alya kachera de la u',
+                nombre: 'Alyde la u',
                 imagen: 'https://pbs.twimg.com/media/G_SimAFXsAAwrel?format=png&name=small', 
+                descripcion: '', 
+                duracion: '' 
+            },
+             '7_2': { 
+                nombre: 'Ade la u',
+                imagen: 'https://pbs.wimg.com/media/G_SimAFXsAAwrel?format=png&name=small', 
+                descripcion: '', 
+                duracion: '' 
+            },
+             '7_3': { 
+                nombre: '  de la u',
+                imagen: 'https://bs.twimg.com/media/G_SimAFXsAAwrel?format=png&name=small', 
+                descripcion: '', 
+                duracion: '' 
+            },
+             '7_4': { 
+                nombre: ' u',
+                imagen: 'https://pbstwimg.com/media/G_SimAFXsAAwrel?format=png&name=small', 
+                descripcion: '', 
+                duracion: '' 
+            },
+             '7_5': { 
+                nombre: 'A',
+                imagen: 'https://bs.twimg.com/media/G_SimAFXsAAwrel?format=png&name=small', 
+                descripcion: '', 
+                duracion: '' 
+            },
+             '7_6': { 
+                nombre: 'u',
+                imagen: 'https://ps.twimg.com/media/G_SimAFXsAAwrel?format=png&name=small', 
+                descripcion: '', 
+                duracion: '' 
+            },
+             '7_7': { 
+                nombre: 'Alya',
+                imagen: 'httwimg.com/media/G_SimAFXsAAwrel?format=png&name=small', 
+                descripcion: '', 
+                duracion: '' 
+            },
+             '7_8': { 
+                nombre: 'Aly',
+                imagen: 'https://pbs.twimg.om/media/G_SimAFXsAAwrel?format=png&name=small', 
+                descripcion: '', 
+                duracion: '' 
+            },
+             '7_9': { 
+                nombre: 'A',
+                imagen: 'https://pbs.twimg.co/media/G_SimAFXsAAwrel?format=png&name=small', 
+                descripcion: '', 
+                duracion: '' 
+            },
+             '7_10': { 
+                nombre: '',
+                imagen: 'https://pbs.twimgcom/media/G_SimAFXsAAwrel?format=png&name=small', 
                 descripcion: '', 
                 duracion: '' 
             },
