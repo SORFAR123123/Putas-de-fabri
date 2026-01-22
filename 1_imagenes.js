@@ -455,8 +455,8 @@ const sistemaDescriptivo = {
                 categoria: 'sci-fi'
             },
             6: { 
-                nombre: 'ANIME CONTAINER 6',
-                imagen: '', 
+                nombre: 'Okaa san',
+                imagen: 'https://pbs.twimg.com/media/G_SEamnXEAAE7sP?format=png&name=small', 
                 descripcion: 'Animes de fantasía',
                 categoria: 'fantasía'
             },
@@ -650,8 +650,8 @@ const sistemaDescriptivo = {
             
             // Contenedor 6
             '6_1': { 
-                nombre: 'Anime 1',
-                imagen: '', 
+                nombre: 'okaasan chupadora ',
+                imagen: 'https://pbs.twimg.com/media/G_SEobsWoAAzSUZ?format=png&name=small', 
                 descripcion: '', 
                 episodios: '' 
             },
