@@ -1600,7 +1600,7 @@ const sistemaDescriptivo = {
             },
              '7_1': { 
                 nombre: 'Alya kachera de la u',
-                imagen: 'https://pbs.twimg.com/media/G_SimAFXsAAwrel?format=png&name=smalll', 
+                imagen: 'https://pbs.twimg.com/media/G_SimAFXsAAwrel?format=png&name=small', 
                 descripcion: '', 
                 duracion: '' 
             },
