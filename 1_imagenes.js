@@ -1635,8 +1635,8 @@ const sistemaDescriptivo = {
                 duracion: '' 
             },
             '6_8': { 
-                nombre: 'Qs',
-                imagen: 'https://pbs.timg.com/media/G_Shos6XUAInb9j?format=png&name=small', 
+                nombre: 'Me kacho a nino en la piscina',
+                imagen: 'https://pbs.twimg.com/media/G_SzNaYXUAAwiM4?format=jpg&name=small', 
                 descripcion: '', 
                 duracion: '' 
             },
