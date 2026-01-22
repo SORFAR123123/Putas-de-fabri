@@ -1641,8 +1641,8 @@ const sistemaDescriptivo = {
                 duracion: '' 
             },
             '6_9': { 
-                nombre: 'Qs',
-                imagen: 'https://pbs.twmg.com/media/G_Shos6XUAInb9j?format=png&name=small', 
+                nombre: 'Miku me pajea',
+                imagen: 'https://pbs.twimg.com/media/G_Sz0zlWoAA823U?format=jpg&name=small', 
                 descripcion: '', 
                 duracion: '' 
             },
