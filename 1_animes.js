@@ -210,7 +210,7 @@ const animesDatabase = {
     },
   '4_3': {
         titulo: "Tia putona me la chupa",
-        driveIdEsp: "1xY-SPaNGXCU4UM4Q5G--cDDirmHFH_K8", // REEMPLAZA con ID real
+        driveIdEsp: "1o2sItvvJO63mvhO88CTEprE22dAmPrr8", // REEMPLAZA con ID real
         driveIdJap: "1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS", // REEMPLAZA con ID real
         descripcion: "Light Yagami encuentra el Death Note y conoce a Ryuk.",
         timestampsEsp: [
@@ -233,7 +233,7 @@ const animesDatabase = {
     },
     '4_4': {
         titulo: "Amigo se folla a mi madre ",
-        driveIdEsp: "1o2sItvvJO63mvhO88CTEprE22dAmPrr8", // REEMPLAZA con ID real
+        driveIdEsp: "1xY-SPaNGXCU4UM4Q5G--cDDirmHFH_K8", // REEMPLAZA con ID real   
         driveIdJap: "1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS", // REEMPLAZA con ID real
         descripcion: "Light Yagami encuentra el Death Note y conoce a Ryuk.",
         timestampsEsp: [
