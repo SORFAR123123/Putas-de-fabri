@@ -107,7 +107,7 @@ const sistemaDescriptivo = {
             },
             // TESTING
             '1_6': { 
-                nombre: 'Ichika quiere rescatar a sus hermanas y la kacho en video',
+                nombre: 'Ichika quiere rescatar a sus hermanas y la kacho graabacion',
                 imagen: 'https://i3.nhentai.net/galleries/3223568/1.webp', 
                 descripcion: '', 
                 nivel: '' 
@@ -1599,32 +1599,32 @@ const sistemaDescriptivo = {
                 duracion: '' 
             },
             '6_2': { 
-                nombre: 'Quintlas',
-                imagen: 'https://pbs.timg.com/media/G_Shos6XUAInb9j?format=png&name=small', 
+                nombre: 'ichiak pt',
+                imagen: 'https://pbs.twimg.com/media/G_SpEaRXMAAm1pa?format=png&name=small', 
                 descripcion: '', 
                 duracion: '' 
             },
             '6_3': { 
-                nombre: 'Quintiolas',
-                imagen: 'https://pbs.twim.com/media/G_Shos6XUAInb9j?format=png&name=small', 
+                nombre: 'Yotsuba se atraganta con mi poronga ',
+                imagen: 'https://pbs.twimg.com/media/G_SonA4XQAAdf5E?format=png&name=small', 
                 descripcion: '', 
                 duracion: '' 
             },
             '6_4': { 
-                nombre: 'Quintipupa bolas',
-                imagen: 'https://pbstwimg.com/media/G_Shos6XUAInb9j?format=png&name=small', 
+                nombre: 'Itsuki petea ',
+                imagen: 'https://pbs.twimg.com/media/G_SnTeHXkAA9SbM?format=png&name=small', 
                 descripcion: '', 
                 duracion: '' 
             },
             '6_5': { 
-                nombre: 'Quinas',
-                imagen: 'https://pbs.twmg.com/media/G_Shos6XUAInb9j?format=png&name=small', 
+                nombre: 'Miku de costado ',
+                imagen: 'https://pbs.twimg.com/media/G_So0A-WwAAcBdr?format=jpg&name=small', 
                 descripcion: '', 
                 duracion: '' 
             },
             '6_6': { 
-                nombre: 'Quintlas',
-                imagen: 'https://pbs.twim.com/media/G_Shos6XUAInb9j?format=png&name=small', 
+                nombre: 'IcHIKA paja',
+                imagen: 'https://pbs.twimg.com/media/G_SnsjAXkAE_fh8?format=png&name=small', 
                 descripcion: '', 
                 duracion: '' 
             },
