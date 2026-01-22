@@ -378,6 +378,22 @@ const videosDatabase = {
     },
      
     '6_1': {
+        titulo: "Nino me chupa las bolas y el orto",
+        driveId: "1ZWL0Gb08wMSM5rj9eAWdBA0A5FdPE2hO", // zero two
+        descripcion: "Belinda te amo",
+        timestamps: [],
+        duracion: "0:00",
+        categoria: "Música"
+    },
+     '7_1': {
+        titulo: "Alya me la kacho ",
+        driveId: "1zV6K-a5_IBsYHAfjwFOXuh4dpcm5BFyZ", // zero two
+        descripcion: "Belinda te amo",
+        timestamps: [],
+        duracion: "0:00",
+        categoria: "Música"
+    },
+      '8_1': {
         titulo: "Zerotwo quiere pene",
         driveId: "15YO_dwiRWEYhkeNgTJ5xcdhikF4UCJ-o", // zero two
         descripcion: "Belinda te amo",
@@ -385,7 +401,6 @@ const videosDatabase = {
         duracion: "0:00",
         categoria: "Música"
     }
-    
 };
 
 // ================================================
