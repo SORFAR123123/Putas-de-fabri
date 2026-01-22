@@ -81,6 +81,29 @@ const animesDatabase = {
         categoria: "Acción",
         año: 2017
     },
+    '1_4': {
+        titulo: "Rubia Perra ",
+        driveIdEsp: "122RGdY8DBRdRQ98pjxhQ1Dg7HOKmYYm1", // REEMPLAZA con ID real
+        driveIdJap: "1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS", // REEMPLAZA con ID real
+        descripcion: "Pelea épica entre Goku y Jiren en el Torneo del Poder.",
+        timestampsEsp: [
+            { tiempo: 0, titulo: "⚡ Inicio de la pelea" },
+            { tiempo: 150, titulo: "💥 Transformación Ultra Instinto" },
+            { tiempo: 300, titulo: "🔥 Poder máximo de Jiren" },
+            { tiempo: 450, titulo: "👊 Combate cuerpo a cuerpo" },
+            { tiempo: 600, titulo: "🌟 Final épico" }
+        ],
+        timestampsJap: [
+            { tiempo: 0, titulo: "⚡ 戦いの開始" },
+            { tiempo: 150, titulo: "💥 身勝手の極意発動" },
+            { tiempo: 300, titulo: "🔥 ジレンの最大パワー" },
+            { tiempo: 450, titulo: "👊 接近戦" },
+            { tiempo: 600, titulo: "🌟 エピックな終了" }
+        ],
+        duracion: "21:15",
+        categoria: "Acción",
+        año: 2017
+    },
     
     // ================================================
     // CONTENEDOR 2
@@ -280,8 +303,31 @@ const animesDatabase = {
         año: 2006
     },
     '6_1': {
-        titulo: "Profesora putona",
-        driveIdEsp: "1Z3dh2BFP1HXi8xX6jVG-dGEusis52fSi", // REEMPLAZA con ID real
+        titulo: "Okaasan mamadora ",
+        driveIdEsp: "1ZbMWDRGOLYWcebQikka2Lqh-KcIvixK2", // REEMPLAZA con ID real
+        driveIdJap: "1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS", // REEMPLAZA con ID real
+        descripcion: "Light Yagami encuentra el Death Note y conoce a Ryuk.",
+        timestampsEsp: [
+            { tiempo: 0, titulo: "📔 Encuentro con el cuaderno" },
+            { tiempo: 180, titulo: "👻 Ryuk aparece" },
+            { tiempo: 360, titulo: "⚖️ Primera prueba" },
+            { tiempo: 540, titulo: "🎯 Decisión de usarlo" },
+            { tiempo: 720, titulo: "🕵️ Primer crimen" }
+        ],
+        timestampsJap: [
+            { tiempo: 0, titulo: "📔 ノートとの出会い" },
+            { tiempo: 180, titulo: "👻 リューク登場" },
+            { tiempo: 360, titulo: "⚖️ 最初のテスト" },
+            { tiempo: 540, titulo: "🎯 使用の決意" },
+            { tiempo: 720, titulo: "🕵️ 最初の犯罪" }
+        ],
+        duracion: "23:20",
+        categoria: "Misterio",
+        año: 2006
+    },
+     '6_2': {
+        titulo: "Okaasan mamadora ",
+        driveIdEsp: "1iX7aT5hnONJBCrnyrjPg-oHFSK2ucqxi", // REEMPLAZA con ID real
         driveIdJap: "1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS", // REEMPLAZA con ID real
         descripcion: "Light Yagami encuentra el Death Note y conoce a Ryuk.",
         timestampsEsp: [
