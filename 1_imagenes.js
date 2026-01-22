@@ -1834,104 +1834,104 @@ const sistemaDescriptivo = {
             },
 
          '6_41': { 
-                nombre: 'Nino y itsuki kachadas a todas y las grabo dios',
-                imagen: 'https://pbs.twimg.com/media/G_TP3mVWkAAanyR?format=jpg&name=small', 
+                nombre: 'Una kachada de chill con nino',
+                imagen: 'https://pbs.twimg.com/media/G_TRy9rW0AAasd7?format=jpg&name=small', 
                 descripcion: '', 
                 duracion: '' 
             },
              '6_42': { 
-                nombre: 'Nino y itsuki kachadas a todas y las grabo dios',
-                imagen: 'https://pbs.twimg.com/media/G_TP3mVWkAAanyR?format=jpg&name=small', 
+                nombre: 'Kachando y grabando',
+                imagen: 'https://pbs.twimg.com/media/G_TSgbeXIAAKT4b?format=jpg&name=small', 
                 descripcion: '', 
                 duracion: '' 
             },
              '6_43': { 
-                nombre: 'Nino y itsuki kachadas a todas y las grabo dios',
-                imagen: 'https://pbs.twimg.com/media/G_TP3mVWkAAanyR?format=jpg&name=small', 
+                nombre: 'Rica cogida con mis putas y grabando',
+                imagen: 'https://pbs.twimg.com/media/G_TS5mrWMAE7zkW?format=jpg&name=small', 
                 descripcion: '', 
                 duracion: '' 
             },
              '6_44': { 
-                nombre: 'Nino y itsuki kachadas a todas y las grabo dios',
-                imagen: 'https://pbs.twimg.com/media/G_TP3mVWkAAanyR?format=jpg&name=small', 
+                nombre: 'Termino la pichanga y nino me relaja con su boca y poto',
+                imagen: 'https://pbs.twimg.com/media/G_TTbCLWoAERR6R?format=jpg&name=small', 
                 descripcion: '', 
                 duracion: '' 
             },
              '6_45': { 
-                nombre: 'Nino y itsuki kachadas a todas y las grabo dios',
-                imagen: 'https://pbs.twimg.com/media/G_TP3mVWkAAanyR?format=jpg&name=small', 
+                nombre: 'Yotsuba chupa en el cine',
+                imagen: 'https://pbs.twimg.com/media/G_TUd4tXEAA5mqi?format=png&name=small', 
                 descripcion: '', 
                 duracion: '' 
             },
              '6_46': { 
-                nombre: 'Nino y itsuki kachadas a todas y las grabo dios',
-                imagen: 'https://pbs.twimg.com/media/G_TP3mVWkAAanyR?format=jpg&name=small', 
+                nombre: 'Yo aldo y jefferson cachamos a Ichika',
+                imagen: 'https://pbs.twimg.com/media/G_TVhBoXwAEzVV0?format=jpg&name=small', 
                 descripcion: '', 
                 duracion: '' 
             },
              '6_47': { 
-                nombre: 'Nino y itsuki kachadas a todas y las grabo dios',
-                imagen: 'https://pbs.twimg.com/media/G_TP3mVWkAAanyR?format=jpg&name=small', 
+                nombre: 'Le chupo el culo  a Miku',
+                imagen: 'https://pbs.twimg.com/media/G_TWh7RXIAAqoAe?format=png&name=small', 
                 descripcion: '', 
                 duracion: '' 
             },
              '6_48': { 
-                nombre: 'Nino y itsuki kachadas a todas y las grabo dios',
-                imagen: 'https://pbs.twimg.com/media/G_TP3mVWkAAanyR?format=jpg&name=small', 
+                nombre: 'Le paso la verga por la cara a Itsuki',
+                imagen: 'https://pbs.twimg.com/media/G_TXLWbWwAESRZP?format=png&name=small', 
                 descripcion: '', 
                 duracion: '' 
             },
              '6_49': { 
-                nombre: 'Nino y itsuki kachadas a todas y las grabo dios',
-                imagen: 'https://pbs.twimg.com/media/G_TP3mVWkAAanyR?format=jpg&name=small', 
+                nombre: 'Nino Me la chupa en la primera cita',
+                imagen: 'https://pbs.twimg.com/media/G_TX0YwXgAAz1zz?format=png&name=small', 
                 descripcion: '', 
                 duracion: '' 
             },
              '6_50': { 
-                nombre: 'Nino y itsuki kachadas a todas y las grabo dios',
-                imagen: 'https://pbs.twimg.com/media/G_TP3mVWkAAanyR?format=jpg&name=small', 
+                nombre: 'Nino y ichiak me limpian la verga y nino me la chupa en el tren',
+                imagen: 'https://pbs.twimg.com/media/G_TYkdBWcAAplz3?format=jpg&name=small', 
                 descripcion: '', 
                 duracion: '' 
             },
              '6_51': { 
-                nombre: 'Nino y itsuki kachadas a todas y las grabo dios',
-                imagen: 'https://pbs.twimg.com/media/G_TP3mVWkAAanyR?format=jpg&name=small', 
+                nombre: 'Me kacho a yotsuba y me pajea en el salon',
+                imagen: 'https://pbs.twimg.com/media/G_TZXl6XkAAT_Uj?format=jpg&name=small', 
                 descripcion: '', 
                 duracion: '' 
             },
              '6_52': { 
-                nombre: 'Nino y itsuki kachadas a todas y las grabo dios',
-                imagen: 'https://pbs.twimg.com/media/G_TP3mVWkAAanyR?format=jpg&name=small', 
+                nombre: 'Nino quiere verga',
+                imagen: 'https://pbs.twimg.com/media/G_TZ0sJWIAAwtRA?format=jpg&name=small', 
                 descripcion: '', 
                 duracion: '' 
             },
              '6_53': { 
-                nombre: 'Nino y itsuki kachadas a todas y las grabo dios',
-                imagen: 'https://pbs.twimg.com/media/G_TP3mVWkAAanyR?format=jpg&name=small', 
+                nombre: 'Paja y mamada de ichika',
+                imagen: 'https://pbs.twimg.com/media/G_Tak52WQAA8S0b?format=jpg&name=small', 
                 descripcion: '', 
                 duracion: '' 
             },
              '6_54': { 
-                nombre: 'Nino y itsuki kachadas a todas y las grabo dios',
-                imagen: 'https://pbs.twimg.com/media/G_TP3mVWkAAanyR?format=jpg&name=small', 
+                nombre: 'Sentones de itsuki y mamada se traga todo',
+                imagen: 'https://pbs.twimg.com/media/G_TcrKQXoAAEE55?format=png&name=small', 
                 descripcion: '', 
                 duracion: '' 
             },
              '6_55': { 
-                nombre: 'Nino y itsuki kachadas a todas y las grabo dios',
-                imagen: 'https://pbs.twimg.com/media/G_TP3mVWkAAanyR?format=jpg&name=small', 
+                nombre: 'Rica peteada limpiadora de Yotsuba',
+                imagen: 'https://pbs.twimg.com/media/G_TdLsiXIAAe62N?format=jpg&name=small', 
                 descripcion: '', 
                 duracion: '' 
             },
              '6_56': { 
-                nombre: 'Nino y itsuki kachadas a todas y las grabo dios',
-                imagen: 'https://pbs.twimg.com/media/G_TP3mVWkAAanyR?format=jpg&name=small', 
+                nombre: 'Yotsuba petea en el colegio',
+                imagen: 'https://pbs.twimg.com/media/G_Td4CkX0AAS3if?format=png&name=small', 
                 descripcion: '', 
                 duracion: '' 
             },
              '6_57': { 
                 nombre: 'Nino y itsuki kachadas a todas y las grabo dios',
-                imagen: 'https://pbs.twimg.com/media/G_TP3mVWkAAanyR?format=jpg&name=small', 
+                imagen: 'https://pbs.twimg.com/media/G_Td4CkX0AAS3if?format=png&name=small', 
                 descripcion: '', 
                 duracion: '' 
             },
