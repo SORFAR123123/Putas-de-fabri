@@ -1652,6 +1652,66 @@ const sistemaDescriptivo = {
                 descripcion: '', 
                 duracion: '' 
             },
+            '6_11': { 
+                nombre: '  bolas',
+                imagen: 'https://pb.twimg.com/media/G_Shos6XUAInb9j?format=png&name=small', 
+                descripcion: '', 
+                duracion: '' 
+            },
+            '6_12': { 
+                nombre: '  bolas',
+                imagen: 'https://pb.twimg.com/media/G_Shos6XUAInb9j?format=png&name=small', 
+                descripcion: '', 
+                duracion: '' 
+            },
+            '6_13': { 
+                nombre: '  bolas',
+                imagen: 'https://pb.twimg.com/media/G_Shos6XUAInb9j?format=png&name=small', 
+                descripcion: '', 
+                duracion: '' 
+            },
+            '6_14': { 
+                nombre: '  bolas',
+                imagen: 'https://pb.twimg.com/media/G_Shos6XUAInb9j?format=png&name=small', 
+                descripcion: '', 
+                duracion: '' 
+            },
+            '6_15': { 
+                nombre: '  bolas',
+                imagen: 'https://pb.twimg.com/media/G_Shos6XUAInb9j?format=png&name=small', 
+                descripcion: '', 
+                duracion: '' 
+            },
+            '6_16': { 
+                nombre: '  bolas',
+                imagen: 'https://pb.twimg.com/media/G_Shos6XUAInb9j?format=png&name=small', 
+                descripcion: '', 
+                duracion: '' 
+            },
+            '6_17': { 
+                nombre: '  bolas',
+                imagen: 'https://pb.twimg.com/media/G_Shos6XUAInb9j?format=png&name=small', 
+                descripcion: '', 
+                duracion: '' 
+            },
+            '6_18': { 
+                nombre: '  bolas',
+                imagen: 'https://pb.twimg.com/media/G_Shos6XUAInb9j?format=png&name=small', 
+                descripcion: '', 
+                duracion: '' 
+            },
+            '6_19': { 
+                nombre: '  bolas',
+                imagen: 'https://pb.twimg.com/media/G_Shos6XUAInb9j?format=png&name=small', 
+                descripcion: '', 
+                duracion: '' 
+            },
+            '6_20': { 
+                nombre: '  bolas',
+                imagen: 'https://pb.twimg.com/media/G_Shos6XUAInb9j?format=png&name=small', 
+                descripcion: '', 
+                duracion: '' 
+            },
              '7_1': { 
                 nombre: 'Alya de la u',
                 imagen: 'https://pbs.twimg.com/media/G_SimAFXsAAwrel?format=png&name=small', 
