@@ -1349,14 +1349,14 @@ const sistemaDescriptivo = {
                 tematica: 'historia'
             },
             6: { 
-                nombre: 'VIDEO CONTAINER 6',
-                imagen: '', 
+                nombre: 'Quintillizas perras animadas',
+                imagen: 'https://pbs.twimg.com/media/G_Shos6XUAInb9j?format=png&name=small', 
                 descripcion: 'Videos de arte japonés',
                 tematica: 'arte'
             },
             7: { 
-                nombre: 'VIDEO CONTAINER 7',
-                imagen: '', 
+                nombre: 'Animaciones',
+                imagen: 'https://pbs.twimg.com/media/G_SimAFXsAAwrel?format=png&name=small', 
                 descripcion: 'Videos de música japonesa',
                 tematica: 'música'
             },
