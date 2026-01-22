@@ -1677,38 +1677,38 @@ const sistemaDescriptivo = {
                 duracion: '' 
             },
             '6_15': { 
-                nombre: '  bolas',
-                imagen: 'https://pb.twimg.com/media/G_Shos6XUAInb9j?format=png&name=small', 
+                nombre: 'Rica kachada con yotsuba',
+                imagen: 'https://pbs.twimg.com/media/G_S6fJtW8AAsq3i?format=jpg&name=small', 
                 descripcion: '', 
                 duracion: '' 
             },
             '6_16': { 
-                nombre: '  bolas',
-                imagen: 'https://pb.twimg.com/media/G_Shos6XUAInb9j?format=png&name=small', 
+                nombre: 'Miku chupadora',
+                imagen: 'https://pbs.twimg.com/media/G_S7qVMXcAANTw7?format=jpg&name=small', 
                 descripcion: '', 
                 duracion: '' 
             },
             '6_17': { 
-                nombre: '  bolas',
-                imagen: 'https://pb.twimg.com/media/G_Shos6XUAInb9j?format=png&name=small', 
+                nombre: 'Saca la lengua mi perra',
+                imagen: 'https://pbs.twimg.com/media/G_S9BI1W0AATsES?format=jpg&name=small', 
                 descripcion: '', 
                 duracion: '' 
             },
             '6_18': { 
-                nombre: '  bolas',
-                imagen: 'https://pb.twimg.com/media/G_Shos6XUAInb9j?format=png&name=small', 
+                nombre: 'Rico polvo con ichika le chupo todo el orto',
+                imagen: 'https://pbs.twimg.com/media/G_S94oIW8AEUshA?format=jpg&name=small', 
                 descripcion: '', 
                 duracion: '' 
             },
             '6_19': { 
-                nombre: '  bolas',
-                imagen: 'https://pb.twimg.com/media/G_Shos6XUAInb9j?format=png&name=small', 
+                nombre: 'Nino la atraganto con mi pinga a mi esclava',
+                imagen: 'https://pbs.twimg.com/media/G_S-ga8XUAEkzjw?format=jpg&name=small', 
                 descripcion: '', 
                 duracion: '' 
             },
             '6_20': { 
-                nombre: '  bolas',
-                imagen: 'https://pb.twimg.com/media/G_Shos6XUAInb9j?format=png&name=small', 
+                nombre: 'Me kacho a ichika hotel vista edificios',
+                imagen: 'https://pbs.twimg.com/media/G_S_Uh9XgAAH7tO?format=jpg&name=small', 
                 descripcion: '', 
                 duracion: '' 
             },
