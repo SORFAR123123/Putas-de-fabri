@@ -1593,6 +1593,18 @@ const sistemaDescriptivo = {
                 duracion: '' 
             },
               '6_1': { 
+                nombre: 'Quintiputarda nino chupa bolas',
+                imagen: 'https://pbs.twimg.com/media/G_Shos6XUAInb9j?format=png&name=small', 
+                descripcion: '', 
+                duracion: '' 
+            },
+             '7_1': { 
+                nombre: 'Alya kachera de la u',
+                imagen: 'https://pbs.twimg.com/media/G_SimAFXsAAwrel?format=png&name=smalll', 
+                descripcion: '', 
+                duracion: '' 
+            },
+             '8_1': { 
                 nombre: 'aaaaaaaa',
                 imagen: 'https://pbs.twimg.com/media/G_DzDM8XQAAd3dA?format=jpg&name=small', 
                 descripcion: '', 
