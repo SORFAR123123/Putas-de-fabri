@@ -1979,7 +1979,70 @@ const vocabularioDatabase = {
             { japones: '感謝しながら', lectura: 'kansha shinagara', opciones: ['Mientras agradeces', 'Mientras te quejas', 'Mientras ignoras', 'Mientras lloras'], respuesta: 0 },
             { japones: '密着', lectura: 'micchaku', opciones: ['Adhesión / Pegado completamente', 'Separación', 'Distancia', 'Libertad'], respuesta: 0 },
             { japones: '聞こえてねぇ', lectura: 'kikoetenee', opciones: ['No se escucha / No oye', 'Se escucha claro', 'Se escucha poco', 'Se escucha mucho'], respuesta: 0 }
-        ]
+        ],
+
+  "D1": [
+    { "japones": "進路", "lectura": "しんろ", "opciones": ["Camino profesional", "Regreso", "Atajo", "Desvío"], "respuesta": 0 },
+    { "japones": "内申点", "lectura": "ないしんてん", "opciones": ["Calificaciones internas", "Puntos de bonificación", "Nota final", "Puntuación de asistencia"], "respuesta": 0 },
+    { "japones": "重要", "lectura": "じゅうよう", "opciones": ["Importante", "Secundario", "Olvidable", "Común"], "respuesta": 0 },
+    { "japones": "点数", "lectura": "てんすう", "opciones": ["Puntuación", "Dinero", "Tiempo", "Esfuerzo"], "respuesta": 0 },
+    { "japones": "挽回", "lectura": "ばんかい", "opciones": ["Recuperación", "Abandono", "Celebración", "Crítica"], "respuesta": 0 },
+    { "japones": "成績", "lectura": "せいせき", "opciones": ["Rendimiento académico", "Personalidad", "Salud", "Economía"], "respuesta": 0 },
+    { "japones": "提案", "lectura": "ていあん", "opciones": ["Propuesta", "Rechazo", "Queja", "Orden"], "respuesta": 0 },
+    { "japones": "推薦者", "lectura": "すいせんしゃ", "opciones": ["Persona que recomienda", "Persona que juzga", "Persona que critica", "Persona que observa"], "respuesta": 0 },
+    { "japones": "名簿", "lectura": "めいぼ", "opciones": ["Lista de nombres", "Libro de texto", "Contrato", "Diario"], "respuesta": 0 },
+    { "japones": "将来", "lectura": "しょうらい", "opciones": ["Futuro", "Pasado", "Presente", "Oportunidad"], "respuesta": 0 }
+  ],
+  "D2": [
+    { "japones": "太刀打ち", "lectura": "たちうち", "opciones": ["Poder competir", "Golpear con espada", "Esquivar", "Rendirse"], "respuesta": 0 },
+    { "japones": "絞って", "lectura": "しぼって", "opciones": ["Exprimir", "Aflojar", "Romper", "Untar"], "respuesta": 0 },
+    { "japones": "励んだ", "lectura": "はげんだ", "opciones": ["Esforzarse", "Descansar", "Abandonar", "Observar"], "respuesta": 0 },
+    { "japones": "取ら", "lectura": "とら", "opciones": ["Forma de 'tomar'", "Forma de 'dar'", "Forma de 'ver'", "Forma de 'oir'"], "respuesta": 0 },
+    { "japones": "攻めたら", "lectura": "せめたら", "opciones": ["Si atacas", "Si defiendes", "Si huyes", "Si negocias"], "respuesta": 0 },
+    { "japones": "盛大に", "lectura": "せいだいに", "opciones": ["Espléndidamente", "Modestamente", "Tristemente", "Rápidamente"], "respuesta": 0 },
+    { "japones": "用意", "lectura": "ようい", "opciones": ["Preparación", "Descuidado", "Improvisación", "Memorización"], "respuesta": 0 },
+    { "japones": "筆記", "lectura": "ひっき", "opciones": ["Escrito", "Oral", "Práctico", "Visual"], "respuesta": 0 },
+    { "japones": "面接", "lectura": "めんせつ", "opciones": ["Entrevista", "Examen", "Charla", "Debate"], "respuesta": 0 },
+    { "japones": "追加", "lectura": "ついか", "opciones": ["Adición", "Eliminación", "Modificación", "División"], "respuesta": 0 }
+  ],
+  "D3": [
+    { "japones": "焦燥感", "lectura": "しょうそうかん", "opciones": ["Sensación de ansiedad", "Sensación de paz", "Sensación de frío", "Sensación de alegría"], "respuesta": 0 },
+    { "japones": "焦らなく", "lectura": "あせらなく", "opciones": ["Sin prisas", "Con urgencia", "Con ira", "Con tristeza"], "respuesta": 0 },
+    { "japones": "圧し潰されてる", "lectura": "おしつぶされてる", "opciones": ["Estar aplastado", "Estar elevado", "Estar liberado", "Estar construido"], "respuesta": 0 },
+    { "japones": "底なし", "lectura": "そこなし", "opciones": ["Sin fondo", "Poco profundo", "Transparente", "Sólido"], "respuesta": 0 },
+    { "japones": "呆れた", "lectura": "あきれた", "opciones": ["Exasperado", "Emocionado", "Asustado", "Hambriento"], "respuesta": 0 },
+    { "japones": "膨れてる", "lectura": "ふくれてる", "opciones": ["Hinchado", "Encogido", "Mojado", "Seco"], "respuesta": 0 },
+    { "japones": "嫌々", "lectura": "いやいや", "opciones": ["De mala gana", "Con entusiasmo", "Rápidamente", "Lentamente"], "respuesta": 0 },
+    { "japones": "優秀", "lectura": "ゆうしゅう", "opciones": ["Excelente", "Mediocre", "Novato", "Experto"], "respuesta": 0 },
+    { "japones": "閉まる", "lectura": "しまる", "opciones": ["Cerrarse", "Abrirse", "Romperse", "Moverse"], "respuesta": 0 },
+    { "japones": "門", "lectura": "もん", "opciones": ["Puerta grande", "Ventana", "Camino", "Jardín"], "respuesta": 0 }
+  ],
+  "D4": [
+    { "japones": "股", "lectura": "また", "opciones": ["Ingle", "Hombro", "Codo", "Rodilla"], "respuesta": 0 },
+    { "japones": "潮吹き", "lectura": "しおふき", "opciones": ["Eyaculación femenina", "Géiser", "Vómito", "Sudor"], "respuesta": 0 },
+    { "japones": "爆乳", "lectura": "ばくにゅう", "opciones": ["Pechos enormes", "Leche explosiva", "Coraje", "Noticia"], "respuesta": 0 },
+    { "japones": "奴", "lectura": "やつ", "opciones": ["Tipo/Individuo", "Objeto", "Lugar", "Idea"], "respuesta": 0 },
+    { "japones": "精力", "lectura": "せいりょく", "opciones": ["Energía sexual", "Debilidad", "Paciencia", "Inteligencia"], "respuesta": 0 },
+    { "japones": "尿道", "lectura": "にょうどう", "opciones": ["Uretra", "Vejiga", "Riñón", "Intestino"], "respuesta": 0 },
+    { "japones": "痙攣", "lectura": "けいれん", "opciones": ["Espasmo", "Relajación", "Sudoración", "Hormigueo"], "respuesta": 0 },
+    { "japones": "一滴残らず", "lectura": "いってきのこらず", "opciones": ["Hasta la última gota", "Solo un poco", "La mitad", "Casi todo"], "respuesta": 0 },
+    { "japones": "妊娠", "lectura": "にんしん", "opciones": ["Embarazo", "Menstruación", "Menopausia", "Enfermedad"], "respuesta": 0 },
+    { "japones": "失神", "lectura": "しっしん", "opciones": ["Pérdida del conocimiento", "Grito", "Risa", "Alerta"], "respuesta": 0 }
+  ],
+  "D5": [
+    { "japones": "潮吹いたら", "lectura": "しおふいたら", "opciones": ["Si eyacula", "Si sube la marea", "Si llueve", "Si suda"], "respuesta": 0 },
+    { "japones": "脱水症状", "lectura": "だっすいしょうじょう", "opciones": ["Deshidratación", "Intoxicación", "Alergia", "Gripe"], "respuesta": 0 },
+    { "japones": "漏れてる", "lectura": "もれてる", "opciones": ["Estar goteando", "Estar bloqueado", "Estar lleno", "Estar seco"], "respuesta": 0 },
+    { "japones": "ヒクついて", "lectura": "ひくついて", "opciones": ["Con espasmos", "Riendo", "Cantando", "Durmiendo"], "respuesta": 0 },
+    { "japones": "ダバダバ", "lectura": "だばだば", "opciones": ["Sonido de líquido copioso", "Sonido de pasos", "Sonido de risa", "Sonido de golpes"], "respuesta": 0 },
+    { "japones": "吸盤みてぇ", "lectura": "きゅうばんみてぇ", "opciones": ["Como una ventosa", "Como un imán", "Como un cepillo", "Como un cuchillo"], "respuesta": 0 },
+    { "japones": "密着してやがる", "lectura": "みっちゃくしてやがる", "opciones": ["Se está pegando", "Se está separando", "Se está limpiando", "Se está rompiendo"], "respuesta": 0 },
+    { "japones": "腰振ってくれよ", "lectura": "こしふってくれよ", "opciones": ["¡Mueve las caderas!", "¡Siéntate!", "¡Levántate!", "¡Corre!"], "respuesta": 0 },
+    { "japones": "飽きねぇわ", "lectura": "あきねぇわ", "opciones": ["No me canso", "Estoy aburrido", "Tengo miedo", "Tengo hambre"], "respuesta": 0 },
+    { "japones": "お粗末", "lectura": "おそまつ", "opciones": ["Algo humilde", "Algo lujoso", "Algo peligroso", "Algo delicioso"], "respuesta": 0 }
+  ]
+
+        
     },
   
 
