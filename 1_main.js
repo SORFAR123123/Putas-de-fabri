@@ -1,3 +1,4 @@
+
 // ================================================
 // SISTEMA PRINCIPAL DE NAVEGACIÓN Y QUIZ - VERSIÓN DINÁMICA
 // ================================================
@@ -1537,11 +1538,11 @@ function crearSubcontenedoresAnimesUI(contenedor) {
         
         const desc = subData.descripcion || (tieneAnime ? 'Anime disponible' : '(Sin anime configurado)');
         
-        // CORRECCIÓN AQUÍ: Usar el nombre personalizado del subcontenedor y mostrar título completo
+        // CORRECCIÓN AQUÍ: Usar el nombre personalizado del subcontenedor
         html += `
             <div class="subcontenedor-item" onclick="${tieneAnime ? `seleccionarAccionAnime(${contenedor}, ${i})` : `cargarMazosAnimes(${contenedor}, ${i})`}">
                 <div class="subcontenedor-img" style="background-image: url('${subData.imagen || obtenerImagenSubcontenedorAnime(contenedor, i)}')"></div>
-                <h3>${subData.nombre || (tieneAnime ? animeInfo.titulo : `Anime ${i}`)}</h3>
+                <h3>${subData.nombre || (tieneAnime ? animeInfo.titulo.split(' ')[0] : `Anime ${i}`)}</h3>
                 ${tieneAnime ? 
                     `<p><strong>${animeInfo.titulo}</strong></p>
                      <p style="font-size: 0.9rem; opacity: 0.8;">${animeInfo.duracion} • ${animeInfo.categoria}</p>` 
@@ -1738,11 +1739,10 @@ function crearSubcontenedoresAudiosUI(contenedor) {
         
         const desc = tieneAudio ? audioInfo.descripcion : '(Sin audio configurado)';
         
-        // CORRECCIÓN: Mostrar título completo en lugar de solo la primera parte
         html += `
             <div class="subcontenedor-item" onclick="${tieneAudio ? `seleccionarAccionAudio(${contenedor}, ${i})` : `cargarMazosAudios(${contenedor}, ${i})`}">
                 <div class="subcontenedor-img" style="background-image: url('${imagenSubcontenedor}')"></div>
-                <h3>${tieneAudio ? audioInfo.titulo : `Audio ${i}`}</h3>
+                <h3>${tieneAudio ? audioInfo.titulo.split('-')[0] : `Audio ${i}`}</h3>
                 ${tieneAudio ? 
                     `<p><strong>${audioInfo.titulo}</strong></p>
                      <p style="font-size: 0.9rem; opacity: 0.8;">${audioInfo.artista} • ${audioInfo.duracion}</p>` 
@@ -1963,11 +1963,10 @@ function crearSubcontenedoresASMRUI(contenedor) {
         
         const desc = subData.descripcion || (tieneASMR ? 'ASMR disponible' : '(Sin audio ASMR configurado)');
         
-        // CORRECCIÓN: Mostrar título completo en lugar de solo la primera palabra
         html += `
             <div class="subcontenedor-item" onclick="${tieneASMR ? `seleccionarAccionASMR(${contenedor}, ${i})` : 'alert("Este sub-contenedor no tiene audio ASMR disponible")'}">
                 <div class="subcontenedor-img" style="background-image: url('${subData.imagen || obtenerImagenSubcontenedorASMR(contenedor, i)}')"></div>
-                <h3>${tieneASMR ? asmrInfo.titulo : `ASMR ${i}`}</h3>
+                <h3>${tieneASMR ? asmrInfo.titulo.split(' ')[0] : `ASMR ${i}`}</h3>
                 ${tieneASMR ? 
                     `<p><strong>${asmrInfo.titulo}</strong></p>
                      <p style="font-size: 0.9rem; opacity: 0.8;">${asmrInfo.duracion} • ${asmrInfo.categoria}</p>
@@ -2301,11 +2300,10 @@ function crearSubcontenedoresVideosUI(contenedor) {
         
         const desc = tieneVideo ? videoInfo.descripcion : subData.descripcion || '(Sin video)';
         
-        // CORRECCIÓN: Mostrar título completo en lugar de solo la primera palabra
         html += `
             <div class="subcontenedor-item" onclick="${tieneVideo ? `cargarVideo(${contenedor}, ${i})` : 'alert("Este sub-contenedor no tiene video disponible")'}">
                 <div class="subcontenedor-img" style="background-image: url('${subData.imagen || obtenerImagenSubcontenedor(contenedor, i)}')"></div>
-                <h3>${tieneVideo ? videoInfo.titulo : `Video ${i}`}</h3>
+                <h3>${tieneVideo ? videoInfo.titulo.split(' ')[0] : `Video ${i}`}</h3>
                 ${tieneVideo ? 
                     `<p><strong>${videoInfo.titulo}</strong></p>
                      <p style="font-size: 0.9rem; opacity: 0.8;">${videoInfo.duracion} • ${videoInfo.categoria}</p>` 
