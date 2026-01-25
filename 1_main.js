@@ -154,7 +154,7 @@ function obtenerPalabrasParaRepasar() {
 
 // Calcular siguiente intervalo basado en respuesta - ¡CORREGIDO COMPLETAMENTE!
 function calcularSiguienteIntervalo(palabra, calidad) {
-    // Calidad: 0=olvidado, 1=difícil, 2=regular, 3=fácil, 4=muy fácil
+    // Calidad: 0=olvidado, 1=difícil, 1=regular, 3=fácil, 4=muy fácil
     
     // Si falló o fue difícil
     if (calidad < 3) {
@@ -890,6 +890,102 @@ function getSignificadoAleatorio() {
 }
 
 // ====================
+// FUNCIONES PARA NAVEGACIÓN ENTRE MAZOS DIFÍCILES - NUEVAS
+// ====================
+
+// Función para navegar entre mazos difíciles adyacentes
+function irAMazoDificil(direccion) {
+    if (!modoMazoDificil) {
+        console.log("No hay mazo difícil activo");
+        return;
+    }
+    
+    // Obtener todas las palabras difíciles disponibles
+    const todasPalabrasDificiles = sistemaEconomia.obtenerMazoDificil();
+    
+    if (todasPalabrasDificiles.length === 0) {
+        mostrarNotificacionQuiz("No hay más palabras difíciles disponibles");
+        cargarPaginaMisiones();
+        return;
+    }
+    
+    // Dividir en grupos de 10 palabras (mazos)
+    const mazosDificiles = [];
+    for (let i = 0; i < todasPalabrasDificiles.length; i += 10) {
+        mazosDificiles.push(todasPalabrasDificiles.slice(i, i + 10));
+    }
+    
+    // Encontrar el mazo actual
+    let indiceMazoActual = -1;
+    for (let i = 0; i < mazosDificiles.length; i++) {
+        if (JSON.stringify(mazosDificiles[i]) === JSON.stringify(palabrasDificilesQuiz)) {
+            indiceMazoActual = i;
+            break;
+        }
+    }
+    
+    // Si no encontramos el mazo actual, es el primero
+    if (indiceMazoActual === -1) {
+        indiceMazoActual = 0;
+    }
+    
+    // Calcular siguiente mazo
+    let nuevoIndiceMazo = indiceMazoActual + (direccion === 'siguiente' ? 1 : -1);
+    
+    // Verificar límites
+    if (nuevoIndiceMazo < 0) {
+        nuevoIndiceMazo = mazosDificiles.length - 1;
+    } else if (nuevoIndiceMazo >= mazosDificiles.length) {
+        nuevoIndiceMazo = 0;
+    }
+    
+    // Verificar si hay palabras en el nuevo mazo
+    if (mazosDificiles[nuevoIndiceMazo] && mazosDificiles[nuevoIndiceMazo].length > 0) {
+        // Reiniciar quiz con el nuevo mazo difícil
+        palabrasDificilesQuiz = mazosDificiles[nuevoIndiceMazo];
+        indicePalabraActual = 0;
+        aciertos = 0;
+        errores = 0;
+        esperandoSiguiente = false;
+        
+        mostrarPalabraMazoDificil();
+        mostrarNotificacionQuiz(`Cambiando a mazo difícil ${nuevoIndiceMazo + 1}/${mazosDificiles.length}`);
+    } else {
+        mostrarNotificacionQuiz("No hay más mazos difíciles disponibles");
+    }
+}
+
+// Función para obtener información de mazos difíciles disponibles
+function obtenerInfoMazosDificiles() {
+    const todasPalabrasDificiles = sistemaEconomia.obtenerMazoDificil();
+    
+    if (todasPalabrasDificiles.length === 0) {
+        return {
+            totalMazos: 0,
+            totalPalabras: 0,
+            mazos: []
+        };
+    }
+    
+    // Dividir en grupos de 10 palabras (mazos)
+    const mazos = [];
+    for (let i = 0; i < todasPalabrasDificiles.length; i += 10) {
+        const mazo = todasPalabrasDificiles.slice(i, i + 10);
+        mazos.push({
+            indice: Math.floor(i / 10),
+            palabras: mazo.length,
+            progreso: 0
+        });
+    }
+    
+    return {
+        totalMazos: mazos.length,
+        totalPalabras: todasPalabrasDificiles.length,
+        mazos: mazos
+    };
+}
+
+// ====================
 // FUNCIÓN AUXILIAR PARA CONTAR MAZOS DISPONIBLES
 // ====================
 
@@ -1154,43 +1250,19 @@ function crearUIMisiones() {
 }
 
 // ====================
-// CORRECCIÓN: NUEVA FUNCIÓN PARA ENCONTRAR PRÓXIMO MAZO DIFÍCIL DISPONIBLE
+// FUNCIONES CORREGIDAS PARA MAZOS DIFÍCILES
 // ====================
 
-function obtenerProximoMazoDificilDisponible() {
-    // Obtener todas las palabras difíciles disponibles
-    const palabrasDificiles = iniciarMazoDificil();
-    
-    if (!palabrasDificiles || palabrasDificiles.length === 0) {
-        return null;
-    }
-    
-    // Verificar si hay más palabras difíciles después de las actuales
-    const todasPalabrasDificiles = sistemaEconomia.obtenerMazoDificil();
-    
-    if (todasPalabrasDificiles.length > 0) {
-        // Tomar las primeras 10 palabras para el siguiente mazo
-        const proximasPalabras = todasPalabrasDificiles.slice(0, 10);
-        
-        return proximasPalabras;
-    }
-    
-    return null;
-}
-
-// ====================
-// FUNCIÓN FINALIZAR MAZO DIFÍCIL CORREGIDA
-// ====================
-
+// Finalizar sesión mazo difícil - CORREGIDA
 function finalizarMazoDificil() {
     const porcentaje = Math.round((aciertos / palabrasDificilesQuiz.length) * 100);
     
     // Completar mazo difícil
     completarMazoDificil();
     
-    // Verificar si hay más mazos difíciles disponibles
-    const proximoMazoDificil = obtenerProximoMazoDificilDisponible();
-    const hayMasMazosDificiles = proximoMazoDificil && proximoMazoDificil.length > 0;
+    // Obtener información de mazos difíciles disponibles
+    const infoMazosDificiles = obtenerInfoMazosDificiles();
+    const hayMasMazosDificiles = infoMazosDificiles.totalMazos > 1;
     
     document.getElementById('quiz-section').innerHTML = `
         <div class="quiz-container">
@@ -1203,7 +1275,7 @@ function finalizarMazoDificil() {
                 </p>
                 <p style="opacity: 0.8; margin-top: 15px;">
                     🎉 ¡Has superado tus palabras difíciles! 
-                    ${hayMasMazosDificiles ? 'Hay más palabras difíciles para practicar.' : 'Todas las palabras difíciles han sido superadas.'}
+                    ${hayMasMazosDificiles ? 'Hay más mazos difíciles para practicar.' : 'Todas las palabras difíciles han sido superadas.'}
                 </p>
             </div>
             
@@ -1222,7 +1294,7 @@ function finalizarMazoDificil() {
             <div style="text-align: center; margin: 30px 0;">
                 <div style="display: flex; justify-content: center; gap: 15px; margin-bottom: 15px;">
                     ${hayMasMazosDificiles ? `
-                        <button class="quiz-btn" onclick="iniciarProximoMazoDificil()" style="background: linear-gradient(135deg, #FF1493, #8A5AF7);">
+                        <button class="quiz-btn" onclick="irAMazoDificil('siguiente')" style="background: linear-gradient(135deg, #FF1493, #8A5AF7);">
                             ⚠️ Siguiente Mazo Difícil
                         </button>
                     ` : ''}
@@ -1232,7 +1304,7 @@ function finalizarMazoDificil() {
                 </div>
                 <p style="opacity: 0.7; font-size: 0.9rem;">
                     ${hayMasMazosDificiles ? 
-                        'Puedes continuar practicando más palabras difíciles' : 
+                        `Tienes ${infoMazosDificiles.totalMazos} mazos difíciles disponibles` : 
                         '¡Felicidades! Has completado todas las palabras difíciles por ahora.'}
                 </p>
             </div>
@@ -1248,9 +1320,6 @@ function finalizarMazoDificil() {
     // Dar recompensa especial
     sistemaEconomia.agregarDinero(10);
     actualizarContadorDineroInicio();
-    
-    // Resetear modo mazo difícil (pero mantener la variable global para posible siguiente mazo)
-    modoMazoDificil = false;
 }
 
 // ====================
@@ -1258,25 +1327,38 @@ function finalizarMazoDificil() {
 // ====================
 
 function iniciarProximoMazoDificil() {
-    const proximoMazo = obtenerProximoMazoDificilDisponible();
+    // Obtener información de todos los mazos difíciles
+    const infoMazosDificiles = obtenerInfoMazosDificiles();
     
-    if (!proximoMazo || proximoMazo.length === 0) {
+    if (infoMazosDificiles.totalMazos === 0) {
         mostrarNotificacionQuiz('✅ No hay más palabras difíciles disponibles por ahora');
         cargarPaginaMisiones();
         return;
     }
     
-    modoMazoDificil = true;
-    palabrasDificilesQuiz = proximoMazo;
+    // Buscar el siguiente mazo disponible
+    let indiceSiguienteMazo = 0;
     
-    // Resetear contadores
-    indicePalabraActual = 0;
-    aciertos = 0;
-    errores = 0;
-    esperandoSiguiente = false;
+    // Si hay palabras difíciles en quiz actual, buscar siguiente
+    if (palabrasDificilesQuiz && palabrasDificilesQuiz.length > 0) {
+        // Dividir todas las palabras en mazos de 10
+        const todasPalabras = sistemaEconomia.obtenerMazoDificil();
+        const mazos = [];
+        for (let i = 0; i < todasPalabras.length; i += 10) {
+            mazos.push(todasPalabras.slice(i, i + 10));
+        }
+        
+        // Buscar índice actual
+        for (let i = 0; i < mazos.length; i++) {
+            if (JSON.stringify(mazos[i]) === JSON.stringify(palabrasDificilesQuiz)) {
+                indiceSiguienteMazo = (i + 1) % mazos.length;
+                break;
+            }
+        }
+    }
     
-    // Cargar primera palabra del siguiente mazo difícil
-    mostrarPalabraMazoDificil();
+    // Iniciar el mazo específico
+    iniciarMazoDificilDesdeUI();
 }
 
 // ====================
@@ -1286,9 +1368,12 @@ function iniciarProximoMazoDificil() {
 function iniciarMazoDificilDesdeUI() {
     const palabras = iniciarMazoDificil();
     
-    if (palabras) {
+    if (palabras && palabras.length > 0) {
+        // Tomar solo las primeras 10 palabras para el mazo actual
+        const palabrasParaMazo = palabras.slice(0, Math.min(10, palabras.length));
+        
         modoMazoDificil = true;
-        palabrasDificilesQuiz = palabras;
+        palabrasDificilesQuiz = palabrasParaMazo;
         
         // Resetear contadores
         indicePalabraActual = 0;
@@ -1302,6 +1387,10 @@ function iniciarMazoDificilDesdeUI() {
         
         // Cargar primera palabra del mazo difícil
         mostrarPalabraMazoDificil();
+        
+        mostrarNotificacionQuiz(`⚠️ Iniciando mazo difícil (${palabrasParaMazo.length} palabras)`);
+    } else {
+        mostrarNotificacionQuiz('📝 No hay palabras difíciles para practicar');
     }
 }
 
@@ -1514,7 +1603,6 @@ function crearContenedoresAnimes() {
         const tieneAnimes = contenedores[i] && contenedores[i].length > 0;
         const desc = contenedorData.descripcion || (tieneAnimes ? contenedores[i].length + ' sub-contenedores con animes' : '5 sub-contenedores disponibles');
         
-        // CORRECCIÓN AQUÍ: Cambiar de "contenedor-nero" a "contenedor-numero"
         html += `
             <div class="contenedor-item" onclick="cargarSubcontenedoresAnimes(${i})">
                 <div class="contenedor-img" style="background-image: url('${contenedorData.imagen || obtenerImagenContenedorAnime(i)}')"></div>
@@ -1667,7 +1755,6 @@ function crearSubcontenedoresAnimesUI(contenedor) {
         
         const desc = subData.descripcion || (tieneAnime ? 'Anime disponible' : '(Sin anime configurado)');
         
-        // CORRECCIÓN AQUÍ: Usar el nombre personalizado del subcontenedor y mostrar título completo
         html += `
             <div class="subcontenedor-item" onclick="${tieneAnime ? `seleccionarAccionAnime(${contenedor}, ${i})` : `cargarMazosAnimes(${contenedor}, ${i})`}">
                 <div class="subcontenedor-img" style="background-image: url('${subData.imagen || obtenerImagenSubcontenedorAnime(contenedor, i)}')"></div>
@@ -1868,7 +1955,6 @@ function crearSubcontenedoresAudiosUI(contenedor) {
         
         const desc = tieneAudio ? audioInfo.descripcion : '(Sin audio configurado)';
         
-        // CORRECCIÓN: Mostrar título completo en lugar de solo la primera parte
         html += `
             <div class="subcontenedor-item" onclick="${tieneAudio ? `seleccionarAccionAudio(${contenedor}, ${i})` : `cargarMazosAudios(${contenedor}, ${i})`}">
                 <div class="subcontenedor-img" style="background-image: url('${imagenSubcontenedor}')"></div>
@@ -2093,7 +2179,6 @@ function crearSubcontenedoresASMRUI(contenedor) {
         
         const desc = subData.descripcion || (tieneASMR ? 'ASMR disponible' : '(Sin audio ASMR configurado)');
         
-        // CORRECCIÓN: Mostrar título completo en lugar de solo la primera palabra
         html += `
             <div class="subcontenedor-item" onclick="${tieneASMR ? `seleccionarAccionASMR(${contenedor}, ${i})` : 'alert("Este sub-contenedor no tiene audio ASMR disponible")'}">
                 <div class="subcontenedor-img" style="background-image: url('${subData.imagen || obtenerImagenSubcontenedorASMR(contenedor, i)}')"></div>
@@ -2431,7 +2516,6 @@ function crearSubcontenedoresVideosUI(contenedor) {
         
         const desc = tieneVideo ? videoInfo.descripcion : subData.descripcion || '(Sin video)';
         
-        // CORRECCIÓN: Mostrar título completo en lugar de solo la primera palabra
         html += `
             <div class="subcontenedor-item" onclick="${tieneVideo ? `cargarVideo(${contenedor}, ${i})` : 'alert("Este sub-contenedor no tiene video disponible")'}">
                 <div class="subcontenedor-img" style="background-image: url('${subData.imagen || obtenerImagenSubcontenedor(contenedor, i)}')"></div>
@@ -2768,10 +2852,14 @@ function mostrarPalabraMazoDificil() {
     const quizSection = document.getElementById('quiz-section');
     const palabra = palabrasDificilesQuiz[indicePalabraActual];
     
+    // Obtener información de mazos para mostrar estadísticas
+    const infoMazos = obtenerInfoMazosDificiles();
+    const mazoActualNumero = 1; // Por simplificación, podrías calcular esto
+    
     quizSection.innerHTML = `
         <div class="quiz-container">
             <h2 style="text-align: center; color: #FF1493; margin-bottom: 20px;">
-                ⚠️ MAZO DIFÍCIL • Palabra ${indicePalabraActual + 1}/${palabrasDificilesQuiz.length}
+                ⚠️ MAZO DIFÍCIL • Mazo ${mazoActualNumero}/${infoMazos.totalMazos} • Palabra ${indicePalabraActual + 1}/${palabrasDificilesQuiz.length}
                 <div style="font-size: 0.9rem; color: #FF6B6B; margin-top: 5px;">
                     Palabras que marcaste como difíciles
                 </div>
@@ -2788,6 +2876,24 @@ function mostrarPalabraMazoDificil() {
             <div id="opciones-container">
                 <!-- Opciones se cargan dinámicamente -->
             </div>
+            
+            <!-- NAVEGACIÓN RÁPIDA ENTRE MAZOS DIFÍCILES -->
+            ${infoMazos.totalMazos > 1 ? `
+                <div style="text-align: center; margin: 20px 0; padding: 15px; background: rgba(255, 20, 147, 0.1); border-radius: 10px;">
+                    <h4 style="color: #FFD166; margin-bottom: 10px;">🔀 Navegar entre mazos difíciles</h4>
+                    <div style="display: flex; justify-content: center; gap: 10px; margin-top: 10px;">
+                        <button class="quiz-btn" onclick="irAMazoDificil('anterior')" style="background: rgba(255, 20, 147, 0.3); padding: 8px 15px; font-size: 0.9rem;">
+                            ⬅️ Mazo Anterior
+                        </button>
+                        <button class="quiz-btn" onclick="irAMazoDificil('siguiente')" style="background: rgba(255, 20, 147, 0.3); padding: 8px 15px; font-size: 0.9rem;">
+                            Mazo Siguiente ➡️
+                        </button>
+                    </div>
+                    <p style="font-size: 0.8rem; opacity: 0.7; margin-top: 10px;">
+                        ${infoMazos.totalMazos} mazos difíciles disponibles
+                    </p>
+                </div>
+            ` : ''}
             
             <div id="resultado-container" style="display: none;">
                 <!-- Resultado se muestra después de responder -->
@@ -3062,7 +3168,7 @@ function pasarSiguientePalabraMazoDificil() {
 }
 
 // ====================
-// FUNCIÓN PARA NAVEGAR A MAZOS ADYACENTES
+// FUNCIÓN PARA NAVEGAR A MAZOS ADYACENTES (NORMALES)
 // ====================
 
 function irAMazo(direccion) {
@@ -3108,24 +3214,6 @@ function irAMazo(direccion) {
             alert("No hay más mazos disponibles con vocabulario en este subcontenedor.");
         }
     }
-}
-
-// MODIFICADA: Ahora también funciona para mazos difíciles
-function irAMazoDificil(direccion) {
-    if (!modoMazoDificil || !palabrasDificilesQuiz || palabrasDificilesQuiz.length === 0) {
-        console.log("No hay mazo difícil activo");
-        return;
-    }
-    
-    // Aquí puedes implementar lógica para navegar entre mazos difíciles
-    // Por ahora, simplemente mostramos un mensaje
-    alert("Navegación entre mazos difíciles - Esta funcionalidad está en desarrollo.");
-    
-    // Ejemplo de implementación futura:
-    // 1. Obtener lista de todos los mazos difíciles disponibles
-    // 2. Encontrar el índice actual
-    // 3. Navegar al siguiente/anterior
-    // 4. Reiniciar quiz con el nuevo mazo difícil
 }
 
 function finalizarQuiz() {
@@ -3244,7 +3332,7 @@ function finalizarQuiz() {
             <!-- BOTÓN PARA MAZO DIFÍCIL SI HAY PALABRAS MARCADAS -->
             ${sistemaEconomia.obtenerMazoDificil().length > 0 ? `
                 <div style="text-align: center; margin: 20px 0;">
-                    <button class="boton-mazo-dificil" onclick="iniciarMazoDificilDesdeFinalizacion()">
+                    <button class="boton-mazo-dificil" onclick="iniciarMazoDificilDesdeUI()">
                         📝 PRACTICAR MAZO DIFÍCIL (${sistemaEconomia.obtenerMazoDificil().length} palabras)
                     </button>
                     <p style="opacity: 0.7; margin-top: 10px; font-size: 0.9rem;">
