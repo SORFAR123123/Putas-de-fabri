@@ -560,7 +560,7 @@ const mangaDatabase = {
             "https://i2.nhentai.net/galleries/2616488/79.jpg", // Página 9
             "https://i1.nhentai.net/galleries/2616488/80.jpg", // Página 10
             "https://i3.nhentai.net/galleries/2616488/81.jpg", // Página 10
-            "https://i2.nhentai.net/galleries/2616488/82.jpg" // Página 10
+            "https://i2.nhentai.net/galleries/2616488/82.jpg", // Página 10
              "https://i3.nhentai.net/galleries/2616488/83.jpg", // Página 10
             "https://i2.nhentai.net/galleries/2616488/84.jpg", // Página 10
              "https://i2.nhentai.net/galleries/2616488/85.jpg" // Página 85
