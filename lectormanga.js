@@ -478,7 +478,33 @@ const mangaDatabase = {
 
 
     
-    '5_1': { titulo: "Manga disponible próximamente", descripcion: "", paginas: 0, año: "", autor: "", paginasUrls: [] }
+    '5_1': {
+        titulo: "Manga disponible próximamente",
+        descripcion: "",
+        paginas: 0,
+        año: "",
+        autor: "",
+        paginasUrls: [
+
+
+            
+        ] 
+
+        
+    },
+      '6_1': {
+        titulo: "Manga disponible próximamente",
+        descripcion: "",
+        paginas: 0,
+        año: "",
+        autor: "",
+        paginasUrls: [
+
+
+            
+        ] 
+          
+      } 
 };
 
 // ================================================
