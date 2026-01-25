@@ -29,13 +29,13 @@ const sistemaDescriptivo = {
             },
             4: { 
                 nombre: 'Hanabi',
-                imagen: 'https://i3.nhentai.net/galleries/3731090/1.webp', 
+                imagen: 'https://pbs.twimg.com/media/G_hm-3DWMAA5976?format=jpg&name=small', 
                 descripcion: 'Contenedor de mangas shojo',
                 tipo: 'shojo'
             },
             5: { 
-                nombre: 'Hentai',
-                imagen: '', 
+                nombre: 'Mitsudoe',
+                imagen: 'https://pbs.twimg.com/media/G_hmltzXQAEOzoH?format=jpg&name=small', 
                 descripcion: 'Contenedor de mangas seinen',
                 tipo: 'seinen'
             },
