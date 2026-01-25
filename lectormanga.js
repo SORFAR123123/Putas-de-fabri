@@ -473,102 +473,12 @@ const mangaDatabase = {
         ]
     },
     
-'5_1': {
-        titulo: "zorrardas",
-        descripcion: "Zorras me las kacho ",
-        paginas: 85,
-        año: "2026",
-        autor: "mitsudoe",
-        paginasUrls: [
-            "https://i3.nhentai.net/galleries/2616488/1.jpg", // Página 1
-            "https://i1.nhentai.net/galleries/2616488/2.jpg", // Página 2
-            "https://i1.nhentai.net/galleries/2616488/3.jpg", // Página 3
-            "https://i2.nhentai.net/galleries/2616488/4.jpg", // Página 4
-            "https://i2.nhentai.net/galleries/2616488/5.jpg", // Página 5
-            "https://i2.nhentai.net/galleries/2616488/6.jpg", // Página 6
-            "https://i2.nhentai.net/galleries/2616488/7.jpg", // Página 7
-            "https://i3.nhentai.net/galleries/2616488/8.jpg", // Página 8
-            "https://i1.nhentai.net/galleries/2616488/9.jpg", // Página 9
-            "https://i2.nhentai.net/galleries/2616488/10.jpg", // Página 10
-            "https://i2.nhentai.net/galleries/2616488/11.jpg", // Página 1
-            "https://i2.nhentai.net/galleries/2616488/12.jpg", // Página 2
-            "https://i3.nhentai.net/galleries/2616488/13.jpg", // Página 3
-            "https://i3.nhentai.net/galleries/2616488/14.jpg", // Página 4
-            "https://i3.nhentai.net/galleries/2616488/15.jpg", // Página 5
-            "https://i2.nhentai.net/galleries/2616488/16.jpg", // Página 6
-            "https://i1.nhentai.net/galleries/2616488/17.jpg", // Página 7
-            "https://i4.nhentai.net/galleries/2616488/18.jpg", // Página 8
-            "https://i2.nhentai.net/galleries/2616488/19.jpg", // Página 9
-            "https://i4.nhentai.net/galleries/2616488/20.jpg", // Página 10
-            "https://i1.nhentai.net/galleries/2616488/21.jpg", // Página 1
-            "https://i2.nhentai.net/galleries/2616488/22.jpg", // Página 2
-            "https://i4.nhentai.net/galleries/2616488/23.jpg", // Página 3
-            "https://i2.nhentai.net/galleries/2616488/24.jpg", // Página 4
-            "https://i3.nhentai.net/galleries/2616488/25.jpg", // Página 5
-            "https://i3.nhentai.net/galleries/2616488/26.jpg", // Página 6
-            "https://i1.nhentai.net/galleries/2616488/27.jpg", // Página 7
-            "https://i4.nhentai.net/galleries/2616488/28.jpg", // Página 8
-            "https://i4.nhentai.net/galleries/2616488/29.jpg", // Página 9
-            "https://i1.nhentai.net/galleries/2616488/30.jpg", // Página 10
-            "https://i1.nhentai.net/galleries/2616488/31.jpg", // Página 1
-            "https://i2.nhentai.net/galleries/2616488/32.jpg", // Página 2
-            "https://i3.nhentai.net/galleries/2616488/33.jpg", // Página 3
-            "https://i1.nhentai.net/galleries/2616488/34.jpg", // Página 4
-            "https://i4.nhentai.net/galleries/2616488/35.jpg", // Página 5
-            "https://i2.nhentai.net/galleries/2616488/36.jpg", // Página 6
-            "https://i4.nhentai.net/galleries/2616488/37.jpg", // Página 7
-            "https://i2.nhentai.net/galleries/2616488/38.jpg", // Página 8
-            "https://i3.nhentai.net/galleries/2616488/39.jpg", // Página 9
-            "https://i2.nhentai.net/galleries/2616488/40.jpg", // Página 10
-            "https://i4.nhentai.net/galleries/2616488/41.jpg", // Página 1
-            "https://i3.nhentai.net/galleries/2616488/42.jpg", // Página 2
-            "https://i3.nhentai.net/galleries/2616488/43.jpg", // Página 3
-            "https://i1.nhentai.net/galleries/2616488/44.jpg", // Página 4
-            "https://i4.nhentai.net/galleries/2616488/45.jpg", // Página 5
-            "https://i2.nhentai.net/galleries/2616488/46.jpg", // Página 6
-            "https://i4.nhentai.net/galleries/2616488/47.jpg", // Página 7
-            "https://i2.nhentai.net/galleries/2616488/48.jpg", // Página 8
-            "https://i1.nhentai.net/galleries/2616488/49.jpg", // Página 9
-            "https://i1.nhentai.net/galleries/2616488/50.jpg", // Página 10
-            "https://i2.nhentai.net/galleries/2616488/51.jpg", // Página 1
-            "https://i4.nhentai.net/galleries/2616488/52.jpg", // Página 2
-            "https://i4.nhentai.net/galleries/2616488/53.jpg", // Página 3
-            "https://i2.nhentai.net/galleries/2616488/54.jpg", // Página 4
-            "https://i1.nhentai.net/galleries/2616488/55.jpg", // Página 5
-            "https://i1.nhentai.net/galleries/2616488/56.jpg", // Página 6
-            "https://i1.nhentai.net/galleries/2616488/57.jpg", // Página 7
-            "https://i2.nhentai.net/galleries/2616488/58.jpg", // Página 8
-            "https://i1.nhentai.net/galleries/2616488/59.jpg", // Página 9
-            "https://i1.nhentai.net/galleries/2616488/60.jpg", // Página 10
-            "https://i3.nhentai.net/galleries/2616488/61.jpg", // Página 1
-            "https://i4.nhentai.net/galleries/2616488/62.jpg", // Página 2
-            "https://i1.nhentai.net/galleries/2616488/63.jpg", // Página 3
-            "https://i2.nhentai.net/galleries/2616488/64.jpg", // Página 4
-            "https://i1.nhentai.net/galleries/2616488/65.jpg", // Página 5
-            "https://i2.nhentai.net/galleries/2616488/66.jpg", // Página 6
-            "https://i1.nhentai.net/galleries/2616488/67.jpg", // Página 7
-            "https://i1.nhentai.net/galleries/2616488/68.jpg", // Página 8
-            "https://i3.nhentai.net/galleries/2616488/69.jpg", // Página 9
-            "https://i4.nhentai.net/galleries/2616488/70.jpg", // Página 10
-            "https://i1.nhentai.net/galleries/2616488/71.jpg", // Página 1
-            "https://i1.nhentai.net/galleries/2616488/72.jpg", // Página 2
-            "https://i4.nhentai.net/galleries/2616488/73.jpg", // Página 3
-            "https://i2.nhentai.net/galleries/2616488/74.jpg", // Página 4
-            "https://i3.nhentai.net/galleries/2616488/75.jpg", // Página 5
-            "https://i1.nhentai.net/galleries/2616488/76.jpg", // Página 6
-            "https://i3.nhentai.net/galleries/2616488/77.jpg", // Página 7
-            "https://i2.nhentai.net/galleries/2616488/78.jpg", // Página 8
-            "https://i2.nhentai.net/galleries/2616488/79.jpg", // Página 9
-            "https://i1.nhentai.net/galleries/2616488/80.jpg", // Página 10
-            "https://i3.nhentai.net/galleries/2616488/81.jpg", // Página 10
-            "https://i2.nhentai.net/galleries/2616488/82.jpg" // Página 10
-             "https://i3.nhentai.net/galleries/2616488/83.jpg", // Página 10
-            "https://i2.nhentai.net/galleries/2616488/84.jpg", // Página 10
-             "https://i2.nhentai.net/galleries/2616488/85.jpg" // Página 85
 
-        ] 
-  
-    }   
+
+
+
+    
+    '5_1': { titulo: "Manga disponible próximamente", descripcion: "", paginas: 0, año: "", autor: "", paginasUrls: [] }
 };
 
 // ================================================
