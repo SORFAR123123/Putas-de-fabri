@@ -228,8 +228,8 @@ const sistemaDescriptivo = {
             
             // Contenedor 5
             '5_1': { 
-                nombre: 'Sub-contenedor 1',
-                imagen: '', 
+                nombre: 'Zorras',
+                imagen: 'https://pbs.twimg.com/media/G_hqbXIWcAAK8uz?format=jpg&name=small', 
                 descripcion: '', 
                 nivel: '' 
             },
