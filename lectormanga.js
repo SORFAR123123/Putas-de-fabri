@@ -480,10 +480,10 @@ const mangaDatabase = {
     
     '5_1': {
         titulo: "zorrardas",
-        descripcion: "",
+        descripcion: "Zorras me las kacho ",
         paginas: 85,
-        año: "",
-        autor: "",
+        año: "2026",
+        autor: "mitsudoe",
         paginasUrls: [
             "https://i3.nhentai.net/galleries/2616488/1.jpg", // Página 1
             "https://i1.nhentai.net/galleries/2616488/2.jpg", // Página 2
