@@ -1,4 +1,3 @@
-
 // ================================================
 // SISTEMA PRINCIPAL DE NAVEGACIÓN Y QUIZ - VERSIÓN DINÁMICA
 // ================================================
@@ -1154,6 +1153,136 @@ function crearUIMisiones() {
     return html;
 }
 
+// ====================
+// CORRECCIÓN: NUEVA FUNCIÓN PARA ENCONTRAR PRÓXIMO MAZO DIFÍCIL DISPONIBLE
+// ====================
+
+function obtenerProximoMazoDificilDisponible() {
+    // Obtener todas las palabras difíciles disponibles
+    const palabrasDificiles = iniciarMazoDificil();
+    
+    if (!palabrasDificiles || palabrasDificiles.length === 0) {
+        return null;
+    }
+    
+    // Verificar si hay más palabras difíciles después de las actuales
+    const todasPalabrasDificiles = sistemaEconomia.obtenerMazoDificil();
+    
+    if (todasPalabrasDificiles.length > 0) {
+        // Tomar las primeras 10 palabras para el siguiente mazo
+        const proximasPalabras = todasPalabrasDificiles.slice(0, 10);
+        
+        return proximasPalabras;
+    }
+    
+    return null;
+}
+
+// ====================
+// FUNCIÓN FINALIZAR MAZO DIFÍCIL CORREGIDA
+// ====================
+
+function finalizarMazoDificil() {
+    const porcentaje = Math.round((aciertos / palabrasDificilesQuiz.length) * 100);
+    
+    // Completar mazo difícil
+    completarMazoDificil();
+    
+    // Verificar si hay más mazos difíciles disponibles
+    const proximoMazoDificil = obtenerProximoMazoDificilDisponible();
+    const hayMasMazosDificiles = proximoMazoDificil && proximoMazoDificil.length > 0;
+    
+    document.getElementById('quiz-section').innerHTML = `
+        <div class="quiz-container">
+            <h2 style="text-align: center; color: #FF1493;">🎉 MAZO DIFÍCIL COMPLETADO</h2>
+            
+            <div style="text-align: center; margin: 40px 0;">
+                <div style="font-size: 4rem; margin-bottom: 20px; color: #FF1493;">${porcentaje}%</div>
+                <p style="font-size: 1.2rem; color: #8A5AF7;">
+                    ${aciertos} aciertos • ${errores} errores
+                </p>
+                <p style="opacity: 0.8; margin-top: 15px;">
+                    🎉 ¡Has superado tus palabras difíciles! 
+                    ${hayMasMazosDificiles ? 'Hay más palabras difíciles para practicar.' : 'Todas las palabras difíciles han sido superadas.'}
+                </p>
+            </div>
+            
+            <!-- RECOMPENSA ESPECIAL POR MAZO DIFÍCIL -->
+            <div style="background: linear-gradient(135deg, rgba(255, 20, 147, 0.1), rgba(255, 107, 107, 0.1)); padding: 25px; border-radius: 15px; margin: 20px 0; border: 2px solid #FF1493;">
+                <h3 style="color: #FFD166; margin-bottom: 15px;">🏆 ¡Recompensa Especial!</h3>
+                <p style="text-align: center; font-size: 1.2rem; color: #FFD166;">
+                    +10 soles por completar mazo difícil
+                </p>
+                <p style="text-align: center; opacity: 0.8; margin-top: 10px;">
+                    Has demostrado dedicación superando las palabras más difíciles
+                </p>
+            </div>
+            
+            <!-- NAVEGACIÓN ENTRE MAZOS DIFÍCILES -->
+            <div style="text-align: center; margin: 30px 0;">
+                <div style="display: flex; justify-content: center; gap: 15px; margin-bottom: 15px;">
+                    ${hayMasMazosDificiles ? `
+                        <button class="quiz-btn" onclick="iniciarProximoMazoDificil()" style="background: linear-gradient(135deg, #FF1493, #8A5AF7);">
+                            ⚠️ Siguiente Mazo Difícil
+                        </button>
+                    ` : ''}
+                    <button class="quiz-btn" onclick="cargarPaginaMisiones()" style="background: linear-gradient(135deg, #5864F5, #8A5AF7);">
+                        🎯 Volver a Misiones
+                    </button>
+                </div>
+                <p style="opacity: 0.7; font-size: 0.9rem;">
+                    ${hayMasMazosDificiles ? 
+                        'Puedes continuar practicando más palabras difíciles' : 
+                        '¡Felicidades! Has completado todas las palabras difíciles por ahora.'}
+                </p>
+            </div>
+            
+            <div class="quiz-controls">
+                <button class="quiz-btn btn-volver" onclick="volverAMazos()" style="background: linear-gradient(135deg, #4CAF50, #2E7D32);">
+                    ↩️ Volver a Mazos Normales
+                </button>
+            </div>
+        </div>
+    `;
+    
+    // Dar recompensa especial
+    sistemaEconomia.agregarDinero(10);
+    actualizarContadorDineroInicio();
+    
+    // Resetear modo mazo difícil (pero mantener la variable global para posible siguiente mazo)
+    modoMazoDificil = false;
+}
+
+// ====================
+// NUEVA FUNCIÓN PARA INICIAR PRÓXIMO MAZO DIFÍCIL
+// ====================
+
+function iniciarProximoMazoDificil() {
+    const proximoMazo = obtenerProximoMazoDificilDisponible();
+    
+    if (!proximoMazo || proximoMazo.length === 0) {
+        mostrarNotificacionQuiz('✅ No hay más palabras difíciles disponibles por ahora');
+        cargarPaginaMisiones();
+        return;
+    }
+    
+    modoMazoDificil = true;
+    palabrasDificilesQuiz = proximoMazo;
+    
+    // Resetear contadores
+    indicePalabraActual = 0;
+    aciertos = 0;
+    errores = 0;
+    esperandoSiguiente = false;
+    
+    // Cargar primera palabra del siguiente mazo difícil
+    mostrarPalabraMazoDificil();
+}
+
+// ====================
+// FUNCIÓN PARA INICIAR MAZO DIFÍCIL DESDE LA UI
+// ====================
+
 function iniciarMazoDificilDesdeUI() {
     const palabras = iniciarMazoDificil();
     
@@ -1538,11 +1667,11 @@ function crearSubcontenedoresAnimesUI(contenedor) {
         
         const desc = subData.descripcion || (tieneAnime ? 'Anime disponible' : '(Sin anime configurado)');
         
-        // CORRECCIÓN AQUÍ: Usar el nombre personalizado del subcontenedor
+        // CORRECCIÓN AQUÍ: Usar el nombre personalizado del subcontenedor y mostrar título completo
         html += `
             <div class="subcontenedor-item" onclick="${tieneAnime ? `seleccionarAccionAnime(${contenedor}, ${i})` : `cargarMazosAnimes(${contenedor}, ${i})`}">
                 <div class="subcontenedor-img" style="background-image: url('${subData.imagen || obtenerImagenSubcontenedorAnime(contenedor, i)}')"></div>
-                <h3>${subData.nombre || (tieneAnime ? animeInfo.titulo.split(' ')[0] : `Anime ${i}`)}</h3>
+                <h3>${subData.nombre || (tieneAnime ? animeInfo.titulo : `Anime ${i}`)}</h3>
                 ${tieneAnime ? 
                     `<p><strong>${animeInfo.titulo}</strong></p>
                      <p style="font-size: 0.9rem; opacity: 0.8;">${animeInfo.duracion} • ${animeInfo.categoria}</p>` 
@@ -1739,10 +1868,11 @@ function crearSubcontenedoresAudiosUI(contenedor) {
         
         const desc = tieneAudio ? audioInfo.descripcion : '(Sin audio configurado)';
         
+        // CORRECCIÓN: Mostrar título completo en lugar de solo la primera parte
         html += `
             <div class="subcontenedor-item" onclick="${tieneAudio ? `seleccionarAccionAudio(${contenedor}, ${i})` : `cargarMazosAudios(${contenedor}, ${i})`}">
                 <div class="subcontenedor-img" style="background-image: url('${imagenSubcontenedor}')"></div>
-                <h3>${tieneAudio ? audioInfo.titulo.split('-')[0] : `Audio ${i}`}</h3>
+                <h3>${tieneAudio ? audioInfo.titulo : `Audio ${i}`}</h3>
                 ${tieneAudio ? 
                     `<p><strong>${audioInfo.titulo}</strong></p>
                      <p style="font-size: 0.9rem; opacity: 0.8;">${audioInfo.artista} • ${audioInfo.duracion}</p>` 
@@ -1963,10 +2093,11 @@ function crearSubcontenedoresASMRUI(contenedor) {
         
         const desc = subData.descripcion || (tieneASMR ? 'ASMR disponible' : '(Sin audio ASMR configurado)');
         
+        // CORRECCIÓN: Mostrar título completo en lugar de solo la primera palabra
         html += `
             <div class="subcontenedor-item" onclick="${tieneASMR ? `seleccionarAccionASMR(${contenedor}, ${i})` : 'alert("Este sub-contenedor no tiene audio ASMR disponible")'}">
                 <div class="subcontenedor-img" style="background-image: url('${subData.imagen || obtenerImagenSubcontenedorASMR(contenedor, i)}')"></div>
-                <h3>${tieneASMR ? asmrInfo.titulo.split(' ')[0] : `ASMR ${i}`}</h3>
+                <h3>${tieneASMR ? asmrInfo.titulo : `ASMR ${i}`}</h3>
                 ${tieneASMR ? 
                     `<p><strong>${asmrInfo.titulo}</strong></p>
                      <p style="font-size: 0.9rem; opacity: 0.8;">${asmrInfo.duracion} • ${asmrInfo.categoria}</p>
@@ -2300,10 +2431,11 @@ function crearSubcontenedoresVideosUI(contenedor) {
         
         const desc = tieneVideo ? videoInfo.descripcion : subData.descripcion || '(Sin video)';
         
+        // CORRECCIÓN: Mostrar título completo en lugar de solo la primera palabra
         html += `
             <div class="subcontenedor-item" onclick="${tieneVideo ? `cargarVideo(${contenedor}, ${i})` : 'alert("Este sub-contenedor no tiene video disponible")'}">
                 <div class="subcontenedor-img" style="background-image: url('${subData.imagen || obtenerImagenSubcontenedor(contenedor, i)}')"></div>
-                <h3>${tieneVideo ? videoInfo.titulo.split(' ')[0] : `Video ${i}`}</h3>
+                <h3>${tieneVideo ? videoInfo.titulo : `Video ${i}`}</h3>
                 ${tieneVideo ? 
                     `<p><strong>${videoInfo.titulo}</strong></p>
                      <p style="font-size: 0.9rem; opacity: 0.8;">${videoInfo.duracion} • ${videoInfo.categoria}</p>` 
@@ -3136,73 +3268,6 @@ function finalizarQuiz() {
     window.funcionVolver = funcionVolver;
     
     actualizarContadorDineroInicio();
-}
-
-function finalizarMazoDificil() {
-    const porcentaje = Math.round((aciertos / palabrasDificilesQuiz.length) * 100);
-    
-    // Completar mazo difícil
-    completarMazoDificil();
-    
-    document.getElementById('quiz-section').innerHTML = `
-        <div class="quiz-container">
-            <h2 style="text-align: center; color: #FF1493;">🎉 MAZO DIFÍCIL COMPLETADO</h2>
-            
-            <div style="text-align: center; margin: 40px 0;">
-                <div style="font-size: 4rem; margin-bottom: 20px; color: #FF1493;">${porcentaje}%</div>
-                <p style="font-size: 1.2rem; color: #8A5AF7;">
-                    ${aciertos} aciertos • ${errores} errores
-                </p>
-                <p style="opacity: 0.8; margin-top: 15px;">
-                    🎉 ¡Has superado tus palabras difíciles! El mazo se ha reiniciado.
-                </p>
-            </div>
-            
-            <!-- RECOMPENSA ESPECIAL POR MAZO DIFÍCIL -->
-            <div style="background: linear-gradient(135deg, rgba(255, 20, 147, 0.1), rgba(255, 107, 107, 0.1)); padding: 25px; border-radius: 15px; margin: 20px 0; border: 2px solid #FF1493;">
-                <h3 style="color: #FFD166; margin-bottom: 15px;">🏆 ¡Recompensa Especial!</h3>
-                <p style="text-align: center; font-size: 1.2rem; color: #FFD166;">
-                    +10 soles por completar mazo difícil
-                </p>
-                <p style="text-align: center; opacity: 0.8; margin-top: 10px;">
-                    Has demostrado dedicación superando las palabras más difíciles
-                </p>
-            </div>
-            
-            <div class="quiz-controls">
-                <button class="quiz-btn btn-volver" onclick="volverAMazos()" style="background: linear-gradient(135deg, #FF1493, #8A5AF7);">
-                    ↩️ Volver a Mazos
-                </button>
-                <button class="quiz-btn btn-siguiente" onclick="cargarPaginaMisiones()">
-                    🎯 Ver más misiones
-                </button>
-            </div>
-        </div>
-    `;
-    
-    // Dar recompensa especial
-    sistemaEconomia.agregarDinero(10);
-    actualizarContadorDineroInicio();
-    
-    // Resetear modo mazo difícil
-    modoMazoDificil = false;
-    palabrasDificilesQuiz = [];
-}
-
-function iniciarMazoDificilDesdeFinalizacion() {
-    const palabras = iniciarMazoDificil();
-    
-    if (palabras) {
-        modoMazoDificil = true;
-        palabrasDificilesQuiz = palabras;
-        
-        indicePalabraActual = 0;
-        aciertos = 0;
-        errores = 0;
-        esperandoSiguiente = false;
-        
-        mostrarPalabraMazoDificil();
-    }
 }
 
 function cancelarQuiz() {
