@@ -1361,10 +1361,10 @@ const sistemaDescriptivo = {
                 tematica: 'música'
             },
             8: { 
-                nombre: 'VIDEO CONTAINER 8',
-                imagen: '', 
-                descripcion: 'Videos de tecnología japonesa',
-                tematica: 'tecnología'
+                nombre: 'Fabri y las quintillizas XD',
+                imagen: 'https://pbs.twimg.com/media/G_2dDpBX0AAcGz6?format=png&name=small', 
+                descripcion: 'Sexo',
+                tematica: 'NTR ORGIA TODO'
             },
             9: { 
                 nombre: 'VIDEO CONTAINER 9',
