@@ -2014,8 +2014,8 @@ const sistemaDescriptivo = {
                 duracion: '' 
             },
              '8_1': { 
-                nombre: 'aaaaaaaa',
-                imagen: 'https://pbs.twimg.com/media/G_DzDM8XQAAd3dA?format=jpg&name=small', 
+                nombre: 'fabri putardo',
+                imagen: 'https://pbs.twimg.com/media/G_2dDpBX0AAcGz6?format=png&name=small', 
                 descripcion: '', 
                 duracion: '' 
             }
