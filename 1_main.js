@@ -1,5 +1,4 @@
-[file name]: 1_main.js
-[file content begin]
+
 // ================================================
 // SISTEMA PRINCIPAL DE NAVEGACIÓN Y QUIZ - VERSIÓN DINÁMICA
 // ================================================
@@ -3995,4 +3994,4 @@ document.addEventListener('DOMContentLoaded', function() {
     
     console.log('👁️ Sistema de vista previa activado y listo');
 });
-[file content end]
+
