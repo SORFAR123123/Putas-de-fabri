@@ -18,6 +18,12 @@ let palabrasDificilesQuiz = [];
 let modoActual = 'manga'; // 'manga', 'video', 'anime', 'audio', 'asmr', 'rpg', 'misiones', 'fantasia', 'srs'
 let idiomaVideoActual = 'espanol'; // 'espanol', 'japones'
 
+// Variables para vista previa de video
+let previewVideoElement = null;
+let previewContainer = null;
+let previewTimeout = null;
+let videoThumbnails = [];
+
 // ====================
 // NUEVO: SISTEMA SRS (Spaced Repetition System) - CORREGIDO
 // ====================
@@ -1827,7 +1833,7 @@ function cargarVideoAnime(contenedor, subcontenedor) {
     }
     
     const mangaSection = document.getElementById('manga-section');
-    mangaSection.innerHTML = sistemaReproductor.cargarVideo(driveId, timestamps);
+    mangaSection.innerHTML = crearReproductorConPreview(driveId, timestamps, animeInfo.titulo, animeInfo.descripcion);
     
     // Agregar controles de idioma
     const tituloDesc = `
@@ -2517,7 +2523,7 @@ function crearSubcontenedoresVideosUI(contenedor) {
         const desc = tieneVideo ? videoInfo.descripcion : subData.descripcion || '(Sin video)';
         
         html += `
-            <div class="subcontenedor-item" onclick="${tieneVideo ? `cargarVideo(${contenedor}, ${i})` : 'alert("Este sub-contenedor no tiene video disponible")'}">
+            <div class="subcontenedor-item" onclick="${tieneVideo ? `cargarVideoConPreview(${contenedor}, ${i})` : 'alert("Este sub-contenedor no tiene video disponible")'}">
                 <div class="subcontenedor-img" style="background-image: url('${subData.imagen || obtenerImagenSubcontenedor(contenedor, i)}')"></div>
                 <h3>${tieneVideo ? videoInfo.titulo : `Video ${i}`}</h3>
                 ${tieneVideo ? 
@@ -2535,7 +2541,7 @@ function crearSubcontenedoresVideosUI(contenedor) {
     return html;
 }
 
-function cargarVideo(contenedor, subcontenedor) {
+function cargarVideoConPreview(contenedor, subcontenedor) {
     contenedorActual = contenedor;
     subcontenedorActual = subcontenedor;
     
@@ -2546,7 +2552,7 @@ function cargarVideo(contenedor, subcontenedor) {
     }
     
     const mangaSection = document.getElementById('manga-section');
-    mangaSection.innerHTML = sistemaReproductor.cargarVideo(videoInfo.driveId, videoInfo.timestamps);
+    mangaSection.innerHTML = crearReproductorConPreview(videoInfo.driveId, videoInfo.timestamps, videoInfo.titulo, videoInfo.descripcion);
     
     const tituloDesc = `
         <div style="text-align: center; margin-bottom: 25px;">
@@ -2675,6 +2681,283 @@ function crearBotonVolver(funcionClick) {
     boton.innerHTML = '← Volver';
     boton.onclick = funcionClick;
     return boton;
+}
+
+// ====================
+// NUEVO: SISTEMA DE VISTA PREVIA EN BARRA DE PROGRESO
+// ====================
+
+function crearReproductorConPreview(driveId, timestamps = [], titulo = "", descripcion = "") {
+    const videoId = `video-${Date.now()}`;
+    
+    return `
+        <div class="reproductor-container" style="max-width: 1200px; margin: 40px auto; background: rgba(30, 30, 40, 0.95); border-radius: 25px; padding: 40px; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6); border: 3px solid #8A5AF7;">
+            <h2 style="text-align: center; color: #FFD166; margin-bottom: 10px;">${titulo}</h2>
+            <p style="text-align: center; opacity: 0.8; margin-bottom: 30px; max-width: 800px; margin-left: auto; margin-right: auto;">
+                ${descripcion}
+            </p>
+            
+            <!-- CONTENEDOR PRINCIPAL DEL VIDEO -->
+            <div style="background: rgba(0, 0, 0, 0.3); border-radius: 15px; padding: 20px; margin-bottom: 30px;">
+                <!-- VIDEO IFRAME DE GOOGLE DRIVE -->
+                <div id="${videoId}-wrapper" style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden; border-radius: 10px;">
+                    <iframe 
+                        id="${videoId}"
+                        src="https://drive.google.com/file/d/${driveId}/preview"
+                        style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; border: none;"
+                        frameborder="0"
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                        allowfullscreen
+                    ></iframe>
+                </div>
+                
+                <!-- CONTROLES PERSONALIZADOS CON PREVIEW -->
+                <div class="video-controls" style="margin-top: 20px;">
+                    <div class="progress-container" style="position: relative; height: 30px; margin-bottom: 15px;">
+                        <!-- BARRA DE PROGRESO CON PREVIEW -->
+                        <div class="progress-bar-wrapper" style="position: relative; width: 100%; height: 8px; background: rgba(255,255,255,0.1); border-radius: 4px; cursor: pointer; margin-top: 10px;">
+                            <div class="progress-bar" style="width: 0%; height: 100%; background: linear-gradient(135deg, #8A5AF7, #FF6B6B); border-radius: 4px;"></div>
+                            
+                            <!-- THUMBNAIL PREVIEW (se mostrará al hacer hover) -->
+                            <div class="preview-thumbnail" style="position: absolute; bottom: 25px; display: none; width: 160px; height: 90px; background: #000; border-radius: 5px; overflow: hidden; box-shadow: 0 5px 15px rgba(0,0,0,0.5); border: 2px solid #8A5AF7; z-index: 1000;">
+                                <div class="preview-video" style="width: 100%; height: 100%;"></div>
+                                <div class="preview-time" style="position: absolute; bottom: 5px; right: 5px; background: rgba(0,0,0,0.7); color: white; padding: 2px 5px; border-radius: 3px; font-size: 11px; font-weight: bold;"></div>
+                            </div>
+                        </div>
+                        
+                        <!-- TIMESTAMPS (marcadores en la barra) -->
+                        ${timestamps && timestamps.length > 0 ? `
+                            <div class="timestamps-overlay" style="position: absolute; top: 0; left: 0; width: 100%; height: 100%; pointer-events: none;">
+                                ${timestamps.map(ts => {
+                                    const porcentaje = (ts.tiempo / 600) * 100; // Asumiendo 10min video
+                                    return `
+                                        <div class="timestamp-marker" 
+                                             style="position: absolute; left: ${porcentaje}%; top: -5px; width: 3px; height: 15px; background: #FFD166; border-radius: 2px; cursor: pointer; pointer-events: auto;"
+                                             title="${ts.titulo}"
+                                             onmouseover="mostrarTooltipTimestamp(this, '${ts.titulo}')"
+                                             onclick="saltarATimestamp(${ts.tiempo}, '${videoId}')">
+                                        </div>
+                                    `;
+                                }).join('')}
+                            </div>
+                        ` : ''}
+                    </div>
+                    
+                    <!-- CONTROLES BÁSICOS -->
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-top: 15px;">
+                        <div style="display: flex; gap: 15px;">
+                            <button class="control-btn" onclick="togglePlayPause('${videoId}')" style="background: #8A5AF7; color: white; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer;">
+                                <span id="${videoId}-play">▶️ Reproducir</span>
+                            </button>
+                            <button class="control-btn" onclick="toggleMute('${videoId}')" style="background: rgba(255,255,255,0.1); color: white; border: none; padding: 8px 15px; border-radius: 5px; cursor: pointer;">
+                                🔈 Volumen
+                            </button>
+                        </div>
+                        
+                        <div style="color: white; font-size: 0.9rem;">
+                            <span id="${videoId}-current">0:00</span> / 
+                            <span id="${videoId}-duration">0:00</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- TIMESTAMPS LISTA -->
+            ${timestamps && timestamps.length > 0 ? `
+                <div style="background: rgba(255, 255, 255, 0.05); border-radius: 15px; padding: 25px; margin-top: 30px; border-left: 5px solid #FFD166;">
+                    <h4 style="color: #FFD166; margin-bottom: 20px;">📍 Secciones del Video</h4>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+                        ${timestamps.map(ts => {
+                            const minutos = Math.floor(ts.tiempo / 60);
+                            const segundos = ts.tiempo % 60;
+                            return `
+                                <div class="timestamp-item" onclick="saltarATimestamp(${ts.tiempo}, '${videoId}')" style="background: rgba(138, 90, 247, 0.15); padding: 15px; border-radius: 10px; cursor: pointer; transition: all 0.3s;">
+                                    <div style="font-size: 1.3rem; color: #FFD166; margin-bottom: 5px;">
+                                        ${minutos.toString().padStart(2, '0')}:${segundos.toString().padStart(2, '0')}
+                                    </div>
+                                    <div style="font-weight: bold;">${ts.titulo}</div>
+                                    ${ts.descripcion ? `<div style="font-size: 0.9rem; opacity: 0.8; margin-top: 5px;">${ts.descripcion}</div>` : ''}
+                                </div>
+                            `;
+                        }).join('')}
+                    </div>
+                </div>
+            ` : ''}
+            
+            <style>
+                .progress-bar-wrapper:hover .preview-thumbnail {
+                    display: block !important;
+                }
+                
+                .timestamp-marker:hover::after {
+                    content: attr(title);
+                    position: absolute;
+                    bottom: 20px;
+                    left: 50%;
+                    transform: translateX(-50%);
+                    background: rgba(0,0,0,0.8);
+                    color: white;
+                    padding: 5px 10px;
+                    border-radius: 5px;
+                    font-size: 12px;
+                    white-space: nowrap;
+                    z-index: 1001;
+                }
+            </style>
+        </div>
+        
+        <script>
+            // Inicializar controles para este video
+            setTimeout(() => {
+                inicializarControlesVideo('${videoId}', '${driveId}');
+            }, 1000);
+        </script>
+    `;
+}
+
+// Inicializar controles del video con vista previa
+function inicializarControlesVideo(videoId, driveId) {
+    const iframe = document.getElementById(videoId);
+    if (!iframe) return;
+    
+    // Esperar a que el iframe cargue
+    iframe.onload = function() {
+        // Obtener elementos de control
+        const progressBar = iframe.closest('.reproductor-container').querySelector('.progress-bar');
+        const progressWrapper = iframe.closest('.reproductor-container').querySelector('.progress-bar-wrapper');
+        const previewThumbnail = iframe.closest('.reproductor-container').querySelector('.preview-thumbnail');
+        const previewVideo = previewThumbnail.querySelector('.preview-video');
+        const previewTime = previewThumbnail.querySelector('.preview-time');
+        const currentTimeElement = document.getElementById(videoId + '-current');
+        const durationElement = document.getElementById(videoId + '-duration');
+        const playButton = document.getElementById(videoId + '-play');
+        
+        // Configurar evento para la barra de progreso con preview
+        progressWrapper.addEventListener('mousemove', function(e) {
+            const rect = this.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const porcentaje = (x / rect.width) * 100;
+            
+            // Calcular tiempo estimado basado en el porcentaje
+            const tiempoEstimado = Math.round((porcentaje / 100) * 600); // 10 minutos = 600 segundos
+            
+            // Actualizar posición del preview
+            previewThumbnail.style.left = Math.min(Math.max(porcentaje - 10, 0), 80) + '%';
+            
+            // Mostrar tiempo en el preview
+            const minutos = Math.floor(tiempoEstimado / 60);
+            const segundos = tiempoEstimado % 60;
+            previewTime.textContent = \`\${minutos.toString().padStart(2, '0')}:\${segundos.toString().padStart(2, '0')}\`;
+            
+            // Cambiar imagen del preview (en un sistema real, usarías miniaturas generadas)
+            previewVideo.style.background = \`linear-gradient(135deg, #\${Math.floor(tiempoEstimado * 4.25).toString(16).padStart(2, '0')}6666, #\${Math.floor(tiempoEstimado * 2.55).toString(16).padStart(2, '0')}66FF)\`;
+            previewVideo.innerHTML = \`<div style="color: white; text-align: center; padding-top: 30px; font-size: 12px;">Vista previa<br>\${minutos}:\${segundos.toString().padStart(2, '0')}</div>\`;
+        });
+        
+        // Al hacer clic en la barra de progreso
+        progressWrapper.addEventListener('click', function(e) {
+            const rect = this.getBoundingClientRect();
+            const x = e.clientX - rect.left;
+            const porcentaje = (x / rect.width) * 100;
+            
+            // Calcular tiempo basado en porcentaje
+            const tiempo = Math.round((porcentaje / 100) * 600); // 10 minutos
+            
+            // Saltar a ese tiempo en el video
+            saltarATimestamp(tiempo, videoId);
+        });
+        
+        // Simular actualización del tiempo (en un sistema real, usarías la API del iframe)
+        let tiempoActual = 0;
+        const intervalo = setInterval(() => {
+            tiempoActual += 1;
+            if (tiempoActual > 600) tiempoActual = 0;
+            
+            // Actualizar barra de progreso
+            progressBar.style.width = (tiempoActual / 600) * 100 + '%';
+            
+            // Actualizar tiempo actual
+            const minutos = Math.floor(tiempoActual / 60);
+            const segundos = tiempoActual % 60;
+            currentTimeElement.textContent = \`\${minutos.toString().padStart(2, '0')}:\${segundos.toString().padStart(2, '0')}\`;
+            
+            // Establecer duración si no está establecida
+            if (durationElement.textContent === '0:00') {
+                durationElement.textContent = '10:00';
+            }
+        }, 1000);
+        
+        // Guardar referencia al intervalo para limpiarlo después
+        iframe._intervalo = intervalo;
+    };
+}
+
+// Funciones de control del video
+function togglePlayPause(videoId) {
+    const iframe = document.getElementById(videoId);
+    const playButton = document.getElementById(videoId + '-play');
+    
+    if (iframe._playing) {
+        // Pausar (simulado)
+        iframe._playing = false;
+        playButton.innerHTML = '▶️ Reproducir';
+    } else {
+        // Reproducir (simulado)
+        iframe._playing = true;
+        playButton.innerHTML = '⏸️ Pausar';
+    }
+}
+
+function toggleMute(videoId) {
+    const iframe = document.getElementById(videoId);
+    iframe._muted = !iframe._muted;
+    
+    mostrarNotificacionVideo(iframe._muted ? '🔇 Silenciado' : '🔊 Sonido activado');
+}
+
+function saltarATimestamp(segundos, videoId) {
+    const iframe = document.getElementById(videoId);
+    const minutos = Math.floor(segundos / 60);
+    const segs = segundos % 60;
+    
+    // En un sistema real, usarías la API del iframe para saltar
+    // iframe.contentWindow.postMessage({method: 'seekTo', value: segundos}, '*');
+    
+    // Simulación
+    const progressBar = iframe.closest('.reproductor-container').querySelector('.progress-bar');
+    progressBar.style.width = (segundos / 600) * 100 + '%';
+    
+    const currentTimeElement = document.getElementById(videoId + '-current');
+    currentTimeElement.textContent = \`\${minutos.toString().padStart(2, '0')}:\${segs.toString().padStart(2, '0')}\`;
+    
+    mostrarNotificacionVideo(\`⏱️ Saltando a \${minutos}:\${segs.toString().padStart(2, '0')}\`);
+}
+
+function mostrarTooltipTimestamp(elemento, texto) {
+    // El tooltip se muestra con CSS
+}
+
+function mostrarNotificacionVideo(mensaje) {
+    const notif = document.createElement('div');
+    notif.textContent = mensaje;
+    notif.style.cssText = \`
+        position: fixed;
+        top: 100px;
+        right: 20px;
+        background: linear-gradient(135deg, #8A5AF7, #FF6B6B);
+        color: white;
+        padding: 12px 20px;
+        border-radius: 50px;
+        font-weight: bold;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+        z-index: 1001;
+        animation: slideIn 0.3s ease, fadeOut 0.3s ease 2s forwards;
+        font-size: 1rem;
+        border: 2px solid white;
+    \`;
+    
+    document.body.appendChild(notif);
+    setTimeout(() => notif.remove(), 2500);
 }
 
 // ====================
