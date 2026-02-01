@@ -10,8 +10,8 @@ const animesDatabase = {
     // Sub-contenedor 1.1
     '1_1': {
         titulo: "🎌 Hermana rubia trola",
-        driveIdEsp: "1aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe", // REEMPLAZA con ID real
-        driveIdJap: "1-wYJYTaw0ZOKQy8BBPR7Fmhlzs0IVx9K", // REEMPLAZA con ID real
+        driveIdEsp: "1aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe",
+        driveIdJap: "1-wYJYTaw0ZOKQy8BBPR7Fmhlzs0IVx9K",
         descripcion: "Primer episodio doblado al español y japonés original con subtítulos.",
         timestampsEsp: [
             { tiempo: 113, titulo: " Rico poto assjob" },
@@ -35,8 +35,8 @@ const animesDatabase = {
     // Sub-contenedor 1.2
     '1_2': {
         titulo: "Rubia petera",
-        driveIdEsp: "1agRPnJlh054WicnXmoCpsfZyy88mubW4", // REEMPLAZA con ID real
-        driveIdJap: "1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS", // REEMPLAZA con ID real
+        driveIdEsp: "1agRPnJlh054WicnXmoCpsfZyy88mubW4",
+        driveIdJap: "1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS",
         descripcion: "Episodio 1: Tanjiro encuentra a su familia atacada por demonios.",
         timestampsEsp: [
             { tiempo: 0, titulo: "🏔️ Vida en las montañas" },
@@ -60,8 +60,8 @@ const animesDatabase = {
     // Sub-contenedor 1.3
     '1_3': {
         titulo: "Rubia putona xd",
-        driveIdEsp: "1duic2iO9JVdm2cC3tnvKZOE0Y8QmX-kN", // REEMPLAZA con ID real
-        driveIdJap: "1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS", // REEMPLAZA con ID real
+        driveIdEsp: "1duic2iO9JVdm2cC3tnvKZOE0Y8QmX-kN",
+        driveIdJap: "1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS",
         descripcion: "Pelea épica entre Goku y Jiren en el Torneo del Poder.",
         timestampsEsp: [
             { tiempo: 0, titulo: "⚡ Inicio de la pelea" },
@@ -81,10 +81,11 @@ const animesDatabase = {
         categoria: "Acción",
         año: 2017
     },
+    
     '1_4': {
         titulo: "Rubia Perra ",
-        driveIdEsp: "122RGdY8DBRdRQ98pjxhQ1Dg7HOKmYYm1", // REEMPLAZA con ID real
-        driveIdJap: "1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS", // REEMPLAZA con ID real
+        driveIdEsp: "122RGdY8DBRdRQ98pjxhQ1Dg7HOKmYYm1",
+        driveIdJap: "1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS",
         descripcion: "Pelea épica entre Goku y Jiren en el Torneo del Poder.",
         timestampsEsp: [
             { tiempo: 0, titulo: "⚡ Inicio de la pelea" },
@@ -112,8 +113,8 @@ const animesDatabase = {
     // Sub-contenedor 2.1
     '2_1': {
         titulo: "🎓 Haikyuu!! - Primer Partido",
-        driveIdEsp: "1dj-N3BFk6644HQGnIwmYox_gMPhybdkW", // REEMPLAZA con ID real
-        driveIdJap: "1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS", // REEMPLAZA con ID real
+        driveIdEsp: "1dj-N3BFk6644HQGnIwmYox_gMPhybdkW",
+        driveIdJap: "1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS",
         descripcion: "Primer partido oficial del equipo de Karasuno contra Date Tech.",
         timestampsEsp: [
             { tiempo: 0, titulo: "🏐 Calentamiento previo" },
@@ -137,8 +138,8 @@ const animesDatabase = {
     // Sub-contenedor 2.2
     '2_2': {
         titulo: "🔍 Death Note - Primer Encuentro",
-        driveIdEsp: "1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS", // REEMPLAZA con ID real
-        driveIdJap: "1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS", // REEMPLAZA con ID real
+        driveIdEsp: "1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS",
+        driveIdJap: "1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS",
         descripcion: "Light Yagami encuentra el Death Note y conoce a Ryuk.",
         timestampsEsp: [
             { tiempo: 0, titulo: "📔 Encuentro con el cuaderno" },
@@ -162,8 +163,8 @@ const animesDatabase = {
     // Sub-contenedor 3
     '3_1': {
         titulo: "🔍 Nikuen 2",
-        driveIdEsp: "1tNTs3cKMsdo9DXq3Kzh_2H1d2yR_1vTq", // REEMPLAZA con ID real
-        driveIdJap: "1rRfu1SSe3ISErFMSnEvwWzZ87py8E1ky", // REEMPLAZA con ID real
+        driveIdEsp: "1tNTs3cKMsdo9DXq3Kzh_2H1d2yR_1vTq",
+        driveIdJap: "1rRfu1SSe3ISErFMSnEvwWzZ87py8E1ky",
         descripcion: "Light Yagami encuentra el Death Note y conoce a Ryuk.",
         timestampsEsp: [
             { tiempo: 0, titulo: "📔 Encuentro con el cuaderno" },
@@ -183,11 +184,12 @@ const animesDatabase = {
         categoria: "Misterio",
         año: 2006
     },
-      // Sub-contenedor 4
+    
+    // Sub-contenedor 4
     '4_1': {
         titulo: "Me kacho a mi hermana pelirroja",
-        driveIdEsp: "1p4_xYNgyjjktmDPLfO9aauKkWvSSEB2C", // REEMPLAZA con ID reala
-        driveIdJap: "1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS", // REEMPLAZA con ID real
+        driveIdEsp: "1p4_xYNgyjjktmDPLfO9aauKkWvSSEB2C",
+        driveIdJap: "1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS",
         descripcion: "Light Yagami encuentra el Death Note y conoce a Ryuk.",
         timestampsEsp: [
             { tiempo: 0, titulo: "📔 Encuentro con el cuaderno" },
@@ -207,11 +209,11 @@ const animesDatabase = {
         categoria: "Misterio",
         año: 2006
     },
-     
+    
     '4_2': {
         titulo: "Trio",
-        driveIdEsp: "1tCipxqqYFQh_s9LGRMSGMAh81Z6oTZpM", // REEMPLAZA con ID real
-        driveIdJap: "1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS", // REEMPLAZA con ID real
+        driveIdEsp: "1tCipxqqYFQh_s9LGRMSGMAh81Z6oTZpM",
+        driveIdJap: "1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS",
         descripcion: "Light Yagami encuentra el Death Note y conoce a Ryuk.",
         timestampsEsp: [
             { tiempo: 0, titulo: "📔 Encuentro con el cuaderno" },
@@ -231,10 +233,11 @@ const animesDatabase = {
         categoria: "Misterio",
         año: 2006
     },
-  '4_3': {
+    
+    '4_3': {
         titulo: "Tia putona me la chupa",
-        driveIdEsp: "1o2sItvvJO63mvhO88CTEprE22dAmPrr8", // REEMPLAZA con ID real
-        driveIdJap: "1o2sItvvJO63mvhO88CTEprE22dAmPrr8", // REEMPLAZA con ID real
+        driveIdEsp: "1o2sItvvJO63mvhO88CTEprE22dAmPrr8",
+        driveIdJap: "1o2sItvvJO63mvhO88CTEprE22dAmPrr8",
         descripcion: "Light Yagami encuentra el Death Note y conoce a Ryuk.",
         timestampsEsp: [
             { tiempo: 0, titulo: "📔 Encuentro con el cuaderno" },
@@ -254,10 +257,11 @@ const animesDatabase = {
         categoria: "Misterio",
         año: 2006
     },
+    
     '4_4': {
         titulo: "Amigo se folla a mi madre ",
-        driveIdEsp: "1xY-SPaNGXCU4UM4Q5G--cDDirmHFH_K8", // REEMPLAZA con ID real   
-        driveIdJap: "1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS", // REEMPLAZA con ID real
+        driveIdEsp: "1xY-SPaNGXCU4UM4Q5G--cDDirmHFH_K8",
+        driveIdJap: "1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS",
         descripcion: "Light Yagami encuentra el Death Note y conoce a Ryuk.",
         timestampsEsp: [
             { tiempo: 0, titulo: "📔 Encuentro con el cuaderno" },
@@ -277,12 +281,11 @@ const animesDatabase = {
         categoria: "Misterio",
         año: 2006
     },
-
     
-       '5_1': {
+    '5_1': {
         titulo: "Profesora putona",
-        driveIdEsp: "1Z3dh2BFP1HXi8xX6jVG-dGEusis52fSi", // REEMPLAZA con ID real
-        driveIdJap: "1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS", // REEMPLAZA con ID real
+        driveIdEsp: "1Z3dh2BFP1HXi8xX6jVG-dGEusis52fSi",
+        driveIdJap: "1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS",
         descripcion: "Light Yagami encuentra el Death Note y conoce a Ryuk.",
         timestampsEsp: [
             { tiempo: 0, titulo: "📔 Encuentro con el cuaderno" },
@@ -302,10 +305,11 @@ const animesDatabase = {
         categoria: "Misterio",
         año: 2006
     },
+    
     '6_1': {
         titulo: "Okaasan mamadora ",
-        driveIdEsp: "1ZbMWDRGOLYWcebQikka2Lqh-KcIvixK2", // REEMPLAZA con ID real
-        driveIdJap: "1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS", // REEMPLAZA con ID real
+        driveIdEsp: "1ZbMWDRGOLYWcebQikka2Lqh-KcIvixK2",
+        driveIdJap: "1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS",
         descripcion: "Light Yagami encuentra el Death Note y conoce a Ryuk.",
         timestampsEsp: [
             { tiempo: 0, titulo: "📔 Encuentro con el cuaderno" },
@@ -325,10 +329,11 @@ const animesDatabase = {
         categoria: "Misterio",
         año: 2006
     },
-     '6_2': {
+    
+    '6_2': {
         titulo: "Okaasan mamadora ",
-        driveIdEsp: "1iX7aT5hnONJBCrnyrjPg-oHFSK2ucqxi", // REEMPLAZA con ID real
-        driveIdJap: "1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS", // REEMPLAZA con ID real
+        driveIdEsp: "1iX7aT5hnONJBCrnyrjPg-oHFSK2ucqxi",
+        driveIdJap: "1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS",
         descripcion: "Light Yagami encuentra el Death Note y conoce a Ryuk.",
         timestampsEsp: [
             { tiempo: 0, titulo: "📔 Encuentro con el cuaderno" },
@@ -348,10 +353,11 @@ const animesDatabase = {
         categoria: "Misterio",
         año: 2006
     },
+    
     '7_1': {
         titulo: "Profesora putona",
-        driveIdEsp: "1Z3dh2BFP1HXi8xX6jVG-dGEusis52fSi", // REEMPLAZA con ID real
-        driveIdJap: "1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS", // REEMPLAZA con ID real
+        driveIdEsp: "1Z3dh2BFP1HXi8xX6jVG-dGEusis52fSi",
+        driveIdJap: "1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS",
         descripcion: "Light Yagami encuentra el Death Note y conoce a Ryuk.",
         timestampsEsp: [
             { tiempo: 0, titulo: "📔 Encuentro con el cuaderno" },
@@ -371,10 +377,11 @@ const animesDatabase = {
         categoria: "Misterio",
         año: 2006
     },
-     '8_1': {
+    
+    '8_1': {
         titulo: "Profesora putona",
-        driveIdEsp: "1Z3dh2BFP1HXi8xX6jVG-dGEusis52fSi", // REEMPLAZA con ID real
-        driveIdJap: "1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS", // REEMPLAZA con ID real
+        driveIdEsp: "1Z3dh2BFP1HXi8xX6jVG-dGEusis52fSi",
+        driveIdJap: "1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS",
         descripcion: "Light Yagami encuentra el Death Note y conoce a Ryuk.",
         timestampsEsp: [
             { tiempo: 0, titulo: "📔 Encuentro con el cuaderno" },
