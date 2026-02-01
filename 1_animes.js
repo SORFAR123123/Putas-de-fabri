@@ -186,7 +186,7 @@ const animesDatabase = {
       // Sub-contenedor 4
     '4_1': {
         titulo: "Me kacho a mi hermana pelirroja",
-        driveIdEsp: "1p4_xYNgyjjktmDPLfO9aauKkWvSSEB2C", // REEMPLAZA con ID real
+        driveIdEsp: "1p4_xYNgyjjktmDPLfO9aauKkWvSSEB2C", // REEMPLAZA con ID reala
         driveIdJap: "1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS", // REEMPLAZA con ID real
         descripcion: "Light Yagami encuentra el Death Note y conoce a Ryuk.",
         timestampsEsp: [
