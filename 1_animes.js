@@ -234,7 +234,7 @@ const animesDatabase = {
   '4_3': {
         titulo: "Tia putona me la chupa",
         driveIdEsp: "1o2sItvvJO63mvhO88CTEprE22dAmPrr8", // REEMPLAZA con ID real
-        driveIdJap: "1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS", // REEMPLAZA con ID real
+        driveIdJap: "1o2sItvvJO63mvhO88CTEprE22dAmPrr8", // REEMPLAZA con ID real
         descripcion: "Light Yagami encuentra el Death Note y conoce a Ryuk.",
         timestampsEsp: [
             { tiempo: 0, titulo: "📔 Encuentro con el cuaderno" },
