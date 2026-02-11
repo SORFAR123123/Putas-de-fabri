@@ -40,10 +40,10 @@ const sistemaDescriptivo = {
                 tipo: 'seinen'
             },
             6: { 
-                nombre: 'CONTAINER 6',
-                imagen: '', 
-                descripcion: 'Contenedor de mangas josei',
-                tipo: 'josei'
+                nombre: 'Hotate historias cortas xd',
+                imagen: 'https://pbs.twimg.com/profile_images/1834481492095107072/REk15Qao_400x400.jpg', 
+                descripcion: 'Culonas ',
+                tipo: 'putardas'
             },
             7: { 
                 nombre: 'CONTAINER 7',
