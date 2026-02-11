@@ -260,8 +260,8 @@ const sistemaDescriptivo = {
             
             // Contenedor 6
             '6_1': { 
-                nombre: 'Sub-contenedor 1',
-                imagen: '', 
+                nombre: 'Kachera de shotas',
+                imagen: 'https://i1.nhentai.net/galleries/3698272/1.jpg', 
                 descripcion: '', 
                 nivel: '' 
             },
