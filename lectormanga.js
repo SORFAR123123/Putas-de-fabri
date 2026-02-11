@@ -570,7 +570,30 @@ const mangaDatabase = {
 
         
     ] 
-   }
+   },
+'6_1': {
+        titulo: " Kachadora de shotas tetona",
+        descripcion: "",
+        paginas: 12,
+        año: 2024,
+        autor: "Hotate",
+        paginasUrls: [
+            "https://i1.nhentai.net/galleries/3698272/1.jpg", // Página 1
+            "https://i3.nhentai.net/galleries/3698272/2.webp", // Página 2
+            "https://i4.nhentai.net/galleries/3698272/3.webp", // Página 3
+            "https://i4.nhentai.net/galleries/3698272/4.webp", // Página 4
+            "https://i3.nhentai.net/galleries/3698272/5.webp", // Página 5
+            "https://i1.nhentai.net/galleries/3698272/6.webp", // Página 6
+            "https://i2.nhentai.net/galleries/3698272/7.webp", // Página 7
+            "https://i2.nhentai.net/galleries/3698272/8.webp", // Página 8
+            "https://i1.nhentai.net/galleries/3698272/9.webp", // Página 9
+            "https://i4.nhentai.net/galleries/3698272/10.webp", // Página 10
+            "https://i2.nhentai.net/galleries/3698272/11.webp", // Página 11
+            "https://i1.nhentai.net/galleries/3698272/12.webp", // Página 12
+       
+        ]
+    }
+    
 };
 
 // ================================================
