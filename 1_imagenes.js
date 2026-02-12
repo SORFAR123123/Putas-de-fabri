@@ -1367,15 +1367,15 @@ const sistemaDescriptivo = {
                 tematica: 'NTR ORGIA TODO'
             },
             9: { 
-                nombre: 'VIDEO CONTAINER 9',
-                imagen: '', 
-                descripcion: 'Videos de anime y manga',
+                nombre: 'SideFuck',
+                imagen: 'https://pbs.twimg.com/media/HA9k_2_WcAAB4Ip?format=jpg&name=small', 
+                descripcion: 'anasos',
                 tematica: 'anime'
             },
             10: { 
-                nombre: 'VIDEO CONTAINER 10',
-                imagen: '', 
-                descripcion: 'Videos misceláneos',
+                nombre: 'Mattting Press',
+                imagen: 'https://pbs.twimg.com/media/HA9mn12bAAAk9FZ?format=png&name=small', 
+                descripcion: 'culonas',
                 tematica: 'misceláneo'
             }
         },
@@ -2016,6 +2016,18 @@ const sistemaDescriptivo = {
              '8_1': { 
                 nombre: 'fabri putardo',
                 imagen: 'https://pbs.twimg.com/media/G_2dDpBX0AAcGz6?format=png&name=small', 
+                descripcion: '', 
+                duracion: '' 
+            },
+              '9_1': { 
+                nombre: 'side',
+                imagen: 'https://pbs.twimg.com/media/HA9k_2_WcAAB4Ip?format=jpg&name=small', 
+                descripcion: '', 
+                duracion: '' 
+            },
+              '10_1': { 
+                nombre: 'mating',
+                imagen: 'https://pbs.twimg.com/media/HA9mn12bAAAk9FZ?format=png&name=small', 
                 descripcion: '', 
                 duracion: '' 
             }
