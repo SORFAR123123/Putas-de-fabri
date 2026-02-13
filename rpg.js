@@ -1,5 +1,5 @@
 // ================================================
-// RPG QUINTILLIZAS - SISTEMA DE ORGIAS CON CUADRÍCULA
+// RPG COMPLETO: LAS QUINTILLIZAS NAKANO - SISTEMA DIFICULTOSO (CORREGIDO)
 // ================================================
 
 class QuintillizasRPG {
@@ -8,1501 +8,1157 @@ class QuintillizasRPG {
         this.datosPersonajes = this.cargarDatosPersonajes() || this.inicializarDatosPersonajes();
         this.condones = this.cargarCondones() || 0;
         this.condones001 = this.cargarCondones001() || 0;
-        
-        // Videos para cada combinación
-        this.videosMamadas = this.inicializarVideosMamadas();
-        this.videosDoggystyle = this.inicializarVideosDoggystyle();
+        this.ultimaInteraccion = null;
     }
+
+    // ====================
+    // INICIALIZACIÓN CON SISTEMA DIFICULTOSO
+    // ====================
 
     inicializar() {
-        console.log('🎮 RPG Quintillizas - Sistema de Orgías');
+        console.log('🎮 RPG Quintillizas - Sistema dificultoso inicializado');
         
-        // Funciones principales
         window.seleccionarPersonajeRPG = (personajeId) => this.seleccionarPersonajeUI(personajeId);
+        window.intentarMomentoIntimoRPG = (personajeId, momentoId) => this.intentarMomentoIntimo(personajeId, momentoId);
+        window.comprarActividadRPG = (personajeId, actividadId) => this.comprarActividad(personajeId, actividadId);
         window.comprarCondonesRPG = (cantidad) => this.comprarCondones(cantidad);
         window.comprarCondones001RPG = (cantidad) => this.comprarCondones001(cantidad);
-        
-        // Funciones de orgías
-        window.cargarPaginaOrgias = () => this.cargarPaginaOrgias();
-        window.mostrarMamadas = () => this.mostrarMamadas();
-        window.mostrarDoggystyle = () => this.mostrarDoggystyle();
-        window.iniciarOrgia = (orgiaId, tipo) => this.iniciarOrgia(orgiaId, tipo);
+        window.cargarVideoNivel = (personajeId, nivel) => this.cargarVideoNivel(personajeId, nivel);
+        window.seleccionarTipoCondon = (tipo) => this.seleccionarTipoCondon(tipo);
     }
 
-    // ====================
-    // VIDEOS PARA CADA COMBINACIÓN DE MAMADAS (TÚ LOS CONFIGURAS)
-    // ====================
-    
-    inicializarVideosMamadas() {
+    inicializarDatosPersonajes() {
         return {
-            // DÚOS - ICHIKA
-            'mamada_ichika_nino': {
-                videoId: '1aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe',
-                imagen: 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=400&h=300&fit=crop'
+            'ichika': {
+                nombre: 'Ichika Nakano',
+                color: '#FF6B8B',
+                imagen: 'https://pbs.twimg.com/media/G7qfcGRWkAAV74w?format=png&name=small',
+                nivel: 1,
+                exp: 0,
+                expNecesaria: 1000,
+                estadoAnimo: 'neutral',
+                afinidad: 0,
+                descripcion: 'La hermana mayor, responsable y coqueta. Le gusta cuidar a los demás.',
+                dificultad: 'media',
+                probabilidadBase: 40,
+                videosDisponibles: [],
+                nivelRequeridoParaIntimos: 3,
+                actividadesEspeciales: [
+                    { id: 'cafe_romantico', nombre: '☕ Café Romántico', costo: 500, videoId: '1aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe', afinidad: 25, exp: 80, descripcion: 'Tómate un café íntimo con Ichika' },
+                    { id: 'estudio_juntos', nombre: '📚 Estudio Juntos', costo: 300, videoId: '1-wYJYTaw0ZOKQy8BBPR7Fmhlzs0IVx9K', afinidad: 20, exp: 60, descripcion: 'Estudia con Ichika después de clases' },
+                    { id: 'paseo_noche', nombre: '🌙 Paseo Nocturno', costo: 800, videoId: '1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS', afinidad: 30, exp: 100, descripcion: 'Un romántico paseo bajo las estrellas' }
+                ],
+                momentosIntimos: [
+                    { 
+                        id: 'mamada', 
+                        nombre: '😮 Mamada Apasionada', 
+                        condonesRequeridos: 1,
+                        condones001Requeridos: 0,
+                        videoId: '1aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe', 
+                        afinidad: 50, 
+                        exp: 200, 
+                        descripcion: 'Una mamada profunda y apasionada',
+                        probabilidadBase: 0,
+                        nivelRequerido: 3
+                    },
+                    { 
+                        id: 'sexo_oral', 
+                        nombre: '👅 Sexo Oral Intenso', 
+                        condonesRequeridos: 1,
+                        condones001Requeridos: 0,
+                        videoId: '1-wYJYTaw0ZOKQy8BBPR7Fmhlzs0IVx9K', 
+                        afinidad: 40, 
+                        exp: 150, 
+                        descripcion: 'Sexo oral hasta que se corra en tu boca',
+                        probabilidadBase: 0,
+                        nivelRequerido: 4
+                    },
+                    { 
+                        id: 'caricia_intima', 
+                        nombre: '👐 Caricia Íntima', 
+                        condonesRequeridos: 1,
+                        condones001Requeridos: 0,
+                        videoId: '1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS', 
+                        afinidad: 20, 
+                        exp: 80, 
+                        descripcion: 'Una caricia en sus partes más íntimas',
+                        probabilidadBase: 5,
+                        nivelRequerido: 2
+                    },
+                    { 
+                        id: 'sexo_duro', 
+                        nombre: '💪 Sexo Duro', 
+                        condonesRequeridos: 2,
+                        condones001Requeridos: 0,
+                        videoId: '1tS-gKr6bf4MY5Yrw7zRvP2uP_zq9rsLl', 
+                        afinidad: 80, 
+                        exp: 300, 
+                        descripcion: 'Dale duro hasta que grite tu nombre',
+                        probabilidadBase: 0,
+                        nivelRequerido: 5
+                    },
+                    { 
+                        id: 'correrse_dentro', 
+                        nombre: '💦 Correrse Dentro', 
+                        condonesRequeridos: 3,
+                        condones001Requeridos: 1,
+                        videoId: '1aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe', 
+                        afinidad: 100, 
+                        exp: 500, 
+                        descripcion: 'El momento final, correrse dentro de ella',
+                        probabilidadBase: 0,
+                        nivelRequerido: 6
+                    }
+                ]
             },
-            'mamada_ichika_miku': {
-                videoId: '1-wYJYTaw0ZOKQy8BBPR7Fmhlzs0IVx9K',
-                imagen: 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=400&h=300&fit=crop'
+            'nino': {
+                nombre: 'Nino Nakano',
+                color: '#FFB347',
+                imagen: 'https://pbs.twimg.com/media/G7qfpGZXAAAib4A?format=png&name=small',
+                nivel: 1,
+                exp: 0,
+                expNecesaria: 1200,
+                estadoAnimo: 'tsundere',
+                afinidad: -50,
+                descripcion: 'Tsundere clásica, difícil de conquistar. Cocina increíblemente bien.',
+                dificultad: 'alta',
+                probabilidadBase: 20,
+                videosDisponibles: [],
+                nivelRequeridoParaIntimos: 4,
+                actividadesEspeciales: [
+                    { id: 'clases_cocina', nombre: '👩‍🍳 Clases de Cocina', costo: 600, videoId: '1tS-gKr6bf4MY5Yrw7zRvP2uP_zq9rsLl', afinidad: 40, exp: 90, descripcion: 'Aprende a cocinar con Nino' },
+                    { id: 'pelicula_hogar', nombre: '🎬 Película en Casa', costo: 400, videoId: '1aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe', afinidad: 25, exp: 70, descripcion: 'Ve una película romántica en el sofá' },
+                    { id: 'concierto', nombre: '🎵 Concierto Juntos', costo: 1000, videoId: '1-wYJYTaw0ZOKQy8BBPR7Fmhlzs0IVx9K', afinidad: 50, exp: 120, descripcion: 'Llévala a ver su banda favorita' }
+                ],
+                momentosIntimos: [
+                    { 
+                        id: 'mamada_tsundere', 
+                        nombre: '😤 Mamada Tsundere', 
+                        condonesRequeridos: 1,
+                        condones001Requeridos: 0,
+                        videoId: '1-wYJYTaw0ZOKQy8BBPR7Fmhlzs0IVx9K', 
+                        afinidad: 60, 
+                        exp: 250, 
+                        descripcion: 'Una mamada a regañadientes pero intensa',
+                        probabilidadBase: 0,
+                        nivelRequerido: 4
+                    },
+                    { 
+                        id: 'sexo_duro_tsundere', 
+                        nombre: '💢 Sexo Duro Tsundere', 
+                        condonesRequeridos: 2,
+                        condones001Requeridos: 0,
+                        videoId: '1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS', 
+                        afinidad: 90, 
+                        exp: 400, 
+                        descripcion: 'Dale duro mientras dice "no es que me guste"',
+                        probabilidadBase: 0,
+                        nivelRequerido: 6
+                    },
+                    { 
+                        id: 'corrida_cara', 
+                        nombre: '💦 Corrida en la Cara', 
+                        condonesRequeridos: 1,
+                        condones001Requeridos: 1,
+                        videoId: '1tS-gKr6bf4MY5Yrw7zRvP2uP_zq9rsLl', 
+                        afinidad: 120, 
+                        exp: 600, 
+                        descripcion: 'Correrse en su cara mientras te mira con odio',
+                        probabilidadBase: 0,
+                        nivelRequerido: 7
+                    }
+                ]
             },
-            'mamada_ichika_yotsuba': {
-                videoId: '1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS',
-                imagen: 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=400&h=300&fit=crop'
+            'miku': {
+                nombre: 'Miku Nakano',
+                color: '#6A5ACD',
+                imagen: 'https://pbs.twimg.com/media/G7qfrrKWsAAv6ZT?format=png&name=small',
+                nivel: 1,
+                exp: 0,
+                expNecesaria: 800,
+                estadoAnimo: 'tímida',
+                afinidad: 10,
+                descripcion: 'Tímida y reservada, le gusta la historia japonesa y los audífonos.',
+                dificultad: 'media-baja',
+                probabilidadBase: 50,
+                videosDisponibles: [],
+                nivelRequeridoParaIntimos: 2,
+                actividadesEspeciales: [
+                    { id: 'visita_templo', nombre: '⛩️ Visita al Templo', costo: 250, videoId: '1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS', afinidad: 15, exp: 50, descripcion: 'Visita un templo histórico con Miku' },
+                    { id: 'biblioteca', nombre: '📖 Tarde en Biblioteca', costo: 200, videoId: '1tS-gKr6bf4MY5Yrw7zRvP2uP_zq9rsLl', afinidad: 10, exp: 40, descripcion: 'Estudia historia en la biblioteca' },
+                    { id: 'concierto_tradicional', nombre: '🎶 Concierto Tradicional', costo: 600, videoId: '1aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe', afinidad: 35, exp: 95, descripcion: 'Asiste a un concierto de música tradicional' }
+                ],
+                momentosIntimos: [
+                    { 
+                        id: 'mamada_timida', 
+                        nombre: '😳 Mamada Tímida', 
+                        condonesRequeridos: 1,
+                        condones001Requeridos: 0,
+                        videoId: '1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS', 
+                        afinidad: 40, 
+                        exp: 180, 
+                        descripcion: 'Una mamada suave y llena de timidez',
+                        probabilidadBase: 5,
+                        nivelRequerido: 2
+                    },
+                    { 
+                        id: 'sexo_lento', 
+                        nombre: '🐌 Sexo Lento', 
+                        condonesRequeridos: 1,
+                        condones001Requeridos: 0,
+                        videoId: '1tS-gKr6bf4MY5Yrw7zRvP2uP_zq9rsLl', 
+                        afinidad: 60, 
+                        exp: 250, 
+                        descripcion: 'Sexo lento y romántico',
+                        probabilidadBase: 0,
+                        nivelRequerido: 3
+                    },
+                    { 
+                        id: 'correrse_dentro_miku', 
+                        nombre: '💕 Correrse Dentro', 
+                        condonesRequeridos: 2,
+                        condones001Requeridos: 1,
+                        videoId: '1aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe', 
+                        afinidad: 80, 
+                        exp: 350, 
+                        descripcion: 'Correrse dentro mientras te abraza',
+                        probabilidadBase: 0,
+                        nivelRequerido: 5
+                    }
+                ]
             },
-            'mamada_ichika_itsuki': {
-                videoId: '1tS-gKr6bf4MY5Yrw7zRvP2uP_zq9rsLl',
-                imagen: 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=400&h=300&fit=crop'
+            'yotsuba': {
+                nombre: 'Yotsuba Nakano',
+                color: '#4CAF50',
+                imagen: 'https://pbs.twimg.com/media/G7qfupkXUAAX0aS?format=png&name=small',
+                nivel: 1,
+                exp: 0,
+                expNecesaria: 700,
+                estadoAnimo: 'energica',
+                afinidad: 30,
+                descripcion: 'La más enérgica y deportista. Siempre lista para ayudar.',
+                dificultad: 'baja',
+                probabilidadBase: 60,
+                videosDisponibles: [],
+                nivelRequeridoParaIntimos: 2,
+                actividadesEspeciales: [
+                    { id: 'partido_futbol', nombre: '⚽ Partido de Fútbol', costo: 300, videoId: '1-wYJYTaw0ZOKQy8BBPR7Fmhlzs0IVx9K', afinidad: 20, exp: 60, descripcion: 'Juega un partido de fútbol con Yotsuba' },
+                    { id: 'voluntariado', nombre: '🤝 Día de Voluntariado', costo: 150, videoId: '1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS', afinidad: 15, exp: 45, descripcion: 'Ayuda a otros junto a Yotsuba' },
+                    { id: 'carrera_atletismo', nombre: '🏃‍♀️ Carrera de Atletismo', costo: 500, videoId: '1tS-gKr6bf4MY5Yrw7zRvP2uP_zq9rsLl', afinidad: 30, exp: 85, descripcion: 'Participa en una carrera juntos' }
+                ],
+                momentosIntimos: [
+                    { 
+                        id: 'mamada_energica', 
+                        nombre: '💪 Mamada Energética', 
+                        condonesRequeridos: 1,
+                        condones001Requeridos: 0,
+                        videoId: '1tS-gKr6bf4MY5Yrw7zRvP2uP_zq9rsLl', 
+                        afinidad: 45, 
+                        exp: 200, 
+                        descripcion: 'Una mamada llena de energía y entusiasmo',
+                        probabilidadBase: 10,
+                        nivelRequerido: 2
+                    },
+                    { 
+                        id: 'sexo_rapido', 
+                        nombre: '⚡ Sexo Rápido', 
+                        condonesRequeridos: 1,
+                        condones001Requeridos: 0,
+                        videoId: '1aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe', 
+                        afinidad: 70, 
+                        exp: 300, 
+                        descripcion: 'Sexo rápido y apasionado',
+                        probabilidadBase: 0,
+                        nivelRequerido: 3
+                    },
+                    { 
+                        id: 'doble_penetracion', 
+                        nombre: '👯‍♀️ Doble Penetración', 
+                        condonesRequeridos: 2,
+                        condones001Requeridos: 1,
+                        videoId: '1-wYJYTaw0ZOKQy8BBPR7Fmhlzs0IVx9K', 
+                        afinidad: 100, 
+                        exp: 500, 
+                        descripcion: 'Doble penetración con otra hermana (fantasía)',
+                        probabilidadBase: 0,
+                        nivelRequerido: 6
+                    }
+                ]
             },
-            
-            // DÚOS - NINO
-            'mamada_nino_miku': {
-                videoId: '1aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe',
-                imagen: 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=400&h=300&fit=crop'
-            },
-            'mamada_nino_yotsuba': {
-                videoId: '1-wYJYTaw0ZOKQy8BBPR7Fmhlzs0IVx9K',
-                imagen: 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=400&h=300&fit=crop'
-            },
-            'mamada_nino_itsuki': {
-                videoId: '1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS',
-                imagen: 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=400&h=300&fit=crop'
-            },
-            
-            // DÚOS - MIKU
-            'mamada_miku_yotsuba': {
-                videoId: '1tS-gKr6bf4MY5Yrw7zRvP2uP_zq9rsLl',
-                imagen: 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=400&h=300&fit=crop'
-            },
-            'mamada_miku_itsuki': {
-                videoId: '1aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe',
-                imagen: 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=400&h=300&fit=crop'
-            },
-            
-            // DÚOS - YOTSUBA
-            'mamada_yotsuba_itsuki': {
-                videoId: '1-wYJYTaw0ZOKQy8BBPR7Fmhlzs0IVx9K',
-                imagen: 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=400&h=300&fit=crop'
-            },
-            
-            // TRÍOS
-            'mamada_ichika_nino_miku': {
-                videoId: '1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS',
-                imagen: 'https://images.unsplash.com/photo-1522673607200-164d1b3ce551?w=400&h=300&fit=crop'
-            },
-            'mamada_ichika_nino_yotsuba': {
-                videoId: '1tS-gKr6bf4MY5Yrw7zRvP2uP_zq9rsLl',
-                imagen: 'https://images.unsplash.com/photo-1522673607200-164d1b3ce551?w=400&h=300&fit=crop'
-            },
-            'mamada_ichika_nino_itsuki': {
-                videoId: '1aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe',
-                imagen: 'https://images.unsplash.com/photo-1522673607200-164d1b3ce551?w=400&h=300&fit=crop'
-            },
-            'mamada_ichika_miku_yotsuba': {
-                videoId: '1-wYJYTaw0ZOKQy8BBPR7Fmhlzs0IVx9K',
-                imagen: 'https://images.unsplash.com/photo-1522673607200-164d1b3ce551?w=400&h=300&fit=crop'
-            },
-            'mamada_ichika_miku_itsuki': {
-                videoId: '1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS',
-                imagen: 'https://images.unsplash.com/photo-1522673607200-164d1b3ce551?w=400&h=300&fit=crop'
-            },
-            'mamada_ichika_yotsuba_itsuki': {
-                videoId: '1tS-gKr6bf4MY5Yrw7zRvP2uP_zq9rsLl',
-                imagen: 'https://images.unsplash.com/photo-1522673607200-164d1b3ce551?w=400&h=300&fit=crop'
-            },
-            'mamada_nino_miku_yotsuba': {
-                videoId: '1aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe',
-                imagen: 'https://images.unsplash.com/photo-1522673607200-164d1b3ce551?w=400&h=300&fit=crop'
-            },
-            'mamada_nino_miku_itsuki': {
-                videoId: '1-wYJYTaw0ZOKQy8BBPR7Fmhlzs0IVx9K',
-                imagen: 'https://images.unsplash.com/photo-1522673607200-164d1b3ce551?w=400&h=300&fit=crop'
-            },
-            'mamada_nino_yotsuba_itsuki': {
-                videoId: '1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS',
-                imagen: 'https://images.unsplash.com/photo-1522673607200-164d1b3ce551?w=400&h=300&fit=crop'
-            },
-            'mamada_miku_yotsuba_itsuki': {
-                videoId: '1tS-gKr6bf4MY5Yrw7zRvP2uP_zq9rsLl',
-                imagen: 'https://images.unsplash.com/photo-1522673607200-164d1b3ce551?w=400&h=300&fit=crop'
-            },
-            
-            // CUARTETOS
-            'mamada_ichika_nino_miku_yotsuba': {
-                videoId: '1aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe',
-                imagen: 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=400&h=300&fit=crop'
-            },
-            'mamada_ichika_nino_miku_itsuki': {
-                videoId: '1-wYJYTaw0ZOKQy8BBPR7Fmhlzs0IVx9K',
-                imagen: 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=400&h=300&fit=crop'
-            },
-            'mamada_ichika_nino_yotsuba_itsuki': {
-                videoId: '1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS',
-                imagen: 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=400&h=300&fit=crop'
-            },
-            'mamada_ichika_miku_yotsuba_itsuki': {
-                videoId: '1tS-gKr6bf4MY5Yrw7zRvP2uP_zq9rsLl',
-                imagen: 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=400&h=300&fit=crop'
-            },
-            'mamada_nino_miku_yotsuba_itsuki': {
-                videoId: '1aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe',
-                imagen: 'https://images.unsplash.com/photo-1544716278-ca5e3f4abd8c?w=400&h=300&fit=crop'
-            },
-            
-            // QUINTETO (TODAS)
-            'mamada_todas': {
-                videoId: '1-wYJYTaw0ZOKQy8BBPR7Fmhlzs0IVx9K',
-                imagen: 'https://images.unsplash.com/photo-1522673607200-164d1b3ce551?w=400&h=300&fit=crop'
+            'itsuki': {
+                nombre: 'Itsuki Nakano',
+                color: '#FFD166',
+                imagen: 'https://pbs.twimg.com/media/G7qfxnsX0AIbJK1?format=png&name=small',
+                nivel: 1,
+                exp: 0,
+                expNecesaria: 900,
+                estadoAnimo: 'glotona',
+                afinidad: 15,
+                descripcion: 'La más glotona, le encanta comer. Es estudiosa y honesta.',
+                dificultad: 'baja',
+                probabilidadBase: 55,
+                videosDisponibles: [],
+                nivelRequeridoParaIntimos: 3,
+                actividadesEspeciales: [
+                    { id: 'buffet_ilimitado', nombre: '🍣 Buffet Ilimitado', costo: 800, videoId: '1aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe', afinidad: 40, exp: 100, descripcion: 'Llévala a un buffet de sushi' },
+                    { id: 'cocina_postres', nombre: '🍰 Clase de Postres', costo: 400, videoId: '1-wYJYTaw0ZOKQy8BBPR7Fmhlzs0IVx9K', afinidad: 25, exp: 75, descripcion: 'Aprende a hacer postres con Itsuki' },
+                    { id: 'picnic_parque', nombre: '🧺 Picnic en el Parque', costo: 350, videoId: '1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS', afinidad: 20, exp: 65, descripcion: 'Un picnic con mucha comida' }
+                ],
+                momentosIntimos: [
+                    { 
+                        id: 'mamada_con_sabor', 
+                        nombre: '🍓 Mamada con Sabor', 
+                        condonesRequeridos: 1,
+                        condones001Requeridos: 0,
+                        videoId: '1aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe', 
+                        afinidad: 50, 
+                        exp: 220, 
+                        descripcion: 'Una mamada que sabe a fresas',
+                        probabilidadBase: 5,
+                        nivelRequerido: 3
+                    },
+                    { 
+                        id: 'sexo_gloton', 
+                        nombre: '🍔 Sexo Glotón', 
+                        condonesRequeridos: 1,
+                        condones001Requeridos: 0,
+                        videoId: '1-wYJYTaw0ZOKQy8BBPR7Fmhlzs0IVx9K', 
+                        afinidad: 65, 
+                        exp: 280, 
+                        descripcion: 'Sexo mientras come algo dulce',
+                        probabilidadBase: 0,
+                        nivelRequerido: 4
+                    },
+                    { 
+                        id: 'correrse_boca', 
+                        nombre: '👄 Correrse en la Boca', 
+                        condonesRequeridos: 1,
+                        condones001Requeridos: 1,
+                        videoId: '1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS', 
+                        afinidad: 90, 
+                        exp: 400, 
+                        descripcion: 'Correrse en su boca y que se lo trague',
+                        probabilidadBase: 0,
+                        nivelRequerido: 6
+                    }
+                ]
             }
         };
     }
 
     // ====================
-    // VIDEOS PARA CADA COMBINACIÓN DE DOGGYSTYLE
+    // SISTEMA DE EXP Y NIVELES DIFICULTOSO
     // ====================
-    
-    inicializarVideosDoggystyle() {
-        return {
-            // DÚOS - ICHIKA
-            'doggystyle_ichika_nino': {
-                videoId: '1aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe',
-                imagen: 'https://images.unsplash.com/photo-1587614382346-4ec70e388b28?w=400&h=300&fit=crop'
-            },
-            'doggystyle_ichika_miku': {
-                videoId: '1-wYJYTaw0ZOKQy8BBPR7Fmhlzs0IVx9K',
-                imagen: 'https://images.unsplash.com/photo-1587614382346-4ec70e388b28?w=400&h=300&fit=crop'
-            },
-            'doggystyle_ichika_yotsuba': {
-                videoId: '1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS',
-                imagen: 'https://images.unsplash.com/photo-1587614382346-4ec70e388b28?w=400&h=300&fit=crop'
-            },
-            'doggystyle_ichika_itsuki': {
-                videoId: '1tS-gKr6bf4MY5Yrw7zRvP2uP_zq9rsLl',
-                imagen: 'https://images.unsplash.com/photo-1587614382346-4ec70e388b28?w=400&h=300&fit=crop'
-            },
-            
-            // DÚOS - NINO
-            'doggystyle_nino_miku': {
-                videoId: '1aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe',
-                imagen: 'https://images.unsplash.com/photo-1587614382346-4ec70e388b28?w=400&h=300&fit=crop'
-            },
-            'doggystyle_nino_yotsuba': {
-                videoId: '1-wYJYTaw0ZOKQy8BBPR7Fmhlzs0IVx9K',
-                imagen: 'https://images.unsplash.com/photo-1587614382346-4ec70e388b28?w=400&h=300&fit=crop'
-            },
-            'doggystyle_nino_itsuki': {
-                videoId: '1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS',
-                imagen: 'https://images.unsplash.com/photo-1587614382346-4ec70e388b28?w=400&h=300&fit=crop'
-            },
-            
-            // DÚOS - MIKU
-            'doggystyle_miku_yotsuba': {
-                videoId: '1tS-gKr6bf4MY5Yrw7zRvP2uP_zq9rsLl',
-                imagen: 'https://images.unsplash.com/photo-1587614382346-4ec70e388b28?w=400&h=300&fit=crop'
-            },
-            'doggystyle_miku_itsuki': {
-                videoId: '1aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe',
-                imagen: 'https://images.unsplash.com/photo-1587614382346-4ec70e388b28?w=400&h=300&fit=crop'
-            },
-            
-            // DÚOS - YOTSUBA
-            'doggystyle_yotsuba_itsuki': {
-                videoId: '1-wYJYTaw0ZOKQy8BBPR7Fmhlzs0IVx9K',
-                imagen: 'https://images.unsplash.com/photo-1587614382346-4ec70e388b28?w=400&h=300&fit=crop'
-            },
-            
-            // TRÍOS
-            'doggystyle_ichika_nino_miku': {
-                videoId: '1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS',
-                imagen: 'https://images.unsplash.com/photo-1522673607200-164d1b3ce551?w=400&h=300&fit=crop'
-            },
-            'doggystyle_ichika_nino_yotsuba': {
-                videoId: '1tS-gKr6bf4MY5Yrw7zRvP2uP_zq9rsLl',
-                imagen: 'https://images.unsplash.com/photo-1522673607200-164d1b3ce551?w=400&h=300&fit=crop'
-            },
-            'doggystyle_ichika_nino_itsuki': {
-                videoId: '1aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe',
-                imagen: 'https://images.unsplash.com/photo-1522673607200-164d1b3ce551?w=400&h=300&fit=crop'
-            },
-            'doggystyle_ichika_miku_yotsuba': {
-                videoId: '1-wYJYTaw0ZOKQy8BBPR7Fmhlzs0IVx9K',
-                imagen: 'https://images.unsplash.com/photo-1522673607200-164d1b3ce551?w=400&h=300&fit=crop'
-            },
-            'doggystyle_ichika_miku_itsuki': {
-                videoId: '1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS',
-                imagen: 'https://images.unsplash.com/photo-1522673607200-164d1b3ce551?w=400&h=300&fit=crop'
-            },
-            'doggystyle_ichika_yotsuba_itsuki': {
-                videoId: '1tS-gKr6bf4MY5Yrw7zRvP2uP_zq9rsLl',
-                imagen: 'https://images.unsplash.com/photo-1522673607200-164d1b3ce551?w=400&h=300&fit=crop'
-            },
-            'doggystyle_nino_miku_yotsuba': {
-                videoId: '1aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe',
-                imagen: 'https://images.unsplash.com/photo-1522673607200-164d1b3ce551?w=400&h=300&fit=crop'
-            },
-            'doggystyle_nino_miku_itsuki': {
-                videoId: '1-wYJYTaw0ZOKQy8BBPR7Fmhlzs0IVx9K',
-                imagen: 'https://images.unsplash.com/photo-1522673607200-164d1b3ce551?w=400&h=300&fit=crop'
-            },
-            'doggystyle_nino_yotsuba_itsuki': {
-                videoId: '1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS',
-                imagen: 'https://images.unsplash.com/photo-1522673607200-164d1b3ce551?w=400&h=300&fit=crop'
-            },
-            'doggystyle_miku_yotsuba_itsuki': {
-                videoId: '1tS-gKr6bf4MY5Yrw7zRvP2uP_zq9rsLl',
-                imagen: 'https://images.unsplash.com/photo-1522673607200-164d1b3ce551?w=400&h=300&fit=crop'
-            },
-            
-            // CUARTETOS
-            'doggystyle_ichika_nino_miku_yotsuba': {
-                videoId: '1aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe',
-                imagen: 'https://images.unsplash.com/photo-1587614382346-4ec70e388b28?w=400&h=300&fit=crop'
-            },
-            'doggystyle_ichika_nino_miku_itsuki': {
-                videoId: '1-wYJYTaw0ZOKQy8BBPR7Fmhlzs0IVx9K',
-                imagen: 'https://images.unsplash.com/photo-1587614382346-4ec70e388b28?w=400&h=300&fit=crop'
-            },
-            'doggystyle_ichika_nino_yotsuba_itsuki': {
-                videoId: '1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS',
-                imagen: 'https://images.unsplash.com/photo-1587614382346-4ec70e388b28?w=400&h=300&fit=crop'
-            },
-            'doggystyle_ichika_miku_yotsuba_itsuki': {
-                videoId: '1tS-gKr6bf4MY5Yrw7zRvP2uP_zq9rsLl',
-                imagen: 'https://images.unsplash.com/photo-1587614382346-4ec70e388b28?w=400&h=300&fit=crop'
-            },
-            'doggystyle_nino_miku_yotsuba_itsuki': {
-                videoId: '1aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe',
-                imagen: 'https://images.unsplash.com/photo-1587614382346-4ec70e388b28?w=400&h=300&fit=crop'
-            },
-            
-            // QUINTETO (TODAS)
-            'doggystyle_todas': {
-                videoId: '1-wYJYTaw0ZOKQy8BBPR7Fmhlzs0IVx9K',
-                imagen: 'https://images.unsplash.com/photo-1522673607200-164d1b3ce551?w=400&h=300&fit=crop'
-            }
-        };
-    }
 
-    // ====================
-    // PANTALLA PRINCIPAL DE ORGIAS (con los dos botones grandes)
-    // ====================
-    
-    cargarPaginaOrgias() {
-        return `
-            <div style="max-width: 1000px; margin: 0 auto; padding: 20px;">
-                <h1 style="text-align: center; color: #FF1493; margin-bottom: 30px; font-size: 3rem;">
-                    🎉 ORGIAS QUINTILLIZAS
-                </h1>
-                
-                <p style="text-align: center; opacity: 0.8; margin-bottom: 40px;">
-                    Selecciona el tipo de orgía que deseas realizar
-                </p>
-                
-                <!-- TUS CONDONES -->
-                <div style="background: rgba(255,20,147,0.1); border-radius: 15px; padding: 20px; margin-bottom: 40px; text-align: center;">
-                    <h3 style="color: #FFD166; margin-bottom: 10px;">💎 TUS CONDONES 0.01</h3>
-                    <div style="font-size: 3rem; color: #5864F5; font-weight: bold;">${this.condones001}</div>
-                    <p style="opacity: 0.7;">¡Necesitas condones 0.01 para todas las orgías!</p>
-                </div>
-                
-                <!-- DOS GRANDES BOTONES -->
-                <div style="display: flex; gap: 30px; justify-content: center; margin-bottom: 50px;">
-                    <!-- BOTÓN MAMADAS -->
-                    <div style="flex: 1; max-width: 400px; cursor: pointer;" onclick="mostrarMamadas()">
-                        <div style="background: linear-gradient(135deg, #FF1493, #FF6B8B); border-radius: 30px; padding: 40px; text-align: center; box-shadow: 0 10px 30px rgba(255,20,147,0.5); transition: transform 0.3s;">
-                            <div style="font-size: 6rem; margin-bottom: 20px;">😮</div>
-                            <h2 style="color: white; font-size: 2.5rem; margin-bottom: 10px;">MAMADAS</h2>
-                            <p style="color: white; opacity: 0.9;">Todas las combinaciones</p>
-                        </div>
-                    </div>
-                    
-                    <!-- BOTÓN DOGGYSTYLE -->
-                    <div style="flex: 1; max-width: 400px; cursor: pointer;" onclick="mostrarDoggystyle()">
-                        <div style="background: linear-gradient(135deg, #5864F5, #8A5AF7); border-radius: 30px; padding: 40px; text-align: center; box-shadow: 0 10px 30px rgba(88,100,245,0.5); transition: transform 0.3s;">
-                            <div style="font-size: 6rem; margin-bottom: 20px;">🐕</div>
-                            <h2 style="color: white; font-size: 2.5rem; margin-bottom: 10px;">DOGGYSTYLE</h2>
-                            <p style="color: white; opacity: 0.9;">Todas las combinaciones</p>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- LEYENDA DE REQUISITOS -->
-                <div style="background: rgba(0,0,0,0.3); border-radius: 20px; padding: 25px;">
-                    <h3 style="color: #FFD166; margin-bottom: 15px;">📋 REQUISITOS POR TIPO</h3>
-                    <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; text-align: center;">
-                        <div>
-                            <div style="font-size: 2rem;">👥</div>
-                            <div><strong>DÚO</strong></div>
-                            <div style="color: #4CAF50;">Afinidad 100 c/u</div>
-                            <div style="color: #FFD166;">Nivel 5 c/u</div>
-                            <div style="color: #5864F5;">💎2 condones</div>
-                        </div>
-                        <div>
-                            <div style="font-size: 2rem;">👥👥</div>
-                            <div><strong>TRÍO</strong></div>
-                            <div style="color: #4CAF50;">Afinidad 130 c/u</div>
-                            <div style="color: #FFD166;">Nivel 6 c/u</div>
-                            <div style="color: #5864F5;">💎3 condones</div>
-                        </div>
-                        <div>
-                            <div style="font-size: 2rem;">👥👥👥</div>
-                            <div><strong>CUARTETO</strong></div>
-                            <div style="color: #4CAF50;">Afinidad 160 c/u</div>
-                            <div style="color: #FFD166;">Nivel 7 c/u</div>
-                            <div style="color: #5864F5;">💎4 condones</div>
-                        </div>
-                        <div>
-                            <div style="font-size: 2rem;">👥👥👥👥👥</div>
-                            <div><strong>QUINTETO</strong></div>
-                            <div style="color: #4CAF50;">Afinidad 200 c/u</div>
-                            <div style="color: #FFD166;">Nivel 8 c/u</div>
-                            <div style="color: #5864F5;">💎5 condones</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        `;
-    }
+    agregarEXP(personajeId, cantidad) {
+        if (!this.personajeSeleccionado || this.personajeSeleccionado !== personajeId) {
+            console.log(`⚠️ No se puede añadir EXP: Personaje ${personajeId} no coincide con seleccionado ${this.personajeSeleccionado}`);
+            return false;
+        }
 
-    // ====================
-    // MOSTRAR TODAS LAS MAMADAS EN CUADRÍCULA
-    // ====================
-    
-    mostrarMamadas() {
-        const videos = this.videosMamadas;
-        const mangaSection = document.getElementById('manga-section');
+        const personaje = this.datosPersonajes[personajeId];
+        personaje.exp += cantidad;
         
-        let html = `
-            <div style="max-width: 1400px; margin: 0 auto; padding: 20px;">
-                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 30px;">
-                    <button class="btn-atras-especifico" onclick="cargarPaginaOrgias()">
-                        ← Volver a Orgías
-                    </button>
-                    <h1 style="color: #FF1493; margin: 0; font-size: 2.5rem;">😮 MAMADAS - TODAS LAS COMBINACIONES</h1>
-                    <div style="background: #5864F5; padding: 10px 20px; border-radius: 30px; font-weight: bold;">
-                        💎 ${this.condones001} condones 0.01
-                    </div>
-                </div>
-                
-                <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 25px;">
-        `;
+        console.log(`🎮 ${personaje.nombre} +${cantidad} EXP (Total: ${personaje.exp}/${personaje.expNecesaria})`);
         
-        // ========================================
-        // DÚOS - TODAS LAS COMBINACIONES
-        // ========================================
-        
-        // Ichika & Nino
-        html += this.crearTarjetaOrgia({
-            id: 'mamada_ichika_nino',
-            tipo: 'duo',
-            nombre: 'Ichika & Nino',
-            hermanas: ['ichika', 'nino'],
-            imagen: videos['mamada_ichika_nino'].imagen,
-            afinidadRequerida: 100,
-            nivelRequerido: 5,
-            condones: 2
-        });
-        
-        // Ichika & Miku
-        html += this.crearTarjetaOrgia({
-            id: 'mamada_ichika_miku',
-            tipo: 'duo',
-            nombre: 'Ichika & Miku',
-            hermanas: ['ichika', 'miku'],
-            imagen: videos['mamada_ichika_miku'].imagen,
-            afinidadRequerida: 100,
-            nivelRequerido: 5,
-            condones: 2
-        });
-        
-        // Ichika & Yotsuba
-        html += this.crearTarjetaOrgia({
-            id: 'mamada_ichika_yotsuba',
-            tipo: 'duo',
-            nombre: 'Ichika & Yotsuba',
-            hermanas: ['ichika', 'yotsuba'],
-            imagen: videos['mamada_ichika_yotsuba'].imagen,
-            afinidadRequerida: 100,
-            nivelRequerido: 5,
-            condones: 2
-        });
-        
-        // Ichika & Itsuki
-        html += this.crearTarjetaOrgia({
-            id: 'mamada_ichika_itsuki',
-            tipo: 'duo',
-            nombre: 'Ichika & Itsuki',
-            hermanas: ['ichika', 'itsuki'],
-            imagen: videos['mamada_ichika_itsuki'].imagen,
-            afinidadRequerida: 100,
-            nivelRequerido: 5,
-            condones: 2
-        });
-        
-        // Nino & Miku
-        html += this.crearTarjetaOrgia({
-            id: 'mamada_nino_miku',
-            tipo: 'duo',
-            nombre: 'Nino & Miku',
-            hermanas: ['nino', 'miku'],
-            imagen: videos['mamada_nino_miku'].imagen,
-            afinidadRequerida: 100,
-            nivelRequerido: 5,
-            condones: 2
-        });
-        
-        // Nino & Yotsuba
-        html += this.crearTarjetaOrgia({
-            id: 'mamada_nino_yotsuba',
-            tipo: 'duo',
-            nombre: 'Nino & Yotsuba',
-            hermanas: ['nino', 'yotsuba'],
-            imagen: videos['mamada_nino_yotsuba'].imagen,
-            afinidadRequerida: 100,
-            nivelRequerido: 5,
-            condones: 2
-        });
-        
-        // Nino & Itsuki
-        html += this.crearTarjetaOrgia({
-            id: 'mamada_nino_itsuki',
-            tipo: 'duo',
-            nombre: 'Nino & Itsuki',
-            hermanas: ['nino', 'itsuki'],
-            imagen: videos['mamada_nino_itsuki'].imagen,
-            afinidadRequerida: 100,
-            nivelRequerido: 5,
-            condones: 2
-        });
-        
-        // Miku & Yotsuba
-        html += this.crearTarjetaOrgia({
-            id: 'mamada_miku_yotsuba',
-            tipo: 'duo',
-            nombre: 'Miku & Yotsuba',
-            hermanas: ['miku', 'yotsuba'],
-            imagen: videos['mamada_miku_yotsuba'].imagen,
-            afinidadRequerida: 100,
-            nivelRequerido: 5,
-            condones: 2
-        });
-        
-        // Miku & Itsuki
-        html += this.crearTarjetaOrgia({
-            id: 'mamada_miku_itsuki',
-            tipo: 'duo',
-            nombre: 'Miku & Itsuki',
-            hermanas: ['miku', 'itsuki'],
-            imagen: videos['mamada_miku_itsuki'].imagen,
-            afinidadRequerida: 100,
-            nivelRequerido: 5,
-            condones: 2
-        });
-        
-        // Yotsuba & Itsuki
-        html += this.crearTarjetaOrgia({
-            id: 'mamada_yotsuba_itsuki',
-            tipo: 'duo',
-            nombre: 'Yotsuba & Itsuki',
-            hermanas: ['yotsuba', 'itsuki'],
-            imagen: videos['mamada_yotsuba_itsuki'].imagen,
-            afinidadRequerida: 100,
-            nivelRequerido: 5,
-            condones: 2
-        });
-        
-        // ========================================
-        // TRÍOS
-        // ========================================
-        
-        // Ichika, Nino, Miku
-        html += this.crearTarjetaOrgia({
-            id: 'mamada_ichika_nino_miku',
-            tipo: 'trio',
-            nombre: 'Ichika, Nino & Miku',
-            hermanas: ['ichika', 'nino', 'miku'],
-            imagen: videos['mamada_ichika_nino_miku'].imagen,
-            afinidadRequerida: 130,
-            nivelRequerido: 6,
-            condones: 3
-        });
-        
-        // Ichika, Nino, Yotsuba
-        html += this.crearTarjetaOrgia({
-            id: 'mamada_ichika_nino_yotsuba',
-            tipo: 'trio',
-            nombre: 'Ichika, Nino & Yotsuba',
-            hermanas: ['ichika', 'nino', 'yotsuba'],
-            imagen: videos['mamada_ichika_nino_yotsuba'].imagen,
-            afinidadRequerida: 130,
-            nivelRequerido: 6,
-            condones: 3
-        });
-        
-        // Ichika, Nino, Itsuki
-        html += this.crearTarjetaOrgia({
-            id: 'mamada_ichika_nino_itsuki',
-            tipo: 'trio',
-            nombre: 'Ichika, Nino & Itsuki',
-            hermanas: ['ichika', 'nino', 'itsuki'],
-            imagen: videos['mamada_ichika_nino_itsuki'].imagen,
-            afinidadRequerida: 130,
-            nivelRequerido: 6,
-            condones: 3
-        });
-        
-        // Ichika, Miku, Yotsuba
-        html += this.crearTarjetaOrgia({
-            id: 'mamada_ichika_miku_yotsuba',
-            tipo: 'trio',
-            nombre: 'Ichika, Miku & Yotsuba',
-            hermanas: ['ichika', 'miku', 'yotsuba'],
-            imagen: videos['mamada_ichika_miku_yotsuba'].imagen,
-            afinidadRequerida: 130,
-            nivelRequerido: 6,
-            condones: 3
-        });
-        
-        // Ichika, Miku, Itsuki
-        html += this.crearTarjetaOrgia({
-            id: 'mamada_ichika_miku_itsuki',
-            tipo: 'trio',
-            nombre: 'Ichika, Miku & Itsuki',
-            hermanas: ['ichika', 'miku', 'itsuki'],
-            imagen: videos['mamada_ichika_miku_itsuki'].imagen,
-            afinidadRequerida: 130,
-            nivelRequerido: 6,
-            condones: 3
-        });
-        
-        // Ichika, Yotsuba, Itsuki
-        html += this.crearTarjetaOrgia({
-            id: 'mamada_ichika_yotsuba_itsuki',
-            tipo: 'trio',
-            nombre: 'Ichika, Yotsuba & Itsuki',
-            hermanas: ['ichika', 'yotsuba', 'itsuki'],
-            imagen: videos['mamada_ichika_yotsuba_itsuki'].imagen,
-            afinidadRequerida: 130,
-            nivelRequerido: 6,
-            condones: 3
-        });
-        
-        // Nino, Miku, Yotsuba
-        html += this.crearTarjetaOrgia({
-            id: 'mamada_nino_miku_yotsuba',
-            tipo: 'trio',
-            nombre: 'Nino, Miku & Yotsuba',
-            hermanas: ['nino', 'miku', 'yotsuba'],
-            imagen: videos['mamada_nino_miku_yotsuba'].imagen,
-            afinidadRequerida: 130,
-            nivelRequerido: 6,
-            condones: 3
-        });
-        
-        // Nino, Miku, Itsuki
-        html += this.crearTarjetaOrgia({
-            id: 'mamada_nino_miku_itsuki',
-            tipo: 'trio',
-            nombre: 'Nino, Miku & Itsuki',
-            hermanas: ['nino', 'miku', 'itsuki'],
-            imagen: videos['mamada_nino_miku_itsuki'].imagen,
-            afinidadRequerida: 130,
-            nivelRequerido: 6,
-            condones: 3
-        });
-        
-        // Nino, Yotsuba, Itsuki
-        html += this.crearTarjetaOrgia({
-            id: 'mamada_nino_yotsuba_itsuki',
-            tipo: 'trio',
-            nombre: 'Nino, Yotsuba & Itsuki',
-            hermanas: ['nino', 'yotsuba', 'itsuki'],
-            imagen: videos['mamada_nino_yotsuba_itsuki'].imagen,
-            afinidadRequerida: 130,
-            nivelRequerido: 6,
-            condones: 3
-        });
-        
-        // Miku, Yotsuba, Itsuki
-        html += this.crearTarjetaOrgia({
-            id: 'mamada_miku_yotsuba_itsuki',
-            tipo: 'trio',
-            nombre: 'Miku, Yotsuba & Itsuki',
-            hermanas: ['miku', 'yotsuba', 'itsuki'],
-            imagen: videos['mamada_miku_yotsuba_itsuki'].imagen,
-            afinidadRequerida: 130,
-            nivelRequerido: 6,
-            condones: 3
-        });
-        
-        // ========================================
-        // CUARTETOS
-        // ========================================
-        
-        // Ichika, Nino, Miku, Yotsuba
-        html += this.crearTarjetaOrgia({
-            id: 'mamada_ichika_nino_miku_yotsuba',
-            tipo: 'cuarteto',
-            nombre: 'Ichika, Nino, Miku & Yotsuba',
-            hermanas: ['ichika', 'nino', 'miku', 'yotsuba'],
-            imagen: videos['mamada_ichika_nino_miku_yotsuba'].imagen,
-            afinidadRequerida: 160,
-            nivelRequerido: 7,
-            condones: 4
-        });
-        
-        // Ichika, Nino, Miku, Itsuki
-        html += this.crearTarjetaOrgia({
-            id: 'mamada_ichika_nino_miku_itsuki',
-            tipo: 'cuarteto',
-            nombre: 'Ichika, Nino, Miku & Itsuki',
-            hermanas: ['ichika', 'nino', 'miku', 'itsuki'],
-            imagen: videos['mamada_ichika_nino_miku_itsuki'].imagen,
-            afinidadRequerida: 160,
-            nivelRequerido: 7,
-            condones: 4
-        });
-        
-        // Ichika, Nino, Yotsuba, Itsuki
-        html += this.crearTarjetaOrgia({
-            id: 'mamada_ichika_nino_yotsuba_itsuki',
-            tipo: 'cuarteto',
-            nombre: 'Ichika, Nino, Yotsuba & Itsuki',
-            hermanas: ['ichika', 'nino', 'yotsuba', 'itsuki'],
-            imagen: videos['mamada_ichika_nino_yotsuba_itsuki'].imagen,
-            afinidadRequerida: 160,
-            nivelRequerido: 7,
-            condones: 4
-        });
-        
-        // Ichika, Miku, Yotsuba, Itsuki
-        html += this.crearTarjetaOrgia({
-            id: 'mamada_ichika_miku_yotsuba_itsuki',
-            tipo: 'cuarteto',
-            nombre: 'Ichika, Miku, Yotsuba & Itsuki',
-            hermanas: ['ichika', 'miku', 'yotsuba', 'itsuki'],
-            imagen: videos['mamada_ichika_miku_yotsuba_itsuki'].imagen,
-            afinidadRequerida: 160,
-            nivelRequerido: 7,
-            condones: 4
-        });
-        
-        // Nino, Miku, Yotsuba, Itsuki
-        html += this.crearTarjetaOrgia({
-            id: 'mamada_nino_miku_yotsuba_itsuki',
-            tipo: 'cuarteto',
-            nombre: 'Nino, Miku, Yotsuba & Itsuki',
-            hermanas: ['nino', 'miku', 'yotsuba', 'itsuki'],
-            imagen: videos['mamada_nino_miku_yotsuba_itsuki'].imagen,
-            afinidadRequerida: 160,
-            nivelRequerido: 7,
-            condones: 4
-        });
-        
-        // ========================================
-        // QUINTETO (TODAS)
-        // ========================================
-        
-        html += this.crearTarjetaOrgia({
-            id: 'mamada_todas',
-            tipo: 'quinteto',
-            nombre: 'TODAS LAS HERMANAS',
-            hermanas: ['ichika', 'nino', 'miku', 'yotsuba', 'itsuki'],
-            imagen: videos['mamada_todas'].imagen,
-            afinidadRequerida: 200,
-            nivelRequerido: 8,
-            condones: 5
-        });
-        
-        html += `
-                </div>
-            </div>
-        `;
-        
-        mangaSection.innerHTML = html;
-        
-        const botonVolver = document.createElement('button');
-        botonVolver.className = 'btn-atras-especifico';
-        botonVolver.innerHTML = '← Volver al RPG';
-        botonVolver.style.margin = '20px';
-        botonVolver.onclick = () => this.cargarPaginaPrincipal();
-        mangaSection.insertBefore(botonVolver, mangaSection.firstChild);
-    }
-
-    // ====================
-    // MOSTRAR TODAS LAS DOGGYSTYLE EN CUADRÍCULA
-    // ====================
-    
-    mostrarDoggystyle() {
-        const videos = this.videosDoggystyle;
-        const mangaSection = document.getElementById('manga-section');
-        
-        let html = `
-            <div style="max-width: 1400px; margin: 0 auto; padding: 20px;">
-                <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 30px;">
-                    <button class="btn-atras-especifico" onclick="cargarPaginaOrgias()">
-                        ← Volver a Orgías
-                    </button>
-                    <h1 style="color: #5864F5; margin: 0; font-size: 2.5rem;">🐕 DOGGYSTYLE - TODAS LAS COMBINACIONES</h1>
-                    <div style="background: #5864F5; padding: 10px 20px; border-radius: 30px; font-weight: bold;">
-                        💎 ${this.condones001} condones 0.01
-                    </div>
-                </div>
-                
-                <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 25px;">
-        `;
-        
-        // ========================================
-        // DÚOS - DOGGYSTYLE
-        // ========================================
-        
-        // Ichika & Nino
-        html += this.crearTarjetaOrgia({
-            id: 'doggystyle_ichika_nino',
-            tipo: 'duo',
-            nombre: 'Ichika & Nino',
-            hermanas: ['ichika', 'nino'],
-            imagen: videos['doggystyle_ichika_nino'].imagen,
-            afinidadRequerida: 100,
-            nivelRequerido: 5,
-            condones: 2
-        });
-        
-        // Ichika & Miku
-        html += this.crearTarjetaOrgia({
-            id: 'doggystyle_ichika_miku',
-            tipo: 'duo',
-            nombre: 'Ichika & Miku',
-            hermanas: ['ichika', 'miku'],
-            imagen: videos['doggystyle_ichika_miku'].imagen,
-            afinidadRequerida: 100,
-            nivelRequerido: 5,
-            condones: 2
-        });
-        
-        // Ichika & Yotsuba
-        html += this.crearTarjetaOrgia({
-            id: 'doggystyle_ichika_yotsuba',
-            tipo: 'duo',
-            nombre: 'Ichika & Yotsuba',
-            hermanas: ['ichika', 'yotsuba'],
-            imagen: videos['doggystyle_ichika_yotsuba'].imagen,
-            afinidadRequerida: 100,
-            nivelRequerido: 5,
-            condones: 2
-        });
-        
-        // Ichika & Itsuki
-        html += this.crearTarjetaOrgia({
-            id: 'doggystyle_ichika_itsuki',
-            tipo: 'duo',
-            nombre: 'Ichika & Itsuki',
-            hermanas: ['ichika', 'itsuki'],
-            imagen: videos['doggystyle_ichika_itsuki'].imagen,
-            afinidadRequerida: 100,
-            nivelRequerido: 5,
-            condones: 2
-        });
-        
-        // Nino & Miku
-        html += this.crearTarjetaOrgia({
-            id: 'doggystyle_nino_miku',
-            tipo: 'duo',
-            nombre: 'Nino & Miku',
-            hermanas: ['nino', 'miku'],
-            imagen: videos['doggystyle_nino_miku'].imagen,
-            afinidadRequerida: 100,
-            nivelRequerido: 5,
-            condones: 2
-        });
-        
-        // Nino & Yotsuba
-        html += this.crearTarjetaOrgia({
-            id: 'doggystyle_nino_yotsuba',
-            tipo: 'duo',
-            nombre: 'Nino & Yotsuba',
-            hermanas: ['nino', 'yotsuba'],
-            imagen: videos['doggystyle_nino_yotsuba'].imagen,
-            afinidadRequerida: 100,
-            nivelRequerido: 5,
-            condones: 2
-        });
-        
-        // Nino & Itsuki
-        html += this.crearTarjetaOrgia({
-            id: 'doggystyle_nino_itsuki',
-            tipo: 'duo',
-            nombre: 'Nino & Itsuki',
-            hermanas: ['nino', 'itsuki'],
-            imagen: videos['doggystyle_nino_itsuki'].imagen,
-            afinidadRequerida: 100,
-            nivelRequerido: 5,
-            condones: 2
-        });
-        
-        // Miku & Yotsuba
-        html += this.crearTarjetaOrgia({
-            id: 'doggystyle_miku_yotsuba',
-            tipo: 'duo',
-            nombre: 'Miku & Yotsuba',
-            hermanas: ['miku', 'yotsuba'],
-            imagen: videos['doggystyle_miku_yotsuba'].imagen,
-            afinidadRequerida: 100,
-            nivelRequerido: 5,
-            condones: 2
-        });
-        
-        // Miku & Itsuki
-        html += this.crearTarjetaOrgia({
-            id: 'doggystyle_miku_itsuki',
-            tipo: 'duo',
-            nombre: 'Miku & Itsuki',
-            hermanas: ['miku', 'itsuki'],
-            imagen: videos['doggystyle_miku_itsuki'].imagen,
-            afinidadRequerida: 100,
-            nivelRequerido: 5,
-            condones: 2
-        });
-        
-        // Yotsuba & Itsuki
-        html += this.crearTarjetaOrgia({
-            id: 'doggystyle_yotsuba_itsuki',
-            tipo: 'duo',
-            nombre: 'Yotsuba & Itsuki',
-            hermanas: ['yotsuba', 'itsuki'],
-            imagen: videos['doggystyle_yotsuba_itsuki'].imagen,
-            afinidadRequerida: 100,
-            nivelRequerido: 5,
-            condones: 2
-        });
-        
-        // ========================================
-        // TRÍOS - DOGGYSTYLE
-        // ========================================
-        
-        // Ichika, Nino, Miku
-        html += this.crearTarjetaOrgia({
-            id: 'doggystyle_ichika_nino_miku',
-            tipo: 'trio',
-            nombre: 'Ichika, Nino & Miku',
-            hermanas: ['ichika', 'nino', 'miku'],
-            imagen: videos['doggystyle_ichika_nino_miku'].imagen,
-            afinidadRequerida: 130,
-            nivelRequerido: 6,
-            condones: 3
-        });
-        
-        // Ichika, Nino, Yotsuba
-        html += this.crearTarjetaOrgia({
-            id: 'doggystyle_ichika_nino_yotsuba',
-            tipo: 'trio',
-            nombre: 'Ichika, Nino & Yotsuba',
-            hermanas: ['ichika', 'nino', 'yotsuba'],
-            imagen: videos['doggystyle_ichika_nino_yotsuba'].imagen,
-            afinidadRequerida: 130,
-            nivelRequerido: 6,
-            condones: 3
-        });
-        
-        // Ichika, Nino, Itsuki
-        html += this.crearTarjetaOrgia({
-            id: 'doggystyle_ichika_nino_itsuki',
-            tipo: 'trio',
-            nombre: 'Ichika, Nino & Itsuki',
-            hermanas: ['ichika', 'nino', 'itsuki'],
-            imagen: videos['doggystyle_ichika_nino_itsuki'].imagen,
-            afinidadRequerida: 130,
-            nivelRequerido: 6,
-            condones: 3
-        });
-        
-        // Ichika, Miku, Yotsuba
-        html += this.crearTarjetaOrgia({
-            id: 'doggystyle_ichika_miku_yotsuba',
-            tipo: 'trio',
-            nombre: 'Ichika, Miku & Yotsuba',
-            hermanas: ['ichika', 'miku', 'yotsuba'],
-            imagen: videos['doggystyle_ichika_miku_yotsuba'].imagen,
-            afinidadRequerida: 130,
-            nivelRequerido: 6,
-            condones: 3
-        });
-        
-        // Ichika, Miku, Itsuki
-        html += this.crearTarjetaOrgia({
-            id: 'doggystyle_ichika_miku_itsuki',
-            tipo: 'trio',
-            nombre: 'Ichika, Miku & Itsuki',
-            hermanas: ['ichika', 'miku', 'itsuki'],
-            imagen: videos['doggystyle_ichika_miku_itsuki'].imagen,
-            afinidadRequerida: 130,
-            nivelRequerido: 6,
-            condones: 3
-        });
-        
-        // Ichika, Yotsuba, Itsuki
-        html += this.crearTarjetaOrgia({
-            id: 'doggystyle_ichika_yotsuba_itsuki',
-            tipo: 'trio',
-            nombre: 'Ichika, Yotsuba & Itsuki',
-            hermanas: ['ichika', 'yotsuba', 'itsuki'],
-            imagen: videos['doggystyle_ichika_yotsuba_itsuki'].imagen,
-            afinidadRequerida: 130,
-            nivelRequerido: 6,
-            condones: 3
-        });
-        
-        // Nino, Miku, Yotsuba
-        html += this.crearTarjetaOrgia({
-            id: 'doggystyle_nino_miku_yotsuba',
-            tipo: 'trio',
-            nombre: 'Nino, Miku & Yotsuba',
-            hermanas: ['nino', 'miku', 'yotsuba'],
-            imagen: videos['doggystyle_nino_miku_yotsuba'].imagen,
-            afinidadRequerida: 130,
-            nivelRequerido: 6,
-            condones: 3
-        });
-        
-        // Nino, Miku, Itsuki
-        html += this.crearTarjetaOrgia({
-            id: 'doggystyle_nino_miku_itsuki',
-            tipo: 'trio',
-            nombre: 'Nino, Miku & Itsuki',
-            hermanas: ['nino', 'miku', 'itsuki'],
-            imagen: videos['doggystyle_nino_miku_itsuki'].imagen,
-            afinidadRequerida: 130,
-            nivelRequerido: 6,
-            condones: 3
-        });
-        
-        // Nino, Yotsuba, Itsuki
-        html += this.crearTarjetaOrgia({
-            id: 'doggystyle_nino_yotsuba_itsuki',
-            tipo: 'trio',
-            nombre: 'Nino, Yotsuba & Itsuki',
-            hermanas: ['nino', 'yotsuba', 'itsuki'],
-            imagen: videos['doggystyle_nino_yotsuba_itsuki'].imagen,
-            afinidadRequerida: 130,
-            nivelRequerido: 6,
-            condones: 3
-        });
-        
-        // Miku, Yotsuba, Itsuki
-        html += this.crearTarjetaOrgia({
-            id: 'doggystyle_miku_yotsuba_itsuki',
-            tipo: 'trio',
-            nombre: 'Miku, Yotsuba & Itsuki',
-            hermanas: ['miku', 'yotsuba', 'itsuki'],
-            imagen: videos['doggystyle_miku_yotsuba_itsuki'].imagen,
-            afinidadRequerida: 130,
-            nivelRequerido: 6,
-            condones: 3
-        });
-        
-        // ========================================
-        // CUARTETOS - DOGGYSTYLE
-        // ========================================
-        
-        // Ichika, Nino, Miku, Yotsuba
-        html += this.crearTarjetaOrgia({
-            id: 'doggystyle_ichika_nino_miku_yotsuba',
-            tipo: 'cuarteto',
-            nombre: 'Ichika, Nino, Miku & Yotsuba',
-            hermanas: ['ichika', 'nino', 'miku', 'yotsuba'],
-            imagen: videos['doggystyle_ichika_nino_miku_yotsuba'].imagen,
-            afinidadRequerida: 160,
-            nivelRequerido: 7,
-            condones: 4
-        });
-        
-        // Ichika, Nino, Miku, Itsuki
-        html += this.crearTarjetaOrgia({
-            id: 'doggystyle_ichika_nino_miku_itsuki',
-            tipo: 'cuarteto',
-            nombre: 'Ichika, Nino, Miku & Itsuki',
-            hermanas: ['ichika', 'nino', 'miku', 'itsuki'],
-            imagen: videos['doggystyle_ichika_nino_miku_itsuki'].imagen,
-            afinidadRequerida: 160,
-            nivelRequerido: 7,
-            condones: 4
-        });
-        
-        // Ichika, Nino, Yotsuba, Itsuki
-        html += this.crearTarjetaOrgia({
-            id: 'doggystyle_ichika_nino_yotsuba_itsuki',
-            tipo: 'cuarteto',
-            nombre: 'Ichika, Nino, Yotsuba & Itsuki',
-            hermanas: ['ichika', 'nino', 'yotsuba', 'itsuki'],
-            imagen: videos['doggystyle_ichika_nino_yotsuba_itsuki'].imagen,
-            afinidadRequerida: 160,
-            nivelRequerido: 7,
-            condones: 4
-        });
-        
-        // Ichika, Miku, Yotsuba, Itsuki
-        html += this.crearTarjetaOrgia({
-            id: 'doggystyle_ichika_miku_yotsuba_itsuki',
-            tipo: 'cuarteto',
-            nombre: 'Ichika, Miku, Yotsuba & Itsuki',
-            hermanas: ['ichika', 'miku', 'yotsuba', 'itsuki'],
-            imagen: videos['doggystyle_ichika_miku_yotsuba_itsuki'].imagen,
-            afinidadRequerida: 160,
-            nivelRequerido: 7,
-            condones: 4
-        });
-        
-        // Nino, Miku, Yotsuba, Itsuki
-        html += this.crearTarjetaOrgia({
-            id: 'doggystyle_nino_miku_yotsuba_itsuki',
-            tipo: 'cuarteto',
-            nombre: 'Nino, Miku, Yotsuba & Itsuki',
-            hermanas: ['nino', 'miku', 'yotsuba', 'itsuki'],
-            imagen: videos['doggystyle_nino_miku_yotsuba_itsuki'].imagen,
-            afinidadRequerida: 160,
-            nivelRequerido: 7,
-            condones: 4
-        });
-        
-        // ========================================
-        // QUINTETO - DOGGYSTYLE (TODAS)
-        // ========================================
-        
-        html += this.crearTarjetaOrgia({
-            id: 'doggystyle_todas',
-            tipo: 'quinteto',
-            nombre: 'TODAS LAS HERMANAS',
-            hermanas: ['ichika', 'nino', 'miku', 'yotsuba', 'itsuki'],
-            imagen: videos['doggystyle_todas'].imagen,
-            afinidadRequerida: 200,
-            nivelRequerido: 8,
-            condones: 5
-        });
-        
-        html += `
-                </div>
-            </div>
-        `;
-        
-        mangaSection.innerHTML = html;
-        
-        const botonVolver = document.createElement('button');
-        botonVolver.className = 'btn-atras-especifico';
-        botonVolver.innerHTML = '← Volver al RPG';
-        botonVolver.style.margin = '20px';
-        botonVolver.onclick = () => this.cargarPaginaPrincipal();
-        mangaSection.insertBefore(botonVolver, mangaSection.firstChild);
-    }
-
-    // ====================
-    // CREAR TARJETA DE ORGÍA (con requisitos y verificación)
-    // ====================
-    
-    crearTarjetaOrgia(orgia) {
-        // Verificar si CADA hermana cumple los requisitos
-        let todasCumplen = true;
-        let estadoRequisitos = [];
-        
-        for (let hermanaId of orgia.hermanas) {
-            const hermana = this.datosPersonajes[hermanaId];
-            const afinidadOk = hermana.afinidad >= orgia.afinidadRequerida;
-            const nivelOk = hermana.nivel >= orgia.nivelRequerido;
-            
-            if (!afinidadOk || !nivelOk) {
-                todasCumplen = false;
-            }
-            
-            estadoRequisitos.push({
-                id: hermanaId,
-                nombre: hermana.nombre.split(' ')[0],
-                afinidad: hermana.afinidad,
-                afinidadReq: orgia.afinidadRequerida,
-                afinidadOk: afinidadOk,
-                nivel: hermana.nivel,
-                nivelReq: orgia.nivelRequerido,
-                nivelOk: nivelOk,
-                color: hermana.color
-            });
-        }
-        
-        // Verificar condones
-        const condonesOk = this.condones001 >= orgia.condones;
-        
-        // Determinar color de borde según estado
-        let borderColor = '#FF1493';
-        let estadoTexto = '❌ REQUISITOS NO CUMPLIDOS';
-        let puedeIntentar = false;
-        
-        if (todasCumplen && condonesOk) {
-            borderColor = '#4CAF50';
-            estadoTexto = '✅ ¡LISTO PARA INICIAR!';
-            puedeIntentar = true;
-        } else if (todasCumplen && !condonesOk) {
-            borderColor = '#5864F5';
-            estadoTexto = `❌ FALTAN ${orgia.condones - this.condones001} CONDONES 0.01`;
-        }
-        
-        return `
-            <div style="background: rgba(255,255,255,0.05); border-radius: 20px; padding: 20px; border: 3px solid ${borderColor}; position: relative;">
-                <img src="${orgia.imagen}" style="width: 100%; height: 150px; object-fit: cover; border-radius: 15px; margin-bottom: 15px;">
-                
-                <h3 style="color: #FFD166; margin-bottom: 15px; font-size: 1.3rem; text-align: center;">${orgia.nombre}</h3>
-                
-                <!-- Estado de cada hermana -->
-                <div style="margin-bottom: 15px;">
-                    ${estadoRequisitos.map(h => `
-                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px; padding: 5px; background: rgba(255,255,255,0.03); border-radius: 8px;">
-                            <span style="color: ${h.color}; font-weight: bold;">${h.nombre}</span>
-                            <div>
-                                <span style="color: ${h.afinidadOk ? '#4CAF50' : '#FF6B6B'}; margin-right: 10px;">
-                                    💝 ${h.afinidad}/${h.afinidadReq}
-                                </span>
-                                <span style="color: ${h.nivelOk ? '#4CAF50' : '#FF6B6B'};">
-                                    ⭐ ${h.nivel}/${h.nivelReq}
-                                </span>
-                            </div>
-                        </div>
-                    `).join('')}
-                </div>
-                
-                <!-- Requisitos generales -->
-                <div style="background: rgba(88,100,245,0.1); padding: 10px; border-radius: 10px; margin-bottom: 15px; text-align: center;">
-                    <span style="color: #5864F5; font-weight: bold;">💎 ${orgia.condones} condones 0.01 requeridos</span>
-                </div>
-                
-                <!-- Botón de inicio -->
-                <button class="card-button" onclick="iniciarOrgia('${orgia.id}', '${orgia.tipo}')" 
-                        style="background: ${puedeIntentar ? 'linear-gradient(135deg, #4CAF50, #2E7D32)' : 'rgba(255,255,255,0.1)'}; width: 100%; padding: 15px; border: none; border-radius: 10px; color: white; font-weight: bold; cursor: ${puedeIntentar ? 'pointer' : 'not-allowed'};"
-                        ${!puedeIntentar ? 'disabled' : ''}>
-                    ${estadoTexto}
-                </button>
-            </div>
-        `;
-    }
-
-    // ====================
-    // INICIAR ORGÍA (con verificación de requisitos)
-    // ====================
-    
-    iniciarOrgia(orgiaId, tipo) {
-        // Obtener datos según tipo
-        let orgia;
-        if (tipo === 'duo' || tipo === 'trio' || tipo === 'cuarteto' || tipo === 'quinteto') {
-            // Buscar en mamadas primero
-            if (this.videosMamadas[orgiaId]) {
-                orgia = this.obtenerDatosOrgiaMamada(orgiaId);
-            } else if (this.videosDoggystyle[orgiaId]) {
-                orgia = this.obtenerDatosOrgiaDoggystyle(orgiaId);
-            }
-        }
-        
-        if (!orgia) {
-            this.mostrarNotificacion('❌ Orgía no encontrada');
-            return;
-        }
-        
-        // Verificar requisitos NUEVAMENTE (por seguridad)
-        for (let hermanaId of orgia.hermanas) {
-            const hermana = this.datosPersonajes[hermanaId];
-            if (hermana.afinidad < orgia.afinidadRequerida) {
-                this.mostrarNotificacion(`❌ ${hermana.nombre} no tiene suficiente afinidad (${hermana.afinidad}/${orgia.afinidadRequerida})`);
-                return;
-            }
-            if (hermana.nivel < orgia.nivelRequerido) {
-                this.mostrarNotificacion(`❌ ${hermana.nombre} no tiene suficiente nivel (${hermana.nivel}/${orgia.nivelRequerido})`);
-                return;
-            }
-        }
-        
-        // Verificar condones
-        if (this.condones001 < orgia.condones) {
-            this.mostrarNotificacion(`❌ Necesitas ${orgia.condones} condones 0.01 (tienes ${this.condones001})`);
-            return;
-        }
-        
-        // Calcular probabilidad de éxito (basada en afinidad promedio)
-        const afinidadPromedio = orgia.hermanas.reduce((sum, id) => sum + this.datosPersonajes[id].afinidad, 0) / orgia.hermanas.length;
-        let probabilidad = 30 + (afinidadPromedio - 100) / 5;
-        probabilidad = Math.min(80, Math.max(20, Math.round(probabilidad)));
-        
-        // Preguntar confirmación
-        const confirmar = confirm(`¿Iniciar ${orgia.nombre}?\n\n` +
-            `Requisitos verificados:\n` +
-            `✓ Afinidad: ${orgia.hermanas.map(id => this.datosPersonajes[id].nombre.split(' ')[0] + ' ' + this.datosPersonajes[id].afinidad).join(', ')}\n` +
-            `✓ Nivel: ${orgia.hermanas.map(id => this.datosPersonajes[id].nivel).join(', ')}\n` +
-            `✓ Condones 0.01: ${orgia.condones}\n\n` +
-            `Probabilidad de éxito: ${probabilidad}%\n\n` +
-            `¿Continuar?`);
-        
-        if (!confirmar) return;
-        
-        // Consumir condones
-        this.condones001 -= orgia.condones;
-        this.guardarCondones001();
-        
-        // Determinar éxito
-        const exito = Math.random() * 100 < probabilidad;
-        
-        if (exito) {
-            // ÉXITO - Dar recompensas
-            const expTotal = orgia.condones * 150;
-            const afinidadTotal = orgia.condones * 40;
-            const expIndividual = Math.round(expTotal / orgia.hermanas.length);
-            const afinidadIndividual = Math.round(afinidadTotal / orgia.hermanas.length);
-            
-            let mensaje = `🎉 ¡ORGÍA EXITOSA! (${orgia.nombre})\n\n`;
-            
-            for (let hermanaId of orgia.hermanas) {
-                const hermana = this.datosPersonajes[hermanaId];
-                hermana.afinidad = Math.min(hermana.afinidad + afinidadIndividual, 200);
-                hermana.exp += expIndividual;
-                hermana.estadoAnimo = 'feliz';
-                
-                // Verificar subida de nivel
-                if (hermana.exp >= hermana.expNecesaria) {
-                    this.subirNivel(hermanaId);
-                }
-                
-                mensaje += `${hermana.nombre.split(' ')[0]}: +${afinidadIndividual} afinidad, +${expIndividual} EXP\n`;
-            }
-            
-            this.mostrarNotificacion(mensaje);
-            
-            // Mostrar video/imagen de éxito
-            this.mostrarVideoOrgia(orgiaId, tipo, true);
-            
-        } else {
-            // FALLO - Penalización
-            const perdidaAfinidad = Math.round(orgia.condones * 10);
-            
-            let mensaje = `❌ ORGÍA FALLIDA (${orgia.nombre})\n\n`;
-            
-            for (let hermanaId of orgia.hermanas) {
-                const hermana = this.datosPersonajes[hermanaId];
-                hermana.afinidad = Math.max(hermana.afinidad - perdidaAfinidad, -100);
-                hermana.estadoAnimo = 'enojada';
-                
-                mensaje += `${hermana.nombre.split(' ')[0]}: -${perdidaAfinidad} afinidad\n`;
-            }
-            
-            this.mostrarNotificacion(mensaje);
-            
-            // Mostrar imagen de fallo
-            this.mostrarVideoOrgia(orgiaId, tipo, false);
+        if (personaje.exp >= personaje.expNecesaria) {
+            this.subirNivel(personajeId);
         }
         
         this.guardarDatosPersonajes();
+        return true;
     }
 
-    // ====================
-    // OBTENER DATOS DE ORGÍA (mamada)
-    // ====================
-    
-    obtenerDatosOrgiaMamada(orgiaId) {
-        const mapa = {
-            // DÚOS
-            'mamada_ichika_nino': { hermanas: ['ichika', 'nino'], afinidadReq: 100, nivelReq: 5, condones: 2, nombre: 'Ichika & Nino' },
-            'mamada_ichika_miku': { hermanas: ['ichika', 'miku'], afinidadReq: 100, nivelReq: 5, condones: 2, nombre: 'Ichika & Miku' },
-            'mamada_ichika_yotsuba': { hermanas: ['ichika', 'yotsuba'], afinidadReq: 100, nivelReq: 5, condones: 2, nombre: 'Ichika & Yotsuba' },
-            'mamada_ichika_itsuki': { hermanas: ['ichika', 'itsuki'], afinidadReq: 100, nivelReq: 5, condones: 2, nombre: 'Ichika & Itsuki' },
-            'mamada_nino_miku': { hermanas: ['nino', 'miku'], afinidadReq: 100, nivelReq: 5, condones: 2, nombre: 'Nino & Miku' },
-            'mamada_nino_yotsuba': { hermanas: ['nino', 'yotsuba'], afinidadReq: 100, nivelReq: 5, condones: 2, nombre: 'Nino & Yotsuba' },
-            'mamada_nino_itsuki': { hermanas: ['nino', 'itsuki'], afinidadReq: 100, nivelReq: 5, condones: 2, nombre: 'Nino & Itsuki' },
-            'mamada_miku_yotsuba': { hermanas: ['miku', 'yotsuba'], afinidadReq: 100, nivelReq: 5, condones: 2, nombre: 'Miku & Yotsuba' },
-            'mamada_miku_itsuki': { hermanas: ['miku', 'itsuki'], afinidadReq: 100, nivelReq: 5, condones: 2, nombre: 'Miku & Itsuki' },
-            'mamada_yotsuba_itsuki': { hermanas: ['yotsuba', 'itsuki'], afinidadReq: 100, nivelReq: 5, condones: 2, nombre: 'Yotsuba & Itsuki' },
-            
-            // TRÍOS
-            'mamada_ichika_nino_miku': { hermanas: ['ichika', 'nino', 'miku'], afinidadReq: 130, nivelReq: 6, condones: 3, nombre: 'Ichika, Nino & Miku' },
-            'mamada_ichika_nino_yotsuba': { hermanas: ['ichika', 'nino', 'yotsuba'], afinidadReq: 130, nivelReq: 6, condones: 3, nombre: 'Ichika, Nino & Yotsuba' },
-            'mamada_ichika_nino_itsuki': { hermanas: ['ichika', 'nino', 'itsuki'], afinidadReq: 130, nivelReq: 6, condones: 3, nombre: 'Ichika, Nino & Itsuki' },
-            'mamada_ichika_miku_yotsuba': { hermanas: ['ichika', 'miku', 'yotsuba'], afinidadReq: 130, nivelReq: 6, condones: 3, nombre: 'Ichika, Miku & Yotsuba' },
-            'mamada_ichika_miku_itsuki': { hermanas: ['ichika', 'miku', 'itsuki'], afinidadReq: 130, nivelReq: 6, condones: 3, nombre: 'Ichika, Miku & Itsuki' },
-            'mamada_ichika_yotsuba_itsuki': { hermanas: ['ichika', 'yotsuba', 'itsuki'], afinidadReq: 130, nivelReq: 6, condones: 3, nombre: 'Ichika, Yotsuba & Itsuki' },
-            'mamada_nino_miku_yotsuba': { hermanas: ['nino', 'miku', 'yotsuba'], afinidadReq: 130, nivelReq: 6, condones: 3, nombre: 'Nino, Miku & Yotsuba' },
-            'mamada_nino_miku_itsuki': { hermanas: ['nino', 'miku', 'itsuki'], afinidadReq: 130, nivelReq: 6, condones: 3, nombre: 'Nino, Miku & Itsuki' },
-            'mamada_nino_yotsuba_itsuki': { hermanas: ['nino', 'yotsuba', 'itsuki'], afinidadReq: 130, nivelReq: 6, condones: 3, nombre: 'Nino, Yotsuba & Itsuki' },
-            'mamada_miku_yotsuba_itsuki': { hermanas: ['miku', 'yotsuba', 'itsuki'], afinidadReq: 130, nivelReq: 6, condones: 3, nombre: 'Miku, Yotsuba & Itsuki' },
-            
-            // CUARTETOS
-            'mamada_ichika_nino_miku_yotsuba': { hermanas: ['ichika', 'nino', 'miku', 'yotsuba'], afinidadReq: 160, nivelReq: 7, condones: 4, nombre: 'Ichika, Nino, Miku & Yotsuba' },
-            'mamada_ichika_nino_miku_itsuki': { hermanas: ['ichika', 'nino', 'miku', 'itsuki'], afinidadReq: 160, nivelReq: 7, condones: 4, nombre: 'Ichika, Nino, Miku & Itsuki' },
-            'mamada_ichika_nino_yotsuba_itsuki': { hermanas: ['ichika', 'nino', 'yotsuba', 'itsuki'], afinidadReq: 160, nivelReq: 7, condones: 4, nombre: 'Ichika, Nino, Yotsuba & Itsuki' },
-            'mamada_ichika_miku_yotsuba_itsuki': { hermanas: ['ichika', 'miku', 'yotsuba', 'itsuki'], afinidadReq: 160, nivelReq: 7, condones: 4, nombre: 'Ichika, Miku, Yotsuba & Itsuki' },
-            'mamada_nino_miku_yotsuba_itsuki': { hermanas: ['nino', 'miku', 'yotsuba', 'itsuki'], afinidadReq: 160, nivelReq: 7, condones: 4, nombre: 'Nino, Miku, Yotsuba & Itsuki' },
-            
-            // QUINTETO
-            'mamada_todas': { hermanas: ['ichika', 'nino', 'miku', 'yotsuba', 'itsuki'], afinidadReq: 200, nivelReq: 8, condones: 5, nombre: 'TODAS LAS HERMANAS' }
+    subirNivel(personajeId) {
+        const personaje = this.datosPersonajes[personajeId];
+        personaje.nivel += 1;
+        personaje.exp = personaje.exp - personaje.expNecesaria;
+        personaje.expNecesaria = Math.round(personaje.expNecesaria * 1.8);
+        
+        console.log(`🎉 ¡${personaje.nombre} subió al nivel ${personaje.nivel}!`);
+        this.mostrarNotificacion(`🎉 ${personaje.nombre} nivel ${personaje.nivel}! (Necesitas ${personaje.expNecesaria} EXP para el siguiente)`);
+        
+        this.desbloquearVideo(personajeId);
+        this.guardarDatosPersonajes();
+    }
+
+    desbloquearVideo(personajeId) {
+        const personaje = this.datosPersonajes[personajeId];
+        const nivel = personaje.nivel;
+        
+        const videosPorNivel = {
+            2: { id: 'presentacion', nombre: 'Presentación', videoId: this.obtenerVideoIdPorNivel(personajeId, 2) },
+            4: { id: 'conversacion_1', nombre: 'Conversación', videoId: this.obtenerVideoIdPorNivel(personajeId, 4) },
+            6: { id: 'paseo', nombre: 'Primer Paseo', videoId: this.obtenerVideoIdPorNivel(personajeId, 6) },
+            8: { id: 'confesion', nombre: 'Confesión', videoId: this.obtenerVideoIdPorNivel(personajeId, 8) },
+            10: { id: 'primer_beso', nombre: 'Primer Beso', videoId: this.obtenerVideoIdPorNivel(personajeId, 10) }
         };
         
-        return mapa[orgiaId] || null;
+        if (videosPorNivel[nivel] && !personaje.videosDisponibles.some(v => v.id === videosPorNivel[nivel].id)) {
+            personaje.videosDisponibles.push(videosPorNivel[nivel]);
+            console.log(`🎥 Video desbloqueado: ${videosPorNivel[nivel].nombre} (Nivel ${nivel})`);
+            this.mostrarNotificacion(`🎬 ¡Video desbloqueado! ${videosPorNivel[nivel].nombre}`);
+        }
     }
 
-    // ====================
-    // OBTENER DATOS DE ORGÍA (doggystyle)
-    // ====================
-    
-    obtenerDatosOrgiaDoggystyle(orgiaId) {
-        const mapa = {
-            // DÚOS
-            'doggystyle_ichika_nino': { hermanas: ['ichika', 'nino'], afinidadReq: 100, nivelReq: 5, condones: 2, nombre: 'Ichika & Nino' },
-            'doggystyle_ichika_miku': { hermanas: ['ichika', 'miku'], afinidadReq: 100, nivelReq: 5, condones: 2, nombre: 'Ichika & Miku' },
-            'doggystyle_ichika_yotsuba': { hermanas: ['ichika', 'yotsuba'], afinidadReq: 100, nivelReq: 5, condones: 2, nombre: 'Ichika & Yotsuba' },
-            'doggystyle_ichika_itsuki': { hermanas: ['ichika', 'itsuki'], afinidadReq: 100, nivelReq: 5, condones: 2, nombre: 'Ichika & Itsuki' },
-            'doggystyle_nino_miku': { hermanas: ['nino', 'miku'], afinidadReq: 100, nivelReq: 5, condones: 2, nombre: 'Nino & Miku' },
-            'doggystyle_nino_yotsuba': { hermanas: ['nino', 'yotsuba'], afinidadReq: 100, nivelReq: 5, condones: 2, nombre: 'Nino & Yotsuba' },
-            'doggystyle_nino_itsuki': { hermanas: ['nino', 'itsuki'], afinidadReq: 100, nivelReq: 5, condones: 2, nombre: 'Nino & Itsuki' },
-            'doggystyle_miku_yotsuba': { hermanas: ['miku', 'yotsuba'], afinidadReq: 100, nivelReq: 5, condones: 2, nombre: 'Miku & Yotsuba' },
-            'doggystyle_miku_itsuki': { hermanas: ['miku', 'itsuki'], afinidadReq: 100, nivelReq: 5, condones: 2, nombre: 'Miku & Itsuki' },
-            'doggystyle_yotsuba_itsuki': { hermanas: ['yotsuba', 'itsuki'], afinidadReq: 100, nivelReq: 5, condones: 2, nombre: 'Yotsuba & Itsuki' },
-            
-            // TRÍOS
-            'doggystyle_ichika_nino_miku': { hermanas: ['ichika', 'nino', 'miku'], afinidadReq: 130, nivelReq: 6, condones: 3, nombre: 'Ichika, Nino & Miku' },
-            'doggystyle_ichika_nino_yotsuba': { hermanas: ['ichika', 'nino', 'yotsuba'], afinidadReq: 130, nivelReq: 6, condones: 3, nombre: 'Ichika, Nino & Yotsuba' },
-            'doggystyle_ichika_nino_itsuki': { hermanas: ['ichika', 'nino', 'itsuki'], afinidadReq: 130, nivelReq: 6, condones: 3, nombre: 'Ichika, Nino & Itsuki' },
-            'doggystyle_ichika_miku_yotsuba': { hermanas: ['ichika', 'miku', 'yotsuba'], afinidadReq: 130, nivelReq: 6, condones: 3, nombre: 'Ichika, Miku & Yotsuba' },
-            'doggystyle_ichika_miku_itsuki': { hermanas: ['ichika', 'miku', 'itsuki'], afinidadReq: 130, nivelReq: 6, condones: 3, nombre: 'Ichika, Miku & Itsuki' },
-            'doggystyle_ichika_yotsuba_itsuki': { hermanas: ['ichika', 'yotsuba', 'itsuki'], afinidadReq: 130, nivelReq: 6, condones: 3, nombre: 'Ichika, Yotsuba & Itsuki' },
-            'doggystyle_nino_miku_yotsuba': { hermanas: ['nino', 'miku', 'yotsuba'], afinidadReq: 130, nivelReq: 6, condones: 3, nombre: 'Nino, Miku & Yotsuba' },
-            'doggystyle_nino_miku_itsuki': { hermanas: ['nino', 'miku', 'itsuki'], afinidadReq: 130, nivelReq: 6, condones: 3, nombre: 'Nino, Miku & Itsuki' },
-            'doggystyle_nino_yotsuba_itsuki': { hermanas: ['nino', 'yotsuba', 'itsuki'], afinidadReq: 130, nivelReq: 6, condones: 3, nombre: 'Nino, Yotsuba & Itsuki' },
-            'doggystyle_miku_yotsuba_itsuki': { hermanas: ['miku', 'yotsuba', 'itsuki'], afinidadReq: 130, nivelReq: 6, condones: 3, nombre: 'Miku, Yotsuba & Itsuki' },
-            
-            // CUARTETOS
-            'doggystyle_ichika_nino_miku_yotsuba': { hermanas: ['ichika', 'nino', 'miku', 'yotsuba'], afinidadReq: 160, nivelReq: 7, condones: 4, nombre: 'Ichika, Nino, Miku & Yotsuba' },
-            'doggystyle_ichika_nino_miku_itsuki': { hermanas: ['ichika', 'nino', 'miku', 'itsuki'], afinidadReq: 160, nivelReq: 7, condones: 4, nombre: 'Ichika, Nino, Miku & Itsuki' },
-            'doggystyle_ichika_nino_yotsuba_itsuki': { hermanas: ['ichika', 'nino', 'yotsuba', 'itsuki'], afinidadReq: 160, nivelReq: 7, condones: 4, nombre: 'Ichika, Nino, Yotsuba & Itsuki' },
-            'doggystyle_ichika_miku_yotsuba_itsuki': { hermanas: ['ichika', 'miku', 'yotsuba', 'itsuki'], afinidadReq: 160, nivelReq: 7, condones: 4, nombre: 'Ichika, Miku, Yotsuba & Itsuki' },
-            'doggystyle_nino_miku_yotsuba_itsuki': { hermanas: ['nino', 'miku', 'yotsuba', 'itsuki'], afinidadReq: 160, nivelReq: 7, condones: 4, nombre: 'Nino, Miku, Yotsuba & Itsuki' },
-            
-            // QUINTETO
-            'doggystyle_todas': { hermanas: ['ichika', 'nino', 'miku', 'yotsuba', 'itsuki'], afinidadReq: 200, nivelReq: 8, condones: 5, nombre: 'TODAS LAS HERMANAS' }
+    obtenerVideoIdPorNivel(personajeId, nivel) {
+        const videos = {
+            'ichika': ['1aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe', '1-wYJYTaw0ZOKQy8BBPR7Fmhlzs0IVx9K', '1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS', '1tS-gKr6bf4MY5Yrw7zRvP2uP_zq9rsLl', '1aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe'],
+            'nino': ['1-wYJYTaw0ZOKQy8BBPR7Fmhlzs0IVx9K', '1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS', '1tS-gKr6bf4MY5Yrw7zRvP2uP_zq9rsLl', '1aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe', '1-wYJYTaw0ZOKQy8BBPR7Fmhlzs0IVx9K'],
+            'miku': ['1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS', '1tS-gKr6bf4MY5Yrw7zRvP2uP_zq9rsLl', '1aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe', '1-wYJYTaw0ZOKQy8BBPR7Fmhlzs0IVx9K', '1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS'],
+            'yotsuba': ['1tS-gKr6bf4MY5Yrw7zRvP2uP_zq9rsLl', '1aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe', '1-wYJYTaw0ZOKQy8BBPR7Fmhlzs0IVx9K', '1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS', '1tS-gKr6bf4MY5Yrw7zRvP2uP_zq9rsLl'],
+            'itsuki': ['1aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe', '1-wYJYTaw0ZOKQy8BBPR7Fmhlzs0IVx9K', '1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS', '1tS-gKr6bf4MY5Yrw7zRvP2uP_zq9rsLl', '1aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe']
         };
         
-        return mapa[orgiaId] || null;
+        const indice = Math.floor((nivel / 2) - 1);
+        return videos[personajeId][indice] || videos[personajeId][0];
     }
 
     // ====================
-    // MOSTRAR VIDEO DE ORGÍA
+    // SISTEMA CON LÍMITES FIJOS - CORREGIDO
     // ====================
-    
-    mostrarVideoOrgia(orgiaId, tipo, exito) {
-        const videos = tipo === 'mamada' ? this.videosMamadas : this.videosDoggystyle;
-        const videoData = videos[orgiaId];
+
+    calcularProbabilidadMomento(personaje, momento, usarCondonEspecial = false) {
+        // ============================================
+        // CONFIGURACIÓN DE LÍMITES FIJOS - CORREGIDO
+        // ============================================
+        const MAX_AFINIDAD = 200;     // AFINIDAD MÁXIMA POSIBLE - NO SE PUEDE SOBREPASAR
+        const MAX_NIVEL = 10;         // NIVEL MÁXIMO POSIBLE
+        const MAX_EXITO_BASE = 80;    // ÉXITO MÁXIMO SIN CONDÓN ESPECIAL
+        const MAX_EXITO_CON_CONDON = 100; // ÉXITO MÁXIMO CON CONDÓN 0.01
         
-        if (!videoData) return;
+        // Determinar el límite máximo
+        const usarLimiteEspecial = usarCondonEspecial || momento.condones001Requeridos > 0;
+        const limiteMaximo = usarLimiteEspecial ? MAX_EXITO_CON_CONDON : MAX_EXITO_BASE;
         
-        const orgiaData = tipo === 'mamada' ? 
-            this.obtenerDatosOrgiaMamada(orgiaId) : 
-            this.obtenerDatosOrgiaDoggystyle(orgiaId);
+        // ============================================
+        // 0. PROBABILIDAD BASE DEL MOMENTO (máx 10%)
+        // ============================================
+        // Solo algunos momentos tienen probabilidad base (5-10%)
+        let probabilidad = Math.min(momento.probabilidadBase, 10);
         
-        const mangaSection = document.getElementById('manga-section');
+        // ============================================
+        // 1. CONTRIBUCIÓN POR AFINIDAD (máx 40%)
+        // ============================================
+        // Aplicar límite de 200 puntos máximo
+        let afinidadEfectiva = Math.max(personaje.afinidad, 0);
+        afinidadEfectiva = Math.min(afinidadEfectiva, MAX_AFINIDAD);
         
-        const html = `
-            <div style="max-width: 900px; margin: 40px auto; padding: 30px; background: rgba(0,0,0,0.9); border-radius: 30px; border: 4px solid ${exito ? '#4CAF50' : '#FF1493'};">
-                <h2 style="text-align: center; color: ${exito ? '#4CAF50' : '#FF1493'}; margin-bottom: 30px; font-size: 2.5rem;">
-                    ${exito ? '🎉 ¡ORGÍA EXITOSA! 🎉' : '❌ ORGÍA FALLIDA ❌'}
-                </h2>
-                
-                <img src="${videoData.imagen}" style="width: 100%; max-height: 400px; object-fit: cover; border-radius: 20px; margin-bottom: 30px; border: 3px solid ${exito ? '#4CAF50' : '#FF1493'};">
-                
-                <h3 style="text-align: center; color: #FFD166; margin-bottom: 20px; font-size: 2rem;">
-                    ${orgiaData.nombre}
-                </h3>
-                
-                <!-- Reproductor de video -->
-                <div style="margin: 30px 0; border-radius: 15px; overflow: hidden; border: 3px solid ${exito ? '#4CAF50' : '#FF1493'};">
-                    <iframe 
-                        src="https://drive.google.com/file/d/${videoData.videoId}/preview"
-                        width="100%"
-                        height="400"
-                        frameborder="0"
-                        allow="autoplay; encrypted-media"
-                        allowfullscreen
-                        style="border-radius: 12px;"
-                    ></iframe>
-                </div>
-                
-                <!-- Miniaturas de las hermanas -->
-                <div style="display: flex; justify-content: center; gap: 20px; margin: 30px 0;">
-                    ${orgiaData.hermanas.map(id => {
-                        const h = this.datosPersonajes[id];
-                        return `
-                            <div style="text-align: center;">
-                                <img src="${h.imagen}" style="width: 70px; height: 70px; border-radius: 50%; object-fit: cover; border: 3px solid ${h.color};">
-                                <div style="margin-top: 5px; color: ${h.color};">${h.nombre.split(' ')[0]}</div>
-                                <div style="font-size: 0.8rem;">💝 ${h.afinidad}</div>
-                            </div>
-                        `;
-                    }).join('')}
-                </div>
-                
-                <div style="text-align: center;">
-                    <button class="card-button" onclick="quintillizasRPG.volverAOrgias()" 
-                            style="background: linear-gradient(135deg, #FF1493, #8A5AF7); padding: 15px 40px; font-size: 1.2rem;">
-                        ↩️ Volver a Orgías
-                    </button>
-                </div>
-            </div>
-        `;
+        // Contribución: 0% a 40% según afinidad (0-200)
+        const porcentajeAfinidad = (afinidadEfectiva / MAX_AFINIDAD) * 40;
+        probabilidad += porcentajeAfinidad;
         
-        mangaSection.innerHTML = html;
+        // ============================================
+        // 2. CONTRIBUCIÓN POR NIVEL (máx 30%)
+        // ============================================
+        const nivelNormalizado = Math.min(personaje.nivel, MAX_NIVEL);
+        const porcentajeNivel = (nivelNormalizado / MAX_NIVEL) * 30;
+        probabilidad += porcentajeNivel;
         
-        const botonVolver = document.createElement('button');
-        botonVolver.className = 'btn-atras-especifico';
-        botonVolver.innerHTML = '← Volver al RPG';
-        botonVolver.style.margin = '20px';
-        botonVolver.onclick = () => this.cargarPaginaPrincipal();
-        mangaSection.insertBefore(botonVolver, mangaSection.firstChild);
+        // ============================================
+        // 3. BONUS POR CONDÓN 0.01 (+20% y límite 100%)
+        // ============================================
+        if (usarLimiteEspecial) {
+            probabilidad += 20; // +20% por condón 0.01 (reducido de 30% para balance)
+        }
+        
+        // ============================================
+        // 4. AJUSTES POR ESTADO DE ÁNIMO (varía)
+        // ============================================
+        const ajustesEstado = {
+            'feliz': 15,
+            'neutral': 0,
+            'triste': -25,
+            'enojada': -40,
+            'tsundere': -30,
+            'tímida': -15,
+            'energica': 10,
+            'glotona': 12
+        };
+        
+        probabilidad += ajustesEstado[personaje.estadoAnimo] || 0;
+        
+        // ============================================
+        // 5. APLICAR LÍMITES Y REDONDEAR
+        // ============================================
+        // Límite mínimo (nunca menos de 1% de éxito)
+        probabilidad = Math.max(1, probabilidad);
+        
+        // Límite máximo (80% sin condón, 100% con condón)
+        probabilidad = Math.min(probabilidad, limiteMaximo);
+        
+        // Redondear a entero
+        const probabilidadFinal = Math.round(probabilidad);
+        
+        console.log(`🎯 Probabilidad ${momento.nombre}:`);
+        console.log(`   Base momento: ${momento.probabilidadBase}%`);
+        console.log(`   Afinidad (${afinidadEfectiva}/200): +${porcentajeAfinidad.toFixed(1)}%`);
+        console.log(`   Nivel (${personaje.nivel}/10): +${porcentajeNivel.toFixed(1)}%`);
+        console.log(`   Estado: ${ajustesEstado[personaje.estadoAnimo] || 0}%`);
+        console.log(`   Condón 0.01: ${usarLimiteEspecial ? '+20%' : 'No'}`);
+        console.log(`   Límite: ${limiteMaximo}% → Final: ${probabilidadFinal}%`);
+        
+        return probabilidadFinal;
     }
 
     // ====================
-    // VOLVER A PANTALLA DE ORGIAS
+    // SISTEMA DE MOMENTOS ÍNTIMOS CON CONDONES ESPECIALES
     // ====================
-    
-    volverAOrgias() {
-        const mangaSection = document.getElementById('manga-section');
-        mangaSection.innerHTML = this.cargarPaginaOrgias();
+
+    intentarMomentoIntimo(personajeId, momentoId) {
+        const personaje = this.datosPersonajes[personajeId];
+        const momento = personaje.momentosIntimos.find(m => m.id === momentoId);
         
-        const botonVolver = document.createElement('button');
-        botonVolver.className = 'btn-atras-especifico';
-        botonVolver.innerHTML = '← Volver al RPG';
-        botonVolver.style.margin = '20px';
-        botonVolver.onclick = () => this.cargarPaginaPrincipal();
-        mangaSection.insertBefore(botonVolver, mangaSection.firstChild);
+        if (!momento) {
+            this.mostrarNotificacion('❌ Momento íntimo no encontrado');
+            return false;
+        }
+        
+        // Verificar nivel requerido
+        if (personaje.nivel < (momento.nivelRequerido || 1)) {
+            this.mostrarNotificacion(`❌ Necesitas nivel ${momento.nivelRequerido} para este momento íntimo`);
+            return false;
+        }
+        
+        // Verificar condones normales
+        if (this.condones < momento.condonesRequeridos) {
+            this.mostrarNotificacion(`❌ Necesitas ${momento.condonesRequeridos} condones normales`);
+            return false;
+        }
+        
+        // Verificar condones especiales si son requeridos
+        if (this.condones001 < momento.condones001Requeridos) {
+            this.mostrarNotificacion(`❌ Necesitas ${momento.condones001Requeridos} condones 0.01`);
+            return false;
+        }
+        
+        // Preguntar si usar condón especial si está disponible pero no requerido
+        let usarCondonEspecial = false;
+        if (this.condones001 > 0 && momento.condones001Requeridos === 0) {
+            const mensaje = `💎 ¿Quieres usar un CONDÓN 0.01?\n\n` +
+                           `• +20% probabilidad de éxito\n` +
+                           `• +80% afinidad obtenida\n` +
+                           `• Puede superar el límite del 80% (hasta 100%)\n` +
+                           `• Se sentirá MÁS RICO para ${personaje.nombre.split(' ')[0]}\n\n` +
+                           `Tienes: ${this.condones001} condones 0.01 disponibles`;
+            
+            usarCondonEspecial = confirm(mensaje);
+        }
+        
+        // Calcular probabilidad real CON el sistema corregido
+        const probabilidadReal = this.calcularProbabilidadMomento(personaje, momento, usarCondonEspecial);
+        
+        // Mostrar mensaje especial si es con condón 0.01
+        if (usarCondonEspecial) {
+            this.mostrarNotificacion(`💎 Condón 0.01 activado! Éxito: ${probabilidadReal}% (Máximo: 100%)`);
+        }
+        
+        console.log(`🎯 Probabilidad final para ${momento.nombre}: ${probabilidadReal}%`);
+        const exito = Math.random() * 100 < probabilidadReal;
+        
+        if (exito) {
+            // ÉXITO
+            this.condones -= momento.condonesRequeridos;
+            if (usarCondonEspecial || momento.condones001Requeridos > 0) {
+                this.condones001 -= (usarCondonEspecial ? 1 : momento.condones001Requeridos);
+            }
+            this.guardarCondones();
+            this.guardarCondones001();
+            
+            let afinidadGanada = momento.afinidad;
+            let expGanada = momento.exp;
+            
+            // BONUS ESPECIAL POR CONDÓN 0.01
+            if (usarCondonEspecial || momento.condones001Requeridos > 0) {
+                afinidadGanada = Math.round(afinidadGanada * 1.8);
+                expGanada = Math.round(expGanada * 1.5);
+                this.mostrarNotificacion(`💎 ¡CONDÓN 0.01! +80% afinidad, +50% EXP, +20% éxito`);
+                
+                const mensajesRico = [
+                    `💖 ${personaje.nombre.split(' ')[0]} gime más fuerte con el condón 0.01`,
+                    `✨ ${personaje.nombre.split(' ')[0]} siente cada movimiento intensificado`,
+                    `🔥 La sensación es tan buena que ${personaje.nombre.split(' ')[0]} tiembla`,
+                    `🎇 El condón 0.01 hace que ${personaje.nombre.split(' ')[0]} llegue al orgasmo más rápido`
+                ];
+                const mensajeAleatorio = mensajesRico[Math.floor(Math.random() * mensajesRico.length)];
+                this.mostrarNotificacion(mensajeAleatorio);
+            }
+            
+            this.agregarEXP(personajeId, expGanada);
+            
+            // APLICAR LÍMITE DE AFINIDAD (200 máximo)
+            personaje.afinidad = Math.min(personaje.afinidad + afinidadGanada, 200);
+            
+            personaje.estadoAnimo = 'feliz';
+            
+            console.log(`✅ ¡${momento.nombre} exitoso con ${personaje.nombre}!`);
+            this.mostrarNotificacion(`💖 ¡${momento.nombre} exitoso! +${afinidadGanada} afinidad, +${expGanada} EXP`);
+            
+            this.cargarVideoMomentoIntimo(personajeId, momento);
+            
+            return true;
+        } else {
+            // FALLO
+            this.condones -= momento.condonesRequeridos;
+            if (usarCondonEspecial || momento.condones001Requeridos > 0) {
+                this.condones001 -= (usarCondonEspecial ? 1 : momento.condones001Requeridos);
+            }
+            this.guardarCondones();
+            this.guardarCondones001();
+            
+            personaje.estadoAnimo = 'enojada';
+            
+            // Pérdida de afinidad limitada (mínimo -100)
+            const perdidaAfinidad = Math.floor(momento.afinidad / 3);
+            personaje.afinidad = Math.max(personaje.afinidad - perdidaAfinidad, -100);
+            
+            console.log(`❌ ${momento.nombre} falló con ${personaje.nombre}`);
+            this.mostrarNotificacion(`😠 ${momento.nombre} falló. ${personaje.nombre} se enojó. Pérdida de afinidad.`);
+            
+            this.actualizarVistaConPersonaje();
+            
+            return false;
+        }
     }
 
     // ====================
-    // PANTALLA PRINCIPAL DEL RPG
+    // SISTEMA DE UI MEJORADO
     // ====================
-    
+
     cargarPaginaPrincipal() {
         return `
             <div style="max-width: 1400px; margin: 0 auto; padding: 20px;">
                 <h1 style="text-align: center; color: #FF1493; margin-bottom: 10px; font-size: 3rem;">
-                    🎮 RPG QUINTILLIZAS NAKANO
+                    🎮 RPG QUINTILLIZAS NAKANO - SISTEMA DIFICULTOSO
                 </h1>
+                <p style="text-align: center; opacity: 0.8; margin-bottom: 40px; font-size: 1.2rem;">
+                    Conquista a las 5 hermanas. Gana dinero estudiando, gasta en conquistarlas. <strong>¡Es difícil!</strong>
+                </p>
                 
-                <!-- BOTÓN GIGANTE DE ORGIAS -->
-                <div style="text-align: center; margin: 50px 0;">
-                    <button class="card-button" onclick="cargarPaginaOrgias()" 
-                            style="background: linear-gradient(135deg, #FF1493, #8A5AF7); padding: 30px 80px; font-size: 3rem; border: 5px solid white; box-shadow: 0 0 50px rgba(255,20,147,0.7); border-radius: 60px;">
-                        🎉 ORGIAS 🎉
-                    </button>
-                    <p style="margin-top: 20px; opacity: 0.8; font-size: 1.2rem;">
-                        Haz clic para acceder a todas las combinaciones de Mamadas y Doggystyle
+                <!-- ESTADO ACTUAL -->
+                <div style="background: rgba(255, 20, 147, 0.1); border-radius: 20px; padding: 25px; margin-bottom: 40px; border: 2px solid #FF1493;">
+                    <h3 style="color: #FFD166; margin-bottom: 15px;">📊 ESTADO ACTUAL</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
+                        <div>
+                            <div style="color: #FF69B4; font-size: 0.9rem;">👤 Personaje Seleccionado</div>
+                            <div style="font-size: 1.3rem; font-weight: bold;">
+                                ${this.personajeSeleccionado ? this.datosPersonajes[this.personajeSeleccionado].nombre : 'NINGUNO'}
+                            </div>
+                        </div>
+                        <div>
+                            <div style="color: #FF69B4; font-size: 0.9rem;">💰 Dinero Disponible</div>
+                            <div style="font-size: 1.3rem; font-weight: bold; color: #FFD166;">
+                                S/. ${sistemaEconomia.obtenerDinero().toFixed(2)}
+                            </div>
+                        </div>
+                        <div>
+                            <div style="color: #FF69B4; font-size: 0.9rem;">🛒 Condones Normales</div>
+                            <div style="font-size: 1.3rem; font-weight: bold; color: #4CAF50;">
+                                ${this.condones} unidades
+                            </div>
+                        </div>
+                        <div>
+                            <div style="color: #FF69B4; font-size: 0.9rem;">💎 Condones 0.01</div>
+                            <div style="font-size: 1.3rem; font-weight: bold; color: #5864F5;">
+                                ${this.condones001} unidades
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- PERSONAJES CON IMÁGENES -->
+                <h2 style="text-align: center; color: #FFD166; margin-bottom: 30px;">💖 SELECCIONA UNA HERMANA</h2>
+                <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; margin-bottom: 50px;">
+                    ${this.crearCardsPersonajes()}
+                </div>
+                
+                <!-- TIENDA DE CONDONES MEJORADA -->
+                <div style="background: linear-gradient(135deg, rgba(88, 100, 245, 0.1), rgba(138, 90, 247, 0.1)); border-radius: 20px; padding: 25px; margin-bottom: 40px; border: 2px solid #5864F5;">
+                    <h3 style="color: #5864F5; margin-bottom: 20px;">🛍️ TIENDA DE CONDONES</h3>
+                    <p style="opacity: 0.8; margin-bottom: 20px;">
+                        <strong>Condones Normales (S/.50):</strong> Para momentos íntimos básicos<br>
+                        <strong>Condones 0.01 (S/.200):</strong> ¡ESPECIAL! +20% éxito, +80% afinidad, hasta 100% de éxito
+                    </p>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 30px;">
+                        <!-- CONDONES NORMALES -->
+                        <div style="background: rgba(76, 175, 80, 0.1); border-radius: 15px; padding: 20px; border: 2px solid #4CAF50;">
+                            <h4 style="color: #4CAF50; margin-bottom: 15px;">🛒 Condones Normales</h4>
+                            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                                <button class="card-button" onclick="comprarCondonesRPG(1)" 
+                                        style="background: linear-gradient(135deg, #4CAF50, #2E7D32);">
+                                    1 Condón - S/.50
+                                </button>
+                                <button class="card-button" onclick="comprarCondonesRPG(5)" 
+                                        style="background: linear-gradient(135deg, #4CAF50, #2E7D32);">
+                                    5 Condones - S/.250
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- CONDONES 0.01 ESPECIALES -->
+                        <div style="background: rgba(88, 100, 245, 0.1); border-radius: 15px; padding: 20px; border: 2px solid #5864F5;">
+                            <h4 style="color: #5864F5; margin-bottom: 15px;">💎 Condones 0.01 ESPECIALES</h4>
+                            <p style="font-size: 0.9rem; opacity: 0.8; margin-bottom: 15px;">
+                                <strong>¡EFECTOS ESPECIALES!</strong><br>
+                                • +20% probabilidad de éxito<br>
+                                • +80% afinidad obtenida<br>
+                                • Puede superar límite 80% (hasta 100%)<br>
+                                • ¡Se siente MÁS RICO para ellas!
+                            </p>
+                            <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                                <button class="card-button" onclick="comprarCondones001RPG(1)" 
+                                        style="background: linear-gradient(135deg, #5864F5, #8A5AF7);">
+                                    1 Condón 0.01 - S/.200
+                                </button>
+                                <button class="card-button" onclick="comprarCondones001RPG(3)" 
+                                        style="background: linear-gradient(135deg, #5864F5, #8A5AF7);">
+                                    3 Condones 0.01 - S/.600
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <p style="text-align: center; opacity: 0.7; font-size: 0.9rem;">
+                        💡 <strong>Consejo:</strong> Los condones 0.01 son caros pero valen la pena. ¡Puedes llegar al 100% de éxito!
                     </p>
                 </div>
                 
-                <!-- RESUMEN DE CONDONES -->
-                <div style="background: rgba(255,20,147,0.1); border-radius: 20px; padding: 25px; margin: 40px 0;">
-                    <h3 style="color: #FFD166; text-align: center;">💎 TUS RECURSOS</h3>
-                    <div style="display: flex; justify-content: center; gap: 50px; margin-top: 20px;">
-                        <div style="text-align: center;">
-                            <div style="font-size: 2rem; color: #4CAF50;">${this.condones}</div>
-                            <div>🛒 Condones Normales</div>
+                <!-- INSTRUCCIONES ACTUALIZADAS -->
+                <div style="background: rgba(255, 209, 102, 0.1); border-radius: 20px; padding: 25px; border-left: 5px solid #FFD166;">
+                    <h4 style="color: #FFD166; margin-bottom: 15px;">📖 SISTEMA CORREGIDO - ¡AHORA SÍ FUNCIONA!</h4>
+                    <ol style="padding-left: 20px; opacity: 0.8;">
+                        <li><strong>Éxito máximo:</strong> 80% sin condón | 100% con condón 0.01</li>
+                        <li><strong>Afinidad (0-200):</strong> Contribuye 40% máximo (solo con 200 puntos)</li>
+                        <li><strong>Nivel (1-10):</strong> Contribuye 30% máximo (solo nivel 10)</li>
+                        <li><strong>Condón 0.01:</strong> +20% éxito, +80% afinidad obtenida</li>
+                        <li><strong>Estado de ánimo:</strong> Afecta de -40% a +15%</li>
+                        <li><strong>Probabilidad base:</strong> Solo algunos momentos (0-10%)</li>
+                    </ol>
+                    <p style="margin-top: 15px; color: #4CAF50; font-weight: bold;">
+                        ✅ ¡CORRECTO! Solo se llega al 80% con afinidad 200 y nivel 10
+                    </p>
+                </div>
+            </div>
+        `;
+    }
+
+    crearCardsPersonajes() {
+        const personajesIds = ['ichika', 'nino', 'miku', 'yotsuba', 'itsuki'];
+        
+        return personajesIds.map(id => {
+            const personaje = this.datosPersonajes[id];
+            const esSeleccionado = this.personajeSeleccionado === id;
+            
+            return `
+                <div class="personaje-card" 
+                     style="border: 2px solid ${personaje.color}; ${esSeleccionado ? 'border-width: 4px; box-shadow: 0 0 20px ' + personaje.color + '50;' : ''}; background: rgba(255,255,255,0.05); border-radius: 15px; padding: 20px; cursor: pointer; transition: all 0.3s ease;"
+                     onclick="seleccionarPersonajeRPG('${id}')">
+                    <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
+                        <div style="position: relative;">
+                            <img src="${personaje.imagen}" 
+                                 alt="${personaje.nombre}"
+                                 style="width: 70px; height: 70px; border-radius: 50%; object-fit: cover; border: 3px solid ${personaje.color};">
+                            ${esSeleccionado ? 
+                                `<div style="position: absolute; top: -5px; right: -5px; background: ${personaje.color}; color: white; width: 25px; height: 25px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; border: 2px solid white;">
+                                    ✓
+                                </div>` 
+                                : ''}
                         </div>
-                        <div style="text-align: center;">
-                            <div style="font-size: 2rem; color: #5864F5;">${this.condones001}</div>
-                            <div>💎 Condones 0.01</div>
+                        <div>
+                            <h3 style="color: ${personaje.color}; margin: 0;">${personaje.nombre}</h3>
+                            <p style="opacity: 0.7; margin: 5px 0 0 0; font-size: 0.9rem;">
+                                Nivel ${personaje.nivel} • ${personaje.dificultad.toUpperCase()}
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <!-- BARRA DE EXP -->
+                    <div style="margin-bottom: 15px;">
+                        <div style="background: rgba(255,255,255,0.1); height: 10px; border-radius: 5px; overflow: hidden;">
+                            <div style="background: ${personaje.color}; width: ${(personaje.exp / personaje.expNecesaria) * 100}%; height: 100%;"></div>
+                        </div>
+                        <p style="font-size: 0.9rem; margin-top: 5px; color: ${personaje.color};">
+                            ${personaje.exp}/${personaje.expNecesaria} EXP
+                        </p>
+                    </div>
+                    
+                    <p style="font-size: 0.9rem; opacity: 0.8; margin-bottom: 15px;">
+                        ${personaje.descripcion}
+                    </p>
+                    
+                    <div style="display: flex; justify-content: space-between; font-size: 0.85rem; opacity: 0.7;">
+                        <div>💝 ${personaje.afinidad >= 0 ? '+' : ''}${personaje.afinidad}/200</div>
+                        <div>${this.obtenerEmojiEstado(personaje.estadoAnimo)} ${personaje.estadoAnimo.toUpperCase()}</div>
+                        <div>🎯 ${personaje.probabilidadBase}%</div>
+                    </div>
+                    
+                    <!-- NIVEL REQUERIDO PARA ÍNTIMOS -->
+                    <div style="background: rgba(255, 20, 147, 0.1); padding: 8px; border-radius: 8px; margin-top: 10px; text-align: center;">
+                        <span style="font-size: 0.8rem; color: #FF1493;">
+                            🔞 Nivel ${personaje.nivelRequeridoParaIntimos}+ para íntimos
+                        </span>
+                    </div>
+                    
+                    ${esSeleccionado ? 
+                        `<div style="background: ${personaje.color}; color: white; padding: 8px; border-radius: 10px; margin-top: 10px; text-align: center; font-weight: bold;">
+                            ✅ SELECCIONADA
+                        </div>` 
+                        : ''}
+                </div>
+            `;
+        }).join('');
+    }
+
+    seleccionarPersonajeUI(personajeId) {
+        this.personajeSeleccionado = personajeId;
+        this.guardarPersonajeSeleccionado();
+        
+        const personaje = this.datosPersonajes[personajeId];
+        this.mostrarNotificacion(`💖 Seleccionaste a ${personaje.nombre} (Nivel ${personaje.nivel}, Afinidad ${personaje.afinidad})`);
+        
+        this.actualizarVistaConPersonaje();
+    }
+
+    actualizarVistaConPersonaje() {
+        const mangaSection = document.getElementById('manga-section');
+        if (!mangaSection) return;
+        
+        mangaSection.innerHTML = '';
+        
+        const botonVolver = document.createElement('button');
+        botonVolver.className = 'btn-atras-especifico';
+        botonVolver.innerHTML = '← Volver al RPG Principal';
+        botonVolver.style.margin = '20px';
+        botonVolver.onclick = () => {
+            mangaSection.innerHTML = this.cargarPaginaPrincipal();
+            const botonInicio = crearBotonVolver(volverAlInicio);
+            mangaSection.insertBefore(botonInicio, mangaSection.firstChild);
+        };
+        mangaSection.appendChild(botonVolver);
+        
+        const personajeDiv = document.createElement('div');
+        personajeDiv.innerHTML = this.crearUIPersonaje();
+        mangaSection.appendChild(personajeDiv);
+    }
+
+    crearUIPersonaje() {
+        if (!this.personajeSeleccionado) return '<p>Selecciona un personaje primero</p>';
+        
+        const personaje = this.datosPersonajes[this.personajeSeleccionado];
+        const dinero = sistemaEconomia.obtenerDinero();
+        
+        const maxAfinidad = 200;
+        const maxNivel = 10;
+        const porcentajeAfinidad = Math.min((personaje.afinidad / maxAfinidad) * 100, 100);
+        const porcentajeNivel = Math.min((personaje.nivel / maxNivel) * 100, 100);
+        
+        // Calcular contribución actual
+        const contribucionAfinidad = (Math.min(Math.max(personaje.afinidad, 0), maxAfinidad) / maxAfinidad) * 40;
+        const contribucionNivel = (personaje.nivel / maxNivel) * 30;
+        const contribucionTotal = contribucionAfinidad + contribucionNivel;
+        
+        return `
+            <div style="max-width: 1000px; margin: 0 auto; padding: 20px;">
+                <!-- CABECERA PERSONAJE -->
+                <div style="background: ${personaje.color}20; border-radius: 20px; padding: 30px; margin-bottom: 30px; border: 3px solid ${personaje.color}; position: relative; overflow: hidden;">
+                    <div style="position: absolute; top: 0; right: 0; width: 200px; height: 200px; background: ${personaje.color}10; border-radius: 0 20px 0 100px; z-index: 1;"></div>
+                    
+                    <div style="display: flex; align-items: center; gap: 25px; flex-wrap: wrap; position: relative; z-index: 2;">
+                        <div style="position: relative;">
+                            <img src="${personaje.imagen}" 
+                                 alt="${personaje.nombre}"
+                                 style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 5px solid ${personaje.color}; box-shadow: 0 10px 20px rgba(0,0,0,0.3);">
+                            <div style="position: absolute; bottom: -10px; right: -10px; background: ${personaje.color}; color: white; padding: 5px 15px; border-radius: 20px; font-weight: bold; font-size: 1.2rem; border: 3px solid white;">
+                                Nivel ${personaje.nivel}
+                            </div>
+                        </div>
+                        <div style="flex: 1;">
+                            <h1 style="color: ${personaje.color}; margin: 0 0 10px 0; font-size: 2.5rem;">
+                                ${personaje.nombre}
+                            </h1>
+                            <div style="display: flex; gap: 20px; flex-wrap: wrap;">
+                                <div>
+                                    <div style="color: rgba(255,255,255,0.7); font-size: 0.9rem;">AFINIDAD</div>
+                                    <div style="font-size: 2rem; font-weight: bold; color: ${personaje.afinidad >= 0 ? '#4CAF50' : '#FF6B6B'}">
+                                        ${personaje.afinidad >= 0 ? '+' : ''}${personaje.afinidad}/200
+                                    </div>
+                                    <div style="background: rgba(255,255,255,0.1); height: 8px; border-radius: 4px; margin-top: 5px; overflow: hidden;">
+                                        <div style="background: #4CAF50; width: ${porcentajeAfinidad}%; height: 100%;"></div>
+                                    </div>
+                                </div>
+                                <div>
+                                    <div style="color: rgba(255,255,255,0.7); font-size: 0.9rem;">ESTADO</div>
+                                    <div style="font-size: 1.5rem; font-weight: bold; text-transform: uppercase;">
+                                        ${this.obtenerEmojiEstado(personaje.estadoAnimo)} ${personaje.estadoAnimo}
+                                    </div>
+                                </div>
+                                <div>
+                                    <div style="color: rgba(255,255,255,0.7); font-size: 0.9rem;">DIFICULTAD</div>
+                                    <div style="font-size: 1.5rem; font-weight: bold; text-transform: uppercase;">
+                                        ${personaje.dificultad}
+                                    </div>
+                                </div>
+                                <div>
+                                    <div style="color: rgba(255,255,255,0.7); font-size: 0.9rem;">NIVEL</div>
+                                    <div style="font-size: 1.5rem; font-weight: bold; color: #FF1493;">
+                                        ${personaje.nivel}/10
+                                    </div>
+                                    <div style="background: rgba(255,255,255,0.1); height: 8px; border-radius: 4px; margin-top: 5px; overflow: hidden;">
+                                        <div style="background: #FF1493; width: ${porcentajeNivel}%; height: 100%;"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- BARRA DE EXP -->
+                    <div style="margin-top: 25px; position: relative; z-index: 2;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
+                            <span style="color: ${personaje.color}; font-weight: bold;">PROGRESO HACIA NIVEL ${personaje.nivel + 1}</span>
+                            <span style="color: ${personaje.color};">${personaje.exp}/${personaje.expNecesaria} EXP</span>
+                        </div>
+                        <div style="background: rgba(255,255,255,0.1); height: 15px; border-radius: 10px; overflow: hidden;">
+                            <div style="background: linear-gradient(135deg, ${personaje.color}, ${this.oscurecerColor(personaje.color)}); 
+                                      width: ${(personaje.exp / personaje.expNecesaria) * 100}%; height: 100%;"></div>
+                        </div>
+                        <p style="text-align: center; margin-top: 10px; opacity: 0.8;">
+                            <strong>${personaje.descripcion}</strong>
+                        </p>
+                        <p style="text-align: center; margin-top: 15px; color: #FFD166; font-weight: bold;">
+                            💖 ¡Gana EXP respondiendo correctamente en los quizzes! (+20 EXP/palabra)
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- SISTEMA DE CONTRIBUCIÓN CORREGIDO -->
+                <div style="background: rgba(88, 100, 245, 0.1); border-radius: 15px; padding: 25px; margin-bottom: 30px; border: 2px solid #5864F5;">
+                    <h3 style="color: #5864F5; margin-bottom: 15px;">📊 SISTEMA DE CONTRIBUCIÓN AL ÉXITO</h3>
+                    <p style="opacity: 0.8; margin-bottom: 20px;">
+                        <strong>¡SISTEMA CORREGIDO!</strong> Solo se llega al 80% con afinidad 200 y nivel 10:
+                    </p>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 20px;">
+                        <!-- AFINIDAD -->
+                        <div style="background: rgba(76, 175, 80, 0.1); padding: 20px; border-radius: 12px; border: 2px solid #4CAF50;">
+                            <h4 style="color: #4CAF50; margin-bottom: 10px;">💝 AFINIDAD (0-200)</h4>
+                            <div style="font-size: 2rem; font-weight: bold; text-align: center; color: #4CAF50;">
+                                ${personaje.afinidad}/200
+                            </div>
+                            <div style="background: rgba(255,255,255,0.1); height: 10px; border-radius: 5px; margin: 15px 0; overflow: hidden;">
+                                <div style="background: #4CAF50; width: ${porcentajeAfinidad}%; height: 100%;"></div>
+                            </div>
+                            <p style="text-align: center; opacity: 0.8; font-size: 0.9rem;">
+                                Contribución: <strong>${contribucionAfinidad.toFixed(1)}%</strong> de 40% máximo
+                            </p>
+                            <p style="text-align: center; color: #FFD166; font-size: 0.8rem; margin-top: 5px;">
+                                ${personaje.afinidad >= 200 ? '✅ MÁXIMO ALCANZADO' : `Faltan ${200 - Math.max(personaje.afinidad, 0)} puntos`}
+                            </p>
+                        </div>
+                        
+                        <!-- NIVEL -->
+                        <div style="background: rgba(255, 20, 147, 0.1); padding: 20px; border-radius: 12px; border: 2px solid #FF1493;">
+                            <h4 style="color: #FF1493; margin-bottom: 10px;">⭐ NIVEL (1-10)</h4>
+                            <div style="font-size: 2rem; font-weight: bold; text-align: center; color: #FF1493;">
+                                ${personaje.nivel}/10
+                            </div>
+                            <div style="background: rgba(255,255,255,0.1); height: 10px; border-radius: 5px; margin: 15px 0; overflow: hidden;">
+                                <div style="background: #FF1493; width: ${porcentajeNivel}%; height: 100%;"></div>
+                            </div>
+                            <p style="text-align: center; opacity: 0.8; font-size: 0.9rem;">
+                                Contribución: <strong>${contribucionNivel.toFixed(1)}%</strong> de 30% máximo
+                            </p>
+                            <p style="text-align: center; color: #FFD166; font-size: 0.8rem; margin-top: 5px;">
+                                ${personaje.nivel >= 10 ? '✅ MÁXIMO ALCANZADO' : `Faltan ${10 - personaje.nivel} niveles`}
+                            </p>
+                        </div>
+                    </div>
+                    
+                    <div style="background: rgba(255, 209, 102, 0.1); padding: 15px; border-radius: 10px; text-align: center; margin-bottom: 15px;">
+                        <p style="color: #FFD166; font-weight: bold; font-size: 1.1rem;">
+                            📊 CONTRIBUCIÓN TOTAL: ${contribucionTotal.toFixed(1)}% / 70%
+                        </p>
+                        <div style="background: rgba(255,255,255,0.1); height: 8px; border-radius: 4px; margin: 10px 0; overflow: hidden;">
+                            <div style="background: linear-gradient(135deg, #4CAF50, #FF1493); width: ${(contribucionTotal / 70) * 100}%; height: 100%;"></div>
+                        </div>
+                        <p style="font-size: 0.9rem; opacity: 0.8;">
+                            ${contribucionTotal >= 70 ? '✅ ¡MÁXIMA CONTRIBUCIÓN POSIBLE!' : `Faltan ${(70 - contribucionTotal).toFixed(1)}% para el máximo`}
+                        </p>
+                    </div>
+                    
+                    <div style="background: rgba(88, 100, 245, 0.2); padding: 15px; border-radius: 10px; text-align: center;">
+                        <p style="color: #5864F5; font-weight: bold;">
+                            💎 Con condón 0.01: +20% éxito, límite 100% | Sin condón: límite 80%
+                        </p>
+                        <p style="font-size: 0.9rem; opacity: 0.8; margin-top: 5px;">
+                            ✅ Estado de ánimo: ${this.obtenerEmojiEstado(personaje.estadoAnimo)} ${personaje.estadoAnimo}
+                        </p>
+                    </div>
+                </div>
+                
+                <!-- MOMENTOS ÍNTIMOS (SOLO SI TIENE NIVEL SUFICIENTE) -->
+                ${personaje.nivel >= personaje.nivelRequeridoParaIntimos ? `
+                    <div style="background: rgba(255, 20, 147, 0.1); border-radius: 15px; padding: 25px; margin-bottom: 30px; border: 2px solid #FF1493;">
+                        <h3 style="color: #FF1493; margin-bottom: 15px;">💖 MOMENTOS ÍNTIMOS (🔞 +18)</h3>
+                        <p style="opacity: 0.8; margin-bottom: 20px;">
+                            <strong>¡SISTEMA CORREGIDO!</strong> Solo 80% con afinidad 200 y nivel 10. Con condón 0.01: 100%
+                        </p>
+                        
+                        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 15px; margin-bottom: 20px;">
+                            ${personaje.momentosIntimos.map(momento => {
+                                const probabilidadReal = this.calcularProbabilidadMomento(personaje, momento);
+                                const tieneCondonesNormales = this.condones >= momento.condonesRequeridos;
+                                const tieneCondonesEspeciales = this.condones001 >= momento.condones001Requeridos;
+                                const puedeIntentar = tieneCondonesNormales && tieneCondonesEspeciales;
+                                const nivelSuficiente = personaje.nivel >= (momento.nivelRequerido || 1);
+                                
+                                const limiteMostrar = momento.condones001Requeridos > 0 ? "100%" : "80%";
+                                
+                                return `
+                                    <div style="background: rgba(255,255,255,0.05); border-radius: 12px; padding: 15px; border: 1px solid ${personaje.color}50;">
+                                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                                            <span style="font-weight: bold; font-size: 1.1rem;">${momento.nombre}</span>
+                                            <span style="color: #FFD166; font-size: 0.9rem;">
+                                                ${momento.condonesRequeridos > 0 ? `${momento.condonesRequeridos}🛒` : ''}
+                                                ${momento.condones001Requeridos > 0 ? `${momento.condones001Requeridos}💎` : ''}
+                                            </span>
+                                        </div>
+                                        <p style="font-size: 0.9rem; opacity: 0.7; margin-bottom: 10px;">${momento.descripcion}</p>
+                                        <div style="display: flex; justify-content: space-between; font-size: 0.9rem; margin-bottom: 15px;">
+                                            <span style="color: #4CAF50;">+${momento.afinidad} afinidad</span>
+                                            <span style="color: #FFD166;">+${momento.exp} EXP</span>
+                                        </div>
+                                        <div style="background: rgba(255,255,255,0.1); height: 6px; border-radius: 3px; margin-bottom: 10px;">
+                                            <div style="background: linear-gradient(135deg, #FF1493, #FF6B6B); width: ${probabilidadReal}%; height: 100%;"></div>
+                                        </div>
+                                        <p style="text-align: center; font-size: 0.9rem; margin-bottom: 10px; color: #FFD166;">
+                                            Éxito: ${probabilidadReal}% (Límite: ${limiteMostrar})${momento.nivelRequerido ? ` | Nivel ${momento.nivelRequerido}+` : ''}
+                                        </p>
+                                        <button class="card-button" 
+                                                onclick="intentarMomentoIntimoRPG('${this.personajeSeleccionado}', '${momento.id}')"
+                                                style="padding: 12px 20px; font-size: 1rem; background: linear-gradient(135deg, ${personaje.color}, #FF1493); width: 100%; border: none; border-radius: 10px; color: white; cursor: pointer; font-weight: bold;"
+                                                ${!puedeIntentar || !nivelSuficiente ? 'disabled style="opacity: 0.5; cursor: not-allowed;"' : ''}>
+                                            ${!nivelSuficiente ? `❌ NIVEL ${momento.nivelRequerido} REQUERIDO` : 
+                                              !puedeIntentar ? `❌ CONDONES INSUFICIENTES` : 
+                                              '💖 INTENTAR MOMENTO ÍNTIMO'}
+                                        </button>
+                                    </div>
+                                `;
+                            }).join('')}
+                        </div>
+                        
+                        <div style="background: rgba(88, 100, 245, 0.1); padding: 15px; border-radius: 10px; margin-bottom: 15px;">
+                            <p style="text-align: center; opacity: 0.8; font-size: 0.9rem;">
+                                Condones disponibles: ${this.condones}🛒 | Condones 0.01: ${this.condones001}💎
+                            </p>
+                            <p style="text-align: center; opacity: 0.7; font-size: 0.8rem; margin-top: 5px;">
+                                💎 <strong>Condón 0.01:</strong> +20% éxito, +80% afinidad, límite 100%
+                            </p>
+                        </div>
+                        
+                        <div style="background: rgba(76, 175, 80, 0.1); padding: 15px; border-radius: 10px;">
+                            <p style="text-align: center; color: #4CAF50; font-weight: bold;">
+                                ✅ ¡SISTEMA CORREGIDO! Solo 80% con AFINIDAD 200 y NIVEL 10
+                            </p>
+                            <p style="text-align: center; font-size: 0.9rem; opacity: 0.8; margin-top: 5px;">
+                                Tu contribución: ${contribucionTotal.toFixed(1)}% (Afinidad: ${contribucionAfinidad.toFixed(1)}% + Nivel: ${contribucionNivel.toFixed(1)}%)
+                            </p>
+                        </div>
+                    </div>
+                ` : `
+                    <div style="background: rgba(255, 20, 147, 0.1); border-radius: 15px; padding: 25px; margin-bottom: 30px; border: 2px solid #FF1493; text-align: center;">
+                        <h3 style="color: #FF1493; margin-bottom: 15px;">🔞 MOMENTOS ÍNTIMOS BLOQUEADOS</h3>
+                        <p style="opacity: 0.8; margin-bottom: 15px;">
+                            Necesitas nivel <strong>${personaje.nivelRequeridoParaIntimos}</strong> para desbloquear momentos íntimos con ${personaje.nombre.split(' ')[0]}
+                        </p>
+                        <p style="opacity: 0.7;">
+                            Tu nivel actual: <strong>${personaje.nivel}</strong> | 
+                            EXP necesario: <strong>${personaje.expNecesaria - personaje.exp} EXP</strong>
+                        </p>
+                        <div style="margin-top: 20px;">
+                            <button class="card-button" onclick="cargarPaginaMangas()" 
+                                    style="background: linear-gradient(135deg, #4CAF50, #2E7D32); padding: 12px 25px;">
+                                📚 IR A ESTUDIAR PARA GANAR EXP
+                            </button>
+                        </div>
+                    </div>
+                `}
+                
+                <!-- ACTIVIDADES ESPECIALES -->
+                <div style="background: rgba(255, 209, 102, 0.1); border-radius: 15px; padding: 25px; margin-bottom: 30px; border: 2px solid #FFD166;">
+                    <h3 style="color: #FFD166; margin-bottom: 15px;">✨ ACTIVIDADES ESPECIALES</h3>
+                    <p style="opacity: 0.8; margin-bottom: 20px;">
+                        Actividades con ${personaje.nombre.split(' ')[0]}. Se pueden comprar siempre que tengas dinero.
+                    </p>
+                    
+                    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 15px;">
+                        ${personaje.actividadesEspeciales.map(actividad => {
+                            const puedeComprar = dinero >= actividad.costo;
+                            
+                            return `
+                                <div style="display: flex; flex-direction: column; gap: 10px; background: rgba(255,255,255,0.05); padding: 15px; border-radius: 10px; border: 1px solid rgba(255, 209, 102, 0.3);">
+                                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                                        <span style="font-weight: bold; font-size: 1.1rem;">${actividad.nombre}</span>
+                                        <span style="color: #FFD166; font-weight: bold;">S/.${actividad.costo}</span>
+                                    </div>
+                                    <p style="opacity: 0.7; font-size: 0.9rem; margin: 0;">${actividad.descripcion}</p>
+                                    <div style="display: flex; justify-content: space-between; font-size: 0.9rem;">
+                                        <span style="color: #4CAF50;">+${actividad.afinidad} afinidad</span>
+                                        <span style="color: #FFD166;">+${actividad.exp} EXP</span>
+                                    </div>
+                                    
+                                    <button class="card-button" onclick="comprarActividadRPG('${this.personajeSeleccionado}', '${actividad.id}')"
+                                            style="padding: 12px 20px; font-size: 1rem; background: linear-gradient(135deg, #4CAF50, #2E7D32); margin-top: 10px; border: none; border-radius: 10px; color: white; cursor: pointer; font-weight: bold;"
+                                            ${!puedeComprar ? 'disabled style="opacity: 0.5; cursor: not-allowed;"' : ''}>
+                                        ${!puedeComprar ? '💰 DINERO INSUFICIENTE' : '✨ COMPRAR ACTIVIDAD'}
+                                    </button>
+                                </div>
+                            `;
+                        }).join('')}
+                    </div>
+                </div>
+                
+                <!-- VIDEOS DESBLOQUEADOS -->
+                <div style="background: rgba(88, 100, 245, 0.1); border-radius: 15px; padding: 25px; margin-bottom: 30px; border: 2px solid #5864F5;">
+                    <h3 style="color: #5864F5; margin-bottom: 20px;">🎬 VIDEOS DESBLOQUEADOS</h3>
+                    ${personaje.videosDisponibles.length > 0 ? 
+                        `<div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 15px;">
+                            ${personaje.videosDisponibles.map((video, index) => `
+                                <div style="background: rgba(255,255,255,0.08); padding: 15px; border-radius: 10px; text-align: center; cursor: pointer; transition: all 0.3s ease; border: 1px solid rgba(88, 100, 245, 0.3);"
+                                     onclick="cargarVideoNivel('${this.personajeSeleccionado}', ${(index + 1) * 2})">
+                                    <div style="font-size: 2rem; margin-bottom: 10px;">🎥</div>
+                                    <div style="font-weight: bold;">${video.nombre}</div>
+                                    <div style="font-size: 0.8rem; opacity: 0.7; margin-top: 5px;">Desbloqueado en nivel ${(index + 1) * 2}</div>
+                                </div>
+                            `).join('')}
+                        </div>` 
+                        : `<p style="text-align: center; opacity: 0.7; padding: 20px;">
+                            Aún no hay videos desbloqueados. ¡Sube de nivel completando mazos! (Videos en niveles 2, 4, 6, 8, 10)
+                        </p>`}
+                </div>
+                
+                <!-- ESTADÍSTICAS -->
+                <div style="background: rgba(255, 255, 255, 0.05); border-radius: 15px; padding: 25px;">
+                    <h3 style="color: #FFD166; margin-bottom: 20px;">📈 ESTADÍSTICAS DETALLADAS</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px;">
+                        <div style="background: rgba(255,255,255,0.08); padding: 15px; border-radius: 10px;">
+                            <div style="color: ${personaje.color}; font-size: 0.9rem;">CONTRIBUCIÓN</div>
+                            <div style="font-size: 1.5rem; font-weight: bold;">
+                                ${contribucionTotal.toFixed(1)}%
+                            </div>
+                            <div style="font-size: 0.8rem; opacity: 0.7;">Afinidad+Nivel / 70%</div>
+                        </div>
+                        <div style="background: rgba(255,255,255,0.08); padding: 15px; border-radius: 10px;">
+                            <div style="color: ${personaje.color}; font-size: 0.9rem;">VIDEOS</div>
+                            <div style="font-size: 1.5rem; font-weight: bold;">${personaje.videosDisponibles.length}/5</div>
+                        </div>
+                        <div style="background: rgba(255,255,255,0.08); padding: 15px; border-radius: 10px;">
+                            <div style="color: ${personaje.color}; font-size: 0.9rem;">NEXT LEVEL</div>
+                            <div style="font-size: 1.5rem; font-weight: bold;">${personaje.expNecesaria - personaje.exp} EXP</div>
+                        </div>
+                        <div style="background: rgba(255,255,255,0.08); padding: 15px; border-radius: 10px;">
+                            <div style="color: ${personaje.color}; font-size: 0.9rem;">CONDONES</div>
+                            <div style="font-size: 1.5rem; font-weight: bold;">${this.condones}🛒 ${this.condones001}💎</div>
                         </div>
                     </div>
                 </div>
@@ -1511,110 +1167,372 @@ class QuintillizasRPG {
     }
 
     // ====================
-    // COMPRAR CONDONES
+    // SISTEMA DE ACTIVIDADES ESPECIALES
     // ====================
-    
-    comprarCondones(cantidad) {
-        const costo = cantidad * 50;
-        if (sistemaEconomia.obtenerDinero() < costo) {
+
+    comprarActividad(personajeId, actividadId) {
+        const personaje = this.datosPersonajes[personajeId];
+        const actividad = personaje.actividadesEspeciales.find(a => a.id === actividadId);
+        
+        if (!actividad) {
+            this.mostrarNotificacion('❌ Actividad no encontrada');
+            return false;
+        }
+        
+        const dineroActual = sistemaEconomia.obtenerDinero();
+        if (dineroActual < actividad.costo) {
             this.mostrarNotificacion('❌ Dinero insuficiente');
             return false;
         }
         
-        sistemaEconomia.agregarDinero(-costo);
+        sistemaEconomia.agregarDinero(-actividad.costo);
+        
+        // APLICAR LÍMITE DE AFINIDAD (200 máximo)
+        personaje.afinidad = Math.min(personaje.afinidad + actividad.afinidad, 200);
+        this.agregarEXP(personajeId, actividad.exp);
+        personaje.estadoAnimo = 'feliz';
+        
+        console.log(`🎉 Actividad ${actividad.nombre} comprada para ${personaje.nombre}`);
+        this.mostrarNotificacion(`💝 ${personaje.nombre} muy feliz! +${actividad.afinidad} afinidad, +${actividad.exp} EXP`);
+        
+        this.cargarVideoActividad(personajeId, actividadId);
+        
+        return true;
+    }
+
+    cargarVideoActividad(personajeId, actividadId) {
+        const personaje = this.datosPersonajes[personajeId];
+        const actividad = personaje.actividadesEspeciales.find(a => a.id === actividadId);
+        
+        if (!actividad || !actividad.videoId) {
+            this.mostrarNotificacion('❌ Video no disponible');
+            return;
+        }
+        
+        this.mostrarReproductorVideo({
+            driveId: actividad.videoId,
+            titulo: actividad.nombre,
+            duracion: '3:00',
+            esExplicito: false
+        }, personaje);
+    }
+
+    cargarVideoNivel(personajeId, nivel) {
+        const personaje = this.datosPersonajes[personajeId];
+        const videoId = this.obtenerVideoIdPorNivel(personajeId, nivel);
+        
+        this.mostrarReproductorVideo({
+            driveId: videoId,
+            titulo: `Video Nivel ${nivel}`,
+            duracion: '2:30',
+            esExplicito: false
+        }, personaje);
+    }
+
+    cargarVideoMomentoIntimo(personajeId, momento) {
+        const personaje = this.datosPersonajes[personajeId];
+        
+        this.mostrarReproductorVideo({
+            driveId: momento.videoId,
+            titulo: `${momento.nombre} - ${personaje.nombre}`,
+            duracion: '3:00',
+            esExplicito: true
+        }, personaje);
+    }
+
+    // ====================
+    // SISTEMA DE CONDONES MEJORADO
+    // ====================
+
+    comprarCondones(cantidad) {
+        const costoPorCondon = 50;
+        const costoTotal = cantidad * costoPorCondon;
+        
+        const dineroActual = sistemaEconomia.obtenerDinero();
+        if (dineroActual < costoTotal) {
+            this.mostrarNotificacion('❌ Dinero insuficiente');
+            return false;
+        }
+        
+        sistemaEconomia.agregarDinero(-costoTotal);
+        
         this.condones += cantidad;
         this.guardarCondones();
-        this.mostrarNotificacion(`🛒 +${cantidad} condones normales`);
+        
+        console.log(`🛒 Comprados ${cantidad} condones normales por S/.${costoTotal}`);
+        this.mostrarNotificacion(`🛍️ +${cantidad} condones normales comprados`);
+        
+        if (this.personajeSeleccionado) {
+            this.actualizarVistaConPersonaje();
+        }
+        
         return true;
     }
 
     comprarCondones001(cantidad) {
-        const costo = cantidad * 200;
-        if (sistemaEconomia.obtenerDinero() < costo) {
+        const costoPorCondon = 200;
+        const costoTotal = cantidad * costoPorCondon;
+        
+        const dineroActual = sistemaEconomia.obtenerDinero();
+        if (dineroActual < costoTotal) {
             this.mostrarNotificacion('❌ Dinero insuficiente');
             return false;
         }
         
-        sistemaEconomia.agregarDinero(-costo);
+        sistemaEconomia.agregarDinero(-costoTotal);
+        
         this.condones001 += cantidad;
         this.guardarCondones001();
-        this.mostrarNotificacion(`💎 +${cantidad} condones 0.01`);
+        
+        console.log(`💎 Comprados ${cantidad} condones 0.01 por S/.${costoTotal}`);
+        this.mostrarNotificacion(`💎 +${cantidad} condones 0.01 comprados (+20% éxito, +80% afinidad, límite 100%)`);
+        
+        if (this.personajeSeleccionado) {
+            this.actualizarVistaConPersonaje();
+        }
+        
         return true;
+    }
+
+    // ====================
+    // REPRODUCTOR DE VIDEOS
+    // ====================
+
+    mostrarReproductorVideo(video, personaje) {
+        const advertencia = video.esExplicito ? 
+            `<div style="background: rgba(255, 20, 147, 0.2); padding: 15px; border-radius: 10px; margin-bottom: 20px; border: 2px solid #FF1493;">
+                <p style="color: #FF1493; font-weight: bold; text-align: center;">
+                    ⚠️ CONTENIDO EXPLÍCITO +18 ⚠️
+                </p>
+            </div>` : '';
+        
+        const html = `
+            <div class="reproductor-container" style="max-width: 800px; margin: 0 auto; padding: 30px;">
+                ${advertencia}
+                
+                <div style="text-align: center; margin-bottom: 20px;">
+                    <img src="${personaje.imagen}" 
+                         alt="${personaje.nombre}"
+                         style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover; border: 4px solid ${personaje.color}; margin-bottom: 15px;">
+                    <h2 style="color: ${personaje.color}; margin-bottom: 10px;">
+                        🎬 ${video.titulo} - ${personaje.nombre}
+                    </h2>
+                    <p style="opacity: 0.8; margin-bottom: 10px;">
+                        Nivel de ${personaje.nombre.split(' ')[0]}: ${personaje.nivel} • Duración: ${video.duracion}
+                    </p>
+                </div>
+                
+                <div class="video-wrapper" style="margin: 30px 0;">
+                    <iframe 
+                        id="rpg-video-iframe"
+                        src="https://drive.google.com/file/d/${video.driveId}/preview"
+                        frameborder="0"
+                        allow="autoplay; encrypted-media"
+                        allowfullscreen
+                        style="width: 100%; height: 400px; border-radius: 15px; border: 3px solid ${personaje.color};"
+                    ></iframe>
+                </div>
+                
+                <div style="text-align: center; margin-top: 30px;">
+                    <button class="card-button" onclick="quintillizasRPG.volverAPersonaje()" 
+                            style="background: linear-gradient(135deg, ${personaje.color}, ${this.oscurecerColor(personaje.color)}); padding: 15px 30px; border: none; border-radius: 10px; color: white; cursor: pointer; font-weight: bold; font-size: 1.1rem;">
+                        ↩️ Volver a ${personaje.nombre.split(' ')[0]}
+                    </button>
+                </div>
+            </div>
+        `;
+        
+        const mangaSection = document.getElementById('manga-section');
+        mangaSection.innerHTML = html;
+        
+        const botonVolver = document.createElement('button');
+        botonVolver.className = 'btn-atras-especifico';
+        botonVolver.innerHTML = '← Volver al RPG';
+        botonVolver.style.margin = '20px';
+        botonVolver.onclick = () => this.actualizarVistaConPersonaje();
+        mangaSection.insertBefore(botonVolver, mangaSection.firstChild);
+    }
+
+    volverAPersonaje() {
+        this.actualizarVistaConPersonaje();
     }
 
     // ====================
     // UTILIDADES
     // ====================
-    
+
+    obtenerEmojiEstado(estado) {
+        const emojis = {
+            'feliz': '😊',
+            'neutral': '😐',
+            'triste': '😢',
+            'enojada': '😠',
+            'tsundere': '😤',
+            'tímida': '😳',
+            'energica': '💪',
+            'glotona': '🍔'
+        };
+        return emojis[estado] || '😐';
+    }
+
+    oscurecerColor(color) {
+        const r = parseInt(color.slice(1, 3), 16);
+        const g = parseInt(color.slice(3, 5), 16);
+        const b = parseInt(color.slice(5, 7), 16);
+        
+        const darkR = Math.max(0, r - 50);
+        const darkG = Math.max(0, g - 50);
+        const darkB = Math.max(0, b - 50);
+        
+        return `#${darkR.toString(16).padStart(2, '0')}${darkG.toString(16).padStart(2, '0')}${darkB.toString(16).padStart(2, '0')}`;
+    }
+
     mostrarNotificacion(mensaje) {
         const notif = document.createElement('div');
+        notif.className = 'notificacion-dinero';
         notif.textContent = mensaje;
         notif.style.cssText = `
             position: fixed;
             top: 80px;
             right: 20px;
-            background: linear-gradient(135deg, #FF1493, #8A5AF7);
+            background: linear-gradient(135deg, #FF1493, #FF69B4);
             color: white;
-            padding: 15px 25px;
+            padding: 12px 25px;
             border-radius: 50px;
             font-weight: bold;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.4);
             z-index: 1001;
             animation: slideIn 0.3s ease, fadeOut 0.3s ease 2s forwards;
+            font-size: 1.1rem;
             border: 2px solid white;
-            white-space: pre-line;
-            max-width: 400px;
         `;
         
         document.body.appendChild(notif);
-        setTimeout(() => notif.remove(), 2500);
+        
+        setTimeout(() => {
+            if (notif.parentNode) {
+                notif.parentNode.removeChild(notif);
+            }
+        }, 2500);
     }
 
     // ====================
     // LOCAL STORAGE
     // ====================
-    
-    guardarCondones() {
-        localStorage.setItem('rpg_condones', this.condones);
-    }
-    
-    cargarCondones() {
-        return parseInt(localStorage.getItem('rpg_condones')) || 0;
-    }
-    
-    guardarCondones001() {
-        localStorage.setItem('rpg_condones001', this.condones001);
-    }
-    
-    cargarCondones001() {
-        return parseInt(localStorage.getItem('rpg_condones001')) || 0;
-    }
-    
-    guardarDatosPersonajes() {
-        localStorage.setItem('rpg_datos_personajes', JSON.stringify(this.datosPersonajes));
-    }
-    
-    cargarDatosPersonajes() {
-        const data = localStorage.getItem('rpg_datos_personajes');
-        return data ? JSON.parse(data) : null;
-    }
-    
+
     guardarPersonajeSeleccionado() {
-        localStorage.setItem('rpg_personaje_seleccionado', this.personajeSeleccionado);
+        try {
+            localStorage.setItem('rpg_personaje_seleccionado', this.personajeSeleccionado);
+        } catch (e) {
+            console.warn('No se pudo guardar personaje seleccionado:', e);
+        }
     }
-    
+
     cargarPersonajeSeleccionado() {
-        return localStorage.getItem('rpg_personaje_seleccionado');
+        try {
+            return localStorage.getItem('rpg_personaje_seleccionado');
+        } catch (e) {
+            console.warn('No se pudo cargar personaje seleccionado:', e);
+            return null;
+        }
+    }
+
+    guardarDatosPersonajes() {
+        try {
+            localStorage.setItem('rpg_datos_personajes', JSON.stringify(this.datosPersonajes));
+        } catch (e) {
+            console.warn('No se pudo guardar datos personajes:', e);
+        }
+    }
+
+    cargarDatosPersonajes() {
+        try {
+            const datos = localStorage.getItem('rpg_datos_personajes');
+            return datos ? JSON.parse(datos) : null;
+        } catch (e) {
+            console.warn('No se pudo cargar datos personajes:', e);
+            return null;
+        }
+    }
+
+    guardarCondones() {
+        try {
+            localStorage.setItem('rpg_condones', this.condones.toString());
+        } catch (e) {
+            console.warn('No se pudo guardar condones:', e);
+        }
+    }
+
+    cargarCondones() {
+        try {
+            const condones = localStorage.getItem('rpg_condones');
+            return condones ? parseInt(condones) : 0;
+        } catch (e) {
+            console.warn('No se pudo cargar condones:', e);
+            return 0;
+        }
+    }
+
+    guardarCondones001() {
+        try {
+            localStorage.setItem('rpg_condones001', this.condones001.toString());
+        } catch (e) {
+            console.warn('No se pudo guardar condones001:', e);
+        }
+    }
+
+    cargarCondones001() {
+        try {
+            const condones = localStorage.getItem('rpg_condones001');
+            return condones ? parseInt(condones) : 0;
+        } catch (e) {
+            console.warn('No se pudo cargar condones001:', e);
+            return 0;
+        }
+    }
+
+    seleccionarTipoCondon(tipo) {
+        console.log(`Tipo de condón seleccionado: ${tipo}`);
+        return tipo;
     }
 }
 
-// ====================
-// INSTANCIA GLOBAL
-// ====================
+// ================================================
+// INTEGRACIÓN CON SISTEMA DE MAZOS
+// ================================================
+
+const agregarDineroOriginal = sistemaEconomia.agregarDinero;
+
+sistemaEconomia.agregarDinero = function(cantidad) {
+    const resultado = agregarDineroOriginal.call(this, cantidad);
+    
+    if (cantidad > 0 && window.quintillizasRPG && window.quintillizasRPG.personajeSeleccionado) {
+        const expPorSoles = 10;
+        const expGanada = Math.round(cantidad * expPorSoles);
+        
+        window.quintillizasRPG.agregarEXP(
+            window.quintillizasRPG.personajeSeleccionado, 
+            expGanada
+        );
+        
+        console.log(`🎮 RPG: +${expGanada} EXP para ${window.quintillizasRPG.datosPersonajes[window.quintillizasRPG.personajeSeleccionado].nombre}`);
+    }
+    
+    return resultado;
+};
+
+// ================================================
+// INSTANCIA GLOBAL DEL RPG
+// ================================================
 
 const quintillizasRPG = new QuintillizasRPG();
 
-// Inicializar
+// Inicializar al cargar
 document.addEventListener('DOMContentLoaded', function() {
     quintillizasRPG.inicializar();
-    console.log('🎮 RPG Quintillizas - Sistema de Orgías con Cuadrícula activado');
+    console.log('🎮 RPG Quintillizas - Sistema CORREGIDO activado');
+    console.log('✅ Límites fijos: Afinidad 0-200 | Nivel 1-10');
+    console.log('✅ Éxito máximo: 80% sin condón (solo con afinidad 200 y nivel 10)');
+    console.log('✅ Condón 0.01: +20% éxito, +80% afinidad, límite 100%');
+    console.log('✅ Probabilidades base: 0-10% (solo momentos fáciles)');
 });
