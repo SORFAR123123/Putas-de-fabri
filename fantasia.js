@@ -1,641 +1,838 @@
 // ================================================
-// RPG FANTASÍA - SISTEMA DE COMBATE POR TURNOS CON PREFERENCIAS
+// RPG FANTASÍA - 5 PISOS CON BOSS Y RECOMPENSAS +18
+// Combate por turnos con sprites URL
+// Tienda de consumibles
+// Recompensas: videos de novia o boss
 // ================================================
 
 class FantasiaRPG {
     constructor() {
         this.jugador = this.cargarJugador() || this.inicializarJugador();
-        this.noviaSeleccionada = this.cargarNoviaSeleccionada() || null;
-        this.combateActual = null;
+        this.pisos = this.inicializarPisos();
+        this.pisoActual = this.cargarPisoActual() || 1;
         this.enemigoActual = null;
-        this.historialCombates = this.cargarHistorial() || [];
+        this.indiceEnemigoActual = 0;
+        this.enCombate = false;
         this.mensajesCombate = [];
-        
-        // PREFERENCIAS DE STATS POR CHICA
-        this.preferenciasStats = {
-            'ichika': {
-                statPreferido: 'fuerza',
-                statSecundario: 'defensa',
-                descripcion: 'Le gustan los hombres fuertes y protectores',
-                bonusPorStat: 2.5,
-                bonusMaximo: 25,
-                frase: '💖 Ichika se siente más atraída por tu fuerza...'
-            },
-            'nino': {
-                statPreferido: 'resistencia',
-                statSecundario: 'defensa',
-                descripcion: 'Admira a quienes aguantan sus tsunderazos',
-                bonusPorStat: 3.0,
-                bonusMaximo: 30,
-                frase: '😤 Nino nota tu resistencia... pero no es que le guste o algo así'
-            },
-            'miku': {
-                statPreferido: 'inteligencia',
-                statSecundario: 'carisma',
-                descripcion: 'Le atraen los hombres inteligentes y cultos',
-                bonusPorStat: 2.8,
-                bonusMaximo: 28,
-                frase: '😳 Miku se siente nerviosa con alguien tan inteligente como tú...'
-            },
-            'yotsuba': {
-                statPreferido: 'velocidad',
-                statSecundario: 'energia',
-                descripcion: 'Le encanta la energía y rapidez',
-                bonusPorStat: 3.2,
-                bonusMaximo: 32,
-                frase: '💪 ¡Yotsuba está impresionada con tu velocidad!'
-            },
-            'itsuki': {
-                statPreferido: 'carisma',
-                statSecundario: 'inteligencia',
-                descripcion: 'Le gustan los hombres carismáticos y divertidos',
-                bonusPorStat: 2.7,
-                bonusMaximo: 27,
-                frase: '🍔 Itsuki encuentra tu carisma irresistible... igual que la comida'
-            }
-        };
+        this.spriteBossActual = 'normal';
+        this.bossDerrotado = null;
+        this.pocionUsadaEsteCombate = false; // Para limitar revivir automático
     }
+
+    // ====================
+    // INICIALIZACIÓN
+    // ====================
 
     inicializarJugador() {
         return {
-            nombre: 'Héroe',
             nivel: 1,
             exp: 0,
-            expParaSiguienteNivel: 100,
+            expMaxima: 100,
             
-            // STATS BASE
+            // Stats base (empiezan en 5)
             stats: {
-                vida: 100,
-                vidaMaxima: 100,
-                energia: 50,
-                energiaMaxima: 50,
-                fuerza: 10,
-                defensa: 5,
-                velocidad: 8,
-                inteligencia: 6,
-                resistencia: 7,
+                fuerza: 5,
+                resistencia: 5,
+                velocidad: 5,
+                inteligencia: 5,
                 carisma: 5
             },
             
-            // EQUIPO
-            equipo: {
-                arma: null,
-                armadura: null,
-                accesorio: null
-            },
+            // Combate
+            vida: 100,
+            vidaMaxima: 100,
+            energia: 50,
+            energiaMaxima: 50,
             
-            // HABILIDADES APRENDIDAS
-            habilidades: [
-                { id: 'ataque_basico', nombre: 'Ataque Básico', tipo: 'fisico', costo: 0, poder: 1.0 }
-            ],
+            // Piedras filosofales
+            piedras: 0,
             
-            // INVENTARIO
+            // Inventario de consumibles
             inventario: {
-                pocionesVida: 3,
-                pocionesEnergia: 2,
-                revivir: 1
+                pocionVidaPequena: 3,
+                pocionVidaGrande: 1,
+                pocionEnergia: 2,
+                revivirAuto: 0
             },
             
-            // HISTORIAL
-            dinero: 0,
-            muertes: 0,
+            // Estadísticas
             enemigosDerrotados: 0,
-            combatesGanados: 0,
-            combatesPerdidos: 0
+            bossesDerrotados: 0,
+            pisosCompletados: 0
         };
     }
 
-    // ====================
-    // SISTEMA DE STATS MANUALES
-    // ====================
-
-    subirStat(stat) {
-        if (this.jugador.stats[stat] !== undefined) {
-            this.jugador.stats[stat] += 1;
-            this.guardarJugador();
-            
-            const nombresStats = {
-                'fuerza': '💪 Fuerza',
-                'defensa': '🛡️ Defensa',
-                'velocidad': '⚡ Velocidad',
-                'inteligencia': '🧠 Inteligencia',
-                'resistencia': '💪 Resistencia',
-                'carisma': '😎 Carisma'
-            };
-            
-            this.mostrarNotificacion(`↑ ${nombresStats[stat] || stat}: ${this.jugador.stats[stat]}`);
-            
-            if (this.noviaSeleccionada) {
-                this.mostrarBonusStatsNovia();
+    inicializarPisos() {
+        return {
+            1: {
+                nombre: "🌳 Bosque Encantado",
+                desbloqueado: true,
+                completado: false,
+                jefe: "Rias Gremory",
+                imagenJefe: "URL_RIAS_NORMAL", // Tú pones URL
+                imagenJefeAtacando: "URL_RIAS_ATACANDO",
+                imagenJefeDerrotado: "URL_RIAS_DERROTADO",
+                enemigos: [
+                    {
+                        id: "slime",
+                        nombre: "Slime Verde",
+                        imagen: "URL_SLIME",
+                        vida: 25,
+                        fuerza: 4,
+                        defensa: 1,
+                        exp: 5,
+                        piedras: 1
+                    },
+                    {
+                        id: "goblin",
+                        nombre: "Goblin",
+                        imagen: "URL_GOBLIN",
+                        vida: 35,
+                        fuerza: 6,
+                        defensa: 2,
+                        exp: 8,
+                        piedras: 1
+                    },
+                    {
+                        id: "lobo",
+                        nombre: "Lobo",
+                        imagen: "URL_LOBO",
+                        vida: 45,
+                        fuerza: 8,
+                        defensa: 3,
+                        exp: 12,
+                        piedras: 1
+                    }
+                ],
+                boss: {
+                    id: "rias",
+                    nombre: "🔥 Rias Gremory",
+                    imagen: "URL_RIAS_NORMAL",
+                    imagenAtacando: "URL_RIAS_ATACANDO",
+                    imagenDerrotado: "URL_RIAS_DERROTADO",
+                    vida: 120,
+                    fuerza: 15,
+                    defensa: 5,
+                    exp: 50,
+                    piedras: 5,
+                    
+                    // Videos de recompensa (tú pones IDs después)
+                    videos: {
+                        mamada: "ID_VIDEO_MAMADA_RIAS",
+                        doggy: "ID_VIDEO_DOGGY_RIAS",
+                        montar: "ID_VIDEO_MONTAR_RIAS"
+                    }
+                }
+            },
+            2: {
+                nombre: "🔥 Volcán de Fuego",
+                desbloqueado: false,
+                completado: false,
+                jefe: "Erza Scarlet",
+                imagenJefe: "URL_ERZA_NORMAL",
+                imagenJefeAtacando: "URL_ERZA_ATACANDO",
+                imagenJefeDerrotado: "URL_ERZA_DERROTADO",
+                enemigos: [
+                    {
+                        id: "elemental",
+                        nombre: "Elemental de Fuego",
+                        imagen: "URL_ELEMENTAL",
+                        vida: 40,
+                        fuerza: 9,
+                        defensa: 3,
+                        exp: 15,
+                        piedras: 2
+                    },
+                    {
+                        id: "salamandra",
+                        nombre: "Salamandra",
+                        imagen: "URL_SALAMANDRA",
+                        vida: 55,
+                        fuerza: 12,
+                        defensa: 4,
+                        exp: 20,
+                        piedras: 2
+                    },
+                    {
+                        id: "demonio",
+                        nombre: "Demonio Menor",
+                        imagen: "URL_DEMONIO",
+                        vida: 70,
+                        fuerza: 15,
+                        defensa: 5,
+                        exp: 25,
+                        piedras: 2
+                    }
+                ],
+                boss: {
+                    id: "erza",
+                    nombre: "⚔️ Erza Scarlet",
+                    imagen: "URL_ERZA_NORMAL",
+                    imagenAtacando: "URL_ERZA_ATACANDO",
+                    imagenDerrotado: "URL_ERZA_DERROTADO",
+                    vida: 180,
+                    fuerza: 22,
+                    defensa: 8,
+                    exp: 80,
+                    piedras: 10,
+                    
+                    videos: {
+                        mamada: "ID_VIDEO_MAMADA_ERZA",
+                        doggy: "ID_VIDEO_DOGGY_ERZA",
+                        montar: "ID_VIDEO_MONTAR_ERZA"
+                    }
+                }
+            },
+            3: {
+                nombre: "❄️ Templo Helado",
+                desbloqueado: false,
+                completado: false,
+                jefe: "Esdeath",
+                imagenJefe: "URL_ESDEATH_NORMAL",
+                imagenJefeAtacando: "URL_ESDEATH_ATACANDO",
+                imagenJefeDerrotado: "URL_ESDEATH_DERROTADO",
+                enemigos: [
+                    {
+                        id: "fantasma",
+                        nombre: "Fantasma",
+                        imagen: "URL_FANTASMA",
+                        vida: 50,
+                        fuerza: 11,
+                        defensa: 4,
+                        exp: 22,
+                        piedras: 3
+                    },
+                    {
+                        id: "yeti",
+                        nombre: "Yeti",
+                        imagen: "URL_YETI",
+                        vida: 75,
+                        fuerza: 16,
+                        defensa: 7,
+                        exp: 30,
+                        piedras: 3
+                    },
+                    {
+                        id: "golem",
+                        nombre: "Golem de Hielo",
+                        imagen: "URL_GOLEM",
+                        vida: 95,
+                        fuerza: 20,
+                        defensa: 10,
+                        exp: 35,
+                        piedras: 3
+                    }
+                ],
+                boss: {
+                    id: "esdeath",
+                    nombre: "❄️ Esdeath",
+                    imagen: "URL_ESDEATH_NORMAL",
+                    imagenAtacando: "URL_ESDEATH_ATACANDO",
+                    imagenDerrotado: "URL_ESDEATH_DERROTADO",
+                    vida: 250,
+                    fuerza: 30,
+                    defensa: 12,
+                    exp: 120,
+                    piedras: 15,
+                    
+                    videos: {
+                        mamada: "ID_VIDEO_MAMADA_ESDEATH",
+                        doggy: "ID_VIDEO_DOGGY_ESDEATH",
+                        montar: "ID_VIDEO_MONTAR_ESDEATH"
+                    }
+                }
+            },
+            4: {
+                nombre: "⚡ Ciudad Prohibida",
+                desbloqueado: false,
+                completado: false,
+                jefe: "Yor Forger",
+                imagenJefe: "URL_YOR_NORMAL",
+                imagenJefeAtacando: "URL_YOR_ATACANDO",
+                imagenJefeDerrotado: "URL_YOR_DERROTADO",
+                enemigos: [
+                    {
+                        id: "samurai",
+                        nombre: "Samurai",
+                        imagen: "URL_SAMURAI",
+                        vida: 65,
+                        fuerza: 18,
+                        defensa: 8,
+                        exp: 35,
+                        piedras: 4
+                    },
+                    {
+                        id: "ninja",
+                        nombre: "Ninja",
+                        imagen: "URL_NINJA",
+                        vida: 55,
+                        fuerza: 22,
+                        defensa: 5,
+                        exp: 40,
+                        piedras: 4
+                    },
+                    {
+                        id: "oni",
+                        nombre: "Oni",
+                        imagen: "URL_ONI",
+                        vida: 90,
+                        fuerza: 25,
+                        defensa: 10,
+                        exp: 45,
+                        piedras: 4
+                    }
+                ],
+                boss: {
+                    id: "yor",
+                    nombre: "🗡️ Yor Forger",
+                    imagen: "URL_YOR_NORMAL",
+                    imagenAtacando: "URL_YOR_ATACANDO",
+                    imagenDerrotado: "URL_YOR_DERROTADO",
+                    vida: 320,
+                    fuerza: 38,
+                    defensa: 15,
+                    exp: 160,
+                    piedras: 20,
+                    
+                    videos: {
+                        mamada: "ID_VIDEO_MAMADA_YOR",
+                        doggy: "ID_VIDEO_DOGGY_YOR",
+                        montar: "ID_VIDEO_MONTAR_YOR"
+                    }
+                }
+            },
+            5: {
+                nombre: "🌌 Castillo Celestial",
+                desbloqueado: false,
+                completado: false,
+                jefe: "Makima",
+                imagenJefe: "URL_MAKIMA_NORMAL",
+                imagenJefeAtacando: "URL_MAKIMA_ATACANDO",
+                imagenJefeDerrotado: "URL_MAKIMA_DERROTADO",
+                enemigos: [
+                    {
+                        id: "angel",
+                        nombre: "Ángel",
+                        imagen: "URL_ANGEL",
+                        vida: 80,
+                        fuerza: 22,
+                        defensa: 10,
+                        exp: 50,
+                        piedras: 5
+                    },
+                    {
+                        id: "caballero",
+                        nombre: "Caballero Celestial",
+                        imagen: "URL_CABALLERO",
+                        vida: 100,
+                        fuerza: 28,
+                        defensa: 15,
+                        exp: 60,
+                        piedras: 5
+                    },
+                    {
+                        id: "mago",
+                        nombre: "Mago Supremo",
+                        imagen: "URL_MAGO",
+                        vida: 70,
+                        fuerza: 35,
+                        defensa: 8,
+                        exp: 70,
+                        piedras: 5
+                    }
+                ],
+                boss: {
+                    id: "makima",
+                    nombre: "👁️ Makima",
+                    imagen: "URL_MAKIMA_NORMAL",
+                    imagenAtacando: "URL_MAKIMA_ATACANDO",
+                    imagenDerrotado: "URL_MAKIMA_DERROTADO",
+                    vida: 500,
+                    fuerza: 50,
+                    defensa: 20,
+                    exp: 300,
+                    piedras: 50,
+                    
+                    videos: {
+                        mamada: "ID_VIDEO_MAMADA_MAKIMA",
+                        doggy: "ID_VIDEO_DOGGY_MAKIMA",
+                        montar: "ID_VIDEO_MONTAR_MAKIMA"
+                    }
+                }
             }
-            
-            return true;
-        }
-        return false;
-    }
-
-    bajarStat(stat) {
-        if (this.jugador.stats[stat] !== undefined && this.jugador.stats[stat] > 1) {
-            this.jugador.stats[stat] -= 1;
-            this.guardarJugador();
-            
-            this.mostrarNotificacion(`↓ ${stat}: ${this.jugador.stats[stat]}`);
-            return true;
-        }
-        return false;
+        };
     }
 
     // ====================
-    // SISTEMA DE COMBATE CORREGIDO
+    // COMBATE POR TURNOS
     // ====================
 
-    iniciarCombate(tipoEnemigo) {
-        const enemigos = {
-            'slime': {
-                nombre: 'Slime Verde',
-                nivel: 1,
-                vida: 30,
-                vidaMaxima: 30,
-                fuerza: 4,
-                defensa: 2,
-                velocidad: 3,
-                exp: 20,
-                dinero: 5,
-                descripcion: 'Una masa gelatinosa que se mueve lentamente'
-            },
-            'goblin': {
-                nombre: 'Goblin Ladrón',
-                nivel: 2,
-                vida: 45,
-                vidaMaxima: 45,
-                fuerza: 7,
-                defensa: 3,
-                velocidad: 6,
-                exp: 35,
-                dinero: 10,
-                descripcion: 'Un pequeño humanoide ávido de dinero'
-            },
-            'lobo': {
-                nombre: 'Lobo Salvaje',
-                nivel: 3,
-                vida: 60,
-                vidaMaxima: 60,
-                fuerza: 10,
-                defensa: 4,
-                velocidad: 9,
-                exp: 50,
-                dinero: 15,
-                descripcion: 'Un depredador veloz y peligroso'
-            },
-            'esqueleto': {
-                nombre: 'Esqueleto Guerrero',
-                nivel: 4,
-                vida: 75,
-                vidaMaxima: 75,
-                fuerza: 12,
-                defensa: 6,
-                velocidad: 5,
-                exp: 70,
-                dinero: 20,
-                descripcion: 'Los restos de un antiguo guerrero'
-            },
-            'ogro': {
-                nombre: 'Ogro Furioso',
-                nivel: 5,
-                vida: 100,
-                vidaMaxima: 100,
-                fuerza: 18,
-                defensa: 8,
-                velocidad: 4,
-                exp: 100,
-                dinero: 30,
-                descripcion: 'Una bestia gigante con fuerza bruta'
-            }
-        };
+    entrarAlPiso(pisoNumero) {
+        if (!this.pisos[pisoNumero].desbloqueado) {
+            this.mostrarNotificacion("❌ Este piso no está desbloqueado");
+            return false;
+        }
+
+        this.pisoActual = pisoNumero;
+        this.indiceEnemigoActual = 0;
+        this.enCombate = true;
+        this.pocionUsadaEsteCombate = false;
         
-        this.enemigoActual = JSON.parse(JSON.stringify(enemigos[tipoEnemigo] || enemigos['slime']));
-        
-        this.combateActual = {
-            enTurno: 'jugador',
-            turno: 1,
-            jugadorVivo: true,
-            enemigoVivo: true,
-            mensajes: []
-        };
+        // Cargar primer enemigo
+        this.enemigoActual = JSON.parse(JSON.stringify(
+            this.pisos[pisoNumero].enemigos[this.indiceEnemigoActual]
+        ));
+        this.enemigoActual.vidaActual = this.enemigoActual.vida;
         
         this.mensajesCombate = [];
-        this.agregarMensajeCombate(`⚔️ COMBATE INICIADO: ${this.jugador.nombre} vs ${this.enemigoActual.nombre}`);
-        this.agregarMensajeCombate(`🎯 Turno del jugador. ¡Ataca primero!`);
+        this.agregarMensaje(`⚔️ Entraste al ${this.pisos[pisoNumero].nombre}`);
+        this.agregarMensaje(`🐉 Enemigo: ${this.enemigoActual.nombre}`);
         
-        return this.enemigoActual;
+        this.guardarTodo();
+        this.actualizarUI();
     }
 
-    atacarEnemigo(habilidadId = 'ataque_basico') {
-        if (!this.combateActual || !this.combateActual.jugadorVivo) {
-            console.error("No hay combate activo o jugador no vivo");
-            return false;
-        }
+    atacar() {
+        if (!this.enCombate) return;
         
-        if (!this.enemigoActual) {
-            console.error("No hay enemigo actual");
-            return false;
-        }
-        
-        const habilidad = this.jugador.habilidades.find(h => h.id === habilidadId) || 
-                         this.jugador.habilidades[0];
-        
-        let daño = Math.floor(this.jugador.stats.fuerza * (habilidad.poder || 1.0));
-        daño = Math.floor(daño * (0.8 + Math.random() * 0.4));
+        // Calcular daño del jugador
+        let daño = 5 + Math.floor(Math.random() * 6) + Math.floor(this.jugador.stats.fuerza / 2);
         daño = Math.max(1, daño - this.enemigoActual.defensa);
         
-        this.enemigoActual.vida = Math.max(0, this.enemigoActual.vida - daño);
+        this.enemigoActual.vidaActual -= daño;
+        this.agregarMensaje(`💥 Atacas! ${daño} de daño a ${this.enemigoActual.nombre}`);
         
-        this.agregarMensajeCombate(`🎯 ${this.jugador.nombre} usa ${habilidad.nombre} y causa ${daño} de daño!`);
-        
-        if (this.enemigoActual.vida <= 0) {
-            this.enemigoActual.vida = 0;
-            this.combateActual.enemigoVivo = false;
-            this.agregarMensajeCombate(`💀 ${this.enemigoActual.nombre} ha sido derrotado!`);
-            
-            this.darRecompensaCombate();
-            
-            setTimeout(() => {
-                this.finalizarCombate('victoria');
-                this.actualizarUI();
-            }, 2000);
-            
-            return 'victoria';
+        // Cambiar sprite si es boss
+        if (this.esBossActual()) {
+            this.spriteBossActual = 'atacando';
+            setTimeout(() => { this.spriteBossActual = 'normal'; this.actualizarUI(); }, 500);
         }
         
-        this.agregarMensajeCombate(`❤️ ${this.enemigoActual.nombre}: ${this.enemigoActual.vida}/${this.enemigoActual.vidaMaxima} HP`);
+        // Verificar si enemigo murió
+        if (this.enemigoActual.vidaActual <= 0) {
+            this.enemigoDerrotado();
+            return;
+        }
         
-        setTimeout(() => {
-            this.turnoEnemigo();
-            this.actualizarUI();
-        }, 1000);
-        
-        return 'continuar';
+        // Turno del enemigo (después de 1 segundo)
+        setTimeout(() => this.turnoEnemigo(), 1000);
+        this.actualizarUI();
     }
 
     turnoEnemigo() {
-        if (!this.combateActual.enemigoVivo) return 'enemigo_muerto';
+        if (!this.enCombate) return;
         
-        const dañoEnemigo = Math.floor(this.enemigoActual.fuerza * (0.8 + Math.random() * 0.4));
-        let dañoFinal = Math.max(1, dañoEnemigo - this.jugador.stats.defensa);
+        let dañoEnemigo = this.enemigoActual.fuerza + Math.floor(Math.random() * 5);
+        dañoEnemigo = Math.max(1, dañoEnemigo - 2); // Defensa base del jugador
         
-        this.jugador.stats.vida = Math.max(0, this.jugador.stats.vida - dañoFinal);
+        this.jugador.vida -= dañoEnemigo;
+        this.agregarMensaje(`💢 ${this.enemigoActual.nombre} te ataca! ${dañoEnemigo} de daño`);
         
-        this.agregarMensajeCombate(`👹 ${this.enemigoActual.nombre} ataca y causa ${dañoFinal} de daño!`);
-        
-        if (this.jugador.stats.vida <= 0) {
-            this.jugador.stats.vida = 0;
-            this.combateActual.jugadorVivo = false;
-            this.agregarMensajeCombate(`💀 ${this.jugador.nombre} ha sido derrotado...`);
-            
-            setTimeout(() => {
-                this.muerteJugador();
-            }, 1500);
-            
-            return 'derrota';
+        // Cambiar sprite si es boss
+        if (this.esBossActual()) {
+            this.spriteBossActual = 'atacando';
+            setTimeout(() => { this.spriteBossActual = 'normal'; this.actualizarUI(); }, 500);
         }
         
-        this.agregarMensajeCombate(`❤️ ${this.jugador.nombre}: ${this.jugador.stats.vida}/${this.jugador.stats.vidaMaxima} HP`);
+        // Verificar si jugador murió
+        if (this.jugador.vida <= 0) {
+            this.jugador.vida = 0;
+            this.agregarMensaje("💀 Has muerto...");
+            setTimeout(() => this.muerteJugador(), 1500);
+        }
         
-        return 'continuar';
+        this.actualizarUI();
     }
 
-    usarPocion(tipo) {
-        if (tipo === 'vida' && this.jugador.inventario.pocionesVida > 0) {
-            const curacion = 30;
-            this.jugador.stats.vida = Math.min(
-                this.jugador.stats.vidaMaxima,
-                this.jugador.stats.vida + curacion
-            );
-            this.jugador.inventario.pocionesVida -= 1;
-            
-            this.agregarMensajeCombate(`❤️ Usas poción de vida: +${curacion} HP`);
-            this.guardarJugador();
-            
-            setTimeout(() => {
-                this.turnoEnemigo();
-                this.actualizarUI();
-            }, 1000);
-            
-            return true;
-        }
+    enemigoDerrotado() {
+        const esBoss = this.esBossActual();
         
-        if (tipo === 'energia' && this.jugador.inventario.pocionesEnergia > 0) {
-            const energia = 20;
-            this.jugador.stats.energia = Math.min(
-                this.jugador.stats.energiaMaxima,
-                this.jugador.stats.energia + energia
-            );
-            this.jugador.inventario.pocionesEnergia -= 1;
-            
-            this.agregarMensajeCombate(`⚡ Usas poción de energía: +${energia} EP`);
-            this.guardarJugador();
-            
-            return true;
-        }
+        // Recompensas
+        this.jugador.piedras += this.enemigoActual.piedras;
+        this.jugador.exp += this.enemigoActual.exp;
+        this.jugador.enemigosDerrotados++;
         
-        return false;
-    }
-
-    huirCombate() {
-        const probabilidadHuida = 60 + (this.jugador.stats.velocidad * 2);
-        const exito = Math.random() * 100 < probabilidadHuida;
+        this.agregarMensaje(`🎉 ${this.enemigoActual.nombre} derrotado!`);
+        this.agregarMensaje(`💎 +${this.enemigoActual.piedras} piedras`);
+        this.agregarMensaje(`⭐ +${this.enemigoActual.exp} EXP`);
         
-        if (exito) {
-            this.agregarMensajeCombate(`🏃‍♂️ ¡Logras huir del combate!`);
-            this.finalizarCombate('huida');
-            setTimeout(() => this.actualizarUI(), 1000);
-            return true;
+        if (esBoss) {
+            // Es BOSS
+            this.spriteBossActual = 'derrotado';
+            this.bossDerrotado = this.enemigoActual;
+            this.jugador.bossesDerrotados++;
+            this.pisos[this.pisoActual].completado = true;
+            
+            // Desbloquear siguiente piso
+            if (this.pisos[this.pisoActual + 1]) {
+                this.pisos[this.pisoActual + 1].desbloqueado = true;
+            }
+            
+            this.actualizarUI();
+            this.mostrarRecompensasBoss();
         } else {
-            this.agregarMensajeCombate(`❌ Intentas huir pero fallas...`);
-            setTimeout(() => {
-                this.turnoEnemigo();
-                this.actualizarUI();
-            }, 1000);
-            return false;
+            // Es enemigo normal, pasar al siguiente
+            this.indiceEnemigoActual++;
+            
+            if (this.indiceEnemigoActual < this.pisos[this.pisoActual].enemigos.length) {
+                // Siguiente enemigo normal
+                this.enemigoActual = JSON.parse(JSON.stringify(
+                    this.pisos[this.pisoActual].enemigos[this.indiceEnemigoActual]
+                ));
+                this.enemigoActual.vidaActual = this.enemigoActual.vida;
+                this.agregarMensaje(`➡️ Siguiente enemigo: ${this.enemigoActual.nombre}`);
+                setTimeout(() => this.actualizarUI(), 1500);
+            } else {
+                // Cargar BOSS
+                this.enemigoActual = JSON.parse(JSON.stringify(this.pisos[this.pisoActual].boss));
+                this.enemigoActual.vidaActual = this.enemigoActual.vida;
+                this.agregarMensaje(`🔥 BOSS: ${this.enemigoActual.nombre}`);
+                setTimeout(() => this.actualizarUI(), 1500);
+            }
         }
-    }
-
-    // ====================
-    // RECOMPENSAS Y PENALIZACIONES
-    // ====================
-
-    darRecompensaCombate() {
-        if (!this.enemigoActual) return;
-        
-        const expGanada = this.enemigoActual.exp;
-        const dineroGanado = this.enemigoActual.dinero;
-        
-        this.jugador.exp += expGanada;
-        this.jugador.dinero += dineroGanado;
-        this.jugador.enemigosDerrotados += 1;
-        this.jugador.combatesGanados += 1;
         
         this.verificarSubidaNivel();
-        this.guardarJugador();
-        
-        this.agregarMensajeCombate(`🎉 ¡VICTORIA!`);
-        this.agregarMensajeCombate(`💰 Obtienes ${dineroGanado} monedas`);
-        this.agregarMensajeCombate(`⭐ Obtienes ${expGanada} EXP`);
-        
-        if (this.noviaSeleccionada && window.quintillizasRPG) {
-            const expParaNovia = Math.floor(expGanada * 0.5);
-            window.quintillizasRPG.agregarEXP(this.noviaSeleccionada, expParaNovia);
-            this.agregarMensajeCombate(`💖 ${expParaNovia} EXP para tu novia`);
-        }
-        
-        this.historialCombates.push({
-            fecha: new Date().toISOString(),
-            enemigo: this.enemigoActual.nombre,
-            resultado: 'victoria',
-            exp: expGanada,
-            dinero: dineroGanado
-        });
-        this.guardarHistorial();
-        
-        if (this.noviaSeleccionada) {
-            setTimeout(() => {
-                this.mostrarVideoVictoria();
-            }, 2000);
-        }
+        this.guardarTodo();
+        this.actualizarUI();
     }
 
     muerteJugador() {
-        this.jugador.muertes += 1;
-        this.jugador.combatesPerdidos += 1;
-        
-        const perdidaDinero = Math.max(5, Math.floor(this.jugador.dinero * 0.1));
-        const perdidaExp = Math.max(10, Math.floor(this.jugador.exp * 0.05));
-        
-        this.jugador.dinero = Math.max(0, this.jugador.dinero - perdidaDinero);
-        this.jugador.exp = Math.max(0, this.jugador.exp - perdidaExp);
-        
-        this.agregarMensajeCombate(`💀 Has muerto...`);
-        this.agregarMensajeCombate(`📉 Pierdes ${perdidaDinero} monedas y ${perdidaExp} EXP`);
-        
-        this.historialCombates.push({
-            fecha: new Date().toISOString(),
-            enemigo: this.enemigoActual.nombre,
-            resultado: 'derrota',
-            perdidaDinero: perdidaDinero,
-            perdidaExp: perdidaExp
-        });
-        this.guardarHistorial();
-        
-        setTimeout(() => {
-            this.mostrarVideoDerrota();
-        }, 1500);
-        
-        this.guardarJugador();
+        this.enCombate = false;
+        this.bossDerrotado = null;
+        this.jugador.vida = this.jugador.vidaMaxima; // Revivir al salir
+        this.guardarTodo();
+        this.cargarUIMenuPrincipal();
     }
 
-    finalizarCombate(resultado) {
-        this.combateActual = null;
-        this.enemigoActual = null;
+    // ====================
+    // CONSUMIBLES
+    // ====================
+
+    usarPocion(tipo) {
+        if (!this.enCombate) return;
+        
+        switch(tipo) {
+            case 'vidaPequena':
+                if (this.jugador.inventario.pocionVidaPequena > 0) {
+                    this.jugador.vida = Math.min(this.jugador.vida + 30, this.jugador.vidaMaxima);
+                    this.jugador.inventario.pocionVidaPequena--;
+                    this.agregarMensaje("💊 Usaste poción de vida pequeña: +30 HP");
+                    setTimeout(() => this.turnoEnemigo(), 1000);
+                }
+                break;
+                
+            case 'vidaGrande':
+                if (this.jugador.inventario.pocionVidaGrande > 0) {
+                    this.jugador.vida = Math.min(this.jugador.vida + 60, this.jugador.vidaMaxima);
+                    this.jugador.inventario.pocionVidaGrande--;
+                    this.agregarMensaje("❤️ Usaste poción de vida grande: +60 HP");
+                    setTimeout(() => this.turnoEnemigo(), 1000);
+                }
+                break;
+                
+            case 'energia':
+                if (this.jugador.inventario.pocionEnergia > 0) {
+                    this.jugador.energia = Math.min(this.jugador.energia + 20, this.jugador.energiaMaxima);
+                    this.jugador.inventario.pocionEnergia--;
+                    this.agregarMensaje("⚡ Usaste poción de energía: +20 EN");
+                    // No pasa turno, puedes seguir atacando
+                }
+                break;
+                
+            case 'revivir':
+                if (!this.pocionUsadaEsteCombate && this.jugador.inventario.revivirAuto > 0) {
+                    this.pocionUsadaEsteCombate = true;
+                    // Se activa automáticamente al morir, pero aquí lo dejamos para activación manual
+                }
+                break;
+        }
+        
+        this.guardarTodo();
+        this.actualizarUI();
     }
 
-    revivirJugador() {
-        const costoRevivir = 20 + (this.jugador.nivel * 5);
+    huir() {
+        if (!this.enCombate) return;
         
-        if (this.jugador.dinero >= costoRevivir) {
-            this.jugador.dinero -= costoRevivir;
-            this.jugador.stats.vida = Math.floor(this.jugador.stats.vidaMaxima * 0.5);
-            this.guardarJugador();
-            
-            this.mostrarNotificacion(`✨ Revivido por ${costoRevivir} monedas`);
-            this.actualizarUI();
-            return true;
+        const probabilidad = 50 + this.jugador.stats.velocidad * 2;
+        const exito = Math.random() * 100 < probabilidad;
+        
+        if (exito) {
+            this.agregarMensaje("🏃‍♂️ Lograste huir!");
+            this.enCombate = false;
+            setTimeout(() => this.cargarUIMenuPrincipal(), 1500);
         } else {
-            this.mostrarNotificacion(`❌ Necesitas ${costoRevivir} monedas para revivir`);
-            return false;
+            this.agregarMensaje("❌ No pudiste huir!");
+            setTimeout(() => this.turnoEnemigo(), 1000);
         }
+        
+        this.actualizarUI();
     }
 
     // ====================
-    // BONIFICACIONES POR STATS CON NOVIAS
+    // RECOMPENSAS DE BOSS
     // ====================
 
-    calcularBonusStatsNovia(personajeId) {
-        if (!personajeId || !this.preferenciasStats[personajeId]) {
-            return 0;
-        }
+    mostrarRecompensasBoss() {
+        if (!this.bossDerrotado) return;
         
-        const preferencia = this.preferenciasStats[personajeId];
-        const statPreferido = this.jugador.stats[preferencia.statPreferido] || 0;
-        const statSecundario = this.jugador.stats[preferencia.statSecundario] || 0;
+        const noviaActual = window.quintillizasRPG?.personajeSeleccionado;
+        const noviaNombre = noviaActual ? 
+            window.quintillizasRPG.datosPersonajes[noviaActual].nombre.split(' ')[0] : 
+            "Ninguna";
         
-        let bonusPrincipal = Math.min(
-            statPreferido * preferencia.bonusPorStat,
-            preferencia.bonusMaximo
-        );
+        const bossNombre = this.bossDerrotado.nombre;
+        const bossVideos = this.bossDerrotado.videos;
         
-        let bonusSecundario = Math.min(
-            statSecundario * (preferencia.bonusPorStat * 0.5),
-            preferencia.bonusMaximo * 0.5
-        );
+        const html = `
+            <div style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); display: flex; justify-content: center; align-items: center; z-index: 10000;">
+                <div style="background: linear-gradient(135deg, #1a1a2e, #16213e); border: 3px solid gold; border-radius: 30px; padding: 40px; max-width: 900px; width: 90%;">
+                    
+                    <h1 style="text-align: center; color: gold; margin-bottom: 20px;">🎉 VICTORIA CONTRA EL BOSS!</h1>
+                    <p style="text-align: center; color: white; margin-bottom: 30px;">${bossNombre} ha sido derrotado</p>
+                    
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-bottom: 30px;">
+                        
+                        <!-- REINO DE LA NOVIA -->
+                        <div style="background: rgba(255, 20, 147, 0.2); border: 2px solid #FF1493; border-radius: 20px; padding: 25px; text-align: center;">
+                            <h2 style="color: #FF1493; margin-bottom: 20px;">💖 REINO DE ${noviaNombre.toUpperCase()}</h2>
+                            <img src="${window.quintillizasRPG?.datosPersonajes[noviaActual]?.imagen || 'https://via.placeholder.com/150'}" 
+                                 style="width: 100px; height: 100px; border-radius: 50%; border: 3px solid #FF1493; margin-bottom: 20px;">
+                            
+                            <div style="display: flex; flex-direction: column; gap: 15px;">
+                                <button class="card-button" onclick="fantasiaRPG.verVideoRecompensa('novia', 'mamada')" 
+                                        style="background: linear-gradient(135deg, #FF1493, #FF6B6B); padding: 15px;">
+                                    😮 Mamada Apasionada
+                                </button>
+                                <button class="card-button" onclick="fantasiaRPG.verVideoRecompensa('novia', 'doggy')" 
+                                        style="background: linear-gradient(135deg, #FF1493, #FF6B6B); padding: 15px;">
+                                    🐕 Doggy Style
+                                </button>
+                                <button class="card-button" onclick="fantasiaRPG.verVideoRecompensa('novia', 'montar')" 
+                                        style="background: linear-gradient(135deg, #FF1493, #FF6B6B); padding: 15px;">
+                                    👆 Montar
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <!-- REINO DEL BOSS -->
+                        <div style="background: rgba(255, 215, 0, 0.2); border: 2px solid gold; border-radius: 20px; padding: 25px; text-align: center;">
+                            <h2 style="color: gold; margin-bottom: 20px;">🔥 REINO DE ${bossNombre.toUpperCase()}</h2>
+                            <img src="${this.bossDerrotado.imagen || 'https://via.placeholder.com/150'}" 
+                                 style="width: 100px; height: 100px; border-radius: 50%; border: 3px solid gold; margin-bottom: 20px;">
+                            
+                            <div style="display: flex; flex-direction: column; gap: 15px;">
+                                <button class="card-button" onclick="fantasiaRPG.verVideoRecompensa('boss', 'mamada')" 
+                                        style="background: linear-gradient(135deg, gold, #FF9800); padding: 15px;">
+                                    😮 Mamada de ${bossNombre}
+                                </button>
+                                <button class="card-button" onclick="fantasiaRPG.verVideoRecompensa('boss', 'doggy')" 
+                                        style="background: linear-gradient(135deg, gold, #FF9800); padding: 15px;">
+                                    🐕 Doggy con ${bossNombre}
+                                </button>
+                                <button class="card-button" onclick="fantasiaRPG.verVideoRecompensa('boss', 'montar')" 
+                                        style="background: linear-gradient(135deg, gold, #FF9800); padding: 15px;">
+                                    👆 Montar a ${bossNombre}
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div style="text-align: center;">
+                        <button class="card-button" onclick="fantasiaRPG.cerrarRecompensas()" 
+                                style="background: linear-gradient(135deg, #4CAF50, #2E7D32); padding: 15px 40px; font-size: 1.2rem;">
+                            ↩️ VOLVER AL MENÚ PRINCIPAL
+                        </button>
+                    </div>
+                </div>
+            </div>
+        `;
         
-        const bonusTotal = bonusPrincipal + bonusSecundario;
-        
-        return Math.round(bonusTotal);
+        // Crear overlay
+        const overlay = document.createElement('div');
+        overlay.id = 'recompensas-overlay';
+        overlay.innerHTML = html;
+        document.body.appendChild(overlay);
     }
 
-    mostrarBonusStatsNovia() {
-        if (!this.noviaSeleccionada || !this.preferenciasStats[this.noviaSeleccionada]) {
+    verVideoRecompensa(tipo, accion) {
+        if (!this.bossDerrotado) return;
+        
+        let videoId = '';
+        let titulo = '';
+        
+        if (tipo === 'novia') {
+            const noviaId = window.quintillizasRPG?.personajeSeleccionado;
+            if (!noviaId) {
+                alert("❌ No tienes ninguna novia seleccionada en el RPG Quintillizas");
+                return;
+            }
+            
+            // Aquí debes mapear los videos de cada novia según la acción
+            // Por ahora usaremos un placeholder
+            const novia = window.quintillizasRPG.datosPersonajes[noviaId];
+            const momentos = novia.momentosIntimos;
+            
+            if (accion === 'mamada') videoId = momentos.find(m => m.id.includes('mamada'))?.videoId;
+            else if (accion === 'doggy') videoId = momentos.find(m => m.id.includes('duro'))?.videoId;
+            else if (accion === 'montar') videoId = momentos.find(m => m.id.includes('correrse'))?.videoId;
+            
+            titulo = `${novia.nombre} - ${accion}`;
+            
+        } else {
+            // Videos del boss
+            videoId = this.bossDerrotado.videos[accion];
+            titulo = `${this.bossDerrotado.nombre} - ${accion}`;
+        }
+        
+        if (!videoId) {
+            alert("❌ Video no disponible (debes configurar el ID)");
             return;
         }
         
-        const preferencia = this.preferenciasStats[this.noviaSeleccionada];
-        const bonus = this.calcularBonusStatsNovia(this.noviaSeleccionada);
+        // Cerrar overlay de recompensas
+        this.cerrarRecompensas();
         
-        if (bonus > 0) {
-            this.mostrarNotificacion(
-                `${preferencia.frase}\n` +
-                `✨ +${bonus}% en momentos íntimos`
-            );
+        // Mostrar video
+        this.mostrarVideo(videoId, titulo, this.bossDerrotado.imagen);
+    }
+
+    cerrarRecompensas() {
+        const overlay = document.getElementById('recompensas-overlay');
+        if (overlay) overlay.remove();
+        this.bossDerrotado = null;
+        this.cargarUIMenuPrincipal();
+    }
+
+    mostrarVideo(videoId, titulo, imagen) {
+        const html = `
+            <div style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: black; z-index: 10001; display: flex; justify-content: center; align-items: center;">
+                <div style="max-width: 900px; width: 90%; background: #1a1a2e; border-radius: 30px; padding: 30px; border: 3px solid #FF1493;">
+                    
+                    <h2 style="text-align: center; color: #FF1493; margin-bottom: 20px;">🎬 ${titulo}</h2>
+                    
+                    <div style="margin: 20px 0; border-radius: 15px; overflow: hidden;">
+                        <iframe width="100%" height="400" 
+                                src="https://drive.google.com/file/d/${videoId}/preview" 
+                                frameborder="0" allow="autoplay; encrypted-media" allowfullscreen>
+                        </iframe>
+                    </div>
+                    
+                    <div style="text-align: center; margin-top: 20px;">
+                        <button class="card-button" onclick="fantasiaRPG.cerrarVideo()" 
+                                style="background: linear-gradient(135deg, #FF1493, #FF6B6B); padding: 15px 40px;">
+                            ↩️ Cerrar Video
+                        </button>
+                    </div>
+                </div>
+            </div>
+        `;
+        
+        const overlay = document.createElement('div');
+        overlay.id = 'video-overlay';
+        overlay.innerHTML = html;
+        document.body.appendChild(overlay);
+    }
+
+    cerrarVideo() {
+        const overlay = document.getElementById('video-overlay');
+        if (overlay) overlay.remove();
+        this.mostrarRecompensasBoss(); // Volver a mostrar recompensas
+    }
+
+    // ====================
+    // TIENDA DE STATS Y CONSUMIBLES
+    // ====================
+
+    comprarStat(stat) {
+        const costo = 10;
+        
+        if (this.jugador.piedras < costo) {
+            this.mostrarNotificacion("❌ No tienes suficientes piedras");
+            return;
+        }
+        
+        if (this.jugador.stats[stat] >= 100) {
+            this.mostrarNotificacion("❌ Ya llegaste al máximo (100)");
+            return;
+        }
+        
+        this.jugador.piedras -= costo;
+        this.jugador.stats[stat]++;
+        
+        this.mostrarNotificacion(`✅ ${stat} +1 (ahora ${this.jugador.stats[stat]})`);
+        this.guardarTodo();
+        this.cargarUITienda();
+    }
+
+    comprarConsumible(tipo) {
+        const precios = {
+            pocionVidaPequena: 3,
+            pocionVidaGrande: 8,
+            pocionEnergia: 5,
+            revivirAuto: 15
+        };
+        
+        const costo = precios[tipo];
+        
+        if (this.jugador.piedras < costo) {
+            this.mostrarNotificacion("❌ No tienes suficientes piedras");
+            return;
+        }
+        
+        this.jugador.piedras -= costo;
+        this.jugador.inventario[tipo]++;
+        
+        this.mostrarNotificacion(`✅ Compraste 1 ${tipo}`);
+        this.guardarTodo();
+        this.cargarUITienda();
+    }
+
+    // ====================
+    // UTILIDADES
+    // ====================
+
+    esBossActual() {
+        return this.indiceEnemigoActual >= this.pisos[this.pisoActual].enemigos.length;
+    }
+
+    agregarMensaje(mensaje) {
+        this.mensajesCombate.push(mensaje);
+        if (this.mensajesCombate.length > 8) {
+            this.mensajesCombate.shift();
         }
     }
-
-    obtenerBonusMomentoIntimo(personajeId) {
-        const bonus = this.calcularBonusStatsNovia(personajeId);
-        const bonusNivel = this.jugador.nivel * 0.5;
-        const bonusTotal = bonus + bonusNivel;
-        
-        return {
-            porcentaje: bonusTotal,
-            desglose: {
-                stats: bonus,
-                nivel: bonusNivel
-            }
-        };
-    }
-
-    // ====================
-    // SISTEMA DE NIVELES
-    // ====================
 
     verificarSubidaNivel() {
-        while (this.jugador.exp >= this.jugador.expParaSiguienteNivel) {
-            this.subirNivel();
+        while (this.jugador.exp >= this.jugador.expMaxima) {
+            this.jugador.nivel++;
+            this.jugador.exp -= this.jugador.expMaxima;
+            this.jugador.expMaxima = Math.floor(this.jugador.expMaxima * 1.5);
+            
+            // Suben stats automáticamente
+            this.jugador.stats.fuerza += 1;
+            this.jugador.stats.resistencia += 1;
+            this.jugador.stats.velocidad += 1;
+            this.jugador.stats.inteligencia += 1;
+            this.jugador.stats.carisma += 1;
+            
+            this.jugador.vidaMaxima += 10;
+            this.jugador.vida = this.jugador.vidaMaxima;
+            
+            this.agregarMensaje(`🎉 SUBISTE AL NIVEL ${this.jugador.nivel}!`);
         }
     }
 
-    subirNivel() {
-        this.jugador.nivel += 1;
-        this.jugador.exp -= this.jugador.expParaSiguienteNivel;
-        this.jugador.expParaSiguienteNivel = Math.floor(this.jugador.expParaSiguienteNivel * 1.5);
+    calcularBonusParaHermana(hermanaId) {
+        const stats = this.jugador.stats;
         
-        this.jugador.stats.vidaMaxima += 10;
-        this.jugador.stats.vida = this.jugador.stats.vidaMaxima;
-        this.jugador.stats.energiaMaxima += 5;
-        this.jugador.stats.energia = this.jugador.stats.energiaMaxima;
-        this.jugador.stats.fuerza += 2;
-        this.jugador.stats.defensa += 1;
-        this.jugador.stats.velocidad += 1;
-        this.jugador.stats.inteligencia += 1;
-        this.jugador.stats.resistencia += 1;
-        this.jugador.stats.carisma += 1;
-        
-        this.mostrarNotificacion(`🎉 ¡Subiste al nivel ${this.jugador.nivel}!`);
-        this.guardarJugador();
-    }
-
-    // ====================
-    // VIDEOS POR NOVIA
-    // ====================
-
-    mostrarVideoVictoria() {
-        if (!this.noviaSeleccionada) return;
-        
-        const videosVictoria = {
-            'ichika': [
-                { id: 'victoria_ichika_1', nombre: 'Ichika te felicita' },
-                { id: 'victoria_ichika_2', nombre: 'Ichika orgullosa' }
-            ],
-            'nino': [
-                { id: 'victoria_nino_1', nombre: 'Nino (no tan) indiferente' },
-                { id: 'victoria_nino_2', nombre: 'Nino tsundere' }
-            ],
-            'miku': [
-                { id: 'victoria_miku_1', nombre: 'Miku tímida' },
-                { id: 'victoria_miku_2', nombre: 'Miku alegre' }
-            ],
-            'yotsuba': [
-                { id: 'victoria_yotsuba_1', nombre: 'Yotsuba energética' },
-                { id: 'victoria_yotsuba_2', nombre: 'Yotsuba saltando' }
-            ],
-            'itsuki': [
-                { id: 'victoria_itsuki_1', nombre: 'Itsuki comiendo' },
-                { id: 'victoria_itsuki_2', nombre: 'Itsuki contenta' }
-            ]
-        };
-        
-        const videos = videosVictoria[this.noviaSeleccionada] || videosVictoria['ichika'];
-        const videoAleatorio = videos[Math.floor(Math.random() * videos.length)];
-        
-        const html = `
-            <div class="reproductor-container" style="text-align: center; padding: 40px;">
-                <h2 style="color: #4CAF50;">🎉 ¡VICTORIA!</h2>
-                <p style="font-size: 1.2rem; margin: 20px 0;">
-                    ${videoAleatorio.nombre}
-                </p>
-                <div style="background: rgba(76, 175, 80, 0.1); padding: 20px; border-radius: 15px; margin: 30px 0;">
-                    <h3 style="color: #FFD166;">Recompensas obtenidas:</h3>
-                    <p>💰 ${this.enemigoActual?.dinero || 0} monedas</p>
-                    <p>⭐ ${this.enemigoActual?.exp || 0} EXP</p>
-                    <p>💖 +${Math.floor((this.enemigoActual?.exp || 0) * 0.5)} EXP para tu novia</p>
-                </div>
-                <button class="card-button" onclick="fantasiaRPG.actualizarUI()" 
-                        style="background: linear-gradient(135deg, #4CAF50, #2E7D32); padding: 15px 30px;">
-                    ↩️ Continuar
-                </button>
-            </div>
-        `;
-        
-        const mangaSection = document.getElementById('manga-section');
-        if (mangaSection) {
-            mangaSection.innerHTML = html;
-        }
-    }
-
-    mostrarVideoDerrota() {
-        if (!this.noviaSeleccionada) {
-            this.actualizarUI();
-            return;
-        }
-        
-        const html = `
-            <div class="reproductor-container" style="text-align: center; padding: 40px;">
-                <h2 style="color: #FF6B6B;">💀 Has sido derrotado</h2>
-                <p style="opacity: 0.8; margin-bottom: 30px;">
-                    Tu novia está preocupada por ti...
-                </p>
-                
-                <div style="background: rgba(255, 107, 107, 0.1); padding: 25px; border-radius: 15px; margin: 30px 0; border: 2px solid #FF6B6B;">
-                    <h3 style="color: #FFD166; margin-bottom: 15px;">💰 Opciones de Revivir</h3>
-                    <button class="card-button" onclick="fantasiaRPG.revivirJugador()" 
-                            style="background: linear-gradient(135deg, #4CAF50, #2E7D32); margin-bottom: 15px;">
-                        💰 Revivir (${20 + (this.jugador.nivel * 5)} monedas)
-                    </button>
-                    <p style="opacity: 0.7; margin-top: 10px;">
-                        Dinero actual: ${this.jugador.dinero} monedas
-                    </p>
-                </div>
-                
-                <div style="text-align: center;">
-                    <button class="btn-atras-especifico" onclick="fantasiaRPG.actualizarUI()">
-                        ↩️ Volver al RPG
-                    </button>
-                </div>
-            </div>
-        `;
-        
-        const mangaSection = document.getElementById('manga-section');
-        if (mangaSection) {
-            mangaSection.innerHTML = html;
+        switch(hermanaId) {
+            case 'ichika': return Math.min(stats.fuerza * 0.1, 10);
+            case 'nino': return Math.min(stats.resistencia * 0.1, 10);
+            case 'yotsuba': return Math.min(stats.velocidad * 0.1, 10);
+            case 'miku': return Math.min(stats.inteligencia * 0.1, 10);
+            case 'itsuki': return Math.min(stats.carisma * 0.1, 10);
+            default: return 0;
         }
     }
 
@@ -644,354 +841,346 @@ class FantasiaRPG {
     // ====================
 
     cargarUI() {
-        let html = `
-            <div style="max-width: 1200px; margin: 0 auto; padding: 20px;">
-                <h1 style="text-align: center; color: #FFD166; margin-bottom: 10px;">
-                    ⚔️ RPG FANTASÍA - SISTEMA DE COMBATE
-                </h1>
-                <p style="text-align: center; opacity: 0.8; margin-bottom: 30px;">
-                    Entrena tus stats con ejercicio real, lucha contra monstruos y mejora tus chances con las chicas
-                </p>
+        return this.cargarUIMenuPrincipal();
+    }
+
+    cargarUIMenuPrincipal() {
+        this.enCombate = false;
+        
+        const pisosHTML = Object.entries(this.pisos).map(([num, piso]) => {
+            const estado = piso.completado ? '✅ COMPLETADO' : 
+                          (piso.desbloqueado ? '▶️ DISPONIBLE' : '🔒 BLOQUEADO');
+            const color = piso.completado ? '#4CAF50' : (piso.desbloqueado ? '#FFD166' : '#666');
+            
+            return `
+                <div style="background: rgba(0,0,0,0.3); border: 2px solid ${color}; border-radius: 15px; padding: 20px; margin-bottom: 15px; cursor: ${piso.desbloqueado ? 'pointer' : 'not-allowed'}; opacity: ${piso.desbloqueado ? 1 : 0.5};"
+                     onclick="${piso.desbloqueado ? `fantasiaRPG.entrarAlPiso(${num})` : ''}">
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <div>
+                            <h3 style="color: ${color}; margin: 0;">${piso.nombre}</h3>
+                            <p style="margin: 5px 0 0 0; opacity: 0.8;">Jefe: ${piso.jefe}</p>
+                        </div>
+                        <div style="font-size: 1.5rem;">${estado}</div>
+                    </div>
+                </div>
+            `;
+        }).join('');
+        
+        return `
+            <div style="max-width: 1000px; margin: 0 auto; padding: 20px;">
+                <h1 style="text-align: center; color: gold; margin-bottom: 10px;">⚔️ RPG FANTASÍA - PISOS</h1>
+                <p style="text-align: center; opacity: 0.8; margin-bottom: 30px;">Derrota bosses y obtén recompensas +18</p>
                 
                 <!-- ESTADO DEL JUGADOR -->
-                <div style="background: rgba(255, 20, 147, 0.1); border-radius: 20px; padding: 25px; margin-bottom: 30px; border: 2px solid #FF1493;">
-                    <h3 style="color: #FF1493; margin-bottom: 20px;">🎮 TU PERSONAJE</h3>
-                    
-                    <div style="display: grid; grid-template-columns: 1fr 2fr; gap: 30px;">
-                        <!-- INFO BÁSICA -->
-                        <div>
-                            <div style="background: rgba(255,255,255,0.05); padding: 20px; border-radius: 15px;">
-                                <h4 style="color: #FFD166; margin-bottom: 15px;">📊 ESTADO</h4>
-                                <div style="margin-bottom: 15px;">
-                                    <div style="color: rgba(255,255,255,0.7);">Nivel</div>
-                                    <div style="font-size: 2rem; font-weight: bold; color: #FFD166;">${this.jugador.nivel}</div>
-                                </div>
-                                <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
-                                    <span>EXP</span>
-                                    <span>${this.jugador.exp}/${this.jugador.expParaSiguienteNivel}</span>
-                                </div>
-                                <div style="background: rgba(255,255,255,0.1); height: 10px; border-radius: 5px; overflow: hidden;">
-                                    <div style="background: #FFD166; width: ${(this.jugador.exp / this.jugador.expParaSiguienteNivel) * 100}%; height: 100%;"></div>
-                                </div>
-                            </div>
-                            
-                            <!-- NOVIA ACTUAL -->
-                            ${this.noviaSeleccionada && window.quintillizasRPG ? `
-                                <div style="background: rgba(88, 100, 245, 0.1); padding: 20px; border-radius: 15px; margin-top: 20px; border: 2px solid #5864F5;">
-                                    <h4 style="color: #5864F5; margin-bottom: 10px;">💖 NOVIA ACTUAL</h4>
-                                    <div style="display: flex; align-items: center; gap: 15px;">
-                                        <div style="width: 50px; height: 50px; border-radius: 50%; background: linear-gradient(135deg, #FF6B6B, #FF1493); display: flex; align-items: center; justify-content: center; font-size: 1.5rem;">
-                                            ${this.noviaSeleccionada.charAt(0).toUpperCase()}
-                                        </div>
-                                        <div>
-                                            <div style="font-weight: bold;">${this.noviaSeleccionada.toUpperCase()}</div>
-                                            <div style="font-size: 0.9rem; opacity: 0.8;">
-                                                Prefiere: ${this.preferenciasStats[this.noviaSeleccionada].statPreferido}
-                                            </div>
-                                            <div style="font-size: 0.8rem; color: #4CAF50; margin-top: 5px;">
-                                                +${this.calcularBonusStatsNovia(this.noviaSeleccionada)}% en momentos íntimos
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            ` : ''}
+                <div style="background: linear-gradient(135deg, #FF1493, #8A5AF7); border-radius: 20px; padding: 25px; margin-bottom: 30px;">
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 20px; color: white;">
+                        <div style="text-align: center;">
+                            <div style="font-size: 0.9rem;">NIVEL</div>
+                            <div style="font-size: 2rem; font-weight: bold;">${this.jugador.nivel}</div>
                         </div>
-                        
-                        <!-- STATS Y BARRAS -->
-                        <div>
-                            <h4 style="color: #4CAF50; margin-bottom: 15px;">📈 STATS (Sube/baja con ejercicio real)</h4>
-                            ${this.crearUIStats()}
+                        <div style="text-align: center;">
+                            <div style="font-size: 0.9rem;">❤️ VIDA</div>
+                            <div style="font-size: 2rem; font-weight: bold;">${this.jugador.vida}/${this.jugador.vidaMaxima}</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="font-size: 0.9rem;">💎 PIEDRAS</div>
+                            <div style="font-size: 2rem; font-weight: bold;">${this.jugador.piedras}</div>
+                        </div>
+                        <div style="text-align: center;">
+                            <div style="font-size: 0.9rem;">⚡ ENERGÍA</div>
+                            <div style="font-size: 2rem; font-weight: bold;">${this.jugador.energia}/${this.jugador.energiaMaxima}</div>
                         </div>
                     </div>
                 </div>
                 
-                <!-- ZONA DE COMBATE -->
-                <div style="background: rgba(40, 40, 50, 0.8); border-radius: 20px; padding: 25px; margin-bottom: 30px; border: 2px solid #FF6B6B;">
-                    <h3 style="color: #FF6B6B; margin-bottom: 20px;">⚔️ ZONA DE COMBATE</h3>
+                <!-- PISOS -->
+                <h2 style="color: #FFD166; margin-bottom: 20px;">🏰 SELECCIONA UN PISO</h2>
+                ${pisosHTML}
+                
+                <!-- BOTONES -->
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin: 30px 0;">
+                    <button class="card-button" onclick="fantasiaRPG.cargarUITienda()" 
+                            style="background: linear-gradient(135deg, #5864F5, #8A5AF7); padding: 20px;">
+                        💎 MEJORAR STATS Y COMPRAR
+                    </button>
+                    <button class="card-button" onclick="volverAlInicio()" 
+                            style="background: linear-gradient(135deg, #FF6B6B, #FF1493); padding: 20px;">
+                        ↩️ VOLVER AL INICIO
+                    </button>
+                </div>
+                
+                <!-- BONUS PARA QUINTILLIZAS -->
+                ${window.quintillizasRPG ? `
+                <div style="background: rgba(255, 20, 147, 0.1); border-radius: 15px; padding: 20px; margin-top: 20px;">
+                    <h3 style="color: #FF1493; margin-bottom: 15px;">💖 BONUS ACTUAL PARA QUINTILLIZAS</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px;">
+                        <div><span style="color: #FF6B6B;">Ichika:</span> +${this.calcularBonusParaHermana('ichika').toFixed(1)}%</div>
+                        <div><span style="color: #FFD166;">Nino:</span> +${this.calcularBonusParaHermana('nino').toFixed(1)}%</div>
+                        <div><span style="color: #4CAF50;">Yotsuba:</span> +${this.calcularBonusParaHermana('yotsuba').toFixed(1)}%</div>
+                        <div><span style="color: #5864F5;">Miku:</span> +${this.calcularBonusParaHermana('miku').toFixed(1)}%</div>
+                        <div><span style="color: gold;">Itsuki:</span> +${this.calcularBonusParaHermana('itsuki').toFixed(1)}%</div>
+                    </div>
+                </div>
+                ` : ''}
+            </div>
+        `;
+    }
+
+    cargarUICombate() {
+        if (!this.enCombate || !this.enemigoActual) return this.cargarUIMenuPrincipal();
+        
+        const esBoss = this.esBossActual();
+        let imagenEnemigo = this.enemigoActual.imagen;
+        
+        if (esBoss) {
+            if (this.spriteBossActual === 'atacando') imagenEnemigo = this.enemigoActual.imagenAtacando;
+            else if (this.spriteBossActual === 'derrotado') imagenEnemigo = this.enemigoActual.imagenDerrotado;
+            else imagenEnemigo = this.enemigoActual.imagen;
+        }
+        
+        const porcentajeVidaJugador = (this.jugador.vida / this.jugador.vidaMaxima) * 100;
+        const porcentajeVidaEnemigo = (this.enemigoActual.vidaActual / this.enemigoActual.vida) * 100;
+        
+        return `
+            <div style="max-width: 1000px; margin: 0 auto; padding: 20px;">
+                <h2 style="text-align: center; color: ${esBoss ? 'gold' : '#FFD166'}; margin-bottom: 10px;">
+                    ${esBoss ? '🔥 BOSS FINAL 🔥' : this.pisos[this.pisoActual].nombre}
+                </h2>
+                <p style="text-align: center; margin-bottom: 30px;">
+                    Enemigo ${this.indiceEnemigoActual + 1}/${this.pisos[this.pisoActual].enemigos.length + 1}
+                </p>
+                
+                <!-- SPRITES -->
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 40px; margin-bottom: 30px;">
+                    <!-- JUGADOR -->
+                    <div style="text-align: center;">
+                        <div style="background: rgba(88, 100, 245, 0.2); border: 3px solid #5864F5; border-radius: 20px; padding: 20px;">
+                            <img src="https://via.placeholder.com/150x150/5864F5/FFFFFF?text=JUGADOR" 
+                                 style="width: 150px; height: 150px; border-radius: 50%; border: 3px solid #5864F5; margin-bottom: 15px;">
+                            <h3 style="color: #5864F5;">${this.jugador.nivel ? 'Héroe' : 'Jugador'}</h3>
+                            <div style="margin-top: 10px;">
+                                <div style="background: rgba(255,255,255,0.1); height: 20px; border-radius: 10px; overflow: hidden;">
+                                    <div style="background: linear-gradient(135deg, #FF6B6B, #FF1493); width: ${porcentajeVidaJugador}%; height: 100%;"></div>
+                                </div>
+                                <p style="margin-top: 5px;">❤️ ${this.jugador.vida}/${this.jugador.vidaMaxima}</p>
+                                <p>⚡ ${this.jugador.energia}/${this.jugador.energiaMaxima}</p>
+                            </div>
+                        </div>
+                    </div>
                     
-                    ${this.combateActual ? this.crearUICombate() : this.crearUISeleccionEnemigo()}
+                    <!-- ENEMIGO -->
+                    <div style="text-align: center;">
+                        <div style="background: rgba(255, 107, 107, 0.2); border: 3px solid ${esBoss ? 'gold' : '#FF6B6B'}; border-radius: 20px; padding: 20px;">
+                            <img src="${imagenEnemigo || 'https://via.placeholder.com/150x150/FF6B6B/FFFFFF?text=ENEMIGO'}" 
+                                 style="width: 150px; height: 150px; border-radius: 50%; border: 3px solid ${esBoss ? 'gold' : '#FF6B6B'}; margin-bottom: 15px;">
+                            <h3 style="color: ${esBoss ? 'gold' : '#FF6B6B'};">${this.enemigoActual.nombre}</h3>
+                            <div style="margin-top: 10px;">
+                                <div style="background: rgba(255,255,255,0.1); height: 20px; border-radius: 10px; overflow: hidden;">
+                                    <div style="background: linear-gradient(135deg, #FF6B6B, #FF1493); width: ${porcentajeVidaEnemigo}%; height: 100%;"></div>
+                                </div>
+                                <p style="margin-top: 5px;">❤️ ${this.enemigoActual.vidaActual}/${this.enemigoActual.vida}</p>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 
-                <!-- HISTORIAL Y ESTADÍSTICAS -->
-                <div style="background: rgba(255, 209, 102, 0.1); border-radius: 20px; padding: 25px; margin-bottom: 30px; border: 2px solid #FFD166;">
-                    <h3 style="color: #FFD166; margin-bottom: 20px;">📊 ESTADÍSTICAS DE COMBATE</h3>
-                    ${this.crearUIEstadisticas()}
+                <!-- LOG DE COMBATE -->
+                <div style="background: rgba(0,0,0,0.5); border-radius: 15px; padding: 20px; margin-bottom: 30px; max-height: 150px; overflow-y: auto;">
+                    ${this.mensajesCombate.map(m => `<div style="margin-bottom: 5px;">${m}</div>`).join('')}
                 </div>
                 
-                <!-- INVENTARIO -->
-                <div style="background: rgba(76, 175, 80, 0.1); border-radius: 20px; padding: 25px; border: 2px solid #4CAF50;">
-                    <h3 style="color: #4CAF50; margin-bottom: 20px;">🎒 INVENTARIO</h3>
-                    ${this.crearUIInventario()}
+                <!-- ACCIONES -->
+                <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-bottom: 20px;">
+                    <button class="card-button" onclick="fantasiaRPG.atacar()" 
+                            style="background: linear-gradient(135deg, #FF6B6B, #FF1493); padding: 15px;">
+                        ⚔️ ATACAR
+                    </button>
+                    <button class="card-button" onclick="fantasiaRPG.mostrarMenuPociones()" 
+                            style="background: linear-gradient(135deg, #4CAF50, #2E7D32); padding: 15px;">
+                        💊 POCIONES
+                    </button>
+                    <button class="card-button" onclick="fantasiaRPG.huir()" 
+                            style="background: linear-gradient(135deg, #5864F5, #8A5AF7); padding: 15px;">
+                        🏃 HUIR
+                    </button>
+                    <button class="card-button" onclick="fantasiaRPG.cargarUIMenuPrincipal()" 
+                            style="background: linear-gradient(135deg, #666, #333); padding: 15px;">
+                        ↩️ RENDIRSE
+                    </button>
+                </div>
+                
+                <!-- INVENTARIO RÁPIDO -->
+                <div style="background: rgba(255,255,255,0.05); border-radius: 15px; padding: 15px;">
+                    <div style="display: flex; gap: 20px; justify-content: center; font-size: 0.9rem;">
+                        <span>💊 Pequeñas: ${this.jugador.inventario.pocionVidaPequena}</span>
+                        <span>❤️ Grandes: ${this.jugador.inventario.pocionVidaGrande}</span>
+                        <span>⚡ Energía: ${this.jugador.inventario.pocionEnergia}</span>
+                        <span>✨ Revivir: ${this.jugador.inventario.revivirAuto}</span>
+                    </div>
+                </div>
+            </div>
+        `;
+    }
+
+    mostrarMenuPociones() {
+        if (!this.enCombate) return;
+        
+        const html = `
+            <div style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.9); display: flex; justify-content: center; align-items: center; z-index: 1000;">
+                <div style="background: #1a1a2e; border: 3px solid #4CAF50; border-radius: 30px; padding: 40px; max-width: 500px;">
+                    <h2 style="text-align: center; color: #4CAF50; margin-bottom: 30px;">💊 SELECCIONA POCIÓN</h2>
+                    
+                    <div style="display: grid; gap: 15px;">
+                        <button class="card-button" onclick="fantasiaRPG.usarPocion('vidaPequena')" 
+                                ${this.jugador.inventario.pocionVidaPequena === 0 ? 'disabled style="opacity:0.5;"' : ''}
+                                style="background: linear-gradient(135deg, #4CAF50, #2E7D32); padding: 15px;">
+                            💊 Poción de Vida Pequeña (+30 HP) [${this.jugador.inventario.pocionVidaPequena}]
+                        </button>
+                        
+                        <button class="card-button" onclick="fantasiaRPG.usarPocion('vidaGrande')" 
+                                ${this.jugador.inventario.pocionVidaGrande === 0 ? 'disabled style="opacity:0.5;"' : ''}
+                                style="background: linear-gradient(135deg, #FF6B6B, #FF1493); padding: 15px;">
+                            ❤️ Poción de Vida Grande (+60 HP) [${this.jugador.inventario.pocionVidaGrande}]
+                        </button>
+                        
+                        <button class="card-button" onclick="fantasiaRPG.usarPocion('energia')" 
+                                ${this.jugador.inventario.pocionEnergia === 0 ? 'disabled style="opacity:0.5;"' : ''}
+                                style="background: linear-gradient(135deg, #FFD700, #FF9800); padding: 15px;">
+                            ⚡ Poción de Energía (+20 EN) [${this.jugador.inventario.pocionEnergia}]
+                        </button>
+                        
+                        <button class="card-button" onclick="fantasiaRPG.usarPocion('revivir')" 
+                                ${this.jugador.inventario.revivirAuto === 0 ? 'disabled style="opacity:0.5;"' : ''}
+                                style="background: linear-gradient(135deg, gold, #8A5AF7); padding: 15px;">
+                            ✨ Revivir Automático [${this.jugador.inventario.revivirAuto}]
+                        </button>
+                    </div>
+                    
+                    <div style="text-align: center; margin-top: 30px;">
+                        <button class="card-button" onclick="fantasiaRPG.cerrarMenuPociones()" 
+                                style="background: linear-gradient(135deg, #666, #333); padding: 10px 30px;">
+                            ↩️ CANCELAR
+                        </button>
+                    </div>
                 </div>
             </div>
         `;
         
-        return html;
+        const overlay = document.createElement('div');
+        overlay.id = 'pociones-overlay';
+        overlay.innerHTML = html;
+        document.body.appendChild(overlay);
     }
 
-    crearUIStats() {
+    cerrarMenuPociones() {
+        const overlay = document.getElementById('pociones-overlay');
+        if (overlay) overlay.remove();
+    }
+
+    cargarUITienda() {
         const stats = this.jugador.stats;
         
-        return `
-            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 15px;">
-                <!-- VIDA -->
-                <div style="background: rgba(255, 107, 107, 0.1); padding: 15px; border-radius: 10px; border-left: 5px solid #FF6B6B;">
-                    <div style="display: flex; justify-content: space-between; align-items: center;">
-                        <span style="font-weight: bold; color: #FF6B6B;">❤️ VIDA</span>
-                        <span>${stats.vida}/${stats.vidaMaxima}</span>
+        const statsHTML = Object.entries({
+            fuerza: { icono: '💪', nombre: 'Fuerza', hermana: 'Ichika', color: '#FF6B6B' },
+            resistencia: { icono: '🔋', nombre: 'Resistencia', hermana: 'Nino', color: '#FFD166' },
+            velocidad: { icono: '⚡', nombre: 'Velocidad', hermana: 'Yotsuba', color: '#4CAF50' },
+            inteligencia: { icono: '🧠', nombre: 'Inteligencia', hermana: 'Miku', color: '#5864F5' },
+            carisma: { icono: '😎', nombre: 'Carisma', hermana: 'Itsuki', color: 'gold' }
+        }).map(([key, data]) => `
+            <div style="background: rgba(255,255,255,0.05); border-radius: 15px; padding: 20px; border-left: 5px solid ${data.color};">
+                <div style="display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <span style="font-size: 1.5rem;">${data.icono}</span>
+                        <strong style="color: ${data.color};"> ${data.nombre}</strong>
+                        <div style="font-size: 0.9rem; opacity: 0.7;">+${this.calcularBonusParaHermana(key).toFixed(1)}% para ${data.hermana}</div>
                     </div>
-                    <div style="background: rgba(255,255,255,0.1); height: 10px; border-radius: 5px; margin-top: 10px; overflow: hidden;">
-                        <div style="background: #FF6B6B; width: ${(stats.vida / stats.vidaMaxima) * 100}%; height: 100%;"></div>
+                    <div style="font-size: 2rem;">${stats[key]}</div>
+                    <div>
+                        <button class="card-button" onclick="fantasiaRPG.comprarStat('${key}')" 
+                                style="background: linear-gradient(135deg, ${data.color}, #333); padding: 10px 20px;">
+                            +1 (10💎)
+                        </button>
                     </div>
+                </div>
+            </div>
+        `).join('');
+        
+        const consumiblesHTML = `
+            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin-top: 20px;">
+                <div style="background: rgba(76, 175, 80, 0.1); border-radius: 15px; padding: 20px; text-align: center;">
+                    <h4 style="color: #4CAF50;">💊 Poción Pequeña</h4>
+                    <p>+30 HP - 3💎</p>
+                    <button class="card-button" onclick="fantasiaRPG.comprarConsumible('pocionVidaPequena')" 
+                            style="background: linear-gradient(135deg, #4CAF50, #2E7D32);">
+                        COMPRAR (${this.jugador.inventario.pocionVidaPequena})
+                    </button>
                 </div>
                 
-                <!-- ENERGÍA -->
-                <div style="background: rgba(255, 215, 0, 0.1); padding: 15px; border-radius: 10px; border-left: 5px solid #FFD700;">
-                    <div style="display: flex; justify-content: space-between; align-items: center;">
-                        <span style="font-weight: bold; color: #FFD700;">⚡ ENERGÍA</span>
-                        <span>${stats.energia}/${stats.energiaMaxima}</span>
-                    </div>
-                    <div style="background: rgba(255,255,255,0.1); height: 10px; border-radius: 5px; margin-top: 10px; overflow: hidden;">
-                        <div style="background: #FFD700; width: ${(stats.energia / stats.energiaMaxima) * 100}%; height: 100%;"></div>
-                    </div>
-                </div>
-            </div>
-            
-            <!-- STATS PRINCIPALES -->
-            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 12px; margin-top: 20px;">
-                ${Object.entries({
-                    'fuerza': '💪 Fuerza',
-                    'defensa': '🛡️ Defensa',
-                    'velocidad': '⚡ Velocidad',
-                    'inteligencia': '🧠 Inteligencia',
-                    'resistencia': '💪 Resistencia',
-                    'carisma': '😎 Carisma'
-                }).map(([stat, emoji]) => `
-                    <div style="background: rgba(255,255,255,0.05); padding: 15px; border-radius: 10px; text-align: center;">
-                        <div style="font-size: 0.9rem; opacity: 0.8;">${emoji}</div>
-                        <div style="font-size: 1.8rem; font-weight: bold; margin: 5px 0;">${stats[stat]}</div>
-                        <div style="display: flex; gap: 10px; justify-content: center;">
-                            <button class="stat-btn" onclick="fantasiaRPG.subirStat('${stat}')" style="background: #4CAF50; padding: 8px 15px; border-radius: 5px; border: none; color: white; cursor: pointer;">↑</button>
-                            <button class="stat-btn" onclick="fantasiaRPG.bajarStat('${stat}')" style="background: #FF6B6B; padding: 8px 15px; border-radius: 5px; border: none; color: white; cursor: pointer;">↓</button>
-                        </div>
-                    </div>
-                `).join('')}
-            </div>
-            
-            <!-- PREFERENCIAS DE NOVIAS -->
-            ${this.noviaSeleccionada ? `
-                <div style="background: rgba(138, 90, 247, 0.1); padding: 20px; border-radius: 15px; margin-top: 25px; border-left: 5px solid #8A5AF7;">
-                    <h4 style="color: #8A5AF7; margin-bottom: 15px;">💖 BONUS CON ${this.noviaSeleccionada.toUpperCase()}</h4>
-                    <p style="opacity: 0.8; margin-bottom: 10px;">
-                        ${this.preferenciasStats[this.noviaSeleccionada].descripcion}
-                    </p>
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px; margin-top: 15px;">
-                        <div style="text-align: center;">
-                            <div style="color: #FFD166; font-size: 0.9rem;">STAT PREFERIDO</div>
-                            <div style="font-size: 1.3rem; font-weight: bold; color: #4CAF50;">
-                                ${this.preferenciasStats[this.noviaSeleccionada].statPreferido}
-                            </div>
-                            <div style="font-size: 0.9rem; opacity: 0.8;">
-                                ${stats[this.preferenciasStats[this.noviaSeleccionada].statPreferido]} puntos
-                            </div>
-                        </div>
-                        <div style="text-align: center;">
-                            <div style="color: #FFD166; font-size: 0.9rem;">BONUS ACTUAL</div>
-                            <div style="font-size: 1.3rem; font-weight: bold; color: #FF1493;">
-                                +${this.calcularBonusStatsNovia(this.noviaSeleccionada)}%
-                            </div>
-                            <div style="font-size: 0.9rem; opacity: 0.8;">
-                                en momentos íntimos
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            ` : ''}
-        `;
-    }
-
-    crearUISeleccionEnemigo() {
-        const enemigos = [
-            { id: 'slime', nombre: 'Slime Verde', nivel: 1, dificultad: 'Fácil', color: '#4CAF50' },
-            { id: 'goblin', nombre: 'Goblin Ladrón', nivel: 2, dificultad: 'Normal', color: '#FF9800' },
-            { id: 'lobo', nombre: 'Lobo Salvaje', nivel: 3, dificultad: 'Media', color: '#FF5722' },
-            { id: 'esqueleto', nombre: 'Esqueleto Guerrero', nivel: 4, dificultad: 'Difícil', color: '#9C27B0' },
-            { id: 'ogro', nombre: 'Ogro Furioso', nivel: 5, dificultad: 'Muy Difícil', color: '#F44336' }
-        ];
-        
-        return `
-            <p style="text-align: center; opacity: 0.8; margin-bottom: 25px;">
-                Selecciona un enemigo para combatir. ¡Gana dinero y EXP para tu novia!
-            </p>
-            
-            <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 20px;">
-                ${enemigos.map(enemigo => `
-                    <div class="enemigo-card" onclick="fantasiaRPG.iniciarCombateUI('${enemigo.id}')" 
-                         style="background: linear-gradient(135deg, ${enemigo.color}20, rgba(255,255,255,0.05)); 
-                                border: 2px solid ${enemigo.color}; border-radius: 15px; padding: 20px; 
-                                cursor: pointer; transition: all 0.3s ease; text-align: center;">
-                        <div style="font-size: 2.5rem; margin-bottom: 10px;">👹</div>
-                        <h4 style="color: ${enemigo.color}; margin-bottom: 10px;">${enemigo.nombre}</h4>
-                        <div style="display: flex; justify-content: space-between; font-size: 0.9rem; opacity: 0.8;">
-                            <span>Nivel ${enemigo.nivel}</span>
-                            <span>${enemigo.dificultad}</span>
-                        </div>
-                        <div style="margin-top: 15px;">
-                            <button class="card-button" style="background: linear-gradient(135deg, ${enemigo.color}, ${this.oscurecerColor(enemigo.color)}); padding: 10px 15px; border-radius: 8px; border: none; color: white; cursor: pointer;">
-                                ⚔️ Combatir
-                            </button>
-                        </div>
-                    </div>
-                `).join('')}
-            </div>
-            
-            <div style="background: rgba(255, 209, 102, 0.1); padding: 20px; border-radius: 15px; margin-top: 30px; border-left: 5px solid #FFD166;">
-                <h4 style="color: #FFD166; margin-bottom: 15px;">💡 CONSEJOS DE COMBATE</h4>
-                <ul style="padding-left: 20px; opacity: 0.8;">
-                    <li>Ganas dinero al derrotar enemigos</li>
-                    <li>Pierdes dinero y EXP al morir</li>
-                    <li>Puedes revivir pagando monedas</li>
-                    <li>50% del EXP va a tu novia seleccionada</li>
-                    <li>Cada novia tiene stats preferidos que te dan bonus</li>
-                </ul>
-            </div>
-        `;
-    }
-
-    crearUICombate() {
-        if (!this.combateActual || !this.enemigoActual) {
-            return this.crearUISeleccionEnemigo();
-        }
-        
-        const vidaJugadorPorcentaje = (this.jugador.stats.vida / this.jugador.stats.vidaMaxima) * 100;
-        const vidaEnemigoPorcentaje = (this.enemigoActual.vida / this.enemigoActual.vidaMaxima) * 100;
-        
-        return `
-            <!-- ESTADO DEL COMBATE -->
-            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 30px; margin-bottom: 30px;">
-                <!-- JUGADOR -->
-                <div style="background: rgba(88, 100, 245, 0.1); padding: 20px; border-radius: 15px; border: 2px solid #5864F5;">
-                    <h4 style="color: #5864F5; margin-bottom: 15px;">🎮 ${this.jugador.nombre}</h4>
-                    <div style="margin-bottom: 15px;">
-                        <div style="color: #FF6B6B; font-size: 0.9rem;">❤️ VIDA</div>
-                        <div style="background: rgba(255,255,255,0.1); height: 20px; border-radius: 10px; overflow: hidden; margin-top: 5px;">
-                            <div style="background: linear-gradient(135deg, #FF6B6B, #FF1493); 
-                                      width: ${vidaJugadorPorcentaje}%; 
-                                      height: 100%; transition: width 0.5s ease;"></div>
-                        </div>
-                        <div style="text-align: right; font-size: 0.9rem; margin-top: 5px;">
-                            ${this.jugador.stats.vida}/${this.jugador.stats.vidaMaxima}
-                        </div>
-                    </div>
-                    <div style="font-size: 0.9rem; opacity: 0.8; margin-top: 10px;">
-                        ${this.combateActual.enTurno === 'jugador' ? '✅ TU TURNO' : '⏳ Enemigo atacando...'}
-                    </div>
+                <div style="background: rgba(255, 107, 107, 0.1); border-radius: 15px; padding: 20px; text-align: center;">
+                    <h4 style="color: #FF6B6B;">❤️ Poción Grande</h4>
+                    <p>+60 HP - 8💎</p>
+                    <button class="card-button" onclick="fantasiaRPG.comprarConsumible('pocionVidaGrande')" 
+                            style="background: linear-gradient(135deg, #FF6B6B, #FF1493);">
+                        COMPRAR (${this.jugador.inventario.pocionVidaGrande})
+                    </button>
                 </div>
                 
-                <!-- ENEMIGO -->
-                <div style="background: rgba(255, 107, 107, 0.1); padding: 20px; border-radius: 15px; border: 2px solid #FF6B6B;">
-                    <h4 style="color: #FF6B6B; margin-bottom: 15px;">👹 ${this.enemigoActual.nombre}</h4>
-                    <div style="margin-bottom: 15px;">
-                        <div style="color: #FF6B6B; font-size: 0.9rem;">❤️ VIDA</div>
-                        <div style="background: rgba(255,255,255,0.1); height: 20px; border-radius: 10px; overflow: hidden; margin-top: 5px;">
-                            <div style="background: linear-gradient(135deg, #FF1493, #8A5AF7); 
-                                      width: ${vidaEnemigoPorcentaje}%; 
-                                      height: 100%; transition: width 0.5s ease;"></div>
-                        </div>
-                        <div style="text-align: right; font-size: 0.9rem; margin-top: 5px;">
-                            ${this.enemigoActual.vida}/${this.enemigoActual.vidaMaxima}
-                        </div>
-                    </div>
-                    <div style="font-size: 0.9rem; opacity: 0.8; margin-top: 10px;">
-                        Nivel ${this.enemigoActual.nivel} • Exp: ${this.enemigoActual.exp}
-                    </div>
+                <div style="background: rgba(255, 215, 0, 0.1); border-radius: 15px; padding: 20px; text-align: center;">
+                    <h4 style="color: gold;">⚡ Poción Energía</h4>
+                    <p>+20 EN - 5💎</p>
+                    <button class="card-button" onclick="fantasiaRPG.comprarConsumible('pocionEnergia')" 
+                            style="background: linear-gradient(135deg, gold, #FF9800);">
+                        COMPRAR (${this.jugador.inventario.pocionEnergia})
+                    </button>
+                </div>
+                
+                <div style="background: rgba(138, 90, 247, 0.1); border-radius: 15px; padding: 20px; text-align: center;">
+                    <h4 style="color: #8A5AF7;">✨ Revivir Auto</h4>
+                    <p>1 uso por combate - 15💎</p>
+                    <button class="card-button" onclick="fantasiaRPG.comprarConsumible('revivirAuto')" 
+                            style="background: linear-gradient(135deg, #8A5AF7, #5864F5);">
+                        COMPRAR (${this.jugador.inventario.revivirAuto})
+                    </button>
                 </div>
             </div>
-            
-            <!-- MENSAJES DEL COMBATE -->
-            <div style="background: rgba(30, 30, 40, 0.8); border-radius: 15px; padding: 20px; margin-bottom: 25px; max-height: 200px; overflow-y: auto;">
-                <h4 style="color: #FFD166; margin-bottom: 15px;">📜 LOG DEL COMBATE</h4>
-                ${this.mensajesCombate.map(msg => `<div style="margin-bottom: 8px; padding: 8px; border-radius: 5px; background: rgba(255,255,255,0.05);">${msg}</div>`).reverse().join('')}
-                ${this.mensajesCombate.length === 0 ? '<div style="opacity: 0.7; text-align: center;">El combate está por comenzar...</div>' : ''}
-            </div>
-            
-            <!-- ACCIONES DE COMBATE -->
-            ${this.combateActual.jugadorVivo && this.combateActual.enemigoVivo ? `
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; margin-bottom: 20px;">
-                    <button class="card-button" onclick="fantasiaRPG.atacarEnemigoUI()" 
-                            style="background: linear-gradient(135deg, #FF6B6B, #FF1493); padding: 15px; border-radius: 10px; border: none; color: white; cursor: pointer;">
-                        ⚔️ Ataque Básico
-                    </button>
-                    <button class="card-button" onclick="fantasiaRPG.usarPocionUI('vida')" 
-                            ${this.jugador.inventario.pocionesVida > 0 ? '' : 'disabled style="opacity: 0.5; cursor: not-allowed;"'} style="padding: 15px; border-radius: 10px; border: none; color: white; cursor: pointer; background: linear-gradient(135deg, #4CAF50, #2E7D32);">
-                        ❤️ Poción Vida (${this.jugador.inventario.pocionesVida})
-                    </button>
-                    <button class="card-button" onclick="fantasiaRPG.usarPocionUI('energia')" 
-                            ${this.jugador.inventario.pocionesEnergia > 0 ? '' : 'disabled style="opacity: 0.5; cursor: not-allowed;"'} style="padding: 15px; border-radius: 10px; border: none; color: white; cursor: pointer; background: linear-gradient(135deg, #FFD700, #FF9800);">
-                        ⚡ Poción Energía (${this.jugador.inventario.pocionesEnergia})
-                    </button>
-                    <button class="card-button" onclick="fantasiaRPG.huirCombateUI()" 
-                            style="background: linear-gradient(135deg, #5864F5, #8A5AF7); padding: 15px; border-radius: 10px; border: none; color: white; cursor: pointer;">
-                        🏃‍♂️ Intentar Huir
-                    </button>
-                </div>
-            ` : ''}
-            
-            ${!this.combateActual.jugadorVivo || !this.combateActual.enemigoVivo ? `
-                <div style="text-align: center; margin-top: 30px;">
-                    <button class="card-button" onclick="fantasiaRPG.finalizarCombateUI()" 
-                            style="background: linear-gradient(135deg, #FFD166, #FF9800); padding: 15px 30px; font-size: 1.1rem; border-radius: 10px; border: none; color: white; cursor: pointer;">
-                        ↩️ Volver al RPG
-                    </button>
-                </div>
-            ` : ''}
         `;
-    }
-
-    // ====================
-    // FUNCIONES UI WRAPPERS
-    // ====================
-
-    iniciarCombateUI(tipoEnemigo) {
-        this.iniciarCombate(tipoEnemigo);
-        this.actualizarUI();
-    }
-
-    atacarEnemigoUI() {
-        const resultado = this.atacarEnemigo();
-        this.actualizarUI();
-    }
-
-    usarPocionUI(tipo) {
-        if (this.usarPocion(tipo)) {
-            this.actualizarUI();
-        }
-    }
-
-    huirCombateUI() {
-        this.huirCombate();
-    }
-
-    finalizarCombateUI() {
-        this.finalizarCombate('abandonado');
-        this.actualizarUI();
-    }
-
-    // ====================
-    // FUNCIONES AUXILIARES
-    // ====================
-
-    agregarMensajeCombate(mensaje) {
-        this.mensajesCombate.push(mensaje);
-        if (this.mensajesCombate.length > 10) {
-            this.mensajesCombate.shift();
-        }
+        
+        const html = `
+            <div style="max-width: 1000px; margin: 0 auto; padding: 20px;">
+                <h1 style="text-align: center; color: gold; margin-bottom: 10px;">💎 TIENDA DE STATS Y CONSUMIBLES</h1>
+                <p style="text-align: center; opacity: 0.8; margin-bottom: 30px;">Tus piedras: ${this.jugador.piedras} 💎</p>
+                
+                <div style="background: linear-gradient(135deg, #FF1493, #8A5AF7); border-radius: 20px; padding: 25px; margin-bottom: 30px;">
+                    <h3 style="color: white; margin-bottom: 20px;">📊 MEJORA TUS STATS (10💎 = +1)</h3>
+                    ${statsHTML}
+                </div>
+                
+                <div style="background: linear-gradient(135deg, #4CAF50, #2E7D32); border-radius: 20px; padding: 25px; margin-bottom: 30px;">
+                    <h3 style="color: white; margin-bottom: 20px;">💊 CONSUMIBLES PARA COMBATE</h3>
+                    ${consumiblesHTML}
+                </div>
+                
+                <div style="text-align: center;">
+                    <button class="card-button" onclick="fantasiaRPG.cargarUIMenuPrincipal()" 
+                            style="background: linear-gradient(135deg, #5864F5, #8A5AF7); padding: 15px 40px;">
+                        ↩️ VOLVER AL MENÚ
+                    </button>
+                </div>
+            </div>
+        `;
+        
+        const mangaSection = document.getElementById('manga-section');
+        mangaSection.innerHTML = html;
     }
 
     actualizarUI() {
         const mangaSection = document.getElementById('manga-section');
-        if (mangaSection) {
-            mangaSection.innerHTML = this.cargarUI();
+        if (!mangaSection) return;
+        
+        if (this.enCombate) {
+            mangaSection.innerHTML = this.cargarUICombate();
+        } else {
+            mangaSection.innerHTML = this.cargarUIMenuPrincipal();
         }
     }
 
@@ -1002,126 +1191,29 @@ class FantasiaRPG {
             position: fixed;
             top: 100px;
             right: 20px;
-            background: linear-gradient(135deg, #FFD166, #FF6B6B);
-            color: #333;
+            background: linear-gradient(135deg, gold, #FF1493);
+            color: white;
             padding: 15px 25px;
             border-radius: 50px;
             font-weight: bold;
-            box-shadow: 0 5px 20px rgba(0,0,0,0.4);
-            z-index: 1003;
-            animation: slideIn 0.3s ease, fadeOut 0.3s ease 2.5s forwards;
-            font-size: 1.1rem;
-            border: 3px solid white;
-            max-width: 400px;
+            z-index: 10000;
+            animation: slideIn 0.3s ease, fadeOut 0.3s ease 2s forwards;
         `;
-        
         document.body.appendChild(notif);
-        
-        setTimeout(() => {
-            if (notif.parentNode) {
-                notif.parentNode.removeChild(notif);
-            }
-        }, 3000);
-    }
-
-    oscurecerColor(color) {
-        const r = parseInt(color.slice(1, 3), 16);
-        const g = parseInt(color.slice(3, 5), 16);
-        const b = parseInt(color.slice(5, 7), 16);
-        
-        const darkR = Math.max(0, r - 40);
-        const darkG = Math.max(0, g - 40);
-        const darkB = Math.max(0, b - 40);
-        
-        return `#${darkR.toString(16).padStart(2, '0')}${darkG.toString(16).padStart(2, '0')}${darkB.toString(16).padStart(2, '0')}`;
-    }
-
-    // ====================
-    // ESTADÍSTICAS E INVENTARIO
-    // ====================
-
-    crearUIEstadisticas() {
-        return `
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px;">
-                <div style="text-align: center;">
-                    <div style="color: #4CAF50; font-size: 0.9rem;">💰 DINERO</div>
-                    <div style="font-size: 1.5rem; font-weight: bold;">${this.jugador.dinero}</div>
-                </div>
-                <div style="text-align: center;">
-                    <div style="color: #FF6B6B; font-size: 0.9rem;">💀 MUERTES</div>
-                    <div style="font-size: 1.5rem; font-weight: bold;">${this.jugador.muertes}</div>
-                </div>
-                <div style="text-align: center;">
-                    <div style="color: #FFD166; font-size: 0.9rem;">👹 DERROTADOS</div>
-                    <div style="font-size: 1.5rem; font-weight: bold;">${this.jugador.enemigosDerrotados}</div>
-                </div>
-                <div style="text-align: center;">
-                    <div style="color: #8A5AF7; font-size: 0.9rem;">⚔️ COMBATES</div>
-                    <div style="font-size: 1.5rem; font-weight: bold;">${this.jugador.combatesGanados}/${this.jugador.combatesGanados + this.jugador.combatesPerdidos}</div>
-                </div>
-            </div>
-            
-            ${this.historialCombates.length > 0 ? `
-                <div style="margin-top: 25px;">
-                    <h4 style="color: #FFD166; margin-bottom: 15px;">📜 ÚLTIMOS COMBATES</h4>
-                    <div style="max-height: 200px; overflow-y: auto; background: rgba(255,255,255,0.05); border-radius: 10px; padding: 15px;">
-                        ${this.historialCombates.slice(-5).reverse().map(combate => `
-                            <div style="padding: 10px; border-bottom: 1px solid rgba(255,255,255,0.1);">
-                                <div style="display: flex; justify-content: space-between;">
-                                    <span>${combate.enemigo}</span>
-                                    <span style="color: ${combate.resultado === 'victoria' ? '#4CAF50' : '#FF6B6B'}">
-                                        ${combate.resultado === 'victoria' ? '✅' : '❌'}
-                                    </span>
-                                </div>
-                                <div style="font-size: 0.9rem; opacity: 0.7; margin-top: 5px;">
-                                    ${new Date(combate.fecha).toLocaleDateString()} • 
-                                    ${combate.exp ? `+${combate.exp} EXP` : ''}
-                                    ${combate.dinero ? `• +${combate.dinero}💰` : ''}
-                                </div>
-                            </div>
-                        `).join('')}
-                    </div>
-                </div>
-            ` : ''}
-        `;
-    }
-
-    crearUIInventario() {
-        return `
-            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px;">
-                <div style="background: rgba(255, 107, 107, 0.1); padding: 15px; border-radius: 10px; text-align: center;">
-                    <div style="font-size: 2rem; margin-bottom: 10px;">❤️</div>
-                    <div style="font-weight: bold;">Poción de Vida</div>
-                    <div style="font-size: 1.2rem; margin-top: 5px;">${this.jugador.inventario.pocionesVida}</div>
-                    <div style="font-size: 0.9rem; opacity: 0.7;">+30 HP</div>
-                </div>
-                
-                <div style="background: rgba(255, 215, 0, 0.1); padding: 15px; border-radius: 10px; text-align: center;">
-                    <div style="font-size: 2rem; margin-bottom: 10px;">⚡</div>
-                    <div style="font-weight: bold;">Poción de Energía</div>
-                    <div style="font-size: 1.2rem; margin-top: 5px;">${this.jugador.inventario.pocionesEnergia}</div>
-                    <div style="font-size: 0.9rem; opacity: 0.7;">+20 EP</div>
-                </div>
-                
-                <div style="background: rgba(76, 175, 80, 0.1); padding: 15px; border-radius: 10px; text-align: center;">
-                    <div style="font-size: 2rem; margin-bottom: 10px;">✨</div>
-                    <div style="font-weight: bold;">Poción de Revivir</div>
-                    <div style="font-size: 1.2rem; margin-top: 5px;">${this.jugador.inventario.revivir}</div>
-                    <div style="font-size: 0.9rem; opacity: 0.7;">+50% HP</div>
-                </div>
-            </div>
-        `;
+        setTimeout(() => notif.remove(), 2500);
     }
 
     // ====================
     // LOCAL STORAGE
     // ====================
 
-    guardarJugador() {
+    guardarTodo() {
         try {
             localStorage.setItem('fantasia_jugador', JSON.stringify(this.jugador));
+            localStorage.setItem('fantasia_pisos', JSON.stringify(this.pisos));
+            localStorage.setItem('fantasia_pisoActual', this.pisoActual.toString());
         } catch (e) {
-            console.warn('No se pudo guardar jugador:', e);
+            console.warn('Error guardando:', e);
         }
     }
 
@@ -1130,113 +1222,17 @@ class FantasiaRPG {
             const jugador = localStorage.getItem('fantasia_jugador');
             return jugador ? JSON.parse(jugador) : null;
         } catch (e) {
-            console.warn('No se pudo cargar jugador:', e);
             return null;
         }
     }
 
-    guardarNoviaSeleccionada() {
+    cargarPisoActual() {
         try {
-            localStorage.setItem('fantasia_novia', this.noviaSeleccionada);
+            return parseInt(localStorage.getItem('fantasia_pisoActual'));
         } catch (e) {
-            console.warn('No se pudo guardar novia:', e);
-        }
-    }
-
-    cargarNoviaSeleccionada() {
-        try {
-            return localStorage.getItem('fantasia_novia');
-        } catch (e) {
-            console.warn('No se pudo cargar novia:', e);
             return null;
         }
     }
-
-    guardarHistorial() {
-        try {
-            localStorage.setItem('fantasia_historial', JSON.stringify(this.historialCombates));
-        } catch (e) {
-            console.warn('No se pudo guardar historial:', e);
-        }
-    }
-
-    cargarHistorial() {
-        try {
-            const historial = localStorage.getItem('fantasia_historial');
-            return historial ? JSON.parse(historial) : [];
-        } catch (e) {
-            console.warn('No se pudo cargar historial:', e);
-            return [];
-        }
-    }
-
-    // ====================
-    // INTEGRACIÓN CON RPG EXISTENTE
-    // ====================
-
-    seleccionarNovia(personajeId) {
-        this.noviaSeleccionada = personajeId;
-        this.guardarNoviaSeleccionada();
-        
-        if (window.quintillizasRPG && window.quintillizasRPG.datosPersonajes[personajeId]) {
-            const personaje = window.quintillizasRPG.datosPersonajes[personajeId];
-            const preferencia = this.preferenciasStats[personajeId];
-            
-            this.mostrarNotificacion(
-                `💖 Novia seleccionada: ${personaje.nombre}\n` +
-                `✨ ${preferencia.descripcion}\n` +
-                `🎯 Bonus actual: +${this.calcularBonusStatsNovia(personajeId)}%`
-            );
-        }
-        
-        return true;
-    }
-}
-
-// ================================================
-// INTEGRACIÓN CON RPG QUINTILLIZAS
-// ================================================
-
-// Modificar la función de momentos íntimos para incluir bonus de stats
-if (typeof QuintillizasRPG !== 'undefined') {
-    const intentarMomentoIntimoOriginal = QuintillizasRPG.prototype.intentarMomentoIntimo;
-    
-    QuintillizasRPG.prototype.intentarMomentoIntimo = function(personajeId, momentoId) {
-        const personaje = this.datosPersonajes[personajeId];
-        const momento = personaje.momentosIntimos.find(m => m.id === momentoId);
-        
-        if (!momento) {
-            this.mostrarNotificacion('❌ Momento íntimo no encontrado');
-            return false;
-        }
-        
-        // Calcular probabilidad base
-        const probabilidadBase = this.calcularProbabilidadMomento(personaje, momento, false);
-        
-        // AGREGAR BONUS DE STATS DEL RPG FANTASÍA
-        let bonusStats = 0;
-        if (typeof fantasiaRPG !== 'undefined') {
-            const bonusFantasia = fantasiaRPG.obtenerBonusMomentoIntimo(personajeId);
-            bonusStats = bonusFantasia.porcentaje;
-            
-            console.log(`💖 Bonus RPG Fantasía para ${personaje.nombre}: +${bonusStats}%`);
-        }
-        
-        const probabilidadReal = Math.min(probabilidadBase + bonusStats, 80);
-        
-        if (bonusStats > 0) {
-            this.mostrarNotificacion(`✨ Bonus RPG Fantasía: +${bonusStats}% éxito`);
-        }
-        
-        console.log(`🎯 Probabilidad final para ${momento.nombre}: ${probabilidadReal}%`);
-        const exito = Math.random() * 100 < probabilidadReal;
-        
-        if (typeof intentarMomentoIntimoOriginal === 'function') {
-            return intentarMomentoIntimoOriginal.call(this, personajeId, momentoId);
-        }
-        
-        return exito;
-    };
 }
 
 // ================================================
@@ -1244,3 +1240,27 @@ if (typeof QuintillizasRPG !== 'undefined') {
 // ================================================
 
 const fantasiaRPG = new FantasiaRPG();
+
+// ================================================
+// INTEGRACIÓN CON RPG QUINTILLIZAS
+// ================================================
+
+// Añadir bonus a la probabilidad de momentos íntimos
+if (typeof QuintillizasRPG !== 'undefined') {
+    const calcularProbabilidadOriginal = QuintillizasRPG.prototype.calcularProbabilidadMomento;
+    
+    QuintillizasRPG.prototype.calcularProbabilidadMomento = function(personaje, momento, usarCondonEspecial) {
+        let probabilidad = calcularProbabilidadOriginal.call(this, personaje, momento, usarCondonEspecial);
+        
+        if (typeof fantasiaRPG !== 'undefined') {
+            const bonus = fantasiaRPG.calcularBonusParaHermana(this.personajeSeleccionado);
+            probabilidad = Math.min(probabilidad + bonus, usarCondonEspecial ? 100 : 80);
+            
+            if (bonus > 0) {
+                console.log(`✨ Bonus RPG Fantasía: +${bonus}%`);
+            }
+        }
+        
+        return probabilidad;
+    };
+}
