@@ -38,62 +38,62 @@ class QuintillizasRPG {
                     { id: 'paseo_noche', nombre: '🌙 Paseo Nocturno', costo: 800, videoId: '1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS', afinidad: 30, exp: 100, descripcion: 'Un romántico paseo bajo las estrellas' }
                 ],
                 momentosIntimos: [
-                    { 
-                        id: 'mamada', 
-                        nombre: '😮 Mamada Apasionada', 
+                    {
+                        id: 'caricia_intima',
+                        nombre: '👐 Caricia Íntima',
                         condonesRequeridos: 1,
                         condones001Requeridos: 0,
-                        videoId: '1aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe', 
-                        afinidad: 50, 
-                        exp: 200, 
-                        descripcion: 'Una mamada profunda y apasionada',
-                        probabilidadBase: 0,
-                        nivelRequerido: 3
-                    },
-                    { 
-                        id: 'sexo_oral', 
-                        nombre: '👅 Sexo Oral Intenso', 
-                        condonesRequeridos: 1,
-                        condones001Requeridos: 0,
-                        videoId: '1-wYJYTaw0ZOKQy8BBPR7Fmhlzs0IVx9K', 
-                        afinidad: 40, 
-                        exp: 150, 
-                        descripcion: 'Sexo oral hasta que se corra en tu boca',
-                        probabilidadBase: 0,
-                        nivelRequerido: 4
-                    },
-                    { 
-                        id: 'caricia_intima', 
-                        nombre: '👐 Caricia Íntima', 
-                        condonesRequeridos: 1,
-                        condones001Requeridos: 0,
-                        videoId: '1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS', 
-                        afinidad: 20, 
-                        exp: 80, 
+                        videoId: '1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS',
+                        afinidad: 20,
+                        exp: 80,
                         descripcion: 'Una caricia en sus partes más íntimas',
                         probabilidadBase: 5,
                         nivelRequerido: 2
                     },
-                    { 
-                        id: 'sexo_duro', 
-                        nombre: '💪 Sexo Duro', 
+                    {
+                        id: 'mamada',
+                        nombre: '😮 Mamada Apasionada',
+                        condonesRequeridos: 1,
+                        condones001Requeridos: 0,
+                        videoId: '1aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe',
+                        afinidad: 50,
+                        exp: 200,
+                        descripcion: 'Una mamada profunda y apasionada',
+                        probabilidadBase: 0,
+                        nivelRequerido: 3
+                    },
+                    {
+                        id: 'sexo_oral',
+                        nombre: '👅 Sexo Oral Intenso',
+                        condonesRequeridos: 1,
+                        condones001Requeridos: 0,
+                        videoId: '1-wYJYTaw0ZOKQy8BBPR7Fmhlzs0IVx9K',
+                        afinidad: 40,
+                        exp: 150,
+                        descripcion: 'Sexo oral hasta que se corra en tu boca',
+                        probabilidadBase: 0,
+                        nivelRequerido: 4
+                    },
+                    {
+                        id: 'sexo_duro',
+                        nombre: '💪 Sexo Duro',
                         condonesRequeridos: 2,
                         condones001Requeridos: 0,
-                        videoId: '1tS-gKr6bf4MY5Yrw7zRvP2uP_zq9rsLl', 
-                        afinidad: 80, 
-                        exp: 300, 
+                        videoId: '1tS-gKr6bf4MY5Yrw7zRvP2uP_zq9rsLl',
+                        afinidad: 80,
+                        exp: 300,
                         descripcion: 'Dale duro hasta que grite tu nombre',
                         probabilidadBase: 0,
                         nivelRequerido: 5
                     },
-                    { 
-                        id: 'correrse_dentro', 
-                        nombre: '💦 Correrse Dentro', 
+                    {
+                        id: 'correrse_dentro',
+                        nombre: '💦 Correrse Dentro',
                         condonesRequeridos: 3,
                         condones001Requeridos: 1,
-                        videoId: '1aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe', 
-                        afinidad: 100, 
-                        exp: 500, 
+                        videoId: '1aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe',
+                        afinidad: 100,
+                        exp: 500,
                         descripcion: 'El momento final, correrse dentro de ella',
                         probabilidadBase: 0,
                         nivelRequerido: 6
@@ -120,38 +120,38 @@ class QuintillizasRPG {
                     { id: 'concierto', nombre: '🎵 Concierto Juntos', costo: 1000, videoId: '1-wYJYTaw0ZOKQy8BBPR7Fmhlzs0IVx9K', afinidad: 50, exp: 120, descripcion: 'Llévala a ver su banda favorita' }
                 ],
                 momentosIntimos: [
-                    { 
-                        id: 'mamada_tsundere', 
-                        nombre: '😤 Mamada Tsundere', 
+                    {
+                        id: 'mamada_tsundere',
+                        nombre: '😤 Mamada Tsundere',
                         condonesRequeridos: 1,
                         condones001Requeridos: 0,
-                        videoId: '1-wYJYTaw0ZOKQy8BBPR7Fmhlzs0IVx9K', 
-                        afinidad: 60, 
-                        exp: 250, 
+                        videoId: '1-wYJYTaw0ZOKQy8BBPR7Fmhlzs0IVx9K',
+                        afinidad: 60,
+                        exp: 250,
                         descripcion: 'Una mamada a regañadientes pero intensa',
                         probabilidadBase: 0,
                         nivelRequerido: 4
                     },
-                    { 
-                        id: 'sexo_duro_tsundere', 
-                        nombre: '💢 Sexo Duro Tsundere', 
+                    {
+                        id: 'sexo_duro_tsundere',
+                        nombre: '💢 Sexo Duro Tsundere',
                         condonesRequeridos: 2,
                         condones001Requeridos: 0,
-                        videoId: '1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS', 
-                        afinidad: 90, 
-                        exp: 400, 
+                        videoId: '1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS',
+                        afinidad: 90,
+                        exp: 400,
                         descripcion: 'Dale duro mientras dice "no es que me guste"',
                         probabilidadBase: 0,
                         nivelRequerido: 6
                     },
-                    { 
-                        id: 'corrida_cara', 
-                        nombre: '💦 Corrida en la Cara', 
+                    {
+                        id: 'corrida_cara',
+                        nombre: '💦 Corrida en la Cara',
                         condonesRequeridos: 1,
                         condones001Requeridos: 1,
-                        videoId: '1tS-gKr6bf4MY5Yrw7zRvP2uP_zq9rsLl', 
-                        afinidad: 120, 
-                        exp: 600, 
+                        videoId: '1tS-gKr6bf4MY5Yrw7zRvP2uP_zq9rsLl',
+                        afinidad: 120,
+                        exp: 600,
                         descripcion: 'Correrse en su cara mientras te mira con odio',
                         probabilidadBase: 0,
                         nivelRequerido: 7
@@ -178,38 +178,38 @@ class QuintillizasRPG {
                     { id: 'concierto_tradicional', nombre: '🎶 Concierto Tradicional', costo: 600, videoId: '1aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe', afinidad: 35, exp: 95, descripcion: 'Asiste a un concierto de música tradicional' }
                 ],
                 momentosIntimos: [
-                    { 
-                        id: 'mamada_timida', 
-                        nombre: '😳 Mamada Tímida', 
+                    {
+                        id: 'mamada_timida',
+                        nombre: '😳 Mamada Tímida',
                         condonesRequeridos: 1,
                         condones001Requeridos: 0,
-                        videoId: '1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS', 
-                        afinidad: 40, 
-                        exp: 180, 
+                        videoId: '1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS',
+                        afinidad: 40,
+                        exp: 180,
                         descripcion: 'Una mamada suave y llena de timidez',
                         probabilidadBase: 5,
                         nivelRequerido: 2
                     },
-                    { 
-                        id: 'sexo_lento', 
-                        nombre: '🐌 Sexo Lento', 
+                    {
+                        id: 'sexo_lento',
+                        nombre: '🐌 Sexo Lento',
                         condonesRequeridos: 1,
                         condones001Requeridos: 0,
-                        videoId: '1tS-gKr6bf4MY5Yrw7zRvP2uP_zq9rsLl', 
-                        afinidad: 60, 
-                        exp: 250, 
+                        videoId: '1tS-gKr6bf4MY5Yrw7zRvP2uP_zq9rsLl',
+                        afinidad: 60,
+                        exp: 250,
                         descripcion: 'Sexo lento y romántico',
                         probabilidadBase: 0,
                         nivelRequerido: 3
                     },
-                    { 
-                        id: 'correrse_dentro_miku', 
-                        nombre: '💕 Correrse Dentro', 
+                    {
+                        id: 'correrse_dentro_miku',
+                        nombre: '💕 Correrse Dentro',
                         condonesRequeridos: 2,
                         condones001Requeridos: 1,
-                        videoId: '1aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe', 
-                        afinidad: 80, 
-                        exp: 350, 
+                        videoId: '1aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe',
+                        afinidad: 80,
+                        exp: 350,
                         descripcion: 'Correrse dentro mientras te abraza',
                         probabilidadBase: 0,
                         nivelRequerido: 5
@@ -236,38 +236,38 @@ class QuintillizasRPG {
                     { id: 'carrera_atletismo', nombre: '🏃‍♀️ Carrera de Atletismo', costo: 500, videoId: '1tS-gKr6bf4MY5Yrw7zRvP2uP_zq9rsLl', afinidad: 30, exp: 85, descripcion: 'Participa en una carrera juntos' }
                 ],
                 momentosIntimos: [
-                    { 
-                        id: 'mamada_energica', 
-                        nombre: '💪 Mamada Energética', 
+                    {
+                        id: 'mamada_energica',
+                        nombre: '💪 Mamada Energética',
                         condonesRequeridos: 1,
                         condones001Requeridos: 0,
-                        videoId: '1tS-gKr6bf4MY5Yrw7zRvP2uP_zq9rsLl', 
-                        afinidad: 45, 
-                        exp: 200, 
+                        videoId: '1tS-gKr6bf4MY5Yrw7zRvP2uP_zq9rsLl',
+                        afinidad: 45,
+                        exp: 200,
                         descripcion: 'Una mamada llena de energía y entusiasmo',
                         probabilidadBase: 10,
                         nivelRequerido: 2
                     },
-                    { 
-                        id: 'sexo_rapido', 
-                        nombre: '⚡ Sexo Rápido', 
+                    {
+                        id: 'sexo_rapido',
+                        nombre: '⚡ Sexo Rápido',
                         condonesRequeridos: 1,
                         condones001Requeridos: 0,
-                        videoId: '1aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe', 
-                        afinidad: 70, 
-                        exp: 300, 
+                        videoId: '1aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe',
+                        afinidad: 70,
+                        exp: 300,
                         descripcion: 'Sexo rápido y apasionado',
                         probabilidadBase: 0,
                         nivelRequerido: 3
                     },
-                    { 
-                        id: 'doble_penetracion', 
-                        nombre: '👯‍♀️ Doble Penetración', 
+                    {
+                        id: 'doble_penetracion',
+                        nombre: '👯‍♀️ Doble Penetración',
                         condonesRequeridos: 2,
                         condones001Requeridos: 1,
-                        videoId: '1-wYJYTaw0ZOKQy8BBPR7Fmhlzs0IVx9K', 
-                        afinidad: 100, 
-                        exp: 500, 
+                        videoId: '1-wYJYTaw0ZOKQy8BBPR7Fmhlzs0IVx9K',
+                        afinidad: 100,
+                        exp: 500,
                         descripcion: 'Doble penetración con otra hermana (fantasía)',
                         probabilidadBase: 0,
                         nivelRequerido: 6
@@ -294,38 +294,38 @@ class QuintillizasRPG {
                     { id: 'picnic_parque', nombre: '🧺 Picnic en el Parque', costo: 350, videoId: '1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS', afinidad: 20, exp: 65, descripcion: 'Un picnic con mucha comida' }
                 ],
                 momentosIntimos: [
-                    { 
-                        id: 'mamada_con_sabor', 
-                        nombre: '🍓 Mamada con Sabor', 
+                    {
+                        id: 'mamada_con_sabor',
+                        nombre: '🍓 Mamada con Sabor',
                         condonesRequeridos: 1,
                         condones001Requeridos: 0,
-                        videoId: '1aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe', 
-                        afinidad: 50, 
-                        exp: 220, 
+                        videoId: '1aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe',
+                        afinidad: 50,
+                        exp: 220,
                         descripcion: 'Una mamada que sabe a fresas',
                         probabilidadBase: 5,
                         nivelRequerido: 3
                     },
-                    { 
-                        id: 'sexo_gloton', 
-                        nombre: '🍔 Sexo Glotón', 
+                    {
+                        id: 'sexo_gloton',
+                        nombre: '🍔 Sexo Glotón',
                         condonesRequeridos: 1,
                         condones001Requeridos: 0,
-                        videoId: '1-wYJYTaw0ZOKQy8BBPR7Fmhlzs0IVx9K', 
-                        afinidad: 65, 
-                        exp: 280, 
+                        videoId: '1-wYJYTaw0ZOKQy8BBPR7Fmhlzs0IVx9K',
+                        afinidad: 65,
+                        exp: 280,
                         descripcion: 'Sexo mientras come algo dulce',
                         probabilidadBase: 0,
                         nivelRequerido: 4
                     },
-                    { 
-                        id: 'correrse_boca', 
-                        nombre: '👄 Correrse en la Boca', 
+                    {
+                        id: 'correrse_boca',
+                        nombre: '👄 Correrse en la Boca',
                         condonesRequeridos: 1,
                         condones001Requeridos: 1,
-                        videoId: '1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS', 
-                        afinidad: 90, 
-                        exp: 400, 
+                        videoId: '1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS',
+                        afinidad: 90,
+                        exp: 400,
                         descripcion: 'Correrse en su boca y que se lo trague',
                         probabilidadBase: 0,
                         nivelRequerido: 6
@@ -342,7 +342,7 @@ class QuintillizasRPG {
     inicializarMomentosGrupales() {
         return {
             duo: [
-                { 
+                {
                     id: 'duo_nino_ichika',
                     nombre: '👯‍♀️ Dúo Tsundere-Mayor',
                     tituloCompleto: 'Nino e Ichika: Dúo de Hermanas',
@@ -358,7 +358,7 @@ class QuintillizasRPG {
                     expGanada: 500,
                     recompensa: 150
                 },
-                { 
+                {
                     id: 'duo_nino_miku',
                     nombre: '👯‍♀️ Dúo Tsundere-Tímida',
                     tituloCompleto: 'Nino y Miku: Contrastes',
@@ -374,7 +374,7 @@ class QuintillizasRPG {
                     expGanada: 500,
                     recompensa: 150
                 },
-                { 
+                {
                     id: 'duo_nino_yotsuba',
                     nombre: '👯‍♀️ Dúo Tsundere-Energía',
                     tituloCompleto: 'Nino y Yotsuba: Fuego y Energía',
@@ -390,7 +390,7 @@ class QuintillizasRPG {
                     expGanada: 500,
                     recompensa: 150
                 },
-                { 
+                {
                     id: 'duo_nino_itsuki',
                     nombre: '👯‍♀️ Dúo Tsundere-Glotona',
                     tituloCompleto: 'Nino e Itsuki: Sabores Contrastantes',
@@ -406,7 +406,7 @@ class QuintillizasRPG {
                     expGanada: 500,
                     recompensa: 150
                 },
-                { 
+                {
                     id: 'duo_ichika_miku',
                     nombre: '👯‍♀️ Dúo Mayor-Tímida',
                     tituloCompleto: 'Ichika y Miku: Protección y Timidez',
@@ -422,7 +422,7 @@ class QuintillizasRPG {
                     expGanada: 500,
                     recompensa: 150
                 },
-                { 
+                {
                     id: 'duo_ichika_yotsuba',
                     nombre: '👯‍♀️ Dúo Coqueta-Energía',
                     tituloCompleto: 'Ichika y Yotsuba: Carisma y Vitalidad',
@@ -438,7 +438,7 @@ class QuintillizasRPG {
                     expGanada: 500,
                     recompensa: 150
                 },
-                { 
+                {
                     id: 'duo_ichika_itsuki',
                     nombre: '👯‍♀️ Dúo Mayor-Glotona',
                     tituloCompleto: 'Ichika e Itsuki: Las Mayores',
@@ -454,7 +454,7 @@ class QuintillizasRPG {
                     expGanada: 500,
                     recompensa: 150
                 },
-                { 
+                {
                     id: 'duo_miku_yotsuba',
                     nombre: '👯‍♀️ Dúo Tímida-Energía',
                     tituloCompleto: 'Miku y Yotsuba: Opuestos',
@@ -470,7 +470,7 @@ class QuintillizasRPG {
                     expGanada: 500,
                     recompensa: 150
                 },
-                { 
+                {
                     id: 'duo_miku_itsuki',
                     nombre: '👯‍♀️ Dúo Tímida-Glotona',
                     tituloCompleto: 'Miku e Itsuki: Dulzura',
@@ -486,7 +486,7 @@ class QuintillizasRPG {
                     expGanada: 500,
                     recompensa: 150
                 },
-                { 
+                {
                     id: 'duo_yotsuba_itsuki',
                     nombre: '👯‍♀️ Dúo Energía-Glotona',
                     tituloCompleto: 'Yotsuba e Itsuki: Diversión',
@@ -504,7 +504,7 @@ class QuintillizasRPG {
                 }
             ],
             trio: [
-                { 
+                {
                     id: 'trio_nino_ichika_miku',
                     nombre: '👯‍♀️👯‍♀️ Trío Tsundere-Mayor-Tímida',
                     tituloCompleto: 'Nino, Ichika y Miku: Diversidad',
@@ -520,7 +520,7 @@ class QuintillizasRPG {
                     expGanada: 800,
                     recompensa: 250
                 },
-                { 
+                {
                     id: 'trio_nino_ichika_yotsuba',
                     nombre: '👯‍♀️👯‍♀️ Trío Tsundere-Mayor-Energía',
                     tituloCompleto: 'Nino, Ichika y Yotsuba: Explosión',
@@ -536,7 +536,7 @@ class QuintillizasRPG {
                     expGanada: 800,
                     recompensa: 250
                 },
-                { 
+                {
                     id: 'trio_nino_ichika_itsuki',
                     nombre: '👯‍♀️👯‍♀️ Trío Tsundere-Mayor-Glotona',
                     tituloCompleto: 'Nino, Ichika e Itsuki: Las Mayores',
@@ -552,7 +552,7 @@ class QuintillizasRPG {
                     expGanada: 800,
                     recompensa: 250
                 },
-                { 
+                {
                     id: 'trio_nino_miku_yotsuba',
                     nombre: '👯‍♀️👯‍♀️ Trío Tsundere-Tímida-Energía',
                     tituloCompleto: 'Nino, Miku y Yotsuba: Contraste',
@@ -568,7 +568,7 @@ class QuintillizasRPG {
                     expGanada: 800,
                     recompensa: 250
                 },
-                { 
+                {
                     id: 'trio_nino_miku_itsuki',
                     nombre: '👯‍♀️👯‍♀️ Trío Tsundere-Tímida-Glotona',
                     tituloCompleto: 'Nino, Miku e Itsuki: Sabores',
@@ -584,7 +584,7 @@ class QuintillizasRPG {
                     expGanada: 800,
                     recompensa: 250
                 },
-                { 
+                {
                     id: 'trio_nino_yotsuba_itsuki',
                     nombre: '👯‍♀️👯‍♀️ Trío Tsundere-Energía-Glotona',
                     tituloCompleto: 'Nino, Yotsuba e Itsuki: Dinamismo',
@@ -600,7 +600,7 @@ class QuintillizasRPG {
                     expGanada: 800,
                     recompensa: 250
                 },
-                { 
+                {
                     id: 'trio_ichika_miku_yotsuba',
                     nombre: '👯‍♀️👯‍♀️ Trío Mayor-Tímida-Energía',
                     tituloCompleto: 'Ichika, Miku y Yotsuba: Armonía',
@@ -616,7 +616,7 @@ class QuintillizasRPG {
                     expGanada: 800,
                     recompensa: 250
                 },
-                { 
+                {
                     id: 'trio_ichika_miku_itsuki',
                     nombre: '👯‍♀️👯‍♀️ Trío Mayor-Tímida-Glotona',
                     tituloCompleto: 'Ichika, Miku e Itsuki: Dulzura',
@@ -632,7 +632,7 @@ class QuintillizasRPG {
                     expGanada: 800,
                     recompensa: 250
                 },
-                { 
+                {
                     id: 'trio_ichika_yotsuba_itsuki',
                     nombre: '👯‍♀️👯‍♀️ Trío Mayor-Energía-Glotona',
                     tituloCompleto: 'Ichika, Yotsuba e Itsuki: Vitalidad',
@@ -648,7 +648,7 @@ class QuintillizasRPG {
                     expGanada: 800,
                     recompensa: 250
                 },
-                { 
+                {
                     id: 'trio_miku_yotsuba_itsuki',
                     nombre: '👯‍♀️👯‍♀️ Trío Tímida-Energía-Glotona',
                     tituloCompleto: 'Miku, Yotsuba e Itsuki: Juventud',
@@ -666,7 +666,7 @@ class QuintillizasRPG {
                 }
             ],
             cuarteto: [
-                { 
+                {
                     id: 'cuarteto_sin_ichika',
                     nombre: '👯‍♀️👯‍♀️👯‍♀️ Cuarteto sin Ichika',
                     tituloCompleto: 'Nino, Miku, Yotsuba e Itsuki',
@@ -682,7 +682,7 @@ class QuintillizasRPG {
                     expGanada: 1200,
                     recompensa: 400
                 },
-                { 
+                {
                     id: 'cuarteto_sin_nino',
                     nombre: '👯‍♀️👯‍♀️👯‍♀️ Cuarteto sin Nino',
                     tituloCompleto: 'Ichika, Miku, Yotsuba e Itsuki',
@@ -698,7 +698,7 @@ class QuintillizasRPG {
                     expGanada: 1200,
                     recompensa: 400
                 },
-                { 
+                {
                     id: 'cuarteto_sin_miku',
                     nombre: '👯‍♀️👯‍♀️👯‍♀️ Cuarteto sin Miku',
                     tituloCompleto: 'Ichika, Nino, Yotsuba e Itsuki',
@@ -714,7 +714,7 @@ class QuintillizasRPG {
                     expGanada: 1200,
                     recompensa: 400
                 },
-                { 
+                {
                     id: 'cuarteto_sin_yotsuba',
                     nombre: '👯‍♀️👯‍♀️👯‍♀️ Cuarteto sin Yotsuba',
                     tituloCompleto: 'Ichika, Nino, Miku e Itsuki',
@@ -730,7 +730,7 @@ class QuintillizasRPG {
                     expGanada: 1200,
                     recompensa: 400
                 },
-                { 
+                {
                     id: 'cuarteto_sin_itsuki',
                     nombre: '👯‍♀️👯‍♀️👯‍♀️ Cuarteto sin Itsuki',
                     tituloCompleto: 'Ichika, Nino, Miku y Yotsuba',
@@ -748,7 +748,7 @@ class QuintillizasRPG {
                 }
             ],
             quinteto: [
-                { 
+                {
                     id: 'quinteto_todas',
                     nombre: '👯‍♀️👯‍♀️👯‍♀️👯‍♀️👯‍♀️ QUINTETO: LAS 5 HERMANAS',
                     tituloCompleto: 'Las Cinco Nakano: El Momento Supremo',
@@ -780,13 +780,13 @@ class QuintillizasRPG {
 
         const personaje = this.datosPersonajes[personajeId];
         personaje.exp += cantidad;
-        
+
         console.log(`🎮 ${personaje.nombre} +${cantidad} EXP (Total: ${personaje.exp}/${personaje.expNecesaria})`);
-        
+
         if (personaje.exp >= personaje.expNecesaria) {
             this.subirNivel(personajeId);
         }
-        
+
         this.guardarDatosPersonajes();
         return true;
     }
@@ -796,10 +796,10 @@ class QuintillizasRPG {
         personaje.nivel += 1;
         personaje.exp = personaje.exp - personaje.expNecesaria;
         personaje.expNecesaria = Math.round(personaje.expNecesaria * 1.8);
-        
+
         console.log(`🎉 ¡${personaje.nombre} subió al nivel ${personaje.nivel}!`);
         this.mostrarNotificacion(`🎉 ${personaje.nombre} nivel ${personaje.nivel}! (Necesitas ${personaje.expNecesaria} EXP para el siguiente)`);
-        
+
         this.desbloquearVideo(personajeId);
         this.guardarDatosPersonajes();
     }
@@ -807,7 +807,7 @@ class QuintillizasRPG {
     desbloquearVideo(personajeId) {
         const personaje = this.datosPersonajes[personajeId];
         const nivel = personaje.nivel;
-        
+
         const videosPorNivel = {
             2: { id: 'presentacion', nombre: 'Presentación', videoId: this.obtenerVideoIdPorNivel(personajeId, 2) },
             4: { id: 'conversacion_1', nombre: 'Conversación', videoId: this.obtenerVideoIdPorNivel(personajeId, 4) },
@@ -815,7 +815,7 @@ class QuintillizasRPG {
             8: { id: 'confesion', nombre: 'Confesión', videoId: this.obtenerVideoIdPorNivel(personajeId, 8) },
             10: { id: 'primer_beso', nombre: 'Primer Beso', videoId: this.obtenerVideoIdPorNivel(personajeId, 10) }
         };
-        
+
         if (videosPorNivel[nivel] && !personaje.videosDisponibles.some(v => v.id === videosPorNivel[nivel].id)) {
             personaje.videosDisponibles.push(videosPorNivel[nivel]);
             console.log(`🎥 Video desbloqueado: ${videosPorNivel[nivel].nombre} (Nivel ${nivel})`);
@@ -831,7 +831,7 @@ class QuintillizasRPG {
             'yotsuba': ['1tS-gKr6bf4MY5Yrw7zRvP2uP_zq9rsLl', '1aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe', '1-wYJYTaw0ZOKQy8BBPR7Fmhlzs0IVx9K', '1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS', '1tS-gKr6bf4MY5Yrw7zRvP2uP_zq9rsLl'],
             'itsuki': ['1aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe', '1-wYJYTaw0ZOKQy8BBPR7Fmhlzs0IVx9K', '1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS', '1tS-gKr6bf4MY5Yrw7zRvP2uP_zq9rsLl', '1aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe']
         };
-        
+
         const indice = Math.floor((nivel / 2) - 1);
         return videos[personajeId][indice] || videos[personajeId][0];
     }
@@ -845,35 +845,35 @@ class QuintillizasRPG {
         const MAX_NIVEL = 10;
         const MAX_EXITO_BASE = 80;
         const MAX_EXITO_CON_CONDON = 100;
-        
+
         const usarLimiteEspecial = usarCondonEspecial || momento.condones001Requeridos > 0;
         const limiteMaximo = usarLimiteEspecial ? MAX_EXITO_CON_CONDON : MAX_EXITO_BASE;
-        
+
         let probabilidad = Math.min(momento.probabilidadBase, 10);
-        
+
         let afinidadEfectiva = Math.max(personaje.afinidad, 0);
         afinidadEfectiva = Math.min(afinidadEfectiva, MAX_AFINIDAD);
-        
+
         const porcentajeAfinidad = (afinidadEfectiva / MAX_AFINIDAD) * 40;
         probabilidad += porcentajeAfinidad;
-        
+
         const nivelNormalizado = Math.min(personaje.nivel, MAX_NIVEL);
         const porcentajeNivel = (nivelNormalizado / MAX_NIVEL) * 30;
         probabilidad += porcentajeNivel;
-        
+
         if (usarLimiteEspecial) {
             probabilidad += 20;
         }
-        
+
         const ajustesEstado = {
             'feliz': 15, 'neutral': 0, 'triste': -25, 'enojada': -40,
             'tsundere': -30, 'tímida': -15, 'energica': 10, 'glotona': 12
         };
-        
+
         probabilidad += ajustesEstado[personaje.estadoAnimo] || 0;
         probabilidad = Math.max(1, probabilidad);
         probabilidad = Math.min(probabilidad, limiteMaximo);
-        
+
         return Math.round(probabilidad);
     }
 
@@ -884,27 +884,27 @@ class QuintillizasRPG {
     intentarMomentoIntimo(personajeId, momentoId) {
         const personaje = this.datosPersonajes[personajeId];
         const momento = personaje.momentosIntimos.find(m => m.id === momentoId);
-        
+
         if (!momento) {
             this.mostrarNotificacion('❌ Momento íntimo no encontrado');
             return false;
         }
-        
+
         if (personaje.nivel < (momento.nivelRequerido || 1)) {
             this.mostrarNotificacion(`❌ Necesitas nivel ${momento.nivelRequerido} para este momento íntimo`);
             return false;
         }
-        
+
         if (this.condones < momento.condonesRequeridos) {
             this.mostrarNotificacion(`❌ Necesitas ${momento.condonesRequeridos} condones normales`);
             return false;
         }
-        
+
         if (this.condones001 < momento.condones001Requeridos) {
             this.mostrarNotificacion(`❌ Necesitas ${momento.condones001Requeridos} condones 0.01`);
             return false;
         }
-        
+
         let usarCondonEspecial = false;
         if (this.condones001 > 0 && momento.condones001Requeridos === 0) {
             const mensaje = `💎 ¿Quieres usar un CONDÓN 0.01?\n\n` +
@@ -913,19 +913,19 @@ class QuintillizasRPG {
                            `• Puede superar el límite del 80% (hasta 100%)\n` +
                            `• Se sentirá MÁS RICO para ${personaje.nombre.split(' ')[0]}\n\n` +
                            `Tienes: ${this.condones001} condones 0.01 disponibles`;
-            
+
             usarCondonEspecial = confirm(mensaje);
         }
-        
+
         const probabilidadReal = this.calcularProbabilidadMomento(personaje, momento, usarCondonEspecial);
-        
+
         if (usarCondonEspecial) {
             this.mostrarNotificacion(`💎 Condón 0.01 activado! Éxito: ${probabilidadReal}% (Máximo: 100%)`);
         }
-        
+
         console.log(`🎯 Probabilidad final para ${momento.nombre}: ${probabilidadReal}%`);
         const exito = Math.random() * 100 < probabilidadReal;
-        
+
         if (exito) {
             this.condones -= momento.condonesRequeridos;
             if (usarCondonEspecial || momento.condones001Requeridos > 0) {
@@ -933,15 +933,15 @@ class QuintillizasRPG {
             }
             this.guardarCondones();
             this.guardarCondones001();
-            
+
             let afinidadGanada = momento.afinidad;
             let expGanada = momento.exp;
-            
+
             if (usarCondonEspecial || momento.condones001Requeridos > 0) {
                 afinidadGanada = Math.round(afinidadGanada * 1.8);
                 expGanada = Math.round(expGanada * 1.5);
                 this.mostrarNotificacion(`💎 ¡CONDÓN 0.01! +80% afinidad, +50% EXP, +20% éxito`);
-                
+
                 const mensajesRico = [
                     `💖 ${personaje.nombre.split(' ')[0]} gime más fuerte con el condón 0.01`,
                     `✨ ${personaje.nombre.split(' ')[0]} siente cada movimiento intensificado`,
@@ -951,14 +951,14 @@ class QuintillizasRPG {
                 const mensajeAleatorio = mensajesRico[Math.floor(Math.random() * mensajesRico.length)];
                 this.mostrarNotificacion(mensajeAleatorio);
             }
-            
+
             this.agregarEXP(personajeId, expGanada);
             personaje.afinidad = Math.min(personaje.afinidad + afinidadGanada, 200);
             personaje.estadoAnimo = 'feliz';
-            
+
             console.log(`✅ ¡${momento.nombre} exitoso con ${personaje.nombre}!`);
             this.mostrarNotificacion(`💖 ¡${momento.nombre} exitoso! +${afinidadGanada} afinidad, +${expGanada} EXP`);
-            
+
             this.cargarVideoMomentoIntimo(personajeId, momento);
             return true;
         } else {
@@ -968,14 +968,14 @@ class QuintillizasRPG {
             }
             this.guardarCondones();
             this.guardarCondones001();
-            
+
             personaje.estadoAnimo = 'enojada';
             const perdidaAfinidad = Math.floor(momento.afinidad / 3);
             personaje.afinidad = Math.max(personaje.afinidad - perdidaAfinidad, -100);
-            
+
             console.log(`❌ ${momento.nombre} falló con ${personaje.nombre}`);
             this.mostrarNotificacion(`😠 ${momento.nombre} falló. ${personaje.nombre} se enojó. Pérdida de afinidad.`);
-            
+
             this.actualizarVistaConPersonaje();
             return false;
         }
@@ -1044,15 +1044,15 @@ class QuintillizasRPG {
                 <p style="text-align: center; opacity: 0.8; margin-bottom: 40px; font-size: 1.2rem;">
                     Conquista a las 5 hermanas. Gana dinero estudiando, gasta en conquistarlas. <strong>¡Es difícil!</strong>
                 </p>
-                
+
                 <div style="text-align: center; margin-bottom: 30px;">
-                    <button class="card-button" onclick="quintillizasRPG.cargarPantallaMomentosGrupales()" 
+                    <button class="card-button" onclick="quintillizasRPG.cargarPantallaMomentosGrupales()"
                             style="background: linear-gradient(135deg, #FF1493, #8A5AF7); padding: 20px 50px; font-size: 1.5rem; border-radius: 50px; animation: pulse 2s infinite;">
                         👯‍♀️ MOMENTOS ESPECIALES EN GRUPO 👯‍♀️
                     </button>
                     <p style="margin-top: 10px; opacity: 0.8;">¡Dúos, tríos, cuartetos y quinteto! Requieren condones 0.01</p>
                 </div>
-                
+
                 <div style="background: rgba(255, 20, 147, 0.1); border-radius: 20px; padding: 25px; margin-bottom: 40px; border: 2px solid #FF1493;">
                     <h3 style="color: #FFD166; margin-bottom: 15px;">📊 ESTADO ACTUAL</h3>
                     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); gap: 20px;">
@@ -1082,19 +1082,19 @@ class QuintillizasRPG {
                         </div>
                     </div>
                 </div>
-                
+
                 <h2 style="text-align: center; color: #FFD166; margin-bottom: 30px;">💖 SELECCIONA UNA HERMANA</h2>
                 <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 25px; margin-bottom: 50px;">
                     ${this.crearCardsPersonajes()}
                 </div>
-                
+
                 <div style="background: linear-gradient(135deg, rgba(88, 100, 245, 0.1), rgba(138, 90, 247, 0.1)); border-radius: 20px; padding: 25px; margin-bottom: 40px; border: 2px solid #5864F5;">
                     <h3 style="color: #5864F5; margin-bottom: 20px;">🛍️ TIENDA DE CONDONES</h3>
                     <p style="opacity: 0.8; margin-bottom: 20px;">
                         <strong>Condones Normales (S/.50):</strong> Para momentos íntimos básicos<br>
                         <strong>Condones 0.01 (S/.200):</strong> ¡ESPECIAL! +20% éxito, +80% afinidad, hasta 100% de éxito
                     </p>
-                    
+
                     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 30px;">
                         <div style="background: rgba(76, 175, 80, 0.1); border-radius: 15px; padding: 20px; border: 2px solid #4CAF50;">
                             <h4 style="color: #4CAF50; margin-bottom: 15px;">🛒 Condones Normales</h4>
@@ -1118,7 +1118,7 @@ class QuintillizasRPG {
                         </div>
                     </div>
                 </div>
-                
+
                 <div style="background: rgba(255, 209, 102, 0.1); border-radius: 20px; padding: 25px; border-left: 5px solid #FFD166;">
                     <h4 style="color: #FFD166; margin-bottom: 15px;">📖 SISTEMA CORREGIDO - ¡AHORA SÍ FUNCIONA!</h4>
                     <ol style="padding-left: 20px; opacity: 0.8;">
@@ -1140,22 +1140,27 @@ class QuintillizasRPG {
 
     crearCardsPersonajes() {
         const personajesIds = ['ichika', 'nino', 'miku', 'yotsuba', 'itsuki'];
-        
+
         return personajesIds.map(id => {
             const personaje = this.datosPersonajes[id];
             const esSeleccionado = this.personajeSeleccionado === id;
-            
+
+            // Calcular la probabilidad base para un momento típico (ejemplo)
+            const momentoEjemplo = personaje.momentosIntimos[0];
+            const probSinCondon = momentoEjemplo ? this.calcularProbabilidadMomento(personaje, momentoEjemplo, false) : 0;
+            const probConCondon = momentoEjemplo ? this.calcularProbabilidadMomento(personaje, momentoEjemplo, true) : 0;
+
             return `
-                <div class="personaje-card" 
+                <div class="personaje-card"
                      style="border: 2px solid ${personaje.color}; ${esSeleccionado ? 'border-width: 4px; box-shadow: 0 0 20px ' + personaje.color + '50;' : ''}; background: rgba(255,255,255,0.05); border-radius: 15px; padding: 20px; cursor: pointer; transition: all 0.3s ease;"
                      onclick="seleccionarPersonajeRPG('${id}')">
                     <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
                         <div style="position: relative;">
-                            <img src="${personaje.imagen}" 
+                            <img src="${personaje.imagen}"
                                  alt="${personaje.nombre}"
                                  style="width: 70px; height: 70px; border-radius: 50%; object-fit: cover; border: 3px solid ${personaje.color};">
-                            ${esSeleccionado ? 
-                                `<div style="position: absolute; top: -5px; right: -5px; background: ${personaje.color}; color: white; width: 25px; height: 25px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; border: 2px solid white;">✓</div>` 
+                            ${esSeleccionado ?
+                                `<div style="position: absolute; top: -5px; right: -5px; background: ${personaje.color}; color: white; width: 25px; height: 25px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 0.8rem; border: 2px solid white;">✓</div>`
                                 : ''}
                         </div>
                         <div>
@@ -1163,28 +1168,43 @@ class QuintillizasRPG {
                             <p style="opacity: 0.7; margin: 5px 0 0 0; font-size: 0.9rem;">Nivel ${personaje.nivel} • ${personaje.dificultad.toUpperCase()}</p>
                         </div>
                     </div>
-                    
+
                     <div style="margin-bottom: 15px;">
                         <div style="background: rgba(255,255,255,0.1); height: 10px; border-radius: 5px; overflow: hidden;">
                             <div style="background: ${personaje.color}; width: ${(personaje.exp / personaje.expNecesaria) * 100}%; height: 100%;"></div>
                         </div>
                         <p style="font-size: 0.9rem; margin-top: 5px; color: ${personaje.color};">${personaje.exp}/${personaje.expNecesaria} EXP</p>
                     </div>
-                    
+
                     <p style="font-size: 0.9rem; opacity: 0.8; margin-bottom: 15px;">${personaje.descripcion}</p>
-                    
+
                     <div style="display: flex; justify-content: space-between; font-size: 0.85rem; opacity: 0.7;">
                         <div>💝 ${personaje.afinidad >= 0 ? '+' : ''}${personaje.afinidad}/200</div>
                         <div>${this.obtenerEmojiEstado(personaje.estadoAnimo)} ${personaje.estadoAnimo.toUpperCase()}</div>
-                        <div>🎯 ${personaje.probabilidadBase}%</div>
                     </div>
-                    
+
+                    <!-- NUEVO: Mostrar fórmula de probabilidad -->
+                    <div style="background: rgba(255, 20, 147, 0.15); border-radius: 8px; padding: 10px; margin: 10px 0; font-size: 0.85rem; border: 1px dashed ${personaje.color};">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                            <span>🎯 Prob. Actual (ejemplo):</span>
+                            <span style="color: ${probSinCondon > 70 ? '#4CAF50' : '#FFD166'}; font-weight: bold;">${probSinCondon}%</span>
+                        </div>
+                        <div style="font-size: 0.75rem; opacity: 0.8; line-height: 1.4;">
+                            📊 Fórmula: Base (${momentoEjemplo ? momentoEjemplo.probabilidadBase : 0}%) +
+                            Afinidad (${Math.round(Math.min(Math.max(personaje.afinidad, 0), 200) / 200 * 40)}%) +
+                            Nivel (${Math.round(personaje.nivel / 10 * 30)}%) +
+                            Estado (${this.obtenerAjusteEstadoTexto(personaje.estadoAnimo)})
+                            = ${probSinCondon}%
+                            <br>💎 Con condón 0.01: <strong style="color:#5864F5;">${probConCondon}%</strong> (hasta 100%)
+                        </div>
+                    </div>
+
                     <div style="background: rgba(255, 20, 147, 0.1); padding: 8px; border-radius: 8px; margin-top: 10px; text-align: center;">
                         <span style="font-size: 0.8rem; color: #FF1493;">🔞 Nivel ${personaje.nivelRequeridoParaIntimos}+ para íntimos</span>
                     </div>
-                    
-                    ${esSeleccionado ? 
-                        `<div style="background: ${personaje.color}; color: white; padding: 8px; border-radius: 10px; margin-top: 10px; text-align: center; font-weight: bold;">✅ SELECCIONADA</div>` 
+
+                    ${esSeleccionado ?
+                        `<div style="background: ${personaje.color}; color: white; padding: 8px; border-radius: 10px; margin-top: 10px; text-align: center; font-weight: bold;">✅ SELECCIONADA</div>`
                         : ''}
                 </div>
             `;
@@ -1226,7 +1246,7 @@ class QuintillizasRPG {
                     <h2 style="color: #4CAF50; margin-bottom: 20px; border-bottom: 2px solid #4CAF50; padding-bottom: 10px;">
                         👯‍♀️ DÚOS (10 combinaciones) - Nivel 5+, Afinidad 100+
                     </h2>
-                    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px;">
+                    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px;">
                         ${this.crearCardsMomentosGrupales('duo')}
                     </div>
                 </div>
@@ -1235,7 +1255,7 @@ class QuintillizasRPG {
                     <h2 style="color: #FF9800; margin-bottom: 20px; border-bottom: 2px solid #FF9800; padding-bottom: 10px;">
                         👯‍♀️👯‍♀️ TRÍOS (10 combinaciones) - Nivel 7+, Afinidad 150+
                     </h2>
-                    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px;">
+                    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 20px;">
                         ${this.crearCardsMomentosGrupales('trio')}
                     </div>
                 </div>
@@ -1244,7 +1264,7 @@ class QuintillizasRPG {
                     <h2 style="color: #FF1493; margin-bottom: 20px; border-bottom: 2px solid #FF1493; padding-bottom: 10px;">
                         👯‍♀️👯‍♀️👯‍♀️ CUARTETOS (5 combinaciones) - Nivel 9+, Afinidad 175+
                     </h2>
-                    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px;">
+                    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); gap: 20px;">
                         ${this.crearCardsMomentosGrupales('cuarteto')}
                     </div>
                 </div>
@@ -1253,13 +1273,13 @@ class QuintillizasRPG {
                     <h2 style="color: gold; margin-bottom: 20px; border-bottom: 2px solid gold; padding-bottom: 10px;">
                         👯‍♀️👯‍♀️👯‍♀️👯‍♀️👯‍♀️ QUINTETO (TODAS) - Nivel 10+, Afinidad 200+
                     </h2>
-                    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(350px, 1fr)); gap: 20px;">
+                    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)); gap: 20px;">
                         ${this.crearCardsMomentosGrupales('quinteto')}
                     </div>
                 </div>
 
                 <div style="text-align: center; margin-top: 40px;">
-                    <button class="card-button" onclick="quintillizasRPG.volverAPaginaPrincipal()" 
+                    <button class="card-button" onclick="quintillizasRPG.volverAPaginaPrincipal()"
                             style="background: linear-gradient(135deg, #5864F5, #8A5AF7); padding: 15px 40px; font-size: 1.2rem;">
                         ↩️ Volver al RPG Principal
                     </button>
@@ -1269,7 +1289,7 @@ class QuintillizasRPG {
 
         const mangaSection = document.getElementById('manga-section');
         mangaSection.innerHTML = html;
-        
+
         const botonVolver = document.createElement('button');
         botonVolver.className = 'btn-atras-especifico';
         botonVolver.innerHTML = '← Volver al RPG';
@@ -1280,26 +1300,35 @@ class QuintillizasRPG {
 
     crearCardsMomentosGrupales(tipo) {
         return this.momentosGrupales[tipo].map(momento => {
-            const cumpleNivel = momento.integrantes.every(id => 
+            const cumpleNivel = momento.integrantes.every(id =>
                 this.datosPersonajes[id].nivel >= momento.nivelRequerido
             );
-            
-            const cumpleAfinidad = momento.integrantes.every(id => 
+
+            const cumpleAfinidad = momento.integrantes.every(id =>
                 this.datosPersonajes[id].afinidad >= momento.afinidadRequerida
             );
-            
+
             const tieneCondones = this.condones001 >= momento.condones001Requeridos;
             const puedeIntentar = cumpleNivel && cumpleAfinidad && tieneCondones;
 
             const nombres = momento.integrantes.map(id => this.datosPersonajes[id].nombre.split(' ')[0]);
 
+            // Calcular probabilidad grupal (es 100% si cumples requisitos)
+            const probGrupal = (cumpleNivel && cumpleAfinidad) ? 100 : 0;
+
+            // Desglose de requisitos para la fórmula
+            const requisitos = momento.integrantes.map(id => {
+                const p = this.datosPersonajes[id];
+                return `${p.nombre.split(' ')[0]}: Nvl ${p.nivel}/${momento.nivelRequerido} | Afin ${p.afinidad}/${momento.afinidadRequerida}`;
+            }).join('<br>');
+
             return `
-                <div style="background: rgba(255,255,255,0.05); border-radius: 15px; padding: 20px; 
+                <div style="background: rgba(255,255,255,0.05); border-radius: 15px; padding: 20px;
                           border: 2px solid ${cumpleNivel && cumpleAfinidad ? '#4CAF50' : '#FF6B6B'};
                           ${puedeIntentar ? 'box-shadow: 0 0 20px #5864F5;' : ''}">
-                    
+
                     <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 15px;">
-                        <img src="${momento.imagen}" 
+                        <img src="${momento.imagen}"
                              alt="${momento.nombre}"
                              style="width: 60px; height: 60px; border-radius: 10px; object-fit: cover; border: 2px solid #FF1493;"
                              onerror="this.src='https://via.placeholder.com/60x60/FF1493/FFFFFF?text=${nombres[0].charAt(0)}+${nombres[1]?.charAt(0) || ''}'">
@@ -1308,9 +1337,9 @@ class QuintillizasRPG {
                             <p style="font-size: 0.9rem; opacity: 0.8; margin: 0;">${nombres.join(' • ')}</p>
                         </div>
                     </div>
-                    
+
                     <p style="font-size: 0.95rem; margin-bottom: 15px; min-height: 50px;">${momento.descripcion}</p>
-                    
+
                     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-bottom: 15px; font-size: 0.9rem;">
                         <div style="background: rgba(255,255,255,0.1); padding: 8px; border-radius: 8px; text-align: center;">
                             <span style="color: #5864F5;">🎯 Nivel ${momento.nivelRequerido}</span>
@@ -1325,18 +1354,38 @@ class QuintillizasRPG {
                             <span style="color: #FFD166;">💰 ${momento.recompensa}</span>
                         </div>
                     </div>
-                    
+
+                    <!-- NUEVO: Mostrar fórmula y probabilidad grupal -->
+                    <div style="background: rgba(88, 100, 245, 0.15); border-radius: 8px; padding: 12px; margin: 15px 0; font-size: 0.9rem; border: 1px dashed #5864F5;">
+                        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                            <span style="font-weight: bold;">🎲 Probabilidad Grupal:</span>
+                            <span style="color: ${probGrupal === 100 ? '#4CAF50' : '#FF6B6B'}; font-weight: bold; font-size: 1.2rem;">${probGrupal}%</span>
+                        </div>
+                        <div style="font-size: 0.8rem; opacity: 0.9; line-height: 1.5;">
+                            <strong>📊 Fórmula:</strong> La probabilidad es 100% si TODAS las integrantes cumplen:
+                            <ul style="margin-top: 5px; padding-left: 20px;">
+                                <li><strong>Nivel ≥ ${momento.nivelRequerido}</strong> (actual: ${momento.integrantes.map(id => this.datosPersonajes[id].nivel).join('/')})</li>
+                                <li><strong>Afinidad ≥ ${momento.afinidadRequerida}</strong> (actual: ${momento.integrantes.map(id => this.datosPersonajes[id].afinidad).join('/')})</li>
+                                <li><strong>Condones 0.01: ${momento.condones001Requeridos}</strong> (tienes: ${this.condones001})</li>
+                            </ul>
+                            <details style="margin-top:5px;">
+                                <summary style="cursor:pointer;">Ver detalles por hermana</summary>
+                                <p style="margin-top:5px;">${requisitos.replace(/\|/g, '<br>')}</p>
+                            </details>
+                        </div>
+                    </div>
+
                     <div style="background: rgba(76, 175, 80, 0.1); padding: 10px; border-radius: 8px; margin-bottom: 15px;">
                         <p style="margin: 0; font-size: 0.9rem; color: #4CAF50; text-align: center;">
                             +${momento.afinidadGanada} afinidad total • +${momento.expGanada} EXP
                         </p>
                     </div>
-                    
-                    <button class="card-button" 
+
+                    <button class="card-button"
                             onclick="quintillizasRPG.intentarMomentoGrupal('${tipo}', '${momento.id}')"
                             style="width: 100%; padding: 15px; background: ${puedeIntentar ? 'linear-gradient(135deg, #5864F5, #8A5AF7)' : 'rgba(255,255,255,0.1)'};"
                             ${!puedeIntentar ? 'disabled' : ''}>
-                        ${!cumpleNivel ? '❌ NIVEL INSUFICIENTE' : 
+                        ${!cumpleNivel ? '❌ NIVEL INSUFICIENTE' :
                           !cumpleAfinidad ? '❌ AFINIDAD INSUFICIENTE' :
                           !tieneCondones ? `❌ FALTAN ${momento.condones001Requeridos - this.condones001} CONDONES 0.01` :
                           '💎 INICIAR MOMENTO GRUPAL'}
@@ -1353,7 +1402,7 @@ class QuintillizasRPG {
     volverAPaginaPrincipal() {
         const mangaSection = document.getElementById('manga-section');
         mangaSection.innerHTML = this.cargarPaginaPrincipal();
-        
+
         const botonVolver = document.createElement('button');
         botonVolver.className = 'btn-atras-especifico';
         botonVolver.innerHTML = '← Volver al Inicio';
@@ -1364,19 +1413,19 @@ class QuintillizasRPG {
     seleccionarPersonajeUI(personajeId) {
         this.personajeSeleccionado = personajeId;
         this.guardarPersonajeSeleccionado();
-        
+
         const personaje = this.datosPersonajes[personajeId];
         this.mostrarNotificacion(`💖 Seleccionaste a ${personaje.nombre} (Nivel ${personaje.nivel}, Afinidad ${personaje.afinidad})`);
-        
+
         this.actualizarVistaConPersonaje();
     }
 
     actualizarVistaConPersonaje() {
         const mangaSection = document.getElementById('manga-section');
         if (!mangaSection) return;
-        
+
         mangaSection.innerHTML = '';
-        
+
         const botonVolver = document.createElement('button');
         botonVolver.className = 'btn-atras-especifico';
         botonVolver.innerHTML = '← Volver al RPG Principal';
@@ -1387,7 +1436,7 @@ class QuintillizasRPG {
             mangaSection.insertBefore(botonInicio, mangaSection.firstChild);
         };
         mangaSection.appendChild(botonVolver);
-        
+
         const personajeDiv = document.createElement('div');
         personajeDiv.innerHTML = this.crearUIPersonaje();
         mangaSection.appendChild(personajeDiv);
@@ -1395,25 +1444,25 @@ class QuintillizasRPG {
 
     crearUIPersonaje() {
         if (!this.personajeSeleccionado) return '<p>Selecciona un personaje primero</p>';
-        
+
         const personaje = this.datosPersonajes[this.personajeSeleccionado];
         const dinero = sistemaEconomia.obtenerDinero();
-        
+
         const maxAfinidad = 200;
         const maxNivel = 10;
         const porcentajeAfinidad = Math.min((personaje.afinidad / maxAfinidad) * 100, 100);
         const porcentajeNivel = Math.min((personaje.nivel / maxNivel) * 100, 100);
-        
+
         const contribucionAfinidad = (Math.min(Math.max(personaje.afinidad, 0), maxAfinidad) / maxAfinidad) * 40;
         const contribucionNivel = (personaje.nivel / maxNivel) * 30;
         const contribucionTotal = contribucionAfinidad + contribucionNivel;
-        
+
         return `
             <div style="max-width: 1000px; margin: 0 auto; padding: 20px;">
                 <div style="background: ${personaje.color}20; border-radius: 20px; padding: 30px; margin-bottom: 30px; border: 3px solid ${personaje.color};">
                     <div style="display: flex; align-items: center; gap: 25px; flex-wrap: wrap;">
                         <div style="position: relative;">
-                            <img src="${personaje.imagen}" 
+                            <img src="${personaje.imagen}"
                                  alt="${personaje.nombre}"
                                  style="width: 120px; height: 120px; border-radius: 50%; object-fit: cover; border: 5px solid ${personaje.color};">
                             <div style="position: absolute; bottom: -10px; right: -10px; background: ${personaje.color}; color: white; padding: 5px 15px; border-radius: 20px; font-weight: bold; font-size: 1.2rem; border: 3px solid white;">
@@ -1452,14 +1501,14 @@ class QuintillizasRPG {
                             </div>
                         </div>
                     </div>
-                    
+
                     <div style="margin-top: 25px;">
                         <div style="display: flex; justify-content: space-between; margin-bottom: 10px;">
                             <span style="color: ${personaje.color}; font-weight: bold;">PROGRESO HACIA NIVEL ${personaje.nivel + 1}</span>
                             <span style="color: ${personaje.color};">${personaje.exp}/${personaje.expNecesaria} EXP</span>
                         </div>
                         <div style="background: rgba(255,255,255,0.1); height: 15px; border-radius: 10px; overflow: hidden;">
-                            <div style="background: linear-gradient(135deg, ${personaje.color}, ${this.oscurecerColor(personaje.color)}); 
+                            <div style="background: linear-gradient(135deg, ${personaje.color}, ${this.oscurecerColor(personaje.color)});
                                       width: ${(personaje.exp / personaje.expNecesaria) * 100}%; height: 100%;"></div>
                         </div>
                     </div>
@@ -1467,30 +1516,48 @@ class QuintillizasRPG {
 
                 <div style="background: rgba(255, 20, 147, 0.1); border-radius: 15px; padding: 25px; margin-bottom: 30px; border: 2px solid #FF1493;">
                     <h3 style="color: #FF1493; margin-bottom: 20px;">💖 MOMENTOS ÍNTIMOS</h3>
-                    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 15px;">
-                        ${personaje.momentosIntimos.map(momento => `
+                    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 15px;">
+                        ${personaje.momentosIntimos.map(momento => {
+                            const probSin = this.calcularProbabilidadMomento(personaje, momento, false);
+                            const probCon = this.calcularProbabilidadMomento(personaje, momento, true);
+                            const puedeNivel = personaje.nivel >= (momento.nivelRequerido || 1);
+                            return `
                             <div style="background: rgba(255,255,255,0.05); border-radius: 10px; padding: 15px;">
                                 <h4 style="color: ${personaje.color}; margin: 0 0 10px 0;">${momento.nombre}</h4>
                                 <p style="font-size: 0.9rem; margin-bottom: 10px;">${momento.descripcion}</p>
+                                <div style="font-size: 0.85rem; margin-bottom: 8px;">
+                                    <span>🎁 Da: +${momento.afinidad} afinidad, +${momento.exp} EXP</span>
+                                    ${momento.condones001Requeridos > 0 ? '<br><span style="color:#5864F5;">💎 Requiere condón 0.01</span>' : ''}
+                                </div>
+                                <!-- NUEVO: Mostrar fórmula y probabilidad -->
+                                <div style="background: rgba(255,20,147,0.1); border-radius: 5px; padding: 8px; margin-bottom: 8px; font-size:0.8rem;">
+                                    <div>🎯 <strong>Probabilidad:</strong> <span style="color:${probSin > 70 ? '#4CAF50' : '#FFD166'}">${probSin}%</span></div>
+                                    <div style="opacity:0.8;">📊 Base ${momento.probabilidadBase}% + Afin ${Math.round(Math.min(Math.max(personaje.afinidad,0),200)/200*40)}% + Nvl ${Math.round(personaje.nivel/10*30)}% + Estado ${this.obtenerAjusteEstadoTexto(personaje.estadoAnimo)}</div>
+                                    <div>💎 Con 0.01: <span style="color:#5864F5;">${probCon}%</span></div>
+                                </div>
                                 <p style="font-size: 0.9rem;">🎯 Nivel ${momento.nivelRequerido || 1}+</p>
                                 <button class="card-button" onclick="intentarMomentoIntimoRPG('${this.personajeSeleccionado}', '${momento.id}')"
                                         style="width: 100%; padding: 10px; font-size: 0.9rem; margin-top: 10px;"
-                                        ${personaje.nivel < (momento.nivelRequerido || 1) ? 'disabled' : ''}>
+                                        ${!puedeNivel ? 'disabled' : ''}>
                                     INTENTAR
                                 </button>
                             </div>
-                        `).join('')}
+                        `}).join('')}
                     </div>
                 </div>
 
                 <div style="background: rgba(255, 209, 102, 0.1); border-radius: 15px; padding: 25px; border: 2px solid #FFD166;">
                     <h3 style="color: #FFD166; margin-bottom: 20px;">✨ ACTIVIDADES ESPECIALES</h3>
-                    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 15px;">
+                    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 15px;">
                         ${personaje.actividadesEspeciales.map(actividad => `
                             <div style="background: rgba(255,255,255,0.05); border-radius: 10px; padding: 15px;">
                                 <h4 style="color: #FFD166; margin: 0 0 10px 0;">${actividad.nombre}</h4>
                                 <p style="font-size: 0.9rem; margin-bottom: 10px;">${actividad.descripcion}</p>
-                                <p style="font-size: 0.9rem;">💰 S/.${actividad.costo}</p>
+                                <div style="font-size: 0.9rem; margin-bottom: 5px;">
+                                    <span>💰 S/.${actividad.costo}</span><br>
+                                    <span style="color:#4CAF50;">💝 +${actividad.afinidad} afinidad</span><br>
+                                    <span style="color:#FF1493;">✨ +${actividad.exp} EXP</span>
+                                </div>
                                 <button class="card-button" onclick="comprarActividadRPG('${this.personajeSeleccionado}', '${actividad.id}')"
                                         style="width: 100%; padding: 10px; font-size: 0.9rem; margin-top: 10px;"
                                         ${dinero < actividad.costo ? 'disabled' : ''}>
@@ -1511,27 +1578,27 @@ class QuintillizasRPG {
     comprarActividad(personajeId, actividadId) {
         const personaje = this.datosPersonajes[personajeId];
         const actividad = personaje.actividadesEspeciales.find(a => a.id === actividadId);
-        
+
         if (!actividad) {
             this.mostrarNotificacion('❌ Actividad no encontrada');
             return false;
         }
-        
+
         const dineroActual = sistemaEconomia.obtenerDinero();
         if (dineroActual < actividad.costo) {
             this.mostrarNotificacion('❌ Dinero insuficiente');
             return false;
         }
-        
+
         sistemaEconomia.agregarDinero(-actividad.costo);
-        
+
         personaje.afinidad = Math.min(personaje.afinidad + actividad.afinidad, 200);
         this.agregarEXP(personajeId, actividad.exp);
         personaje.estadoAnimo = 'feliz';
-        
+
         console.log(`🎉 Actividad ${actividad.nombre} comprada para ${personaje.nombre}`);
         this.mostrarNotificacion(`💝 ${personaje.nombre} muy feliz! +${actividad.afinidad} afinidad, +${actividad.exp} EXP`);
-        
+
         this.cargarVideoActividad(personajeId, actividadId);
         return true;
     }
@@ -1539,12 +1606,12 @@ class QuintillizasRPG {
     cargarVideoActividad(personajeId, actividadId) {
         const personaje = this.datosPersonajes[personajeId];
         const actividad = personaje.actividadesEspeciales.find(a => a.id === actividadId);
-        
+
         if (!actividad || !actividad.videoId) {
             this.mostrarNotificacion('❌ Video no disponible');
             return;
         }
-        
+
         this.mostrarReproductorVideo({
             driveId: actividad.videoId,
             titulo: actividad.nombre,
@@ -1556,7 +1623,7 @@ class QuintillizasRPG {
     cargarVideoNivel(personajeId, nivel) {
         const personaje = this.datosPersonajes[personajeId];
         const videoId = this.obtenerVideoIdPorNivel(personajeId, nivel);
-        
+
         this.mostrarReproductorVideo({
             driveId: videoId,
             titulo: `Video Nivel ${nivel}`,
@@ -1567,7 +1634,7 @@ class QuintillizasRPG {
 
     cargarVideoMomentoIntimo(personajeId, momento) {
         const personaje = this.datosPersonajes[personajeId];
-        
+
         this.mostrarReproductorVideo({
             driveId: momento.videoId,
             titulo: `${momento.nombre} - ${personaje.nombre}`,
@@ -1583,50 +1650,50 @@ class QuintillizasRPG {
     comprarCondones(cantidad) {
         const costoPorCondon = 50;
         const costoTotal = cantidad * costoPorCondon;
-        
+
         const dineroActual = sistemaEconomia.obtenerDinero();
         if (dineroActual < costoTotal) {
             this.mostrarNotificacion('❌ Dinero insuficiente');
             return false;
         }
-        
+
         sistemaEconomia.agregarDinero(-costoTotal);
-        
+
         this.condones += cantidad;
         this.guardarCondones();
-        
+
         console.log(`🛒 Comprados ${cantidad} condones normales por S/.${costoTotal}`);
         this.mostrarNotificacion(`🛍️ +${cantidad} condones normales comprados`);
-        
+
         if (this.personajeSeleccionado) {
             this.actualizarVistaConPersonaje();
         }
-        
+
         return true;
     }
 
     comprarCondones001(cantidad) {
         const costoPorCondon = 200;
         const costoTotal = cantidad * costoPorCondon;
-        
+
         const dineroActual = sistemaEconomia.obtenerDinero();
         if (dineroActual < costoTotal) {
             this.mostrarNotificacion('❌ Dinero insuficiente');
             return false;
         }
-        
+
         sistemaEconomia.agregarDinero(-costoTotal);
-        
+
         this.condones001 += cantidad;
         this.guardarCondones001();
-        
+
         console.log(`💎 Comprados ${cantidad} condones 0.01 por S/.${costoTotal}`);
         this.mostrarNotificacion(`💎 +${cantidad} condones 0.01 comprados (+20% éxito, +80% afinidad, límite 100%)`);
-        
+
         if (this.personajeSeleccionado) {
             this.actualizarVistaConPersonaje();
         }
-        
+
         return true;
     }
 
@@ -1635,19 +1702,19 @@ class QuintillizasRPG {
     // ====================
 
     mostrarReproductorVideo(video, personaje) {
-        const advertencia = video.esExplicito ? 
+        const advertencia = video.esExplicito ?
             `<div style="background: rgba(255, 20, 147, 0.2); padding: 15px; border-radius: 10px; margin-bottom: 20px; border: 2px solid #FF1493;">
                 <p style="color: #FF1493; font-weight: bold; text-align: center;">
                     ⚠️ CONTENIDO EXPLÍCITO +18 ⚠️
                 </p>
             </div>` : '';
-        
+
         const html = `
             <div class="reproductor-container" style="max-width: 800px; margin: 0 auto; padding: 30px;">
                 ${advertencia}
-                
+
                 <div style="text-align: center; margin-bottom: 20px;">
-                    <img src="${personaje.imagen}" 
+                    <img src="${personaje.imagen}"
                          alt="${personaje.nombre}"
                          style="width: 80px; height: 80px; border-radius: 50%; object-fit: cover; border: 4px solid ${personaje.color}; margin-bottom: 15px;">
                     <h2 style="color: ${personaje.color}; margin-bottom: 10px;">
@@ -1657,9 +1724,9 @@ class QuintillizasRPG {
                         Nivel de ${personaje.nombre.split(' ')[0]}: ${personaje.nivel} • Duración: ${video.duracion}
                     </p>
                 </div>
-                
+
                 <div class="video-wrapper" style="margin: 30px 0;">
-                    <iframe 
+                    <iframe
                         id="rpg-video-iframe"
                         src="https://drive.google.com/file/d/${video.driveId}/preview"
                         frameborder="0"
@@ -1668,19 +1735,19 @@ class QuintillizasRPG {
                         style="width: 100%; height: 400px; border-radius: 15px; border: 3px solid ${personaje.color};"
                     ></iframe>
                 </div>
-                
+
                 <div style="text-align: center; margin-top: 30px;">
-                    <button class="card-button" onclick="quintillizasRPG.volverAPersonaje()" 
+                    <button class="card-button" onclick="quintillizasRPG.volverAPersonaje()"
                             style="background: linear-gradient(135deg, ${personaje.color}, ${this.oscurecerColor(personaje.color)}); padding: 15px 30px; border: none; border-radius: 10px; color: white; cursor: pointer; font-weight: bold; font-size: 1.1rem;">
                         ↩️ Volver a ${personaje.nombre.split(' ')[0]}
                     </button>
                 </div>
             </div>
         `;
-        
+
         const mangaSection = document.getElementById('manga-section');
         mangaSection.innerHTML = html;
-        
+
         const botonVolver = document.createElement('button');
         botonVolver.className = 'btn-atras-especifico';
         botonVolver.innerHTML = '← Volver al RPG';
@@ -1705,15 +1772,23 @@ class QuintillizasRPG {
         return emojis[estado] || '😐';
     }
 
+    obtenerAjusteEstadoTexto(estado) {
+        const ajustes = {
+            'feliz': '+15%', 'neutral': '0%', 'triste': '-25%', 'enojada': '-40%',
+            'tsundere': '-30%', 'tímida': '-15%', 'energica': '+10%', 'glotona': '+12%'
+        };
+        return ajustes[estado] || '0%';
+    }
+
     oscurecerColor(color) {
         const r = parseInt(color.slice(1, 3), 16);
         const g = parseInt(color.slice(3, 5), 16);
         const b = parseInt(color.slice(5, 7), 16);
-        
+
         const darkR = Math.max(0, r - 50);
         const darkG = Math.max(0, g - 50);
         const darkB = Math.max(0, b - 50);
-        
+
         return `#${darkR.toString(16).padStart(2, '0')}${darkG.toString(16).padStart(2, '0')}${darkB.toString(16).padStart(2, '0')}`;
     }
 
@@ -1736,9 +1811,9 @@ class QuintillizasRPG {
             font-size: 1.1rem;
             border: 2px solid white;
         `;
-        
+
         document.body.appendChild(notif);
-        
+
         setTimeout(() => {
             if (notif.parentNode) {
                 notif.parentNode.removeChild(notif);
@@ -1832,7 +1907,7 @@ class QuintillizasRPG {
 
     inicializar() {
         console.log('🎮 RPG Quintillizas - Sistema dificultoso con momentos grupales inicializado');
-        
+
         window.seleccionarPersonajeRPG = (personajeId) => this.seleccionarPersonajeUI(personajeId);
         window.intentarMomentoIntimoRPG = (personajeId, momentoId) => this.intentarMomentoIntimo(personajeId, momentoId);
         window.comprarActividadRPG = (personajeId, actividadId) => this.comprarActividad(personajeId, actividadId);
@@ -1840,7 +1915,7 @@ class QuintillizasRPG {
         window.comprarCondones001RPG = (cantidad) => this.comprarCondones001(cantidad);
         window.cargarVideoNivel = (personajeId, nivel) => this.cargarVideoNivel(personajeId, nivel);
         window.seleccionarTipoCondon = (tipo) => this.seleccionarTipoCondon(tipo);
-        
+
         window.cargarMomentosGrupales = () => this.cargarPantallaMomentosGrupales();
     }
 }
@@ -1853,19 +1928,19 @@ const agregarDineroOriginal = sistemaEconomia.agregarDinero;
 
 sistemaEconomia.agregarDinero = function(cantidad) {
     const resultado = agregarDineroOriginal.call(this, cantidad);
-    
+
     if (cantidad > 0 && window.quintillizasRPG && window.quintillizasRPG.personajeSeleccionado) {
         const expPorSoles = 10;
         const expGanada = Math.round(cantidad * expPorSoles);
-        
+
         window.quintillizasRPG.agregarEXP(
-            window.quintillizasRPG.personajeSeleccionado, 
+            window.quintillizasRPG.personajeSeleccionado,
             expGanada
         );
-        
+
         console.log(`🎮 RPG: +${expGanada} EXP para ${window.quintillizasRPG.datosPersonajes[window.quintillizasRPG.personajeSeleccionado].nombre}`);
     }
-    
+
     return resultado;
 };
 
