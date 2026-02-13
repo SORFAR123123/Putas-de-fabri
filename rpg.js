@@ -1,5 +1,6 @@
 // ================================================
 // RPG COMPLETO: LAS QUINTILLIZAS NAKANO - CON TODAS LAS COMBINACIONES GRUPALES
+// + INTEGRACIÓN CON RPG FANTASÍA (BONUS POR STATS)
 // ================================================
 
 class QuintillizasRPG {
@@ -837,7 +838,7 @@ class QuintillizasRPG {
     }
 
     // ====================
-    // SISTEMA DE PROBABILIDADES (CORREGIDO)
+    // SISTEMA DE PROBABILIDADES (CORREGIDO + BONUS FANTASÍA)
     // ====================
 
     calcularProbabilidadMomento(personaje, momento, usarCondonEspecial = false) {
@@ -871,6 +872,18 @@ class QuintillizasRPG {
         };
 
         probabilidad += ajustesEstado[personaje.estadoAnimo] || 0;
+        
+        // ===== INTEGRACIÓN CON RPG FANTASÍA =====
+        if (typeof fantasiaRPG !== 'undefined' && this.personajeSeleccionado) {
+            const bonus = fantasiaRPG.calcularBonusParaHermana(this.personajeSeleccionado);
+            probabilidad += bonus;
+            
+            if (bonus > 0) {
+                console.log(`✨ Bonus RPG Fantasía: +${bonus.toFixed(1)}% para ${personaje.nombre}`);
+            }
+        }
+        // ========================================
+
         probabilidad = Math.max(1, probabilidad);
         probabilidad = Math.min(probabilidad, limiteMaximo);
 
@@ -1032,6 +1045,19 @@ class QuintillizasRPG {
     }
 
     // ====================
+    // FUNCIÓN PARA ACTUALIZAR BONUS DE FANTASÍA
+    // ====================
+
+    actualizarBonusFantasia() {
+        if (this.personajeSeleccionado && typeof fantasiaRPG !== 'undefined') {
+            const bonus = fantasiaRPG.calcularBonusParaHermana(this.personajeSeleccionado);
+            this.mostrarNotificacion(`✨ Bonus actual de stats: +${bonus.toFixed(1)}%`);
+            return bonus;
+        }
+        return 0;
+    }
+
+    // ====================
     // FUNCIONES DE UI - PÁGINA PRINCIPAL
     // ====================
 
@@ -1044,6 +1070,17 @@ class QuintillizasRPG {
                 <p style="text-align: center; opacity: 0.8; margin-bottom: 40px; font-size: 1.2rem;">
                     Conquista a las 5 hermanas. Gana dinero estudiando, gasta en conquistarlas. <strong>¡Es difícil!</strong>
                 </p>
+
+                <!-- BOTÓN RPG FANTASÍA -->
+                <div style="text-align: center; margin-bottom: 30px;">
+                    <button class="card-button" onclick="cargarPaginaFantasiaRPG()"
+                            style="background: linear-gradient(135deg, gold, #8A5AF7); padding: 20px 50px; font-size: 1.5rem; border-radius: 50px; animation: pulse 2s infinite;">
+                        ⚔️ RPG FANTASÍA - COMBATE POR PISOS ⚔️
+                    </button>
+                    <p style="margin-top: 10px; opacity: 0.8;">
+                        Gana piedras, sube stats y obtén bonus de hasta +10% en momentos íntimos
+                    </p>
+                </div>
 
                 <div style="text-align: center; margin-bottom: 30px;">
                     <button class="card-button" onclick="quintillizasRPG.cargarPantallaMomentosGrupales()"
@@ -1080,6 +1117,14 @@ class QuintillizasRPG {
                                 ${this.condones001} unidades
                             </div>
                         </div>
+                        ${typeof fantasiaRPG !== 'undefined' && this.personajeSeleccionado ? `
+                        <div>
+                            <div style="color: gold; font-size: 0.9rem;">⚔️ Bonus Fantasía</div>
+                            <div style="font-size: 1.3rem; font-weight: bold; color: gold;">
+                                +${fantasiaRPG.calcularBonusParaHermana(this.personajeSeleccionado).toFixed(1)}%
+                            </div>
+                        </div>
+                        ` : ''}
                     </div>
                 </div>
 
@@ -1128,10 +1173,11 @@ class QuintillizasRPG {
                         <li><strong>Condón 0.01:</strong> +20% éxito, +80% afinidad obtenida</li>
                         <li><strong>Estado de ánimo:</strong> Afecta de -40% a +15%</li>
                         <li><strong>Probabilidad base:</strong> Solo algunos momentos (0-10%)</li>
-                        <li><strong style="color: #FF1493;">NUEVO - MOMENTOS GRUPALES:</strong> 100% de éxito si cumples requisitos, requieren condones 0.01 (1 por chica)</li>
+                        <li><strong style="color: gold;">NUEVO - RPG FANTASÍA:</strong> Hasta +10% bonus según tus stats</li>
+                        <li><strong style="color: #FF1493;">MOMENTOS GRUPALES:</strong> 100% de éxito si cumples requisitos, requieren condones 0.01 (1 por chica)</li>
                     </ol>
                     <p style="margin-top: 15px; color: #4CAF50; font-weight: bold;">
-                        ✅ ¡CORRECTO! Solo se llega al 80% con afinidad 200 y nivel 10
+                        ✅ ¡CORRECTO! Solo se llega al 80% con afinidad 200 y nivel 10 + bonus de stats
                     </p>
                 </div>
             </div>
@@ -1149,6 +1195,9 @@ class QuintillizasRPG {
             const momentoEjemplo = personaje.momentosIntimos[0];
             const probSinCondon = momentoEjemplo ? this.calcularProbabilidadMomento(personaje, momentoEjemplo, false) : 0;
             const probConCondon = momentoEjemplo ? this.calcularProbabilidadMomento(personaje, momentoEjemplo, true) : 0;
+            
+            // Bonus de fantasía
+            const bonusFantasia = typeof fantasiaRPG !== 'undefined' ? fantasiaRPG.calcularBonusParaHermana(id) : 0;
 
             return `
                 <div class="personaje-card"
@@ -1183,7 +1232,7 @@ class QuintillizasRPG {
                         <div>${this.obtenerEmojiEstado(personaje.estadoAnimo)} ${personaje.estadoAnimo.toUpperCase()}</div>
                     </div>
 
-                    <!-- NUEVO: Mostrar fórmula de probabilidad -->
+                    <!-- Mostrar fórmula de probabilidad -->
                     <div style="background: rgba(255, 20, 147, 0.15); border-radius: 8px; padding: 10px; margin: 10px 0; font-size: 0.85rem; border: 1px dashed ${personaje.color};">
                         <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
                             <span>🎯 Prob. Actual (ejemplo):</span>
@@ -1196,6 +1245,9 @@ class QuintillizasRPG {
                             Estado (${this.obtenerAjusteEstadoTexto(personaje.estadoAnimo)})
                             = ${probSinCondon}%
                             <br>💎 Con condón 0.01: <strong style="color:#5864F5;">${probConCondon}%</strong> (hasta 100%)
+                            ${bonusFantasia > 0 ? `
+                            <br><span style="color: gold;">✨ Bonus Fantasía: +${bonusFantasia.toFixed(1)}%</span>
+                            ` : ''}
                         </div>
                     </div>
 
@@ -1355,7 +1407,7 @@ class QuintillizasRPG {
                         </div>
                     </div>
 
-                    <!-- NUEVO: Mostrar fórmula y probabilidad grupal -->
+                    <!-- Mostrar fórmula y probabilidad grupal -->
                     <div style="background: rgba(88, 100, 245, 0.15); border-radius: 8px; padding: 12px; margin: 15px 0; font-size: 0.9rem; border: 1px dashed #5864F5;">
                         <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
                             <span style="font-weight: bold;">🎲 Probabilidad Grupal:</span>
@@ -1456,6 +1508,9 @@ class QuintillizasRPG {
         const contribucionAfinidad = (Math.min(Math.max(personaje.afinidad, 0), maxAfinidad) / maxAfinidad) * 40;
         const contribucionNivel = (personaje.nivel / maxNivel) * 30;
         const contribucionTotal = contribucionAfinidad + contribucionNivel;
+        
+        const bonusFantasia = typeof fantasiaRPG !== 'undefined' ? 
+            fantasiaRPG.calcularBonusParaHermana(this.personajeSeleccionado) : 0;
 
         return `
             <div style="max-width: 1000px; margin: 0 auto; padding: 20px;">
@@ -1514,6 +1569,27 @@ class QuintillizasRPG {
                     </div>
                 </div>
 
+                ${typeof fantasiaRPG !== 'undefined' ? `
+                <div style="background: rgba(255, 215, 0, 0.1); border-radius: 15px; padding: 20px; margin-bottom: 30px; border: 2px solid gold;">
+                    <h3 style="color: gold; margin-bottom: 15px; text-align: center;">✨ BONUS RPG FANTASÍA</h3>
+                    <div style="display: flex; justify-content: space-around; align-items: center;">
+                        <div style="text-align: center;">
+                            <div style="font-size: 2.5rem; font-weight: bold; color: gold;">+${bonusFantasia.toFixed(1)}%</div>
+                            <div style="opacity: 0.8;">en todos los momentos</div>
+                        </div>
+                        <div>
+                            <button class="card-button" onclick="cargarPaginaFantasiaRPG()" 
+                                    style="background: linear-gradient(135deg, gold, #8A5AF7); padding: 15px 30px;">
+                                ⚔️ IR A RPG FANTASÍA
+                            </button>
+                        </div>
+                    </div>
+                    <p style="text-align: center; font-size: 0.9rem; opacity: 0.7; margin-top: 15px;">
+                        Máximo 10% - Mejora stats en el modo Fantasía
+                    </p>
+                </div>
+                ` : ''}
+
                 <div style="background: rgba(255, 20, 147, 0.1); border-radius: 15px; padding: 25px; margin-bottom: 30px; border: 2px solid #FF1493;">
                     <h3 style="color: #FF1493; margin-bottom: 20px;">💖 MOMENTOS ÍNTIMOS</h3>
                     <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 15px;">
@@ -1529,11 +1605,14 @@ class QuintillizasRPG {
                                     <span>🎁 Da: +${momento.afinidad} afinidad, +${momento.exp} EXP</span>
                                     ${momento.condones001Requeridos > 0 ? '<br><span style="color:#5864F5;">💎 Requiere condón 0.01</span>' : ''}
                                 </div>
-                                <!-- NUEVO: Mostrar fórmula y probabilidad -->
+                                <!-- Mostrar fórmula y probabilidad -->
                                 <div style="background: rgba(255,20,147,0.1); border-radius: 5px; padding: 8px; margin-bottom: 8px; font-size:0.8rem;">
                                     <div>🎯 <strong>Probabilidad:</strong> <span style="color:${probSin > 70 ? '#4CAF50' : '#FFD166'}">${probSin}%</span></div>
                                     <div style="opacity:0.8;">📊 Base ${momento.probabilidadBase}% + Afin ${Math.round(Math.min(Math.max(personaje.afinidad,0),200)/200*40)}% + Nvl ${Math.round(personaje.nivel/10*30)}% + Estado ${this.obtenerAjusteEstadoTexto(personaje.estadoAnimo)}</div>
                                     <div>💎 Con 0.01: <span style="color:#5864F5;">${probCon}%</span></div>
+                                    ${bonusFantasia > 0 ? `
+                                    <div style="color: gold;">✨ Bonus Fantasía: +${bonusFantasia.toFixed(1)}%</div>
+                                    ` : ''}
                                 </div>
                                 <p style="font-size: 0.9rem;">🎯 Nivel ${momento.nivelRequerido || 1}+</p>
                                 <button class="card-button" onclick="intentarMomentoIntimoRPG('${this.personajeSeleccionado}', '${momento.id}')"
@@ -1959,4 +2038,8 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log('✅ Condón 0.01: +20% éxito, +80% afinidad, límite 100%');
     console.log('✅ MOMENTOS GRUPALES: 10 dúos, 10 tríos, 5 cuartetos, 1 quinteto');
     console.log('✅ Requisitos grupales: Condones 0.01 = número de chicas');
+    
+    if (typeof fantasiaRPG !== 'undefined') {
+        console.log('✨ INTEGRACIÓN CON RPG FANTASÍA: Bonus por stats activado');
+    }
 });
