@@ -1,5 +1,5 @@
 // ================================================
-// SISTEMA PRINCIPAL DE NAVEGACIÓN Y QUIZ - VERSIÓN DINÁMICA
+// SISTEMA PRINCIPAL DE NAVEGACIÓN Y QUIZ - VERSIÓN COMPLETAMENTE DINÁMICA
 // ================================================
 
 // Variables globales
@@ -19,7 +19,112 @@ let modoActual = 'manga'; // 'manga', 'video', 'anime', 'audio', 'asmr', 'rpg', 
 let idiomaVideoActual = 'espanol'; // 'espanol', 'japones'
 
 // ====================
-// NUEVO: SISTEMA SRS (Spaced Repetition System) - CORREGIDO
+// FUNCIONES DINÁMICAS PARA DETECTAR CONTENEDORES Y SUBCONTENEDORES
+// ====================
+
+// Obtener todos los contenedores disponibles de un modo
+function obtenerContenedoresDisponibles(modo) {
+    if (!sistemaDescriptivo[modo]) return [];
+    
+    const contenedores = [];
+    const contenedoresData = sistemaDescriptivo[modo].contenedores;
+    
+    // Recorrer todas las propiedades del objeto contenedores
+    for (let key in contenedoresData) {
+        if (contenedoresData.hasOwnProperty(key)) {
+            const numero = parseInt(key);
+            if (!isNaN(numero)) {
+                contenedores.push(numero);
+            }
+        }
+    }
+    
+    // Ordenar numéricamente
+    return contenedores.sort((a, b) => a - b);
+}
+
+// Obtener el número máximo de contenedores de un modo
+function obtenerMaxContenedores(modo) {
+    const contenedores = obtenerContenedoresDisponibles(modo);
+    return contenedores.length > 0 ? Math.max(...contenedores) : 0;
+}
+
+// Obtener todos los subcontenedores disponibles de un contenedor específico
+function obtenerSubcontenedoresDisponibles(modo, contenedor) {
+    if (!sistemaDescriptivo[modo]) return [];
+    
+    const subcontenedores = sistemaDescriptivo[modo].subcontenedores;
+    const disponibles = [];
+    
+    for (let key in subcontenedores) {
+        if (subcontenedores.hasOwnProperty(key)) {
+            const [cont, sub] = key.split('_').map(Number);
+            if (cont === contenedor) {
+                disponibles.push(sub);
+            }
+        }
+    }
+    
+    return disponibles.sort((a, b) => a - b);
+}
+
+// Obtener el número máximo de subcontenedores de un contenedor
+function obtenerMaxSubcontenedores(modo, contenedor) {
+    const subs = obtenerSubcontenedoresDisponibles(modo, contenedor);
+    return subs.length > 0 ? Math.max(...subs) : 0;
+}
+
+// Obtener todos los mazos disponibles para un subcontenedor
+function obtenerMazosDisponibles(contenedor, subcontenedor) {
+    const mazos = [];
+    
+    if (modoActual === 'anime') {
+        // Para animes, buscar hasta encontrar 5 vacíos seguidos
+        let consecutivosVacios = 0;
+        for (let mazo = 1; mazo <= 100; mazo++) {
+            if (existeVocabularioAnime(contenedor, subcontenedor, mazo)) {
+                mazos.push(mazo);
+                consecutivosVacios = 0;
+            } else {
+                consecutivosVacios++;
+                if (consecutivosVacios >= 5) break;
+            }
+        }
+    } else if (modoActual === 'audio') {
+        let consecutivosVacios = 0;
+        for (let mazo = 1; mazo <= 100; mazo++) {
+            if (existeVocabularioAudio(contenedor, subcontenedor, mazo)) {
+                mazos.push(mazo);
+                consecutivosVacios = 0;
+            } else {
+                consecutivosVacios++;
+                if (consecutivosVacios >= 5) break;
+            }
+        }
+    } else {
+        let consecutivosVacios = 0;
+        for (let mazo = 1; mazo <= 100; mazo++) {
+            if (verificarVocabularioDisponible(contenedor, subcontenedor, mazo)) {
+                mazos.push(mazo);
+                consecutivosVacios = 0;
+            } else {
+                consecutivosVacios++;
+                if (consecutivosVacios >= 5) break;
+            }
+        }
+    }
+    
+    return mazos;
+}
+
+// Obtener el número máximo de mazos disponibles
+function obtenerMaxMazos(contenedor, subcontenedor) {
+    const mazos = obtenerMazosDisponibles(contenedor, subcontenedor);
+    return mazos.length > 0 ? Math.max(...mazos) : 0;
+}
+
+// ====================
+// NUEVO: SISTEMA SRS (Spaced Repetition System)
 // ====================
 
 // Almacenamiento local para palabras SRS
@@ -82,18 +187,18 @@ function agregarPalabraSRS(palabraData) {
         mazo: palabraData.mazo,
         fechaAgregada: new Date().toISOString(),
         
-        // Sistema de repeticiones - INICIALIZADO CORRECTAMENTE
-        nivel: 0, // 0=nueva, 1=fácil, 2=medio, 3=difícil, 4=muy difícil, etc.
-        siguienteRepeticion: new Date().toISOString(), // Repetir en 1 hora
-        intervalo: 1, // horas hasta próxima repetición
+        // Sistema de repeticiones
+        nivel: 0,
+        siguienteRepeticion: new Date().toISOString(),
+        intervalo: 1,
         repeticiones: 0,
         fallos: 0,
         aciertosConsecutivos: 0,
         
         // Estadísticas
         ultimaRevision: null,
-        facilidad: 2.5, // Factor de facilidad (2.5 = estándar)
-        tiempoEstudio: 0 // segundos totales estudiando esta palabra
+        facilidad: 2.5,
+        tiempoEstudio: 0
     };
     
     srsDatabase.palabras.push(palabraSRS);
@@ -117,7 +222,6 @@ function actualizarProximaRepeticionSRS() {
     );
     
     if (palabrasPendientes.length > 0) {
-        // Ordenar por fecha más antigua
         palabrasPendientes.sort((a, b) => 
             new Date(a.siguienteRepeticion) - new Date(b.siguienteRepeticion)
         );
@@ -152,9 +256,9 @@ function obtenerPalabrasParaRepasar() {
     );
 }
 
-// Calcular siguiente intervalo basado en respuesta - ¡CORREGIDO COMPLETAMENTE!
+// Calcular siguiente intervalo basado en respuesta
 function calcularSiguienteIntervalo(palabra, calidad) {
-    // Calidad: 0=olvidado, 1=difícil, 1=regular, 3=fácil, 4=muy fácil
+    // Calidad: 0=olvidado, 1=difícil, 2=regular, 3=fácil, 4=muy fácil
     
     // Si falló o fue difícil
     if (calidad < 3) {
@@ -162,17 +266,14 @@ function calcularSiguienteIntervalo(palabra, calidad) {
         palabra.fallos++;
         
         if (calidad === 0) {
-            // Olvidado completamente, empezar de nuevo
             palabra.nivel = 0;
-            return 0.0167; // 1 minuto (1/60 horas)
+            return 0.0167; // 1 minuto
         } else if (calidad === 1) {
-            // Difícil - bajar un nivel o mantener en 0
             palabra.nivel = Math.max(0, palabra.nivel - 1);
-            return 0.0833; // 5 minutos (5/60 horas)
+            return 0.0833; // 5 minutos
         } else if (calidad === 2) {
-            // Regular - bajar un poco
             palabra.nivel = Math.max(0, palabra.nivel - 0.5);
-            return 0.25; // 15 minutos (15/60 horas)
+            return 0.25; // 15 minutos
         }
     } 
     // Si acertó (calidad 3 o 4)
@@ -180,33 +281,27 @@ function calcularSiguienteIntervalo(palabra, calidad) {
         palabra.aciertosConsecutivos++;
         palabra.repeticiones++;
         
-        // Subir de nivel según la calidad de respuesta
         if (calidad === 4) {
-            // Muy fácil - subir más rápido
             palabra.nivel += 1.5;
         } else if (calidad === 3) {
-            // Fácil - subir normalmente
             palabra.nivel += 1;
         }
         
-        // Redondear nivel
         palabra.nivel = Math.round(palabra.nivel * 10) / 10;
         
-        // Calcular intervalo basado en nivel (progresión exponencial)
         const intervalos = [
             1,      // Nivel 0-1: 1 hora
             6,      // Nivel 1-2: 6 horas
             24,     // Nivel 2-3: 1 día
-            72,     // Nivel 3-4: 3 días (CORRECCIÓN: estaba en 24, ahora es 72)
-            168,    // Nivel 4-5: 7 días (¡CORREGIDO! de 3 días a 7 días)
+            72,     // Nivel 3-4: 3 días
+            168,    // Nivel 4-5: 7 días
             336,    // Nivel 5-6: 14 días
-            720,    // Nivel 6-7: 30 días (~1 mes)
-            1440,   // Nivel 7-8: 60 días (~2 meses)
-            2160,   // Nivel 8-9: 90 días (~3 meses)
-            4320    // Nivel 9+: 180 días (~6 meses)
+            720,    // Nivel 6-7: 30 días
+            1440,   // Nivel 7-8: 60 días
+            2160,   // Nivel 8-9: 90 días
+            4320    // Nivel 9+: 180 días
         ];
         
-        // Obtener intervalo según nivel (redondeado hacia abajo)
         const nivelIndex = Math.floor(palabra.nivel);
         
         if (nivelIndex < 0) {
@@ -219,22 +314,18 @@ function calcularSiguienteIntervalo(palabra, calidad) {
     }
 }
 
-// Procesar respuesta en SRS - ¡ACTUALIZADO CON LA CORRECCIÓN!
+// Procesar respuesta en SRS
 function procesarRespuestaSRS(palabra, acerto) {
-    const calidad = acerto ? 4 : 1; // 4=muy fácil (si acertó), 1=difícil (si falló)
+    const calidad = acerto ? 4 : 1;
     
-    // Calcular nuevo intervalo
     const intervaloHoras = calcularSiguienteIntervalo(palabra, calidad);
     
-    // Calcular nueva fecha de repetición
     const ahora = new Date();
     palabra.ultimaRevision = ahora.toISOString();
     palabra.siguienteRepeticion = new Date(ahora.getTime() + intervaloHoras * 60 * 60 * 1000).toISOString();
     palabra.intervalo = intervaloHoras;
     
-    // Actualizar estadísticas
     if (acerto) {
-        // Cambiar a 10 aciertos seguidos para considerar "dominada"
         if (palabra.aciertosConsecutivos >= 10 && palabra.nivel >= 7) {
             if (!palabra.dominada) {
                 palabra.dominada = true;
@@ -246,7 +337,6 @@ function procesarRespuestaSRS(palabra, acerto) {
         palabra.fallos++;
     }
     
-    // Actualizar racha
     if (acerto) {
         srsDatabase.estadisticas.rachaActual++;
         if (srsDatabase.estadisticas.rachaActual > srsDatabase.estadisticas.mejorRacha) {
@@ -256,17 +346,15 @@ function procesarRespuestaSRS(palabra, acerto) {
         srsDatabase.estadisticas.rachaActual = 0;
     }
     
-    // Actualizar próxima repetición
     actualizarProximaRepeticionSRS();
-    
     guardarSRS();
     
-    console.log(`🔄 SRS: Palabra "${palabra.japones}" - Nivel: ${palabra.nivel.toFixed(1)}, Intervalo: ${intervaloHoras}h, Próxima: ${new Date(palabra.siguienteRepeticion).toLocaleString()}`);
+    console.log(`🔄 SRS: "${palabra.japones}" - Nivel: ${palabra.nivel.toFixed(1)}, Intervalo: ${intervaloHoras}h`);
     
     return intervaloHoras;
 }
 
-// Eliminar palabra del SRS (cuando se domina)
+// Eliminar palabra del SRS
 function eliminarPalabraSRS(id) {
     const index = srsDatabase.palabras.findIndex(p => p.id === id);
     if (index !== -1) {
@@ -282,7 +370,7 @@ function eliminarPalabraSRS(id) {
 }
 
 // ====================
-// NUEVO: INTERFAZ SRS
+// INTERFAZ SRS
 // ====================
 
 function cargarPaginaSRS() {
@@ -445,9 +533,8 @@ function crearUISRS() {
                         <div style="font-size: 2rem; margin-bottom: 10px;">3️⃣</div>
                         <h4 style="color: #FFD166; margin-bottom: 10px;">Intervalos crecientes</h4>
                         <div style="font-size: 0.8rem; opacity: 0.8; background: rgba(255,255,255,0.1); padding: 10px; border-radius: 8px; margin-top: 5px;">
-                            <div><strong>Progresión corregida:</strong></div>
+                            <div><strong>Progresión:</strong></div>
                             <div>1h → 6h → 1d → 3d → 7d → 14d → 30d → 60d → 90d → 180d</div>
-                            <div style="color: #4CAF50; margin-top: 3px;">¡Ahora con progresión correcta de 3d a 7d!</div>
                         </div>
                     </div>
                     <div style="text-align: center;">
@@ -472,19 +559,16 @@ function iniciarRepasoSRS() {
         return;
     }
     
-    // Configurar variables para el quiz SRS
     modoActual = 'srs';
-    palabrasActuales = palabrasParaRepasar.slice(0, 20); // Máximo 20 por sesión
+    palabrasActuales = palabrasParaRepasar.slice(0, 20);
     indicePalabraActual = 0;
     aciertos = 0;
     errores = 0;
     esperandoSiguiente = false;
     
-    // Ocultar sección de mangas, mostrar quiz
     document.getElementById('manga-section').style.display = 'none';
     document.getElementById('quiz-section').style.display = 'block';
     
-    // Cargar primera palabra del SRS
     mostrarPalabraSRS();
 }
 
@@ -514,7 +598,6 @@ function mostrarPalabraSRS() {
                 <!-- Opciones se cargan dinámicamente -->
             </div>
             
-            <!-- INFO PALABRA SRS -->
             <div style="background: rgba(76, 175, 80, 0.1); border-radius: 10px; padding: 15px; margin: 20px 0; text-align: center;">
                 <div style="display: flex; justify-content: space-around; font-size: 0.9rem;">
                     <div>
@@ -548,7 +631,6 @@ function mostrarPalabraSRS() {
         </div>
     `;
     
-    // Crear opciones para la palabra SRS
     crearOpcionesSRS(palabra);
 }
 
@@ -556,25 +638,20 @@ function mostrarPalabraSRS() {
 function crearOpcionesSRS(palabra) {
     const opcionesContainer = document.getElementById('opciones-container');
     
-    // Crear opciones falsas (distractores)
     const opcionesFalsas = [];
     
-    // Obtener algunas palabras aleatorias del SRS para opciones falsas
     const otrasPalabras = srsDatabase.palabras
         .filter(p => p.id !== palabra.id)
         .sort(() => Math.random() - 0.5)
         .slice(0, 2)
         .map(p => p.significado);
     
-    // Agregar opciones genéricas
     opcionesFalsas.push(...otrasPalabras);
     
-    // Si no hay suficientes opciones falsas, agregar algunas genéricas
     while (opcionesFalsas.length < 3) {
         opcionesFalsas.push(getSignificadoAleatorio());
     }
     
-    // Mezclar todas las opciones
     const todasOpciones = [palabra.significado, ...opcionesFalsas.slice(0, 3)];
     for (let i = todasOpciones.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
@@ -605,7 +682,6 @@ function crearOpcionesSRS(palabra) {
     `;
 }
 
-// MODIFICADO: Ahora pasa automáticamente si la respuesta es correcta
 function verificarRespuestaSRS(opcionSeleccionada, posicionCorrecta) {
     if (esperandoSiguiente) return;
     
@@ -641,13 +717,11 @@ function verificarRespuestaSRS(opcionSeleccionada, posicionCorrecta) {
         </div>
     `;
     
-    // Procesar respuesta en el sistema SRS
     const intervaloHoras = procesarRespuestaSRS(palabra, correcta);
     
     if (correcta) {
         aciertos++;
         
-        // Mostrar mensaje según el intervalo
         let mensajeIntervalo;
         if (intervaloHoras < 24) {
             mensajeIntervalo = `${Math.round(intervaloHoras)} horas`;
@@ -666,7 +740,6 @@ function verificarRespuestaSRS(opcionSeleccionada, posicionCorrecta) {
     const controls = document.querySelector('.quiz-controls');
     controls.innerHTML = '';
     
-    // MODIFICACIÓN CLAVE: Si es correcta, pasar automáticamente después de 1.5 segundos
     if (correcta) {
         controls.innerHTML = `
             <div style="text-align: center; padding: 20px; color: #4CAF50;">
@@ -676,12 +749,10 @@ function verificarRespuestaSRS(opcionSeleccionada, posicionCorrecta) {
         
         esperandoSiguiente = true;
         
-        // Pasar automáticamente después de 1.5 segundos
         setTimeout(() => {
             pasarSiguientePalabraSRS();
         }, 1500);
     } else {
-        // Si falla, mostrar botones de calidad
         controls.innerHTML = `
             <div style="display: flex; gap: 10px; justify-content: center; margin-bottom: 15px;">
                 <button class="quiz-btn" onclick="calidadRespuestaSRS(0)" style="background: #F44336;">
@@ -700,14 +771,11 @@ function verificarRespuestaSRS(opcionSeleccionada, posicionCorrecta) {
     }
 }
 
-// Calidad de respuesta para SRS (más preciso)
 function calidadRespuestaSRS(calidad) {
     const palabra = palabrasActuales[indicePalabraActual];
     
-    // Recalcular intervalo basado en calidad específica
     const intervaloHoras = calcularSiguienteIntervalo(palabra, calidad);
     
-    // Actualizar palabra
     const ahora = new Date();
     palabra.ultimaRevision = ahora.toISOString();
     palabra.siguienteRepeticion = new Date(ahora.getTime() + intervaloHoras * 60 * 60 * 1000).toISOString();
@@ -735,13 +803,11 @@ function calidadRespuestaSRS(calidad) {
     
     mostrarNotificacionSRS(`${mensaje} - Próxima en ${mensajeIntervalo}`);
     
-    // Pasar automáticamente después de seleccionar calidad
     setTimeout(() => {
         pasarSiguientePalabraSRS();
     }, 1000);
 }
 
-// Pasar a siguiente palabra en SRS
 function pasarSiguientePalabraSRS() {
     indicePalabraActual++;
     
@@ -753,7 +819,6 @@ function pasarSiguientePalabraSRS() {
     }
 }
 
-// Finalizar sesión SRS
 function finalizarSRS() {
     const porcentaje = Math.round((aciertos / palabrasActuales.length) * 100);
     
@@ -771,7 +836,6 @@ function finalizarSRS() {
                 </p>
             </div>
             
-            <!-- RECOMPENSA POR SRS -->
             <div style="background: linear-gradient(135deg, rgba(76, 175, 80, 0.1), rgba(33, 150, 243, 0.1)); padding: 25px; border-radius: 15px; margin: 20px 0; border: 2px solid #4CAF50;">
                 <h3 style="color: #FFD166; margin-bottom: 15px;">💰 Recompensa por práctica intensiva</h3>
                 <div style="font-size: 2rem; text-align: center; color: #FFD166;">
@@ -782,7 +846,6 @@ function finalizarSRS() {
                 </p>
             </div>
             
-            <!-- PRÓXIMA REPETICIÓN -->
             <div style="background: rgba(255, 152, 0, 0.1); border-radius: 15px; padding: 20px; margin: 20px 0;">
                 <h4 style="color: #FF9800; margin-bottom: 15px;">⏰ Próxima repetición</h4>
                 <p style="text-align: center; opacity: 0.8;">
@@ -791,7 +854,7 @@ function finalizarSRS() {
                 </p>
                 <div style="text-align: center; margin-top: 15px; padding: 10px; background: rgba(255, 152, 0, 0.2); border-radius: 8px;">
                     <p style="font-size: 0.9rem; color: #FFD166;">
-                        🎯 Progresión corregida: 1h → 6h → 1d → 3d → 7d → 14d → 30d → 60d → 90d → 180d
+                        🎯 Progresión: 1h → 6h → 1d → 3d → 7d → 14d → 30d → 60d → 90d → 180d
                     </p>
                 </div>
             </div>
@@ -807,13 +870,11 @@ function finalizarSRS() {
         </div>
     `;
     
-    // Dar recompensa
     const recompensa = aciertos * 0.5;
     sistemaEconomia.agregarDinero(recompensa);
     actualizarContadorDineroInicio();
 }
 
-// Cancelar quiz SRS
 function cancelarQuizSRS() {
     if (confirm('¿Seguro que quieres cancelar la sesión SRS? El progreso se guardará.')) {
         guardarSRS();
@@ -821,34 +882,28 @@ function cancelarQuizSRS() {
     }
 }
 
-// Volver al menú SRS
 function volverASRS() {
     document.getElementById('quiz-section').style.display = 'none';
     document.getElementById('manga-section').style.display = 'block';
     cargarPaginaSRS();
 }
 
-// Repetir palabra específica del SRS
 function repetirPalabraSRS(id) {
     const palabra = srsDatabase.palabras.find(p => p.id === id);
     if (!palabra) return;
     
-    // Crear quiz con solo esta palabra
     palabrasActuales = [palabra];
     indicePalabraActual = 0;
     aciertos = 0;
     errores = 0;
     esperandoSiguiente = false;
     
-    // Ocultar sección de mangas, mostrar quiz
     document.getElementById('manga-section').style.display = 'none';
     document.getElementById('quiz-section').style.display = 'block';
     
-    // Mostrar palabra
     mostrarPalabraSRS();
 }
 
-// Notificación para SRS
 function mostrarNotificacionSRS(mensaje) {
     const notif = document.createElement('div');
     notif.textContent = mensaje;
@@ -878,7 +933,6 @@ function mostrarNotificacionSRS(mensaje) {
     }, 2500);
 }
 
-// Obtener significado aleatorio para opciones falsas
 function getSignificadoAleatorio() {
     const significados = [
         'Casa', 'Escuela', 'Libro', 'Mesa', 'Silla', 'Ventana',
@@ -890,17 +944,15 @@ function getSignificadoAleatorio() {
 }
 
 // ====================
-// FUNCIONES PARA NAVEGACIÓN ENTRE MAZOS DIFÍCILES - NUEVAS
+// FUNCIONES PARA NAVEGACIÓN ENTRE MAZOS DIFÍCILES
 // ====================
 
-// Función para navegar entre mazos difíciles adyacentes
 function irAMazoDificil(direccion) {
     if (!modoMazoDificil) {
         console.log("No hay mazo difícil activo");
         return;
     }
     
-    // Obtener todas las palabras difíciles disponibles
     const todasPalabrasDificiles = sistemaEconomia.obtenerMazoDificil();
     
     if (todasPalabrasDificiles.length === 0) {
@@ -909,13 +961,11 @@ function irAMazoDificil(direccion) {
         return;
     }
     
-    // Dividir en grupos de 10 palabras (mazos)
     const mazosDificiles = [];
     for (let i = 0; i < todasPalabrasDificiles.length; i += 10) {
         mazosDificiles.push(todasPalabrasDificiles.slice(i, i + 10));
     }
     
-    // Encontrar el mazo actual
     let indiceMazoActual = -1;
     for (let i = 0; i < mazosDificiles.length; i++) {
         if (JSON.stringify(mazosDificiles[i]) === JSON.stringify(palabrasDificilesQuiz)) {
@@ -924,24 +974,19 @@ function irAMazoDificil(direccion) {
         }
     }
     
-    // Si no encontramos el mazo actual, es el primero
     if (indiceMazoActual === -1) {
         indiceMazoActual = 0;
     }
     
-    // Calcular siguiente mazo
     let nuevoIndiceMazo = indiceMazoActual + (direccion === 'siguiente' ? 1 : -1);
     
-    // Verificar límites
     if (nuevoIndiceMazo < 0) {
         nuevoIndiceMazo = mazosDificiles.length - 1;
     } else if (nuevoIndiceMazo >= mazosDificiles.length) {
         nuevoIndiceMazo = 0;
     }
     
-    // Verificar si hay palabras en el nuevo mazo
     if (mazosDificiles[nuevoIndiceMazo] && mazosDificiles[nuevoIndiceMazo].length > 0) {
-        // Reiniciar quiz con el nuevo mazo difícil
         palabrasDificilesQuiz = mazosDificiles[nuevoIndiceMazo];
         indicePalabraActual = 0;
         aciertos = 0;
@@ -955,7 +1000,6 @@ function irAMazoDificil(direccion) {
     }
 }
 
-// Función para obtener información de mazos difíciles disponibles
 function obtenerInfoMazosDificiles() {
     const todasPalabrasDificiles = sistemaEconomia.obtenerMazoDificil();
     
@@ -967,7 +1011,6 @@ function obtenerInfoMazosDificiles() {
         };
     }
     
-    // Dividir en grupos de 10 palabras (mazos)
     const mazos = [];
     for (let i = 0; i < todasPalabrasDificiles.length; i += 10) {
         const mazo = todasPalabrasDificiles.slice(i, i + 10);
@@ -989,35 +1032,8 @@ function obtenerInfoMazosDificiles() {
 // FUNCIÓN AUXILIAR PARA CONTAR MAZOS DISPONIBLES
 // ====================
 
-// Función para contar mazos disponibles en un subcontenedor
 function contarMazosDisponibles(contenedor, subcontenedor) {
-    let count = 0;
-    
-    if (modoActual === 'anime') {
-        for (let mazo = 1; mazo <= 100; mazo++) { // Hasta 100 como máximo
-            if (existeVocabularioAnime(contenedor, subcontenedor, mazo)) {
-                count++;
-            } else {
-                // Si encontramos un mazo vacío, seguimos buscando por si hay más adelante
-                continue;
-            }
-        }
-    } else if (modoActual === 'audio') {
-        for (let mazo = 1; mazo <= 100; mazo++) {
-            if (existeVocabularioAudio(contenedor, subcontenedor, mazo)) {
-                count++;
-            }
-        }
-    } else {
-        // Modo manga/video normal
-        for (let mazo = 1; mazo <= 100; mazo++) {
-            if (verificarVocabularioDisponible(contenedor, subcontenedor, mazo)) {
-                count++;
-            }
-        }
-    }
-    
-    return count || 10; // Mínimo 10 para mantener compatibilidad
+    return obtenerMazosDisponibles(contenedor, subcontenedor).length;
 }
 
 // ====================
@@ -1030,7 +1046,6 @@ function ocultarHeader() {
     document.querySelector('.additional-section').style.display = 'none';
     document.querySelector('.footer').style.display = 'none';
     
-    // Ocultar contador de dinero cuando no estemos en inicio
     const dineroContador = document.getElementById('dinero-inicio');
     if (dineroContador) {
         dineroContador.classList.add('hidden');
@@ -1043,7 +1058,6 @@ function mostrarHeader() {
     document.querySelector('.additional-section').style.display = 'block';
     document.querySelector('.footer').style.display = 'block';
     
-    // Mostrar contador de dinero solo en inicio
     const dineroContador = document.getElementById('dinero-inicio');
     if (dineroContador) {
         dineroContador.classList.remove('hidden');
@@ -1051,7 +1065,6 @@ function mostrarHeader() {
 }
 
 function crearContadorDineroInicio() {
-    // Crear contenedor de dinero SOLO para inicio
     if (!document.getElementById('dinero-inicio')) {
         const dineroDiv = document.createElement('div');
         dineroDiv.id = 'dinero-inicio';
@@ -1062,7 +1075,6 @@ function crearContadorDineroInicio() {
             <span>soles</span>
         `;
         
-        // Insertar al principio del header
         const header = document.querySelector('.header');
         header.insertBefore(dineroDiv, header.firstChild);
     }
@@ -1076,7 +1088,7 @@ function actualizarContadorDineroInicio() {
 }
 
 // ====================
-// NUEVO: SISTEMA DE MISIONES
+// SISTEMA DE MISIONES
 // ====================
 
 function cargarPaginaMisiones() {
@@ -1152,7 +1164,6 @@ function crearUIMisiones() {
                 <div style="display: flex; flex-direction: column; gap: 15px;">
     `;
     
-    // Misiones diarias
     Object.entries(misiones.diarias.misiones).forEach(([clave, mision]) => {
         const porcentaje = (mision.progreso / mision.objetivo) * 100;
         const nombreMision = {
@@ -1198,7 +1209,6 @@ function crearUIMisiones() {
                 <div style="display: flex; flex-direction: column; gap: 15px;">
     `;
     
-    // Misiones semanales
     Object.entries(misiones.semanales.misiones).forEach(([clave, mision]) => {
         const porcentaje = (mision.progreso / mision.objetivo) * 100;
         const nombreMision = {
@@ -1250,17 +1260,14 @@ function crearUIMisiones() {
 }
 
 // ====================
-// FUNCIONES CORREGIDAS PARA MAZOS DIFÍCILES
+// FUNCIONES PARA MAZOS DIFÍCILES
 // ====================
 
-// Finalizar sesión mazo difícil - CORREGIDA
 function finalizarMazoDificil() {
     const porcentaje = Math.round((aciertos / palabrasDificilesQuiz.length) * 100);
     
-    // Completar mazo difícil
     completarMazoDificil();
     
-    // Obtener información de mazos difíciles disponibles
     const infoMazosDificiles = obtenerInfoMazosDificiles();
     const hayMasMazosDificiles = infoMazosDificiles.totalMazos > 1;
     
@@ -1279,7 +1286,6 @@ function finalizarMazoDificil() {
                 </p>
             </div>
             
-            <!-- RECOMPENSA ESPECIAL POR MAZO DIFÍCIL -->
             <div style="background: linear-gradient(135deg, rgba(255, 20, 147, 0.1), rgba(255, 107, 107, 0.1)); padding: 25px; border-radius: 15px; margin: 20px 0; border: 2px solid #FF1493;">
                 <h3 style="color: #FFD166; margin-bottom: 15px;">🏆 ¡Recompensa Especial!</h3>
                 <p style="text-align: center; font-size: 1.2rem; color: #FFD166;">
@@ -1290,7 +1296,6 @@ function finalizarMazoDificil() {
                 </p>
             </div>
             
-            <!-- NAVEGACIÓN ENTRE MAZOS DIFÍCILES -->
             <div style="text-align: center; margin: 30px 0;">
                 <div style="display: flex; justify-content: center; gap: 15px; margin-bottom: 15px;">
                     ${hayMasMazosDificiles ? `
@@ -1317,17 +1322,11 @@ function finalizarMazoDificil() {
         </div>
     `;
     
-    // Dar recompensa especial
     sistemaEconomia.agregarDinero(10);
     actualizarContadorDineroInicio();
 }
 
-// ====================
-// NUEVA FUNCIÓN PARA INICIAR PRÓXIMO MAZO DIFÍCIL
-// ====================
-
 function iniciarProximoMazoDificil() {
-    // Obtener información de todos los mazos difíciles
     const infoMazosDificiles = obtenerInfoMazosDificiles();
     
     if (infoMazosDificiles.totalMazos === 0) {
@@ -1336,19 +1335,15 @@ function iniciarProximoMazoDificil() {
         return;
     }
     
-    // Buscar el siguiente mazo disponible
     let indiceSiguienteMazo = 0;
     
-    // Si hay palabras difíciles en quiz actual, buscar siguiente
     if (palabrasDificilesQuiz && palabrasDificilesQuiz.length > 0) {
-        // Dividir todas las palabras en mazos de 10
         const todasPalabras = sistemaEconomia.obtenerMazoDificil();
         const mazos = [];
         for (let i = 0; i < todasPalabras.length; i += 10) {
             mazos.push(todasPalabras.slice(i, i + 10));
         }
         
-        // Buscar índice actual
         for (let i = 0; i < mazos.length; i++) {
             if (JSON.stringify(mazos[i]) === JSON.stringify(palabrasDificilesQuiz)) {
                 indiceSiguienteMazo = (i + 1) % mazos.length;
@@ -1357,35 +1352,26 @@ function iniciarProximoMazoDificil() {
         }
     }
     
-    // Iniciar el mazo específico
     iniciarMazoDificilDesdeUI();
 }
-
-// ====================
-// FUNCIÓN PARA INICIAR MAZO DIFÍCIL DESDE LA UI
-// ====================
 
 function iniciarMazoDificilDesdeUI() {
     const palabras = iniciarMazoDificil();
     
     if (palabras && palabras.length > 0) {
-        // Tomar solo las primeras 10 palabras para el mazo actual
         const palabrasParaMazo = palabras.slice(0, Math.min(10, palabras.length));
         
         modoMazoDificil = true;
         palabrasDificilesQuiz = palabrasParaMazo;
         
-        // Resetear contadores
         indicePalabraActual = 0;
         aciertos = 0;
         errores = 0;
         esperandoSiguiente = false;
         
-        // Ocultar sección de mangas, mostrar quiz
         document.getElementById('manga-section').style.display = 'none';
         document.getElementById('quiz-section').style.display = 'block';
         
-        // Cargar primera palabra del mazo difícil
         mostrarPalabraMazoDificil();
         
         mostrarNotificacionQuiz(`⚠️ Iniciando mazo difícil (${palabrasParaMazo.length} palabras)`);
@@ -1395,7 +1381,7 @@ function iniciarMazoDificilDesdeUI() {
 }
 
 // ====================
-// NAVEGACIÓN PRINCIPAL - TODOS LOS MODOS
+// NAVEGACIÓN PRINCIPAL - TODOS LOS MODOS (AHORA DINÁMICA)
 // ====================
 
 function cargarPaginaMangas() {
@@ -1489,10 +1475,6 @@ function cargarPaginaRPG() {
     mangaSection.insertBefore(botonVolver, mangaSection.firstChild);
 }
 
-// ====================
-// NUEVO: FUNCIÓN PARA RPG FANTASÍA
-// ====================
-
 function cargarPaginaFantasiaRPG() {
     modoActual = 'fantasia';
     modoMazoDificil = false;
@@ -1501,7 +1483,6 @@ function cargarPaginaFantasiaRPG() {
     const mangaSection = document.getElementById('manga-section');
     mangaSection.style.display = 'block';
     
-    // Verificar si el sistema está cargado
     if (typeof fantasiaRPG !== 'undefined') {
         mangaSection.innerHTML = fantasiaRPG.cargarUI();
     } else {
@@ -1544,19 +1525,26 @@ function crearContenedoresMangas() {
     let html = '<h2 style="text-align: center; margin-bottom: 30px; color: #FFD166;">📚 CONTENEDORES DE MANGAS</h2>';
     html += '<div class="manga-contenedores">';
     
-    for (let i = 1; i <= 10; i++) {
-        const contenedorData = obtenerContenedorManga(i);
-        const nombre = contenedorData.nombre || `CONTAINER ${i}`;
-        const desc = contenedorData.descripcion || '5 sub-contenedores con vocabulario y manga';
-        
-        html += `
-            <div class="contenedor-item" onclick="cargarSubcontenedores(${i})">
-                <div class="contenedor-img" style="background-image: url('${contenedorData.imagen || obtenerImagenContenedor(i)}')"></div>
-                <div class="contenedor-numero">${nombre}</div>
-                <p>${desc}</p>
-                <div class="card-button">Abrir</div>
-            </div>
-        `;
+    // Obtener contenedores disponibles dinámicamente
+    const contenedores = obtenerContenedoresDisponibles('mangas');
+    
+    if (contenedores.length === 0) {
+        html += '<div style="text-align: center; padding: 50px; opacity: 0.7;">No hay contenedores configurados</div>';
+    } else {
+        contenedores.forEach(numero => {
+            const contenedorData = obtenerContenedorManga(numero);
+            const nombre = contenedorData.nombre || `CONTAINER ${numero}`;
+            const desc = contenedorData.descripcion || 'Sub-contenedores con vocabulario y manga';
+            
+            html += `
+                <div class="contenedor-item" onclick="cargarSubcontenedores(${numero})">
+                    <div class="contenedor-img" style="background-image: url('${contenedorData.imagen || obtenerImagenContenedor(numero)}')"></div>
+                    <div class="contenedor-numero">${nombre}</div>
+                    <p>${desc}</p>
+                    <div class="card-button">Abrir</div>
+                </div>
+            `;
+        });
     }
     
     html += '</div>';
@@ -1567,50 +1555,55 @@ function crearContenedoresVideos() {
     let html = '<h2 style="text-align: center; margin-bottom: 30px; color: #FFD166;">🎬 CONTENEDORES DE VIDEOS</h2>';
     html += '<div class="manga-contenedores">';
     
-    for (let i = 1; i <= 10; i++) {
-        const contenedorData = obtenerContenedorVideo(i);
-        const nombre = contenedorData.nombre || `VIDEO CONTAINER ${i}`;
-        const desc = contenedorData.descripcion || 'Videos privados con timestamps';
-        
-        html += `
-            <div class="contenedor-item" onclick="cargarSubcontenedoresVideos(${i})">
-                <div class="contenedor-img" style="background-image: url('${contenedorData.imagen || obtenerImagenContenedor(i)}')"></div>
-                <div class="contenedor-numero">${nombre}</div>
-                <p>${desc}</p>
-                <div class="card-button">Ver videos</div>
-            </div>
-        `;
+    const contenedores = obtenerContenedoresDisponibles('videos');
+    
+    if (contenedores.length === 0) {
+        html += '<div style="text-align: center; padding: 50px; opacity: 0.7;">No hay contenedores configurados</div>';
+    } else {
+        contenedores.forEach(numero => {
+            const contenedorData = obtenerContenedorVideo(numero);
+            const nombre = contenedorData.nombre || `VIDEO CONTAINER ${numero}`;
+            const desc = contenedorData.descripcion || 'Videos privados con timestamps';
+            
+            html += `
+                <div class="contenedor-item" onclick="cargarSubcontenedoresVideos(${numero})">
+                    <div class="contenedor-img" style="background-image: url('${contenedorData.imagen || obtenerImagenContenedor(numero)}')"></div>
+                    <div class="contenedor-numero">${nombre}</div>
+                    <p>${desc}</p>
+                    <div class="card-button">Ver videos</div>
+                </div>
+            `;
+        });
     }
     
     html += '</div>';
     return html;
 }
 
-// ====================
-// FUNCIÓN CORREGIDA: CREAR CONTENEDORES DE ANIMES CON NOMBRES PERSONALIZADOS
-// ====================
-
 function crearContenedoresAnimes() {
     let html = '<h2 style="text-align: center; margin-bottom: 30px; color: #FFD166;">🎌 CONTENEDORES DE ANIMES</h2>';
     html += '<p style="text-align: center; margin-bottom: 30px; opacity: 0.8;">Animes con videos en español/japonés + vocabulario</p>';
     html += '<div class="manga-contenedores">';
     
-    const contenedores = obtenerContenedoresAnimesDisponibles();
-    const totalContenedores = Object.keys(contenedores).length || 10;
+    const contenedores = obtenerContenedoresDisponibles('animes');
     
-    for (let i = 1; i <= Math.max(totalContenedores, 10); i++) {
-        const contenedorData = obtenerContenedorAnime(i);
-        const tieneAnimes = contenedores[i] && contenedores[i].length > 0;
-        const desc = contenedorData.descripcion || (tieneAnimes ? contenedores[i].length + ' sub-contenedores con animes' : '5 sub-contenedores disponibles');
-        
-        html += `
-            <div class="contenedor-item" onclick="cargarSubcontenedoresAnimes(${i})">
-                <div class="contenedor-img" style="background-image: url('${contenedorData.imagen || obtenerImagenContenedorAnime(i)}')"></div>
-                <div class="contenedor-numero">${contenedorData.nombre || `ANIME CONTAINER ${i}`}</div>
-                <p>${desc}</p>
-                <div class="card-button">${tieneAnimes ? 'Ver animes' : 'Explorar'}</div>
-            </div>
-        `;
+    if (contenedores.length === 0) {
+        html += '<div style="text-align: center; padding: 50px; opacity: 0.7;">No hay contenedores configurados</div>';
+    } else {
+        contenedores.forEach(numero => {
+            const contenedorData = obtenerContenedorAnime(numero);
+            const tieneAnimes = obtenerSubcontenedoresDisponibles('animes', numero).length > 0;
+            const desc = contenedorData.descripcion || (tieneAnimes ? 'Sub-contenedores con animes' : 'Sub-contenedores disponibles');
+            
+            html += `
+                <div class="contenedor-item" onclick="cargarSubcontenedoresAnimes(${numero})">
+                    <div class="contenedor-img" style="background-image: url('${contenedorData.imagen || obtenerImagenContenedorAnime(numero)}')"></div>
+                    <div class="contenedor-numero">${contenedorData.nombre || `ANIME CONTAINER ${numero}`}</div>
+                    <p>${desc}</p>
+                    <div class="card-button">${tieneAnimes ? 'Ver animes' : 'Explorar'}</div>
+                </div>
+            `;
+        });
     }
     
     html += '</div>';
@@ -1622,26 +1615,28 @@ function crearContenedoresAudios() {
     html += '<p style="text-align: center; margin-bottom: 30px; opacity: 0.8;">Openings MP3 + vocabulario de letras</p>';
     html += '<div class="manga-contenedores">';
     
-    const contenedores = obtenerContenedoresAudiosDisponibles();
-    const totalContenedores = Object.keys(contenedores).length || 10;
+    const contenedores = obtenerContenedoresDisponibles('audios');
     
-    for (let i = 1; i <= Math.max(totalContenedores, 10); i++) {
-        const tieneAudios = contenedores[i] && contenedores[i].length > 0;
-        const desc = tieneAudios ? contenedores[i].length + ' sub-contenedores con openings' : '5 sub-contenedores disponibles';
-        
-        // Usar función específica para audio
-        let imagenContenedor = obtenerImagenContenedorAudio(i);
-        
-        html += `
-            <div class="contenedor-item" onclick="cargarSubcontenedoresAudios(${i})">
-                <div class="contenedor-img" style="background-image: url('${imagenContenedor}')"></div>
-                <div class="contenedor-numero">${obtenerContenedorAudio(i).nombre || `AUDIO CONTAINER ${i}`}</div>
-                <p>${desc}</p>
-                <div class="card-button" style="background: linear-gradient(135deg, #FF6B6B, #FFD166);">
-                    ${tieneAudios ? '🎵 Escuchar audios' : 'Explorar'}
+    if (contenedores.length === 0) {
+        html += '<div style="text-align: center; padding: 50px; opacity: 0.7;">No hay contenedores configurados</div>';
+    } else {
+        contenedores.forEach(numero => {
+            const tieneAudios = obtenerSubcontenedoresDisponibles('audios', numero).length > 0;
+            const desc = tieneAudios ? 'Sub-contenedores con openings' : 'Sub-contenedores disponibles';
+            
+            let imagenContenedor = obtenerImagenContenedorAudio(numero);
+            
+            html += `
+                <div class="contenedor-item" onclick="cargarSubcontenedoresAudios(${numero})">
+                    <div class="contenedor-img" style="background-image: url('${imagenContenedor}')"></div>
+                    <div class="contenedor-numero">${obtenerContenedorAudio(numero).nombre || `AUDIO CONTAINER ${numero}`}</div>
+                    <p>${desc}</p>
+                    <div class="card-button" style="background: linear-gradient(135deg, #FF6B6B, #FFD166);">
+                        ${tieneAudios ? '🎵 Escuchar audios' : 'Explorar'}
+                    </div>
                 </div>
-            </div>
-        `;
+            `;
+        });
     }
     
     html += '</div>';
@@ -1653,24 +1648,27 @@ function crearContenedoresASMR() {
     html += '<p style="text-align: center; margin-bottom: 30px; opacity: 0.8;">Audios relajantes para estudio y meditación</p>';
     html += '<div class="manga-contenedores">';
     
-    const contenedores = obtenerContenedoresASMRDisponibles();
-    const totalContenedores = Object.keys(contenedores).length || 4;
+    const contenedores = obtenerContenedoresDisponibles('asmr');
     
-    for (let i = 1; i <= Math.max(totalContenedores, 4); i++) {
-        const contenedorData = obtenerContenedorASMR(i);
-        const tieneAudios = contenedores[i] && contenedores[i].length > 0;
-        const desc = contenedorData.descripcion || (tieneAudios ? contenedores[i].length + ' sub-contenedores con audios' : '3 sub-contenedores disponibles');
-        
-        html += `
-            <div class="contenedor-item" onclick="cargarSubcontenedoresASMR(${i})">
-                <div class="contenedor-img" style="background-image: url('${contenedorData.imagen}')"></div>
-                <div class="contenedor-numero">${contenedorData.nombre || `ASMR CONTAINER ${i}`}</div>
-                <p>${desc}</p>
-                <div class="card-button" style="background: linear-gradient(135deg, #9C27B0, #673AB7);">
-                    ${tieneAudios ? '🎧 Escuchar ASMR' : 'Explorar'}
+    if (contenedores.length === 0) {
+        html += '<div style="text-align: center; padding: 50px; opacity: 0.7;">No hay contenedores configurados</div>';
+    } else {
+        contenedores.forEach(numero => {
+            const contenedorData = obtenerContenedorASMR(numero);
+            const tieneAudios = obtenerSubcontenedoresDisponibles('asmr', numero).length > 0;
+            const desc = contenedorData.descripcion || (tieneAudios ? 'Sub-contenedores con audios' : 'Sub-contenedores disponibles');
+            
+            html += `
+                <div class="contenedor-item" onclick="cargarSubcontenedoresASMR(${numero})">
+                    <div class="contenedor-img" style="background-image: url('${contenedorData.imagen}')"></div>
+                    <div class="contenedor-numero">${contenedorData.nombre || `ASMR CONTAINER ${numero}`}</div>
+                    <p>${desc}</p>
+                    <div class="card-button" style="background: linear-gradient(135deg, #9C27B0, #673AB7);">
+                        ${tieneAudios ? '🎧 Escuchar ASMR' : 'Explorar'}
+                    </div>
                 </div>
-            </div>
-        `;
+            `;
+        });
     }
     
     html += '</div>';
@@ -1678,42 +1676,242 @@ function crearContenedoresASMR() {
 }
 
 // ====================
-// FUNCIONES DINÁMICAS PARA SUBCONTENEDORES
+// FUNCIONES PARA SUBCONTENEDORES (AHORA DINÁMICAS)
 // ====================
 
-// FUNCIÓN DINÁMICA PARA CONTAR SUBCONTENEDORES CONFIGURADOS
-function contarSubcontenedoresConfigurados(modo, contenedor) {
-    if (!sistemaDescriptivo[modo]) return 0;
+function cargarSubcontenedores(contenedor) {
+    contenedorActual = contenedor;
+    modoActual = 'manga';
+    modoMazoDificil = false;
     
-    const subcontenedores = sistemaDescriptivo[modo].subcontenedores;
-    let count = 0;
+    const mangaSection = document.getElementById('manga-section');
+    mangaSection.innerHTML = crearSubcontenedoresUI(contenedor);
     
-    // Contar cuántos subcontenedores tienen configuración para este contenedor
-    for (let i = 1; i <= 100; i++) { // Revisar hasta 100 como máximo
-        const key = `${contenedor}_${i}`;
-        if (subcontenedores.hasOwnProperty(key)) {
-            count = i; // Guardar el número más alto encontrado
-        }
-    }
-    
-    return Math.max(count, 5); // Mínimo 5 para compatibilidad
+    const botonVolver = crearBotonVolver(cargarPaginaMangas);
+    mangaSection.insertBefore(botonVolver, mangaSection.firstChild);
 }
 
-// FUNCIÓN DINÁMICA PARA OBTENER SUBCONTENEDORES DISPONIBLES
-function obtenerSubcontenedoresDisponibles(modo, contenedor) {
-    if (!sistemaDescriptivo[modo]) return [];
+function crearSubcontenedoresUI(contenedor) {
+    let html = `<h2 style="text-align: center; margin-bottom: 30px; color: #FFD166;">
+        📦 ${obtenerNombreContenedor('manga', contenedor)} - SUB-CONTENEDORES
+    </h2>`;
+    html += '<div class="subcontenedores-grid">';
     
-    const subcontenedores = sistemaDescriptivo[modo].subcontenedores;
-    const disponibles = [];
+    const subcontenedores = obtenerSubcontenedoresDisponibles('mangas', contenedor);
     
-    for (let i = 1; i <= 100; i++) {
-        const key = `${contenedor}_${i}`;
-        if (subcontenedores.hasOwnProperty(key)) {
-            disponibles.push(i);
-        }
+    if (subcontenedores.length === 0) {
+        html += '<div style="text-align: center; padding: 50px; opacity: 0.7;">No hay subcontenedores configurados</div>';
+    } else {
+        subcontenedores.forEach(i => {
+            const subData = obtenerSubcontenedorManga(contenedor, i);
+            const nombre = subData.nombre || `Sub-contenedor ${i}`;
+            const desc = subData.descripcion || 'Mazos de vocabulario';
+            const tieneContenido = tieneVocabularioEnSubcontenedor(contenedor, i);
+            const tieneManga = existeManga(contenedor, i);
+            
+            html += `
+                <div class="subcontenedor-item">
+                    <div class="subcontenedor-img" style="background-image: url('${subData.imagen || obtenerImagenSubcontenedor(contenedor, i)}')"></div>
+                    <h3>${nombre}</h3>
+                    <p>${desc}</p>
+                    ${tieneContenido ? '' : '<p style="color: #FF6B6B; font-size: 0.9rem;">(Sin vocabulario)</p>'}
+                    
+                    <div style="display: flex; gap: 10px; margin-top: 15px;">
+                        <button class="card-button" onclick="cargarMazos(${contenedor}, ${i})" style="padding: 10px 15px; font-size: 0.9rem;">
+                            📚 Vocabulario
+                        </button>
+                        ${tieneManga ? 
+                            `<button class="card-button" onclick="iniciarLectorManga(${contenedor}, ${i})" style="padding: 10px 15px; font-size: 0.9rem; background: linear-gradient(135deg, #8A5AF7, #FF6B6B);">
+                                📖 Leer Manga
+                            </button>` 
+                            : '<button class="card-button" style="padding: 10px 15px; font-size: 0.9rem; background: rgba(255,255,255,0.1); opacity: 0.5; cursor: not-allowed;">📖 (Sin manga)</button>'}
+                    </div>
+                </div>
+            `;
+        });
     }
     
-    return disponibles;
+    html += '</div>';
+    return html;
+}
+
+function cargarSubcontenedoresVideos(contenedor) {
+    contenedorActual = contenedor;
+    modoActual = 'video';
+    modoMazoDificil = false;
+    
+    const mangaSection = document.getElementById('manga-section');
+    mangaSection.innerHTML = crearSubcontenedoresVideosUI(contenedor);
+    
+    const botonVolver = crearBotonVolver(cargarPaginaVideos);
+    mangaSection.insertBefore(botonVolver, mangaSection.firstChild);
+}
+
+function crearSubcontenedoresVideosUI(contenedor) {
+    let html = `<h2 style="text-align: center; margin-bottom: 30px; color: #FFD166;">
+        🎬 CONTENEDOR ${contenedor} - SUB-CONTENEDORES DE VIDEOS
+    </h2>`;
+    html += '<div class="subcontenedores-grid">';
+    
+    const subcontenedores = obtenerSubcontenedoresDisponibles('videos', contenedor);
+    
+    if (subcontenedores.length === 0) {
+        html += '<div style="text-align: center; padding: 50px; opacity: 0.7;">No hay subcontenedores configurados</div>';
+    } else {
+        subcontenedores.forEach(i => {
+            const subData = obtenerSubcontenedorVideo(contenedor, i);
+            const videoInfo = obtenerVideo(contenedor, i);
+            const tieneVideo = videoInfo !== null;
+            
+            const desc = tieneVideo ? videoInfo.descripcion : subData.descripcion || '(Sin video)';
+            
+            html += `
+                <div class="subcontenedor-item" onclick="${tieneVideo ? `cargarVideo(${contenedor}, ${i})` : 'alert("Este sub-contenedor no tiene video disponible")'}">
+                    <div class="subcontenedor-img" style="background-image: url('${subData.imagen || obtenerImagenSubcontenedor(contenedor, i)}')"></div>
+                    <h3>${tieneVideo ? videoInfo.titulo : `Video ${i}`}</h3>
+                    ${tieneVideo ? 
+                        `<p><strong>${videoInfo.titulo}</strong></p>
+                         <p style="font-size: 0.9rem; opacity: 0.8;">${videoInfo.duracion} • ${videoInfo.categoria}</p>` 
+                        : `<p style="color: #FF6B6B;">${desc}</p>`}
+                    <div class="card-button" style="margin-top: 10px; padding: 10px 20px; font-size: 0.9rem;">
+                        ${tieneVideo ? '▶️ Ver video' : 'Vacío'}
+                    </div>
+                </div>
+            `;
+        });
+    }
+    
+    html += '</div>';
+    return html;
+}
+
+function cargarVideo(contenedor, subcontenedor) {
+    contenedorActual = contenedor;
+    subcontenedorActual = subcontenedor;
+    
+    const videoInfo = obtenerVideo(contenedor, subcontenedor);
+    if (!videoInfo || !videoInfo.driveId) {
+        alert('No hay video disponible en este sub-contenedor');
+        return;
+    }
+    
+    const mangaSection = document.getElementById('manga-section');
+    mangaSection.innerHTML = sistemaReproductor.cargarVideo(videoInfo.driveId, videoInfo.timestamps);
+    
+    const tituloDesc = `
+        <div style="text-align: center; margin-bottom: 25px;">
+            <h2 style="color: #8A5AF7; margin-bottom: 10px;">${videoInfo.titulo}</h2>
+            <p style="opacity: 0.8; max-width: 700px; margin: 0 auto;">${videoInfo.descripcion}</p>
+        </div>
+    `;
+    
+    mangaSection.querySelector('.reproductor-container').insertAdjacentHTML('afterbegin', tituloDesc);
+    
+    const botonVolver = crearBotonVolver(() => cargarSubcontenedoresVideos(contenedor));
+    mangaSection.insertBefore(botonVolver, mangaSection.firstChild);
+}
+
+function cargarMazos(contenedor, subcontenedor) {
+    contenedorActual = contenedor;
+    subcontenedorActual = subcontenedor;
+    modoMazoDificil = false;
+    
+    const mangaSection = document.getElementById('manga-section');
+    mangaSection.innerHTML = crearMazosUI(contenedor, subcontenedor);
+    
+    const botonVolver = crearBotonVolver(() => cargarSubcontenedores(contenedor));
+    mangaSection.insertBefore(botonVolver, mangaSection.firstChild);
+}
+
+function crearMazosUI(contenedor, subcontenedor) {
+    let html = `<h2 style="text-align: center; margin-bottom: 30px; color: #FFD166;">
+        📚 CONTENEDOR ${contenedor} • SUB-CONTENEDOR ${subcontenedor} - MAZOS
+    </h2>`;
+    
+    const tieneManga = existeManga(contenedor, subcontenedor);
+    if (tieneManga) {
+        const mangaInfo = mangaDatabase[`${contenedor}_${subcontenedor}`];
+        html += `
+            <div style="text-align: center; margin-bottom: 25px; background: rgba(138, 90, 247, 0.1); padding: 20px; border-radius: 15px; border: 2px solid #8A5AF7;">
+                <h3 style="color: #FFD166; margin-bottom: 10px;">📖 ${mangaInfo.titulo}</h3>
+                <p style="opacity: 0.8; margin-bottom: 15px; font-size: 0.95rem;">${mangaInfo.descripcion}</p>
+                <button class="card-button" onclick="iniciarLectorManga(${contenedor}, ${subcontenedor})" 
+                        style="background: linear-gradient(135deg, #8A5AF7, #FF6B6B); max-width: 300px; margin: 0 auto;">
+                    📖 LEER MANGA COMPLETO (${mangaInfo.paginas} páginas)
+                </button>
+                <p style="opacity: 0.7; font-size: 0.9rem; margin-top: 10px;">
+                    Autor: ${mangaInfo.autor} • Año: ${mangaInfo.año}
+                </p>
+            </div>
+        `;
+    }
+    
+    const mazosDificiles = obtenerMazosDificilesSubcontenedor(contenedor, subcontenedor);
+    if (mazosDificiles.length > 0) {
+        html += `
+            <div style="background: linear-gradient(135deg, rgba(255, 20, 147, 0.1), rgba(255, 107, 107, 0.1)); 
+                      border-radius: 15px; padding: 25px; margin-bottom: 30px; border: 3px solid #FF1493;">
+                <h3 style="color: #FFD166; margin-bottom: 20px; text-align: center;">
+                    ⚠️ MAZOS DIFÍCILES ESPECIALES
+                </h3>
+                <p style="text-align: center; opacity: 0.8; margin-bottom: 20px;">
+                    Vocabulario avanzado y expresiones complejas. ¡Doble recompensa!
+                </p>
+                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
+        `;
+        
+        mazosDificiles.forEach(mazo => {
+            html += `
+                <div class="mazo-item" onclick="iniciarQuizDificil(${contenedor}, ${subcontenedor}, '${mazo.id}')" 
+                      style="border-color: #FF1493; background: rgba(255, 20, 147, 0.05);">
+                    <h3 style="color: #FF1493;">${mazo.nombre}</h3>
+                    <p style="color: #FF6B6B;">${mazo.palabras.length} palabras avanzadas</p>
+                    <p style="font-size: 0.9rem; opacity: 0.7; margin-top: 10px;">
+                        ⭐ Expresiones complejas
+                    </p>
+                    <div style="margin-top: 15px; padding: 8px 12px; background: rgba(255, 20, 147, 0.2); 
+                              border-radius: 8px; font-size: 0.9rem; text-align: center; color: #FFD166;">
+                        +5 soles de bonificación
+                    </div>
+                </div>
+            `;
+        });
+        
+        html += `</div></div>`;
+    }
+    
+    const mazos = obtenerMazosDisponibles(contenedor, subcontenedor);
+    
+    if (mazos.length === 0) {
+        html += '<div style="text-align: center; padding: 50px; opacity: 0.7;">No hay mazos de vocabulario configurados</div>';
+    } else {
+        html += '<div class="mazos-container">';
+        
+        mazos.forEach(mazoNumero => {
+            const tieneVocabulario = verificarVocabularioDisponible(contenedor, subcontenedor, mazoNumero);
+            const progreso = sistemaEconomia.obtenerProgreso(contenedor, subcontenedor, mazoNumero);
+            
+            html += `
+                <div class="mazo-item" onclick="${tieneVocabulario ? `iniciarQuiz(${contenedor}, ${subcontenedor}, ${mazoNumero})` : 'alert("Este mazo no tiene vocabulario")'}">
+                    <h3>MAZO ${mazoNumero}</h3>
+                    <p>${tieneVocabulario ? '10 palabras japonesas' : 'Sin vocabulario'}</p>
+                    ${progreso > 0 ? 
+                        `<div style="margin-top: 10px;">
+                            <div style="background: rgba(255,255,255,0.1); height: 8px; border-radius: 4px; overflow: hidden;">
+                                <div style="background: linear-gradient(135deg, #4CAF50, #2E7D32); width: ${progreso}%; height: 100%;"></div>
+                            </div>
+                            <p style="font-size: 0.9rem; margin-top: 5px; color: #4CAF50;">${progreso}% completado</p>
+                        </div>` 
+                        : ''}
+                    ${!tieneVocabulario ? '<p style="color: #FF6B6B; font-size: 0.9rem; margin-top: 5px;">(Vacío)</p>' : ''}
+                </div>
+            `;
+        });
+        
+        html += '</div>';
+    }
+    
+    return html;
 }
 
 // ====================
@@ -1732,10 +1930,6 @@ function cargarSubcontenedoresAnimes(contenedor) {
     mangaSection.insertBefore(botonVolver, mangaSection.firstChild);
 }
 
-// ====================
-// FUNCIÓN CORREGIDA: CREAR SUBCONTENEDORES DE ANIMES CON NOMBRES PERSONALIZADOS
-// ====================
-
 function crearSubcontenedoresAnimesUI(contenedor) {
     const contenedorData = obtenerContenedorAnime(contenedor);
     let html = `<h2 style="text-align: center; margin-bottom: 30px; color: #FFD166;">
@@ -1743,31 +1937,32 @@ function crearSubcontenedoresAnimesUI(contenedor) {
     </h2>`;
     html += '<div class="subcontenedores-grid">';
     
-    // Obtener subcontenedores configurados dinámicamente
-    const subcontenedoresConfigurados = contarSubcontenedoresConfigurados('animes', contenedor);
-    const subcontenedoresDisponibles = obtenerSubcontenedoresDisponibles('animes', contenedor);
+    const subcontenedores = obtenerSubcontenedoresDisponibles('animes', contenedor);
     
-    for (let i = 1; i <= subcontenedoresConfigurados; i++) {
-        const tieneConfiguracion = subcontenedoresDisponibles.includes(i);
-        const subData = obtenerSubcontenedorAnime(contenedor, i);
-        const animeInfo = tieneConfiguracion ? obtenerAnime(contenedor, i) : null;
-        const tieneAnime = tieneConfiguracion && animeInfo !== null; // ← CORRECCIÓN CLAVE
-        
-        const desc = subData.descripcion || (tieneAnime ? 'Anime disponible' : '(Sin anime configurado)');
-        
-        html += `
-            <div class="subcontenedor-item" onclick="${tieneAnime ? `seleccionarAccionAnime(${contenedor}, ${i})` : `cargarMazosAnimes(${contenedor}, ${i})`}">
-                <div class="subcontenedor-img" style="background-image: url('${subData.imagen || obtenerImagenSubcontenedorAnime(contenedor, i)}')"></div>
-                <h3>${subData.nombre || (tieneAnime ? animeInfo.titulo : `Anime ${i}`)}</h3>
-                ${tieneAnime ? 
-                    `<p><strong>${animeInfo.titulo}</strong></p>
-                     <p style="font-size: 0.9rem; opacity: 0.8;">${animeInfo.duracion} • ${animeInfo.categoria}</p>` 
-                    : `<p style="color: #FF6B6B;">${desc}</p>`}
-                <div class="card-button" style="margin-top: 10px; padding: 10px 20px; font-size: 0.9rem;">
-                    ${tieneAnime ? '🎬 Ver opciones' : '📚 Solo vocabulario'}
+    if (subcontenedores.length === 0) {
+        html += '<div style="text-align: center; padding: 50px; opacity: 0.7;">No hay subcontenedores configurados</div>';
+    } else {
+        subcontenedores.forEach(i => {
+            const subData = obtenerSubcontenedorAnime(contenedor, i);
+            const animeInfo = obtenerAnime(contenedor, i);
+            const tieneAnime = animeInfo !== null;
+            
+            const desc = subData.descripcion || (tieneAnime ? 'Anime disponible' : '(Sin anime configurado)');
+            
+            html += `
+                <div class="subcontenedor-item" onclick="${tieneAnime ? `seleccionarAccionAnime(${contenedor}, ${i})` : `cargarMazosAnimes(${contenedor}, ${i})`}">
+                    <div class="subcontenedor-img" style="background-image: url('${subData.imagen || obtenerImagenSubcontenedorAnime(contenedor, i)}')"></div>
+                    <h3>${subData.nombre || (tieneAnime ? animeInfo.titulo : `Anime ${i}`)}</h3>
+                    ${tieneAnime ? 
+                        `<p><strong>${animeInfo.titulo}</strong></p>
+                         <p style="font-size: 0.9rem; opacity: 0.8;">${animeInfo.duracion} • ${animeInfo.categoria}</p>` 
+                        : `<p style="color: #FF6B6B;">${desc}</p>`}
+                    <div class="card-button" style="margin-top: 10px; padding: 10px 20px; font-size: 0.9rem;">
+                        ${tieneAnime ? '🎬 Ver opciones' : '📚 Solo vocabulario'}
+                    </div>
                 </div>
-            </div>
-        `;
+            `;
+        });
     }
     
     html += '</div>';
@@ -1829,7 +2024,6 @@ function cargarVideoAnime(contenedor, subcontenedor) {
     const mangaSection = document.getElementById('manga-section');
     mangaSection.innerHTML = sistemaReproductor.cargarVideo(driveId, timestamps);
     
-    // Agregar controles de idioma
     const tituloDesc = `
         <div style="text-align: center; margin-bottom: 25px;">
             <h2 style="color: #8A5AF7; margin-bottom: 10px;">${animeInfo.titulo}</h2>
@@ -1890,39 +2084,42 @@ function crearMazosAnimesUI(contenedor, subcontenedor) {
         </p>`;
     }
     
-    // Contar mazos disponibles
-    const mazosDisponibles = contarMazosDisponibles(contenedor, subcontenedor);
-    const maxMazos = Math.max(10, mazosDisponibles); // Mostrar al menos 10 o los que haya
+    const mazos = obtenerMazosDisponibles(contenedor, subcontenedor);
     
-    html += '<div class="mazos-container">';
-    
-    for (let i = 1; i <= maxMazos; i++) {
-        const tieneVocabulario = existeVocabularioAnime(contenedor, subcontenedor, i);
-        const progreso = sistemaEconomia.obtenerProgreso(contenedor, subcontenedor, i);
+    if (mazos.length === 0) {
+        html += '<div style="text-align: center; padding: 50px; opacity: 0.7;">No hay mazos de vocabulario configurados</div>';
+    } else {
+        html += '<div class="mazos-container">';
         
-        html += `
-            <div class="mazo-item" onclick="${tieneVocabulario ? `iniciarQuiz(${contenedor}, ${subcontenedor}, ${i})` : 'alert("Este mazo aún no tiene vocabulario. Agrégalo en 1_animes_vocabulario.js")'}">
-                <h3>MAZO ${i}</h3>
-                <p>10 palabras japonesas</p>
-                ${progreso > 0 ? 
-                    `<div style="margin-top: 10px;">
-                        <div style="background: rgba(255,255,255,0.1); height: 8px; border-radius: 4px; overflow: hidden;">
-                            <div style="background: linear-gradient(135deg, #4CAF50, #2E7D32); width: ${progreso}%; height: 100%;"></div>
-                        </div>
-                        <p style="font-size: 0.9rem; margin-top: 5px; color: #4CAF50;">${progreso}% completado</p>
-                    </div>` 
-                    : ''}
-                ${!tieneVocabulario ? '<p style="color: #FF6B6B; font-size: 0.9rem; margin-top: 5px;">(Vacío)</p>' : ''}
-            </div>
-        `;
+        mazos.forEach(mazoNumero => {
+            const tieneVocabulario = existeVocabularioAnime(contenedor, subcontenedor, mazoNumero);
+            const progreso = sistemaEconomia.obtenerProgreso(contenedor, subcontenedor, mazoNumero);
+            
+            html += `
+                <div class="mazo-item" onclick="${tieneVocabulario ? `iniciarQuiz(${contenedor}, ${subcontenedor}, ${mazoNumero})` : 'alert("Este mazo aún no tiene vocabulario. Agrégalo en 1_animes_vocabulario.js")'}">
+                    <h3>MAZO ${mazoNumero}</h3>
+                    <p>10 palabras japonesas</p>
+                    ${progreso > 0 ? 
+                        `<div style="margin-top: 10px;">
+                            <div style="background: rgba(255,255,255,0.1); height: 8px; border-radius: 4px; overflow: hidden;">
+                                <div style="background: linear-gradient(135deg, #4CAF50, #2E7D32); width: ${progreso}%; height: 100%;"></div>
+                            </div>
+                            <p style="font-size: 0.9rem; margin-top: 5px; color: #4CAF50;">${progreso}% completado</p>
+                        </div>` 
+                        : ''}
+                    ${!tieneVocabulario ? '<p style="color: #FF6B6B; font-size: 0.9rem; margin-top: 5px;">(Vacío)</p>' : ''}
+                </div>
+            `;
+        });
+        
+        html += '</div>';
     }
     
-    html += '</div>';
     return html;
 }
 
 // ====================
-// FUNCIONES DINÁMICAS PARA AUDIOS
+// FUNCIONES PARA AUDIOS (VERSIÓN DINÁMICA)
 // ====================
 
 function cargarSubcontenedoresAudios(contenedor) {
@@ -1943,31 +2140,32 @@ function crearSubcontenedoresAudiosUI(contenedor) {
     </h2>`;
     html += '<div class="subcontenedores-grid">';
     
-    // Obtener subcontenedores configurados dinámicamente
-    const subcontenedoresConfigurados = contarSubcontenedoresConfigurados('audios', contenedor);
-    const subcontenedoresDisponibles = obtenerSubcontenedoresDisponibles('audios', contenedor);
+    const subcontenedores = obtenerSubcontenedoresDisponibles('audios', contenedor);
     
-    for (let i = 1; i <= subcontenedoresConfigurados; i++) {
-        const tieneConfiguracion = subcontenedoresDisponibles.includes(i);
-        let imagenSubcontenedor = obtenerImagenSubcontenedorAudio(contenedor, i);
-        const audioInfo = tieneConfiguracion ? obtenerAudio(contenedor, i) : null;
-        const tieneAudio = tieneConfiguracion && audioInfo !== null; // ← CORRECCIÓN CLAVE
-        
-        const desc = tieneAudio ? audioInfo.descripcion : '(Sin audio configurado)';
-        
-        html += `
-            <div class="subcontenedor-item" onclick="${tieneAudio ? `seleccionarAccionAudio(${contenedor}, ${i})` : `cargarMazosAudios(${contenedor}, ${i})`}">
-                <div class="subcontenedor-img" style="background-image: url('${imagenSubcontenedor}')"></div>
-                <h3>${tieneAudio ? audioInfo.titulo : `Audio ${i}`}</h3>
-                ${tieneAudio ? 
-                    `<p><strong>${audioInfo.titulo}</strong></p>
-                     <p style="font-size: 0.9rem; opacity: 0.8;">${audioInfo.artista} • ${audioInfo.duracion}</p>` 
-                    : `<p style="color: #FF6B6B;">${desc}</p>`}
-                <div class="card-button" style="margin-top: 10px; padding: 10px 20px; font-size: 0.9rem; background: linear-gradient(135deg, #FF6B6B, #FFD166);">
-                    ${tieneAudio ? '🎵 Ver opciones' : '📚 Solo vocabulario'}
+    if (subcontenedores.length === 0) {
+        html += '<div style="text-align: center; padding: 50px; opacity: 0.7;">No hay subcontenedores configurados</div>';
+    } else {
+        subcontenedores.forEach(i => {
+            let imagenSubcontenedor = obtenerImagenSubcontenedorAudio(contenedor, i);
+            const audioInfo = obtenerAudio(contenedor, i);
+            const tieneAudio = audioInfo !== null;
+            
+            const desc = tieneAudio ? audioInfo.descripcion : '(Sin audio configurado)';
+            
+            html += `
+                <div class="subcontenedor-item" onclick="${tieneAudio ? `seleccionarAccionAudio(${contenedor}, ${i})` : `cargarMazosAudios(${contenedor}, ${i})`}">
+                    <div class="subcontenedor-img" style="background-image: url('${imagenSubcontenedor}')"></div>
+                    <h3>${tieneAudio ? audioInfo.titulo : `Audio ${i}`}</h3>
+                    ${tieneAudio ? 
+                        `<p><strong>${audioInfo.titulo}</strong></p>
+                         <p style="font-size: 0.9rem; opacity: 0.8;">${audioInfo.artista} • ${audioInfo.duracion}</p>` 
+                        : `<p style="color: #FF6B6B;">${desc}</p>`}
+                    <div class="card-button" style="margin-top: 10px; padding: 10px 20px; font-size: 0.9rem; background: linear-gradient(135deg, #FF6B6B, #FFD166);">
+                        ${tieneAudio ? '🎵 Ver opciones' : '📚 Solo vocabulario'}
+                    </div>
                 </div>
-            </div>
-        `;
+            `;
+        });
     }
     
     html += '</div>';
@@ -2030,7 +2228,6 @@ function crearReproductorAudioUI(audioInfo) {
                 ${audioInfo.descripcion}
             </p>
             
-            <!-- REPRODUCTOR DE AUDIO DRIVE -->
             <div style="background: rgba(0, 0, 0, 0.3); border-radius: 15px; padding: 25px; margin: 30px 0; text-align: center;">
                 <h3 style="color: #FFD166; margin-bottom: 20px;">🎵 Reproductor</h3>
                 <div style="margin: 20px 0;">
@@ -2048,7 +2245,6 @@ function crearReproductorAudioUI(audioInfo) {
                 </p>
             </div>
             
-            <!-- INFORMACIÓN DEL AUDIO -->
             <div style="background: rgba(255, 255, 255, 0.05); border-radius: 15px; padding: 20px; margin: 20px 0;">
                 <h4 style="color: #8A5AF7; margin-bottom: 15px;">📊 Información del Opening</h4>
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
@@ -2113,39 +2309,42 @@ function crearMazosAudiosUI(contenedor, subcontenedor) {
         </p>`;
     }
     
-    // Contar mazos disponibles
-    const mazosDisponibles = contarMazosDisponibles(contenedor, subcontenedor);
-    const maxMazos = Math.max(10, mazosDisponibles); // Mostrar al menos 10 o los que haya
+    const mazos = obtenerMazosDisponibles(contenedor, subcontenedor);
     
-    html += '<div class="mazos-container">';
-    
-    for (let i = 1; i <= maxMazos; i++) {
-        const tieneVocabulario = existeVocabularioAudio(contenedor, subcontenedor, i);
-        const progreso = sistemaEconomia.obtenerProgreso(contenedor, subcontenedor, i);
+    if (mazos.length === 0) {
+        html += '<div style="text-align: center; padding: 50px; opacity: 0.7;">No hay mazos de vocabulario configurados</div>';
+    } else {
+        html += '<div class="mazos-container">';
         
-        html += `
-            <div class="mazo-item" onclick="${tieneVocabulario ? `iniciarQuiz(${contenedor}, ${subcontenedor}, ${i})` : 'alert("Este mazo aún no tiene vocabulario. Agrégalo en 1_audios_vocabulario.js")'}" style="border-color: rgba(255, 107, 107, 0.6);">
-                <h3>MAZO ${i}</h3>
-                <p>10 palabras japonesas de la letra</p>
-                ${progreso > 0 ? 
-                    `<div style="margin-top: 10px;">
-                        <div style="background: rgba(255,255,255,0.1); height: 8px; border-radius: 4px; overflow: hidden;">
-                            <div style="background: linear-gradient(135deg, #FF6B6B, #FFD166); width: ${progreso}%; height: 100%;"></div>
-                        </div>
-                        <p style="font-size: 0.9rem; margin-top: 5px; color: #FF6B6B;">${progreso}% completado</p>
-                    </div>` 
-                    : ''}
-                ${!tieneVocabulario ? '<p style="color: #FF6B6B; font-size: 0.9rem; margin-top: 5px;">(Vacío)</p>' : ''}
-            </div>
-        `;
+        mazos.forEach(mazoNumero => {
+            const tieneVocabulario = existeVocabularioAudio(contenedor, subcontenedor, mazoNumero);
+            const progreso = sistemaEconomia.obtenerProgreso(contenedor, subcontenedor, mazoNumero);
+            
+            html += `
+                <div class="mazo-item" onclick="${tieneVocabulario ? `iniciarQuiz(${contenedor}, ${subcontenedor}, ${mazoNumero})` : 'alert("Este mazo aún no tiene vocabulario. Agrégalo en 1_audios_vocabulario.js")'}" style="border-color: rgba(255, 107, 107, 0.6);">
+                    <h3>MAZO ${mazoNumero}</h3>
+                    <p>10 palabras japonesas de la letra</p>
+                    ${progreso > 0 ? 
+                        `<div style="margin-top: 10px;">
+                            <div style="background: rgba(255,255,255,0.1); height: 8px; border-radius: 4px; overflow: hidden;">
+                                <div style="background: linear-gradient(135deg, #FF6B6B, #FFD166); width: ${progreso}%; height: 100%;"></div>
+                            </div>
+                            <p style="font-size: 0.9rem; margin-top: 5px; color: #FF6B6B;">${progreso}% completado</p>
+                        </div>` 
+                        : ''}
+                    ${!tieneVocabulario ? '<p style="color: #FF6B6B; font-size: 0.9rem; margin-top: 5px;">(Vacío)</p>' : ''}
+                </div>
+            `;
+        });
+        
+        html += '</div>';
     }
     
-    html += '</div>';
     return html;
 }
 
 // ====================
-// FUNCIONES DINÁMICAS PARA ASMR
+// FUNCIONES PARA ASMR (VERSIÓN DINÁMICA)
 // ====================
 
 function cargarSubcontenedoresASMR(contenedor) {
@@ -2167,37 +2366,37 @@ function crearSubcontenedoresASMRUI(contenedor) {
     </h2>`;
     html += '<div class="subcontenedores-grid">';
     
-    // Obtener subcontenedores configurados dinámicamente
-    const subcontenedoresConfigurados = contarSubcontenedoresConfigurados('asmr', contenedor);
-    const subcontenedoresDisponibles = obtenerSubcontenedoresDisponibles('asmr', contenedor);
+    const subcontenedores = obtenerSubcontenedoresDisponibles('asmr', contenedor);
     
-    for (let i = 1; i <= subcontenedoresConfigurados; i++) {
-        const tieneConfiguracion = subcontenedoresDisponibles.includes(i);
-        const subData = obtenerSubcontenedorASMR(contenedor, i);
-        const asmrInfo = tieneConfiguracion ? obtenerASMR(contenedor, i) : null;
-        const tieneASMR = tieneConfiguracion && asmrInfo !== null; // ← CORRECCIÓN CLAVE
-        
-        const desc = subData.descripcion || (tieneASMR ? 'ASMR disponible' : '(Sin audio ASMR configurado)');
-        
-        html += `
-            <div class="subcontenedor-item" onclick="${tieneASMR ? `seleccionarAccionASMR(${contenedor}, ${i})` : 'alert("Este sub-contenedor no tiene audio ASMR disponible")'}">
-                <div class="subcontenedor-img" style="background-image: url('${subData.imagen || obtenerImagenSubcontenedorASMR(contenedor, i)}')"></div>
-                <h3>${tieneASMR ? asmrInfo.titulo : `ASMR ${i}`}</h3>
-                ${tieneASMR ? 
-                    `<p><strong>${asmrInfo.titulo}</strong></p>
-                     <p style="font-size: 0.9rem; opacity: 0.8;">${asmrInfo.duracion} • ${asmrInfo.categoria}</p>
-                     <p style="font-size: 0.8rem; opacity: 0.7;">🎤 ${asmrInfo.tipoVoz}</p>` 
-                    : `<p style="color: #FF6B6B;">${desc}</p>`}
-                <div class="card-button" style="margin-top: 10px; padding: 10px 20px; font-size: 0.9rem; background: linear-gradient(135deg, #9C27B0, #673AB7);">
-                    ${tieneASMR ? '🎧 Escuchar ASMR' : 'Vacío'}
+    if (subcontenedores.length === 0) {
+        html += '<div style="text-align: center; padding: 50px; opacity: 0.7;">No hay subcontenedores configurados</div>';
+    } else {
+        subcontenedores.forEach(i => {
+            const subData = obtenerSubcontenedorASMR(contenedor, i);
+            const asmrInfo = obtenerASMR(contenedor, i);
+            const tieneASMR = asmrInfo !== null;
+            
+            const desc = subData.descripcion || (tieneASMR ? 'ASMR disponible' : '(Sin audio ASMR configurado)');
+            
+            html += `
+                <div class="subcontenedor-item" onclick="${tieneASMR ? `seleccionarAccionASMR(${contenedor}, ${i})` : 'alert("Este sub-contenedor no tiene audio ASMR disponible")'}">
+                    <div class="subcontenedor-img" style="background-image: url('${subData.imagen || obtenerImagenSubcontenedorASMR(contenedor, i)}')"></div>
+                    <h3>${tieneASMR ? asmrInfo.titulo : `ASMR ${i}`}</h3>
+                    ${tieneASMR ? 
+                        `<p><strong>${asmrInfo.titulo}</strong></p>
+                         <p style="font-size: 0.9rem; opacity: 0.8;">${asmrInfo.duracion} • ${asmrInfo.categoria}</p>
+                         <p style="font-size: 0.8rem; opacity: 0.7;">🎤 ${asmrInfo.tipoVoz}</p>` 
+                        : `<p style="color: #FF6B6B;">${desc}</p>`}
+                    <div class="card-button" style="margin-top: 10px; padding: 10px 20px; font-size: 0.9rem; background: linear-gradient(135deg, #9C27B0, #673AB7);">
+                        ${tieneASMR ? '🎧 Escuchar ASMR' : 'Vacío'}
+                    </div>
                 </div>
-            </div>
-        `;
+            `;
+        });
     }
     
     html += '</div>';
     
-    // Información sobre el contenedor
     const estadisticas = obtenerEstadisticasASMR();
     html += `
         <div style="background: rgba(156, 39, 176, 0.1); border-radius: 15px; padding: 20px; margin: 30px 0; border-left: 5px solid #9C27B0;">
@@ -2205,7 +2404,7 @@ function crearSubcontenedoresASMRUI(contenedor) {
             <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px;">
                 <div style="text-align: center;">
                     <div style="color: #9C27B0; font-size: 0.9rem;">🎧 Audios</div>
-                    <div style="font-weight: bold; font-size: 1.2rem;">${subcontenedoresDisponibles.length}/${subcontenedoresConfigurados}</div>
+                    <div style="font-weight: bold; font-size: 1.2rem;">${subcontenedores.length}</div>
                 </div>
                 <div style="text-align: center;">
                     <div style="color: #9C27B0; font-size: 0.9rem;">⏱️ Duración Total</div>
@@ -2213,7 +2412,7 @@ function crearSubcontenedoresASMRUI(contenedor) {
                 </div>
                 <div style="text-align: center;">
                     <div style="color: #9C27B0; font-size: 0.9rem;">📈 Completado</div>
-                    <div style="font-weight: bold; font-size: 1.2rem;">${Math.round((subcontenedoresDisponibles.length / subcontenedoresConfigurados) * 100)}%</div>
+                    <div style="font-weight: bold; font-size: 1.2rem;">100%</div>
                 </div>
             </div>
         </div>
@@ -2224,9 +2423,9 @@ function crearSubcontenedoresASMRUI(contenedor) {
 
 function calcularDuracionTotalASMRContenedor(contenedor) {
     let totalSegundos = 0;
-    const subcontenedoresDisponibles = obtenerSubcontenedoresDisponibles('asmr', contenedor);
+    const subcontenedores = obtenerSubcontenedoresDisponibles('asmr', contenedor);
     
-    subcontenedoresDisponibles.forEach(sub => {
+    subcontenedores.forEach(sub => {
         const asmrInfo = obtenerASMR(contenedor, sub);
         if (asmrInfo && asmrInfo.duracion !== "0:00") {
             const [minutos, segundos] = asmrInfo.duracion.split(':').map(Number);
@@ -2258,7 +2457,6 @@ function seleccionarAccionASMR(contenedor, subcontenedor) {
                 </button>
             </div>
             
-            <!-- INFORMACIÓN DETALLADA -->
             <div style="background: rgba(156, 39, 176, 0.1); border-radius: 15px; padding: 20px; margin-top: 40px; text-align: left;">
                 <h4 style="color: #FFD166; margin-bottom: 15px;">📋 Detalles del Audio</h4>
                 <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
@@ -2316,7 +2514,6 @@ function crearReproductorASMRUI(asmrInfo) {
                 ${asmrInfo.descripcion}
             </p>
             
-            <!-- REPRODUCTOR DE AUDIO DRIVE -->
             <div style="background: rgba(156, 39, 176, 0.1); border-radius: 15px; padding: 25px; margin: 30px 0; text-align: center; border: 2px solid rgba(156, 39, 176, 0.3);">
                 <h3 style="color: #FFD166; margin-bottom: 20px;">🎧 Reproductor ASMR</h3>
                 <div style="margin: 20px 0;">
@@ -2334,7 +2531,6 @@ function crearReproductorASMRUI(asmrInfo) {
                 </p>
             </div>
             
-            <!-- TIMESTAMPS PARA ASMR -->
             ${asmrInfo.timestamps && asmrInfo.timestamps.length > 0 ? `
                 <div style="background: rgba(255, 255, 255, 0.05); border-radius: 15px; padding: 25px; margin: 30px 0; border-left: 5px solid #FFD166;">
                     <h4 style="color: #FFD166; margin-bottom: 20px;">📍 Secciones del Audio</h4>
@@ -2355,7 +2551,6 @@ function crearReproductorASMRUI(asmrInfo) {
                 </div>
             ` : ''}
             
-            <!-- INFORMACIÓN DEL ASMR -->
             <div style="background: rgba(255, 255, 255, 0.05); border-radius: 15px; padding: 20px; margin: 20px 0;">
                 <h4 style="color: #9C27B0; margin-bottom: 15px;">📊 Información del Audio ASMR</h4>
                 <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
@@ -2378,7 +2573,6 @@ function crearReproductorASMRUI(asmrInfo) {
                 </div>
             </div>
             
-            <!-- CONSEJOS PARA ASMR -->
             <div style="background: rgba(255, 209, 102, 0.1); border-radius: 15px; padding: 20px; margin: 20px 0; border-left: 5px solid #FFD166;">
                 <h4 style="color: #FFD166; margin-bottom: 15px;">💡 Consejos para disfrutar el ASMR</h4>
                 <ul style="padding-left: 20px; opacity: 0.8;">
@@ -2429,256 +2623,7 @@ function mostrarNotificacionASMR(mensaje) {
 }
 
 // ====================
-// FUNCIONES DINÁMICAS PARA MANGAS/VIDEOS
-// ====================
-
-function cargarSubcontenedores(contenedor) {
-    contenedorActual = contenedor;
-    modoActual = 'manga';
-    modoMazoDificil = false;
-    
-    const mangaSection = document.getElementById('manga-section');
-    mangaSection.innerHTML = crearSubcontenedoresUI(contenedor);
-    
-    const botonVolver = crearBotonVolver(cargarPaginaMangas);
-    mangaSection.insertBefore(botonVolver, mangaSection.firstChild);
-}
-
-function crearSubcontenedoresUI(contenedor) {
-    let html = `<h2 style="text-align: center; margin-bottom: 30px; color: #FFD166;">
-        📦 ${obtenerNombreContenedor('manga', contenedor)} - SUB-CONTENEDORES
-    </h2>`;
-    html += '<div class="subcontenedores-grid">';
-    
-    // Obtener subcontenedores configurados dinámicamente
-    const subcontenedoresConfigurados = contarSubcontenedoresConfigurados('mangas', contenedor);
-    
-    for (let i = 1; i <= subcontenedoresConfigurados; i++) {
-        const subData = obtenerSubcontenedorManga(contenedor, i);
-        const nombre = subData.nombre || `Sub-contenedor ${i}`;
-        const desc = subData.descripcion || '10 mazos de vocabulario';
-        const tieneContenido = tieneVocabularioEnSubcontenedor(contenedor, i);
-        const tieneManga = existeManga(contenedor, i);
-        
-        html += `
-            <div class="subcontenedor-item">
-                <div class="subcontenedor-img" style="background-image: url('${subData.imagen || obtenerImagenSubcontenedor(contenedor, i)}')"></div>
-                <h3>${nombre}</h3>
-                <p>${desc}</p>
-                ${tieneContenido ? '' : '<p style="color: #FF6B6B; font-size: 0.9rem;">(Sin vocabulario)</p>'}
-                
-                <!-- BOTONES PARA ESTE SUB-CONTENEDOR -->
-                <div style="display: flex; gap: 10px; margin-top: 15px;">
-                    <button class="card-button" onclick="cargarMazos(${contenedor}, ${i})" style="padding: 10px 15px; font-size: 0.9rem;">
-                        📚 Vocabulario
-                    </button>
-                    ${tieneManga ? 
-                        `<button class="card-button" onclick="iniciarLectorManga(${contenedor}, ${i})" style="padding: 10px 15px; font-size: 0.9rem; background: linear-gradient(135deg, #8A5AF7, #FF6B6B);">
-                            📖 Leer Manga
-                        </button>` 
-                        : '<button class="card-button" style="padding: 10px 15px; font-size: 0.9rem; background: rgba(255,255,255,0.1); opacity: 0.5; cursor: not-allowed;">📖 (Sin manga)</button>'}
-                </div>
-            </div>
-        `;
-    }
-    
-    html += '</div>';
-    return html;
-}
-
-function cargarSubcontenedoresVideos(contenedor) {
-    contenedorActual = contenedor;
-    modoActual = 'video';
-    modoMazoDificil = false;
-    
-    const mangaSection = document.getElementById('manga-section');
-    mangaSection.innerHTML = crearSubcontenedoresVideosUI(contenedor);
-    
-    const botonVolver = crearBotonVolver(cargarPaginaVideos);
-    mangaSection.insertBefore(botonVolver, mangaSection.firstChild);
-}
-
-function crearSubcontenedoresVideosUI(contenedor) {
-    let html = `<h2 style="text-align: center; margin-bottom: 30px; color: #FFD166;">
-        🎬 CONTENEDOR ${contenedor} - SUB-CONTENEDORES DE VIDEOS
-    </h2>`;
-    html += '<div class="subcontenedores-grid">';
-    
-    // Obtener subcontenedores configurados dinámicamente
-    const subcontenedoresConfigurados = contarSubcontenedoresConfigurados('videos', contenedor);
-    const subcontenedoresDisponibles = obtenerSubcontenedoresDisponibles('videos', contenedor);
-    
-    for (let i = 1; i <= subcontenedoresConfigurados; i++) {
-        const tieneConfiguracion = subcontenedoresDisponibles.includes(i);
-        const subData = obtenerSubcontenedorVideo(contenedor, i);
-        const videoInfo = tieneConfiguracion ? obtenerVideo(contenedor, i) : null;
-        const tieneVideo = tieneConfiguracion && videoInfo !== null; // ← CORRECCIÓN CLAVE
-        
-        const desc = tieneVideo ? videoInfo.descripcion : subData.descripcion || '(Sin video)';
-        
-        html += `
-            <div class="subcontenedor-item" onclick="${tieneVideo ? `cargarVideo(${contenedor}, ${i})` : 'alert("Este sub-contenedor no tiene video disponible")'}">
-                <div class="subcontenedor-img" style="background-image: url('${subData.imagen || obtenerImagenSubcontenedor(contenedor, i)}')"></div>
-                <h3>${tieneVideo ? videoInfo.titulo : `Video ${i}`}</h3>
-                ${tieneVideo ? 
-                    `<p><strong>${videoInfo.titulo}</strong></p>
-                     <p style="font-size: 0.9rem; opacity: 0.8;">${videoInfo.duracion} • ${videoInfo.categoria}</p>` 
-                    : `<p style="color: #FF6B6B;">${desc}</p>`}
-                <div class="card-button" style="margin-top: 10px; padding: 10px 20px; font-size: 0.9rem;">
-                    ${tieneVideo ? '▶️ Ver video' : 'Vacío'}
-                </div>
-            </div>
-        `;
-    }
-    
-    html += '</div>';
-    return html;
-}
-
-function cargarVideo(contenedor, subcontenedor) {
-    contenedorActual = contenedor;
-    subcontenedorActual = subcontenedor;
-    
-    const videoInfo = obtenerVideo(contenedor, subcontenedor);
-    if (!videoInfo || !videoInfo.driveId) {
-        alert('No hay video disponible en este sub-contenedor');
-        return;
-    }
-    
-    const mangaSection = document.getElementById('manga-section');
-    mangaSection.innerHTML = sistemaReproductor.cargarVideo(videoInfo.driveId, videoInfo.timestamps);
-    
-    const tituloDesc = `
-        <div style="text-align: center; margin-bottom: 25px;">
-            <h2 style="color: #8A5AF7; margin-bottom: 10px;">${videoInfo.titulo}</h2>
-            <p style="opacity: 0.8; max-width: 700px; margin: 0 auto;">${videoInfo.descripcion}</p>
-        </div>
-    `;
-    
-    mangaSection.querySelector('.reproductor-container').insertAdjacentHTML('afterbegin', tituloDesc);
-    
-    const botonVolver = crearBotonVolver(() => cargarSubcontenedoresVideos(contenedor));
-    mangaSection.insertBefore(botonVolver, mangaSection.firstChild);
-}
-
-function volverASubcontenedoresVideos() {
-    if (modoActual === 'video') {
-        cargarSubcontenedoresVideos(contenedorActual);
-    }
-}
-
-function cargarMazos(contenedor, subcontenedor) {
-    contenedorActual = contenedor;
-    subcontenedorActual = subcontenedor;
-    modoMazoDificil = false;
-    
-    const mangaSection = document.getElementById('manga-section');
-    mangaSection.innerHTML = crearMazosUI(contenedor, subcontenedor);
-    
-    const botonVolver = crearBotonVolver(() => cargarSubcontenedores(contenedor));
-    mangaSection.insertBefore(botonVolver, mangaSection.firstChild);
-}
-
-function crearMazosUI(contenedor, subcontenedor) {
-    let html = `<h2 style="text-align: center; margin-bottom: 30px; color: #FFD166;">
-        📚 CONTENEDOR ${contenedor} • SUB-CONTENEDOR ${subcontenedor} - MAZOS
-    </h2>`;
-    
-    // BOTÓN PARA LEER MANGA EN CABECERA
-    const tieneManga = existeManga(contenedor, subcontenedor);
-    if (tieneManga) {
-        const mangaInfo = mangaDatabase[`${contenedor}_${subcontenedor}`];
-        html += `
-            <div style="text-align: center; margin-bottom: 25px; background: rgba(138, 90, 247, 0.1); padding: 20px; border-radius: 15px; border: 2px solid #8A5AF7;">
-                <h3 style="color: #FFD166; margin-bottom: 10px;">📖 ${mangaInfo.titulo}</h3>
-                <p style="opacity: 0.8; margin-bottom: 15px; font-size: 0.95rem;">${mangaInfo.descripcion}</p>
-                <button class="card-button" onclick="iniciarLectorManga(${contenedor}, ${subcontenedor})" 
-                        style="background: linear-gradient(135deg, #8A5AF7, #FF6B6B); max-width: 300px; margin: 0 auto;">
-                    📖 LEER MANGA COMPLETO (${mangaInfo.paginas} páginas)
-                </button>
-                <p style="opacity: 0.7; font-size: 0.9rem; margin-top: 10px;">
-                    Autor: ${mangaInfo.autor} • Año: ${mangaInfo.año}
-                </p>
-            </div>
-        `;
-    }
-    
-    // SECCIÓN DE MAZOS DIFÍCILES ESPECIALES
-    const mazosDificiles = obtenerMazosDificilesSubcontenedor(contenedor, subcontenedor);
-    if (mazosDificiles.length > 0) {
-        html += `
-            <div style="background: linear-gradient(135deg, rgba(255, 20, 147, 0.1), rgba(255, 107, 107, 0.1)); 
-                      border-radius: 15px; padding: 25px; margin-bottom: 30px; border: 3px solid #FF1493;">
-                <h3 style="color: #FFD166; margin-bottom: 20px; text-align: center;">
-                    ⚠️ MAZOS DIFÍCILES ESPECIALES
-                </h3>
-                <p style="text-align: center; opacity: 0.8; margin-bottom: 20px;">
-                    Vocabulario avanzado y expresiones complejas. ¡Doble recompensa!
-                </p>
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
-        `;
-        
-        mazosDificiles.forEach(mazo => {
-            html += `
-                <div class="mazo-item" onclick="iniciarQuizDificil(${contenedor}, ${subcontenedor}, '${mazo.id}')" 
-                      style="border-color: #FF1493; background: rgba(255, 20, 147, 0.05);">
-                    <h3 style="color: #FF1493;">${mazo.nombre}</h3>
-                    <p style="color: #FF6B6B;">${mazo.palabras.length} palabras avanzadas</p>
-                    <p style="font-size: 0.9rem; opacity: 0.7; margin-top: 10px;">
-                        ⭐ Expresiones complejas
-                    </p>
-                    <div style="margin-top: 15px; padding: 8px 12px; background: rgba(255, 20, 147, 0.2); 
-                              border-radius: 8px; font-size: 0.9rem; text-align: center; color: #FFD166;">
-                        +5 soles de bonificación
-                    </div>
-                </div>
-            `;
-        });
-        
-        html += `</div></div>`;
-    }
-    
-    // Contar mazos disponibles
-    const mazosDisponibles = contarMazosDisponibles(contenedor, subcontenedor);
-    const maxMazos = Math.max(10, mazosDisponibles); // Mostrar al menos 10 o los que haya
-    
-    html += '<div class="mazos-container">';
-    
-    for (let i = 1; i <= maxMazos; i++) {
-        const tieneVocabulario = verificarVocabularioDisponible(contenedor, subcontenedor, i);
-        const progreso = sistemaEconomia.obtenerProgreso(contenedor, subcontenedor, i);
-        
-        html += `
-            <div class="mazo-item" onclick="${tieneVocabulario ? `iniciarQuiz(${contenedor}, ${subcontenedor}, ${i})` : 'alert("Este mazo aún no tiene vocabulario. Agrégalo en 1_vocabulario.js")'}">
-                <h3>MAZO ${i}</h3>
-                <p>10 palabras japonesas</p>
-                ${progreso > 0 ? 
-                    `<div style="margin-top: 10px;">
-                        <div style="background: rgba(255,255,255,0.1); height: 8px; border-radius: 4px; overflow: hidden;">
-                            <div style="background: linear-gradient(135deg, #4CAF50, #2E7D32); width: ${progreso}%; height: 100%;"></div>
-                        </div>
-                        <p style="font-size: 0.9rem; margin-top: 5px; color: #4CAF50;">${progreso}% completado</p>
-                    </div>` 
-                    : ''}
-                ${!tieneVocabulario ? '<p style="color: #FF6B6B; font-size: 0.9rem; margin-top: 5px;">(Vacío)</p>' : ''}
-            </div>
-        `;
-    }
-    
-    html += '</div>';
-    return html;
-}
-
-function crearBotonVolver(funcionClick) {
-    const boton = document.createElement('button');
-    boton.className = 'btn-atras-especifico';
-    boton.innerHTML = '← Volver';
-    boton.onclick = funcionClick;
-    return boton;
-}
-
-// ====================
-// SISTEMA DE QUIZ (CON PALABRAS DIFÍCILES Y SRS)
+// SISTEMA DE QUIZ
 // ====================
 
 function iniciarQuiz(contenedor, subcontenedor, mazo) {
@@ -2687,7 +2632,6 @@ function iniciarQuiz(contenedor, subcontenedor, mazo) {
     mazoActual = mazo;
     modoMazoDificil = false;
     
-    // Obtener palabras según el modo actual
     if (modoActual === 'anime') {
         palabrasActuales = obtenerVocabularioAnime(contenedor, subcontenedor, mazo);
     } else if (modoActual === 'audio') {
@@ -2703,27 +2647,22 @@ function iniciarQuiz(contenedor, subcontenedor, mazo) {
         return;
     }
     
-    // Resetear contadores
     indicePalabraActual = 0;
     aciertos = 0;
     errores = 0;
     esperandoSiguiente = false;
     
-    // Ocultar sección de mangas, mostrar quiz
     document.getElementById('manga-section').style.display = 'none';
     document.getElementById('quiz-section').style.display = 'block';
     
-    // Cargar primera palabra
     mostrarPalabraQuiz();
 }
 
-// FUNCIÓN PARA INICIAR QUIZ DE MAZOS DIFÍCILES ESPECIALES
 function iniciarQuizDificil(contenedor, subcontenedor, mazoId) {
     contenedorActual = contenedor;
     subcontenedorActual = subcontenedor;
     mazoActual = mazoId;
     
-    // Obtener palabras del mazo difícil
     palabrasActuales = obtenerVocabulario(contenedor, subcontenedor, mazoId);
     
     if (palabrasActuales.length === 0) {
@@ -2731,20 +2670,16 @@ function iniciarQuizDificil(contenedor, subcontenedor, mazoId) {
         return;
     }
     
-    // Resetear contadores
     indicePalabraActual = 0;
     aciertos = 0;
     errores = 0;
     esperandoSiguiente = false;
     
-    // Marcar como mazo difícil para dar bonificación extra
     modoMazoDificil = true;
     
-    // Ocultar sección de mangas, mostrar quiz
     document.getElementById('manga-section').style.display = 'none';
     document.getElementById('quiz-section').style.display = 'block';
     
-    // Cargar primera palabra del mazo difícil
     mostrarPalabraQuizDificil();
 }
 
@@ -2778,7 +2713,6 @@ function mostrarPalabraQuiz() {
                 <!-- Opciones se cargan dinámicamente -->
             </div>
             
-            <!-- BOTÓN PARA MARCAR COMO DIFÍCIL -->
             <div style="text-align: center; margin: 20px 0;">
                 <button class="boton-dificil" onclick="marcarPalabraActualComoDificil()">
                     ⚠️ Marcar como difícil
@@ -2797,7 +2731,6 @@ function mostrarPalabraQuiz() {
         </div>
     `;
     
-    // Crear opciones
     crearOpcionesQuiz(palabra);
 }
 
@@ -2844,7 +2777,6 @@ function mostrarPalabraQuizDificil() {
         </div>
     `;
     
-    // Crear opciones
     crearOpcionesQuiz(palabra);
 }
 
@@ -2852,9 +2784,8 @@ function mostrarPalabraMazoDificil() {
     const quizSection = document.getElementById('quiz-section');
     const palabra = palabrasDificilesQuiz[indicePalabraActual];
     
-    // Obtener información de mazos para mostrar estadísticas
     const infoMazos = obtenerInfoMazosDificiles();
-    const mazoActualNumero = 1; // Por simplificación, podrías calcular esto
+    const mazoActualNumero = 1;
     
     quizSection.innerHTML = `
         <div class="quiz-container">
@@ -2877,7 +2808,6 @@ function mostrarPalabraMazoDificil() {
                 <!-- Opciones se cargan dinámicamente -->
             </div>
             
-            <!-- NAVEGACIÓN RÁPIDA ENTRE MAZOS DIFÍCILES -->
             ${infoMazos.totalMazos > 1 ? `
                 <div style="text-align: center; margin: 20px 0; padding: 15px; background: rgba(255, 20, 147, 0.1); border-radius: 10px;">
                     <h4 style="color: #FFD166; margin-bottom: 10px;">🔀 Navegar entre mazos difíciles</h4>
@@ -2907,7 +2837,6 @@ function mostrarPalabraMazoDificil() {
         </div>
     `;
     
-    // Crear opciones
     crearOpcionesMazoDificil(palabra);
 }
 
@@ -3001,7 +2930,6 @@ function crearOpcionesMazoDificil(palabra) {
     `;
 }
 
-// MODIFICADA: Ahora detecta cuando fallas y agrega al SRS
 function verificarRespuesta(opcionSeleccionada, posicionCorrecta) {
     if (esperandoSiguiente) return;
     
@@ -3035,14 +2963,12 @@ function verificarRespuesta(opcionSeleccionada, posicionCorrecta) {
         aciertos++;
         darExpPorPalabraCorrecta(true);
         
-        // Pasar automáticamente si es correcta
         setTimeout(() => {
             pasarSiguientePalabra();
         }, 1500);
     } else {
         errores++;
         
-        // NUEVO: Agregar palabra fallada al sistema SRS
         const palabraData = {
             contenedor: contenedorActual,
             subcontenedor: subcontenedorActual,
@@ -3057,7 +2983,6 @@ function verificarRespuesta(opcionSeleccionada, posicionCorrecta) {
         
         agregarPalabraSRS(palabraData);
         
-        // Mostrar notificación
         mostrarNotificacionQuiz(`📝 Palabra agregada al SRS: ${palabra.japones}`);
     }
     
@@ -3115,7 +3040,6 @@ function verificarRespuestaMazoDificil(opcionSeleccionada, posicionCorrecta) {
     if (correcta) {
         aciertos++;
         
-        // Pasar automáticamente si es correcta
         setTimeout(() => {
             pasarSiguientePalabraMazoDificil();
         }, 1500);
@@ -3167,53 +3091,48 @@ function pasarSiguientePalabraMazoDificil() {
     }
 }
 
-// ====================
-// FUNCIÓN PARA NAVEGAR A MAZOS ADYACENTES (NORMALES)
-// ====================
-
 function irAMazo(direccion) {
     let nuevoMazo = parseInt(mazoActual) + (direccion === 'siguiente' ? 1 : -1);
     
-    // Determinar el número máximo de mazos disponibles
-    const mazosDisponibles = contarMazosDisponibles(contenedorActual, subcontenedorActual);
-    const maxMazos = Math.max(10, mazosDisponibles);
+    const mazos = obtenerMazosDisponibles(contenedorActual, subcontenedorActual);
     
-    // Verificar límites
-    if (nuevoMazo < 1) {
+    if (mazos.length === 0) return;
+    
+    const maxMazos = Math.max(...mazos);
+    const minMazos = Math.min(...mazos);
+    
+    if (nuevoMazo < minMazos) {
         nuevoMazo = maxMazos;
     } else if (nuevoMazo > maxMazos) {
-        nuevoMazo = 1;
+        nuevoMazo = minMazos;
     }
     
-    // Verificar si el mazo tiene vocabulario
-    const tieneVocabulario = verificarVocabularioDisponible(contenedorActual, subcontenedorActual, nuevoMazo);
-    
-    if (tieneVocabulario) {
-        iniciarQuiz(contenedorActual, subcontenedorActual, nuevoMazo);
-    } else {
-        // Buscar el siguiente mazo con vocabulario
+    if (!mazos.includes(nuevoMazo)) {
         let mazoEncontrado = false;
         let intentos = 0;
+        let mazoActualBusqueda = nuevoMazo;
         
-        while (!mazoEncontrado && intentos < maxMazos) {
-            nuevoMazo += (direccion === 'siguiente' ? 1 : -1);
+        while (!mazoEncontrado && intentos < 50) {
+            mazoActualBusqueda += (direccion === 'siguiente' ? 1 : -1);
             
-            if (nuevoMazo < 1) nuevoMazo = maxMazos;
-            if (nuevoMazo > maxMazos) nuevoMazo = 1;
+            if (mazoActualBusqueda < minMazos) mazoActualBusqueda = maxMazos;
+            if (mazoActualBusqueda > maxMazos) mazoActualBusqueda = minMazos;
             
-            if (verificarVocabularioDisponible(contenedorActual, subcontenedorActual, nuevoMazo)) {
+            if (mazos.includes(mazoActualBusqueda)) {
                 mazoEncontrado = true;
+                nuevoMazo = mazoActualBusqueda;
             }
             
             intentos++;
         }
         
-        if (mazoEncontrado) {
-            iniciarQuiz(contenedorActual, subcontenedorActual, nuevoMazo);
-        } else {
+        if (!mazoEncontrado) {
             alert("No hay más mazos disponibles con vocabulario en este subcontenedor.");
+            return;
         }
     }
+    
+    iniciarQuiz(contenedorActual, subcontenedorActual, nuevoMazo);
 }
 
 function finalizarQuiz() {
@@ -3235,7 +3154,6 @@ function finalizarQuiz() {
     const dineroAhora = sistemaEconomia.obtenerDinero();
     const recompensa = dineroAhora - dineroAntes;
     
-    // Definir función de volver aquí mismo para evitar problemas de scope
     const funcionVolver = () => {
         document.getElementById('quiz-section').style.display = 'none';
         document.getElementById('manga-section').style.display = 'block';
@@ -3284,7 +3202,6 @@ function finalizarQuiz() {
                 </p>
             </div>
             
-            <!-- BONIFICACIÓN EXTRA POR MAZO DIFÍCIL -->
             ${modoMazoDificil ? `
                 <div style="background: linear-gradient(135deg, rgba(255, 20, 147, 0.1), rgba(255, 107, 107, 0.1)); padding: 25px; border-radius: 15px; margin: 20px 0; border: 2px solid #FF1493;">
                     <h3 style="color: #FFD166; margin-bottom: 15px;">🏆 ¡Bonificación por Mazo Difícil!</h3>
@@ -3296,13 +3213,11 @@ function finalizarQuiz() {
                     </p>
                 </div>
                 <script>
-                    // Dar bonificación extra
                     sistemaEconomia.agregarDinero(5);
                     actualizarContadorDineroInicio();
                 </script>
             ` : ''}
             
-            <!-- NAVEGACIÓN ENTRE MAZOS -->
             <div style="text-align: center; margin: 30px 0;">
                 <div style="display: flex; justify-content: center; gap: 15px; margin-bottom: 15px;">
                     <button class="quiz-btn" onclick="irAMazo('anterior')" style="background: linear-gradient(135deg, #5864F5, #8A5AF7);">
@@ -3317,7 +3232,6 @@ function finalizarQuiz() {
                 </p>
             </div>
             
-            <!-- BOTÓN PARA SRS SI HAY PALABRAS FALLADAS -->
             ${srsDatabase.palabras.length > 0 ? `
                 <div style="text-align: center; margin: 20px 0;">
                     <button class="boton-srs-iniciar" onclick="cargarPaginaSRS()">
@@ -3329,7 +3243,6 @@ function finalizarQuiz() {
                 </div>
             ` : ''}
             
-            <!-- BOTÓN PARA MAZO DIFÍCIL SI HAY PALABRAS MARCADAS -->
             ${sistemaEconomia.obtenerMazoDificil().length > 0 ? `
                 <div style="text-align: center; margin: 20px 0;">
                     <button class="boton-mazo-dificil" onclick="iniciarMazoDificilDesdeUI()">
@@ -3352,7 +3265,6 @@ function finalizarQuiz() {
         </div>
     `;
     
-    // Hacer que las funciones sean accesibles globalmente
     window.funcionVolver = funcionVolver;
     
     actualizarContadorDineroInicio();
@@ -3515,25 +3427,18 @@ function mostrarNotificacionQuiz(mensaje) {
 
 function calcularProgresoSubcontenedor(contenedor, subcontenedor) {
     let totalProgreso = 0;
-    let mazosConVocabulario = 0;
+    const mazos = obtenerMazosDisponibles(contenedor, subcontenedor);
     
-    for (let mazo = 1; mazo <= 100; mazo++) { // Buscar hasta 100 mazos
-        if (verificarVocabularioDisponible(contenedor, subcontenedor, mazo)) {
-            totalProgreso += sistemaEconomia.obtenerProgreso(contenedor, subcontenedor, mazo);
-            mazosConVocabulario++;
-        }
-    }
+    mazos.forEach(mazo => {
+        totalProgreso += sistemaEconomia.obtenerProgreso(contenedor, subcontenedor, mazo);
+    });
     
-    return mazosConVocabulario > 0 ? Math.round(totalProgreso / mazosConVocabulario) : 0;
+    return mazos.length > 0 ? Math.round(totalProgreso / mazos.length) : 0;
 }
 
 function tieneVocabularioEnSubcontenedor(contenedor, subcontenedor) {
-    for (let mazo = 1; mazo <= 100; mazo++) { // Buscar hasta 100 mazos
-        if (verificarVocabularioDisponible(contenedor, subcontenedor, mazo)) {
-            return true;
-        }
-    }
-    return false;
+    const mazos = obtenerMazosDisponibles(contenedor, subcontenedor);
+    return mazos.length > 0;
 }
 
 function verificarVocabularioDisponible(contenedor, subcontenedor, mazo) {
@@ -3541,11 +3446,6 @@ function verificarVocabularioDisponible(contenedor, subcontenedor, mazo) {
     return vocabulario && vocabulario.length > 0;
 }
 
-// ====================
-// FUNCIONES ESPECÍFICAS PARA AUDIOS (FALTANTES)
-// ====================
-
-// Función para obtener imagen de subcontenedor de audio
 function obtenerImagenSubcontenedorAudio(contenedor, subcontenedor) {
     const key = `${contenedor}_${subcontenedor}`;
     const subData = sistemaDescriptivo.audios.subcontenedores[key];
@@ -3554,22 +3454,15 @@ function obtenerImagenSubcontenedorAudio(contenedor, subcontenedor) {
         return subData.imagen;
     }
     
-    // Si no hay imagen específica, usar la del contenedor
     const contenedorData = obtenerContenedorAudio(contenedor);
     return contenedorData.imagen || 'https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=300&h=300&fit=crop';
 }
 
-// Función para obtener imagen de contenedor de audio
 function obtenerImagenContenedorAudio(numero) {
     const audioData = obtenerContenedorAudio(numero);
     return audioData.imagen || 'https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=400&h=400&fit=crop';
 }
 
-// ====================
-// FUNCIONES ESPECÍFICAS PARA ASMR (FALTANTES)
-// ====================
-
-// Función para obtener imagen de subcontenedor de ASMR
 function obtenerImagenSubcontenedorASMR(contenedor, subcontenedor) {
     const key = `${contenedor}_${subcontenedor}`;
     const subData = sistemaDescriptivo.asmr.subcontenedores[key];
@@ -3578,7 +3471,6 @@ function obtenerImagenSubcontenedorASMR(contenedor, subcontenedor) {
         return subData.imagen;
     }
     
-    // Si no hay imagen específica, usar la del contenedor
     const contenedorData = obtenerContenedorASMR(contenedor);
     return contenedorData.imagen || 'https://images.unsplash.com/photo-1572860177022-8fda92a90b95?w=300&h=300&fit=crop';
 }
@@ -3595,19 +3487,10 @@ document.addEventListener('DOMContentLoaded', function() {
         botonCasa.onclick = volverAlInicio;
     }
     
-    // Inicializar sistema SRS
     inicializarSRS();
     
-    // Verificar que las funciones de imágenes estén disponibles
-    console.log('🖼️ Funciones de imágenes cargadas:');
-    console.log('- obtenerImagenSubcontenedorAudio:', typeof obtenerImagenSubcontenedorAudio);
-    console.log('- obtenerImagenContenedorAudio:', typeof obtenerImagenContenedorAudio);
-    console.log('- obtenerImagenSubcontenedorASMR:', typeof obtenerImagenSubcontenedorASMR);
-    
-    // Verificar funciones dinámicas
-    console.log('🔄 Funciones dinámicas cargadas:');
-    console.log('- contarSubcontenedoresConfigurados:', typeof contarSubcontenedoresConfigurados);
-    console.log('- obtenerSubcontenedoresDisponibles:', typeof obtenerSubcontenedoresDisponibles);
+    console.log('🖼️ Funciones de imágenes cargadas');
+    console.log('🔄 Funciones dinámicas cargadas');
     
     if (typeof quintillizasRPG !== 'undefined') {
         quintillizasRPG.inicializar();
@@ -3618,7 +3501,6 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log('⚔️ RPG Fantasía inicializado');
     }
     
-    // Efectos hover en tarjetas
     document.querySelectorAll('.card').forEach(card => {
         card.addEventListener('mouseenter', function() {
             this.style.transform = 'translateY(-10px) scale(1.02)';
@@ -3629,26 +3511,20 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     });
     
-    console.log('✅ Sistema completo cargado correctamente (VERSIÓN DINÁMICA)');
-    console.log('📚 Mangas: 10 contenedores, subcontenedores dinámicos');
-    console.log('🎬 Videos: 10 contenedores, subcontenedores dinámicos');
-    console.log('🎌 Animes: 10 contenedores, subcontenedores dinámicos');
-    console.log('🎵 Audios: 10 contenedores, subcontenedores dinámicos');
-    console.log('🎧 ASMR: 4 contenedores, subcontenedores dinámicos');
-    console.log('🎮 RPG, ⚔️ Fantasía, 🎯 Misiones, 🔄 SRS');
+    console.log('✅ Sistema completo cargado correctamente (VERSIÓN COMPLETAMENTE DINÁMICA)');
+    console.log('📊 Modos disponibles:');
+    console.log('   - Mangas: ' + obtenerContenedoresDisponibles('mangas').length + ' contenedores');
+    console.log('   - Videos: ' + obtenerContenedoresDisponibles('videos').length + ' contenedores');
+    console.log('   - Animes: ' + obtenerContenedoresDisponibles('animes').length + ' contenedores');
+    console.log('   - Audios: ' + obtenerContenedoresDisponibles('audios').length + ' contenedores');
+    console.log('   - ASMR: ' + obtenerContenedoresDisponibles('asmr').length + ' contenedores');
     console.log('');
     console.log('🔄 Sistema dinámico activado:');
-    console.log('   - Detecta automáticamente cuántos subcontenedores hay configurados');
-    console.log('   - Soporta hasta 100 subcontenedores por contenedor');
-    console.log('   - Muestra solo los subcontenedores que tienen configuración');
-    console.log('');
-    console.log('🎯 Sistema de misiones activo');
-    console.log('⚠️ Sistema de palabras difíciles activo');
-    console.log('🔄 Sistema SRS activo: ' + srsDatabase.palabras.length + ' palabras para repasar');
-    console.log('💖 EXP por quiz activado: +20 EXP/palabra correcta, +15-100 EXP/mazo completo');
-    console.log('💰 Recompensas: 2-3 soles por mazo al 100%');
+    console.log('   - Detecta automáticamente TODOS los contenedores configurados');
+    console.log('   - Detecta automáticamente TODOS los subcontenedores configurados');
+    console.log('   - Detecta automáticamente TODOS los mazos con vocabulario');
+    console.log('   - No hay límites fijos (puedes tener contenedores 1, 2, 3, 11, 12, 20, etc.)');
     
-    // Mostrar notificación si hay palabras pendientes en SRS
     setTimeout(() => {
         const pendientes = verificarRepeticionesPendientes();
         if (pendientes > 0) {
@@ -3656,21 +3532,12 @@ document.addEventListener('DOMContentLoaded', function() {
         }
     }, 2000);
     
-    // Mostrar información sobre configuración dinámica
     setTimeout(() => {
         console.log('📊 Configuración dinámica detectada:');
-        
-        // Verificar cuántos subcontenedores hay configurados para manga contenedor 1
-        const mangasSubs = contarSubcontenedoresConfigurados('mangas', 1);
-        const animesSubs = contarSubcontenedoresConfigurados('animes', 1);
-        const audiosSubs = contarSubcontenedoresConfigurados('audios', 1);
-        const asmrSubs = contarSubcontenedoresConfigurados('asmr', 1);
-        const videosSubs = contarSubcontenedoresConfigurados('videos', 1);
-        
-        console.log(`   - Mangas contenedor 1: ${mangasSubs} subcontenedores configurados`);
-        console.log(`   - Animes contenedor 1: ${animesSubs} subcontenedores configurados`);
-        console.log(`   - Audios contenedor 1: ${audiosSubs} subcontenedores configurados`);
-        console.log(`   - ASMR contenedor 1: ${asmrSubs} subcontenedores configurados`);
-        console.log(`   - Videos contenedor 1: ${videosSubs} subcontenedores configurados`);
+        console.log('   - Mangas contenedor 1: ' + obtenerSubcontenedoresDisponibles('mangas', 1).length + ' subcontenedores');
+        console.log('   - Videos contenedor 1: ' + obtenerSubcontenedoresDisponibles('videos', 1).length + ' subcontenedores');
+        console.log('   - Animes contenedor 1: ' + obtenerSubcontenedoresDisponibles('animes', 1).length + ' subcontenedores');
+        console.log('   - Audios contenedor 1: ' + obtenerSubcontenedoresDisponibles('audios', 1).length + ' subcontenedores');
+        console.log('   - ASMR contenedor 1: ' + obtenerSubcontenedoresDisponibles('asmr', 1).length + ' subcontenedores');
     }, 3000);
 });
