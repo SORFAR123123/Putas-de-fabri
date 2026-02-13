@@ -10,6 +10,7 @@ class QuintillizasRPG {
         this.condones001 = this.cargarCondones001() || 0;
         this.ultimaInteraccion = null;
         this.modoOrgias = false;
+        this.categoriaOrgiasActual = 'mamadas'; // 'mamadas', 'doggystyle', 'orgias'
 
         // ========================================
         // MOMENTOS GRUPALES (ORGÍAS) - SOLO CONDONES 0.01
@@ -26,7 +27,8 @@ class QuintillizasRPG {
                 descripcion: 'Nino, a regañadientes, te toma el pene mientras Miku, sonrojada, lame tus testículos. La combinación de la actitud tsundere de Nino con la timidez de Miku crea una experiencia única. Nino dice "¡No es que me guste hacer esto!" mientras acelera el ritmo.',
                 participantes: ['nino', 'miku'],
                 tipo: 'duo',
-                imagen: 'https://images.unsplash.com/photo-1541696432-82c6da8ce7bf?w=400&h=300&fit=crop',
+                categoria: 'mamadas',
+                imagen: 'https://images.unsplash.com/photo-1541696432-82c6da8ce7bf?w=400&h=150&fit=crop',
                 condones001Requeridos: 2,
                 nivelRequerido: 5,
                 afinidadRequerida: 100,
@@ -45,7 +47,8 @@ class QuintillizasRPG {
                 descripcion: 'Ichika te besa apasionadamente mientras Nino te hace una mamada. Ichika susurra "Disfruta, cariño" al oído, mientras Nino, celosa, intenta superarse para llamar tu atención.',
                 participantes: ['nino', 'ichika'],
                 tipo: 'duo',
-                imagen: 'https://images.unsplash.com/photo-1516726817505-f5ed825624d8?w=400&h=300&fit=crop',
+                categoria: 'mamadas',
+                imagen: 'https://images.unsplash.com/photo-1516726817505-f5ed825624d8?w=400&h=150&fit=crop',
                 condones001Requeridos: 2,
                 nivelRequerido: 5,
                 afinidadRequerida: 100,
@@ -64,7 +67,8 @@ class QuintillizasRPG {
                 descripcion: 'Yotsuba, con su energía habitual, te hace una mamada entusiasta mientras Nino, aunque molesta, no quiere quedarse atrás y compite por tu atención. Yotsuba sonríe y dice "¡Vamos, vamos!" mientras Nino frunce el ceño.',
                 participantes: ['nino', 'yotsuba'],
                 tipo: 'duo',
-                imagen: 'https://images.unsplash.com/photo-1516466723877-e4ec1d736c8a?w=400&h=300&fit=crop',
+                categoria: 'mamadas',
+                imagen: 'https://images.unsplash.com/photo-1516466723877-e4ec1d736c8a?w=400&h=150&fit=crop',
                 condones001Requeridos: 2,
                 nivelRequerido: 5,
                 afinidadRequerida: 100,
@@ -83,7 +87,8 @@ class QuintillizasRPG {
                 descripcion: 'Itsuki te hace sexo oral mientras come un caramelo, y Nino, aunque dice "qué asco", no puede evitar mirar fijamente y terminar participando con un estilo tsundere clásico.',
                 participantes: ['nino', 'itsuki'],
                 tipo: 'duo',
-                imagen: 'https://images.unsplash.com/photo-1516685018646-549d5257ae2a?w=400&h=300&fit=crop',
+                categoria: 'mamadas',
+                imagen: 'https://images.unsplash.com/photo-1516685018646-549d5257ae2a?w=400&h=150&fit=crop',
                 condones001Requeridos: 2,
                 nivelRequerido: 5,
                 afinidadRequerida: 100,
@@ -102,7 +107,8 @@ class QuintillizasRPG {
                 descripcion: 'Ichika guía a la tímida Miku, mostrándole cómo hacerte una mamada. Miku tiembla de nervios mientras Ichika susurra "Así, suavecito..." y lame tu glande.',
                 participantes: ['miku', 'ichika'],
                 tipo: 'duo',
-                imagen: 'https://images.unsplash.com/photo-1522673607200-164d1b3ce5aa?w=400&h=300&fit=crop',
+                categoria: 'mamadas',
+                imagen: 'https://images.unsplash.com/photo-1522673607200-164d1b3ce5aa?w=400&h=150&fit=crop',
                 condones001Requeridos: 2,
                 nivelRequerido: 5,
                 afinidadRequerida: 100,
@@ -121,7 +127,8 @@ class QuintillizasRPG {
                 descripcion: 'Yotsuba, con su entusiasmo, intenta animar a la tímida Miku. "¡Vamos Miku! Hazlo así!" mientras te lame los testículos. Miku, sonrojada, imita sus movimientos.',
                 participantes: ['miku', 'yotsuba'],
                 tipo: 'duo',
-                imagen: 'https://images.unsplash.com/photo-1516466723877-e4ec1d736c8a?w=400&h=300&fit=crop',
+                categoria: 'mamadas',
+                imagen: 'https://images.unsplash.com/photo-1516466723877-e4ec1d736c8a?w=400&h=150&fit=crop',
                 condones001Requeridos: 2,
                 nivelRequerido: 5,
                 afinidadRequerida: 100,
@@ -140,7 +147,8 @@ class QuintillizasRPG {
                 descripcion: 'Itsuki, mientras saborea un caramelo, lame tu pene con destreza. Miku, observando fascinada, se anima a lamer tus testículos tímidamente.',
                 participantes: ['miku', 'itsuki'],
                 tipo: 'duo',
-                imagen: 'https://images.unsplash.com/photo-1516685018646-549d5257ae2a?w=400&h=300&fit=crop',
+                categoria: 'mamadas',
+                imagen: 'https://images.unsplash.com/photo-1516685018646-549d5257ae2a?w=400&h=150&fit=crop',
                 condones001Requeridos: 2,
                 nivelRequerido: 5,
                 afinidadRequerida: 100,
@@ -159,7 +167,8 @@ class QuintillizasRPG {
                 descripcion: 'Yotsuba te hace una mamada enérgica mientras Ichika juega con tus pezones y susurra cosas sucias al oído. La combinación de energía y sensualidad te vuelve loco.',
                 participantes: ['ichika', 'yotsuba'],
                 tipo: 'duo',
-                imagen: 'https://images.unsplash.com/photo-1522673607200-164d1b3ce5aa?w=400&h=300&fit=crop',
+                categoria: 'mamadas',
+                imagen: 'https://images.unsplash.com/photo-1522673607200-164d1b3ce5aa?w=400&h=150&fit=crop',
                 condones001Requeridos: 2,
                 nivelRequerido: 5,
                 afinidadRequerida: 100,
@@ -178,7 +187,8 @@ class QuintillizasRPG {
                 descripcion: 'Itsuki te hace sexo oral mientras Ichika te besa apasionadamente. Itsuki, con su estilo glotón, lame cada gota de líquido preseminal mientras Ichika juega con tu lengua.',
                 participantes: ['ichika', 'itsuki'],
                 tipo: 'duo',
-                imagen: 'https://images.unsplash.com/photo-1516685018646-549d5257ae2a?w=400&h=300&fit=crop',
+                categoria: 'mamadas',
+                imagen: 'https://images.unsplash.com/photo-1516685018646-549d5257ae2a?w=400&h=150&fit=crop',
                 condones001Requeridos: 2,
                 nivelRequerido: 5,
                 afinidadRequerida: 100,
@@ -197,7 +207,8 @@ class QuintillizasRPG {
                 descripcion: 'Yotsuba te hace una mamada enérgica mientras Itsuki lame tus testículos como si fueran un caramelo. Las dos compiten por ver quién te da más placer.',
                 participantes: ['yotsuba', 'itsuki'],
                 tipo: 'duo',
-                imagen: 'https://images.unsplash.com/photo-1516466723877-e4ec1d736c8a?w=400&h=300&fit=crop',
+                categoria: 'mamadas',
+                imagen: 'https://images.unsplash.com/photo-1516466723877-e4ec1d736c8a?w=400&h=150&fit=crop',
                 condones001Requeridos: 2,
                 nivelRequerido: 5,
                 afinidadRequerida: 100,
@@ -220,7 +231,8 @@ class QuintillizasRPG {
                 descripcion: 'Ichika te besa apasionadamente mientras Nino te hace una mamada y Miku lame tus testículos. Nino, celosa de la atención que le das a Ichika, acelera el ritmo. Miku, sonrojada, sigue el ritmo de su hermana mayor.',
                 participantes: ['nino', 'miku', 'ichika'],
                 tipo: 'trio',
-                imagen: 'https://images.unsplash.com/photo-1541696432-82c6da8ce7bf?w=400&h=300&fit=crop',
+                categoria: 'mamadas',
+                imagen: 'https://images.unsplash.com/photo-1541696432-82c6da8ce7bf?w=400&h=150&fit=crop',
                 condones001Requeridos: 3,
                 nivelRequerido: 7,
                 afinidadRequerida: 130,
@@ -239,7 +251,8 @@ class QuintillizasRPG {
                 descripcion: 'Yotsuba te hace una mamada enérgica mientras Nino, competitiva, te hace sexo oral y Miku, tímida, acaricia tu cuerpo. Yotsuba anima a Miku: "¡Vamos, tú puedes!"',
                 participantes: ['nino', 'miku', 'yotsuba'],
                 tipo: 'trio',
-                imagen: 'https://images.unsplash.com/photo-1516466723877-e4ec1d736c8a?w=400&h=300&fit=crop',
+                categoria: 'mamadas',
+                imagen: 'https://images.unsplash.com/photo-1516466723877-e4ec1d736c8a?w=400&h=150&fit=crop',
                 condones001Requeridos: 3,
                 nivelRequerido: 7,
                 afinidadRequerida: 130,
@@ -258,7 +271,8 @@ class QuintillizasRPG {
                 descripcion: 'Itsuki te hace sexo oral mientras come un caramelo, Nino te hace una mamada intensa y Miku lame tus testículos. Itsuki dice "Tiene un sabor único..." mientras Nino pone ojos de indignación.',
                 participantes: ['nino', 'miku', 'itsuki'],
                 tipo: 'trio',
-                imagen: 'https://images.unsplash.com/photo-1516685018646-549d5257ae2a?w=400&h=300&fit=crop',
+                categoria: 'mamadas',
+                imagen: 'https://images.unsplash.com/photo-1516685018646-549d5257ae2a?w=400&h=150&fit=crop',
                 condones001Requeridos: 3,
                 nivelRequerido: 7,
                 afinidadRequerida: 130,
@@ -277,7 +291,8 @@ class QuintillizasRPG {
                 descripcion: 'Ichika te besa apasionadamente mientras Yotsuba te hace una mamada enérgica y Nino, celosa, te acaricia los testículos. Ichika sonríe provocando a Nino: "¿Te molesta que sea la mejor?"',
                 participantes: ['nino', 'ichika', 'yotsuba'],
                 tipo: 'trio',
-                imagen: 'https://images.unsplash.com/photo-1522673607200-164d1b3ce5aa?w=400&h=300&fit=crop',
+                categoria: 'mamadas',
+                imagen: 'https://images.unsplash.com/photo-1522673607200-164d1b3ce5aa?w=400&h=150&fit=crop',
                 condones001Requeridos: 3,
                 nivelRequerido: 7,
                 afinidadRequerida: 130,
@@ -296,7 +311,8 @@ class QuintillizasRPG {
                 descripcion: 'Itsuki te hace sexo oral mientras Ichika te besa y Nino, aunque molesta, te acaricia. Itsuki, con su estilo glotón, lame cada gota mientras Ichika susurra cosas al oído.',
                 participantes: ['nino', 'ichika', 'itsuki'],
                 tipo: 'trio',
-                imagen: 'https://images.unsplash.com/photo-1516685018646-549d5257ae2a?w=400&h=300&fit=crop',
+                categoria: 'mamadas',
+                imagen: 'https://images.unsplash.com/photo-1516685018646-549d5257ae2a?w=400&h=150&fit=crop',
                 condones001Requeridos: 3,
                 nivelRequerido: 7,
                 afinidadRequerida: 130,
@@ -315,7 +331,8 @@ class QuintillizasRPG {
                 descripcion: 'Yotsuba te hace una mamada enérgica mientras Itsuki lame tus testículos y Nino, competitiva, te hace sexo oral. Las tres compiten por tu atención.',
                 participantes: ['nino', 'yotsuba', 'itsuki'],
                 tipo: 'trio',
-                imagen: 'https://images.unsplash.com/photo-1516466723877-e4ec1d736c8a?w=400&h=300&fit=crop',
+                categoria: 'mamadas',
+                imagen: 'https://images.unsplash.com/photo-1516466723877-e4ec1d736c8a?w=400&h=150&fit=crop',
                 condones001Requeridos: 3,
                 nivelRequerido: 7,
                 afinidadRequerida: 130,
@@ -334,7 +351,8 @@ class QuintillizasRPG {
                 descripcion: 'Ichika guía a Miku mientras Yotsuba te hace una mamada. Ichika susurra "Así Miku, lame suavemente" mientras Yotsuba, enérgica, acelera el ritmo.',
                 participantes: ['miku', 'ichika', 'yotsuba'],
                 tipo: 'trio',
-                imagen: 'https://images.unsplash.com/photo-1522673607200-164d1b3ce5aa?w=400&h=300&fit=crop',
+                categoria: 'mamadas',
+                imagen: 'https://images.unsplash.com/photo-1522673607200-164d1b3ce5aa?w=400&h=150&fit=crop',
                 condones001Requeridos: 3,
                 nivelRequerido: 7,
                 afinidadRequerida: 130,
@@ -353,7 +371,8 @@ class QuintillizasRPG {
                 descripcion: 'Itsuki te hace sexo oral mientras Ichika guía a Miku. Miku, tímida, lame tus testículos mientras Itsuki, glotona, disfruta cada momento.',
                 participantes: ['miku', 'ichika', 'itsuki'],
                 tipo: 'trio',
-                imagen: 'https://images.unsplash.com/photo-1516685018646-549d5257ae2a?w=400&h=300&fit=crop',
+                categoria: 'mamadas',
+                imagen: 'https://images.unsplash.com/photo-1516685018646-549d5257ae2a?w=400&h=150&fit=crop',
                 condones001Requeridos: 3,
                 nivelRequerido: 7,
                 afinidadRequerida: 130,
@@ -372,7 +391,8 @@ class QuintillizasRPG {
                 descripcion: 'Yotsuba te hace una mamada enérgica mientras Itsuki lame tus testículos y Miku, tímida, acaricia tu cuerpo. Yotsuba anima a Miku: "¡Vamos, sé más atrevida!"',
                 participantes: ['miku', 'yotsuba', 'itsuki'],
                 tipo: 'trio',
-                imagen: 'https://images.unsplash.com/photo-1516466723877-e4ec1d736c8a?w=400&h=300&fit=crop',
+                categoria: 'mamadas',
+                imagen: 'https://images.unsplash.com/photo-1516466723877-e4ec1d736c8a?w=400&h=150&fit=crop',
                 condones001Requeridos: 3,
                 nivelRequerido: 7,
                 afinidadRequerida: 130,
@@ -391,7 +411,8 @@ class QuintillizasRPG {
                 descripcion: 'Ichika te besa apasionadamente mientras Yotsuba te hace una mamada y Itsuki lame tus testículos. Las tres coordinadas para darte máximo placer.',
                 participantes: ['ichika', 'yotsuba', 'itsuki'],
                 tipo: 'trio',
-                imagen: 'https://images.unsplash.com/photo-1522673607200-164d1b3ce5aa?w=400&h=300&fit=crop',
+                categoria: 'mamadas',
+                imagen: 'https://images.unsplash.com/photo-1522673607200-164d1b3ce5aa?w=400&h=150&fit=crop',
                 condones001Requeridos: 3,
                 nivelRequerido: 7,
                 afinidadRequerida: 130,
@@ -414,7 +435,8 @@ class QuintillizasRPG {
                 descripcion: 'Cuatro hermanas a tu servicio. Yotsuba te hace una mamada enérgica, Ichika te besa apasionadamente, Nino te acaricia los testículos y Miku lame tu glande. Una experiencia de otro nivel.',
                 participantes: ['nino', 'miku', 'ichika', 'yotsuba'],
                 tipo: 'cuarteto',
-                imagen: 'https://images.unsplash.com/photo-1541696432-82c6da8ce7bf?w=400&h=300&fit=crop',
+                categoria: 'mamadas',
+                imagen: 'https://images.unsplash.com/photo-1541696432-82c6da8ce7bf?w=400&h=150&fit=crop',
                 condones001Requeridos: 4,
                 nivelRequerido: 8,
                 afinidadRequerida: 160,
@@ -433,7 +455,8 @@ class QuintillizasRPG {
                 descripcion: 'Itsuki te hace sexo oral mientras Ichika te besa, Nino te acaricia y Miku lame tus testículos. Itsuki, glotona, no deja ni una gota. Nino la mira con desprecio pero sigue participando.',
                 participantes: ['nino', 'miku', 'ichika', 'itsuki'],
                 tipo: 'cuarteto',
-                imagen: 'https://images.unsplash.com/photo-1516685018646-549d5257ae2a?w=400&h=300&fit=crop',
+                categoria: 'mamadas',
+                imagen: 'https://images.unsplash.com/photo-1516685018646-549d5257ae2a?w=400&h=150&fit=crop',
                 condones001Requeridos: 4,
                 nivelRequerido: 8,
                 afinidadRequerida: 160,
@@ -452,7 +475,8 @@ class QuintillizasRPG {
                 descripcion: 'Yotsuba te hace una mamada enérgica, Itsuki lame tus testículos, Nino te acaricia el glande y Miku, tímida, recorre tu cuerpo con sus manos. Una sinfonía de placer.',
                 participantes: ['nino', 'miku', 'yotsuba', 'itsuki'],
                 tipo: 'cuarteto',
-                imagen: 'https://images.unsplash.com/photo-1516466723877-e4ec1d736c8a?w=400&h=300&fit=crop',
+                categoria: 'mamadas',
+                imagen: 'https://images.unsplash.com/photo-1516466723877-e4ec1d736c8a?w=400&h=150&fit=crop',
                 condones001Requeridos: 4,
                 nivelRequerido: 8,
                 afinidadRequerida: 160,
@@ -471,7 +495,8 @@ class QuintillizasRPG {
                 descripcion: 'Ichika te besa mientras Yotsuba te hace una mamada, Itsuki lame tu glande y Nino, celosa, te acaricia los testículos. Ichika se ríe provocando a Nino.',
                 participantes: ['nino', 'ichika', 'yotsuba', 'itsuki'],
                 tipo: 'cuarteto',
-                imagen: 'https://images.unsplash.com/photo-1522673607200-164d1b3ce5aa?w=400&h=300&fit=crop',
+                categoria: 'mamadas',
+                imagen: 'https://images.unsplash.com/photo-1522673607200-164d1b3ce5aa?w=400&h=150&fit=crop',
                 condones001Requeridos: 4,
                 nivelRequerido: 8,
                 afinidadRequerida: 160,
@@ -490,7 +515,8 @@ class QuintillizasRPG {
                 descripcion: 'Ichika guía a las demás mientras Yotsuba te hace una mamada, Itsuki lame tus testículos y Miku, tímida, acaricia tu cuerpo. Ichika susurra "Así, todas juntas"',
                 participantes: ['miku', 'ichika', 'yotsuba', 'itsuki'],
                 tipo: 'cuarteto',
-                imagen: 'https://images.unsplash.com/photo-1516685018646-549d5257ae2a?w=400&h=300&fit=crop',
+                categoria: 'mamadas',
+                imagen: 'https://images.unsplash.com/photo-1516685018646-549d5257ae2a?w=400&h=150&fit=crop',
                 condones001Requeridos: 4,
                 nivelRequerido: 8,
                 afinidadRequerida: 160,
@@ -512,7 +538,8 @@ class QuintillizasRPG {
                 descripcion: 'Las cinco hermanas Nakano juntas para darte la experiencia definitiva. Nino te hace una mamada tsundere, Miku lame tus testículos tímidamente, Ichika te besa apasionadamente, Yotsuba acaricia tu cuerpo con energía e Itsuki, glotona, lame cada gota. El sueño hecho realidad.',
                 participantes: ['nino', 'miku', 'ichika', 'yotsuba', 'itsuki'],
                 tipo: 'quinteto',
-                imagen: 'https://images.unsplash.com/photo-1541696432-82c6da8ce7bf?w=400&h=300&fit=crop',
+                categoria: 'mamadas',
+                imagen: 'https://images.unsplash.com/photo-1541696432-82c6da8ce7bf?w=400&h=150&fit=crop',
                 condones001Requeridos: 5,
                 nivelRequerido: 10,
                 afinidadRequerida: 200,
@@ -547,12 +574,12 @@ class QuintillizasRPG {
                 videosDisponibles: [],
                 nivelRequeridoParaIntimos: 3,
                 
-                // MOMENTOS ÍNTIMOS DE ICHIKA CON IMÁGENES
+                // MOMENTOS ÍNTIMOS DE ICHIKA CON IMÁGENES REDIMENSIONADAS
                 momentosIntimos: [
                     { 
                         id: 'mamada_ichika', 
                         nombre: '😮 Mamada Apasionada de Ichika', 
-                        imagen: 'https://images.unsplash.com/photo-1541696432-82c6da8ce7bf?w=400&h=300&fit=crop',
+                        imagen: 'https://images.unsplash.com/photo-1541696432-82c6da8ce7bf?w=400&h=150&fit=crop',
                         condonesRequeridos: 1,
                         condones001Requeridos: 0,
                         videoId: '1aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe', 
@@ -565,7 +592,7 @@ class QuintillizasRPG {
                     { 
                         id: 'sexo_oral_ichika', 
                         nombre: '👅 Sexo Oral Intenso de Ichika', 
-                        imagen: 'https://images.unsplash.com/photo-1522673607200-164d1b3ce5aa?w=400&h=300&fit=crop',
+                        imagen: 'https://images.unsplash.com/photo-1522673607200-164d1b3ce5aa?w=400&h=150&fit=crop',
                         condonesRequeridos: 1,
                         condones001Requeridos: 0,
                         videoId: '1-wYJYTaw0ZOKQy8BBPR7Fmhlzs0IVx9K', 
@@ -578,7 +605,7 @@ class QuintillizasRPG {
                     { 
                         id: 'caricia_intima_ichika', 
                         nombre: '👐 Caricia Íntima de Ichika', 
-                        imagen: 'https://images.unsplash.com/photo-1516466723877-e4ec1d736c8a?w=400&h=300&fit=crop',
+                        imagen: 'https://images.unsplash.com/photo-1516466723877-e4ec1d736c8a?w=400&h=150&fit=crop',
                         condonesRequeridos: 1,
                         condones001Requeridos: 0,
                         videoId: '1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS', 
@@ -591,7 +618,7 @@ class QuintillizasRPG {
                     { 
                         id: 'sexo_duro_ichika', 
                         nombre: '💪 Sexo Duro con Ichika', 
-                        imagen: 'https://images.unsplash.com/photo-1541696432-82c6da8ce7bf?w=400&h=300&fit=crop',
+                        imagen: 'https://images.unsplash.com/photo-1541696432-82c6da8ce7bf?w=400&h=150&fit=crop',
                         condonesRequeridos: 2,
                         condones001Requeridos: 0,
                         videoId: '1tS-gKr6bf4MY5Yrw7zRvP2uP_zq9rsLl', 
@@ -604,7 +631,7 @@ class QuintillizasRPG {
                     { 
                         id: 'correrse_dentro_ichika', 
                         nombre: '💦 Correrse Dentro de Ichika', 
-                        imagen: 'https://images.unsplash.com/photo-1522673607200-164d1b3ce5aa?w=400&h=300&fit=crop',
+                        imagen: 'https://images.unsplash.com/photo-1522673607200-164d1b3ce5aa?w=400&h=150&fit=crop',
                         condonesRequeridos: 3,
                         condones001Requeridos: 1,
                         videoId: '1aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe', 
@@ -616,12 +643,12 @@ class QuintillizasRPG {
                     }
                 ],
                 
-                // ACTIVIDADES ESPECIALES DE ICHIKA CON IMÁGENES
+                // ACTIVIDADES ESPECIALES DE ICHIKA CON IMÁGENES REDIMENSIONADAS
                 actividadesEspeciales: [
                     { 
                         id: 'cafe_romantico', 
                         nombre: '☕ Café Romántico con Ichika', 
-                        imagen: 'https://images.unsplash.com/photo-1511920170026-cb1be0e1a741?w=400&h=300&fit=crop',
+                        imagen: 'https://images.unsplash.com/photo-1511920170026-cb1be0e1a741?w=400&h=150&fit=crop',
                         costo: 500, 
                         videoId: '1aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe', 
                         afinidad: 25, 
@@ -631,7 +658,7 @@ class QuintillizasRPG {
                     { 
                         id: 'estudio_juntos_ichika', 
                         nombre: '📚 Estudio con Ichika', 
-                        imagen: 'https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=400&h=300&fit=crop',
+                        imagen: 'https://images.unsplash.com/photo-1456513080510-7bf3a84b82f8?w=400&h=150&fit=crop',
                         costo: 300, 
                         videoId: '1-wYJYTaw0ZOKQy8BBPR7Fmhlzs0IVx9K', 
                         afinidad: 20, 
@@ -641,7 +668,7 @@ class QuintillizasRPG {
                     { 
                         id: 'paseo_noche_ichika', 
                         nombre: '🌙 Paseo Nocturno con Ichika', 
-                        imagen: 'https://images.unsplash.com/photo-1519608485311-1f5bb89a0e7f?w=400&h=300&fit=crop',
+                        imagen: 'https://images.unsplash.com/photo-1519608485311-1f5bb89a0e7f?w=400&h=150&fit=crop',
                         costo: 800, 
                         videoId: '1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS', 
                         afinidad: 30, 
@@ -666,12 +693,12 @@ class QuintillizasRPG {
                 videosDisponibles: [],
                 nivelRequeridoParaIntimos: 4,
                 
-                // MOMENTOS ÍNTIMOS DE NINO CON IMÁGENES
+                // MOMENTOS ÍNTIMOS DE NINO CON IMÁGENES REDIMENSIONADAS
                 momentosIntimos: [
                     { 
                         id: 'mamada_tsundere', 
                         nombre: '😤 Mamada Tsundere de Nino', 
-                        imagen: 'https://images.unsplash.com/photo-1541696432-82c6da8ce7bf?w=400&h=300&fit=crop',
+                        imagen: 'https://images.unsplash.com/photo-1541696432-82c6da8ce7bf?w=400&h=150&fit=crop',
                         condonesRequeridos: 1,
                         condones001Requeridos: 0,
                         videoId: '1-wYJYTaw0ZOKQy8BBPR7Fmhlzs0IVx9K', 
@@ -684,7 +711,7 @@ class QuintillizasRPG {
                     { 
                         id: 'sexo_duro_tsundere', 
                         nombre: '💢 Sexo Duro Tsundere con Nino', 
-                        imagen: 'https://images.unsplash.com/photo-1522673607200-164d1b3ce5aa?w=400&h=300&fit=crop',
+                        imagen: 'https://images.unsplash.com/photo-1522673607200-164d1b3ce5aa?w=400&h=150&fit=crop',
                         condonesRequeridos: 2,
                         condones001Requeridos: 0,
                         videoId: '1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS', 
@@ -697,7 +724,7 @@ class QuintillizasRPG {
                     { 
                         id: 'corrida_cara', 
                         nombre: '💦 Corrida en la Cara de Nino', 
-                        imagen: 'https://images.unsplash.com/photo-1516466723877-e4ec1d736c8a?w=400&h=300&fit=crop',
+                        imagen: 'https://images.unsplash.com/photo-1516466723877-e4ec1d736c8a?w=400&h=150&fit=crop',
                         condonesRequeridos: 1,
                         condones001Requeridos: 1,
                         videoId: '1tS-gKr6bf4MY5Yrw7zRvP2uP_zq9rsLl', 
@@ -709,12 +736,12 @@ class QuintillizasRPG {
                     }
                 ],
                 
-                // ACTIVIDADES ESPECIALES DE NINO CON IMÁGENES
+                // ACTIVIDADES ESPECIALES DE NINO CON IMÁGENES REDIMENSIONADAS
                 actividadesEspeciales: [
                     { 
                         id: 'clases_cocina', 
                         nombre: '👩‍🍳 Clases de Cocina con Nino', 
-                        imagen: 'https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=400&h=300&fit=crop',
+                        imagen: 'https://images.unsplash.com/photo-1556910103-1c02745aae4d?w=400&h=150&fit=crop',
                         costo: 600, 
                         videoId: '1tS-gKr6bf4MY5Yrw7zRvP2uP_zq9rsLl', 
                         afinidad: 40, 
@@ -724,7 +751,7 @@ class QuintillizasRPG {
                     { 
                         id: 'pelicula_hogar', 
                         nombre: '🎬 Película en Casa con Nino', 
-                        imagen: 'https://images.unsplash.com/photo-1527977966376-1c8408f9f108?w=400&h=300&fit=crop',
+                        imagen: 'https://images.unsplash.com/photo-1527977966376-1c8408f9f108?w=400&h=150&fit=crop',
                         costo: 400, 
                         videoId: '1aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe', 
                         afinidad: 25, 
@@ -734,7 +761,7 @@ class QuintillizasRPG {
                     { 
                         id: 'concierto', 
                         nombre: '🎵 Concierto Juntos', 
-                        imagen: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=400&h=300&fit=crop',
+                        imagen: 'https://images.unsplash.com/photo-1514525253161-7a46d19cd819?w=400&h=150&fit=crop',
                         costo: 1000, 
                         videoId: '1-wYJYTaw0ZOKQy8BBPR7Fmhlzs0IVx9K', 
                         afinidad: 50, 
@@ -759,12 +786,12 @@ class QuintillizasRPG {
                 videosDisponibles: [],
                 nivelRequeridoParaIntimos: 2,
                 
-                // MOMENTOS ÍNTIMOS DE MIKU CON IMÁGENES
+                // MOMENTOS ÍNTIMOS DE MIKU CON IMÁGENES REDIMENSIONADAS
                 momentosIntimos: [
                     { 
                         id: 'mamada_timida', 
                         nombre: '😳 Mamada Tímida de Miku', 
-                        imagen: 'https://images.unsplash.com/photo-1541696432-82c6da8ce7bf?w=400&h=300&fit=crop',
+                        imagen: 'https://images.unsplash.com/photo-1541696432-82c6da8ce7bf?w=400&h=150&fit=crop',
                         condonesRequeridos: 1,
                         condones001Requeridos: 0,
                         videoId: '1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS', 
@@ -777,7 +804,7 @@ class QuintillizasRPG {
                     { 
                         id: 'sexo_lento', 
                         nombre: '🐌 Sexo Lento con Miku', 
-                        imagen: 'https://images.unsplash.com/photo-1522673607200-164d1b3ce5aa?w=400&h=300&fit=crop',
+                        imagen: 'https://images.unsplash.com/photo-1522673607200-164d1b3ce5aa?w=400&h=150&fit=crop',
                         condonesRequeridos: 1,
                         condones001Requeridos: 0,
                         videoId: '1tS-gKr6bf4MY5Yrw7zRvP2uP_zq9rsLl', 
@@ -790,7 +817,7 @@ class QuintillizasRPG {
                     { 
                         id: 'correrse_dentro_miku', 
                         nombre: '💕 Correrse Dentro de Miku', 
-                        imagen: 'https://images.unsplash.com/photo-1516466723877-e4ec1d736c8a?w=400&h=300&fit=crop',
+                        imagen: 'https://images.unsplash.com/photo-1516466723877-e4ec1d736c8a?w=400&h=150&fit=crop',
                         condonesRequeridos: 2,
                         condones001Requeridos: 1,
                         videoId: '1aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe', 
@@ -802,12 +829,12 @@ class QuintillizasRPG {
                     }
                 ],
                 
-                // ACTIVIDADES ESPECIALES DE MIKU CON IMÁGENES
+                // ACTIVIDADES ESPECIALES DE MIKU CON IMÁGENES REDIMENSIONADAS
                 actividadesEspeciales: [
                     { 
                         id: 'visita_templo', 
                         nombre: '⛩️ Visita al Templo con Miku', 
-                        imagen: 'https://images.unsplash.com/photo-1518546305927-5a555bb7020d?w=400&h=300&fit=crop',
+                        imagen: 'https://images.unsplash.com/photo-1518546305927-5a555bb7020d?w=400&h=150&fit=crop',
                         costo: 250, 
                         videoId: '1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS', 
                         afinidad: 15, 
@@ -817,7 +844,7 @@ class QuintillizasRPG {
                     { 
                         id: 'biblioteca', 
                         nombre: '📖 Tarde en Biblioteca con Miku', 
-                        imagen: 'https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?w=400&h=300&fit=crop',
+                        imagen: 'https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?w=400&h=150&fit=crop',
                         costo: 200, 
                         videoId: '1tS-gKr6bf4MY5Yrw7zRvP2uP_zq9rsLl', 
                         afinidad: 10, 
@@ -827,7 +854,7 @@ class QuintillizasRPG {
                     { 
                         id: 'concierto_tradicional', 
                         nombre: '🎶 Concierto Tradicional con Miku', 
-                        imagen: 'https://images.unsplash.com/photo-1507838153414-b4b713384a98?w=400&h=300&fit=crop',
+                        imagen: 'https://images.unsplash.com/photo-1507838153414-b4b713384a98?w=400&h=150&fit=crop',
                         costo: 600, 
                         videoId: '1aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe', 
                         afinidad: 35, 
@@ -852,12 +879,12 @@ class QuintillizasRPG {
                 videosDisponibles: [],
                 nivelRequeridoParaIntimos: 2,
                 
-                // MOMENTOS ÍNTIMOS DE YOTSUBA CON IMÁGENES
+                // MOMENTOS ÍNTIMOS DE YOTSUBA CON IMÁGENES REDIMENSIONADAS
                 momentosIntimos: [
                     { 
                         id: 'mamada_energica', 
                         nombre: '💪 Mamada Energética de Yotsuba', 
-                        imagen: 'https://images.unsplash.com/photo-1541696432-82c6da8ce7bf?w=400&h=300&fit=crop',
+                        imagen: 'https://images.unsplash.com/photo-1541696432-82c6da8ce7bf?w=400&h=150&fit=crop',
                         condonesRequeridos: 1,
                         condones001Requeridos: 0,
                         videoId: '1tS-gKr6bf4MY5Yrw7zRvP2uP_zq9rsLl', 
@@ -870,7 +897,7 @@ class QuintillizasRPG {
                     { 
                         id: 'sexo_rapido', 
                         nombre: '⚡ Sexo Rápido con Yotsuba', 
-                        imagen: 'https://images.unsplash.com/photo-1522673607200-164d1b3ce5aa?w=400&h=300&fit=crop',
+                        imagen: 'https://images.unsplash.com/photo-1522673607200-164d1b3ce5aa?w=400&h=150&fit=crop',
                         condonesRequeridos: 1,
                         condones001Requeridos: 0,
                         videoId: '1aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe', 
@@ -883,7 +910,7 @@ class QuintillizasRPG {
                     { 
                         id: 'doble_penetracion', 
                         nombre: '👯‍♀️ Doble Penetración (Fantasía)', 
-                        imagen: 'https://images.unsplash.com/photo-1516466723877-e4ec1d736c8a?w=400&h=300&fit=crop',
+                        imagen: 'https://images.unsplash.com/photo-1516466723877-e4ec1d736c8a?w=400&h=150&fit=crop',
                         condonesRequeridos: 2,
                         condones001Requeridos: 1,
                         videoId: '1-wYJYTaw0ZOKQy8BBPR7Fmhlzs0IVx9K', 
@@ -895,12 +922,12 @@ class QuintillizasRPG {
                     }
                 ],
                 
-                // ACTIVIDADES ESPECIALES DE YOTSUBA CON IMÁGENES
+                // ACTIVIDADES ESPECIALES DE YOTSUBA CON IMÁGENES REDIMENSIONADAS
                 actividadesEspeciales: [
                     { 
                         id: 'partido_futbol', 
                         nombre: '⚽ Partido de Fútbol con Yotsuba', 
-                        imagen: 'https://images.unsplash.com/photo-1575361204480-a5a5daecce0c?w=400&h=300&fit=crop',
+                        imagen: 'https://images.unsplash.com/photo-1575361204480-a5a5daecce0c?w=400&h=150&fit=crop',
                         costo: 300, 
                         videoId: '1-wYJYTaw0ZOKQy8BBPR7Fmhlzs0IVx9K', 
                         afinidad: 20, 
@@ -910,7 +937,7 @@ class QuintillizasRPG {
                     { 
                         id: 'voluntariado', 
                         nombre: '🤝 Día de Voluntariado con Yotsuba', 
-                        imagen: 'https://images.unsplash.com/photo-1593113598332-cd59a0c3a9a1?w=400&h=300&fit=crop',
+                        imagen: 'https://images.unsplash.com/photo-1593113598332-cd59a0c3a9a1?w=400&h=150&fit=crop',
                         costo: 150, 
                         videoId: '1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS', 
                         afinidad: 15, 
@@ -920,7 +947,7 @@ class QuintillizasRPG {
                     { 
                         id: 'carrera_atletismo', 
                         nombre: '🏃‍♀️ Carrera de Atletismo con Yotsuba', 
-                        imagen: 'https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=400&h=300&fit=crop',
+                        imagen: 'https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=400&h=150&fit=crop',
                         costo: 500, 
                         videoId: '1tS-gKr6bf4MY5Yrw7zRvP2uP_zq9rsLl', 
                         afinidad: 30, 
@@ -945,12 +972,12 @@ class QuintillizasRPG {
                 videosDisponibles: [],
                 nivelRequeridoParaIntimos: 3,
                 
-                // MOMENTOS ÍNTIMOS DE ITSUKI CON IMÁGENES
+                // MOMENTOS ÍNTIMOS DE ITSUKI CON IMÁGENES REDIMENSIONADAS
                 momentosIntimos: [
                     { 
                         id: 'mamada_con_sabor', 
                         nombre: '🍓 Mamada con Sabor de Itsuki', 
-                        imagen: 'https://images.unsplash.com/photo-1541696432-82c6da8ce7bf?w=400&h=300&fit=crop',
+                        imagen: 'https://images.unsplash.com/photo-1541696432-82c6da8ce7bf?w=400&h=150&fit=crop',
                         condonesRequeridos: 1,
                         condones001Requeridos: 0,
                         videoId: '1aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe', 
@@ -963,7 +990,7 @@ class QuintillizasRPG {
                     { 
                         id: 'sexo_gloton', 
                         nombre: '🍔 Sexo Glotón con Itsuki', 
-                        imagen: 'https://images.unsplash.com/photo-1522673607200-164d1b3ce5aa?w=400&h=300&fit=crop',
+                        imagen: 'https://images.unsplash.com/photo-1522673607200-164d1b3ce5aa?w=400&h=150&fit=crop',
                         condonesRequeridos: 1,
                         condones001Requeridos: 0,
                         videoId: '1-wYJYTaw0ZOKQy8BBPR7Fmhlzs0IVx9K', 
@@ -976,7 +1003,7 @@ class QuintillizasRPG {
                     { 
                         id: 'correrse_boca', 
                         nombre: '👄 Correrse en la Boca de Itsuki', 
-                        imagen: 'https://images.unsplash.com/photo-1516466723877-e4ec1d736c8a?w=400&h=300&fit=crop',
+                        imagen: 'https://images.unsplash.com/photo-1516466723877-e4ec1d736c8a?w=400&h=150&fit=crop',
                         condonesRequeridos: 1,
                         condones001Requeridos: 1,
                         videoId: '1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS', 
@@ -988,12 +1015,12 @@ class QuintillizasRPG {
                     }
                 ],
                 
-                // ACTIVIDADES ESPECIALES DE ITSUKI CON IMÁGENES
+                // ACTIVIDADES ESPECIALES DE ITSUKI CON IMÁGENES REDIMENSIONADAS
                 actividadesEspeciales: [
                     { 
                         id: 'buffet_ilimitado', 
                         nombre: '🍣 Buffet Ilimitado con Itsuki', 
-                        imagen: 'https://images.unsplash.com/photo-1553621042-f6e147245754?w=400&h=300&fit=crop',
+                        imagen: 'https://images.unsplash.com/photo-1553621042-f6e147245754?w=400&h=150&fit=crop',
                         costo: 800, 
                         videoId: '1aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe', 
                         afinidad: 40, 
@@ -1003,7 +1030,7 @@ class QuintillizasRPG {
                     { 
                         id: 'cocina_postres', 
                         nombre: '🍰 Clase de Postres con Itsuki', 
-                        imagen: 'https://images.unsplash.com/photo-1488477181946-6428a0291777?w=400&h=300&fit=crop',
+                        imagen: 'https://images.unsplash.com/photo-1488477181946-6428a0291777?w=400&h=150&fit=crop',
                         costo: 400, 
                         videoId: '1-wYJYTaw0ZOKQy8BBPR7Fmhlzs0IVx9K', 
                         afinidad: 25, 
@@ -1013,7 +1040,7 @@ class QuintillizasRPG {
                     { 
                         id: 'picnic_parque', 
                         nombre: '🧺 Picnic en el Parque con Itsuki', 
-                        imagen: 'https://images.unsplash.com/photo-1509356843151-3e7d96241e11?w=400&h=300&fit=crop',
+                        imagen: 'https://images.unsplash.com/photo-1509356843151-3e7d96241e11?w=400&h=150&fit=crop',
                         costo: 350, 
                         videoId: '1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS', 
                         afinidad: 20, 
@@ -1033,7 +1060,7 @@ class QuintillizasRPG {
         console.log('🎮 RPG Quintillizas - Sistema dificultoso + ORGÍAS + IMÁGENES inicializado');
         console.log('📊 Total combinaciones: 10 Dúos + 10 Tríos + 5 Cuartetos + 1 Quinteto = 26 momentos grupales');
         console.log('💎 TODOS requieren SOLO condones 0.01');
-        console.log('🖼️ Cada momento íntimo y actividad tiene su propia imagen personalizada');
+        console.log('🖼️ Cada momento íntimo y actividad tiene su propia imagen personalizada (redimensionada)');
         
         window.seleccionarPersonajeRPG = (personajeId) => this.seleccionarPersonajeUI(personajeId);
         window.intentarMomentoIntimoRPG = (personajeId, momentoId) => this.intentarMomentoIntimo(personajeId, momentoId);
@@ -1045,6 +1072,7 @@ class QuintillizasRPG {
         
         // Funciones para orgías
         window.cargarPantallaOrgias = () => this.cargarPantallaOrgias();
+        window.cargarCategoriaOrgias = (categoria) => this.cargarCategoriaOrgias(categoria);
         window.intentarMomentoGrupal = (combinacionId) => this.intentarMomentoGrupal(combinacionId);
     }
 
@@ -1083,28 +1111,21 @@ class QuintillizasRPG {
                     </div>
                 </div>
                 
-                <!-- DÚOS -->
-                <h2 style="color: #4CAF50; margin: 30px 0 20px;">👯 DÚOS (Afinidad 100+, Nivel 5+) - 2 condones 0.01</h2>
-                <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px;">
-                    ${this.crearTarjetasGrupales('duo')}
+                <!-- CATEGORÍAS DE ORGÍAS -->
+                <div style="display: flex; gap: 20px; justify-content: center; margin: 40px 0;">
+                    <button class="card-button" onclick="cargarCategoriaOrgias('mamadas')" 
+                            style="background: ${this.categoriaOrgiasActual === 'mamadas' ? 'linear-gradient(135deg, #FF1493, #8A5AF7)' : 'rgba(255,255,255,0.1)'}; padding: 15px 40px; font-size: 1.5rem;">
+                        👄 MAMADAS (26)
+                    </button>
+                    <button class="card-button" onclick="cargarCategoriaOrgias('doggystyle')" 
+                            style="background: ${this.categoriaOrgiasActual === 'doggystyle' ? 'linear-gradient(135deg, #FF1493, #8A5AF7)' : 'rgba(255,255,255,0.1)'}; padding: 15px 40px; font-size: 1.5rem;">
+                        🐕 DOGGYSTYLE (0)
+                    </button>
                 </div>
                 
-                <!-- TRÍOS -->
-                <h2 style="color: #FF9800; margin: 40px 0 20px;">👯‍♂️ TRÍOS (Afinidad 130+, Nivel 7+) - 3 condones 0.01</h2>
-                <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px;">
-                    ${this.crearTarjetasGrupales('trio')}
-                </div>
-                
-                <!-- CUARTETOS -->
-                <h2 style="color: #FF1493; margin: 40px 0 20px;">👨‍👩‍👧‍👦 CUARTETOS (Afinidad 160+, Nivel 8+) - 4 condones 0.01</h2>
-                <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px;">
-                    ${this.crearTarjetasGrupales('cuarteto')}
-                </div>
-                
-                <!-- QUINTETO -->
-                <h2 style="color: #FFD700; margin: 40px 0 20px;">👑 QUINTETO (Afinidad 200+, Nivel 10) - 5 condones 0.01</h2>
-                <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px;">
-                    ${this.crearTarjetasGrupales('quinteto')}
+                <!-- CONTENIDO DE LA CATEGORÍA -->
+                <div id="contenido-categoria-orgias">
+                    ${this.cargarCategoriaOrgias(this.categoriaOrgiasActual, true)}
                 </div>
                 
                 <!-- BOTÓN VOLVER -->
@@ -1121,10 +1142,68 @@ class QuintillizasRPG {
         const botonVolver = crearBotonVolver(volverAlInicio);
         mangaSection.insertBefore(botonVolver, mangaSection.firstChild);
     }
-
-    crearTarjetasGrupales(tipo) {
-        const combinaciones = Object.values(this.combinacionesGrupales).filter(c => c.tipo === tipo);
+    
+    cargarCategoriaOrgias(categoria, esInterno = false) {
+        this.categoriaOrgiasActual = categoria;
         
+        if (categoria === 'mamadas') {
+            // Mostrar todas las combinaciones de mamadas (por ahora todas son mamadas)
+            const combinacionesMamadas = Object.values(this.combinacionesGrupales);
+            
+            // Agrupar por tipo
+            const duos = combinacionesMamadas.filter(c => c.tipo === 'duo');
+            const trios = combinacionesMamadas.filter(c => c.tipo === 'trio');
+            const cuartetos = combinacionesMamadas.filter(c => c.tipo === 'cuarteto');
+            const quinteto = combinacionesMamadas.filter(c => c.tipo === 'quinteto');
+            
+            let html = `
+                <!-- DÚOS -->
+                <h2 style="color: #4CAF50; margin: 30px 0 20px;">👯 DÚOS (Afinidad 100+, Nivel 5+) - 2 condones 0.01</h2>
+                <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px;">
+                    ${this.crearTarjetasGrupales(duos)}
+                </div>
+                
+                <!-- TRÍOS -->
+                <h2 style="color: #FF9800; margin: 40px 0 20px;">👯‍♂️ TRÍOS (Afinidad 130+, Nivel 7+) - 3 condones 0.01</h2>
+                <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px;">
+                    ${this.crearTarjetasGrupales(trios)}
+                </div>
+                
+                <!-- CUARTETOS -->
+                <h2 style="color: #FF1493; margin: 40px 0 20px;">👨‍👩‍👧‍👦 CUARTETOS (Afinidad 160+, Nivel 8+) - 4 condones 0.01</h2>
+                <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px;">
+                    ${this.crearTarjetasGrupales(cuartetos)}
+                </div>
+                
+                <!-- QUINTETO -->
+                <h2 style="color: #FFD700; margin: 40px 0 20px;">👑 QUINTETO (Afinidad 200+, Nivel 10) - 5 condones 0.01</h2>
+                <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 20px;">
+                    ${this.crearTarjetasGrupales(quinteto)}
+                </div>
+            `;
+            
+            if (esInterno) return html;
+            
+            const contenedor = document.getElementById('contenido-categoria-orgias');
+            if (contenedor) contenedor.innerHTML = html;
+            
+        } else if (categoria === 'doggystyle') {
+            const html = `
+                <div style="text-align: center; padding: 100px 20px; background: rgba(255,255,255,0.05); border-radius: 30px; margin: 40px 0;">
+                    <h2 style="color: #FFD166; font-size: 3rem; margin-bottom: 20px;">🐕 DOGGYSTYLE</h2>
+                    <p style="font-size: 1.5rem; opacity: 0.7;">Próximamente... (0 combinaciones disponibles)</p>
+                    <p style="margin-top: 30px; opacity: 0.5;">Esta sección estará disponible en futuras actualizaciones</p>
+                </div>
+            `;
+            
+            if (esInterno) return html;
+            
+            const contenedor = document.getElementById('contenido-categoria-orgias');
+            if (contenedor) contenedor.innerHTML = html;
+        }
+    }
+
+    crearTarjetasGrupales(combinaciones) {
         return combinaciones.map(comb => {
             // Verificar si se cumplen los requisitos
             const afinidadActual = comb.participantes.every(id => 
@@ -1293,7 +1372,7 @@ class QuintillizasRPG {
         const html = `
             <div class="reproductor-container" style="max-width: 800px; margin: 40px auto; padding: 30px;">
                 <div style="text-align: center; margin-bottom: 20px;">
-                    <img src="${combinacion.imagen}" style="width: 100%; height: 200px; object-fit: cover; border-radius: 10px; margin-bottom: 10px;">
+                    <img src="${combinacion.imagen}" style="width: 100%; height: 150px; object-fit: cover; border-radius: 10px; margin-bottom: 10px;">
                     <h2 style="color: #FF1493; margin-bottom: 10px;">${combinacion.nombre}</h2>
                     <p style="opacity: 0.8;">${nombres}</p>
                 </div>
@@ -1352,7 +1431,7 @@ class QuintillizasRPG {
         
         const personaje = this.datosPersonajes[this.personajeSeleccionado];
         
-        // MOMENTOS ÍNTIMOS CON IMÁGENES
+        // MOMENTOS ÍNTIMOS CON IMÁGENES REDIMENSIONADAS
         const momentosIntimosHTML = personaje.momentosIntimos.map(momento => {
             const puedeIntentar = this.condones >= momento.condonesRequeridos && 
                                  this.condones001 >= momento.condones001Requeridos &&
@@ -1360,7 +1439,7 @@ class QuintillizasRPG {
             
             return `
                 <div style="background: rgba(255,255,255,0.05); border-radius: 12px; padding: 15px; border: 1px solid ${personaje.color}50;">
-                    <img src="${momento.imagen}" style="width: 100%; height: 120px; object-fit: cover; border-radius: 8px; margin-bottom: 10px;">
+                    <img src="${momento.imagen}" style="width: 100%; height: 150px; object-fit: cover; border-radius: 8px; margin-bottom: 10px;">
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
                         <span style="font-weight: bold; font-size: 1.1rem;">${momento.nombre}</span>
                         <span style="color: #FFD166; font-size: 0.9rem;">
@@ -1383,13 +1462,13 @@ class QuintillizasRPG {
             `;
         }).join('');
         
-        // ACTIVIDADES ESPECIALES CON IMÁGENES
+        // ACTIVIDADES ESPECIALES CON IMÁGENES REDIMENSIONADAS
         const actividadesHTML = personaje.actividadesEspeciales.map(actividad => {
             const puedeComprar = sistemaEconomia.obtenerDinero() >= actividad.costo;
             
             return `
                 <div style="background: rgba(255,255,255,0.05); border-radius: 12px; padding: 15px; border: 1px solid rgba(255, 209, 102, 0.3);">
-                    <img src="${actividad.imagen}" style="width: 100%; height: 120px; object-fit: cover; border-radius: 8px; margin-bottom: 10px;">
+                    <img src="${actividad.imagen}" style="width: 100%; height: 150px; object-fit: cover; border-radius: 8px; margin-bottom: 10px;">
                     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
                         <span style="font-weight: bold; font-size: 1.1rem;">${actividad.nombre}</span>
                         <span style="color: #FFD166; font-weight: bold;">S/.${actividad.costo}</span>
@@ -1630,7 +1709,7 @@ class QuintillizasRPG {
         const html = `
             <div class="reproductor-container" style="max-width: 800px; margin: 40px auto; padding: 30px;">
                 <div style="text-align: center; margin-bottom: 20px;">
-                    <img src="${momento.imagen}" style="width: 100%; height: 200px; object-fit: cover; border-radius: 10px; margin-bottom: 10px;">
+                    <img src="${momento.imagen}" style="width: 100%; height: 150px; object-fit: cover; border-radius: 10px; margin-bottom: 10px;">
                     <h2 style="color: ${personaje.color};">${momento.nombre}</h2>
                     <p>${personaje.nombre}</p>
                 </div>
@@ -1649,7 +1728,7 @@ class QuintillizasRPG {
         const html = `
             <div class="reproductor-container" style="max-width: 800px; margin: 40px auto; padding: 30px;">
                 <div style="text-align: center; margin-bottom: 20px;">
-                    <img src="${actividad.imagen}" style="width: 100%; height: 200px; object-fit: cover; border-radius: 10px; margin-bottom: 10px;">
+                    <img src="${actividad.imagen}" style="width: 100%; height: 150px; object-fit: cover; border-radius: 10px; margin-bottom: 10px;">
                     <h2 style="color: ${personaje.color};">${actividad.nombre}</h2>
                     <p>${personaje.nombre}</p>
                 </div>
@@ -1849,5 +1928,5 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log('🎮 RPG Quintillizas - Sistema COMPLETO activado');
     console.log('📊 26 combinaciones grupales');
     console.log('💎 Todas requieren solo condones 0.01');
-    console.log('🖼️ Cada momento tiene imagen personalizada');
+    console.log('🖼️ Cada momento tiene imagen personalizada (redimensionada)');
 });
