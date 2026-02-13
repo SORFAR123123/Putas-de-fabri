@@ -1377,6 +1377,12 @@ const sistemaDescriptivo = {
                 imagen: 'https://pbs.twimg.com/media/HA9mn12bAAAk9FZ?format=png&name=small', 
                 descripcion: 'culonas',
                 tematica: 'misceláneo'
+            },
+             11: { 
+                nombre: 'Probando xd',
+                imagen: 'https://pbs.twimg.com/media/HBDlv8pWYAAYTnT?format=jpg&name=small', 
+                descripcion: 'culonas',
+                tematica: 'misceláneo'
             }
         },
         
