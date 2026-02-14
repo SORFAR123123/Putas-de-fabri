@@ -33,10 +33,7 @@ class QuintillizasRPG {
                     imagen: personaje.imagen,
                     color: personaje.color,
                     nivel: personaje.nivel,
-                    afinidad: personaje.afinidad,
-                    exp: personaje.exp,
-                    expNecesaria: personaje.expNecesaria,
-                    estadoAnimo: personaje.estadoAnimo
+                    afinidad: personaje.afinidad
                 };
             }
             return null;
