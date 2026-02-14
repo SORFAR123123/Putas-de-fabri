@@ -112,9 +112,12 @@ class FantasiaRPG {
                     imagen: personaje.imagen,
                     color: personaje.color,
                     nivel: personaje.nivel,
-                    afinidad: personaje.afinidad
+                    afinidad: personaje.afinidad,
+                    exp: personaje.exp,
+                    expNecesaria: personaje.expNecesaria,
+                    estadoAnimo: personaje.estadoAnimo
                 };
-                console.log("💖 Novia actualizada en Fantasía:", this.noviaActual.nombreCorto);
+                console.log("💖 Novia actualizada en Fantasía:", this.noviaActual.nombreCorto, "Nivel:", this.noviaActual.nivel, "Afinidad:", this.noviaActual.afinidad);
             }
         }
         
@@ -127,13 +130,26 @@ class FantasiaRPG {
                     nombre: data.nombre,
                     nombreCorto: data.nombre.split(' ')[0],
                     imagen: data.imagen,
-                    color: data.color || '#FF1493'
+                    color: data.color || '#FF1493',
+                    nivel: data.nivel || 1,
+                    afinidad: data.afinidad || 0,
+                    exp: data.exp,
+                    expNecesaria: data.expNecesaria,
+                    estadoAnimo: data.estadoAnimo
                 };
-                console.log("💖 Novia actualizada vía global:", this.noviaActual.nombreCorto);
+                console.log("💖 Novia actualizada vía global:", this.noviaActual.nombreCorto, "Nivel:", this.noviaActual.nivel, "Afinidad:", this.noviaActual.afinidad);
             }
         }
         
         return this.noviaActual;
+    }
+
+    obtenerEmojiEstado(estado) {
+        const emojis = {
+            'feliz': '😊', 'neutral': '😐', 'triste': '😢', 'enojada': '😠',
+            'tsundere': '😤', 'tímida': '😳', 'energica': '💪', 'glotona': '🍔'
+        };
+        return emojis[estado] || '😐';
     }
 
     // ====================
@@ -754,6 +770,8 @@ class FantasiaRPG {
         let noviaNombre = "NINGUNA";
         let noviaImagen = "https://via.placeholder.com/100x100/FF1493/FFFFFF?text=NOVIA";
         let noviaColor = "#FF1493";
+        let noviaNivel = "?";
+        let noviaAfinidad = "?";
         
         // Si hay novia actual, guardarla para recompensas
         if (this.noviaActual) {
@@ -761,16 +779,24 @@ class FantasiaRPG {
                 id: this.noviaActual.id,
                 nombre: this.noviaActual.nombreCorto,
                 imagen: this.noviaActual.imagen,
-                color: this.noviaActual.color || '#FF1493'
+                color: this.noviaActual.color || '#FF1493',
+                nivel: this.noviaActual.nivel,
+                afinidad: this.noviaActual.afinidad
             };
             noviaId = this.noviaActual.id;
             noviaNombre = this.noviaActual.nombreCorto;
             noviaImagen = this.noviaActual.imagen;
             noviaColor = this.noviaActual.color || '#FF1493';
-            console.log("✅ Novia guardada en recompensas:", noviaNombre);
+            noviaNivel = this.noviaActual.nivel;
+            noviaAfinidad = this.noviaActual.afinidad;
+            console.log("✅ Novia guardada en recompensas:", noviaNombre, "Nivel:", noviaNivel, "Afinidad:", noviaAfinidad);
         }
         
         const bossNombre = this.bossDerrotado.nombre;
+        
+        // Calcular porcentaje de afinidad para barra
+        const afinidadPorcentaje = Math.min((noviaAfinidad / 200) * 100, 100);
+        const afinidadColor = noviaAfinidad >= 0 ? '#4CAF50' : '#FF6B6B';
         
         const html = `
             <div style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); display: flex; justify-content: center; align-items: center; z-index: 10000;">
@@ -787,6 +813,20 @@ class FantasiaRPG {
                             <img src="${noviaImagen}" 
                                  style="width: 100px; height: 100px; border-radius: 50%; border: 3px solid ${noviaColor}; margin-bottom: 15px; object-fit: cover;"
                                  onerror="this.src='https://via.placeholder.com/100x100/FF1493/FFFFFF?text=NOVIA'">
+                            
+                            <div style="background: rgba(0,0,0,0.3); border-radius: 10px; padding: 10px; margin-bottom: 15px;">
+                                <div style="display: flex; justify-content: space-between; font-size: 0.9rem; margin-bottom: 5px;">
+                                    <span>📊 Nivel:</span>
+                                    <span style="font-weight: bold; color: ${noviaColor};">${noviaNivel}/10</span>
+                                </div>
+                                <div style="display: flex; justify-content: space-between; font-size: 0.9rem; margin-bottom: 5px;">
+                                    <span>💝 Afinidad:</span>
+                                    <span style="font-weight: bold; color: ${afinidadColor};">${noviaAfinidad}/200</span>
+                                </div>
+                                <div style="background: rgba(255,255,255,0.1); height: 6px; border-radius: 3px; overflow: hidden;">
+                                    <div style="background: ${afinidadColor}; width: ${afinidadPorcentaje}%; height: 100%;"></div>
+                                </div>
+                            </div>
                             
                             <div style="display: flex; flex-direction: column; gap: 10px;">
                                 <button class="card-button" onclick="fantasiaRPG.verVideoRecompensaNoviaGuardada('mamada')" 
@@ -843,7 +883,7 @@ class FantasiaRPG {
         overlay.innerHTML = html;
         document.body.appendChild(overlay);
         
-        console.log("🎬 Mostrando recompensas - Novia guardada:", noviaNombre);
+        console.log("🎬 Mostrando recompensas - Novia guardada:", noviaNombre, "Nivel:", noviaNivel, "Afinidad:", noviaAfinidad);
     }
 
     verVideoRecompensaNoviaGuardada(accion) {
@@ -1073,29 +1113,79 @@ class FantasiaRPG {
         
         const expPorcentaje = (this.jugador.exp / this.jugador.expMaxima) * 100;
         
-        // ===== SECCIÓN DE LA NOVIA SELECCIONADA =====
+        // ===== SECCIÓN DE LA NOVIA SELECCIONADA (MEJORADA) =====
         let noviaHTML = '';
         if (this.noviaActual) {
+            // Calcular porcentaje de afinidad para la barra
+            const afinidadPorcentaje = Math.min((this.noviaActual.afinidad / 200) * 100, 100);
+            const afinidadColor = this.noviaActual.afinidad >= 0 ? '#4CAF50' : '#FF6B6B';
+            
             noviaHTML = `
-                <div style="background: ${this.noviaActual.color}20; border-radius: 20px; padding: 20px; margin-bottom: 30px; border: 3px solid ${this.noviaActual.color}; display: flex; align-items: center; gap: 20px;">
-                    <img src="${this.noviaActual.imagen}" 
-                         style="width: 80px; height: 80px; border-radius: 50%; border: 3px solid ${this.noviaActual.color}; object-fit: cover;"
-                         onerror="this.src='https://via.placeholder.com/80x80/FF1493/FFFFFF?text=NOVIA'">
-                    <div style="flex: 1;">
-                        <h3 style="color: ${this.noviaActual.color}; margin: 0 0 10px 0;">💖 NOVIA SELECCIONADA: ${this.noviaActual.nombre.toUpperCase()}</h3>
-                        <div style="display: flex; gap: 20px; font-size: 0.9rem;">
-                            <div><span style="color: ${this.noviaActual.color};">Nivel:</span> ${this.noviaActual.nivel || '?'}</div>
-                            <div><span style="color: ${this.noviaActual.color};">Afinidad:</span> ${this.noviaActual.afinidad || '?'}/200</div>
-                            <div><span style="color: ${this.noviaActual.color};">Bonus:</span> +${this.calcularBonusParaHermana(this.noviaActual.id).toFixed(1)}%</div>
+                <div style="background: ${this.noviaActual.color}15; border-radius: 20px; padding: 20px; margin-bottom: 30px; border: 3px solid ${this.noviaActual.color};">
+                    <div style="display: flex; align-items: center; gap: 20px; flex-wrap: wrap;">
+                        <img src="${this.noviaActual.imagen}" 
+                             style="width: 80px; height: 80px; border-radius: 50%; border: 3px solid ${this.noviaActual.color}; object-fit: cover;"
+                             onerror="this.src='https://via.placeholder.com/80x80/FF1493/FFFFFF?text=NOVIA'">
+                        
+                        <div style="flex: 1;">
+                            <h3 style="color: ${this.noviaActual.color}; margin: 0 0 10px 0; font-size: 1.3rem;">
+                                💖 NOVIA SELECCIONADA: ${this.noviaActual.nombre.toUpperCase()}
+                            </h3>
+                            
+                            <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px;">
+                                <!-- Nivel -->
+                                <div style="background: rgba(255,255,255,0.1); border-radius: 10px; padding: 10px;">
+                                    <div style="color: ${this.noviaActual.color}; font-size: 0.8rem;">📊 NIVEL</div>
+                                    <div style="font-size: 1.5rem; font-weight: bold;">${this.noviaActual.nivel || '?'}</div>
+                                    <div style="font-size: 0.8rem; opacity: 0.7;">Máx: 10</div>
+                                </div>
+                                
+                                <!-- Afinidad con barra -->
+                                <div style="background: rgba(255,255,255,0.1); border-radius: 10px; padding: 10px;">
+                                    <div style="color: ${this.noviaActual.color}; font-size: 0.8rem;">💝 AFINIDAD</div>
+                                    <div style="font-size: 1.5rem; font-weight: bold; color: ${afinidadColor};">${this.noviaActual.afinidad || 0}/200</div>
+                                    <div style="background: rgba(255,255,255,0.2); height: 6px; border-radius: 3px; margin-top: 5px; overflow: hidden;">
+                                        <div style="background: ${afinidadColor}; width: ${afinidadPorcentaje}%; height: 100%;"></div>
+                                    </div>
+                                </div>
+                                
+                                <!-- Bonus de Fantasía -->
+                                <div style="background: rgba(255,255,255,0.1); border-radius: 10px; padding: 10px;">
+                                    <div style="color: gold; font-size: 0.8rem;">✨ BONUS FANTASÍA</div>
+                                    <div style="font-size: 1.5rem; font-weight: bold; color: gold;">+${this.calcularBonusParaHermana(this.noviaActual.id).toFixed(1)}%</div>
+                                    <div style="font-size: 0.8rem; opacity: 0.7;">en momentos íntimos</div>
+                                </div>
+                                
+                                <!-- Estado de ánimo -->
+                                <div style="background: rgba(255,255,255,0.1); border-radius: 10px; padding: 10px;">
+                                    <div style="color: ${this.noviaActual.color}; font-size: 0.8rem;">😊 ESTADO</div>
+                                    <div style="font-size: 1.2rem; font-weight: bold; text-transform: capitalize;">
+                                        ${this.obtenerEmojiEstado(this.noviaActual.estadoAnimo)} ${this.noviaActual.estadoAnimo || 'neutral'}
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Barra de EXP si existe -->
+                            ${this.noviaActual.exp ? `
+                            <div style="margin-top: 15px;">
+                                <div style="display: flex; justify-content: space-between; font-size: 0.9rem; margin-bottom: 5px;">
+                                    <span style="color: ${this.noviaActual.color};">EXPERIENCIA</span>
+                                    <span>${this.noviaActual.exp}/${this.noviaActual.expNecesaria}</span>
+                                </div>
+                                <div style="background: rgba(255,255,255,0.2); height: 8px; border-radius: 4px; overflow: hidden;">
+                                    <div style="background: ${this.noviaActual.color}; width: ${(this.noviaActual.exp / this.noviaActual.expNecesaria) * 100}%; height: 100%;"></div>
+                                </div>
+                            </div>
+                            ` : ''}
                         </div>
                     </div>
                 </div>
             `;
         } else {
             noviaHTML = `
-                <div style="background: rgba(255, 20, 147, 0.1); border-radius: 20px; padding: 20px; margin-bottom: 30px; border: 2px dashed #FF1493; text-align: center;">
-                    <p style="color: #FF1493; margin: 0;">❌ NO HAY NOVIA SELECCIONADA EN EL RPG PRINCIPAL</p>
-                    <p style="opacity: 0.7; font-size: 0.9rem; margin-top: 10px;">Selecciona una novia en el RPG Quintillizas para obtener bonus</p>
+                <div style="background: rgba(255, 20, 147, 0.1); border-radius: 20px; padding: 30px; margin-bottom: 30px; border: 2px dashed #FF1493; text-align: center;">
+                    <p style="color: #FF1493; margin: 0; font-size: 1.2rem;">❌ NO HAY NOVIA SELECCIONADA EN EL RPG PRINCIPAL</p>
+                    <p style="opacity: 0.7; font-size: 0.9rem; margin-top: 10px;">Selecciona una novia en el RPG Quintillizas para ver sus stats aquí</p>
                 </div>
             `;
         }
@@ -1558,4 +1648,4 @@ window.fantasiaRPG = fantasiaRPG;
 console.log("✅ RPG Fantasía cargado correctamente");
 console.log("💰 Piedras iniciales:", fantasiaRPG.jugador.piedras);
 console.log("❤️ Vida:", fantasiaRPG.jugador.vida);
-console.log("⚡ Energía:", fantasiaRPG.jugador.energia);
+console.log("⚡ Energía:", fantasiaRPG.jugador.energia");
