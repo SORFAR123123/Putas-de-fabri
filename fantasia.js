@@ -800,7 +800,7 @@ class FantasiaRPG {
                     else if (accion === 'montar') videoId = "ID_ICHIKA_MONTAR";
                 }
                 else if (noviaId === 'nino') {
-                    if (accion === 'mamada') videoId = "ID_NINO_MAMADA";
+                    if (accion === 'mamada') videoId = "11hBAFRHLV6hnaVLYZEuZPISvL-TvsJZO";
                     else if (accion === 'doggy') videoId = "ID_NINO_DOGGY";
                     else if (accion === 'montar') videoId = "ID_NINO_MONTAR";
                 }
