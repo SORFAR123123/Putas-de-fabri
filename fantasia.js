@@ -150,7 +150,7 @@ class FantasiaRPG {
                     
                     // ===== VIDEOS DE RIAS (EDITAR AQUÍ) =====
                     videos: {
-                        mamada: "ID_RIAS_MAMADA",    // Reemplazar con ID real
+                        mamada: "11hBAFRHLV6hnaVLYZEuZPISvL-TvsJZO",    // Reemplazar con ID real
                         doggy: "ID_RIAS_DOGGY",      // Reemplazar con ID real
                         montar: "ID_RIAS_MONTAR"     // Reemplazar con ID real
                     }
