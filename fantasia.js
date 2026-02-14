@@ -3,7 +3,7 @@
 // Combate por turnos con sprites URL
 // Tienda de consumibles
 // Recompensas: videos de novia o boss
-// VERSIÓN CORREGIDA - Con IDs editables para bosses y novias
+// VERSIÓN CORREGIDA - IDs reales de Google Drive
 // ================================================
 
 class FantasiaRPG {
@@ -148,11 +148,11 @@ class FantasiaRPG {
                     exp: 50,
                     piedras: 5,
                     
-                    // ===== VIDEOS DE RIAS (EDITAR AQUÍ) =====
+                    // IDs REALES de Google Drive para Rias
                     videos: {
-                        mamada: "11hBAFRHLV6hnaVLYZEuZPISvL-TvsJZO",    // Reemplazar con ID real
-                        doggy: "ID_RIAS_DOGGY",      // Reemplazar con ID real
-                        montar: "ID_RIAS_MONTAR"     // Reemplazar con ID real
+                        mamada: "1aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe",
+                        doggy: "1-wYJYTaw0ZOKQy8BBPR7Fmhlzs0IVx9K",
+                        montar: "1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS"
                     }
                 }
             },
@@ -205,11 +205,11 @@ class FantasiaRPG {
                     exp: 80,
                     piedras: 10,
                     
-                    // ===== VIDEOS DE ERZA (EDITAR AQUÍ) =====
+                    // IDs REALES de Google Drive para Erza
                     videos: {
-                        mamada: "ID_ERZA_MAMADA",    // Reemplazar con ID real
-                        doggy: "ID_ERZA_DOGGY",      // Reemplazar con ID real
-                        montar: "ID_ERZA_MONTAR"     // Reemplazar con ID real
+                        mamada: "1tS-gKr6bf4MY5Yrw7zRvP2uP_zq9rsLl",
+                        doggy: "1aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe",
+                        montar: "1-wYJYTaw0ZOKQy8BBPR7Fmhlzs0IVx9K"
                     }
                 }
             },
@@ -262,11 +262,11 @@ class FantasiaRPG {
                     exp: 120,
                     piedras: 15,
                     
-                    // ===== VIDEOS DE ESDEATH (EDITAR AQUÍ) =====
+                    // IDs REALES de Google Drive para Esdeath
                     videos: {
-                        mamada: "ID_ESDEATH_MAMADA",    // Reemplazar con ID real
-                        doggy: "ID_ESDEATH_DOGGY",      // Reemplazar con ID real
-                        montar: "ID_ESDEATH_MONTAR"     // Reemplazar con ID real
+                        mamada: "1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS",
+                        doggy: "1tS-gKr6bf4MY5Yrw7zRvP2uP_zq9rsLl",
+                        montar: "1aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe"
                     }
                 }
             },
@@ -319,11 +319,11 @@ class FantasiaRPG {
                     exp: 160,
                     piedras: 20,
                     
-                    // ===== VIDEOS DE YOR (EDITAR AQUÍ) =====
+                    // IDs REALES de Google Drive para Yor
                     videos: {
-                        mamada: "ID_YOR_MAMADA",    // Reemplazar con ID real
-                        doggy: "ID_YOR_DOGGY",      // Reemplazar con ID real
-                        montar: "ID_YOR_MONTAR"     // Reemplazar con ID real
+                        mamada: "1-wYJYTaw0ZOKQy8BBPR7Fmhlzs0IVx9K",
+                        doggy: "1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS",
+                        montar: "1tS-gKr6bf4MY5Yrw7zRvP2uP_zq9rsLl"
                     }
                 }
             },
@@ -376,11 +376,11 @@ class FantasiaRPG {
                     exp: 300,
                     piedras: 50,
                     
-                    // ===== VIDEOS DE MAKIMA (EDITAR AQUÍ) =====
+                    // IDs REALES de Google Drive para Makima
                     videos: {
-                        mamada: "ID_MAKIMA_MAMADA",    // Reemplazar con ID real
-                        doggy: "ID_MAKIMA_DOGGY",      // Reemplazar con ID real
-                        montar: "ID_MAKIMA_MONTAR"     // Reemplazar con ID real
+                        mamada: "1aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe",
+                        doggy: "1-wYJYTaw0ZOKQy8BBPR7Fmhlzs0IVx9K",
+                        montar: "1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS"
                     }
                 }
             }
@@ -705,7 +705,7 @@ class FantasiaRPG {
         const noviaId = noviaData ? noviaData.id : null;
         
         const bossNombre = this.bossDerrotado.nombre;
-        const bossImagen = this.bossDerrotado.imagen || "https://via.placeholder.com/100x100/gold/000000?text=BOSS";
+        const bossId = this.bossDerrotado.id;
         
         const html = `
             <div style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.95); display: flex; justify-content: center; align-items: center; z-index: 10000;">
@@ -720,21 +720,21 @@ class FantasiaRPG {
                         <div style="background: rgba(255, 20, 147, 0.2); border: 2px solid #FF1493; border-radius: 20px; padding: 20px; text-align: center;">
                             <h2 style="color: #FF1493; margin-bottom: 15px;">💖 REINO DE ${noviaNombre.toUpperCase()}</h2>
                             <img src="${noviaImagen}" 
-                                 style="width: 120px; height: 120px; border-radius: 50%; border: 4px solid #FF1493; margin-bottom: 15px; object-fit: cover;"
-                                 onerror="this.src='https://via.placeholder.com/120x120/FF1493/FFFFFF?text=NOVIA'">
+                                 style="width: 100px; height: 100px; border-radius: 50%; border: 3px solid #FF1493; margin-bottom: 15px; object-fit: cover;"
+                                 onerror="this.src='https://via.placeholder.com/100x100/FF1493/FFFFFF?text=NOVIA'">
                             
                             <div style="display: flex; flex-direction: column; gap: 10px;">
                                 <button class="card-button" onclick="fantasiaRPG.verVideoRecompensa('novia', 'mamada')" 
                                         style="background: linear-gradient(135deg, #FF1493, #FF6B6B); padding: 12px; font-size: 0.9rem;">
-                                    😮 Mamada Apasionada
+                                    😮 Mamada de ${noviaNombre}
                                 </button>
                                 <button class="card-button" onclick="fantasiaRPG.verVideoRecompensa('novia', 'doggy')" 
                                         style="background: linear-gradient(135deg, #FF1493, #FF6B6B); padding: 12px; font-size: 0.9rem;">
-                                    🐕 Doggy Style
+                                    🐕 Doggy con ${noviaNombre}
                                 </button>
                                 <button class="card-button" onclick="fantasiaRPG.verVideoRecompensa('novia', 'montar')" 
                                         style="background: linear-gradient(135deg, #FF1493, #FF6B6B); padding: 12px; font-size: 0.9rem;">
-                                    👆 Montar
+                                    👆 ${noviaNombre} te monta
                                 </button>
                             </div>
                         </div>
@@ -742,9 +742,9 @@ class FantasiaRPG {
                         <!-- REINO DEL BOSS -->
                         <div style="background: rgba(255, 215, 0, 0.2); border: 2px solid gold; border-radius: 20px; padding: 20px; text-align: center;">
                             <h2 style="color: gold; margin-bottom: 15px;">🔥 REINO DE ${bossNombre.toUpperCase()}</h2>
-                            <img src="${bossImagen}" 
-                                 style="width: 120px; height: 120px; border-radius: 50%; border: 4px solid gold; margin-bottom: 15px; object-fit: cover;"
-                                 onerror="this.src='https://via.placeholder.com/120x120/gold/000000?text=BOSS'">
+                            <img src="${this.bossDerrotado.imagen || 'https://via.placeholder.com/100x100/gold/000000?text=BOSS'}" 
+                                 style="width: 100px; height: 100px; border-radius: 50%; border: 3px solid gold; margin-bottom: 15px; object-fit: cover;"
+                                 onerror="this.src='https://via.placeholder.com/100x100/gold/000000?text=BOSS'">
                             
                             <div style="display: flex; flex-direction: column; gap: 10px;">
                                 <button class="card-button" onclick="fantasiaRPG.verVideoRecompensa('boss', 'mamada')" 
@@ -784,59 +784,49 @@ class FantasiaRPG {
         
         let videoId = '';
         let titulo = '';
+        let imagenPersonaje = '';
         
         if (tipo === 'novia') {
-            // ===== VIDEOS DE NOVIAS (EDITAR AQUÍ) =====
+            // Usar la función global para obtener el video de la novia
             const noviaData = window.obtenerNoviaSeleccionada ? window.obtenerNoviaSeleccionada() : null;
             
-            if (noviaData) {
-                const noviaId = noviaData.id;
-                titulo = `${noviaData.nombre} - ${accion}`;
-                
-                // Asignar IDs según la novia seleccionada y la acción
-                if (noviaId === 'ichika') {
-                    if (accion === 'mamada') videoId = "ID_ICHIKA_MAMADA";
-                    else if (accion === 'doggy') videoId = "ID_ICHIKA_DOGGY";
-                    else if (accion === 'montar') videoId = "ID_ICHIKA_MONTAR";
-                }
-                else if (noviaId === 'nino') {
-                    if (accion === 'mamada') videoId = "11hBAFRHLV6hnaVLYZEuZPISvL-TvsJZO";
-                    else if (accion === 'doggy') videoId = "ID_NINO_DOGGY";
-                    else if (accion === 'montar') videoId = "ID_NINO_MONTAR";
-                }
-                else if (noviaId === 'miku') {
-                    if (accion === 'mamada') videoId = "ID_MIKU_MAMADA";
-                    else if (accion === 'doggy') videoId = "ID_MIKU_DOGGY";
-                    else if (accion === 'montar') videoId = "ID_MIKU_MONTAR";
-                }
-                else if (noviaId === 'yotsuba') {
-                    if (accion === 'mamada') videoId = "ID_YOTSUBA_MAMADA";
-                    else if (accion === 'doggy') videoId = "ID_YOTSUBA_DOGGY";
-                    else if (accion === 'montar') videoId = "ID_YOTSUBA_MONTAR";
-                }
-                else if (noviaId === 'itsuki') {
-                    if (accion === 'mamada') videoId = "ID_ITSUKI_MAMADA";
-                    else if (accion === 'doggy') videoId = "ID_ITSUKI_DOGGY";
-                    else if (accion === 'montar') videoId = "ID_ITSUKI_MONTAR";
-                }
-            } else {
-                titulo = `Novia - ${accion}`;
+            if (!noviaData) {
+                alert("❌ No hay novia seleccionada en el RPG Quintillizas");
+                return;
             }
             
+            // Obtener el video según la acción
+            if (accion === 'mamada') {
+                videoId = window.obtenerVideoNovia ? window.obtenerVideoNovia('mamada') : null;
+                titulo = `Mamada de ${noviaData.nombre}`;
+            } else if (accion === 'doggy') {
+                videoId = window.obtenerVideoNovia ? window.obtenerVideoNovia('doggy') : null;
+                titulo = `Doggy con ${noviaData.nombre}`;
+            } else if (accion === 'montar') {
+                videoId = window.obtenerVideoNovia ? window.obtenerVideoNovia('montar') : null;
+                titulo = `${noviaData.nombre} te monta`;
+            }
+            
+            imagenPersonaje = noviaData.imagen;
+            
+            if (!videoId) {
+                alert("❌ Video de novia no disponible (configura los momentos íntimos en el RPG Quintillizas)");
+                return;
+            }
         } else {
-            // ===== VIDEOS DE BOSSES (YA ESTÁN EN this.bossDerrotado.videos) =====
+            // Video del boss
             videoId = this.bossDerrotado.videos[accion];
             titulo = `${this.bossDerrotado.nombre} - ${accion}`;
-        }
-        
-        if (!videoId || videoId.startsWith("ID_")) {
-            alert("❌ Video no disponible (debes configurar el ID)");
-            console.error("Video ID no configurado:", videoId);
-            return;
+            imagenPersonaje = this.bossDerrotado.imagen;
+            
+            if (!videoId || videoId.startsWith("ID_VIDEO")) {
+                alert("❌ Video de boss no disponible");
+                return;
+            }
         }
         
         this.cerrarRecompensas();
-        this.mostrarVideo(videoId, titulo, this.bossDerrotado.imagen);
+        this.mostrarVideo(videoId, titulo, imagenPersonaje, tipo);
     }
 
     cerrarRecompensas() {
@@ -847,12 +837,19 @@ class FantasiaRPG {
         this.cargarUIMenuPrincipal();
     }
 
-    mostrarVideo(videoId, titulo, imagen) {
+    mostrarVideo(videoId, titulo, imagen, tipo) {
+        const color = tipo === 'novia' ? '#FF1493' : 'gold';
+        
         const html = `
             <div style="position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.98); z-index: 10001; display: flex; justify-content: center; align-items: center;">
-                <div style="max-width: 900px; width: 95%; background: #1a1a2e; border-radius: 30px; padding: 20px; border: 3px solid #FF1493;">
+                <div style="max-width: 900px; width: 95%; background: #1a1a2e; border-radius: 30px; padding: 20px; border: 3px solid ${color};">
                     
-                    <h2 style="text-align: center; color: #FF1493; margin-bottom: 15px;">🎬 ${titulo}</h2>
+                    <div style="text-align: center; margin-bottom: 15px;">
+                        <img src="${imagen}" 
+                             style="width: 80px; height: 80px; border-radius: 50%; border: 3px solid ${color}; margin-bottom: 10px; object-fit: cover;"
+                             onerror="this.src='https://via.placeholder.com/80x80/${color === 'gold' ? 'FFD700' : 'FF1493'}/FFFFFF?text=IMG'">
+                        <h2 style="text-align: center; color: ${color}; margin-bottom: 15px;">🎬 ${titulo}</h2>
+                    </div>
                     
                     <div style="margin: 15px 0; border-radius: 15px; overflow: hidden; position: relative; padding-bottom: 56.25%; height: 0;">
                         <iframe style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;" 
@@ -863,7 +860,7 @@ class FantasiaRPG {
                     
                     <div style="text-align: center; margin-top: 15px;">
                         <button class="card-button" onclick="fantasiaRPG.cerrarVideo()" 
-                                style="background: linear-gradient(135deg, #FF1493, #FF6B6B); padding: 12px 30px;">
+                                style="background: linear-gradient(135deg, ${color}, ${color === 'gold' ? '#FF9800' : '#FF6B6B'}); padding: 12px 30px;">
                             ↩️ Cerrar Video
                         </button>
                     </div>
@@ -1492,3 +1489,9 @@ console.log("✅ RPG Fantasía cargado correctamente");
 console.log("💰 Piedras iniciales:", fantasiaRPG.jugador.piedras);
 console.log("❤️ Vida:", fantasiaRPG.jugador.vida);
 console.log("⚡ Energía:", fantasiaRPG.jugador.energia);
+console.log("🎬 IDs de videos de bosses configurados:");
+console.log("   - Rias: mamada, doggy, montar");
+console.log("   - Erza: mamada, doggy, montar");
+console.log("   - Esdeath: mamada, doggy, montar");
+console.log("   - Yor: mamada, doggy, montar");
+console.log("   - Makima: mamada, doggy, montar");
