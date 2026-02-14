@@ -1,6 +1,7 @@
 // ================================================
 // RPG COMPLETO: LAS QUINTILLIZAS NAKANO - CON TODAS LAS COMBINACIONES GRUPALES
 // + INTEGRACIÓN CON RPG FANTASÍA (BONUS POR STATS)
+// + FUNCIONES GLOBALES PARA ACCEDER A LA NOVIA SELECCIONADA
 // ================================================
 
 class QuintillizasRPG {
@@ -2028,6 +2029,57 @@ sistemaEconomia.agregarDinero = function(cantidad) {
 // ================================================
 
 const quintillizasRPG = new QuintillizasRPG();
+
+// ================================================
+// EXPONER NOVIA SELECCIONADA GLOBALMENTE PARA FANTASÍA
+// ================================================
+
+// Crear referencia global a la novia seleccionada
+window.obtenerNoviaSeleccionada = function() {
+    if (window.quintillizasRPG && window.quintillizasRPG.personajeSeleccionado) {
+        const personajeId = window.quintillizasRPG.personajeSeleccionado;
+        const personaje = window.quintillizasRPG.datosPersonajes[personajeId];
+        return {
+            id: personajeId,
+            nombre: personaje.nombre,
+            imagen: personaje.imagen
+        };
+    }
+    return null;
+};
+
+// Exponer los videos de la novia por tipo de acción
+window.obtenerVideoNovia = function(accion) {
+    if (!window.quintillizasRPG || !window.quintillizasRPG.personajeSeleccionado) return null;
+    
+    const noviaId = window.quintillizasRPG.personajeSeleccionado;
+    const novia = window.quintillizasRPG.datosPersonajes[noviaId];
+    const momentos = novia.momentosIntimos;
+    
+    if (accion === 'mamada') {
+        const momento = momentos.find(m => m.id.includes('mamada'));
+        return momento ? momento.videoId : null;
+    } else if (accion === 'doggy') {
+        const momento = momentos.find(m => m.id.includes('duro') || m.id.includes('penetracion'));
+        return momento ? momento.videoId : null;
+    } else if (accion === 'montar') {
+        const momento = momentos.find(m => m.id.includes('correrse') || m.id.includes('corrida'));
+        return momento ? momento.videoId : null;
+    }
+    
+    return null;
+};
+
+// También exponer función para obtener todos los datos de la novia
+window.obtenerDatosNovia = function() {
+    if (!window.quintillizasRPG || !window.quintillizasRPG.personajeSeleccionado) return null;
+    
+    const noviaId = window.quintillizasRPG.personajeSeleccionado;
+    return window.quintillizasRPG.datosPersonajes[noviaId] || null;
+};
+
+console.log("💖 Funciones de novia expuestas globalmente para Fantasía");
+console.log("📦 Funciones disponibles: obtenerNoviaSeleccionada(), obtenerVideoNovia(accion), obtenerDatosNovia()");
 
 // Inicializar al cargar
 document.addEventListener('DOMContentLoaded', function() {
