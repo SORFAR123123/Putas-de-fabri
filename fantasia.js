@@ -1,16 +1,16 @@
 // ================================================
 // RPG FANTASÍA - 5 PISOS CON BOSS Y RECOMPENSAS +18
-// Sistema de energía para ataques mágicos
 // Combate por turnos con sprites URL
 // Tienda de consumibles
 // Recompensas: videos de novia o boss
+// VERSIÓN CORREGIDA - Todos los bugs arreglados
 // ================================================
 
 class FantasiaRPG {
     constructor() {
         console.log("🎮 Inicializando FantasiaRPG...");
         
-        // ===== OPCIÓN 2: DETECCIÓN Y RESET DE DATOS CORRUPTOS =====
+        // Detectar y resetear datos corruptos
         this.detectarYResetearDatosCorruptos();
         
         this.jugador = this.cargarJugador() || this.inicializarJugador();
@@ -20,7 +20,7 @@ class FantasiaRPG {
         this.indiceEnemigoActual = 0;
         this.enCombate = false;
         this.mensajesCombate = [];
-        this.spriteBossActual = 'normal';
+        this.spriteBossActual = 'normal'; // 'normal', 'atacando', 'derrotado'
         this.bossDerrotado = null;
         this.pocionUsadaEsteCombate = false;
         this.esperandoRecompensas = false;
@@ -64,7 +64,7 @@ class FantasiaRPG {
             exp: 0,
             expMaxima: 100,
             
-            // Stats base
+            // Stats base (empiezan en 5)
             stats: {
                 fuerza: 5,
                 resistencia: 5,
@@ -80,7 +80,7 @@ class FantasiaRPG {
             energiaMaxima: 50,
             
             // Piedras filosofales
-            piedras: 10,
+            piedras: 10, // Empezamos con 10 para probar
             
             // Inventario de consumibles
             inventario: {
@@ -402,7 +402,7 @@ class FantasiaRPG {
                 
             case 'fuerte':
                 if (this.jugador.energia < 15) {
-                    this.agregarMensaje("❌ No tienes suficiente energía para ataque fuerte");
+                    this.agregarMensaje("❌ No tienes suficiente energía para ataque fuerte (necesitas 15 EN)");
                     return;
                 }
                 daño = 15 + Math.floor(Math.random() * 10) + this.jugador.stats.fuerza;
@@ -412,7 +412,7 @@ class FantasiaRPG {
                 
             case 'magico':
                 if (this.jugador.energia < 25) {
-                    this.agregarMensaje("❌ No tienes suficiente energía para ataque mágico");
+                    this.agregarMensaje("❌ No tienes suficiente energía para ataque mágico (necesitas 25 EN)");
                     return;
                 }
                 daño = 25 + Math.floor(Math.random() * 15) + Math.floor(this.jugador.stats.inteligencia * 1.5);
@@ -431,11 +431,13 @@ class FantasiaRPG {
         this.enemigoActual.vidaActual -= daño;
         this.agregarMensaje(`${mensaje} ${daño} de daño a ${this.enemigoActual.nombre}`);
         
-        // Cambiar sprite si es boss
-        if (this.esBossActual()) {
+        // Cambiar sprite si es boss (pero solo si no está derrotado)
+        if (this.esBossActual() && this.spriteBossActual !== 'derrotado') {
             this.spriteBossActual = 'atacando';
             setTimeout(() => { 
-                this.spriteBossActual = 'normal'; 
+                if (this.spriteBossActual !== 'derrotado') {
+                    this.spriteBossActual = 'normal'; 
+                }
                 this.actualizarUI(); 
             }, 500);
         }
@@ -454,17 +456,36 @@ class FantasiaRPG {
     turnoEnemigo() {
         if (!this.enCombate) return;
         
+        // Verificar si el boss ya fue derrotado (no debería pasar, pero por seguridad)
+        if (this.enemigoActual.vidaActual <= 0) {
+            this.enemigoDerrotado();
+            return;
+        }
+        
+        // REGENERAR ENERGÍA (5 por turno, sin pasar del máximo)
+        const energiaAnterior = this.jugador.energia;
+        this.jugador.energia = Math.min(
+            this.jugador.energia + 5, 
+            this.jugador.energiaMaxima
+        );
+        
+        if (this.jugador.energia > energiaAnterior) {
+            this.agregarMensaje(`⚡ Energía +5 (${this.jugador.energia}/${this.jugador.energiaMaxima})`);
+        }
+        
         let dañoEnemigo = this.enemigoActual.fuerza + Math.floor(Math.random() * 5);
         dañoEnemigo = Math.max(1, dañoEnemigo - 2); // Defensa base del jugador
         
         this.jugador.vida -= dañoEnemigo;
         this.agregarMensaje(`💢 ${this.enemigoActual.nombre} te ataca! ${dañoEnemigo} de daño`);
         
-        // Cambiar sprite si es boss
-        if (this.esBossActual()) {
+        // Cambiar sprite si es boss (pero solo si no está derrotado)
+        if (this.esBossActual() && this.spriteBossActual !== 'derrotado') {
             this.spriteBossActual = 'atacando';
             setTimeout(() => { 
-                this.spriteBossActual = 'normal'; 
+                if (this.spriteBossActual !== 'derrotado') {
+                    this.spriteBossActual = 'normal'; 
+                }
                 this.actualizarUI(); 
             }, 500);
         }
@@ -473,8 +494,8 @@ class FantasiaRPG {
         if (this.jugador.vida <= 0) {
             this.jugador.vida = 0;
             this.agregarMensaje("💀 Has muerto...");
-            setTimeout(() => this.muerteJugador(), 1500);
             this.actualizarUI();
+            setTimeout(() => this.muerteJugador(), 2000);
             return;
         }
         
@@ -495,6 +516,7 @@ class FantasiaRPG {
         this.indiceEnemigoActual = 0;
         this.enCombate = true;
         this.pocionUsadaEsteCombate = false;
+        this.spriteBossActual = 'normal';
         
         // Restaurar vida y energía al entrar al piso
         this.jugador.vida = this.jugador.vidaMaxima;
@@ -531,7 +553,7 @@ class FantasiaRPG {
         this.agregarMensaje(`⭐ +${this.enemigoActual.exp} EXP`);
         
         if (esBoss) {
-            // Es BOSS - Mostrar sprite derrotado y esperar 5 segundos
+            // Es BOSS - Cambiar a sprite derrotado y MANTENERLO
             this.spriteBossActual = 'derrotado';
             this.bossDerrotado = this.enemigoActual;
             this.jugador.bossesDerrotados++;
@@ -542,10 +564,13 @@ class FantasiaRPG {
                 this.pisos[this.pisoActual + 1].desbloqueado = true;
             }
             
+            // Mostrar mensaje de cuenta regresiva
+            this.agregarMensaje("⏳ Mostrando recompensas en 5 segundos...");
+            
+            // Actualizar UI para mostrar el sprite derrotado
             this.actualizarUI();
             
             // DELAY DE 5 SEGUNDOS antes de mostrar recompensas
-            this.agregarMensaje("⏳ Mostrando recompensas en 5 segundos...");
             setTimeout(() => {
                 this.mostrarRecompensasBoss();
             }, 5000);
@@ -566,6 +591,7 @@ class FantasiaRPG {
                 // Cargar BOSS
                 this.enemigoActual = JSON.parse(JSON.stringify(this.pisos[this.pisoActual].boss));
                 this.enemigoActual.vidaActual = this.enemigoActual.vida;
+                this.spriteBossActual = 'normal';
                 this.agregarMensaje(`🔥 BOSS: ${this.enemigoActual.nombre}`);
                 setTimeout(() => this.actualizarUI(), 1500);
             }
@@ -582,7 +608,8 @@ class FantasiaRPG {
         this.jugador.vida = this.jugador.vidaMaxima;
         this.jugador.energia = this.jugador.energiaMaxima;
         this.guardarTodo();
-        this.cargarUIMenuPrincipal();
+        this.mostrarNotificacion("💀 Has muerto... Volviendo al menú");
+        setTimeout(() => this.cargarUIMenuPrincipal(), 1000);
     }
 
     // ====================
@@ -622,7 +649,7 @@ class FantasiaRPG {
                     this.agregarMensaje("⚡ Usaste poción de energía: +20 EN");
                     this.guardarTodo();
                     this.actualizarUI();
-                    // No pasa turno
+                    // No pasa turno - puedes seguir atacando
                 }
                 break;
         }
@@ -647,6 +674,18 @@ class FantasiaRPG {
         this.actualizarUI();
     }
 
+    rendirse() {
+        if (!this.enCombate) return;
+        
+        if (confirm("¿Seguro que quieres rendirte? Perderás el progreso de este combate.")) {
+            this.agregarMensaje("🏳️ Te has rendido...");
+            this.enCombate = false;
+            this.guardarTodo();
+            setTimeout(() => this.cargarUIMenuPrincipal(), 1500);
+            this.actualizarUI();
+        }
+    }
+
     // ====================
     // RECOMPENSAS DE BOSS (CON NOVIA SELECCIONADA)
     // ====================
@@ -654,16 +693,11 @@ class FantasiaRPG {
     mostrarRecompensasBoss() {
         if (!this.bossDerrotado) return;
         
-        // Obtener novia seleccionada del RPG Quintillizas
-        const noviaActual = window.quintillizasRPG?.personajeSeleccionado;
-        let noviaNombre = "Ninguna";
-        let noviaImagen = "https://via.placeholder.com/100";
-        
-        if (noviaActual && window.quintillizasRPG?.datosPersonajes[noviaActual]) {
-            const novia = window.quintillizasRPG.datosPersonajes[noviaActual];
-            noviaNombre = novia.nombre.split(' ')[0];
-            noviaImagen = novia.imagen;
-        }
+        // Obtener novia seleccionada usando las funciones globales del RPG
+        const noviaData = window.obtenerNoviaSeleccionada ? window.obtenerNoviaSeleccionada() : null;
+        const noviaNombre = noviaData ? noviaData.nombre.split(' ')[0] : "Ninguna";
+        const noviaImagen = noviaData ? noviaData.imagen : "https://via.placeholder.com/100";
+        const noviaId = noviaData ? noviaData.id : null;
         
         const bossNombre = this.bossDerrotado.nombre;
         
@@ -676,7 +710,7 @@ class FantasiaRPG {
                     
                     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 30px;">
                         
-                        <!-- REINO DE LA NOVIA (SIEMPRE VISIBLE) -->
+                        <!-- REINO DE LA NOVIA -->
                         <div style="background: rgba(255, 20, 147, 0.2); border: 2px solid #FF1493; border-radius: 20px; padding: 20px; text-align: center;">
                             <h2 style="color: #FF1493; margin-bottom: 15px;">💖 REINO DE ${noviaNombre.toUpperCase()}</h2>
                             <img src="${noviaImagen}" 
@@ -702,7 +736,7 @@ class FantasiaRPG {
                         <!-- REINO DEL BOSS -->
                         <div style="background: rgba(255, 215, 0, 0.2); border: 2px solid gold; border-radius: 20px; padding: 20px; text-align: center;">
                             <h2 style="color: gold; margin-bottom: 15px;">🔥 REINO DE ${bossNombre.toUpperCase()}</h2>
-                            <img src="${this.bossDerrotado.imagen}" 
+                            <img src="${this.bossDerrotado.imagen || 'https://via.placeholder.com/100'}" 
                                  style="width: 100px; height: 100px; border-radius: 50%; border: 3px solid gold; margin-bottom: 15px; object-fit: cover;"
                                  onerror="this.src='https://via.placeholder.com/100x100/gold/000000?text=BOSS'">
                             
@@ -746,27 +780,11 @@ class FantasiaRPG {
         let titulo = '';
         
         if (tipo === 'novia') {
-            const noviaId = window.quintillizasRPG?.personajeSeleccionado;
-            if (!noviaId) {
-                alert("❌ No tienes ninguna novia seleccionada en el RPG Quintillizas");
-                return;
-            }
+            // Usar la función global para obtener el video
+            videoId = window.obtenerVideoNovia ? window.obtenerVideoNovia(accion) : null;
             
-            const novia = window.quintillizasRPG.datosPersonajes[noviaId];
-            const momentos = novia.momentosIntimos;
-            
-            if (accion === 'mamada') {
-                const momento = momentos.find(m => m.id.includes('mamada'));
-                videoId = momento?.videoId;
-            } else if (accion === 'doggy') {
-                const momento = momentos.find(m => m.id.includes('duro') || m.id.includes('penetracion'));
-                videoId = momento?.videoId;
-            } else if (accion === 'montar') {
-                const momento = momentos.find(m => m.id.includes('correrse') || m.id.includes('corrida'));
-                videoId = momento?.videoId;
-            }
-            
-            titulo = `${novia.nombre} - ${accion}`;
+            const noviaData = window.obtenerNoviaSeleccionada ? window.obtenerNoviaSeleccionada() : null;
+            titulo = noviaData ? `${noviaData.nombre} - ${accion}` : `Novia - ${accion}`;
             
         } else {
             videoId = this.bossDerrotado.videos[accion];
@@ -786,6 +804,7 @@ class FantasiaRPG {
         const overlay = document.getElementById('recompensas-overlay');
         if (overlay) overlay.remove();
         this.bossDerrotado = null;
+        this.spriteBossActual = 'normal';
         this.cargarUIMenuPrincipal();
     }
 
@@ -1011,7 +1030,7 @@ class FantasiaRPG {
                     </button>
                 </div>
                 
-                <!-- BOTÓN DE RESET (OPCIÓN 3) -->
+                <!-- BOTÓN DE RESET -->
                 <div style="text-align: center; margin: 20px 0;">
                     <button class="card-button" onclick="fantasiaRPG.resetearTodo()" 
                             style="background: linear-gradient(135deg, #FF6B6B, #FF0000); padding: 15px;">
@@ -1044,11 +1063,14 @@ class FantasiaRPG {
         const esBoss = this.esBossActual();
         let imagenEnemigo = this.enemigoActual.imagen;
         
+        // Seleccionar imagen según el estado del sprite (para boss)
         if (esBoss) {
             if (this.spriteBossActual === 'atacando' && this.enemigoActual.imagenAtacando) {
                 imagenEnemigo = this.enemigoActual.imagenAtacando;
             } else if (this.spriteBossActual === 'derrotado' && this.enemigoActual.imagenDerrotado) {
                 imagenEnemigo = this.enemigoActual.imagenDerrotado;
+            } else {
+                imagenEnemigo = this.enemigoActual.imagen;
             }
         }
         
@@ -1118,7 +1140,7 @@ class FantasiaRPG {
                             </div>
                             
                             ${esBoss && this.spriteBossActual === 'derrotado' ? 
-                                '<p style="color: gold; margin-top: 10px; font-weight: bold;">💀 BOSS DERROTADO - PREMIOS EN 5 SEGUNDOS...</p>' : ''}
+                                '<p style="color: gold; margin-top: 10px; font-weight: bold; animation: pulse 1s infinite;">💀 BOSS DERROTADO - PREMIOS EN 5 SEGUNDOS...</p>' : ''}
                         </div>
                     </div>
                 </div>
@@ -1130,7 +1152,9 @@ class FantasiaRPG {
                         : '<div style="text-align: center; opacity: 0.7;">El combate comienza...</div>'}
                 </div>
                 
-                <!-- ACCIONES (CON 3 TIPOS DE ATAQUE) -->
+                <!-- ACCIONES (solo si el boss no está derrotado) -->
+                ${this.spriteBossActual !== 'derrotado' ? `
+                <!-- ATAQUES PRINCIPALES -->
                 <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-bottom: 20px;">
                     <button class="card-button" onclick="fantasiaRPG.atacar('basico')" 
                             style="background: linear-gradient(135deg, #FF6B6B, #FF1493); padding: 15px;">
@@ -1158,11 +1182,17 @@ class FantasiaRPG {
                             style="background: linear-gradient(135deg, #5864F5, #8A5AF7); padding: 15px;">
                         🏃 HUIR
                     </button>
-                    <button class="card-button" onclick="fantasiaRPG.cargarUIMenuPrincipal()" 
+                    <button class="card-button" onclick="fantasiaRPG.rendirse()" 
                             style="background: linear-gradient(135deg, #666, #333); padding: 15px;">
-                        ↩️ RENDIRSE
+                        🏳️ RENDIRSE
                     </button>
                 </div>
+                ` : `
+                <!-- MENSAJE MIENTRAS SE ESPERAN RECOMPENSAS -->
+                <div style="text-align: center; padding: 30px; background: rgba(255,215,0,0.1); border-radius: 15px; margin: 20px 0;">
+                    <p style="color: gold; font-size: 1.2rem;">⏳ Preparando recompensas...</p>
+                </div>
+                `}
                 
                 <!-- INVENTARIO RÁPIDO -->
                 <div style="background: rgba(255,255,255,0.05); border-radius: 15px; padding: 15px;">
