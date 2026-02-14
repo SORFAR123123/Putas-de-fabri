@@ -1,5 +1,6 @@
 // ================================================
 // RPG FANTASÍA - 5 PISOS CON BOSS Y RECOMPENSAS +18
+// Sistema de energía para ataques mágicos
 // Combate por turnos con sprites URL
 // Tienda de consumibles
 // Recompensas: videos de novia o boss
@@ -8,6 +9,10 @@
 class FantasiaRPG {
     constructor() {
         console.log("🎮 Inicializando FantasiaRPG...");
+        
+        // ===== OPCIÓN 2: DETECCIÓN Y RESET DE DATOS CORRUPTOS =====
+        this.detectarYResetearDatosCorruptos();
+        
         this.jugador = this.cargarJugador() || this.inicializarJugador();
         this.pisos = this.inicializarPisos();
         this.pisoActual = this.cargarPisoActual() || 1;
@@ -18,7 +23,35 @@ class FantasiaRPG {
         this.spriteBossActual = 'normal';
         this.bossDerrotado = null;
         this.pocionUsadaEsteCombate = false;
+        this.esperandoRecompensas = false;
         console.log("✅ FantasiaRPG inicializado:", this.jugador);
+    }
+
+    // ====================
+    // DETECCIÓN DE DATOS CORRUPTOS
+    // ====================
+
+    detectarYResetearDatosCorruptos() {
+        try {
+            const testJugador = localStorage.getItem('fantasia_jugador');
+            if (testJugador) {
+                const parsed = JSON.parse(testJugador);
+                if (!parsed.stats || !parsed.inventario || !parsed.stats.fuerza) {
+                    console.warn("⚠️ Datos corruptos detectados, reseteando...");
+                    this.limpiarLocalStorage();
+                }
+            }
+        } catch (e) {
+            console.warn("⚠️ Error al leer datos, reseteando...");
+            this.limpiarLocalStorage();
+        }
+    }
+
+    limpiarLocalStorage() {
+        localStorage.removeItem('fantasia_jugador');
+        localStorage.removeItem('fantasia_pisos');
+        localStorage.removeItem('fantasia_pisoActual');
+        console.log("🧹 LocalStorage limpiado");
     }
 
     // ====================
@@ -31,7 +64,7 @@ class FantasiaRPG {
             exp: 0,
             expMaxima: 100,
             
-            // Stats base (empiezan en 5)
+            // Stats base
             stats: {
                 fuerza: 5,
                 resistencia: 5,
@@ -47,7 +80,7 @@ class FantasiaRPG {
             energiaMaxima: 50,
             
             // Piedras filosofales
-            piedras: 10, // Empezamos con 10 para probar
+            piedras: 10,
             
             // Inventario de consumibles
             inventario: {
@@ -71,9 +104,6 @@ class FantasiaRPG {
                 desbloqueado: true,
                 completado: false,
                 jefe: "Rias Gremory",
-                imagenJefe: "URL_RIAS_NORMAL",
-                imagenJefeAtacando: "URL_RIAS_ATACANDO",
-                imagenJefeDerrotado: "URL_RIAS_DERROTADO",
                 enemigos: [
                     {
                         id: "slime",
@@ -108,7 +138,7 @@ class FantasiaRPG {
                 ],
                 boss: {
                     id: "rias",
-                    nombre: "🔥 Rias la putona",
+                    nombre: "🔥 Rias Gremory",
                     imagen: "https://pbs.twimg.com/media/HBE4XBQakAEjLjq?format=jpg&name=medium",
                     imagenAtacando: "https://pbs.twimg.com/media/HBE4c2sXEAAuow7?format=png&name=small",
                     imagenDerrotado: "https://pbs.twimg.com/media/HBE3hojWQAAMSRN?format=jpg&name=medium",
@@ -130,9 +160,6 @@ class FantasiaRPG {
                 desbloqueado: false,
                 completado: false,
                 jefe: "Erza Scarlet",
-                imagenJefe: "https://via.placeholder.com/150x150/FF5722/FFFFFF?text=ERZA",
-                imagenJefeAtacando: "https://via.placeholder.com/150x150/FF5722/FFFFFF?text=ERZA+ATK",
-                imagenJefeDerrotado: "https://via.placeholder.com/150x150/FF5722/FFFFFF?text=ERZA+DEF",
                 enemigos: [
                     {
                         id: "elemental",
@@ -189,9 +216,6 @@ class FantasiaRPG {
                 desbloqueado: false,
                 completado: false,
                 jefe: "Esdeath",
-                imagenJefe: "https://via.placeholder.com/150x150/2196F3/FFFFFF?text=ESDEATH",
-                imagenJefeAtacando: "https://via.placeholder.com/150x150/2196F3/FFFFFF?text=ESDEATH+ATK",
-                imagenJefeDerrotado: "https://via.placeholder.com/150x150/2196F3/FFFFFF?text=ESDEATH+DEF",
                 enemigos: [
                     {
                         id: "fantasma",
@@ -248,9 +272,6 @@ class FantasiaRPG {
                 desbloqueado: false,
                 completado: false,
                 jefe: "Yor Forger",
-                imagenJefe: "https://via.placeholder.com/150x150/9C27B0/FFFFFF?text=YOR",
-                imagenJefeAtacando: "https://via.placeholder.com/150x150/9C27B0/FFFFFF?text=YOR+ATK",
-                imagenJefeDerrotado: "https://via.placeholder.com/150x150/9C27B0/FFFFFF?text=YOR+DEF",
                 enemigos: [
                     {
                         id: "samurai",
@@ -307,9 +328,6 @@ class FantasiaRPG {
                 desbloqueado: false,
                 completado: false,
                 jefe: "Makima",
-                imagenJefe: "https://via.placeholder.com/150x150/FFEB3B/000000?text=MAKIMA",
-                imagenJefeAtacando: "https://via.placeholder.com/150x150/FFEB3B/000000?text=MAKIMA+ATK",
-                imagenJefeDerrotado: "https://via.placeholder.com/150x150/FFEB3B/000000?text=MAKIMA+DEF",
                 enemigos: [
                     {
                         id: "angel",
@@ -365,48 +383,61 @@ class FantasiaRPG {
     }
 
     // ====================
-    // COMBATE POR TURNOS
+    // SISTEMA DE ATAQUES (CON ENERGÍA)
     // ====================
 
-    entrarAlPiso(pisoNumero) {
-        if (!this.pisos[pisoNumero].desbloqueado) {
-            this.mostrarNotificacion("❌ Este piso no está desbloqueado");
-            return false;
-        }
-
-        this.pisoActual = pisoNumero;
-        this.indiceEnemigoActual = 0;
-        this.enCombate = true;
-        this.pocionUsadaEsteCombate = false;
-        
-        // Cargar primer enemigo
-        this.enemigoActual = JSON.parse(JSON.stringify(
-            this.pisos[pisoNumero].enemigos[this.indiceEnemigoActual]
-        ));
-        this.enemigoActual.vidaActual = this.enemigoActual.vida;
-        
-        this.mensajesCombate = [];
-        this.agregarMensaje(`⚔️ Entraste al ${this.pisos[pisoNumero].nombre}`);
-        this.agregarMensaje(`🐉 Enemigo: ${this.enemigoActual.nombre}`);
-        
-        this.guardarTodo();
-        this.actualizarUI();
-    }
-
-    atacar() {
+    atacar(tipo = 'basico') {
         if (!this.enCombate) return;
         
-        // Calcular daño del jugador
-        let daño = 5 + Math.floor(Math.random() * 6) + Math.floor(this.jugador.stats.fuerza / 2);
+        let daño = 0;
+        let costoEnergia = 0;
+        let mensaje = "";
+        
+        switch(tipo) {
+            case 'basico':
+                daño = 5 + Math.floor(Math.random() * 6) + Math.floor(this.jugador.stats.fuerza / 2);
+                costoEnergia = 0;
+                mensaje = `⚔️ Ataque básico!`;
+                break;
+                
+            case 'fuerte':
+                if (this.jugador.energia < 15) {
+                    this.agregarMensaje("❌ No tienes suficiente energía para ataque fuerte");
+                    return;
+                }
+                daño = 15 + Math.floor(Math.random() * 10) + this.jugador.stats.fuerza;
+                costoEnergia = 15;
+                mensaje = `💥 ATAQUE FUERTE!`;
+                break;
+                
+            case 'magico':
+                if (this.jugador.energia < 25) {
+                    this.agregarMensaje("❌ No tienes suficiente energía para ataque mágico");
+                    return;
+                }
+                daño = 25 + Math.floor(Math.random() * 15) + Math.floor(this.jugador.stats.inteligencia * 1.5);
+                costoEnergia = 25;
+                mensaje = `✨ ATAQUE MÁGICO!`;
+                break;
+        }
+        
+        // Aplicar costo de energía
+        this.jugador.energia -= costoEnergia;
+        
+        // Calcular daño final (reducir por defensa)
         daño = Math.max(1, daño - this.enemigoActual.defensa);
         
+        // Aplicar daño al enemigo
         this.enemigoActual.vidaActual -= daño;
-        this.agregarMensaje(`💥 Atacas! ${daño} de daño a ${this.enemigoActual.nombre}`);
+        this.agregarMensaje(`${mensaje} ${daño} de daño a ${this.enemigoActual.nombre}`);
         
         // Cambiar sprite si es boss
         if (this.esBossActual()) {
             this.spriteBossActual = 'atacando';
-            setTimeout(() => { this.spriteBossActual = 'normal'; this.actualizarUI(); }, 500);
+            setTimeout(() => { 
+                this.spriteBossActual = 'normal'; 
+                this.actualizarUI(); 
+            }, 500);
         }
         
         // Verificar si enemigo murió
@@ -432,7 +463,10 @@ class FantasiaRPG {
         // Cambiar sprite si es boss
         if (this.esBossActual()) {
             this.spriteBossActual = 'atacando';
-            setTimeout(() => { this.spriteBossActual = 'normal'; this.actualizarUI(); }, 500);
+            setTimeout(() => { 
+                this.spriteBossActual = 'normal'; 
+                this.actualizarUI(); 
+            }, 500);
         }
         
         // Verificar si jugador murió
@@ -447,6 +481,43 @@ class FantasiaRPG {
         this.actualizarUI();
     }
 
+    // ====================
+    // ENTRAR AL PISO
+    // ====================
+
+    entrarAlPiso(pisoNumero) {
+        if (!this.pisos[pisoNumero].desbloqueado) {
+            this.mostrarNotificacion("❌ Este piso no está desbloqueado");
+            return false;
+        }
+
+        this.pisoActual = pisoNumero;
+        this.indiceEnemigoActual = 0;
+        this.enCombate = true;
+        this.pocionUsadaEsteCombate = false;
+        
+        // Restaurar vida y energía al entrar al piso
+        this.jugador.vida = this.jugador.vidaMaxima;
+        this.jugador.energia = this.jugador.energiaMaxima;
+        
+        // Cargar primer enemigo
+        this.enemigoActual = JSON.parse(JSON.stringify(
+            this.pisos[pisoNumero].enemigos[this.indiceEnemigoActual]
+        ));
+        this.enemigoActual.vidaActual = this.enemigoActual.vida;
+        
+        this.mensajesCombate = [];
+        this.agregarMensaje(`⚔️ Entraste al ${this.pisos[pisoNumero].nombre}`);
+        this.agregarMensaje(`🐉 Enemigo: ${this.enemigoActual.nombre}`);
+        
+        this.guardarTodo();
+        this.actualizarUI();
+    }
+
+    // ====================
+    // ENEMIGO DERROTADO (CON DELAY DE 5 SEGUNDOS PARA BOSS)
+    // ====================
+
     enemigoDerrotado() {
         const esBoss = this.esBossActual();
         
@@ -460,7 +531,7 @@ class FantasiaRPG {
         this.agregarMensaje(`⭐ +${this.enemigoActual.exp} EXP`);
         
         if (esBoss) {
-            // Es BOSS
+            // Es BOSS - Mostrar sprite derrotado y esperar 5 segundos
             this.spriteBossActual = 'derrotado';
             this.bossDerrotado = this.enemigoActual;
             this.jugador.bossesDerrotados++;
@@ -472,7 +543,13 @@ class FantasiaRPG {
             }
             
             this.actualizarUI();
-            this.mostrarRecompensasBoss();
+            
+            // DELAY DE 5 SEGUNDOS antes de mostrar recompensas
+            this.agregarMensaje("⏳ Mostrando recompensas en 5 segundos...");
+            setTimeout(() => {
+                this.mostrarRecompensasBoss();
+            }, 5000);
+            
         } else {
             // Es enemigo normal, pasar al siguiente
             this.indiceEnemigoActual++;
@@ -502,7 +579,8 @@ class FantasiaRPG {
     muerteJugador() {
         this.enCombate = false;
         this.bossDerrotado = null;
-        this.jugador.vida = this.jugador.vidaMaxima; // Revivir al salir
+        this.jugador.vida = this.jugador.vidaMaxima;
+        this.jugador.energia = this.jugador.energiaMaxima;
         this.guardarTodo();
         this.cargarUIMenuPrincipal();
     }
@@ -570,16 +648,22 @@ class FantasiaRPG {
     }
 
     // ====================
-    // RECOMPENSAS DE BOSS
+    // RECOMPENSAS DE BOSS (CON NOVIA SELECCIONADA)
     // ====================
 
     mostrarRecompensasBoss() {
         if (!this.bossDerrotado) return;
         
+        // Obtener novia seleccionada del RPG Quintillizas
         const noviaActual = window.quintillizasRPG?.personajeSeleccionado;
-        const noviaNombre = noviaActual ? 
-            window.quintillizasRPG.datosPersonajes[noviaActual]?.nombre?.split(' ')[0] || "Ninguna" : 
-            "Ninguna";
+        let noviaNombre = "Ninguna";
+        let noviaImagen = "https://via.placeholder.com/100";
+        
+        if (noviaActual && window.quintillizasRPG?.datosPersonajes[noviaActual]) {
+            const novia = window.quintillizasRPG.datosPersonajes[noviaActual];
+            noviaNombre = novia.nombre.split(' ')[0];
+            noviaImagen = novia.imagen;
+        }
         
         const bossNombre = this.bossDerrotado.nombre;
         
@@ -592,11 +676,12 @@ class FantasiaRPG {
                     
                     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 30px;">
                         
-                        <!-- REINO DE LA NOVIA -->
+                        <!-- REINO DE LA NOVIA (SIEMPRE VISIBLE) -->
                         <div style="background: rgba(255, 20, 147, 0.2); border: 2px solid #FF1493; border-radius: 20px; padding: 20px; text-align: center;">
                             <h2 style="color: #FF1493; margin-bottom: 15px;">💖 REINO DE ${noviaNombre.toUpperCase()}</h2>
-                            <img src="${window.quintillizasRPG?.datosPersonajes[noviaActual]?.imagen || 'https://via.placeholder.com/100'}" 
-                                 style="width: 80px; height: 80px; border-radius: 50%; border: 3px solid #FF1493; margin-bottom: 15px; object-fit: cover;">
+                            <img src="${noviaImagen}" 
+                                 style="width: 100px; height: 100px; border-radius: 50%; border: 3px solid #FF1493; margin-bottom: 15px; object-fit: cover;"
+                                 onerror="this.src='https://via.placeholder.com/100x100/FF1493/FFFFFF?text=NOVIA'">
                             
                             <div style="display: flex; flex-direction: column; gap: 10px;">
                                 <button class="card-button" onclick="fantasiaRPG.verVideoRecompensa('novia', 'mamada')" 
@@ -617,8 +702,9 @@ class FantasiaRPG {
                         <!-- REINO DEL BOSS -->
                         <div style="background: rgba(255, 215, 0, 0.2); border: 2px solid gold; border-radius: 20px; padding: 20px; text-align: center;">
                             <h2 style="color: gold; margin-bottom: 15px;">🔥 REINO DE ${bossNombre.toUpperCase()}</h2>
-                            <img src="${this.bossDerrotado.imagen || 'https://via.placeholder.com/100'}" 
-                                 style="width: 80px; height: 80px; border-radius: 50%; border: 3px solid gold; margin-bottom: 15px; object-fit: cover;">
+                            <img src="${this.bossDerrotado.imagen}" 
+                                 style="width: 100px; height: 100px; border-radius: 50%; border: 3px solid gold; margin-bottom: 15px; object-fit: cover;"
+                                 onerror="this.src='https://via.placeholder.com/100x100/gold/000000?text=BOSS'">
                             
                             <div style="display: flex; flex-direction: column; gap: 10px;">
                                 <button class="card-button" onclick="fantasiaRPG.verVideoRecompensa('boss', 'mamada')" 
@@ -687,7 +773,7 @@ class FantasiaRPG {
             titulo = `${this.bossDerrotado.nombre} - ${accion}`;
         }
         
-        if (!videoId || videoId === "ID_VIDEO_MAMADA_RIAS") {
+        if (!videoId || videoId.startsWith("ID_VIDEO")) {
             alert("❌ Video no disponible (debes configurar el ID)");
             return;
         }
@@ -868,6 +954,9 @@ class FantasiaRPG {
             `;
         }).join('');
         
+        // Calcular porcentaje de EXP
+        const expPorcentaje = (this.jugador.exp / this.jugador.expMaxima) * 100;
+        
         const html = `
             <div style="max-width: 1000px; margin: 0 auto; padding: 20px;">
                 <h1 style="text-align: center; color: gold; margin-bottom: 10px;">⚔️ RPG FANTASÍA - PISOS</h1>
@@ -893,6 +982,17 @@ class FantasiaRPG {
                             <div style="font-size: 2rem; font-weight: bold;">${this.jugador.energia}/${this.jugador.energiaMaxima}</div>
                         </div>
                     </div>
+                    
+                    <!-- BARRA DE EXPERIENCIA -->
+                    <div style="margin-top: 20px;">
+                        <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                            <span style="color: white;">EXPERIENCIA</span>
+                            <span style="color: white;">${this.jugador.exp}/${this.jugador.expMaxima}</span>
+                        </div>
+                        <div style="background: rgba(255,255,255,0.2); height: 15px; border-radius: 10px; overflow: hidden;">
+                            <div style="background: linear-gradient(135deg, #FFD166, #FF9800); width: ${expPorcentaje}%; height: 100%; transition: width 0.3s ease;"></div>
+                        </div>
+                    </div>
                 </div>
                 
                 <!-- PISOS -->
@@ -908,6 +1008,14 @@ class FantasiaRPG {
                     <button class="card-button" onclick="volverAlInicio()" 
                             style="background: linear-gradient(135deg, #FF6B6B, #FF1493); padding: 20px;">
                         ↩️ VOLVER AL INICIO
+                    </button>
+                </div>
+                
+                <!-- BOTÓN DE RESET (OPCIÓN 3) -->
+                <div style="text-align: center; margin: 20px 0;">
+                    <button class="card-button" onclick="fantasiaRPG.resetearTodo()" 
+                            style="background: linear-gradient(135deg, #FF6B6B, #FF0000); padding: 15px;">
+                        🔄 RESETEAR PROGRESO (solo si hay errores)
                     </button>
                 </div>
                 
@@ -946,6 +1054,7 @@ class FantasiaRPG {
         
         const porcentajeVidaJugador = (this.jugador.vida / this.jugador.vidaMaxima) * 100;
         const porcentajeVidaEnemigo = (this.enemigoActual.vidaActual / this.enemigoActual.vida) * 100;
+        const porcentajeEnergia = (this.jugador.energia / this.jugador.energiaMaxima) * 100;
         
         return `
             <div style="max-width: 1000px; margin: 0 auto; padding: 20px;">
@@ -964,12 +1073,27 @@ class FantasiaRPG {
                             <img src="https://via.placeholder.com/150x150/5864F5/FFFFFF?text=JUGADOR" 
                                  style="width: 150px; height: 150px; border-radius: 50%; border: 3px solid #5864F5; margin-bottom: 15px; object-fit: cover;">
                             <h3 style="color: #5864F5;">Héroe</h3>
+                            
+                            <!-- BARRA DE VIDA -->
                             <div style="margin-top: 10px;">
-                                <div style="background: rgba(255,255,255,0.1); height: 20px; border-radius: 10px; overflow: hidden;">
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 2px;">
+                                    <span style="color: #FF6B6B;">❤️ VIDA</span>
+                                    <span>${this.jugador.vida}/${this.jugador.vidaMaxima}</span>
+                                </div>
+                                <div style="background: rgba(255,255,255,0.1); height: 15px; border-radius: 10px; overflow: hidden;">
                                     <div style="background: linear-gradient(135deg, #FF6B6B, #FF1493); width: ${porcentajeVidaJugador}%; height: 100%;"></div>
                                 </div>
-                                <p style="margin-top: 5px;">❤️ ${this.jugador.vida}/${this.jugador.vidaMaxima}</p>
-                                <p>⚡ ${this.jugador.energia}/${this.jugador.energiaMaxima}</p>
+                            </div>
+                            
+                            <!-- BARRA DE ENERGÍA -->
+                            <div style="margin-top: 10px;">
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 2px;">
+                                    <span style="color: #FFD700;">⚡ ENERGÍA</span>
+                                    <span>${this.jugador.energia}/${this.jugador.energiaMaxima}</span>
+                                </div>
+                                <div style="background: rgba(255,255,255,0.1); height: 15px; border-radius: 10px; overflow: hidden;">
+                                    <div style="background: linear-gradient(135deg, #FFD700, #FF9800); width: ${porcentajeEnergia}%; height: 100%;"></div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -981,12 +1105,20 @@ class FantasiaRPG {
                                  style="width: 150px; height: 150px; border-radius: 50%; border: 3px solid ${esBoss ? 'gold' : '#FF6B6B'}; margin-bottom: 15px; object-fit: cover;"
                                  onerror="this.src='https://via.placeholder.com/150x150/FF6B6B/FFFFFF?text=ENEMIGO'">
                             <h3 style="color: ${esBoss ? 'gold' : '#FF6B6B'};">${this.enemigoActual.nombre}</h3>
+                            
+                            <!-- BARRA DE VIDA DEL ENEMIGO -->
                             <div style="margin-top: 10px;">
-                                <div style="background: rgba(255,255,255,0.1); height: 20px; border-radius: 10px; overflow: hidden;">
+                                <div style="display: flex; justify-content: space-between; margin-bottom: 2px;">
+                                    <span style="color: #FF6B6B;">❤️ VIDA</span>
+                                    <span>${this.enemigoActual.vidaActual}/${this.enemigoActual.vida}</span>
+                                </div>
+                                <div style="background: rgba(255,255,255,0.1); height: 15px; border-radius: 10px; overflow: hidden;">
                                     <div style="background: linear-gradient(135deg, #FF6B6B, #FF1493); width: ${porcentajeVidaEnemigo}%; height: 100%;"></div>
                                 </div>
-                                <p style="margin-top: 5px;">❤️ ${this.enemigoActual.vidaActual}/${this.enemigoActual.vida}</p>
                             </div>
+                            
+                            ${esBoss && this.spriteBossActual === 'derrotado' ? 
+                                '<p style="color: gold; margin-top: 10px; font-weight: bold;">💀 BOSS DERROTADO - PREMIOS EN 5 SEGUNDOS...</p>' : ''}
                         </div>
                     </div>
                 </div>
@@ -998,12 +1130,26 @@ class FantasiaRPG {
                         : '<div style="text-align: center; opacity: 0.7;">El combate comienza...</div>'}
                 </div>
                 
-                <!-- ACCIONES -->
-                <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-bottom: 20px;">
-                    <button class="card-button" onclick="fantasiaRPG.atacar()" 
+                <!-- ACCIONES (CON 3 TIPOS DE ATAQUE) -->
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-bottom: 20px;">
+                    <button class="card-button" onclick="fantasiaRPG.atacar('basico')" 
                             style="background: linear-gradient(135deg, #FF6B6B, #FF1493); padding: 15px;">
-                        ⚔️ ATACAR
+                        ⚔️ BÁSICO (0 EN)
                     </button>
+                    <button class="card-button" onclick="fantasiaRPG.atacar('fuerte')" 
+                            style="background: linear-gradient(135deg, #FF9800, #F44336); padding: 15px; ${this.jugador.energia < 15 ? 'opacity:0.5;' : ''}"
+                            ${this.jugador.energia < 15 ? 'disabled' : ''}>
+                        💥 FUERTE (15 EN)
+                    </button>
+                    <button class="card-button" onclick="fantasiaRPG.atacar('magico')" 
+                            style="background: linear-gradient(135deg, #8A5AF7, #5864F5); padding: 15px; ${this.jugador.energia < 25 ? 'opacity:0.5;' : ''}"
+                            ${this.jugador.energia < 25 ? 'disabled' : ''}>
+                        ✨ MÁGICO (25 EN)
+                    </button>
+                </div>
+                
+                <!-- ACCIONES SECUNDARIAS -->
+                <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-bottom: 20px;">
                     <button class="card-button" onclick="fantasiaRPG.mostrarMenuPociones()" 
                             style="background: linear-gradient(135deg, #4CAF50, #2E7D32); padding: 15px;">
                         💊 POCIONES
@@ -1186,6 +1332,19 @@ class FantasiaRPG {
             mangaSection.innerHTML = this.cargarUICombate();
         } else {
             mangaSection.innerHTML = this.cargarUIMenuPrincipal();
+        }
+    }
+
+    resetearTodo() {
+        if (confirm("¿Seguro? Perderás todo tu progreso en Fantasía")) {
+            this.limpiarLocalStorage();
+            this.jugador = this.inicializarJugador();
+            this.pisos = this.inicializarPisos();
+            this.pisoActual = 1;
+            this.enCombate = false;
+            this.guardarTodo();
+            this.cargarUIMenuPrincipal();
+            this.mostrarNotificacion("✅ Progreso reseteado");
         }
     }
 
