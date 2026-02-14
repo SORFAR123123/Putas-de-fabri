@@ -3,7 +3,7 @@
 // Combate por turnos con sprites URL
 // Tienda de consumibles
 // Recompensas: videos de novia o boss
-// VERSIÓN CORREGIDA - CON NOVIA SELECCIONADA FUNCIONANDO
+// VERSIÓN CORREGIDA - CON NOVIA VISIBLE Y RECOMPENSAS FUNCIONALES
 // ================================================
 
 class FantasiaRPG {
@@ -24,6 +24,10 @@ class FantasiaRPG {
         this.bossDerrotado = null;
         this.pocionUsadaEsteCombate = false;
         this.esperandoRecompensas = false;
+        
+        // ===== VARIABLES PARA LA NOVIA =====
+        this.noviaActual = null;           // Novia en menú principal
+        this.noviaEnRecompensas = null;    // Novia guardada para recompensas
         
         // ===== IDs DE VIDEOS PARA CADA NOVIA (PROPIAS DE FANTASÍA) =====
         this.videosNovias = {
@@ -60,7 +64,6 @@ class FantasiaRPG {
         };
         
         console.log("✅ FantasiaRPG inicializado:", this.jugador);
-        console.log("🎬 IDs de novias cargados:", Object.keys(this.videosNovias));
     }
 
     // ====================
@@ -88,6 +91,49 @@ class FantasiaRPG {
         localStorage.removeItem('fantasia_pisos');
         localStorage.removeItem('fantasia_pisoActual');
         console.log("🧹 LocalStorage limpiado");
+    }
+
+    // ====================
+    // FUNCIONES DE NOVIA
+    // ====================
+
+    actualizarNoviaActual() {
+        this.noviaActual = null;
+        
+        // Intentar obtener de quintillizasRPG
+        if (window.quintillizasRPG) {
+            const rpg = window.quintillizasRPG;
+            if (rpg.personajeSeleccionado && rpg.datosPersonajes && rpg.datosPersonajes[rpg.personajeSeleccionado]) {
+                const personaje = rpg.datosPersonajes[rpg.personajeSeleccionado];
+                this.noviaActual = {
+                    id: rpg.personajeSeleccionado,
+                    nombre: personaje.nombre,
+                    nombreCorto: personaje.nombre.split(' ')[0],
+                    imagen: personaje.imagen,
+                    color: personaje.color,
+                    nivel: personaje.nivel,
+                    afinidad: personaje.afinidad
+                };
+                console.log("💖 Novia actualizada en Fantasía:", this.noviaActual.nombreCorto);
+            }
+        }
+        
+        // Si no, intentar con función global
+        if (!this.noviaActual && window.obtenerNoviaSeleccionada) {
+            const data = window.obtenerNoviaSeleccionada();
+            if (data) {
+                this.noviaActual = {
+                    id: data.id,
+                    nombre: data.nombre,
+                    nombreCorto: data.nombre.split(' ')[0],
+                    imagen: data.imagen,
+                    color: data.color || '#FF1493'
+                };
+                console.log("💖 Novia actualizada vía global:", this.noviaActual.nombreCorto);
+            }
+        }
+        
+        return this.noviaActual;
     }
 
     // ====================
@@ -694,38 +740,34 @@ class FantasiaRPG {
     }
 
     // ====================
-    // RECOMPENSAS DE BOSS - ¡CORREGIDO!
+    // RECOMPENSAS DE BOSS - CORREGIDO CON NOVIA GUARDADA
     // ====================
 
     mostrarRecompensasBoss() {
         if (!this.bossDerrotado) return;
         
-        // ===== OBTENER NOVIA SELECCIONADA =====
+        // ===== GUARDAR LA NOVIA EN LA INSTANCIA =====
+        this.noviaEnRecompensas = null;
+        this.actualizarNoviaActual(); // Actualizar novia actual
+        
         let noviaId = null;
         let noviaNombre = "NINGUNA";
         let noviaImagen = "https://via.placeholder.com/100x100/FF1493/FFFFFF?text=NOVIA";
+        let noviaColor = "#FF1493";
         
-        // Intentar obtener de quintillizasRPG directamente
-        if (window.quintillizasRPG) {
-            const rpg = window.quintillizasRPG;
-            if (rpg.personajeSeleccionado && rpg.datosPersonajes && rpg.datosPersonajes[rpg.personajeSeleccionado]) {
-                const personaje = rpg.datosPersonajes[rpg.personajeSeleccionado];
-                noviaId = rpg.personajeSeleccionado;
-                noviaNombre = personaje.nombre.split(' ')[0];
-                noviaImagen = personaje.imagen;
-                console.log("✅ Novia encontrada en quintillizasRPG:", noviaNombre);
-            }
-        }
-        
-        // Si no, intentar con la función global
-        if (!noviaId && window.obtenerNoviaSeleccionada) {
-            const data = window.obtenerNoviaSeleccionada();
-            if (data) {
-                noviaId = data.id;
-                noviaNombre = data.nombre.split(' ')[0];
-                noviaImagen = data.imagen;
-                console.log("✅ Novia encontrada via obtenerNoviaSeleccionada():", noviaNombre);
-            }
+        // Si hay novia actual, guardarla para recompensas
+        if (this.noviaActual) {
+            this.noviaEnRecompensas = {
+                id: this.noviaActual.id,
+                nombre: this.noviaActual.nombreCorto,
+                imagen: this.noviaActual.imagen,
+                color: this.noviaActual.color || '#FF1493'
+            };
+            noviaId = this.noviaActual.id;
+            noviaNombre = this.noviaActual.nombreCorto;
+            noviaImagen = this.noviaActual.imagen;
+            noviaColor = this.noviaActual.color || '#FF1493';
+            console.log("✅ Novia guardada en recompensas:", noviaNombre);
         }
         
         const bossNombre = this.bossDerrotado.nombre;
@@ -740,23 +782,23 @@ class FantasiaRPG {
                     <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-bottom: 30px;">
                         
                         <!-- REINO DE LA NOVIA -->
-                        <div style="background: rgba(255, 20, 147, 0.2); border: 2px solid #FF1493; border-radius: 20px; padding: 20px; text-align: center;">
-                            <h2 style="color: #FF1493; margin-bottom: 15px;">💖 REINO DE ${noviaNombre.toUpperCase()}</h2>
+                        <div style="background: rgba(255, 20, 147, 0.2); border: 2px solid ${noviaColor}; border-radius: 20px; padding: 20px; text-align: center;">
+                            <h2 style="color: ${noviaColor}; margin-bottom: 15px;">💖 REINO DE ${noviaNombre.toUpperCase()}</h2>
                             <img src="${noviaImagen}" 
-                                 style="width: 100px; height: 100px; border-radius: 50%; border: 3px solid #FF1493; margin-bottom: 15px; object-fit: cover;"
+                                 style="width: 100px; height: 100px; border-radius: 50%; border: 3px solid ${noviaColor}; margin-bottom: 15px; object-fit: cover;"
                                  onerror="this.src='https://via.placeholder.com/100x100/FF1493/FFFFFF?text=NOVIA'">
                             
                             <div style="display: flex; flex-direction: column; gap: 10px;">
-                                <button class="card-button" onclick="fantasiaRPG.verVideoRecompensaNovia('mamada')" 
-                                        style="background: linear-gradient(135deg, #FF1493, #FF6B6B); padding: 12px; font-size: 0.9rem;">
+                                <button class="card-button" onclick="fantasiaRPG.verVideoRecompensaNoviaGuardada('mamada')" 
+                                        style="background: linear-gradient(135deg, ${noviaColor}, #FF6B6B); padding: 12px; font-size: 0.9rem;">
                                     😮 Mamada de ${noviaNombre}
                                 </button>
-                                <button class="card-button" onclick="fantasiaRPG.verVideoRecompensaNovia('doggy')" 
-                                        style="background: linear-gradient(135deg, #FF1493, #FF6B6B); padding: 12px; font-size: 0.9rem;">
+                                <button class="card-button" onclick="fantasiaRPG.verVideoRecompensaNoviaGuardada('doggy')" 
+                                        style="background: linear-gradient(135deg, ${noviaColor}, #FF6B6B); padding: 12px; font-size: 0.9rem;">
                                     🐕 Doggy con ${noviaNombre}
                                 </button>
-                                <button class="card-button" onclick="fantasiaRPG.verVideoRecompensaNovia('montar')" 
-                                        style="background: linear-gradient(135deg, #FF1493, #FF6B6B); padding: 12px; font-size: 0.9rem;">
+                                <button class="card-button" onclick="fantasiaRPG.verVideoRecompensaNoviaGuardada('montar')" 
+                                        style="background: linear-gradient(135deg, ${noviaColor}, #FF6B6B); padding: 12px; font-size: 0.9rem;">
                                     👆 ${noviaNombre} te monta
                                 </button>
                             </div>
@@ -801,24 +843,17 @@ class FantasiaRPG {
         overlay.innerHTML = html;
         document.body.appendChild(overlay);
         
-        console.log("🎬 Mostrando recompensas - Novia:", noviaNombre, "ID:", noviaId);
+        console.log("🎬 Mostrando recompensas - Novia guardada:", noviaNombre);
     }
 
-    verVideoRecompensaNovia(accion) {
-        // Obtener la novia seleccionada
-        let noviaId = null;
-        let noviaNombre = "Ninguna";
-        
-        if (window.quintillizasRPG && window.quintillizasRPG.personajeSeleccionado) {
-            noviaId = window.quintillizasRPG.personajeSeleccionado;
-            const personaje = window.quintillizasRPG.datosPersonajes[noviaId];
-            noviaNombre = personaje ? personaje.nombre.split(' ')[0] : "Ninguna";
-        }
-        
-        if (!noviaId) {
-            alert("❌ No hay novia seleccionada en el RPG Quintillizas");
+    verVideoRecompensaNoviaGuardada(accion) {
+        if (!this.noviaEnRecompensas) {
+            alert("❌ No hay novia guardada en recompensas");
             return;
         }
+        
+        const noviaId = this.noviaEnRecompensas.id;
+        const noviaNombre = this.noviaEnRecompensas.nombre;
         
         if (!this.videosNovias[noviaId]) {
             alert(`❌ No hay videos configurados para ${noviaNombre} en Fantasía`);
@@ -827,7 +862,7 @@ class FantasiaRPG {
         
         const videoId = this.videosNovias[noviaId][accion];
         const titulo = `${noviaNombre} - ${accion}`;
-        const imagen = this.videosNovias[noviaId].imagen;
+        const imagen = this.noviaEnRecompensas.imagen;
         
         if (!videoId) {
             alert(`❌ Video de ${accion} para ${noviaNombre} no disponible en Fantasía`);
@@ -858,6 +893,7 @@ class FantasiaRPG {
         const overlay = document.getElementById('recompensas-overlay');
         if (overlay) overlay.remove();
         this.bossDerrotado = null;
+        this.noviaEnRecompensas = null;
         this.spriteBossActual = 'normal';
         this.cargarUIMenuPrincipal();
     }
@@ -1014,6 +1050,7 @@ class FantasiaRPG {
 
     cargarUIMenuPrincipal() {
         this.enCombate = false;
+        this.actualizarNoviaActual(); // <-- ACTUALIZAR NOVIA CADA VEZ QUE SE CARGA EL MENÚ
         
         const pisosHTML = Object.entries(this.pisos).map(([num, piso]) => {
             const estado = piso.completado ? '✅ COMPLETADO' : 
@@ -1036,10 +1073,39 @@ class FantasiaRPG {
         
         const expPorcentaje = (this.jugador.exp / this.jugador.expMaxima) * 100;
         
+        // ===== SECCIÓN DE LA NOVIA SELECCIONADA =====
+        let noviaHTML = '';
+        if (this.noviaActual) {
+            noviaHTML = `
+                <div style="background: ${this.noviaActual.color}20; border-radius: 20px; padding: 20px; margin-bottom: 30px; border: 3px solid ${this.noviaActual.color}; display: flex; align-items: center; gap: 20px;">
+                    <img src="${this.noviaActual.imagen}" 
+                         style="width: 80px; height: 80px; border-radius: 50%; border: 3px solid ${this.noviaActual.color}; object-fit: cover;"
+                         onerror="this.src='https://via.placeholder.com/80x80/FF1493/FFFFFF?text=NOVIA'">
+                    <div style="flex: 1;">
+                        <h3 style="color: ${this.noviaActual.color}; margin: 0 0 10px 0;">💖 NOVIA SELECCIONADA: ${this.noviaActual.nombre.toUpperCase()}</h3>
+                        <div style="display: flex; gap: 20px; font-size: 0.9rem;">
+                            <div><span style="color: ${this.noviaActual.color};">Nivel:</span> ${this.noviaActual.nivel || '?'}</div>
+                            <div><span style="color: ${this.noviaActual.color};">Afinidad:</span> ${this.noviaActual.afinidad || '?'}/200</div>
+                            <div><span style="color: ${this.noviaActual.color};">Bonus:</span> +${this.calcularBonusParaHermana(this.noviaActual.id).toFixed(1)}%</div>
+                        </div>
+                    </div>
+                </div>
+            `;
+        } else {
+            noviaHTML = `
+                <div style="background: rgba(255, 20, 147, 0.1); border-radius: 20px; padding: 20px; margin-bottom: 30px; border: 2px dashed #FF1493; text-align: center;">
+                    <p style="color: #FF1493; margin: 0;">❌ NO HAY NOVIA SELECCIONADA EN EL RPG PRINCIPAL</p>
+                    <p style="opacity: 0.7; font-size: 0.9rem; margin-top: 10px;">Selecciona una novia en el RPG Quintillizas para obtener bonus</p>
+                </div>
+            `;
+        }
+        
         const html = `
             <div style="max-width: 1000px; margin: 0 auto; padding: 20px;">
                 <h1 style="text-align: center; color: gold; margin-bottom: 10px;">⚔️ RPG FANTASÍA - PISOS</h1>
                 <p style="text-align: center; opacity: 0.8; margin-bottom: 30px;">Derrota bosses y obtén recompensas +18</p>
+                
+                ${noviaHTML}
                 
                 <div style="background: linear-gradient(135deg, #FF1493, #8A5AF7); border-radius: 20px; padding: 25px; margin-bottom: 30px;">
                     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 20px; color: white;">
@@ -1093,9 +1159,9 @@ class FantasiaRPG {
                     </button>
                 </div>
                 
-                ${window.quintillizasRPG ? `
+                ${this.noviaActual ? `
                 <div style="background: rgba(255, 20, 147, 0.1); border-radius: 15px; padding: 20px; margin-top: 20px;">
-                    <h3 style="color: #FF1493; margin-bottom: 15px;">💖 BONUS ACTUAL PARA QUINTILLIZAS</h3>
+                    <h3 style="color: #FF1493; margin-bottom: 15px;">💖 BONUS PARA QUINTILLIZAS</h3>
                     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px;">
                         <div><span style="color: #FF6B6B;">Ichika:</span> +${this.calcularBonusParaHermana('ichika').toFixed(1)}%</div>
                         <div><span style="color: #FFD166;">Nino:</span> +${this.calcularBonusParaHermana('nino').toFixed(1)}%</div>
@@ -1413,6 +1479,8 @@ class FantasiaRPG {
             this.pisos = this.inicializarPisos();
             this.pisoActual = 1;
             this.enCombate = false;
+            this.noviaActual = null;
+            this.noviaEnRecompensas = null;
             this.guardarTodo();
             this.cargarUIMenuPrincipal();
             this.mostrarNotificacion("✅ Progreso reseteado");
@@ -1491,4 +1559,3 @@ console.log("✅ RPG Fantasía cargado correctamente");
 console.log("💰 Piedras iniciales:", fantasiaRPG.jugador.piedras);
 console.log("❤️ Vida:", fantasiaRPG.jugador.vida);
 console.log("⚡ Energía:", fantasiaRPG.jugador.energia);
-console.log("🎬 IDs de novias cargados:", Object.keys(fantasiaRPG.videosNovias));
