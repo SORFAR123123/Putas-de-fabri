@@ -148,6 +148,297 @@ const EVENTOS_DIARIOS = [
     }
 ];
 
+// ================================================
+// SISTEMA DE PROGRESO DE EVENTOS DIARIOS (BARRA VISIBLE)
+// ================================================
+
+const SistemaProgresoEventos = {
+    // Inicializar contadores
+    inicializarContadores: function() {
+        if (!localStorage.getItem('eventos_progreso')) {
+            const progresoInicial = {
+                totalEventos: EVENTOS_DIARIOS.length,
+                eventosCompletados: 0,
+                eventosFallidos: 0,
+                ultimaSemana: this.obtenerNumeroSemana(),
+                ultimoEventoFecha: null,
+                historial: [] // Guardar últimos eventos
+            };
+            localStorage.setItem('eventos_progreso', JSON.stringify(progresoInicial));
+        }
+        return JSON.parse(localStorage.getItem('eventos_progreso'));
+    },
+
+    // Obtener número de semana del año
+    obtenerNumeroSemana: function() {
+        const fecha = new Date();
+        const inicioAño = new Date(fecha.getFullYear(), 0, 1);
+        const dias = Math.floor((fecha - inicioAño) / (24 * 60 * 60 * 1000));
+        return Math.ceil((dias + inicioAño.getDay() + 1) / 7);
+    },
+
+    // Registrar resultado de evento
+    registrarResultado: function(eventoId, exito) {
+        const progreso = this.inicializarContadores();
+        
+        // Verificar si cambió de semana
+        const semanaActual = this.obtenerNumeroSemana();
+        if (semanaActual !== progreso.ultimaSemana) {
+            progreso.eventosCompletados = 0;
+            progreso.eventosFallidos = 0;
+            progreso.ultimaSemana = semanaActual;
+            progreso.historial = [];
+        }
+
+        // Actualizar contadores
+        if (exito) {
+            progreso.eventosCompletados++;
+        } else {
+            progreso.eventosFallidos++;
+        }
+
+        progreso.ultimoEventoFecha = new Date().toISOString();
+
+        // Añadir al historial
+        progreso.historial.unshift({
+            id: eventoId,
+            fecha: new Date().toISOString(),
+            exito: exito
+        });
+        
+        // Mantener solo últimos 10 eventos en historial
+        if (progreso.historial.length > 10) {
+            progreso.historial.pop();
+        }
+
+        localStorage.setItem('eventos_progreso', JSON.stringify(progreso));
+        return progreso;
+    },
+
+    // Obtener estadísticas
+    obtenerEstadisticas: function() {
+        return this.inicializarContadores();
+    },
+
+    // Calcular porcentaje de progreso semanal
+    obtenerPorcentajeSemanal: function() {
+        const progreso = this.obtenerEstadisticas();
+        const totalEventosSemana = 7; // Máximo 7 eventos por semana (1 por día)
+        const totalCompletados = progreso.eventosCompletados;
+        
+        return {
+            completados: totalCompletados,
+            total: totalEventosSemana,
+            porcentaje: Math.min(100, Math.round((totalCompletados / totalEventosSemana) * 100))
+        };
+    },
+
+    // Obtener racha actual (días seguidos completando)
+    obtenerRacha: function() {
+        const progreso = this.obtenerEstadisticas();
+        let racha = 0;
+        
+        for (let i = 0; i < progreso.historial.length; i++) {
+            if (progreso.historial[i].exito) {
+                racha++;
+            } else {
+                break;
+            }
+        }
+        
+        return racha;
+    },
+
+    // Crear barra de progreso visual
+    crearBarraProgreso: function() {
+        const stats = this.obtenerPorcentajeSemanal();
+        const racha = this.obtenerRacha();
+        const progreso = this.obtenerEstadisticas();
+        
+        // Colores para los días
+        const diasSemana = ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'];
+        const hoy = new Date().getDay(); // 0 = Domingo, 1 = Lunes...
+        const hoyIndex = hoy === 0 ? 6 : hoy - 1; // Convertir a índice 0-6 (Lun-Dom)
+        
+        let diasHTML = '';
+        for (let i = 0; i < 7; i++) {
+            let estado = 'pendiente';
+            let color = '#2a2a3a';
+            
+            // Determinar estado del día basado en historial
+            if (i < progreso.eventosCompletados) {
+                estado = 'completado';
+                color = '#4CAF50';
+            } else if (i < progreso.eventosCompletados + progreso.eventosFallidos) {
+                estado = 'fallido';
+                color = '#F44336';
+            }
+            
+            // Si es hoy y no tiene estado, poner borde especial
+            const esHoy = i === hoyIndex;
+            
+            diasHTML += `
+                <div style="text-align: center;">
+                    <div style="
+                        width: 35px;
+                        height: 35px;
+                        background: ${color};
+                        border-radius: 50%;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        font-weight: bold;
+                        border: ${esHoy ? '3px solid #FFD166' : '2px solid rgba(255,255,255,0.2)'};
+                        margin: 0 auto;
+                        color: white;
+                        box-shadow: ${esHoy ? '0 0 15px #FFD166' : 'none'};
+                    ">
+                        ${i + 1}
+                    </div>
+                    <div style="font-size: 0.7rem; margin-top: 5px; opacity: 0.7;">
+                        ${diasSemana[i]}
+                    </div>
+                </div>
+            `;
+        }
+
+        return `
+            <div id="eventos-progreso-barra" style="
+                background: linear-gradient(135deg, rgba(255, 20, 147, 0.15), rgba(138, 90, 247, 0.15));
+                border-radius: 20px;
+                padding: 20px;
+                margin: 20px auto;
+                max-width: 800px;
+                border: 2px solid #FF1493;
+                box-shadow: 0 0 20px rgba(255, 20, 147, 0.3);
+                position: relative;
+                backdrop-filter: blur(10px);
+            ">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; flex-wrap: wrap; gap: 10px;">
+                    <h3 style="color: #FFD166; margin: 0; font-size: 1.2rem;">
+                        📅 EVENTOS DIARIOS
+                    </h3>
+                    <div style="
+                        background: rgba(255, 20, 147, 0.3);
+                        padding: 5px 15px;
+                        border-radius: 50px;
+                        font-weight: bold;
+                        color: #FFD166;
+                        border: 2px solid #FF1493;
+                        font-size: 0.9rem;
+                    ">
+                        🔥 Racha: ${racha} día${racha !== 1 ? 's' : ''}
+                    </div>
+                </div>
+                
+                <!-- Barra de progreso principal -->
+                <div style="margin-bottom: 20px;">
+                    <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
+                        <span style="color: #FFD166; font-weight: bold; font-size: 0.9rem;">
+                            Progreso semanal:
+                        </span>
+                        <span style="color: #FF1493; font-weight: bold; font-size: 0.9rem;">
+                            ${stats.completados}/${stats.total} eventos
+                        </span>
+                    </div>
+                    
+                    <div style="
+                        background: rgba(0, 0, 0, 0.3);
+                        height: 25px;
+                        border-radius: 15px;
+                        overflow: hidden;
+                        position: relative;
+                        border: 2px solid #FF1493;
+                    ">
+                        <div style="
+                            background: linear-gradient(90deg, #FF1493, #8A5AF7);
+                            width: ${stats.porcentaje}%;
+                            height: 100%;
+                            transition: width 0.5s ease;
+                            display: flex;
+                            align-items: center;
+                            justify-content: flex-end;
+                            padding-right: 10px;
+                            color: white;
+                            font-weight: bold;
+                            font-size: 0.9rem;
+                            white-space: nowrap;
+                        ">
+                            ${stats.porcentaje}%
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Días de la semana -->
+                <div style="
+                    display: grid;
+                    grid-template-columns: repeat(7, 1fr);
+                    gap: 5px;
+                    margin: 15px 0;
+                ">
+                    ${diasHTML}
+                </div>
+                
+                <!-- Leyenda -->
+                <div style="
+                    display: flex;
+                    gap: 20px;
+                    justify-content: center;
+                    margin-top: 15px;
+                    padding-top: 15px;
+                    border-top: 1px solid rgba(255,255,255,0.1);
+                    flex-wrap: wrap;
+                ">
+                    <div style="display: flex; align-items: center; gap: 5px;">
+                        <div style="width: 15px; height: 15px; background: #4CAF50; border-radius: 50%;"></div>
+                        <span style="font-size: 0.8rem; opacity: 0.8;">Completado</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 5px;">
+                        <div style="width: 15px; height: 15px; background: #F44336; border-radius: 50%;"></div>
+                        <span style="font-size: 0.8rem; opacity: 0.8;">Fallido</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 5px;">
+                        <div style="width: 15px; height: 15px; background: #2a2a3a; border-radius: 50%; border: 2px solid rgba(255,255,255,0.2);"></div>
+                        <span style="font-size: 0.8rem; opacity: 0.8;">Pendiente</span>
+                    </div>
+                    <div style="display: flex; align-items: center; gap: 5px;">
+                        <div style="width: 15px; height: 15px; background: transparent; border-radius: 50%; border: 3px solid #FFD166;"></div>
+                        <span style="font-size: 0.8rem; opacity: 0.8;">Hoy</span>
+                    </div>
+                </div>
+
+                <!-- Botón para ver detalles del último evento -->
+                ${progreso.ultimoEventoFecha ? `
+                    <div style="text-align: center; margin-top: 15px;">
+                        <button onclick="EventosDiarios.mostrarUltimoResultado()" style="
+                            background: linear-gradient(135deg, #FF1493, #8A5AF7);
+                            color: white;
+                            border: none;
+                            padding: 8px 20px;
+                            border-radius: 50px;
+                            font-weight: bold;
+                            cursor: pointer;
+                            font-size: 0.9rem;
+                            border: 2px solid white;
+                            transition: all 0.3s;
+                        " onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                            📊 Ver último resultado
+                        </button>
+                    </div>
+                ` : ''}
+            </div>
+        `;
+    },
+
+    // Mostrar la barra en un contenedor específico
+    mostrarEnContenedor: function(contenedorId) {
+        const contenedor = document.getElementById(contenedorId);
+        if (contenedor) {
+            contenedor.innerHTML = this.crearBarraProgreso();
+        }
+    }
+};
+
 // Sistema de eventos diarios
 const EventosDiarios = {
     // Obtener la fecha actual en formato YYYY-MM-DD
@@ -262,6 +553,9 @@ const EventosDiarios = {
 
         // Guardar cambios en RPG
         quintillizasRPG.guardarDatosPersonajes();
+        
+        // Registrar en el sistema de progreso
+        SistemaProgresoEventos.registrarResultado(evento.id, exito);
         
         return true;
     },
@@ -608,6 +902,21 @@ const EventosDiarios = {
         location.reload();
     },
 
+    // Mostrar último resultado
+    mostrarUltimoResultado: function() {
+        const evento = this.obtenerEventoHoy();
+        const yaProcesado = this.eventoYaProcesado();
+        
+        if (evento && yaProcesado) {
+            const exito = this.verificarRequisito(evento);
+            this.mostrarResultadoEvento(evento, exito);
+        } else if (evento) {
+            alert('El evento de hoy aún no ha sido procesado. Completa el requisito primero.');
+        } else {
+            alert('No hay eventos recientes.');
+        }
+    },
+
     // Iniciar evento diario
     iniciarEventoDiario: function() {
         // Verificar si es primera vez hoy
@@ -646,18 +955,69 @@ const EventosDiarios = {
         setTimeout(() => {
             this.mostrarModalEvento(evento);
         }, 500);
+    },
+
+    // Crear un contenedor fijo para la barra de progreso
+    crearContenedorProgreso: function() {
+        // Verificar si ya existe
+        if (document.getElementById('eventos-progreso-container')) {
+            return;
+        }
+
+        // Crear contenedor
+        const contenedor = document.createElement('div');
+        contenedor.id = 'eventos-progreso-container';
+        contenedor.style.cssText = `
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            z-index: 1000;
+            width: 350px;
+            max-width: calc(100vw - 40px);
+            transition: all 0.3s ease;
+        `;
+
+        // Añadir al body
+        document.body.appendChild(contenedor);
+
+        // Actualizar contenido
+        this.actualizarBarraProgreso();
+    },
+
+    // Actualizar la barra de progreso
+    actualizarBarraProgreso: function() {
+        const contenedor = document.getElementById('eventos-progreso-container');
+        if (contenedor) {
+            contenedor.innerHTML = SistemaProgresoEventos.crearBarraProgreso();
+        }
+    },
+
+    // Inicializar todo
+    inicializar: function() {
+        // Crear contenedor de progreso
+        this.crearContenedorProgreso();
+
+        // Iniciar evento diario
+        setTimeout(() => {
+            if (typeof sistemaEconomia !== 'undefined' && typeof quintillizasRPG !== 'undefined') {
+                this.iniciarEventoDiario();
+            }
+        }, 1500);
+
+        // Actualizar barra cada vez que se muestra un resultado
+        const originalMostrarResultado = this.mostrarResultadoEvento;
+        this.mostrarResultadoEvento = function(evento, exito) {
+            originalMostrarResultado.call(this, evento, exito);
+            this.actualizarBarraProgreso();
+        };
     }
 };
 
 // Inicializar eventos al cargar la página
 document.addEventListener('DOMContentLoaded', function() {
-    // Esperar un poco para que carguen los demás sistemas
-    setTimeout(() => {
-        if (typeof sistemaEconomia !== 'undefined' && typeof quintillizasRPG !== 'undefined') {
-            EventosDiarios.iniciarEventoDiario();
-        }
-    }, 1500);
+    EventosDiarios.inicializar();
 });
 
 // Exponer globalmente
 window.EventosDiarios = EventosDiarios;
+window.SistemaProgresoEventos = SistemaProgresoEventos;
