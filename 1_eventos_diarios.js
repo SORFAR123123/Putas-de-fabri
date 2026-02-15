@@ -1,19 +1,19 @@
 // ================================================
-// SISTEMA DE EVENTOS DIARIOS - INTEGRADO CON RPG
-// Aparece un evento aleatorio cada día en la primera visita.
-// Modifica la afinidad en quintillizasRPG directamente.
+// SISTEMA DE EVENTOS DIARIOS - VERSIÓN MODAL GRANDE
+// Aparece un evento aleatorio cada día en un modal que ocupa casi toda la pantalla
+// TODOS LOS EVENTOS PIDEN SOLO 1 MAZO AL 100% (PARA TESTEO)
 // ================================================
 
 // Lista de 10 eventos con requisitos y consecuencias
 const EVENTOS_DIARIOS = [
     { // Evento 1 - Solo Nino
         id: 'nino_ex',
-        titulo: '😤 El ex de Nino apareció',
-        descripcion: 'Mientras estudiabas en la cafetería, ves a Nino hablando acaloradamente con un chico. ¡Es su ex! Te mira y te hace una seña para que te acerques. Necesitas demostrarle que eres mejor que él completando 5 mazos al 100% hoy.',
+        titulo: '😤 ¡EL EX DE NINO APARECIÓ!',
+        descripcion: 'Mientras estudiabas en la cafetería, ves a Nino hablando acaloradamente con un chico. ¡Es su ex! Te mira y te hace una seña para que te acerques. Necesitas demostrarle que eres mejor que él completando 1 MAZO AL 100% hoy.',
         imagen: 'https://pbs.twimg.com/media/G7qfpGZXAAAib4A?format=png&name=small',
         personajes: ['nino'],
         tipoRequisito: 'mazos_completados',
-        cantidadRequerida: 5,
+        cantidadRequerida: 1, // SOLO 1 PARA TESTEO
         videoExito: '1aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe',
         videoFracaso: '1-wYJYTaw0ZOKQy8BBPR7Fmhlzs0IVx9K',
         afinidadExito: 15,
@@ -22,12 +22,12 @@ const EVENTOS_DIARIOS = [
     },
     { // Evento 2 - Solo Ichika
         id: 'ichika_trabajo',
-        titulo: '💼 Ichika tiene problemas en el trabajo',
-        descripcion: 'Ichika está agotada por el trabajo y necesita que la ayudes a estudiar para un examen importante. Ayúdala completando 3 mazos al 100% para que pueda pasar la materia.',
+        titulo: '💼 ¡ICHIKA ESTÁ AGOTADA!',
+        descripcion: 'Ichika está agotada por el trabajo y necesita que la ayudes a estudiar para un examen importante. Si no completas 1 MAZO AL 100% hoy, perderá el año.',
         imagen: 'https://pbs.twimg.com/media/G7qfcGRWkAAV74w?format=png&name=small',
         personajes: ['ichika'],
         tipoRequisito: 'mazos_completados',
-        cantidadRequerida: 3,
+        cantidadRequerida: 1, // SOLO 1 PARA TESTEO
         videoExito: '1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS',
         videoFracaso: '1tS-gKr6bf4MY5Yrw7zRvP2uP_zq9rsLl',
         afinidadExito: 10,
@@ -36,12 +36,12 @@ const EVENTOS_DIARIOS = [
     },
     { // Evento 3 - Solo Miku
         id: 'miku_concierto',
-        titulo: '🎶 Miku perdió las entradas',
-        descripcion: 'Miku tiene un concierto de música tradicional hoy, pero perdió las entradas. Necesita que la ayudes a buscarlas completando 4 mazos al 100%. ¡No la dejes plantada!',
+        titulo: '🎶 ¡MIKU PERDIÓ LAS ENTRADAS!',
+        descripcion: 'Miku tiene un concierto de música tradicional hoy, pero perdió las entradas. Necesita que la ayudes a buscarlas. Completa 1 MAZO AL 100% hoy. ¡No la dejes plantada!',
         imagen: 'https://pbs.twimg.com/media/G7qfrrKWsAAv6ZT?format=png&name=small',
         personajes: ['miku'],
         tipoRequisito: 'mazos_completados',
-        cantidadRequerida: 4,
+        cantidadRequerida: 1, // SOLO 1 PARA TESTEO
         videoExito: '1tS-gKr6bf4MY5Yrw7zRvP2uP_zq9rsLl',
         videoFracaso: '1aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe',
         afinidadExito: 12,
@@ -50,12 +50,12 @@ const EVENTOS_DIARIOS = [
     },
     { // Evento 4 - Solo Yotsuba
         id: 'yotsuba_carrera',
-        titulo: '🏃‍♀️ Yotsuba necesita apoyo',
-        descripcion: 'Yotsuba tiene una carrera importante mañana y está nerviosa. Quiere que estudien juntos para calmarse. Completa 2 mazos al 100% para demostrarle que puedes con todo.',
+        titulo: '🏃‍♀️ ¡YOTSUBA NECESITA APOYO!',
+        descripcion: 'Yotsuba tiene una carrera importante mañana y está nerviosa. Quiere que estudien juntos para calmarse. Completa 1 MAZO AL 100% hoy para demostrarle que puedes con todo.',
         imagen: 'https://pbs.twimg.com/media/G7qfupkXUAAX0aS?format=png&name=small',
         personajes: ['yotsuba'],
         tipoRequisito: 'mazos_completados',
-        cantidadRequerida: 2,
+        cantidadRequerida: 1, // SOLO 1 PARA TESTEO
         videoExito: '1-wYJYTaw0ZOKQy8BBPR7Fmhlzs0IVx9K',
         videoFracaso: '1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS',
         afinidadExito: 8,
@@ -64,12 +64,12 @@ const EVENTOS_DIARIOS = [
     },
     { // Evento 5 - Solo Itsuki
         id: 'itsuki_buffet',
-        titulo: '🍣 Itsuki quiere buffet libre',
-        descripcion: 'Itsuki quiere ir a un buffet libre pero le da vergüenza ir sola. Prometiste acompañarla si completas 3 mazos al 100% hoy. ¡No la decepciones!',
+        titulo: '🍣 ¡ITSUKI QUIERE BUFFET LIBRE!',
+        descripcion: 'Itsuki quiere ir a un buffet libre pero le da vergüenza ir sola. Prometiste acompañarla si completas 1 MAZO AL 100% hoy. ¡No la decepciones!',
         imagen: 'https://pbs.twimg.com/media/G7qfxnsX0AIbJK1?format=png&name=small',
         personajes: ['itsuki'],
         tipoRequisito: 'mazos_completados',
-        cantidadRequerida: 3,
+        cantidadRequerida: 1, // SOLO 1 PARA TESTEO
         videoExito: '1aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe',
         videoFracaso: '1-wYJYTaw0ZOKQy8BBPR7Fmhlzs0IVx9K',
         afinidadExito: 10,
@@ -78,26 +78,26 @@ const EVENTOS_DIARIOS = [
     },
     { // Evento 6 - Dúo Nino e Ichika
         id: 'duo_nino_ichika_discusion',
-        titulo: '👯‍♀️ Nino e Ichika discuten',
-        descripcion: 'Nino e Ichika están discutiendo por quién cocinará hoy. Tienes que mediar para que se reconcilien. Demuestra tu habilidad completando 6 mazos al 100%.',
+        titulo: '👯‍♀️ ¡NINO E ICHIKA DISCUTEN!',
+        descripcion: 'Nino e Ichika están discutiendo por quién cocinará hoy. Tienes que mediar para que se reconcilien. Demuestra tu habilidad completando 1 MAZO AL 100% hoy.',
         imagen: 'https://pbs.twimg.com/media/G7qfcGRWkAAV74w?format=png&name=small',
         personajes: ['nino', 'ichika'],
         tipoRequisito: 'mazos_completados',
-        cantidadRequerida: 6,
+        cantidadRequerida: 1, // SOLO 1 PARA TESTEO
         videoExito: '1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS',
         videoFracaso: '1tS-gKr6bf4MY5Yrw7zRvP2uP_zq9rsLl',
-        afinidadExito: 12, // +12 para cada una
-        afinidadFracaso: -20, // -20 para cada una
+        afinidadExito: 12,
+        afinidadFracaso: -20,
         dineroRecompensa: 60
     },
     { // Evento 7 - Dúo Miku y Yotsuba
         id: 'duo_miku_yotsuba_estudio',
-        titulo: '📚 Miku y Yotsuba necesitan ayuda',
-        descripcion: 'Miku no entiende historia y Yotsuba quiere ayudarle pero no sabe cómo. Completa 4 mazos al 100% para darles material de estudio.',
+        titulo: '📚 ¡MIKU Y YOTSUBA NECESITAN AYUDA!',
+        descripcion: 'Miku no entiende historia y Yotsuba quiere ayudarle pero no sabe cómo. Completa 1 MAZO AL 100% hoy para darles material de estudio.',
         imagen: 'https://pbs.twimg.com/media/G7qfrrKWsAAv6ZT?format=png&name=small',
         personajes: ['miku', 'yotsuba'],
         tipoRequisito: 'mazos_completados',
-        cantidadRequerida: 4,
+        cantidadRequerida: 1, // SOLO 1 PARA TESTEO
         videoExito: '1-wYJYTaw0ZOKQy8BBPR7Fmhlzs0IVx9K',
         videoFracaso: '1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS',
         afinidadExito: 10,
@@ -106,12 +106,12 @@ const EVENTOS_DIARIOS = [
     },
     { // Evento 8 - Trío (Nino, Miku, Itsuki)
         id: 'trio_examen',
-        titulo: '📝 Examen sorpresa',
-        descripcion: 'Las profesoras anunciaron un examen sorpresa. Nino, Miku e Itsuki entran en pánico. Necesitan que las ayudes a repasar completando 8 mazos al 100%.',
+        titulo: '📝 ¡EXAMEN SORPRESA!',
+        descripcion: 'Las profesoras anunciaron un examen sorpresa. Nino, Miku e Itsuki entran en pánico. Necesitan que las ayudes a repasar completando 1 MAZO AL 100% hoy.',
         imagen: 'https://pbs.twimg.com/media/G7qfxnsX0AIbJK1?format=png&name=small',
         personajes: ['nino', 'miku', 'itsuki'],
         tipoRequisito: 'mazos_completados',
-        cantidadRequerida: 8,
+        cantidadRequerida: 1, // SOLO 1 PARA TESTEO
         videoExito: '1aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe',
         videoFracaso: '1tS-gKr6bf4MY5Yrw7zRvP2uP_zq9rsLl',
         afinidadExito: 15,
@@ -120,12 +120,12 @@ const EVENTOS_DIARIOS = [
     },
     { // Evento 9 - Cuarteto (Ichika, Nino, Miku, Yotsuba)
         id: 'cuarteto_festival',
-        titulo: '🎪 Festival escolar',
-        descripcion: 'El festival escolar está cerca y 4 de las hermanas necesitan ayuda para preparar el stand. Completa 10 mazos al 100% para que todo salga perfecto.',
+        titulo: '🎪 ¡FESTIVAL ESCOLAR!',
+        descripcion: 'El festival escolar está cerca y 4 de las hermanas necesitan ayuda para preparar el stand. Completa 1 MAZO AL 100% hoy para que todo salga perfecto.',
         imagen: 'https://pbs.twimg.com/media/G7qfcGRWkAAV74w?format=png&name=small',
         personajes: ['ichika', 'nino', 'miku', 'yotsuba'],
         tipoRequisito: 'mazos_completados',
-        cantidadRequerida: 10,
+        cantidadRequerida: 1, // SOLO 1 PARA TESTEO
         videoExito: '1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS',
         videoFracaso: '1-wYJYTaw0ZOKQy8BBPR7Fmhlzs0IVx9K',
         afinidadExito: 18,
@@ -134,12 +134,12 @@ const EVENTOS_DIARIOS = [
     },
     { // Evento 10 - QUINTETO (TODAS)
         id: 'quinteto_viaje',
-        titulo: '👯‍♀️👯‍♀️👯‍♀️👯‍♀️👯‍♀️ Viaje de hermanas',
-        descripcion: '¡Las 5 hermanas quieren hacer un viaje juntas! Te invitaron, pero debes demostrar que eres responsable completando 12 mazos al 100% hoy.',
+        titulo: '👯‍♀️👯‍♀️👯‍♀️👯‍♀️👯‍♀️ ¡VIAJE DE HERMANAS!',
+        descripcion: '¡Las 5 hermanas quieren hacer un viaje juntas! Te invitaron, pero debes demostrar que eres responsable completando 1 MAZO AL 100% hoy.',
         imagen: 'https://pbs.twimg.com/media/G7qfpGZXAAAib4A?format=png&name=small',
         personajes: ['ichika', 'nino', 'miku', 'yotsuba', 'itsuki'],
         tipoRequisito: 'mazos_completados',
-        cantidadRequerida: 12,
+        cantidadRequerida: 1, // SOLO 1 PARA TESTEO
         videoExito: '1tS-gKr6bf4MY5Yrw7zRvP2uP_zq9rsLl',
         videoFracaso: '1aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe',
         afinidadExito: 25,
@@ -197,6 +197,7 @@ const EventosDiarios = {
         localStorage.setItem('evento_diario_ultimo', this.obtenerFechaActual());
         localStorage.setItem('evento_diario_actual', JSON.stringify(evento));
         localStorage.setItem('evento_diario_completado', 'false');
+        localStorage.setItem('evento_diario_resultado_mostrado', 'false');
     },
 
     // Obtener el evento de hoy
@@ -205,14 +206,24 @@ const EventosDiarios = {
         return eventoGuardado ? JSON.parse(eventoGuardado) : null;
     },
 
-    // Marcar evento como completado/fallado
-    marcarEventoProcesado: function(completado) {
-        localStorage.setItem('evento_diario_completado', completado ? 'true' : 'false');
+    // Marcar evento como procesado
+    marcarEventoProcesado: function() {
+        localStorage.setItem('evento_diario_completado', 'true');
     },
 
     // Verificar si el evento de hoy ya fue procesado
     eventoYaProcesado: function() {
         return localStorage.getItem('evento_diario_completado') === 'true';
+    },
+
+    // Marcar resultado como mostrado
+    marcarResultadoMostrado: function() {
+        localStorage.setItem('evento_diario_resultado_mostrado', 'true');
+    },
+
+    // Verificar si el resultado ya fue mostrado
+    resultadoYaMostrado: function() {
+        return localStorage.getItem('evento_diario_resultado_mostrado') === 'true';
     },
 
     // Verificar si se cumplió el requisito
@@ -255,97 +266,360 @@ const EventosDiarios = {
         return true;
     },
 
-    // Mostrar el video correspondiente
-    mostrarVideoEvento: function(evento, exito) {
-        const videoId = exito ? evento.videoExito : evento.videoFracaso;
-        
-        // Crear reproductor de video
-        const html = `
-            <div class="reproductor-container" style="max-width: 800px; margin: 0 auto; padding: 30px;">
-                <div style="text-align: center; margin-bottom: 20px;">
-                    <img src="${evento.imagen}" alt="${evento.titulo}" style="width: 100px; height: 100px; border-radius: 50%; object-fit: cover; border: 4px solid #FF1493; margin-bottom: 15px;">
-                    <h2 style="color: #FF1493; margin-bottom: 10px;">
-                        ${exito ? '✅ ¡Evento Superado!' : '❌ Evento Fallido'}
-                    </h2>
-                    <h3 style="color: #FFD166; margin-bottom: 20px;">${evento.titulo}</h3>
+    // Mostrar MODAL GRANDE del evento
+    mostrarModalEvento: function(evento) {
+        // Crear overlay oscuro
+        const overlay = document.createElement('div');
+        overlay.id = 'evento-modal-overlay';
+        overlay.style.cssText = `
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.9);
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.5s ease;
+        `;
+
+        // Crear modal
+        const modal = document.createElement('div');
+        modal.style.cssText = `
+            width: 90%;
+            max-width: 900px;
+            max-height: 90vh;
+            overflow-y: auto;
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            border-radius: 30px;
+            padding: 30px;
+            border: 4px solid #FF1493;
+            box-shadow: 0 0 50px rgba(255, 20, 147, 0.5);
+            position: relative;
+            animation: zoomIn 0.5s ease;
+        `;
+
+        // Construir nombres de personajes
+        const nombresPersonajes = evento.personajes.map(p => {
+            const nombres = {
+                'ichika': 'Ichika', 'nino': 'Nino', 'miku': 'Miku', 
+                'yotsuba': 'Yotsuba', 'itsuki': 'Itsuki'
+            };
+            return nombres[p] || p;
+        }).join(' • ');
+
+        // Colores para éxito/fracaso
+        const colorExito = '#4CAF50';
+        const colorFracaso = '#F44336';
+
+        // HTML del modal
+        modal.innerHTML = `
+            <div style="text-align: center;">
+                <!-- Botón cerrar -->
+                <button onclick="EventosDiarios.cerrarModalEvento()" style="
+                    position: absolute;
+                    top: 20px;
+                    right: 20px;
+                    background: rgba(255,255,255,0.2);
+                    border: none;
+                    color: white;
+                    font-size: 30px;
+                    width: 50px;
+                    height: 50px;
+                    border-radius: 50%;
+                    cursor: pointer;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    transition: all 0.3s;
+                    border: 2px solid white;
+                ">✕</button>
+
+                <!-- Título -->
+                <h1 style="
+                    color: #FFD166;
+                    font-size: 2.5rem;
+                    margin-bottom: 20px;
+                    text-shadow: 0 0 10px #FF1493;
+                ">📅 ¡EVENTO DIARIO!</h1>
+
+                <!-- Imagen GRANDE -->
+                <div style="
+                    width: 250px;
+                    height: 250px;
+                    margin: 20px auto;
+                    border-radius: 50%;
+                    overflow: hidden;
+                    border: 5px solid #FF1493;
+                    box-shadow: 0 0 30px #FF1493;
+                ">
+                    <img src="${evento.imagen}" alt="${evento.titulo}" style="width: 100%; height: 100%; object-fit: cover;">
                 </div>
 
-                <div class="video-wrapper" style="margin: 30px 0;">
+                <!-- Título del evento -->
+                <h2 style="
+                    color: #FF1493;
+                    font-size: 2rem;
+                    margin: 20px 0;
+                    text-transform: uppercase;
+                ">${evento.titulo}</h2>
+
+                <!-- Descripción -->
+                <p style="
+                    color: white;
+                    font-size: 1.2rem;
+                    line-height: 1.6;
+                    margin: 20px 0;
+                    padding: 0 20px;
+                    max-width: 700px;
+                    margin-left: auto;
+                    margin-right: auto;
+                ">${evento.descripcion}</p>
+
+                <!-- Personajes involucrados -->
+                <div style="
+                    background: rgba(255, 20, 147, 0.2);
+                    padding: 15px;
+                    border-radius: 50px;
+                    display: inline-block;
+                    margin: 20px auto;
+                    font-size: 1.3rem;
+                    border: 2px solid #FF1493;
+                ">
+                    👥 ${nombresPersonajes}
+                </div>
+
+                <!-- Requisito -->
+                <div style="
+                    background: linear-gradient(135deg, #5864F5, #8A5AF7);
+                    padding: 20px;
+                    border-radius: 20px;
+                    margin: 25px 0;
+                    font-size: 1.5rem;
+                    border: 3px solid white;
+                ">
+                    🎯 REQUISITO: Completa ${evento.cantidadRequerida} MAZO${evento.cantidadRequerida > 1 ? 'S' : ''} al 100% hoy
+                </div>
+
+                <!-- Recompensas y castigos -->
+                <div style="
+                    display: grid;
+                    grid-template-columns: 1fr 1fr;
+                    gap: 20px;
+                    margin: 30px 0;
+                ">
+                    <!-- Éxito -->
+                    <div style="
+                        background: rgba(76, 175, 80, 0.2);
+                        border: 3px solid ${colorExito};
+                        border-radius: 20px;
+                        padding: 20px;
+                    ">
+                        <h3 style="color: ${colorExito}; font-size: 1.8rem; margin-bottom: 15px;">✅ ÉXITO</h3>
+                        ${evento.personajes.map(p => {
+                            const nombre = p.charAt(0).toUpperCase() + p.slice(1);
+                            return `<div style="color: white; font-size: 1.2rem; margin: 5px 0;">${nombre}: +${evento.afinidadExito} afinidad</div>`;
+                        }).join('')}
+                        <div style="color: #FFD166; font-size: 1.3rem; margin-top: 15px;">💰 +${evento.dineroRecompensa} soles</div>
+                    </div>
+
+                    <!-- Fracaso -->
+                    <div style="
+                        background: rgba(244, 67, 54, 0.2);
+                        border: 3px solid ${colorFracaso};
+                        border-radius: 20px;
+                        padding: 20px;
+                    ">
+                        <h3 style="color: ${colorFracaso}; font-size: 1.8rem; margin-bottom: 15px;">❌ FRACASO</h3>
+                        ${evento.personajes.map(p => {
+                            const nombre = p.charAt(0).toUpperCase() + p.slice(1);
+                            return `<div style="color: white; font-size: 1.2rem; margin: 5px 0;">${nombre}: ${evento.afinidadFracaso} afinidad</div>`;
+                        }).join('')}
+                    </div>
+                </div>
+
+                <!-- Botón de entendido -->
+                <button onclick="EventosDiarios.cerrarModalEvento()" style="
+                    background: linear-gradient(135deg, #FF1493, #8A5AF7);
+                    color: white;
+                    font-size: 1.5rem;
+                    padding: 15px 50px;
+                    border: none;
+                    border-radius: 50px;
+                    cursor: pointer;
+                    font-weight: bold;
+                    margin: 20px 0;
+                    border: 3px solid white;
+                    box-shadow: 0 0 20px #FF1493;
+                    transition: all 0.3s;
+                " onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                    ¡ENTENDIDO, LO HARÉ!
+                </button>
+
+                <!-- Nota -->
+                <p style="color: rgba(255,255,255,0.5); font-size: 0.9rem; margin-top: 10px;">
+                    Vuelve mañana para ver el resultado del evento
+                </p>
+            </div>
+        `;
+
+        overlay.appendChild(modal);
+        document.body.appendChild(overlay);
+
+        // Agregar estilos de animación si no existen
+        if (!document.getElementById('evento-modal-styles')) {
+            const style = document.createElement('style');
+            style.id = 'evento-modal-styles';
+            style.textContent = `
+                @keyframes fadeIn {
+                    from { opacity: 0; }
+                    to { opacity: 1; }
+                }
+                @keyframes zoomIn {
+                    from { transform: scale(0.8); opacity: 0; }
+                    to { transform: scale(1); opacity: 1; }
+                }
+            `;
+            document.head.appendChild(style);
+        }
+    },
+
+    // Cerrar modal
+    cerrarModalEvento: function() {
+        const overlay = document.getElementById('evento-modal-overlay');
+        if (overlay) {
+            overlay.remove();
+        }
+    },
+
+    // Mostrar resultado del evento (video)
+    mostrarResultadoEvento: function(evento, exito) {
+        const videoId = exito ? evento.videoExito : evento.videoFracaso;
+        
+        // Crear overlay para el resultado
+        const overlay = document.createElement('div');
+        overlay.id = 'evento-resultado-overlay';
+        overlay.style.cssText = `
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.5s ease;
+        `;
+
+        const modal = document.createElement('div');
+        modal.style.cssText = `
+            width: 90%;
+            max-width: 900px;
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            border-radius: 30px;
+            padding: 30px;
+            border: 4px solid ${exito ? '#4CAF50' : '#F44336'};
+            box-shadow: 0 0 50px ${exito ? '#4CAF50' : '#F44336'};
+        `;
+
+        // Calcular cambios de afinidad para mostrar
+        const cambiosHTML = evento.personajes.map(p => {
+            const nombre = p.charAt(0).toUpperCase() + p.slice(1);
+            const cambio = exito ? evento.afinidadExito : evento.afinidadFracaso;
+            return `<div style="color: white; font-size: 1.2rem;">${nombre}: ${cambio > 0 ? '+' : ''}${cambio}</div>`;
+        }).join('');
+
+        modal.innerHTML = `
+            <div style="text-align: center;">
+                <h1 style="
+                    color: ${exito ? '#4CAF50' : '#F44336'};
+                    font-size: 3rem;
+                    margin-bottom: 20px;
+                ">${exito ? '✅ ¡EVENTO SUPERADO!' : '❌ EVENTO FALLIDO'}</h1>
+
+                <h2 style="color: #FFD166; font-size: 2rem; margin-bottom: 30px;">${evento.titulo}</h2>
+
+                <!-- Video -->
+                <div style="margin: 30px 0; border: 4px solid ${exito ? '#4CAF50' : '#F44336'}; border-radius: 20px; overflow: hidden;">
                     <iframe
                         src="https://drive.google.com/file/d/${videoId}/preview"
+                        width="100%"
+                        height="400"
                         frameborder="0"
                         allow="autoplay; encrypted-media"
                         allowfullscreen
-                        style="width: 100%; height: 400px; border-radius: 15px; border: 3px solid #FF1493;"
+                        style="display: block;"
                     ></iframe>
                 </div>
 
-                <div style="background: rgba(255, 20, 147, 0.1); border-radius: 15px; padding: 20px; margin: 30px 0;">
-                    <h4 style="color: #FFD166; margin-bottom: 15px;">📊 Consecuencias del evento</h4>
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px;">
-                        ${evento.personajes.map(p => {
-                            const personaje = quintillizasRPG?.datosPersonajes[p];
-                            return `
-                                <div style="text-align: center;">
-                                    <div style="color: ${personaje?.color || '#FF1493'};">${personaje?.nombre?.split(' ')[0] || p}</div>
-                                    <div style="font-size: 1.3rem; font-weight: bold; color: ${exito ? '#4CAF50' : '#F44336'};">
-                                        ${exito ? '+' : ''}${exito ? evento.afinidadExito : evento.afinidadFracaso}
-                                    </div>
-                                </div>
-                            `;
-                        }).join('')}
+                <!-- Consecuencias -->
+                <div style="
+                    background: rgba(0,0,0,0.5);
+                    border-radius: 20px;
+                    padding: 20px;
+                    margin: 30px 0;
+                ">
+                    <h3 style="color: #FFD166; font-size: 1.5rem; margin-bottom: 20px;">📊 CONSECUENCIAS</h3>
+                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                        <div>
+                            <h4 style="color: #FF1493;">💖 Afinidad</h4>
+                            ${cambiosHTML}
+                        </div>
                         ${exito && evento.dineroRecompensa > 0 ? `
-                            <div style="text-align: center;">
-                                <div style="color: #FFD166;">💰 Dinero</div>
-                                <div style="font-size: 1.3rem; font-weight: bold; color: #FFD166;">+${evento.dineroRecompensa}</div>
+                            <div>
+                                <h4 style="color: #FFD166;">💰 Dinero</h4>
+                                <div style="color: white; font-size: 1.5rem;">+${evento.dineroRecompensa}</div>
                             </div>
                         ` : ''}
                     </div>
                 </div>
 
-                <div style="text-align: center; margin-top: 30px;">
-                    <button class="card-button" onclick="EventosDiarios.cerrarVideoEvento()" 
-                            style="background: linear-gradient(135deg, #FF1493, #8A5AF7); padding: 15px 30px; font-size: 1.2rem;">
-                        ↩️ Volver al Inicio
-                    </button>
-                </div>
+                <button onclick="EventosDiarios.cerrarResultadoEvento()" style="
+                    background: linear-gradient(135deg, ${exito ? '#4CAF50' : '#F44336'}, #8A5AF7);
+                    color: white;
+                    font-size: 1.3rem;
+                    padding: 15px 40px;
+                    border: none;
+                    border-radius: 50px;
+                    cursor: pointer;
+                    font-weight: bold;
+                    border: 3px solid white;
+                ">
+                    ↩️ VOLVER AL INICIO
+                </button>
             </div>
         `;
 
-        // Mostrar en manga-section
-        const mangaSection = document.getElementById('manga-section');
-        mangaSection.style.display = 'block';
-        mangaSection.innerHTML = html;
-        
-        // Ocultar header y otras secciones
-        document.querySelector('.header').style.display = 'none';
-        document.querySelector('.especial-section').style.display = 'none';
-        document.querySelector('.additional-section').style.display = 'none';
+        overlay.appendChild(modal);
+        document.body.appendChild(overlay);
     },
 
-    // Cerrar video y volver al inicio
-    cerrarVideoEvento: function() {
-        document.getElementById('manga-section').style.display = 'none';
-        mostrarHeader();
-        
-        // Recargar página principal para actualizar afinidades
-        if (typeof quintillizasRPG !== 'undefined' && quintillizasRPG.personajeSeleccionado) {
-            // Si hay personaje seleccionado, actualizar vista
-            quintillizasRPG.actualizarVistaConPersonaje();
+    // Cerrar resultado
+    cerrarResultadoEvento: function() {
+        const overlay = document.getElementById('evento-resultado-overlay');
+        if (overlay) {
+            overlay.remove();
         }
+        // Recargar la página principal para actualizar afinidades
+        location.reload();
     },
 
-    // Iniciar evento diario (llamar al cargar la página)
+    // Iniciar evento diario
     iniciarEventoDiario: function() {
         // Verificar si es primera vez hoy
         if (!this.verificarEventoHoy()) {
             console.log('📅 Ya hubo evento hoy');
             
-            // Si ya hubo evento pero no se ha mostrado el resultado, mostrarlo
+            // Verificar si hay que mostrar resultado
             const evento = this.obtenerEventoHoy();
             const yaProcesado = this.eventoYaProcesado();
+            const resultadoMostrado = this.resultadoYaMostrado();
             
-            if (evento && !yaProcesado) {
+            if (evento && !yaProcesado && !resultadoMostrado) {
                 // Verificar si se cumplió el requisito
                 const exito = this.verificarRequisito(evento);
                 
@@ -353,91 +627,25 @@ const EventosDiarios = {
                 this.aplicarConsecuencias(evento, exito);
                 
                 // Marcar como procesado
-                this.marcarEventoProcesado(true);
+                this.marcarEventoProcesado();
                 
-                // Mostrar video
+                // Mostrar resultado
                 setTimeout(() => {
-                    this.mostrarVideoEvento(evento, exito);
+                    this.mostrarResultadoEvento(evento, exito);
+                    this.marcarResultadoMostrado();
                 }, 1000);
             }
             return;
         }
 
-        // Seleccionar evento aleatorio
+        // Es primera vez hoy - seleccionar evento y mostrar modal
         const evento = this.seleccionarEventoAleatorio();
-        
-        // Guardar evento de hoy
         this.guardarEventoHoy(evento);
         
-        // Mostrar notificación de evento
-        this.mostrarNotificacionEvento(evento);
-    },
-
-    // Mostrar notificación de evento nuevo
-    mostrarNotificacionEvento: function(evento) {
-        const personajesStr = evento.personajes.map(p => {
-            const nombres = {
-                'ichika': 'Ichika', 'nino': 'Nino', 'miku': 'Miku', 'yotsuba': 'Yotsuba', 'itsuki': 'Itsuki'
-            };
-            return nombres[p] || p;
-        }).join(' • ');
-
-        const html = `
-            <div id="evento-diario-notificacion" style="position: fixed; top: 100px; right: 20px; max-width: 350px; background: linear-gradient(135deg, #FF1493, #8A5AF7); border-radius: 20px; padding: 20px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); border: 3px solid white; z-index: 2000; animation: slideIn 0.5s ease;">
-                <div style="display: flex; gap: 15px; align-items: center;">
-                    <img src="${evento.imagen}" alt="Evento" style="width: 70px; height: 70px; border-radius: 50%; object-fit: cover; border: 3px solid white;">
-                    <div>
-                        <h3 style="color: white; margin: 0 0 5px 0;">📅 EVENTO DIARIO</h3>
-                        <p style="color: #FFD166; font-weight: bold; margin: 0;">${evento.titulo}</p>
-                    </div>
-                </div>
-                
-                <p style="color: white; margin: 15px 0; font-size: 0.95rem; line-height: 1.4;">
-                    ${evento.descripcion}
-                </p>
-                
-                <div style="background: rgba(0,0,0,0.3); border-radius: 10px; padding: 12px; margin: 15px 0;">
-                    <div style="color: #FFD166; font-weight: bold; margin-bottom: 5px;">🎯 Requisito:</div>
-                    <div style="color: white;">Completa ${evento.cantidadRequerida} mazos al 100% hoy</div>
-                    <div style="color: #FFD166; margin-top: 8px; font-size: 0.9rem;">
-                        Involucra: ${personajesStr}
-                    </div>
-                </div>
-                
-                <div style="display: flex; gap: 10px;">
-                    <div style="flex: 1; background: rgba(76, 175, 80, 0.3); border-radius: 8px; padding: 8px; text-align: center;">
-                        <div style="color: #4CAF50; font-weight: bold;">✅ Éxito</div>
-                        <div style="color: white;">+${evento.afinidadExito} afinidad c/u</div>
-                        ${evento.dineroRecompensa > 0 ? `<div style="color: #FFD166;">+${evento.dineroRecompensa}💰</div>` : ''}
-                    </div>
-                    <div style="flex: 1; background: rgba(244, 67, 54, 0.3); border-radius: 8px; padding: 8px; text-align: center;">
-                        <div style="color: #F44336; font-weight: bold;">❌ Fracaso</div>
-                        <div style="color: white;">${evento.afinidadFracaso} afinidad c/u</div>
-                    </div>
-                </div>
-                
-                <button onclick="EventosDiarios.cerrarNotificacionEvento()" 
-                        style="width: 100%; margin-top: 15px; padding: 10px; background: white; color: #FF1493; border: none; border-radius: 10px; font-weight: bold; cursor: pointer;">
-                    Entendido, ¡lo haré!
-                </button>
-            </div>
-        `;
-
-        // Eliminar notificación anterior si existe
-        const anterior = document.getElementById('evento-diario-notificacion');
-        if (anterior) anterior.remove();
-
-        // Agregar al body
-        document.body.insertAdjacentHTML('beforeend', html);
-    },
-
-    // Cerrar notificación de evento
-    cerrarNotificacionEvento: function() {
-        const notif = document.getElementById('evento-diario-notificacion');
-        if (notif) {
-            notif.style.animation = 'slideOut 0.3s ease forwards';
-            setTimeout(() => notif.remove(), 300);
-        }
+        // Mostrar modal después de que cargue la página
+        setTimeout(() => {
+            this.mostrarModalEvento(evento);
+        }, 500);
     }
 };
 
