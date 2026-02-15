@@ -2,6 +2,7 @@
 // RPG COMPLETO: LAS QUINTILLIZAS NAKANO - CON TODAS LAS COMBINACIONES GRUPALES
 // + INTEGRACIÓN CON RPG FANTASÍA (BONUS POR STATS)
 // + FUNCIONES GLOBALES PARA ACCEDER A LA NOVIA SELECCIONADA
+// + NUEVA FUNCIÓN: modificarAfinidad() PARA EVENTOS DIARIOS
 // ================================================
 
 class QuintillizasRPG {
@@ -1959,6 +1960,35 @@ class QuintillizasRPG {
                 notif.parentNode.removeChild(notif);
             }
         }, 2500);
+    }
+
+    // ====================
+    // NUEVA FUNCIÓN: MODIFICAR AFINIDAD DIRECTAMENTE (PARA EVENTOS)
+    // ====================
+
+    modificarAfinidad(personajeId, cantidad) {
+        if (!this.datosPersonajes[personajeId]) {
+            console.error(`Personaje ${personajeId} no encontrado`);
+            return false;
+        }
+        
+        const personaje = this.datosPersonajes[personajeId];
+        const afinidadAnterior = personaje.afinidad;
+        personaje.afinidad = Math.max(-100, Math.min(200, personaje.afinidad + cantidad));
+        
+        console.log(`💖 Evento: ${personaje.nombre} afinidad ${afinidadAnterior} → ${personaje.afinidad} (${cantidad > 0 ? '+' : ''}${cantidad})`);
+        
+        this.guardarDatosPersonajes();
+        
+        // Actualizar vista si es el personaje seleccionado
+        if (this.personajeSeleccionado === personajeId) {
+            this.actualizarVistaConPersonaje();
+        }
+        
+        // Mostrar notificación visual
+        this.mostrarNotificacion(`💖 ${personaje.nombre.split(' ')[0]}: ${cantidad > 0 ? '+' : ''}${cantidad} afinidad`);
+        
+        return true;
     }
 
     // ====================
