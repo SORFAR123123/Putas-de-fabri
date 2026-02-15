@@ -149,7 +149,7 @@ const EVENTOS_DIARIOS = [
 ];
 
 // ================================================
-// SISTEMA DE PROGRESO DE EVENTOS DIARIOS (BARRA VISIBLE)
+// SISTEMA DE PROGRESO DE EVENTOS DIARIOS (BARRA VISIBLE CON TOGGLE)
 // ================================================
 
 const SistemaProgresoEventos = {
@@ -439,7 +439,21 @@ const SistemaProgresoEventos = {
     }
 };
 
-// Sistema de eventos diarios
+// ================================================
+// FUNCIONES AUXILIARES PARA TOGGLE DE LA BARRA
+// ================================================
+function obtenerEstadoVisibilidadBarra() {
+    const estado = localStorage.getItem('eventos_progreso_visible');
+    return estado === null ? true : estado === 'true'; // visible por defecto
+}
+
+function guardarEstadoVisibilidadBarra(visible) {
+    localStorage.setItem('eventos_progreso_visible', visible);
+}
+
+// ================================================
+// SISTEMA DE EVENTOS DIARIOS (CORREGIDO)
+// ================================================
 const EventosDiarios = {
     // Obtener la fecha actual en formato YYYY-MM-DD
     obtenerFechaActual: function() {
@@ -520,44 +534,97 @@ const EventosDiarios = {
     // Verificar si se cumplió el requisito
     verificarRequisito: function(evento) {
         if (evento.tipoRequisito === 'mazos_completados') {
+            // Asegurarse de que sistemaEconomia existe
+            if (typeof sistemaEconomia === 'undefined') {
+                console.error('❌ sistemaEconomia no está definido al verificar requisito');
+                return false;
+            }
             const estadisticas = sistemaEconomia.obtenerEstadisticas();
             return estadisticas.completados100 >= evento.cantidadRequerida;
         }
         return false;
     },
 
-    // Aplicar consecuencias del evento
+    // Aplicar consecuencias del evento (VERSIÓN CORREGIDA Y CON LOGS)
     aplicarConsecuencias: function(evento, exito) {
+        console.log('🎯 Aplicando consecuencias del evento:', evento.id, 'Éxito:', exito);
+        
+        // Verificar dependencias
         if (typeof quintillizasRPG === 'undefined') {
-            console.error('RPG no disponible para aplicar consecuencias');
+            console.error('❌ quintillizasRPG no está definido. No se puede aplicar afinidad.');
+            this.mostrarNotificacionEvento('❌ Error: RPG no disponible', '#F44336');
+            return false;
+        }
+        if (typeof sistemaEconomia === 'undefined') {
+            console.error('❌ sistemaEconomia no está definido. No se puede dar dinero.');
+            this.mostrarNotificacionEvento('❌ Error: Economía no disponible', '#F44336');
             return false;
         }
 
         // Aplicar afinidad a cada personaje involucrado
         evento.personajes.forEach(personajeId => {
-            if (quintillizasRPG.datosPersonajes[personajeId]) {
+            if (quintillizasRPG.datosPersonajes && quintillizasRPG.datosPersonajes[personajeId]) {
                 const afinidadActual = quintillizasRPG.datosPersonajes[personajeId].afinidad;
                 const cambio = exito ? evento.afinidadExito : evento.afinidadFracaso;
                 const nuevaAfinidad = Math.max(-100, Math.min(200, afinidadActual + cambio));
                 
                 quintillizasRPG.datosPersonajes[personajeId].afinidad = nuevaAfinidad;
+                console.log(`✅ Evento: ${personajeId} afinidad ${cambio > 0 ? '+' : ''}${cambio} → ${nuevaAfinidad}`);
                 
-                console.log(`🎯 Evento: ${personajeId} afinidad ${cambio > 0 ? '+' : ''}${cambio} → ${nuevaAfinidad}`);
+                // Mostrar notificación visual
+                this.mostrarNotificacionEvento(
+                    `💖 ${personajeId}: ${cambio > 0 ? '+' : ''}${cambio} afinidad`,
+                    cambio > 0 ? '#4CAF50' : '#F44336'
+                );
+            } else {
+                console.warn(`⚠️ Personaje ${personajeId} no encontrado en quintillizasRPG`);
             }
         });
 
         // Dar dinero si fue éxito
         if (exito && evento.dineroRecompensa > 0) {
             sistemaEconomia.agregarDinero(evento.dineroRecompensa);
+            console.log(`💰 +${evento.dineroRecompensa} soles por evento`);
+            this.mostrarNotificacionEvento(`💰 +${evento.dineroRecompensa} soles`, '#FFD166');
+            
+            // Actualizar el contador de dinero en la página principal si existe
+            if (typeof actualizarContadorDineroInicio === 'function') {
+                actualizarContadorDineroInicio();
+            }
         }
 
         // Guardar cambios en RPG
-        quintillizasRPG.guardarDatosPersonajes();
+        if (quintillizasRPG.guardarDatosPersonajes) {
+            quintillizasRPG.guardarDatosPersonajes();
+        }
         
         // Registrar en el sistema de progreso
         SistemaProgresoEventos.registrarResultado(evento.id, exito);
         
         return true;
+    },
+
+    // Mostrar notificación pequeña
+    mostrarNotificacionEvento: function(mensaje, color = '#FF1493') {
+        const notif = document.createElement('div');
+        notif.textContent = mensaje;
+        notif.style.cssText = `
+            position: fixed;
+            top: 80px;
+            right: 20px;
+            background: ${color};
+            color: white;
+            padding: 10px 20px;
+            border-radius: 50px;
+            font-weight: bold;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.4);
+            z-index: 10000;
+            animation: slideIn 0.3s ease, fadeOut 0.3s ease 2s forwards;
+            font-size: 1rem;
+            border: 2px solid white;
+        `;
+        document.body.appendChild(notif);
+        setTimeout(() => notif.remove(), 2500);
     },
 
     // Mostrar MODAL GRANDE del evento
@@ -917,8 +984,10 @@ const EventosDiarios = {
         }
     },
 
-    // Iniciar evento diario
+    // Iniciar evento diario (VERSIÓN CORREGIDA)
     iniciarEventoDiario: function() {
+        console.log('📅 Iniciando sistema de eventos diarios...');
+        
         // Verificar si es primera vez hoy
         if (!this.verificarEventoHoy()) {
             console.log('📅 Ya hubo evento hoy');
@@ -929,20 +998,35 @@ const EventosDiarios = {
             const resultadoMostrado = this.resultadoYaMostrado();
             
             if (evento && !yaProcesado && !resultadoMostrado) {
+                console.log('🎯 Procesando resultado del evento...');
+                
+                // Verificar dependencias antes de procesar
+                if (typeof sistemaEconomia === 'undefined' || typeof quintillizasRPG === 'undefined') {
+                    console.warn('⏳ Dependencias no listas. Reintentando en 2 segundos...');
+                    setTimeout(() => this.iniciarEventoDiario(), 2000);
+                    return;
+                }
+                
                 // Verificar si se cumplió el requisito
                 const exito = this.verificarRequisito(evento);
+                console.log('✅ Requisito verificado, éxito:', exito);
                 
                 // Aplicar consecuencias
-                this.aplicarConsecuencias(evento, exito);
+                const aplicadas = this.aplicarConsecuencias(evento, exito);
                 
-                // Marcar como procesado
-                this.marcarEventoProcesado();
-                
-                // Mostrar resultado
-                setTimeout(() => {
-                    this.mostrarResultadoEvento(evento, exito);
-                    this.marcarResultadoMostrado();
-                }, 1000);
+                if (aplicadas) {
+                    // Marcar como procesado
+                    this.marcarEventoProcesado();
+                    
+                    // Mostrar resultado
+                    setTimeout(() => {
+                        this.mostrarResultadoEvento(evento, exito);
+                        this.marcarResultadoMostrado();
+                        this.actualizarBarraProgreso();
+                    }, 1000);
+                } else {
+                    console.error('❌ No se pudieron aplicar las consecuencias');
+                }
             }
             return;
         }
@@ -957,14 +1041,12 @@ const EventosDiarios = {
         }, 500);
     },
 
-    // Crear un contenedor fijo para la barra de progreso
+    // Crear contenedor para la barra de progreso con botón toggle
     crearContenedorProgreso: function() {
-        // Verificar si ya existe
         if (document.getElementById('eventos-progreso-container')) {
             return;
         }
 
-        // Crear contenedor
         const contenedor = document.createElement('div');
         contenedor.id = 'eventos-progreso-container';
         contenedor.style.cssText = `
@@ -977,34 +1059,86 @@ const EventosDiarios = {
             transition: all 0.3s ease;
         `;
 
-        // Añadir al body
+        // Botón toggle
+        const toggleBtn = document.createElement('button');
+        toggleBtn.id = 'toggle-progreso-btn';
+        toggleBtn.innerHTML = '📅';
+        toggleBtn.style.cssText = `
+            position: absolute;
+            top: -10px;
+            right: -10px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #FF1493, #8A5AF7);
+            border: 2px solid white;
+            color: white;
+            font-size: 1.2rem;
+            cursor: pointer;
+            box-shadow: 0 0 15px rgba(255,20,147,0.5);
+            z-index: 1001;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s;
+        `;
+        toggleBtn.onmouseover = () => toggleBtn.style.transform = 'scale(1.1)';
+        toggleBtn.onmouseout = () => toggleBtn.style.transform = 'scale(1)';
+        toggleBtn.onclick = () => this.alternarVisibilidadBarra();
+
+        // Contenedor del contenido
+        const contenido = document.createElement('div');
+        contenido.id = 'progreso-contenido';
+        contenido.style.transition = 'opacity 0.3s ease';
+
+        const visible = obtenerEstadoVisibilidadBarra();
+        contenido.style.display = visible ? 'block' : 'none';
+        toggleBtn.innerHTML = visible ? '📅' : '📌';
+
+        contenedor.appendChild(toggleBtn);
+        contenedor.appendChild(contenido);
         document.body.appendChild(contenedor);
 
-        // Actualizar contenido
         this.actualizarBarraProgreso();
     },
 
-    // Actualizar la barra de progreso
+    alternarVisibilidadBarra: function() {
+        const contenido = document.getElementById('progreso-contenido');
+        const toggleBtn = document.getElementById('toggle-progreso-btn');
+        if (!contenido || !toggleBtn) return;
+
+        const visible = contenido.style.display !== 'none';
+        const nuevaVisibilidad = !visible;
+        contenido.style.display = nuevaVisibilidad ? 'block' : 'none';
+        toggleBtn.innerHTML = nuevaVisibilidad ? '📅' : '📌';
+        guardarEstadoVisibilidadBarra(nuevaVisibilidad);
+    },
+
     actualizarBarraProgreso: function() {
-        const contenedor = document.getElementById('eventos-progreso-container');
-        if (contenedor) {
-            contenedor.innerHTML = SistemaProgresoEventos.crearBarraProgreso();
+        const contenido = document.getElementById('progreso-contenido');
+        if (contenido) {
+            contenido.innerHTML = SistemaProgresoEventos.crearBarraProgreso();
         }
     },
 
     // Inicializar todo
     inicializar: function() {
-        // Crear contenedor de progreso
+        // Crear contenedor de progreso con toggle
         this.crearContenedorProgreso();
 
-        // Iniciar evento diario
-        setTimeout(() => {
+        // Iniciar evento diario con reintento si las dependencias no están listas
+        const intentarInicio = () => {
             if (typeof sistemaEconomia !== 'undefined' && typeof quintillizasRPG !== 'undefined') {
                 this.iniciarEventoDiario();
+            } else {
+                console.warn('⏳ Esperando dependencias para iniciar evento diario...');
+                setTimeout(intentarInicio, 1000);
             }
-        }, 1500);
+        };
+        
+        setTimeout(intentarInicio, 1500);
 
-        // Actualizar barra cada vez que se muestra un resultado
+        // Hook para actualizar barra al mostrar resultado
         const originalMostrarResultado = this.mostrarResultadoEvento;
         this.mostrarResultadoEvento = function(evento, exito) {
             originalMostrarResultado.call(this, evento, exito);
