@@ -1469,7 +1469,13 @@ const sistemaDescriptivo = {
                 descripcion: '', 
                 duracion: '' 
             },
-            
+        
+             '2_8': { 
+                nombre: 'Raiden chupa hambreada   ',
+                imagen: 'https://pbs.twimg.com/media/HBSqpZKa4AA-204?format=png&name=small', 
+                descripcion: '', 
+                duracion: '' 
+            },
             
             // Contenedor 3
             '3_1': { 
