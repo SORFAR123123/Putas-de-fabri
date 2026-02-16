@@ -1599,8 +1599,8 @@ const sistemaDescriptivo = {
                 duracion: '' 
             },
              '4_7': { 
-                nombre: 'Sempai putarda',
-                imagen: 'https://pbs.twimg.com/media/G_IbjvhWYAAlCZ5?format=png&name=small', 
+                nombre: 'Zorra rusa 2 ',
+                imagen: 'https://pbs.twimg.com/media/HBSpcbSakAIXWM-?format=jpg&name=small', 
                 descripcion: '', 
                 duracion: '' 
             },
