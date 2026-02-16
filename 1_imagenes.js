@@ -1476,6 +1476,18 @@ const sistemaDescriptivo = {
                 descripcion: '', 
                 duracion: '' 
             },
+            '2_9': { 
+                nombre: 'Raiden mama mientras la veo   ',
+                imagen: 'https://pbs.twimg.com/media/HBStxzLWEAA2lDv?format=png&name=small', 
+                descripcion: '', 
+                duracion: '' 
+            },
+            '2_10': { 
+                nombre: 'Raiden chupa hambreada   ',
+                imagen: 'https:4AA-204?format=png&name=small', 
+                descripcion: '', 
+                duracion: '' 
+            },
             
             // Contenedor 3
             '3_1': { 
