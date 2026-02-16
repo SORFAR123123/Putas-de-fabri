@@ -1592,6 +1592,36 @@ const sistemaDescriptivo = {
                 descripcion: '', 
                 duracion: '' 
             },
+             '4_6': { 
+                nombre: 'Sempai putarda',
+                imagen: 'https://pbs.twimg.com/media/HBSnaOIakAEHtLz?format=png&name=small', 
+                descripcion: '', 
+                duracion: '' 
+            },
+             '4_7': { 
+                nombre: 'Sempai putarda',
+                imagen: 'https://pbs.twimg.com/media/G_IbjvhWYAAlCZ5?format=png&name=small', 
+                descripcion: '', 
+                duracion: '' 
+            },
+             '4_8': { 
+                nombre: 'Sempai putarda',
+                imagen: 'https://pbs.twimg.com/media/G_IbjvhWYAAlCZ5?format=png&name=small', 
+                descripcion: '', 
+                duracion: '' 
+            },
+             '4_9': { 
+                nombre: 'Sempai putarda',
+                imagen: 'https://pbs.twimg.com/media/G_IbjvhWYAAlCZ5?format=png&name=small', 
+                descripcion: '', 
+                duracion: '' 
+            },
+             '4_10': { 
+                nombre: 'Sempai putarda',
+                imagen: 'https://pbs.twimg.com/media/G_IbjvhWYAAlCZ5?format=png&name=small', 
+                descripcion: '', 
+                duracion: '' 
+            },
             '5_1': { 
                 nombre: 'Colombianas putardas',
                 imagen: 'https://pbs.twimg.com/media/G_Hrih3WkAYINc8?format=jpg&name=small', 
