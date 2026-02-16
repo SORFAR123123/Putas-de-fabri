@@ -1611,8 +1611,8 @@ const sistemaDescriptivo = {
                 duracion: '' 
             },
              '4_7': { 
-                nombre: 'Zorra rusa 2 ',
-                imagen: 'https://pbs.twimg.com/media/HBSpcbSakAIXWM-?format=jpg&name=small', 
+                nombre: 'Tiburona putona',
+                imagen: 'https://pbs.twimg.com/media/HBSs0w-bQAAEdhD?format=jpg&name=small', 
                 descripcion: '', 
                 duracion: '' 
             },
