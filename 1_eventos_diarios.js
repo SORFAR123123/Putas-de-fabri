@@ -540,6 +540,11 @@ const EventosDiarios = {
                 return false;
             }
             const estadisticas = sistemaEconomia.obtenerEstadisticas();
+            console.log('📊 Verificando requisito:', {
+                completados100: estadisticas.completados100,
+                requerido: evento.cantidadRequerida,
+                resultado: estadisticas.completados100 >= evento.cantidadRequerida
+            });
             return estadisticas.completados100 >= evento.cantidadRequerida;
         }
         return false;
