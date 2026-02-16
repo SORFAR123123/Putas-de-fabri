@@ -1463,6 +1463,12 @@ const sistemaDescriptivo = {
                 descripcion: '', 
                 duracion: '' 
             },
+             '2_7': { 
+                nombre: 'Zorra rusa 2 ',
+                imagen: 'https://pbs.twimg.com/media/HBSpcbSakAIXWM-?format=jpg&name=small', 
+                descripcion: '', 
+                duracion: '' 
+            },
             
             
             // Contenedor 3
