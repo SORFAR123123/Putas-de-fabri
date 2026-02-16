@@ -1629,8 +1629,8 @@ const sistemaDescriptivo = {
                 duracion: '' 
             },
              '4_8': { 
-                nombre: 'Sempai putarda',
-                imagen: 'https://pbs.twimg.com/media/G_IbjvhWYAAlCZ5?format=png&name=small', 
+                nombre: 'Nami putarda',
+                imagen: 'https://pbs.twimg.com/media/HBSu693WMAYcFqg?format=png&name=small', 
                 descripcion: '', 
                 duracion: '' 
             },
