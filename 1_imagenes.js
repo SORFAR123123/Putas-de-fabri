@@ -1379,8 +1379,14 @@ const sistemaDescriptivo = {
                 tematica: 'misceláneo'
             },
              11: { 
-                nombre: 'Probando xd',
-                imagen: 'https://pbs.twimg.com/media/HBDlv8pWYAAYTnT?format=jpg&name=small', 
+                nombre: 'Estudiantes putonas xd',
+                imagen: 'https://pbs.twimg.com/media/HBSeqZLakAAXA51?format=png&name=small', 
+                descripcion: 'culonas',
+                tematica: 'misceláneo'
+            },
+            12: { 
+                nombre: 'Corridas en el orto',
+                imagen: 'https://pbs.twimg.com/media/HBSejioaUAE8Tpb?format=png&name=small', 
                 descripcion: 'culonas',
                 tematica: 'misceláneo'
             }
@@ -2046,6 +2052,18 @@ const sistemaDescriptivo = {
               '10_1': { 
                 nombre: 'mating',
                 imagen: 'https://pbs.twimg.com/media/HA9mn12bAAAk9FZ?format=png&name=small', 
+                descripcion: '', 
+                duracion: '' 
+            },
+             '11_1': { 
+                nombre: 'estudiaNTE PUTA ',
+                imagen: 'https://pbs.twimg.com/media/HBSeqZLakAAXA51?format=png&name=small', 
+                descripcion: '', 
+                duracion: '' 
+            },
+             '12_1': { 
+                nombre: 'Corrida en el orto',
+                imagen: 'https://pbs.twimg.com/media/HBSejioaUAE8Tpb?format=png&name=small', 
                 descripcion: '', 
                 duracion: '' 
             }
