@@ -1281,7 +1281,7 @@ const sistemaDescriptivo = {
             // Contenedor 3
             '3_1': { 
                 nombre: 'ASMR 1',
-                imagen: '', 
+                imagen: 'https://pbs.twimg.com/media/HCMywqyXkAAHZQL?format=jpg&name=small', 
                 descripcion: '', 
                 tipoVoz: '' 
             },
