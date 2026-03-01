@@ -1812,7 +1812,7 @@ function cargarSubcontenedoresVideos(contenedor) {
 
 function crearSubcontenedoresVideosUI(contenedor) {
     let html = `<h2 style="text-align: center; margin-bottom: 30px; color: #FFD166;">
-        🎬 CONTENEDOR ${contenedor} - SUB-CONTENEDORES DE VIDEOS
+        🎬 ${obtenerContenedorVideo(contenedor).nombre || `CONTENEDOR ${contenedor}`} - SUB-CONTENEDORES DE VIDEOS
     </h2>`;
     html += '<div class="subcontenedores-grid">';
     
@@ -1824,20 +1824,23 @@ function crearSubcontenedoresVideosUI(contenedor) {
         subcontenedores.forEach(i => {
             const subData = obtenerSubcontenedorVideo(contenedor, i);
             const videoInfo = obtenerVideo(contenedor, i);
-            const tieneVideo = videoInfo !== null;
+            const tieneVideo = videoInfo !== null && videoInfo.driveId && videoInfo.driveId !== "";
             
-            const desc = tieneVideo ? videoInfo.descripcion : subData.descripcion || '(Sin video)';
+            const titulo = subData.nombre || (videoInfo ? videoInfo.titulo : `Video ${i}`);
+            const descripcion = subData.descripcion || (videoInfo ? videoInfo.descripcion : 'Sin video disponible');
             
             html += `
-                <div class="subcontenedor-item" onclick="${tieneVideo ? `cargarVideo(${contenedor}, ${i})` : 'alert("Este sub-contenedor no tiene video disponible")'}">
+                <div class="subcontenedor-item" onclick="${tieneVideo ? `cargarVideo(${contenedor}, ${i})` : 'mostrarNotificacionASMR(\'❌ Este sub-contenedor no tiene video disponible\')'}">
                     <div class="subcontenedor-img" style="background-image: url('${subData.imagen || obtenerImagenSubcontenedor(contenedor, i)}')"></div>
-                    <h3>${tieneVideo ? videoInfo.titulo : `Video ${i}`}</h3>
+                    <h3>${titulo}</h3>
+                    
                     ${tieneVideo ? 
-                        `<p><strong>${videoInfo.titulo}</strong></p>
-                         <p style="font-size: 0.9rem; opacity: 0.8;">${videoInfo.duracion} • ${videoInfo.categoria}</p>` 
-                        : `<p style="color: #FF6B6B;">${desc}</p>`}
-                    <div class="card-button" style="margin-top: 10px; padding: 10px 20px; font-size: 0.9rem;">
-                        ${tieneVideo ? '▶️ Ver video' : 'Vacío'}
+                        `<p style="font-size: 0.9rem; opacity: 0.8;">${videoInfo.duracion} • ${videoInfo.categoria}</p>
+                         <p style="font-size: 0.9rem; min-height: 40px;">${descripcion.substring(0, 60)}${descripcion.length > 60 ? '...' : ''}</p>` 
+                        : `<p style="color: #FF6B6B; min-height: 40px;">${descripcion}</p>`}
+                    
+                    <div class="card-button" style="margin-top: 10px; padding: 10px 20px; font-size: 0.9rem; ${!tieneVideo ? 'opacity: 0.5;' : ''}">
+                        ${tieneVideo ? '▶️ Ver video' : '📭 Sin video'}
                     </div>
                 </div>
             `;
@@ -2008,19 +2011,22 @@ function crearSubcontenedoresAnimesUI(contenedor) {
         subcontenedores.forEach(i => {
             const subData = obtenerSubcontenedorAnime(contenedor, i);
             const animeInfo = obtenerAnime(contenedor, i);
-            const tieneAnime = animeInfo !== null;
+            const tieneAnime = animeInfo !== null && animeInfo.driveIdEspanol && animeInfo.driveIdEspanol !== "";
             
-            const desc = subData.descripcion || (tieneAnime ? 'Anime disponible' : '(Sin anime configurado)');
+            const titulo = subData.nombre || (animeInfo ? animeInfo.titulo : `Anime ${i}`);
+            const desc = subData.descripcion || (animeInfo ? animeInfo.descripcion : 'Sin anime configurado');
             
             html += `
                 <div class="subcontenedor-item" onclick="${tieneAnime ? `seleccionarAccionAnime(${contenedor}, ${i})` : `cargarMazosAnimes(${contenedor}, ${i})`}">
                     <div class="subcontenedor-img" style="background-image: url('${subData.imagen || obtenerImagenSubcontenedorAnime(contenedor, i)}')"></div>
-                    <h3>${subData.nombre || (tieneAnime ? animeInfo.titulo : `Anime ${i}`)}</h3>
+                    <h3>${titulo}</h3>
+                    
                     ${tieneAnime ? 
-                        `<p><strong>${animeInfo.titulo}</strong></p>
-                         <p style="font-size: 0.9rem; opacity: 0.8;">${animeInfo.duracion} • ${animeInfo.categoria}</p>` 
-                        : `<p style="color: #FF6B6B;">${desc}</p>`}
-                    <div class="card-button" style="margin-top: 10px; padding: 10px 20px; font-size: 0.9rem;">
+                        `<p style="font-size: 0.9rem; opacity: 0.8;">${animeInfo.duracion} • ${animeInfo.categoria}</p>
+                         <p style="font-size: 0.9rem; min-height: 40px;">${desc.substring(0, 60)}${desc.length > 60 ? '...' : ''}</p>` 
+                        : `<p style="color: #FF6B6B; min-height: 40px;">${desc}</p>`}
+                    
+                    <div class="card-button" style="margin-top: 10px; padding: 10px 20px; font-size: 0.9rem; ${!tieneAnime ? 'opacity: 0.5;' : ''}">
                         ${tieneAnime ? '🎬 Ver opciones' : '📚 Solo vocabulario'}
                     </div>
                 </div>
@@ -2199,7 +2205,7 @@ function cargarSubcontenedoresAudios(contenedor) {
 
 function crearSubcontenedoresAudiosUI(contenedor) {
     let html = `<h2 style="text-align: center; margin-bottom: 30px; color: #FFD166;">
-        🎵 CONTENEDOR ${contenedor} - SUB-CONTENEDORES DE OPENINGS
+        🎵 ${obtenerContenedorAudio(contenedor).nombre || `CONTENEDOR ${contenedor}`} - SUB-CONTENEDORES DE OPENINGS
     </h2>`;
     html += '<div class="subcontenedores-grid">';
     
@@ -2211,19 +2217,22 @@ function crearSubcontenedoresAudiosUI(contenedor) {
         subcontenedores.forEach(i => {
             let imagenSubcontenedor = obtenerImagenSubcontenedorAudio(contenedor, i);
             const audioInfo = obtenerAudio(contenedor, i);
-            const tieneAudio = audioInfo !== null;
+            const tieneAudio = audioInfo !== null && audioInfo.driveId && audioInfo.driveId !== "";
             
-            const desc = tieneAudio ? audioInfo.descripcion : '(Sin audio configurado)';
+            const titulo = audioInfo ? audioInfo.titulo : `Audio ${i}`;
+            const descripcion = audioInfo ? audioInfo.descripcion : 'Sin audio configurado';
             
             html += `
                 <div class="subcontenedor-item" onclick="${tieneAudio ? `seleccionarAccionAudio(${contenedor}, ${i})` : `cargarMazosAudios(${contenedor}, ${i})`}">
                     <div class="subcontenedor-img" style="background-image: url('${imagenSubcontenedor}')"></div>
-                    <h3>${tieneAudio ? audioInfo.titulo : `Audio ${i}`}</h3>
+                    <h3>${titulo}</h3>
+                    
                     ${tieneAudio ? 
-                        `<p><strong>${audioInfo.titulo}</strong></p>
-                         <p style="font-size: 0.9rem; opacity: 0.8;">${audioInfo.artista} • ${audioInfo.duracion}</p>` 
-                        : `<p style="color: #FF6B6B;">${desc}</p>`}
-                    <div class="card-button" style="margin-top: 10px; padding: 10px 20px; font-size: 0.9rem; background: linear-gradient(135deg, #FF6B6B, #FFD166);">
+                        `<p style="font-size: 0.9rem; opacity: 0.8;">${audioInfo.artista || 'Artista desconocido'} • ${audioInfo.duracion || '0:00'}</p>
+                         <p style="font-size: 0.9rem; min-height: 40px;">${descripcion.substring(0, 60)}${descripcion.length > 60 ? '...' : ''}</p>` 
+                        : `<p style="color: #FF6B6B; min-height: 40px;">${descripcion}</p>`}
+                    
+                    <div class="card-button" style="margin-top: 10px; padding: 10px 20px; font-size: 0.9rem; background: linear-gradient(135deg, #FF6B6B, #FFD166); ${!tieneAudio ? 'opacity: 0.5;' : ''}">
                         ${tieneAudio ? '🎵 Ver opciones' : '📚 Solo vocabulario'}
                     </div>
                 </div>
@@ -2407,7 +2416,7 @@ function crearMazosAudiosUI(contenedor, subcontenedor) {
 }
 
 // ====================
-// FUNCIONES PARA ASMR (VERSIÓN DINÁMICA)
+// FUNCIONES PARA ASMR (VERSIÓN CORREGIDA)
 // ====================
 
 function cargarSubcontenedoresASMR(contenedor) {
@@ -2425,7 +2434,7 @@ function cargarSubcontenedoresASMR(contenedor) {
 
 function crearSubcontenedoresASMRUI(contenedor) {
     let html = `<h2 style="text-align: center; margin-bottom: 30px; color: #FFD166;">
-        🎧 CONTENEDOR ${contenedor} - SUB-CONTENEDORES DE ASMR
+        🎧 ${obtenerContenedorASMR(contenedor).nombre || `CONTENEDOR ${contenedor}`} - SUB-CONTENEDORES DE ASMR
     </h2>`;
     html += '<div class="subcontenedores-grid">';
     
@@ -2437,21 +2446,24 @@ function crearSubcontenedoresASMRUI(contenedor) {
         subcontenedores.forEach(i => {
             const subData = obtenerSubcontenedorASMR(contenedor, i);
             const asmrInfo = obtenerASMR(contenedor, i);
-            const tieneASMR = asmrInfo !== null;
+            const tieneASMR = asmrInfo !== null && asmrInfo.driveId && asmrInfo.driveId !== "";
             
-            const desc = subData.descripcion || (tieneASMR ? 'ASMR disponible' : '(Sin audio ASMR configurado)');
+            const titulo = subData.nombre || (asmrInfo ? asmrInfo.titulo : `ASMR ${i}`);
+            const descripcion = subData.descripcion || (asmrInfo ? asmrInfo.descripcion : 'Sin audio ASMR configurado');
             
             html += `
-                <div class="subcontenedor-item" onclick="${tieneASMR ? `seleccionarAccionASMR(${contenedor}, ${i})` : 'alert("Este sub-contenedor no tiene audio ASMR disponible")'}">
+                <div class="subcontenedor-item" onclick="${tieneASMR ? `seleccionarAccionASMR(${contenedor}, ${i})` : 'mostrarNotificacionASMR(\'❌ Este sub-contenedor no tiene audio ASMR disponible\')'}">
                     <div class="subcontenedor-img" style="background-image: url('${subData.imagen || obtenerImagenSubcontenedorASMR(contenedor, i)}')"></div>
-                    <h3>${tieneASMR ? asmrInfo.titulo : `ASMR ${i}`}</h3>
+                    <h3>${titulo}</h3>
+                    
                     ${tieneASMR ? 
-                        `<p><strong>${asmrInfo.titulo}</strong></p>
-                         <p style="font-size: 0.9rem; opacity: 0.8;">${asmrInfo.duracion} • ${asmrInfo.categoria}</p>
+                        `<p style="font-size: 0.9rem; opacity: 0.8;">${asmrInfo.duracion} • ${asmrInfo.categoria}</p>
+                         <p style="font-size: 0.9rem; min-height: 40px;">${descripcion.substring(0, 60)}${descripcion.length > 60 ? '...' : ''}</p>
                          <p style="font-size: 0.8rem; opacity: 0.7;">🎤 ${asmrInfo.tipoVoz}</p>` 
-                        : `<p style="color: #FF6B6B;">${desc}</p>`}
-                    <div class="card-button" style="margin-top: 10px; padding: 10px 20px; font-size: 0.9rem; background: linear-gradient(135deg, #9C27B0, #673AB7);">
-                        ${tieneASMR ? '🎧 Escuchar ASMR' : 'Vacío'}
+                        : `<p style="color: #FF6B6B; min-height: 40px;">${descripcion}</p>`}
+                    
+                    <div class="card-button" style="margin-top: 10px; padding: 10px 20px; font-size: 0.9rem; background: linear-gradient(135deg, #9C27B0, #673AB7); ${!tieneASMR ? 'opacity: 0.5;' : ''}">
+                        ${tieneASMR ? '🎧 Escuchar ASMR' : '📭 Sin audio'}
                     </div>
                 </div>
             `;
@@ -2474,8 +2486,8 @@ function crearSubcontenedoresASMRUI(contenedor) {
                     <div style="font-weight: bold; font-size: 1.2rem;">${calcularDuracionTotalASMRContenedor(contenedor)}</div>
                 </div>
                 <div style="text-align: center;">
-                    <div style="color: #9C27B0; font-size: 0.9rem;">📈 Completado</div>
-                    <div style="font-weight: bold; font-size: 1.2rem;">100%</div>
+                    <div style="color: #9C27B0; font-size: 0.9rem;">📈 Disponibles</div>
+                    <div style="font-weight: bold; font-size: 1.2rem;">${Object.keys(asmrDatabase).filter(key => asmrDatabase[key] && asmrDatabase[key].driveId !== "").length}</div>
                 </div>
             </div>
         </div>
@@ -2490,14 +2502,18 @@ function calcularDuracionTotalASMRContenedor(contenedor) {
     
     subcontenedores.forEach(sub => {
         const asmrInfo = obtenerASMR(contenedor, sub);
-        if (asmrInfo && asmrInfo.duracion !== "0:00") {
-            const [minutos, segundos] = asmrInfo.duracion.split(':').map(Number);
-            totalSegundos += minutos * 60 + segundos;
+        if (asmrInfo && asmrInfo.duracion && asmrInfo.duracion !== "0:00") {
+            const partes = asmrInfo.duracion.split(':').map(Number);
+            if (partes.length === 2) {
+                const [minutos, segundos] = partes;
+                totalSegundos += minutos * 60 + segundos;
+            }
         }
     });
     
     const minutos = Math.floor(totalSegundos / 60);
-    return `${minutos} min`;
+    const segundosRestantes = totalSegundos % 60;
+    return `${minutos}:${segundosRestantes.toString().padStart(2, '0')}`;
 }
 
 function seleccionarAccionASMR(contenedor, subcontenedor) {
@@ -2537,7 +2553,7 @@ function seleccionarAccionASMR(contenedor, subcontenedor) {
                     </div>
                     <div>
                         <span style="color: #9C27B0; font-size: 0.9rem;">🏷️ Tags:</span>
-                        <div style="font-weight: bold;">${asmrInfo.tags.join(', ')}</div>
+                        <div style="font-weight: bold;">${asmrInfo.tags ? asmrInfo.tags.join(', ') : 'Sin etiquetas'}</div>
                     </div>
                 </div>
             </div>
@@ -2631,7 +2647,7 @@ function crearReproductorASMRUI(asmrInfo) {
                     </div>
                     <div style="background: rgba(255, 255, 255, 0.08); padding: 15px; border-radius: 10px;">
                         <div style="color: #9C27B0; font-size: 0.9rem;">🏷️ Tags</div>
-                        <div style="font-weight: bold;">${asmrInfo.tags.join(', ')}</div>
+                        <div style="font-weight: bold;">${asmrInfo.tags ? asmrInfo.tags.join(', ') : 'Sin etiquetas'}</div>
                     </div>
                 </div>
             </div>
@@ -3218,9 +3234,9 @@ function finalizarQuiz() {
         porcentaje
     );
     
-    // ===== NUEVA LÍNEA - VERIFICAR EVENTO DIARIO =====
+    // ===== VERIFICAR EVENTO DIARIO =====
     verificarEventoDiarioAlCompletarMazo(porcentaje);
-    // ==================================================
+    // ===================================
     
     const dineroAhora = sistemaEconomia.obtenerDinero();
     const recompensa = dineroAhora - dineroAntes;
