@@ -124,8 +124,8 @@ const asmrDatabase = {
     
     // Sub-contenedor 3.1
     '3_1': {
-        titulo: "🍵 Ceremonia del Té ASMR",
-        driveId: "1tS-gKr6bf4MY5Yrw7zRvP2uP_zq9rsLl",
+        titulo: "Vecina milf putonas",
+        driveId: "1CwgH1vKEysecFK8EvfRo4Ra4D-cjpKy5",
         descripcion: "Sonidos de la ceremonia del té japonesa con explicaciones susurradas.",
         timestamps: [
             { tiempo: 0, titulo: "🏯 Preparación del espacio" },
@@ -142,8 +142,8 @@ const asmrDatabase = {
     
     // Sub-contenedor 3.2
     '3_2': {
-        titulo: "🎋 Sonidos de Bambú y Campanas",
-        driveId: "1tS-gKr6bf4MY5Yrw7zRvP2uP_zq9rsLl",
+        titulo: " AMIGA DE TU MAMÁ SOBRE ti",
+        driveId: "bc1q94ngmz9mu3zadhvgran4eeakfhraqlpaa3ndcw",
         descripcion: "Sonidos relajantes de bambú y campanas de templo con mantras en japonés.",
         timestamps: [
             { tiempo: 0, titulo: "🎋 Bambú meciéndose" },
@@ -159,8 +159,56 @@ const asmrDatabase = {
     
     // Sub-contenedor 3.3
     '3_3': {
-        titulo: "📖 Lectura de Haikus en Susurro",
-        driveId: "1tS-gKr6bf4MY5Yrw7zRvP2uP_zq9rsLl",
+        titulo: "Mama mafioso de amiga",
+        driveId: "1ktLE0jO4o4fCptC-CnWwrgixqihrhyz2",
+        descripcion: "Lectura suave de haikus clásicos japoneses con explicaciones poéticas.",
+        timestamps: [
+            { tiempo: 0, titulo: "🌸 Haiku de primavera" },
+            { tiempo: 120, titulo: "☀️ Haiku de verano" },
+            { tiempo: 240, titulo: "🍁 Haiku de otoño" },
+            { tiempo: 360, titulo: "❄️ Haiku de invierno" },
+            { tiempo: 480, titulo: "🌙 Haiku de luna" }
+        ],
+        duracion: "11:20",
+        categoria: "Poesía",
+        tipoVoz: "Masculina poética",
+        tags: ["haiku", "poesía", "clásico"]
+    },
+      '3_4': {
+        titulo: " Mamá De Tu Ex Te Pide Que Regreses Con Mamada",
+        driveId: "1suOD_rxLVYmcSwn-wXQb3H3qdyqqHW5m",
+        descripcion: "Lectura suave de haikus clásicos japoneses con explicaciones poéticas.",
+        timestamps: [
+            { tiempo: 0, titulo: "🌸 Haiku de primavera" },
+            { tiempo: 120, titulo: "☀️ Haiku de verano" },
+            { tiempo: 240, titulo: "🍁 Haiku de otoño" },
+            { tiempo: 360, titulo: "❄️ Haiku de invierno" },
+            { tiempo: 480, titulo: "🌙 Haiku de luna" }
+        ],
+        duracion: "11:20",
+        categoria: "Poesía",
+        tipoVoz: "Masculina poética",
+        tags: ["haiku", "poesía", "clásico"]
+    },
+      '3_5': {
+        titulo: "TÍA DE TU AMIGO QUIERE SER TU MAMI❤️_🔥💋",
+        driveId: "1TlZBcXlWQDyeg8_dzIKqVljbVPCq0VrY",
+        descripcion: "Lectura suave de haikus clásicos japoneses con explicaciones poéticas.",
+        timestamps: [
+            { tiempo: 0, titulo: "🌸 Haiku de primavera" },
+            { tiempo: 120, titulo: "☀️ Haiku de verano" },
+            { tiempo: 240, titulo: "🍁 Haiku de otoño" },
+            { tiempo: 360, titulo: "❄️ Haiku de invierno" },
+            { tiempo: 480, titulo: "🌙 Haiku de luna" }
+        ],
+        duracion: "11:20",
+        categoria: "Poesía",
+        tipoVoz: "Masculina poética",
+        tags: ["haiku", "poesía", "clásico"]
+    },
+      '3_6': {
+        titulo: "Mamá de tu amigo siempre quiso MAM4RTELA",
+        driveId: "1sewpSfY3X7TgOb3j3VS5vpVOHPXs09fy",
         descripcion: "Lectura suave de haikus clásicos japoneses con explicaciones poéticas.",
         timestamps: [
             { tiempo: 0, titulo: "🌸 Haiku de primavera" },
