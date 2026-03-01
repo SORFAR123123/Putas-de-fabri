@@ -1217,8 +1217,8 @@ const sistemaDescriptivo = {
                 ambiente: 'tapping'
             },
             3: { 
-                nombre: 'ASMR CONTAINER 3',
-                imagen: 'https://pbs.twimg.com/media/G7wfStPXUAA1Ra2?format=png&name=900x900', 
+                nombre: 'Madres putonas',
+                imagen: 'https://pbs.twimg.com/media/HCWjicLbkAACzrp?format=jpg&name=large', 
                 descripcion: 'ASMR de roleplay',
                 ambiente: 'roleplay'
             },
@@ -1246,6 +1246,12 @@ const sistemaDescriptivo = {
                 tipoVoz: '' 
             },
             '1_3': { 
+                nombre: 'ASMR 3',
+                imagen: '', 
+                descripcion: '', 
+                tipoVoz: '' 
+            },
+            '1_4': { 
                 nombre: 'ASMR 3',
                 imagen: '', 
                 descripcion: '', 
@@ -1286,6 +1292,24 @@ const sistemaDescriptivo = {
                 tipoVoz: '' 
             },
             '3_3': { 
+                nombre: 'ASMR 3',
+                imagen: '', 
+                descripcion: '', 
+                tipoVoz: '' 
+            },
+            '3_4': { 
+                nombre: 'ASMR 3',
+                imagen: '', 
+                descripcion: '', 
+                tipoVoz: '' 
+            },
+            '3_5': { 
+                nombre: 'ASMR 3',
+                imagen: '', 
+                descripcion: '', 
+                tipoVoz: '' 
+            },
+            '3_6': { 
                 nombre: 'ASMR 3',
                 imagen: '', 
                 descripcion: '', 
