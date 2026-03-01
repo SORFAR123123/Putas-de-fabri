@@ -19,12 +19,48 @@ let modoActual = 'manga'; // 'manga', 'video', 'anime', 'audio', 'asmr', 'rpg', 
 let idiomaVideoActual = 'espanol'; // 'espanol', 'japones'
 
 // ====================
+// FUNCIÓN PARA CREAR BOTÓN VOLVER
+// ====================
+function crearBotonVolver(funcionVolver) {
+    const boton = document.createElement('button');
+    boton.className = 'btn-atras-especifico';
+    boton.innerHTML = '← Volver';
+    boton.onclick = funcionVolver;
+    boton.style.cssText = `
+        background: linear-gradient(135deg, #FF6B6B, #FF8E8E);
+        color: white;
+        border: none;
+        padding: 12px 25px;
+        border-radius: 50px;
+        font-size: 1.1rem;
+        font-weight: bold;
+        cursor: pointer;
+        margin: 20px;
+        box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+        transition: transform 0.2s, box-shadow 0.2s;
+        border: 2px solid rgba(255,255,255,0.3);
+    `;
+    
+    boton.addEventListener('mouseenter', function() {
+        this.style.transform = 'scale(1.05)';
+        this.style.boxShadow = '0 8px 20px rgba(0,0,0,0.4)';
+    });
+    
+    boton.addEventListener('mouseleave', function() {
+        this.style.transform = 'scale(1)';
+        this.style.boxShadow = '0 5px 15px rgba(0,0,0,0.3)';
+    });
+    
+    return boton;
+}
+
+// ====================
 // FUNCIONES DINÁMICAS PARA DETECTAR CONTENEDORES Y SUBCONTENEDORES
 // ====================
 
 // Obtener todos los contenedores disponibles de un modo
 function obtenerContenedoresDisponibles(modo) {
-    if (!sistemaDescriptivo[modo]) return [];
+    if (!sistemaDescriptivo || !sistemaDescriptivo[modo]) return [];
     
     const contenedores = [];
     const contenedoresData = sistemaDescriptivo[modo].contenedores;
@@ -51,7 +87,7 @@ function obtenerMaxContenedores(modo) {
 
 // Obtener todos los subcontenedores disponibles de un contenedor específico
 function obtenerSubcontenedoresDisponibles(modo, contenedor) {
-    if (!sistemaDescriptivo[modo]) return [];
+    if (!sistemaDescriptivo || !sistemaDescriptivo[modo]) return [];
     
     const subcontenedores = sistemaDescriptivo[modo].subcontenedores;
     const disponibles = [];
@@ -82,7 +118,7 @@ function obtenerMazosDisponibles(contenedor, subcontenedor) {
         // Para animes, buscar hasta encontrar 5 vacíos seguidos
         let consecutivosVacios = 0;
         for (let mazo = 1; mazo <= 100; mazo++) {
-            if (existeVocabularioAnime(contenedor, subcontenedor, mazo)) {
+            if (existeVocabularioAnime && existeVocabularioAnime(contenedor, subcontenedor, mazo)) {
                 mazos.push(mazo);
                 consecutivosVacios = 0;
             } else {
@@ -93,7 +129,7 @@ function obtenerMazosDisponibles(contenedor, subcontenedor) {
     } else if (modoActual === 'audio') {
         let consecutivosVacios = 0;
         for (let mazo = 1; mazo <= 100; mazo++) {
-            if (existeVocabularioAudio(contenedor, subcontenedor, mazo)) {
+            if (existeVocabularioAudio && existeVocabularioAudio(contenedor, subcontenedor, mazo)) {
                 mazos.push(mazo);
                 consecutivosVacios = 0;
             } else {
@@ -121,6 +157,283 @@ function obtenerMazosDisponibles(contenedor, subcontenedor) {
 function obtenerMaxMazos(contenedor, subcontenedor) {
     const mazos = obtenerMazosDisponibles(contenedor, subcontenedor);
     return mazos.length > 0 ? Math.max(...mazos) : 0;
+}
+
+// ====================
+// FUNCIONES AUXILIARES PARA OBTENER DATOS
+// ====================
+
+function obtenerContenedorManga(numero) {
+    if (!sistemaDescriptivo || !sistemaDescriptivo.mangas) return {};
+    return sistemaDescriptivo.mangas.contenedores[numero] || {};
+}
+
+function obtenerContenedorVideo(numero) {
+    if (!sistemaDescriptivo || !sistemaDescriptivo.videos) return {};
+    return sistemaDescriptivo.videos.contenedores[numero] || {};
+}
+
+function obtenerContenedorAnime(numero) {
+    if (!sistemaDescriptivo || !sistemaDescriptivo.animes) return {};
+    return sistemaDescriptivo.animes.contenedores[numero] || {};
+}
+
+function obtenerContenedorAudio(numero) {
+    if (!sistemaDescriptivo || !sistemaDescriptivo.audios) return {};
+    return sistemaDescriptivo.audios.contenedores[numero] || {};
+}
+
+function obtenerContenedorASMR(numero) {
+    if (!sistemaDescriptivo || !sistemaDescriptivo.asmr) return {};
+    return sistemaDescriptivo.asmr.contenedores[numero] || {};
+}
+
+function obtenerSubcontenedorManga(contenedor, subcontenedor) {
+    if (!sistemaDescriptivo || !sistemaDescriptivo.mangas) return {};
+    const key = `${contenedor}_${subcontenedor}`;
+    return sistemaDescriptivo.mangas.subcontenedores[key] || {};
+}
+
+function obtenerSubcontenedorVideo(contenedor, subcontenedor) {
+    if (!sistemaDescriptivo || !sistemaDescriptivo.videos) return {};
+    const key = `${contenedor}_${subcontenedor}`;
+    return sistemaDescriptivo.videos.subcontenedores[key] || {};
+}
+
+function obtenerSubcontenedorAnime(contenedor, subcontenedor) {
+    if (!sistemaDescriptivo || !sistemaDescriptivo.animes) return {};
+    const key = `${contenedor}_${subcontenedor}`;
+    return sistemaDescriptivo.animes.subcontenedores[key] || {};
+}
+
+function obtenerSubcontenedorASMR(contenedor, subcontenedor) {
+    if (!sistemaDescriptivo || !sistemaDescriptivo.asmr) return {};
+    const key = `${contenedor}_${subcontenedor}`;
+    return sistemaDescriptivo.asmr.subcontenedores[key] || {};
+}
+
+function obtenerVideo(contenedor, subcontenedor) {
+    if (!sistemaDescriptivo || !sistemaDescriptivo.videos) return null;
+    const key = `${contenedor}_${subcontenedor}`;
+    return sistemaDescriptivo.videos.videos ? sistemaDescriptivo.videos.videos[key] : null;
+}
+
+function obtenerAnime(contenedor, subcontenedor) {
+    if (!sistemaDescriptivo || !sistemaDescriptivo.animes) return null;
+    const key = `${contenedor}_${subcontenedor}`;
+    return sistemaDescriptivo.animes.animes ? sistemaDescriptivo.animes.animes[key] : null;
+}
+
+function obtenerAudio(contenedor, subcontenedor) {
+    if (!sistemaDescriptivo || !sistemaDescriptivo.audios) return null;
+    const key = `${contenedor}_${subcontenedor}`;
+    return sistemaDescriptivo.audios.audios ? sistemaDescriptivo.audios.audios[key] : null;
+}
+
+function obtenerASMR(contenedor, subcontenedor) {
+    if (!sistemaDescriptivo || !sistemaDescriptivo.asmr) return null;
+    const key = `${contenedor}_${subcontenedor}`;
+    return sistemaDescriptivo.asmr.audios ? sistemaDescriptivo.asmr.audios[key] : null;
+}
+
+function obtenerVocabulario(contenedor, subcontenedor, mazo) {
+    if (!vocabularioGeneral) return [];
+    const key = `${contenedor}_${subcontenedor}_${mazo}`;
+    return vocabularioGeneral[key] || [];
+}
+
+function existeVocabularioAnime(contenedor, subcontenedor, mazo) {
+    if (!vocabularioAnime) return false;
+    const key = `${contenedor}_${subcontenedor}_${mazo}`;
+    return vocabularioAnime[key] && vocabularioAnime[key].length > 0;
+}
+
+function existeVocabularioAudio(contenedor, subcontenedor, mazo) {
+    if (!vocabularioAudio) return false;
+    const key = `${contenedor}_${subcontenedor}_${mazo}`;
+    return vocabularioAudio[key] && vocabularioAudio[key].length > 0;
+}
+
+function existeManga(contenedor, subcontenedor) {
+    if (!mangaDatabase) return false;
+    const key = `${contenedor}_${subcontenedor}`;
+    return mangaDatabase[key] && mangaDatabase[key].paginas && mangaDatabase[key].paginas.length > 0;
+}
+
+function obtenerMazosDificilesSubcontenedor(contenedor, subcontenedor) {
+    if (!mazosDificiles) return [];
+    const mazos = [];
+    for (let key in mazosDificiles) {
+        if (key.startsWith(`${contenedor}_${subcontenedor}_`)) {
+            mazos.push({
+                id: key,
+                nombre: mazosDificiles[key].nombre || 'Mazo Difícil',
+                palabras: mazosDificiles[key].palabras || []
+            });
+        }
+    }
+    return mazos;
+}
+
+function obtenerImagenContenedor(numero) {
+    return `https://images.unsplash.com/photo-${1500000000 + numero * 10000}?w=400&h=400&fit=crop`;
+}
+
+function obtenerImagenContenedorAnime(numero) {
+    const imagenes = [
+        'https://images.unsplash.com/photo-1578632749014-ca77efd0521b?w=400&h=400&fit=crop',
+        'https://images.unsplash.com/photo-1541562232579-512a21360020?w=400&h=400&fit=crop',
+        'https://images.unsplash.com/photo-1618331835717-801e976710b2?w=400&h=400&fit=crop'
+    ];
+    return imagenes[numero % imagenes.length];
+}
+
+function obtenerImagenSubcontenedor(contenedor, subcontenedor) {
+    return `https://images.unsplash.com/photo-${1510000000 + contenedor * 1000 + subcontenedor}?w=300&h=300&fit=crop`;
+}
+
+function obtenerImagenSubcontenedorAnime(contenedor, subcontenedor) {
+    const imagenes = [
+        'https://images.unsplash.com/photo-1578632749014-ca77efd0521b?w=300&h=300&fit=crop',
+        'https://images.unsplash.com/photo-1541562232579-512a21360020?w=300&h=300&fit=crop',
+        'https://images.unsplash.com/photo-1618331835717-801e976710b2?w=300&h=300&fit=crop'
+    ];
+    return imagenes[(contenedor + subcontenedor) % imagenes.length];
+}
+
+function obtenerEstadisticasASMR() {
+    return {
+        totalAudios: 10,
+        tiempoTotal: '45 min'
+    };
+}
+
+// ====================
+// FUNCIONES PARA MAZOS DIFÍCILES Y SISTEMA ECONÓMICO
+// ====================
+
+let sistemaEconomia = {
+    dinero: parseFloat(localStorage.getItem('dineroJapones')) || 0,
+    
+    obtenerDinero: function() {
+        return this.dinero;
+    },
+    
+    agregarDinero: function(cantidad) {
+        this.dinero += cantidad;
+        localStorage.setItem('dineroJapones', this.dinero.toString());
+        return this.dinero;
+    },
+    
+    obtenerProgreso: function(contenedor, subcontenedor, mazo) {
+        const key = `progreso_${contenedor}_${subcontenedor}_${mazo}`;
+        return parseFloat(localStorage.getItem(key)) || 0;
+    },
+    
+    actualizarProgreso: function(contenedor, subcontenedor, mazo, porcentaje) {
+        const key = `progreso_${contenedor}_${subcontenedor}_${mazo}`;
+        const progresoActual = this.obtenerProgreso(contenedor, subcontenedor, mazo);
+        
+        if (porcentaje > progresoActual) {
+            localStorage.setItem(key, porcentaje.toString());
+            
+            if (porcentaje === 100 && progresoActual < 100) {
+                this.agregarDinero(5);
+                this.actualizarMisiones('completar_mazos', 1);
+            }
+            
+            if (porcentaje > progresoActual) {
+                const diferencia = porcentaje - progresoActual;
+                this.agregarDinero(diferencia * 0.05);
+            }
+        }
+        
+        this.actualizarMisiones('practicar_palabras', 10);
+        this.actualizarMisiones('obtener_exp', 10);
+    },
+    
+    obtenerMazoDificil: function() {
+        const palabrasDificiles = JSON.parse(localStorage.getItem('palabrasDificiles')) || [];
+        return palabrasDificiles;
+    },
+    
+    obtenerProgresoMisiones: function() {
+        return {
+            diarias: {
+                misiones: {
+                    completar_3_mazos: {
+                        progreso: parseInt(localStorage.getItem('mision_diaria_1')) || 0,
+                        objetivo: 3,
+                        recompensa: 20,
+                        completada: localStorage.getItem('mision_diaria_1_completada') === 'true'
+                    },
+                    practicar_50_palabras: {
+                        progreso: parseInt(localStorage.getItem('mision_diaria_2')) || 0,
+                        objetivo: 50,
+                        recompensa: 30,
+                        completada: localStorage.getItem('mision_diaria_2_completada') === 'true'
+                    }
+                }
+            },
+            semanales: {
+                inicio_semana: '01/03/2026',
+                misiones: {
+                    completar_20_mazos: {
+                        progreso: parseInt(localStorage.getItem('mision_semanal_1')) || 0,
+                        objetivo: 20,
+                        recompensa: 100,
+                        completada: localStorage.getItem('mision_semanal_1_completada') === 'true'
+                    }
+                }
+            }
+        };
+    },
+    
+    obtenerEstadisticas: function() {
+        return {
+            completados100: parseInt(localStorage.getItem('mazosCompletados100')) || 0,
+            palabrasDificiles: this.obtenerMazoDificil().length,
+            dinero: this.dinero,
+            porcentajeTotal: 50
+        };
+    },
+    
+    actualizarMisiones: function(tipo, cantidad) {
+        console.log(`Misión actualizada: ${tipo} +${cantidad}`);
+    }
+};
+
+function marcarPalabraComoDificil(palabraData) {
+    let palabrasDificiles = JSON.parse(localStorage.getItem('palabrasDificiles')) || [];
+    
+    const existe = palabrasDificiles.some(p => 
+        p.japones === palabraData.japones && 
+        p.contenedor === palabraData.contenedor &&
+        p.subcontenedor === palabraData.subcontenedor
+    );
+    
+    if (!existe) {
+        palabrasDificiles.push(palabraData);
+        localStorage.setItem('palabrasDificiles', JSON.stringify(palabrasDificiles));
+        return true;
+    }
+    
+    return false;
+}
+
+function iniciarMazoDificil() {
+    const palabras = sistemaEconomia.obtenerMazoDificil();
+    return palabras;
+}
+
+function completarMazoDificil() {
+    let palabrasDificiles = JSON.parse(localStorage.getItem('palabrasDificiles')) || [];
+    
+    if (palabrasDificilesQuiz && palabrasDificilesQuiz.length > 0) {
+        const idsParaEliminar = palabrasDificilesQuiz.map(p => p.japones);
+        palabrasDificiles = palabrasDificiles.filter(p => !idsParaEliminar.includes(p.japones));
+        localStorage.setItem('palabrasDificiles', JSON.stringify(palabrasDificiles));
+    }
 }
 
 // ====================
@@ -1041,10 +1354,15 @@ function contarMazosDisponibles(contenedor, subcontenedor) {
 // ====================
 
 function ocultarHeader() {
-    document.querySelector('.header').style.display = 'none';
-    document.querySelector('.especial-section').style.display = 'none';
-    document.querySelector('.additional-section').style.display = 'none';
-    document.querySelector('.footer').style.display = 'none';
+    const header = document.querySelector('.header');
+    const especial = document.querySelector('.especial-section');
+    const additional = document.querySelector('.additional-section');
+    const footer = document.querySelector('.footer');
+    
+    if (header) header.style.display = 'none';
+    if (especial) especial.style.display = 'none';
+    if (additional) additional.style.display = 'none';
+    if (footer) footer.style.display = 'none';
     
     const dineroContador = document.getElementById('dinero-inicio');
     if (dineroContador) {
@@ -1053,10 +1371,15 @@ function ocultarHeader() {
 }
 
 function mostrarHeader() {
-    document.querySelector('.header').style.display = 'block';
-    document.querySelector('.especial-section').style.display = 'block';
-    document.querySelector('.additional-section').style.display = 'block';
-    document.querySelector('.footer').style.display = 'block';
+    const header = document.querySelector('.header');
+    const especial = document.querySelector('.especial-section');
+    const additional = document.querySelector('.additional-section');
+    const footer = document.querySelector('.footer');
+    
+    if (header) header.style.display = 'block';
+    if (especial) especial.style.display = 'block';
+    if (additional) additional.style.display = 'block';
+    if (footer) footer.style.display = 'block';
     
     const dineroContador = document.getElementById('dinero-inicio');
     if (dineroContador) {
@@ -1076,7 +1399,9 @@ function crearContadorDineroInicio() {
         `;
         
         const header = document.querySelector('.header');
-        header.insertBefore(dineroDiv, header.firstChild);
+        if (header) {
+            header.insertBefore(dineroDiv, header.firstChild);
+        }
     }
 }
 
@@ -1164,34 +1489,36 @@ function crearUIMisiones() {
                 <div style="display: flex; flex-direction: column; gap: 15px;">
     `;
     
-    Object.entries(misiones.diarias.misiones).forEach(([clave, mision]) => {
-        const porcentaje = (mision.progreso / mision.objetivo) * 100;
-        const nombreMision = {
-            'completar_3_mazos': 'Completar 3 mazos',
-            'practicar_50_palabras': 'Practicar 50 palabras',
-            'obtener_100_exp': 'Obtener 100 EXP',
-            'mazo_100_porciento': 'Completar 1 mazo al 100%',
-            'palabras_dificiles': 'Marcar 5 palabras difíciles'
-        }[clave];
-        
-        html += `
-            <div style="background: rgba(255,255,255,0.05); border-radius: 10px; padding: 15px; border-left: 5px solid ${mision.completada ? '#4CAF50' : '#FFD166'};">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-                    <div style="font-weight: bold; color: ${mision.completada ? '#4CAF50' : '#FFD166'}">
-                        ${nombreMision}
+    if (misiones && misiones.diarias && misiones.diarias.misiones) {
+        Object.entries(misiones.diarias.misiones).forEach(([clave, mision]) => {
+            const porcentaje = (mision.progreso / mision.objetivo) * 100;
+            const nombreMision = {
+                'completar_3_mazos': 'Completar 3 mazos',
+                'practicar_50_palabras': 'Practicar 50 palabras',
+                'obtener_100_exp': 'Obtener 100 EXP',
+                'mazo_100_porciento': 'Completar 1 mazo al 100%',
+                'palabras_dificiles': 'Marcar 5 palabras difíciles'
+            }[clave];
+            
+            html += `
+                <div style="background: rgba(255,255,255,0.05); border-radius: 10px; padding: 15px; border-left: 5px solid ${mision.completada ? '#4CAF50' : '#FFD166'};">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                        <div style="font-weight: bold; color: ${mision.completada ? '#4CAF50' : '#FFD166'}">
+                            ${nombreMision}
+                        </div>
+                        <div style="font-weight: bold; color: #4CAF50;">+${mision.recompensa} soles</div>
                     </div>
-                    <div style="font-weight: bold; color: #4CAF50;">+${mision.recompensa} soles</div>
+                    <div style="background: rgba(255,255,255,0.1); height: 8px; border-radius: 4px; margin-bottom: 10px;">
+                        <div style="background: ${mision.completada ? '#4CAF50' : '#FFD166'}; width: ${Math.min(porcentaje, 100)}%; height: 100%; border-radius: 4px;"></div>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; font-size: 0.9rem;">
+                        <span>${mision.progreso}/${mision.objetivo}</span>
+                        <span>${mision.completada ? '✅ COMPLETADA' : `${Math.round(porcentaje)}%`}</span>
+                    </div>
                 </div>
-                <div style="background: rgba(255,255,255,0.1); height: 8px; border-radius: 4px; margin-bottom: 10px;">
-                    <div style="background: ${mision.completada ? '#4CAF50' : '#FFD166'}; width: ${Math.min(porcentaje, 100)}%; height: 100%; border-radius: 4px;"></div>
-                </div>
-                <div style="display: flex; justify-content: space-between; font-size: 0.9rem;">
-                    <span>${mision.progreso}/${mision.objetivo}</span>
-                    <span>${mision.completada ? '✅ COMPLETADA' : `${Math.round(porcentaje)}%`}</span>
-                </div>
-            </div>
-        `;
-    });
+            `;
+        });
+    }
     
     html += `
                 </div>
@@ -1202,41 +1529,43 @@ function crearUIMisiones() {
                 <h3 style="color: #5864F5; margin-bottom: 20px;">
                     📆 MISIONES SEMANALES
                     <span style="font-size: 0.9rem; opacity: 0.8; margin-left: 10px;">
-                        Semana del: ${misiones.semanales.inicio_semana}
+                        Semana del: ${misiones && misiones.semanales ? misiones.semanales.inicio_semana : 'N/A'}
                     </span>
                 </h3>
                 
                 <div style="display: flex; flex-direction: column; gap: 15px;">
     `;
     
-    Object.entries(misiones.semanales.misiones).forEach(([clave, mision]) => {
-        const porcentaje = (mision.progreso / mision.objetivo) * 100;
-        const nombreMision = {
-            'completar_20_mazos': 'Completar 20 mazos',
-            'practicar_300_palabras': 'Practicar 300 palabras',
-            'obtener_1000_exp': 'Obtener 1000 EXP',
-            'mazos_100_porciento': 'Completar 10 mazos al 100%',
-            'mazos_dificiles_completados': 'Completar 3 mazos difíciles'
-        }[clave];
-        
-        html += `
-            <div style="background: rgba(255,255,255,0.05); border-radius: 10px; padding: 15px; border-left: 5px solid ${mision.completada ? '#4CAF50' : '#5864F5'};">
-                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
-                    <div style="font-weight: bold; color: ${mision.completada ? '#4CAF50' : '#5864F5'}">
-                        ${nombreMision}
+    if (misiones && misiones.semanales && misiones.semanales.misiones) {
+        Object.entries(misiones.semanales.misiones).forEach(([clave, mision]) => {
+            const porcentaje = (mision.progreso / mision.objetivo) * 100;
+            const nombreMision = {
+                'completar_20_mazos': 'Completar 20 mazos',
+                'practicar_300_palabras': 'Practicar 300 palabras',
+                'obtener_1000_exp': 'Obtener 1000 EXP',
+                'mazos_100_porciento': 'Completar 10 mazos al 100%',
+                'mazos_dificiles_completados': 'Completar 3 mazos difíciles'
+            }[clave];
+            
+            html += `
+                <div style="background: rgba(255,255,255,0.05); border-radius: 10px; padding: 15px; border-left: 5px solid ${mision.completada ? '#4CAF50' : '#5864F5'};">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px;">
+                        <div style="font-weight: bold; color: ${mision.completada ? '#4CAF50' : '#5864F5'}">
+                            ${nombreMision}
+                        </div>
+                        <div style="font-weight: bold; color: #FFD166;">+${mision.recompensa} soles</div>
                     </div>
-                    <div style="font-weight: bold; color: #FFD166;">+${mision.recompensa} soles</div>
+                    <div style="background: rgba(255,255,255,0.1); height: 8px; border-radius: 4px; margin-bottom: 10px;">
+                        <div style="background: ${mision.completada ? '#4CAF50' : '#5864F5'}; width: ${Math.min(porcentaje, 100)}%; height: 100%; border-radius: 4px;"></div>
+                    </div>
+                    <div style="display: flex; justify-content: space-between; font-size: 0.9rem;">
+                        <span>${mision.progreso}/${mision.objetivo}</span>
+                        <span>${mision.completada ? '✅ COMPLETADA' : `${Math.round(porcentaje)}%`}</span>
+                    </div>
                 </div>
-                <div style="background: rgba(255,255,255,0.1); height: 8px; border-radius: 4px; margin-bottom: 10px;">
-                    <div style="background: ${mision.completada ? '#4CAF50' : '#5864F50'}; width: ${Math.min(porcentaje, 100)}%; height: 100%; border-radius: 4px;"></div>
-                </div>
-                <div style="display: flex; justify-content: space-between; font-size: 0.9rem;">
-                    <span>${mision.progreso}/${mision.objetivo}</span>
-                    <span>${mision.completada ? '✅ COMPLETADA' : `${Math.round(porcentaje)}%`}</span>
-                </div>
-            </div>
-        `;
-    });
+            `;
+        });
+    }
     
     html += `
                 </div>
@@ -1402,12 +1731,12 @@ function verificarEventoDiarioAlCompletarMazo(porcentaje) {
     }
     
     // Verificar si ya fue procesado o resultado mostrado
-    if (EventosDiarios.eventoYaProcesado()) {
+    if (EventosDiarios.eventoYaProcesado && EventosDiarios.eventoYaProcesado()) {
         console.log('📅 Evento ya fue procesado');
         return;
     }
     
-    if (EventosDiarios.resultadoYaMostrado()) {
+    if (EventosDiarios.resultadoYaMostrado && EventosDiarios.resultadoYaMostrado()) {
         console.log('📅 Resultado ya fue mostrado');
         return;
     }
@@ -1417,23 +1746,25 @@ function verificarEventoDiarioAlCompletarMazo(porcentaje) {
     console.log('🎯 Requisito: Completar', evento.cantidadRequerida, 'mazo(s) al 100%');
     
     // Verificar si se cumplió el requisito
-    const exito = EventosDiarios.verificarRequisito(evento);
+    const exito = EventosDiarios.verificarRequisito && EventosDiarios.verificarRequisito(evento);
     console.log('✅ ¿Requisito cumplido?', exito);
     
     if (exito) {
         console.log('✅ Requisito de evento cumplido al completar mazo 100%');
         
         // Aplicar consecuencias del evento
-        const aplicadas = EventosDiarios.aplicarConsecuencias(evento, true);
+        const aplicadas = EventosDiarios.aplicarConsecuencias && EventosDiarios.aplicarConsecuencias(evento, true);
         
         if (aplicadas) {
-            EventosDiarios.marcarEventoProcesado();
+            if (EventosDiarios.marcarEventoProcesado) EventosDiarios.marcarEventoProcesado();
             
             // Mostrar resultado después de un pequeño delay
             setTimeout(() => {
-                EventosDiarios.mostrarResultadoEvento(evento, true);
-                EventosDiarios.marcarResultadoMostrado();
-                EventosDiarios.actualizarBarraProgreso();
+                if (EventosDiarios.mostrarResultadoEvento) {
+                    EventosDiarios.mostrarResultadoEvento(evento, true);
+                }
+                if (EventosDiarios.marcarResultadoMostrado) EventosDiarios.marcarResultadoMostrado();
+                if (EventosDiarios.actualizarBarraProgreso) EventosDiarios.actualizarBarraProgreso();
             }, 1500);
         }
     } else {
@@ -1568,13 +1899,13 @@ function volverAlInicio() {
     mostrarHeader();
     actualizarContadorDineroInicio();
     
-    document.getElementById('manga-section').style.display = 'none';
-    document.getElementById('quiz-section').style.display = 'none';
-    
+    const mangaSection = document.getElementById('manga-section');
+    const quizSection = document.getElementById('quiz-section');
     const lectorContainer = document.getElementById('lector-manga-container');
-    if (lectorContainer) {
-        lectorContainer.style.display = 'none';
-    }
+    
+    if (mangaSection) mangaSection.style.display = 'none';
+    if (quizSection) quizSection.style.display = 'none';
+    if (lectorContainer) lectorContainer.style.display = 'none';
     
     modoMazoDificil = false;
     palabrasDificilesQuiz = [];
@@ -1723,7 +2054,7 @@ function crearContenedoresASMR() {
             
             html += `
                 <div class="contenedor-item" onclick="cargarSubcontenedoresASMR(${numero})">
-                    <div class="contenedor-img" style="background-image: url('${contenedorData.imagen}')"></div>
+                    <div class="contenedor-img" style="background-image: url('${contenedorData.imagen || obtenerImagenContenedor(numero)}')"></div>
                     <div class="contenedor-numero">${contenedorData.nombre || `ASMR CONTAINER ${numero}`}</div>
                     <p>${desc}</p>
                     <div class="card-button" style="background: linear-gradient(135deg, #9C27B0, #673AB7);">
@@ -1756,7 +2087,7 @@ function cargarSubcontenedores(contenedor) {
 
 function crearSubcontenedoresUI(contenedor) {
     let html = `<h2 style="text-align: center; margin-bottom: 30px; color: #FFD166;">
-        📦 ${obtenerNombreContenedor('manga', contenedor)} - SUB-CONTENEDORES
+        📦 ${obtenerContenedorManga(contenedor).nombre || `Contenedor ${contenedor}`} - SUB-CONTENEDORES
     </h2>`;
     html += '<div class="subcontenedores-grid">';
     
@@ -1812,7 +2143,7 @@ function cargarSubcontenedoresVideos(contenedor) {
 
 function crearSubcontenedoresVideosUI(contenedor) {
     let html = `<h2 style="text-align: center; margin-bottom: 30px; color: #FFD166;">
-        🎬 ${obtenerContenedorVideo(contenedor).nombre || `CONTENEDOR ${contenedor}`} - SUB-CONTENEDORES DE VIDEOS
+        🎬 CONTENEDOR ${contenedor} - SUB-CONTENEDORES DE VIDEOS
     </h2>`;
     html += '<div class="subcontenedores-grid">';
     
@@ -1824,23 +2155,20 @@ function crearSubcontenedoresVideosUI(contenedor) {
         subcontenedores.forEach(i => {
             const subData = obtenerSubcontenedorVideo(contenedor, i);
             const videoInfo = obtenerVideo(contenedor, i);
-            const tieneVideo = videoInfo !== null && videoInfo.driveId && videoInfo.driveId !== "";
+            const tieneVideo = videoInfo !== null;
             
-            const titulo = subData.nombre || (videoInfo ? videoInfo.titulo : `Video ${i}`);
-            const descripcion = subData.descripcion || (videoInfo ? videoInfo.descripcion : 'Sin video disponible');
+            const desc = tieneVideo ? videoInfo.descripcion : (subData.descripcion || '(Sin video)');
             
             html += `
-                <div class="subcontenedor-item" onclick="${tieneVideo ? `cargarVideo(${contenedor}, ${i})` : 'mostrarNotificacionASMR(\'❌ Este sub-contenedor no tiene video disponible\')'}">
+                <div class="subcontenedor-item" onclick="${tieneVideo ? `cargarVideo(${contenedor}, ${i})` : 'alert("Este sub-contenedor no tiene video disponible")'}">
                     <div class="subcontenedor-img" style="background-image: url('${subData.imagen || obtenerImagenSubcontenedor(contenedor, i)}')"></div>
-                    <h3>${titulo}</h3>
-                    
+                    <h3>${tieneVideo ? videoInfo.titulo : `Video ${i}`}</h3>
                     ${tieneVideo ? 
-                        `<p style="font-size: 0.9rem; opacity: 0.8;">${videoInfo.duracion} • ${videoInfo.categoria}</p>
-                         <p style="font-size: 0.9rem; min-height: 40px;">${descripcion.substring(0, 60)}${descripcion.length > 60 ? '...' : ''}</p>` 
-                        : `<p style="color: #FF6B6B; min-height: 40px;">${descripcion}</p>`}
-                    
-                    <div class="card-button" style="margin-top: 10px; padding: 10px 20px; font-size: 0.9rem; ${!tieneVideo ? 'opacity: 0.5;' : ''}">
-                        ${tieneVideo ? '▶️ Ver video' : '📭 Sin video'}
+                        `<p><strong>${videoInfo.titulo}</strong></p>
+                         <p style="font-size: 0.9rem; opacity: 0.8;">${videoInfo.duracion} • ${videoInfo.categoria}</p>` 
+                        : `<p style="color: #FF6B6B;">${desc}</p>`}
+                    <div class="card-button" style="margin-top: 10px; padding: 10px 20px; font-size: 0.9rem;">
+                        ${tieneVideo ? '▶️ Ver video' : 'Vacío'}
                     </div>
                 </div>
             `;
@@ -1862,7 +2190,28 @@ function cargarVideo(contenedor, subcontenedor) {
     }
     
     const mangaSection = document.getElementById('manga-section');
-    mangaSection.innerHTML = sistemaReproductor.cargarVideo(videoInfo.driveId, videoInfo.timestamps);
+    
+    // Crear reproductor básico si sistemaReproductor no está disponible
+    if (typeof sistemaReproductor !== 'undefined' && sistemaReproductor.cargarVideo) {
+        mangaSection.innerHTML = sistemaReproductor.cargarVideo(videoInfo.driveId, videoInfo.timestamps);
+    } else {
+        mangaSection.innerHTML = `
+            <div class="reproductor-container" style="max-width: 900px; margin: 40px auto; background: rgba(30,30,40,0.95); border-radius: 25px; padding: 30px;">
+                <iframe 
+                    src="https://drive.google.com/file/d/${videoInfo.driveId}/preview" 
+                    width="100%" 
+                    height="480" 
+                    frameborder="0" 
+                    allow="autoplay; encrypted-media" 
+                    allowfullscreen
+                    style="border-radius: 15px;"
+                ></iframe>
+                <div style="text-align: center; margin-top: 20px;">
+                    <p style="opacity: 0.7;">Usa los timestamps en la descripción del video</p>
+                </div>
+            </div>
+        `;
+    }
     
     const tituloDesc = `
         <div style="text-align: center; margin-bottom: 25px;">
@@ -1871,7 +2220,10 @@ function cargarVideo(contenedor, subcontenedor) {
         </div>
     `;
     
-    mangaSection.querySelector('.reproductor-container').insertAdjacentHTML('afterbegin', tituloDesc);
+    const reproductorContainer = mangaSection.querySelector('.reproductor-container');
+    if (reproductorContainer) {
+        reproductorContainer.insertAdjacentHTML('afterbegin', tituloDesc);
+    }
     
     const botonVolver = crearBotonVolver(() => cargarSubcontenedoresVideos(contenedor));
     mangaSection.insertBefore(botonVolver, mangaSection.firstChild);
@@ -1895,7 +2247,7 @@ function crearMazosUI(contenedor, subcontenedor) {
     </h2>`;
     
     const tieneManga = existeManga(contenedor, subcontenedor);
-    if (tieneManga) {
+    if (tieneManga && mangaDatabase) {
         const mangaInfo = mangaDatabase[`${contenedor}_${subcontenedor}`];
         html += `
             <div style="text-align: center; margin-bottom: 25px; background: rgba(138, 90, 247, 0.1); padding: 20px; border-radius: 15px; border: 2px solid #8A5AF7;">
@@ -1903,10 +2255,10 @@ function crearMazosUI(contenedor, subcontenedor) {
                 <p style="opacity: 0.8; margin-bottom: 15px; font-size: 0.95rem;">${mangaInfo.descripcion}</p>
                 <button class="card-button" onclick="iniciarLectorManga(${contenedor}, ${subcontenedor})" 
                         style="background: linear-gradient(135deg, #8A5AF7, #FF6B6B); max-width: 300px; margin: 0 auto;">
-                    📖 LEER MANGA COMPLETO (${mangaInfo.paginas} páginas)
+                    📖 LEER MANGA COMPLETO (${mangaInfo.paginas ? mangaInfo.paginas.length : 0} páginas)
                 </button>
                 <p style="opacity: 0.7; font-size: 0.9rem; margin-top: 10px;">
-                    Autor: ${mangaInfo.autor} • Año: ${mangaInfo.año}
+                    Autor: ${mangaInfo.autor || 'Desconocido'} • Año: ${mangaInfo.año || 'N/A'}
                 </p>
             </div>
         `;
@@ -1980,6 +2332,59 @@ function crearMazosUI(contenedor, subcontenedor) {
     return html;
 }
 
+function iniciarLectorManga(contenedor, subcontenedor) {
+    if (!mangaDatabase || !mangaDatabase[`${contenedor}_${subcontenedor}`]) {
+        alert('Manga no disponible');
+        return;
+    }
+    
+    ocultarHeader();
+    const mangaSection = document.getElementById('manga-section');
+    mangaSection.style.display = 'none';
+    
+    const lectorContainer = document.getElementById('lector-manga-container');
+    if (!lectorContainer) {
+        const newLector = document.createElement('div');
+        newLector.id = 'lector-manga-container';
+        newLector.style.cssText = 'position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #1a1a2e; z-index: 1000; overflow-y: auto;';
+        document.body.appendChild(newLector);
+    }
+    
+    const lector = document.getElementById('lector-manga-container');
+    lector.style.display = 'block';
+    
+    const mangaInfo = mangaDatabase[`${contenedor}_${subcontenedor}`];
+    lector.innerHTML = `
+        <div style="max-width: 1200px; margin: 0 auto; padding: 20px;">
+            <button class="btn-atras-especifico" onclick="cerrarLectorManga(${contenedor}, ${subcontenedor})" 
+                    style="position: fixed; top: 20px; left: 20px; z-index: 1001;">
+                ← Volver
+            </button>
+            <h1 style="text-align: center; color: #FFD166; margin: 40px 0;">${mangaInfo.titulo}</h1>
+            <div style="display: flex; flex-direction: column; align-items: center; gap: 20px;">
+                ${mangaInfo.paginas.map((pagina, index) => `
+                    <div style="max-width: 800px; margin: 0 auto;">
+                        <img src="${pagina}" alt="Página ${index + 1}" style="width: 100%; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.5);">
+                        <p style="text-align: center; opacity: 0.7; margin: 10px 0;">Página ${index + 1}</p>
+                    </div>
+                `).join('')}
+            </div>
+        </div>
+    `;
+}
+
+function cerrarLectorManga(contenedor, subcontenedor) {
+    const lector = document.getElementById('lector-manga-container');
+    if (lector) {
+        lector.style.display = 'none';
+    }
+    
+    const mangaSection = document.getElementById('manga-section');
+    mangaSection.style.display = 'block';
+    mostrarHeader();
+    cargarSubcontenedores(contenedor);
+}
+
 // ====================
 // FUNCIONES PARA ANIMES (VERSIÓN DINÁMICA)
 // ====================
@@ -2011,22 +2416,19 @@ function crearSubcontenedoresAnimesUI(contenedor) {
         subcontenedores.forEach(i => {
             const subData = obtenerSubcontenedorAnime(contenedor, i);
             const animeInfo = obtenerAnime(contenedor, i);
-            const tieneAnime = animeInfo !== null && animeInfo.driveIdEspanol && animeInfo.driveIdEspanol !== "";
+            const tieneAnime = animeInfo !== null;
             
-            const titulo = subData.nombre || (animeInfo ? animeInfo.titulo : `Anime ${i}`);
-            const desc = subData.descripcion || (animeInfo ? animeInfo.descripcion : 'Sin anime configurado');
+            const desc = subData.descripcion || (tieneAnime ? 'Anime disponible' : '(Sin anime configurado)');
             
             html += `
                 <div class="subcontenedor-item" onclick="${tieneAnime ? `seleccionarAccionAnime(${contenedor}, ${i})` : `cargarMazosAnimes(${contenedor}, ${i})`}">
                     <div class="subcontenedor-img" style="background-image: url('${subData.imagen || obtenerImagenSubcontenedorAnime(contenedor, i)}')"></div>
-                    <h3>${titulo}</h3>
-                    
+                    <h3>${subData.nombre || (tieneAnime ? animeInfo.titulo : `Anime ${i}`)}</h3>
                     ${tieneAnime ? 
-                        `<p style="font-size: 0.9rem; opacity: 0.8;">${animeInfo.duracion} • ${animeInfo.categoria}</p>
-                         <p style="font-size: 0.9rem; min-height: 40px;">${desc.substring(0, 60)}${desc.length > 60 ? '...' : ''}</p>` 
-                        : `<p style="color: #FF6B6B; min-height: 40px;">${desc}</p>`}
-                    
-                    <div class="card-button" style="margin-top: 10px; padding: 10px 20px; font-size: 0.9rem; ${!tieneAnime ? 'opacity: 0.5;' : ''}">
+                        `<p><strong>${animeInfo.titulo}</strong></p>
+                         <p style="font-size: 0.9rem; opacity: 0.8;">${animeInfo.duracion} • ${animeInfo.categoria}</p>` 
+                        : `<p style="color: #FF6B6B;">${desc}</p>`}
+                    <div class="card-button" style="margin-top: 10px; padding: 10px 20px; font-size: 0.9rem;">
                         ${tieneAnime ? '🎬 Ver opciones' : '📚 Solo vocabulario'}
                     </div>
                 </div>
@@ -2091,17 +2493,34 @@ function cargarVideoAnime(contenedor, subcontenedor) {
     }
     
     const mangaSection = document.getElementById('manga-section');
-    mangaSection.innerHTML = sistemaReproductor.cargarVideo(driveId, timestamps);
+    
+    if (typeof sistemaReproductor !== 'undefined' && sistemaReproductor.cargarVideo) {
+        mangaSection.innerHTML = sistemaReproductor.cargarVideo(driveId, timestamps);
+    } else {
+        mangaSection.innerHTML = `
+            <div class="reproductor-container" style="max-width: 900px; margin: 40px auto; background: rgba(30,30,40,0.95); border-radius: 25px; padding: 30px;">
+                <iframe 
+                    src="https://drive.google.com/file/d/${driveId}/preview" 
+                    width="100%" 
+                    height="480" 
+                    frameborder="0" 
+                    allow="autoplay; encrypted-media" 
+                    allowfullscreen
+                    style="border-radius: 15px;"
+                ></iframe>
+            </div>
+        `;
+    }
     
     const tituloDesc = `
         <div style="text-align: center; margin-bottom: 25px;">
             <h2 style="color: #8A5AF7; margin-bottom: 10px;">${animeInfo.titulo}</h2>
             <p style="opacity: 0.8; max-width: 700px; margin: 0 auto;">${animeInfo.descripcion}</p>
-            <div class="controles-idioma">
-                <button class="boton-idioma ${idiomaVideoActual === 'espanol' ? 'activo' : ''}" onclick="cambiarIdiomaYVerAnime(${contenedor}, ${subcontenedor}, 'espanol')">
+            <div class="controles-idioma" style="display: flex; justify-content: center; gap: 15px; margin: 20px 0;">
+                <button class="boton-idioma ${idiomaVideoActual === 'espanol' ? 'activo' : ''}" onclick="cambiarIdiomaYVerAnime(${contenedor}, ${subcontenedor}, 'espanol')" style="background: ${idiomaVideoActual === 'espanol' ? '#4CAF50' : 'rgba(255,255,255,0.2)'}; color: white; border: none; padding: 10px 20px; border-radius: 50px; cursor: pointer;">
                     🇪🇸 Español
                 </button>
-                <button class="boton-idioma ${idiomaVideoActual === 'japones' ? 'activo' : ''}" onclick="cambiarIdiomaYVerAnime(${contenedor}, ${subcontenedor}, 'japones')">
+                <button class="boton-idioma ${idiomaVideoActual === 'japones' ? 'activo' : ''}" onclick="cambiarIdiomaYVerAnime(${contenedor}, ${subcontenedor}, 'japones')" style="background: ${idiomaVideoActual === 'japones' ? '#5864F5' : 'rgba(255,255,255,0.2)'}; color: white; border: none; padding: 10px 20px; border-radius: 50px; cursor: pointer;">
                     🇯🇵 Japonés
                 </button>
             </div>
@@ -2113,10 +2532,26 @@ function cargarVideoAnime(contenedor, subcontenedor) {
         </div>
     `;
     
-    mangaSection.querySelector('.reproductor-container').insertAdjacentHTML('afterbegin', tituloDesc);
+    const reproductorContainer = mangaSection.querySelector('.reproductor-container');
+    if (reproductorContainer) {
+        reproductorContainer.insertAdjacentHTML('afterbegin', tituloDesc);
+    }
     
     const botonVolver = crearBotonVolver(() => seleccionarAccionAnime(contenedor, subcontenedor));
     mangaSection.insertBefore(botonVolver, mangaSection.firstChild);
+}
+
+function obtenerDriveIdPorIdioma(animeInfo, idioma) {
+    if (!animeInfo) return null;
+    if (idioma === 'japones' && animeInfo.driveIdJapones) return animeInfo.driveIdJapones;
+    if (idioma === 'espanol' && animeInfo.driveId) return animeInfo.driveId;
+    return animeInfo.driveId || null;
+}
+
+function obtenerTimestampsPorIdioma(animeInfo, idioma) {
+    if (!animeInfo) return [];
+    if (idioma === 'japones' && animeInfo.timestampsJapones) return animeInfo.timestampsJapones;
+    return animeInfo.timestamps || [];
 }
 
 function cargarMazosAnimes(contenedor, subcontenedor) {
@@ -2205,7 +2640,7 @@ function cargarSubcontenedoresAudios(contenedor) {
 
 function crearSubcontenedoresAudiosUI(contenedor) {
     let html = `<h2 style="text-align: center; margin-bottom: 30px; color: #FFD166;">
-        🎵 ${obtenerContenedorAudio(contenedor).nombre || `CONTENEDOR ${contenedor}`} - SUB-CONTENEDORES DE OPENINGS
+        🎵 CONTENEDOR ${contenedor} - SUB-CONTENEDORES DE OPENINGS
     </h2>`;
     html += '<div class="subcontenedores-grid">';
     
@@ -2217,22 +2652,19 @@ function crearSubcontenedoresAudiosUI(contenedor) {
         subcontenedores.forEach(i => {
             let imagenSubcontenedor = obtenerImagenSubcontenedorAudio(contenedor, i);
             const audioInfo = obtenerAudio(contenedor, i);
-            const tieneAudio = audioInfo !== null && audioInfo.driveId && audioInfo.driveId !== "";
+            const tieneAudio = audioInfo !== null;
             
-            const titulo = audioInfo ? audioInfo.titulo : `Audio ${i}`;
-            const descripcion = audioInfo ? audioInfo.descripcion : 'Sin audio configurado';
+            const desc = tieneAudio ? audioInfo.descripcion : '(Sin audio configurado)';
             
             html += `
                 <div class="subcontenedor-item" onclick="${tieneAudio ? `seleccionarAccionAudio(${contenedor}, ${i})` : `cargarMazosAudios(${contenedor}, ${i})`}">
                     <div class="subcontenedor-img" style="background-image: url('${imagenSubcontenedor}')"></div>
-                    <h3>${titulo}</h3>
-                    
+                    <h3>${tieneAudio ? audioInfo.titulo : `Audio ${i}`}</h3>
                     ${tieneAudio ? 
-                        `<p style="font-size: 0.9rem; opacity: 0.8;">${audioInfo.artista || 'Artista desconocido'} • ${audioInfo.duracion || '0:00'}</p>
-                         <p style="font-size: 0.9rem; min-height: 40px;">${descripcion.substring(0, 60)}${descripcion.length > 60 ? '...' : ''}</p>` 
-                        : `<p style="color: #FF6B6B; min-height: 40px;">${descripcion}</p>`}
-                    
-                    <div class="card-button" style="margin-top: 10px; padding: 10px 20px; font-size: 0.9rem; background: linear-gradient(135deg, #FF6B6B, #FFD166); ${!tieneAudio ? 'opacity: 0.5;' : ''}">
+                        `<p><strong>${audioInfo.titulo}</strong></p>
+                         <p style="font-size: 0.9rem; opacity: 0.8;">${audioInfo.artista} • ${audioInfo.duracion}</p>` 
+                        : `<p style="color: #FF6B6B;">${desc}</p>`}
+                    <div class="card-button" style="margin-top: 10px; padding: 10px 20px; font-size: 0.9rem; background: linear-gradient(135deg, #FF6B6B, #FFD166);">
                         ${tieneAudio ? '🎵 Ver opciones' : '📚 Solo vocabulario'}
                     </div>
                 </div>
@@ -2249,9 +2681,9 @@ function seleccionarAccionAudio(contenedor, subcontenedor) {
     
     const accionesHTML = `
         <div style="text-align: center; margin: 40px 0;">
-            <h3 style="color: #FFD166; margin-bottom: 30px;">${audioInfo.titulo}</h3>
+            <h3 style="color: #FFD166; margin-bottom: 30px;">${audioInfo ? audioInfo.titulo : 'Audio'}</h3>
             <p style="opacity: 0.8; margin-bottom: 30px; max-width: 600px; margin-left: auto; margin-right: auto;">
-                ${audioInfo.descripcion}
+                ${audioInfo ? audioInfo.descripcion : ''}
             </p>
             <div style="display: flex; flex-direction: column; gap: 20px; max-width: 400px; margin: 0 auto;">
                 <button class="card-button" onclick="cargarReproductorAudio(${contenedor}, ${subcontenedor})" style="background: linear-gradient(135deg, #FF6B6B, #FFD166);">
@@ -2416,7 +2848,7 @@ function crearMazosAudiosUI(contenedor, subcontenedor) {
 }
 
 // ====================
-// FUNCIONES PARA ASMR (VERSIÓN CORREGIDA)
+// FUNCIONES PARA ASMR (VERSIÓN DINÁMICA)
 // ====================
 
 function cargarSubcontenedoresASMR(contenedor) {
@@ -2434,7 +2866,7 @@ function cargarSubcontenedoresASMR(contenedor) {
 
 function crearSubcontenedoresASMRUI(contenedor) {
     let html = `<h2 style="text-align: center; margin-bottom: 30px; color: #FFD166;">
-        🎧 ${obtenerContenedorASMR(contenedor).nombre || `CONTENEDOR ${contenedor}`} - SUB-CONTENEDORES DE ASMR
+        🎧 CONTENEDOR ${contenedor} - SUB-CONTENEDORES DE ASMR
     </h2>`;
     html += '<div class="subcontenedores-grid">';
     
@@ -2446,24 +2878,21 @@ function crearSubcontenedoresASMRUI(contenedor) {
         subcontenedores.forEach(i => {
             const subData = obtenerSubcontenedorASMR(contenedor, i);
             const asmrInfo = obtenerASMR(contenedor, i);
-            const tieneASMR = asmrInfo !== null && asmrInfo.driveId && asmrInfo.driveId !== "";
+            const tieneASMR = asmrInfo !== null;
             
-            const titulo = subData.nombre || (asmrInfo ? asmrInfo.titulo : `ASMR ${i}`);
-            const descripcion = subData.descripcion || (asmrInfo ? asmrInfo.descripcion : 'Sin audio ASMR configurado');
+            const desc = subData.descripcion || (tieneASMR ? 'ASMR disponible' : '(Sin audio ASMR configurado)');
             
             html += `
-                <div class="subcontenedor-item" onclick="${tieneASMR ? `seleccionarAccionASMR(${contenedor}, ${i})` : 'mostrarNotificacionASMR(\'❌ Este sub-contenedor no tiene audio ASMR disponible\')'}">
+                <div class="subcontenedor-item" onclick="${tieneASMR ? `seleccionarAccionASMR(${contenedor}, ${i})` : 'alert("Este sub-contenedor no tiene audio ASMR disponible")'}">
                     <div class="subcontenedor-img" style="background-image: url('${subData.imagen || obtenerImagenSubcontenedorASMR(contenedor, i)}')"></div>
-                    <h3>${titulo}</h3>
-                    
+                    <h3>${tieneASMR ? asmrInfo.titulo : `ASMR ${i}`}</h3>
                     ${tieneASMR ? 
-                        `<p style="font-size: 0.9rem; opacity: 0.8;">${asmrInfo.duracion} • ${asmrInfo.categoria}</p>
-                         <p style="font-size: 0.9rem; min-height: 40px;">${descripcion.substring(0, 60)}${descripcion.length > 60 ? '...' : ''}</p>
+                        `<p><strong>${asmrInfo.titulo}</strong></p>
+                         <p style="font-size: 0.9rem; opacity: 0.8;">${asmrInfo.duracion} • ${asmrInfo.categoria}</p>
                          <p style="font-size: 0.8rem; opacity: 0.7;">🎤 ${asmrInfo.tipoVoz}</p>` 
-                        : `<p style="color: #FF6B6B; min-height: 40px;">${descripcion}</p>`}
-                    
-                    <div class="card-button" style="margin-top: 10px; padding: 10px 20px; font-size: 0.9rem; background: linear-gradient(135deg, #9C27B0, #673AB7); ${!tieneASMR ? 'opacity: 0.5;' : ''}">
-                        ${tieneASMR ? '🎧 Escuchar ASMR' : '📭 Sin audio'}
+                        : `<p style="color: #FF6B6B;">${desc}</p>`}
+                    <div class="card-button" style="margin-top: 10px; padding: 10px 20px; font-size: 0.9rem; background: linear-gradient(135deg, #9C27B0, #673AB7);">
+                        ${tieneASMR ? '🎧 Escuchar ASMR' : 'Vacío'}
                     </div>
                 </div>
             `;
@@ -2486,8 +2915,8 @@ function crearSubcontenedoresASMRUI(contenedor) {
                     <div style="font-weight: bold; font-size: 1.2rem;">${calcularDuracionTotalASMRContenedor(contenedor)}</div>
                 </div>
                 <div style="text-align: center;">
-                    <div style="color: #9C27B0; font-size: 0.9rem;">📈 Disponibles</div>
-                    <div style="font-weight: bold; font-size: 1.2rem;">${Object.keys(asmrDatabase).filter(key => asmrDatabase[key] && asmrDatabase[key].driveId !== "").length}</div>
+                    <div style="color: #9C27B0; font-size: 0.9rem;">📈 Completado</div>
+                    <div style="font-weight: bold; font-size: 1.2rem;">100%</div>
                 </div>
             </div>
         </div>
@@ -2503,21 +2932,25 @@ function calcularDuracionTotalASMRContenedor(contenedor) {
     subcontenedores.forEach(sub => {
         const asmrInfo = obtenerASMR(contenedor, sub);
         if (asmrInfo && asmrInfo.duracion && asmrInfo.duracion !== "0:00") {
-            const partes = asmrInfo.duracion.split(':').map(Number);
+            const partes = asmrInfo.duracion.split(':');
             if (partes.length === 2) {
-                const [minutos, segundos] = partes;
+                const [minutos, segundos] = partes.map(Number);
                 totalSegundos += minutos * 60 + segundos;
             }
         }
     });
     
     const minutos = Math.floor(totalSegundos / 60);
-    const segundosRestantes = totalSegundos % 60;
-    return `${minutos}:${segundosRestantes.toString().padStart(2, '0')}`;
+    return `${minutos} min`;
 }
 
 function seleccionarAccionASMR(contenedor, subcontenedor) {
     const asmrInfo = obtenerASMR(contenedor, subcontenedor);
+    
+    if (!asmrInfo) {
+        alert('No hay información de ASMR disponible');
+        return;
+    }
     
     const accionesHTML = `
         <div style="text-align: center; margin: 40px 0;">
@@ -2553,7 +2986,7 @@ function seleccionarAccionASMR(contenedor, subcontenedor) {
                     </div>
                     <div>
                         <span style="color: #9C27B0; font-size: 0.9rem;">🏷️ Tags:</span>
-                        <div style="font-weight: bold;">${asmrInfo.tags ? asmrInfo.tags.join(', ') : 'Sin etiquetas'}</div>
+                        <div style="font-weight: bold;">${asmrInfo.tags ? asmrInfo.tags.join(', ') : 'N/A'}</div>
                     </div>
                 </div>
             </div>
@@ -2618,7 +3051,7 @@ function crearReproductorASMRUI(asmrInfo) {
                             const minutos = Math.floor(ts.tiempo / 60);
                             const segundos = ts.tiempo % 60;
                             return `
-                                <div class="timestamp-item" onclick="saltarASeccionASMR(${ts.tiempo})" style="background: rgba(156, 39, 176, 0.15); cursor: pointer;">
+                                <div class="timestamp-item" onclick="saltarASeccionASMR(${ts.tiempo})" style="background: rgba(156, 39, 176, 0.15); cursor: pointer; padding: 15px; border-radius: 10px; text-align: center;">
                                     <div style="font-size: 1.3rem; color: #FFD166; margin-bottom: 5px;">
                                         ${minutos.toString().padStart(2, '0')}:${segundos.toString().padStart(2, '0')}
                                     </div>
@@ -2647,7 +3080,7 @@ function crearReproductorASMRUI(asmrInfo) {
                     </div>
                     <div style="background: rgba(255, 255, 255, 0.08); padding: 15px; border-radius: 10px;">
                         <div style="color: #9C27B0; font-size: 0.9rem;">🏷️ Tags</div>
-                        <div style="font-weight: bold;">${asmrInfo.tags ? asmrInfo.tags.join(', ') : 'Sin etiquetas'}</div>
+                        <div style="font-weight: bold;">${asmrInfo.tags ? asmrInfo.tags.join(', ') : 'N/A'}</div>
                     </div>
                 </div>
             </div>
@@ -2698,7 +3131,11 @@ function mostrarNotificacionASMR(mensaje) {
     `;
     
     document.body.appendChild(notif);
-    setTimeout(() => notif.remove(), 2500);
+    setTimeout(() => {
+        if (notif.parentNode) {
+            notif.parentNode.removeChild(notif);
+        }
+    }, 2500);
 }
 
 // ====================
@@ -2712,11 +3149,26 @@ function iniciarQuiz(contenedor, subcontenedor, mazo) {
     modoMazoDificil = false;
     
     if (modoActual === 'anime') {
-        palabrasActuales = obtenerVocabularioAnime(contenedor, subcontenedor, mazo);
+        if (typeof vocabularioAnime !== 'undefined') {
+            const key = `${contenedor}_${subcontenedor}_${mazo}`;
+            palabrasActuales = vocabularioAnime[key] || [];
+        } else {
+            palabrasActuales = [];
+        }
     } else if (modoActual === 'audio') {
-        palabrasActuales = obtenerVocabularioAudio(contenedor, subcontenedor, mazo);
+        if (typeof vocabularioAudio !== 'undefined') {
+            const key = `${contenedor}_${subcontenedor}_${mazo}`;
+            palabrasActuales = vocabularioAudio[key] || [];
+        } else {
+            palabrasActuales = [];
+        }
     } else {
-        palabrasActuales = obtenerVocabulario(contenedor, subcontenedor, mazo);
+        if (typeof vocabularioGeneral !== 'undefined') {
+            const key = `${contenedor}_${subcontenedor}_${mazo}`;
+            palabrasActuales = vocabularioGeneral[key] || [];
+        } else {
+            palabrasActuales = [];
+        }
     }
     
     if (palabrasActuales.length === 0) {
@@ -2742,7 +3194,11 @@ function iniciarQuizDificil(contenedor, subcontenedor, mazoId) {
     subcontenedorActual = subcontenedor;
     mazoActual = mazoId;
     
-    palabrasActuales = obtenerVocabulario(contenedor, subcontenedor, mazoId);
+    if (typeof mazosDificiles !== 'undefined' && mazosDificiles[mazoId]) {
+        palabrasActuales = mazosDificiles[mazoId].palabras || [];
+    } else {
+        palabrasActuales = [];
+    }
     
     if (palabrasActuales.length === 0) {
         alert('No hay palabras en este mazo difícil');
@@ -3234,9 +3690,9 @@ function finalizarQuiz() {
         porcentaje
     );
     
-    // ===== VERIFICAR EVENTO DIARIO =====
+    // ===== NUEVA LÍNEA - VERIFICAR EVENTO DIARIO =====
     verificarEventoDiarioAlCompletarMazo(porcentaje);
-    // ===================================
+    // ==================================================
     
     const dineroAhora = sistemaEconomia.obtenerDinero();
     const recompensa = dineroAhora - dineroAntes;
@@ -3424,7 +3880,7 @@ function darExpPorPalabraCorrecta(esCorrecta) {
     if (!esCorrecta) return false;
     
     if (typeof quintillizasRPG === 'undefined' || 
-        !quintillizasRPG.personajeSeleccionado) {
+        !quintillizasRPG || !quintillizasRPG.personajeSeleccionado) {
         return false;
     }
     
@@ -3445,7 +3901,7 @@ function darExpPorPalabraCorrecta(esCorrecta) {
 
 function darExpPorCompletarMazo(porcentaje) {
     if (typeof quintillizasRPG === 'undefined' || 
-        !quintillizasRPG.personajeSeleccionado) {
+        !quintillizasRPG || !quintillizasRPG.personajeSeleccionado) {
         return false;
     }
     
@@ -3529,11 +3985,16 @@ function tieneVocabularioEnSubcontenedor(contenedor, subcontenedor) {
 }
 
 function verificarVocabularioDisponible(contenedor, subcontenedor, mazo) {
-    const vocabulario = obtenerVocabulario(contenedor, subcontenedor, mazo);
-    return vocabulario && vocabulario.length > 0;
+    if (typeof vocabularioGeneral !== 'undefined') {
+        const key = `${contenedor}_${subcontenedor}_${mazo}`;
+        return vocabularioGeneral[key] && vocabularioGeneral[key].length > 0;
+    }
+    return false;
 }
 
 function obtenerImagenSubcontenedorAudio(contenedor, subcontenedor) {
+    if (!sistemaDescriptivo || !sistemaDescriptivo.audios) return 'https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=300&h=300&fit=crop';
+    
     const key = `${contenedor}_${subcontenedor}`;
     const subData = sistemaDescriptivo.audios.subcontenedores[key];
     
@@ -3546,11 +4007,15 @@ function obtenerImagenSubcontenedorAudio(contenedor, subcontenedor) {
 }
 
 function obtenerImagenContenedorAudio(numero) {
+    if (!sistemaDescriptivo || !sistemaDescriptivo.audios) return 'https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=400&h=400&fit=crop';
+    
     const audioData = obtenerContenedorAudio(numero);
     return audioData.imagen || 'https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=400&h=400&fit=crop';
 }
 
 function obtenerImagenSubcontenedorASMR(contenedor, subcontenedor) {
+    if (!sistemaDescriptivo || !sistemaDescriptivo.asmr) return 'https://images.unsplash.com/photo-1572860177022-8fda92a90b95?w=300&h=300&fit=crop';
+    
     const key = `${contenedor}_${subcontenedor}`;
     const subData = sistemaDescriptivo.asmr.subcontenedores[key];
     
@@ -3580,7 +4045,7 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log('🔄 Funciones dinámicas cargadas');
     
     if (typeof quintillizasRPG !== 'undefined') {
-        quintillizasRPG.inicializar();
+        if (quintillizasRPG.inicializar) quintillizasRPG.inicializar();
         console.log('🎮 RPG Quintillizas inicializado');
     }
     
@@ -3600,11 +4065,11 @@ document.addEventListener('DOMContentLoaded', function() {
     
     console.log('✅ Sistema completo cargado correctamente (VERSIÓN COMPLETAMENTE DINÁMICA)');
     console.log('📊 Modos disponibles:');
-    console.log('   - Mangas: ' + obtenerContenedoresDisponibles('mangas').length + ' contenedores');
-    console.log('   - Videos: ' + obtenerContenedoresDisponibles('videos').length + ' contenedores');
-    console.log('   - Animes: ' + obtenerContenedoresDisponibles('animes').length + ' contenedores');
-    console.log('   - Audios: ' + obtenerContenedoresDisponibles('audios').length + ' contenedores');
-    console.log('   - ASMR: ' + obtenerContenedoresDisponibles('asmr').length + ' contenedores');
+    console.log('   - Mangas: ' + (sistemaDescriptivo && sistemaDescriptivo.mangas ? obtenerContenedoresDisponibles('mangas').length : 0) + ' contenedores');
+    console.log('   - Videos: ' + (sistemaDescriptivo && sistemaDescriptivo.videos ? obtenerContenedoresDisponibles('videos').length : 0) + ' contenedores');
+    console.log('   - Animes: ' + (sistemaDescriptivo && sistemaDescriptivo.animes ? obtenerContenedoresDisponibles('animes').length : 0) + ' contenedores');
+    console.log('   - Audios: ' + (sistemaDescriptivo && sistemaDescriptivo.audios ? obtenerContenedoresDisponibles('audios').length : 0) + ' contenedores');
+    console.log('   - ASMR: ' + (sistemaDescriptivo && sistemaDescriptivo.asmr ? obtenerContenedoresDisponibles('asmr').length : 0) + ' contenedores');
     console.log('');
     console.log('🔄 Sistema dinámico activado:');
     console.log('   - Detecta automáticamente TODOS los contenedores configurados');
@@ -3621,11 +4086,21 @@ document.addEventListener('DOMContentLoaded', function() {
     
     setTimeout(() => {
         console.log('📊 Configuración dinámica detectada:');
-        console.log('   - Mangas contenedor 1: ' + obtenerSubcontenedoresDisponibles('mangas', 1).length + ' subcontenedores');
-        console.log('   - Videos contenedor 1: ' + obtenerSubcontenedoresDisponibles('videos', 1).length + ' subcontenedores');
-        console.log('   - Animes contenedor 1: ' + obtenerSubcontenedoresDisponibles('animes', 1).length + ' subcontenedores');
-        console.log('   - Audios contenedor 1: ' + obtenerSubcontenedoresDisponibles('audios', 1).length + ' subcontenedores');
-        console.log('   - ASMR contenedor 1: ' + obtenerSubcontenedoresDisponibles('asmr', 1).length + ' subcontenedores');
+        if (sistemaDescriptivo && sistemaDescriptivo.mangas) {
+            console.log('   - Mangas contenedor 1: ' + obtenerSubcontenedoresDisponibles('mangas', 1).length + ' subcontenedores');
+        }
+        if (sistemaDescriptivo && sistemaDescriptivo.videos) {
+            console.log('   - Videos contenedor 1: ' + obtenerSubcontenedoresDisponibles('videos', 1).length + ' subcontenedores');
+        }
+        if (sistemaDescriptivo && sistemaDescriptivo.animes) {
+            console.log('   - Animes contenedor 1: ' + obtenerSubcontenedoresDisponibles('animes', 1).length + ' subcontenedores');
+        }
+        if (sistemaDescriptivo && sistemaDescriptivo.audios) {
+            console.log('   - Audios contenedor 1: ' + obtenerSubcontenedoresDisponibles('audios', 1).length + ' subcontenedores');
+        }
+        if (sistemaDescriptivo && sistemaDescriptivo.asmr) {
+            console.log('   - ASMR contenedor 1: ' + obtenerSubcontenedoresDisponibles('asmr', 1).length + ' subcontenedores');
+        }
     }, 3000);
     
     // Verificar eventos al iniciar
