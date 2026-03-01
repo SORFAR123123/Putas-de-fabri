@@ -19,6 +19,51 @@ let modoActual = 'manga'; // 'manga', 'video', 'anime', 'audio', 'asmr', 'rpg', 
 let idiomaVideoActual = 'espanol'; // 'espanol', 'japones'
 
 // ====================
+// FUNCIÓN GLOBAL PARA BOTONES DE VOLVER - CORREGIDA
+// ====================
+
+// Función para crear un botón de volver reutilizable
+function crearBotonVolver(funcionAtras) {
+    const boton = document.createElement('button');
+    boton.className = 'btn-atras-especifico';
+    boton.innerHTML = '⬅️ Volver';
+    boton.onclick = (e) => {
+        e.stopPropagation();
+        funcionAtras();
+    };
+    
+    // Añadir estilos en línea para asegurar consistencia
+    boton.style.cssText = `
+        background: linear-gradient(135deg, #8A5AF7, #5864F5);
+        color: white;
+        border: none;
+        padding: 12px 25px;
+        border-radius: 50px;
+        font-size: 1.1rem;
+        font-weight: bold;
+        cursor: pointer;
+        margin: 20px;
+        box-shadow: 0 4px 15px rgba(138, 90, 247, 0.4);
+        transition: all 0.3s ease;
+        border: 2px solid rgba(255,255,255,0.2);
+        z-index: 100;
+    `;
+    
+    // Añadir efecto hover
+    boton.addEventListener('mouseenter', () => {
+        boton.style.transform = 'translateY(-3px)';
+        boton.style.boxShadow = '0 8px 25px rgba(138, 90, 247, 0.6)';
+    });
+    
+    boton.addEventListener('mouseleave', () => {
+        boton.style.transform = 'translateY(0)';
+        boton.style.boxShadow = '0 4px 15px rgba(138, 90, 247, 0.4)';
+    });
+    
+    return boton;
+}
+
+// ====================
 // FUNCIONES DINÁMICAS PARA DETECTAR CONTENEDORES Y SUBCONTENEDORES
 // ====================
 
@@ -2159,15 +2204,15 @@ function crearMazosAnimesUI(contenedor, subcontenedor) {
             const progreso = sistemaEconomia.obtenerProgreso(contenedor, subcontenedor, mazoNumero);
             
             html += `
-                <div class="mazo-item" onclick="${tieneVocabulario ? `iniciarQuiz(${contenedor}, ${subcontenedor}, ${mazoNumero})` : 'alert("Este mazo aún no tiene vocabulario. Agrégalo en 1_animes_vocabulario.js")'}" style="border-color: rgba(88, 100, 245, 0.6);">
+                <div class="mazo-item" onclick="${tieneVocabulario ? `iniciarQuiz(${contenedor}, ${subcontenedor}, ${mazoNumero})` : 'alert("Este mazo aún no tiene vocabulario. Agrégalo en 1_animes_vocabulario.js")'}">
                     <h3>MAZO ${mazoNumero}</h3>
                     <p>10 palabras japonesas</p>
                     ${progreso > 0 ? 
                         `<div style="margin-top: 10px;">
                             <div style="background: rgba(255,255,255,0.1); height: 8px; border-radius: 4px; overflow: hidden;">
-                                <div style="background: linear-gradient(135deg, #5864F5, #8A5AF7); width: ${progreso}%; height: 100%;"></div>
+                                <div style="background: linear-gradient(135deg, #4CAF50, #2E7D32); width: ${progreso}%; height: 100%;"></div>
                             </div>
-                            <p style="font-size: 0.9rem; margin-top: 5px; color: #5864F5;">${progreso}% completado</p>
+                            <p style="font-size: 0.9rem; margin-top: 5px; color: #4CAF50;">${progreso}% completado</p>
                         </div>` 
                         : ''}
                     ${!tieneVocabulario ? '<p style="color: #FF6B6B; font-size: 0.9rem; margin-top: 5px;">(Vacío)</p>' : ''}
@@ -2552,10 +2597,6 @@ function seleccionarAccionASMR(contenedor, subcontenedor) {
     `;
 }
 
-// ====================
-// FUNCIÓN FALTANTE PARA REPRODUCTOR ASMR
-// ====================
-
 function cargarReproductorASMR(contenedor, subcontenedor) {
     contenedorActual = contenedor;
     subcontenedorActual = subcontenedor;
@@ -2567,9 +2608,14 @@ function cargarReproductorASMR(contenedor, subcontenedor) {
     }
     
     const mangaSection = document.getElementById('manga-section');
+    mangaSection.innerHTML = crearReproductorASMRUI(asmrInfo);
     
-    // Crear el reproductor ASMR
-    let html = `
+    const botonVolver = crearBotonVolver(() => seleccionarAccionASMR(contenedor, subcontenedor));
+    mangaSection.insertBefore(botonVolver, mangaSection.firstChild);
+}
+
+function crearReproductorASMRUI(asmrInfo) {
+    return `
         <div class="reproductor-audio-container" style="max-width: 800px; margin: 40px auto; background: rgba(30, 30, 40, 0.95); border-radius: 25px; padding: 40px; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6); border: 3px solid #9C27B0;">
             <h2 style="text-align: center; color: #FFD166; margin-bottom: 10px;">${asmrInfo.titulo}</h2>
             <p style="text-align: center; opacity: 0.8; margin-bottom: 30px;">
@@ -2647,11 +2693,6 @@ function cargarReproductorASMR(contenedor, subcontenedor) {
             </div>
         </div>
     `;
-    
-    mangaSection.innerHTML = html;
-    
-    const botonVolver = crearBotonVolver(() => seleccionarAccionASMR(contenedor, subcontenedor));
-    mangaSection.insertBefore(botonVolver, mangaSection.firstChild);
 }
 
 function saltarASeccionASMR(segundos) {
