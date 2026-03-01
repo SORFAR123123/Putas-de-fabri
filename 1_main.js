@@ -2159,15 +2159,15 @@ function crearMazosAnimesUI(contenedor, subcontenedor) {
             const progreso = sistemaEconomia.obtenerProgreso(contenedor, subcontenedor, mazoNumero);
             
             html += `
-                <div class="mazo-item" onclick="${tieneVocabulario ? `iniciarQuiz(${contenedor}, ${subcontenedor}, ${mazoNumero})` : 'alert("Este mazo aún no tiene vocabulario. Agrégalo en 1_animes_vocabulario.js")'}">
+                <div class="mazo-item" onclick="${tieneVocabulario ? `iniciarQuiz(${contenedor}, ${subcontenedor}, ${mazoNumero})` : 'alert("Este mazo aún no tiene vocabulario. Agrégalo en 1_animes_vocabulario.js")'}" style="border-color: rgba(88, 100, 245, 0.6);">
                     <h3>MAZO ${mazoNumero}</h3>
                     <p>10 palabras japonesas</p>
                     ${progreso > 0 ? 
                         `<div style="margin-top: 10px;">
                             <div style="background: rgba(255,255,255,0.1); height: 8px; border-radius: 4px; overflow: hidden;">
-                                <div style="background: linear-gradient(135deg, #4CAF50, #2E7D32); width: ${progreso}%; height: 100%;"></div>
+                                <div style="background: linear-gradient(135deg, #5864F5, #8A5AF7); width: ${progreso}%; height: 100%;"></div>
                             </div>
-                            <p style="font-size: 0.9rem; margin-top: 5px; color: #4CAF50;">${progreso}% completado</p>
+                            <p style="font-size: 0.9rem; margin-top: 5px; color: #5864F5;">${progreso}% completado</p>
                         </div>` 
                         : ''}
                     ${!tieneVocabulario ? '<p style="color: #FF6B6B; font-size: 0.9rem; margin-top: 5px;">(Vacío)</p>' : ''}
@@ -2552,6 +2552,10 @@ function seleccionarAccionASMR(contenedor, subcontenedor) {
     `;
 }
 
+// ====================
+// FUNCIÓN FALTANTE PARA REPRODUCTOR ASMR
+// ====================
+
 function cargarReproductorASMR(contenedor, subcontenedor) {
     contenedorActual = contenedor;
     subcontenedorActual = subcontenedor;
@@ -2563,14 +2567,9 @@ function cargarReproductorASMR(contenedor, subcontenedor) {
     }
     
     const mangaSection = document.getElementById('manga-section');
-    mangaSection.innerHTML = crearReproductorASMRUI(asmrInfo);
     
-    const botonVolver = crearBotonVolver(() => seleccionarAccionASMR(contenedor, subcontenedor));
-    mangaSection.insertBefore(botonVolver, mangaSection.firstChild);
-}
-
-function crearReproductorASMRUI(asmrInfo) {
-    return `
+    // Crear el reproductor ASMR
+    let html = `
         <div class="reproductor-audio-container" style="max-width: 800px; margin: 40px auto; background: rgba(30, 30, 40, 0.95); border-radius: 25px; padding: 40px; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6); border: 3px solid #9C27B0;">
             <h2 style="text-align: center; color: #FFD166; margin-bottom: 10px;">${asmrInfo.titulo}</h2>
             <p style="text-align: center; opacity: 0.8; margin-bottom: 30px;">
@@ -2648,6 +2647,11 @@ function crearReproductorASMRUI(asmrInfo) {
             </div>
         </div>
     `;
+    
+    mangaSection.innerHTML = html;
+    
+    const botonVolver = crearBotonVolver(() => seleccionarAccionASMR(contenedor, subcontenedor));
+    mangaSection.insertBefore(botonVolver, mangaSection.firstChild);
 }
 
 function saltarASeccionASMR(segundos) {
