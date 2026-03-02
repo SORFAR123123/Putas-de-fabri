@@ -1241,19 +1241,19 @@ const sistemaDescriptivo = {
             },
             '1_2': { 
                 nombre: 'ASMR 2',
-                imagen: '', 
+                imagen: 'https://pbs.twimg.com/media/HCbLQT9WMAAp07y?format=jpg&name=small', 
                 descripcion: '', 
                 tipoVoz: '' 
             },
             '1_3': { 
                 nombre: 'ASMR 3',
-                imagen: '', 
+                imagen: 'https://pbs.twimg.com/media/HCbL055XYAEqTBs?format=png&name=small', 
                 descripcion: '', 
                 tipoVoz: '' 
             },
             '1_4': { 
                 nombre: 'ASMR 3',
-                imagen: '', 
+                imagen: 'https://pbs.twimg.com/media/HCbLcZoWQAAO7QY?format=jpg&name=small', 
                 descripcion: '', 
                 tipoVoz: '' 
             },
