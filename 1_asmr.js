@@ -28,8 +28,8 @@ const asmrDatabase = {
     
     // Sub-contenedor 1.2
     '1_2': {
-        titulo: "📚 Lectura ASMR de Cuento Japonés",
-        driveId: "1tS-gKr6bf4MY5Yrw7zRvP2uP_zq9rsLl",
+        titulo: "📚 Tsunade putona",
+        driveId: "1M3DtPV3gjdf3OBzOMBchmiwsS7rRKk9v",
         descripcion: "Lectura suave de un cuento tradicional japonés con efectos de sonido ambientales.",
         timestamps: [
             { tiempo: 0, titulo: "📖 Introducción del cuento" },
@@ -46,8 +46,23 @@ const asmrDatabase = {
     
     // Sub-contenedor 1.3
     '1_3': {
-        titulo: "💤 Sonidos de Naturaleza Japonesa",
-        driveId: "1tS-gKr6bf4MY5Yrw7zRvP2uP_zq9rsLl",
+        titulo: "💤 Step mom",
+        driveId: "1aLTHsbhl1tX8smDhoCCZxggDpfT2Aw3C",
+        descripcion: "Mezcla de sonidos naturales de Japón con murmullos en japonés de fondo.",
+        timestamps: [
+            { tiempo: 0, titulo: "🌧️ Lluvia en Kioto" },
+            { tiempo: 240, titulo: "🍃 Viento en bosque de bambú" },
+            { tiempo: 480, titulo: "🏞️ Río de montaña" },
+            { tiempo: 720, titulo: "🐦 Cantos de pájaros" }
+        ],
+        duracion: "18:20",
+        categoria: "Naturaleza",
+        tipoVoz: "Varios",
+        tags: ["naturaleza", "ambiental", "relajante"]
+    },
+    '1_4': {
+        titulo: "💤 18",
+        driveId: "1VDwD18Rno-rhv9NsHqc7R3WHnjTfAZol",
         descripcion: "Mezcla de sonidos naturales de Japón con murmullos en japonés de fondo.",
         timestamps: [
             { tiempo: 0, titulo: "🌧️ Lluvia en Kioto" },
