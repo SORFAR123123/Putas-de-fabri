@@ -1,7 +1,6 @@
 // ================================================
 // SISTEMA DE EVENTOS DIARIOS - VERSIÓN CORREGIDA
-// Aparece un evento aleatorio cada día en un modal que ocupa casi toda la pantalla
-// TODOS LOS EVENTOS PIDEN SOLO 1 MAZO AL 100% (PARA TESTEO)
+// Éxito inmediato, fracaso al día siguiente
 // ================================================
 
 // Lista de 10 eventos con requisitos y consecuencias
@@ -13,7 +12,7 @@ const EVENTOS_DIARIOS = [
         imagen: 'https://pbs.twimg.com/media/G7qfpGZXAAAib4A?format=png&name=small',
         personajes: ['nino'],
         tipoRequisito: 'mazos_completados',
-        cantidadRequerida: 1, // SOLO 1 PARA TESTEO
+        cantidadRequerida: 1,
         videoExito: '1aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe',
         videoFracaso: '1-wYJYTaw0ZOKQy8BBPR7Fmhlzs0IVx9K',
         afinidadExito: 15,
@@ -27,7 +26,7 @@ const EVENTOS_DIARIOS = [
         imagen: 'https://pbs.twimg.com/media/G7qfcGRWkAAV74w?format=png&name=small',
         personajes: ['ichika'],
         tipoRequisito: 'mazos_completados',
-        cantidadRequerida: 1, // SOLO 1 PARA TESTEO
+        cantidadRequerida: 1,
         videoExito: '1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS',
         videoFracaso: '1tS-gKr6bf4MY5Yrw7zRvP2uP_zq9rsLl',
         afinidadExito: 10,
@@ -41,7 +40,7 @@ const EVENTOS_DIARIOS = [
         imagen: 'https://pbs.twimg.com/media/G7qfrrKWsAAv6ZT?format=png&name=small',
         personajes: ['miku'],
         tipoRequisito: 'mazos_completados',
-        cantidadRequerida: 1, // SOLO 1 PARA TESTEO
+        cantidadRequerida: 1,
         videoExito: '1tS-gKr6bf4MY5Yrw7zRvP2uP_zq9rsLl',
         videoFracaso: '1aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe',
         afinidadExito: 12,
@@ -55,7 +54,7 @@ const EVENTOS_DIARIOS = [
         imagen: 'https://pbs.twimg.com/media/G7qfupkXUAAX0aS?format=png&name=small',
         personajes: ['yotsuba'],
         tipoRequisito: 'mazos_completados',
-        cantidadRequerida: 1, // SOLO 1 PARA TESTEO
+        cantidadRequerida: 1,
         videoExito: '1-wYJYTaw0ZOKQy8BBPR7Fmhlzs0IVx9K',
         videoFracaso: '1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS',
         afinidadExito: 8,
@@ -69,7 +68,7 @@ const EVENTOS_DIARIOS = [
         imagen: 'https://pbs.twimg.com/media/G7qfxnsX0AIbJK1?format=png&name=small',
         personajes: ['itsuki'],
         tipoRequisito: 'mazos_completados',
-        cantidadRequerida: 1, // SOLO 1 PARA TESTEO
+        cantidadRequerida: 1,
         videoExito: '1aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe',
         videoFracaso: '1-wYJYTaw0ZOKQy8BBPR7Fmhlzs0IVx9K',
         afinidadExito: 10,
@@ -83,7 +82,7 @@ const EVENTOS_DIARIOS = [
         imagen: 'https://pbs.twimg.com/media/G7qfcGRWkAAV74w?format=png&name=small',
         personajes: ['nino', 'ichika'],
         tipoRequisito: 'mazos_completados',
-        cantidadRequerida: 1, // SOLO 1 PARA TESTEO
+        cantidadRequerida: 1,
         videoExito: '1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS',
         videoFracaso: '1tS-gKr6bf4MY5Yrw7zRvP2uP_zq9rsLl',
         afinidadExito: 12,
@@ -97,7 +96,7 @@ const EVENTOS_DIARIOS = [
         imagen: 'https://pbs.twimg.com/media/G7qfrrKWsAAv6ZT?format=png&name=small',
         personajes: ['miku', 'yotsuba'],
         tipoRequisito: 'mazos_completados',
-        cantidadRequerida: 1, // SOLO 1 PARA TESTEO
+        cantidadRequerida: 1,
         videoExito: '1-wYJYTaw0ZOKQy8BBPR7Fmhlzs0IVx9K',
         videoFracaso: '1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS',
         afinidadExito: 10,
@@ -111,7 +110,7 @@ const EVENTOS_DIARIOS = [
         imagen: 'https://pbs.twimg.com/media/G7qfxnsX0AIbJK1?format=png&name=small',
         personajes: ['nino', 'miku', 'itsuki'],
         tipoRequisito: 'mazos_completados',
-        cantidadRequerida: 1, // SOLO 1 PARA TESTEO
+        cantidadRequerida: 1,
         videoExito: '1aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe',
         videoFracaso: '1tS-gKr6bf4MY5Yrw7zRvP2uP_zq9rsLl',
         afinidadExito: 15,
@@ -125,7 +124,7 @@ const EVENTOS_DIARIOS = [
         imagen: 'https://pbs.twimg.com/media/G7qfcGRWkAAV74w?format=png&name=small',
         personajes: ['ichika', 'nino', 'miku', 'yotsuba'],
         tipoRequisito: 'mazos_completados',
-        cantidadRequerida: 1, // SOLO 1 PARA TESTEO
+        cantidadRequerida: 1,
         videoExito: '1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS',
         videoFracaso: '1-wYJYTaw0ZOKQy8BBPR7Fmhlzs0IVx9K',
         afinidadExito: 18,
@@ -139,7 +138,7 @@ const EVENTOS_DIARIOS = [
         imagen: 'https://pbs.twimg.com/media/G7qfpGZXAAAib4A?format=png&name=small',
         personajes: ['ichika', 'nino', 'miku', 'yotsuba', 'itsuki'],
         tipoRequisito: 'mazos_completados',
-        cantidadRequerida: 1, // SOLO 1 PARA TESTEO
+        cantidadRequerida: 1,
         videoExito: '1tS-gKr6bf4MY5Yrw7zRvP2uP_zq9rsLl',
         videoFracaso: '1aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe',
         afinidadExito: 25,
@@ -444,7 +443,7 @@ const SistemaProgresoEventos = {
 // ================================================
 function obtenerEstadoVisibilidadBarra() {
     const estado = localStorage.getItem('eventos_progreso_visible');
-    return estado === null ? true : estado === 'true'; // visible por defecto
+    return estado === null ? true : estado === 'true';
 }
 
 function guardarEstadoVisibilidadBarra(visible) {
@@ -453,6 +452,7 @@ function guardarEstadoVisibilidadBarra(visible) {
 
 // ================================================
 // SISTEMA DE EVENTOS DIARIOS (VERSIÓN CORREGIDA)
+// Éxito inmediato, fracaso al día siguiente
 // ================================================
 const EventosDiarios = {
     // Obtener la fecha actual en formato YYYY-MM-DD
@@ -507,7 +507,9 @@ const EventosDiarios = {
             fecha: this.obtenerFechaActual(),
             evento: evento,
             requisitoCumplido: false,
-            resultadoMostrado: false
+            resultadoExitoMostrado: false,  // Para éxito inmediato
+            resultadoFracasoMostrado: false, // Para fracaso al día siguiente
+            fechaFracaso: null // Fecha en que se debe mostrar el fracaso
         };
         
         localStorage.setItem('evento_diario_ultimo', JSON.stringify(eventoData));
@@ -520,45 +522,83 @@ const EventosDiarios = {
         return eventoGuardado ? JSON.parse(eventoGuardado) : null;
     },
 
-    // Marcar requisito como cumplido
+    // Marcar requisito como cumplido (y mostrar éxito inmediato)
     marcarRequisitoCumplido: function() {
         const ultimoEvento = JSON.parse(localStorage.getItem('evento_diario_ultimo') || '{}');
         const fechaHoy = this.obtenerFechaActual();
+        const evento = this.obtenerEventoHoy();
         
         // Solo marcar si es el evento de hoy y aún no se ha cumplido
-        if (ultimoEvento.fecha === fechaHoy && !ultimoEvento.requisitoCumplido) {
+        if (ultimoEvento.fecha === fechaHoy && !ultimoEvento.requisitoCumplido && evento) {
             ultimoEvento.requisitoCumplido = true;
+            ultimoEvento.resultadoExitoMostrado = false; // Aún no se ha mostrado el éxito
             localStorage.setItem('evento_diario_ultimo', JSON.stringify(ultimoEvento));
-            console.log('✅ Requisito del evento cumplido HOY');
             
-            // Mostrar notificación de que el requisito está cumplido
-            this.mostrarNotificacionEvento('✅ Requisito cumplido! Mañana verás el resultado', '#4CAF50');
+            console.log('✅ Requisito del evento cumplido HOY - Mostrando éxito inmediato');
+            
+            // Mostrar éxito INMEDIATAMENTE
+            setTimeout(() => {
+                this.mostrarResultadoEvento(evento, true);
+                // Marcar como mostrado después de mostrar
+                ultimoEvento.resultadoExitoMostrado = true;
+                localStorage.setItem('evento_diario_ultimo', JSON.stringify(ultimoEvento));
+            }, 500);
+            
+            // Notificación
+            this.mostrarNotificacionEvento('✅ ¡Requisito cumplido!', '#4CAF50');
         }
     },
 
-    // Verificar si el evento de hoy ya fue procesado
-    eventoYaProcesado: function() {
+    // Marcar evento como fallido (para mostrar mañana)
+    marcarEventoFallido: function() {
+        const ultimoEvento = JSON.parse(localStorage.getItem('evento_diario_ultimo') || '{}');
+        const fechaHoy = this.obtenerFechaActual();
+        
+        // Solo marcar si es el evento de hoy y no está cumplido
+        if (ultimoEvento.fecha === fechaHoy && !ultimoEvento.requisitoCumplido) {
+            ultimoEvento.fechaFracaso = fechaHoy; // Guardar que falló hoy
+            ultimoEvento.resultadoFracasoMostrado = false;
+            localStorage.setItem('evento_diario_ultimo', JSON.stringify(ultimoEvento));
+            
+            console.log('❌ Evento fallido HOY - Se mostrará mañana');
+        }
+    },
+
+    // Verificar si el evento de hoy fue exitoso
+    eventoExitoso: function() {
         const ultimoEvento = JSON.parse(localStorage.getItem('evento_diario_ultimo') || '{}');
         return ultimoEvento.requisitoCumplido === true;
     },
 
-    // Marcar resultado como mostrado
-    marcarResultadoMostrado: function() {
+    // Verificar si el evento de hoy fue fallido
+    eventoFallido: function() {
         const ultimoEvento = JSON.parse(localStorage.getItem('evento_diario_ultimo') || '{}');
-        ultimoEvento.resultadoMostrado = true;
-        localStorage.setItem('evento_diario_ultimo', JSON.stringify(ultimoEvento));
+        const fechaHoy = this.obtenerFechaActual();
+        
+        // Fue fallido si: no está cumplido Y la fecha es de hoy
+        return !ultimoEvento.requisitoCumplido && ultimoEvento.fecha === fechaHoy;
     },
 
-    // Verificar si el resultado ya fue mostrado
-    resultadoYaMostrado: function() {
+    // Verificar si hay que mostrar fracaso de ayer
+    debeMostrarFracasoAyer: function() {
         const ultimoEvento = JSON.parse(localStorage.getItem('evento_diario_ultimo') || '{}');
-        return ultimoEvento.resultadoMostrado === true;
+        const fechaHoy = this.obtenerFechaActual();
+        
+        // Verificar si el evento de ayer fue fallido y no se ha mostrado
+        return ultimoEvento.fecha && 
+               ultimoEvento.fecha !== fechaHoy && 
+               !ultimoEvento.requisitoCumplido && 
+               !ultimoEvento.resultadoFracasoMostrado;
+    },
+
+    // Obtener evento de ayer (el último evento guardado)
+    obtenerEventoAyer: function() {
+        return this.obtenerEventoHoy(); // Es el mismo porque solo guardamos el último
     },
 
     // Verificar si se cumplió el requisito
     verificarRequisito: function(evento) {
         if (evento.tipoRequisito === 'mazos_completados') {
-            // Asegurarse de que sistemaEconomia existe
             if (typeof sistemaEconomia === 'undefined') {
                 console.error('❌ sistemaEconomia no está definido al verificar requisito');
                 return false;
@@ -578,14 +618,13 @@ const EventosDiarios = {
     aplicarConsecuencias: function(evento, exito) {
         console.log('🎯 Aplicando consecuencias del evento:', evento.id, 'Éxito:', exito);
         
-        // Verificar dependencias
         if (typeof quintillizasRPG === 'undefined') {
-            console.error('❌ quintillizasRPG no está definido. No se puede aplicar afinidad.');
+            console.error('❌ quintillizasRPG no está definido');
             this.mostrarNotificacionEvento('❌ Error: RPG no disponible', '#F44336');
             return false;
         }
         if (typeof sistemaEconomia === 'undefined') {
-            console.error('❌ sistemaEconomia no está definido. No se puede dar dinero.');
+            console.error('❌ sistemaEconomia no está definido');
             this.mostrarNotificacionEvento('❌ Error: Economía no disponible', '#F44336');
             return false;
         }
@@ -600,13 +639,10 @@ const EventosDiarios = {
                 quintillizasRPG.datosPersonajes[personajeId].afinidad = nuevaAfinidad;
                 console.log(`✅ Evento: ${personajeId} afinidad ${cambio > 0 ? '+' : ''}${cambio} → ${nuevaAfinidad}`);
                 
-                // Mostrar notificación visual
                 this.mostrarNotificacionEvento(
                     `💖 ${personajeId}: ${cambio > 0 ? '+' : ''}${cambio} afinidad`,
                     cambio > 0 ? '#4CAF50' : '#F44336'
                 );
-            } else {
-                console.warn(`⚠️ Personaje ${personajeId} no encontrado en quintillizasRPG`);
             }
         });
 
@@ -616,18 +652,15 @@ const EventosDiarios = {
             console.log(`💰 +${evento.dineroRecompensa} soles por evento`);
             this.mostrarNotificacionEvento(`💰 +${evento.dineroRecompensa} soles`, '#FFD166');
             
-            // Actualizar el contador de dinero en la página principal si existe
             if (typeof actualizarContadorDineroInicio === 'function') {
                 actualizarContadorDineroInicio();
             }
         }
 
-        // Guardar cambios en RPG
         if (quintillizasRPG.guardarDatosPersonajes) {
             quintillizasRPG.guardarDatosPersonajes();
         }
         
-        // Registrar en el sistema de progreso
         SistemaProgresoEventos.registrarResultado(evento.id, exito);
         
         return true;
@@ -658,7 +691,6 @@ const EventosDiarios = {
 
     // Mostrar MODAL GRANDE del evento
     mostrarModalEvento: function(evento) {
-        // Crear overlay oscuro
         const overlay = document.createElement('div');
         overlay.id = 'evento-modal-overlay';
         overlay.style.cssText = `
@@ -675,7 +707,6 @@ const EventosDiarios = {
             animation: fadeIn 0.5s ease;
         `;
 
-        // Crear modal
         const modal = document.createElement('div');
         modal.style.cssText = `
             width: 90%;
@@ -691,7 +722,6 @@ const EventosDiarios = {
             animation: zoomIn 0.5s ease;
         `;
 
-        // Construir nombres de personajes
         const nombresPersonajes = evento.personajes.map(p => {
             const nombres = {
                 'ichika': 'Ichika', 'nino': 'Nino', 'miku': 'Miku', 
@@ -700,14 +730,11 @@ const EventosDiarios = {
             return nombres[p] || p;
         }).join(' • ');
 
-        // Colores para éxito/fracaso
         const colorExito = '#4CAF50';
         const colorFracaso = '#F44336';
 
-        // HTML del modal
         modal.innerHTML = `
             <div style="text-align: center;">
-                <!-- Botón cerrar -->
                 <button onclick="EventosDiarios.cerrarModalEvento()" style="
                     position: absolute;
                     top: 20px;
@@ -727,7 +754,6 @@ const EventosDiarios = {
                     border: 2px solid white;
                 ">✕</button>
 
-                <!-- Título -->
                 <h1 style="
                     color: #FFD166;
                     font-size: 2.5rem;
@@ -735,7 +761,6 @@ const EventosDiarios = {
                     text-shadow: 0 0 10px #FF1493;
                 ">📅 ¡EVENTO DIARIO!</h1>
 
-                <!-- Imagen GRANDE -->
                 <div style="
                     width: 250px;
                     height: 250px;
@@ -748,7 +773,6 @@ const EventosDiarios = {
                     <img src="${evento.imagen}" alt="${evento.titulo}" style="width: 100%; height: 100%; object-fit: cover;">
                 </div>
 
-                <!-- Título del evento -->
                 <h2 style="
                     color: #FF1493;
                     font-size: 2rem;
@@ -756,7 +780,6 @@ const EventosDiarios = {
                     text-transform: uppercase;
                 ">${evento.titulo}</h2>
 
-                <!-- Descripción -->
                 <p style="
                     color: white;
                     font-size: 1.2rem;
@@ -768,7 +791,6 @@ const EventosDiarios = {
                     margin-right: auto;
                 ">${evento.descripcion}</p>
 
-                <!-- Personajes involucrados -->
                 <div style="
                     background: rgba(255, 20, 147, 0.2);
                     padding: 15px;
@@ -781,7 +803,6 @@ const EventosDiarios = {
                     👥 ${nombresPersonajes}
                 </div>
 
-                <!-- Requisito -->
                 <div style="
                     background: linear-gradient(135deg, #5864F5, #8A5AF7);
                     padding: 20px;
@@ -793,14 +814,12 @@ const EventosDiarios = {
                     🎯 REQUISITO: Completa ${evento.cantidadRequerida} MAZO${evento.cantidadRequerida > 1 ? 'S' : ''} al 100% hoy
                 </div>
 
-                <!-- Recompensas y castigos -->
                 <div style="
                     display: grid;
                     grid-template-columns: 1fr 1fr;
                     gap: 20px;
                     margin: 30px 0;
                 ">
-                    <!-- Éxito -->
                     <div style="
                         background: rgba(76, 175, 80, 0.2);
                         border: 3px solid ${colorExito};
@@ -815,7 +834,6 @@ const EventosDiarios = {
                         <div style="color: #FFD166; font-size: 1.3rem; margin-top: 15px;">💰 +${evento.dineroRecompensa} soles</div>
                     </div>
 
-                    <!-- Fracaso -->
                     <div style="
                         background: rgba(244, 67, 54, 0.2);
                         border: 3px solid ${colorFracaso};
@@ -830,7 +848,6 @@ const EventosDiarios = {
                     </div>
                 </div>
 
-                <!-- Botón de entendido -->
                 <button onclick="EventosDiarios.cerrarModalEvento()" style="
                     background: linear-gradient(135deg, #FF1493, #8A5AF7);
                     color: white;
@@ -848,9 +865,9 @@ const EventosDiarios = {
                     ¡ENTENDIDO, LO HARÉ!
                 </button>
 
-                <!-- Nota -->
                 <p style="color: rgba(255,255,255,0.5); font-size: 0.9rem; margin-top: 10px;">
-                    Vuelve mañana para ver el resultado del evento
+                    ⚡ Si completas el requisito HOY, verás el video de ÉXITO inmediatamente<br>
+                    ❌ Si NO lo completas, verás el video de FRACASO mañana
                 </p>
             </div>
         `;
@@ -858,7 +875,6 @@ const EventosDiarios = {
         overlay.appendChild(modal);
         document.body.appendChild(overlay);
 
-        // Agregar estilos de animación si no existen
         if (!document.getElementById('evento-modal-styles')) {
             const style = document.createElement('style');
             style.id = 'evento-modal-styles';
@@ -888,7 +904,6 @@ const EventosDiarios = {
     mostrarResultadoEvento: function(evento, exito) {
         const videoId = exito ? evento.videoExito : evento.videoFracaso;
         
-        // Crear overlay para el resultado
         const overlay = document.createElement('div');
         overlay.id = 'evento-resultado-overlay';
         overlay.style.cssText = `
@@ -916,7 +931,6 @@ const EventosDiarios = {
             box-shadow: 0 0 50px ${exito ? '#4CAF50' : '#F44336'};
         `;
 
-        // Calcular cambios de afinidad para mostrar
         const cambiosHTML = evento.personajes.map(p => {
             const nombre = p.charAt(0).toUpperCase() + p.slice(1);
             const cambio = exito ? evento.afinidadExito : evento.afinidadFracaso;
@@ -933,7 +947,6 @@ const EventosDiarios = {
 
                 <h2 style="color: #FFD166; font-size: 2rem; margin-bottom: 30px;">${evento.titulo}</h2>
 
-                <!-- Video -->
                 <div style="margin: 30px 0; border: 4px solid ${exito ? '#4CAF50' : '#F44336'}; border-radius: 20px; overflow: hidden;">
                     <iframe
                         src="https://drive.google.com/file/d/${videoId}/preview"
@@ -946,7 +959,6 @@ const EventosDiarios = {
                     ></iframe>
                 </div>
 
-                <!-- Consecuencias -->
                 <div style="
                     background: rgba(0,0,0,0.5);
                     border-radius: 20px;
@@ -988,29 +1000,15 @@ const EventosDiarios = {
         document.body.appendChild(overlay);
     },
 
-    // Cerrar resultado y mostrar nuevo evento del día
+    // Cerrar resultado
     cerrarResultadoEvento: function() {
         const overlay = document.getElementById('evento-resultado-overlay');
         if (overlay) {
             overlay.remove();
         }
         
-        // Marcar resultado como mostrado
-        this.marcarResultadoMostrado();
-        
         // Actualizar barra de progreso
         this.actualizarBarraProgreso();
-        
-        // Verificar si hoy ya hay evento nuevo
-        if (this.verificarEventoHoy()) {
-            // Si ya pasó la fecha del evento anterior, mostrar el nuevo evento
-            const evento = this.seleccionarEventoAleatorio();
-            this.guardarEventoHoy(evento);
-            
-            setTimeout(() => {
-                this.mostrarModalEvento(evento);
-            }, 500);
-        }
     },
 
     // Mostrar último resultado
@@ -1018,26 +1016,31 @@ const EventosDiarios = {
         const ultimoEvento = JSON.parse(localStorage.getItem('evento_diario_ultimo') || '{}');
         const evento = this.obtenerEventoHoy();
         
-        if (evento && ultimoEvento.resultadoMostrado) {
-            const exito = ultimoEvento.requisitoCumplido || false;
-            this.mostrarResultadoEvento(evento, exito);
-        } else if (evento && ultimoEvento.requisitoCumplido) {
-            // Si no se ha mostrado el resultado pero el requisito está cumplido
-            const exito = true;
-            this.mostrarResultadoEvento(evento, exito);
-            this.marcarResultadoMostrado();
-        } else if (evento) {
-            this.mostrarNotificacionEvento('El evento de hoy aún no ha sido procesado. Completa el requisito primero.', '#FF9800');
+        if (evento && ultimoEvento.resultadoExitoMostrado) {
+            // Mostrar éxito ya mostrado
+            this.mostrarResultadoEvento(evento, true);
+        } else if (evento && ultimoEvento.resultadoFracasoMostrado) {
+            // Mostrar fracaso ya mostrado
+            this.mostrarResultadoEvento(evento, false);
+        } else if (evento && ultimoEvento.requisitoCumplido && !ultimoEvento.resultadoExitoMostrado) {
+            // Éxito pendiente de mostrar
+            this.mostrarResultadoEvento(evento, true);
+            ultimoEvento.resultadoExitoMostrado = true;
+            localStorage.setItem('evento_diario_ultimo', JSON.stringify(ultimoEvento));
+        } else if (evento && !ultimoEvento.requisitoCumplido && ultimoEvento.fechaFracaso) {
+            // Fracaso pendiente de mostrar
+            this.mostrarResultadoEvento(evento, false);
+            ultimoEvento.resultadoFracasoMostrado = true;
+            localStorage.setItem('evento_diario_ultimo', JSON.stringify(ultimoEvento));
         } else {
-            this.mostrarNotificacionEvento('No hay eventos recientes.', '#FF9800');
+            this.mostrarNotificacionEvento('No hay resultados pendientes.', '#FF9800');
         }
     },
 
-    // Iniciar evento diario (VERSIÓN CORREGIDA)
+    // Iniciar evento diario (VERSIÓN CORREGIDA - Éxito inmediato, fracaso al día siguiente)
     iniciarEventoDiario: function() {
         console.log('📅 Iniciando sistema de eventos diarios...');
         
-        // Obtener datos del último evento
         const ultimoEventoStr = localStorage.getItem('evento_diario_ultimo');
         const fechaHoy = this.obtenerFechaActual();
         
@@ -1056,52 +1059,67 @@ const EventosDiarios = {
         const ultimoEvento = JSON.parse(ultimoEventoStr);
         const eventoGuardado = this.obtenerEventoHoy();
         
-        // CASO 1: Hay un evento PENDIENTE de resultado del día anterior
-        if (ultimoEvento.fecha && ultimoEvento.fecha !== fechaHoy) {
-            // Si NO se ha mostrado el resultado del día anterior
-            if (!ultimoEvento.resultadoMostrado && eventoGuardado) {
-                console.log('🎬 Mostrando resultado del evento de ayer...');
-                
-                // Verificar si se cumplió el requisito (usando datos guardados)
-                const exito = ultimoEvento.requisitoCumplido || false;
-                
-                // Mostrar video resultado
-                this.mostrarResultadoEvento(eventoGuardado, exito);
-                
-                // Marcar resultado como mostrado (pero no guardar todavía, esperar a que cierre)
-                // Esto se hará en cerrarResultadoEvento
-                
-                // NO mostrar evento nuevo hoy todavía (esperar a que cierre el video)
-                return;
-            }
+        // CASO 1: Verificar si hay que mostrar FRACASO de ayer
+        if (this.debeMostrarFracasoAyer()) {
+            console.log('🎬 Mostrando video de FRACASO del día anterior...');
             
-            // Si ya se mostró el resultado de ayer, entonces crear nuevo evento para hoy
-            if (ultimoEvento.resultadoMostrado && !document.getElementById('evento-resultado-overlay')) {
-                console.log('🎲 Resultado de ayer ya mostrado. Creando nuevo evento para hoy...');
-                const evento = this.seleccionarEventoAleatorio();
-                this.guardarEventoHoy(evento);
+            if (eventoGuardado) {
+                this.mostrarResultadoEvento(eventoGuardado, false);
                 
+                // Marcar como mostrado
+                ultimoEvento.resultadoFracasoMostrado = true;
+                localStorage.setItem('evento_diario_ultimo', JSON.stringify(ultimoEvento));
+                
+                // Después de mostrar fracaso, crear nuevo evento para hoy
                 setTimeout(() => {
-                    this.mostrarModalEvento(evento);
-                }, 500);
-                return;
+                    const nuevoEvento = this.seleccionarEventoAleatorio();
+                    this.guardarEventoHoy(nuevoEvento);
+                    
+                    setTimeout(() => {
+                        this.mostrarModalEvento(nuevoEvento);
+                    }, 500);
+                }, 1000);
             }
+            return;
         }
         
-        // CASO 2: Es el mismo día (fecha actual)
-        if (ultimoEvento.fecha === fechaHoy) {
-            console.log('📅 Ya hay evento para hoy');
+        // CASO 2: Verificar si hay que mostrar ÉXITO pendiente de hoy
+        if (ultimoEvento.fecha === fechaHoy && 
+            ultimoEvento.requisitoCumplido && 
+            !ultimoEvento.resultadoExitoMostrado && 
+            eventoGuardado) {
             
-            // Verificar si hay que mostrar resultado (esto no debería pasar porque es el mismo día)
-            // Pero por si acaso
-            if (ultimoEvento.requisitoCumplido && !ultimoEvento.resultadoMostrado && !document.getElementById('evento-resultado-overlay')) {
-                console.log('⚠️ Caso extraño: requisito cumplido hoy pero resultado no mostrado');
-                // No hacer nada, esperar a mañana
+            console.log('🎬 Mostrando video de ÉXITO pendiente de hoy...');
+            this.mostrarResultadoEvento(eventoGuardado, true);
+            
+            ultimoEvento.resultadoExitoMostrado = true;
+            localStorage.setItem('evento_diario_ultimo', JSON.stringify(ultimoEvento));
+            return;
+        }
+        
+        // CASO 3: Es un día nuevo (sin evento hoy)
+        if (ultimoEvento.fecha !== fechaHoy) {
+            console.log('🎲 Día nuevo - Creando nuevo evento...');
+            
+            // Marcar el evento anterior como fallido si no fue exitoso
+            if (!ultimoEvento.requisitoCumplido && ultimoEvento.fecha) {
+                ultimoEvento.fechaFracaso = ultimoEvento.fecha;
+                localStorage.setItem('evento_diario_ultimo', JSON.stringify(ultimoEvento));
             }
             
-            // Actualizar barra de progreso
-            this.actualizarBarraProgreso();
+            // Crear nuevo evento para hoy
+            const nuevoEvento = this.seleccionarEventoAleatorio();
+            this.guardarEventoHoy(nuevoEvento);
+            
+            setTimeout(() => {
+                this.mostrarModalEvento(nuevoEvento);
+            }, 500);
+            return;
         }
+        
+        // CASO 4: Mismo día, evento ya mostrado
+        console.log('📅 Ya hay evento para hoy');
+        this.actualizarBarraProgreso();
     },
 
     // Crear contenedor para la barra de progreso con botón toggle
@@ -1122,7 +1140,6 @@ const EventosDiarios = {
             transition: all 0.3s ease;
         `;
 
-        // Botón toggle
         const toggleBtn = document.createElement('button');
         toggleBtn.id = 'toggle-progreso-btn';
         toggleBtn.innerHTML = '📅';
@@ -1149,7 +1166,6 @@ const EventosDiarios = {
         toggleBtn.onmouseout = () => toggleBtn.style.transform = 'scale(1)';
         toggleBtn.onclick = () => this.alternarVisibilidadBarra();
 
-        // Contenedor del contenido
         const contenido = document.createElement('div');
         contenido.id = 'progreso-contenido';
         contenido.style.transition = 'opacity 0.3s ease';
@@ -1197,7 +1213,27 @@ const EventosDiarios = {
             eventoActual) {
             
             if (estadisticas.completados100 >= eventoActual.cantidadRequerida) {
-                this.marcarRequisitoCumplido();
+                this.marcarRequisitoCumplido(); // Esto mostrará éxito inmediato
+            }
+        }
+        
+        // Verificar al final del día (para marcar como fallido)
+        // Esto se puede llamar desde un timer o al cerrar la página
+        this.verificarFinDelDia();
+    },
+
+    // Verificar si terminó el día y marcar como fallido
+    verificarFinDelDia: function() {
+        const ultimoEvento = JSON.parse(localStorage.getItem('evento_diario_ultimo') || '{}');
+        const fechaHoy = this.obtenerFechaActual();
+        const ahora = new Date();
+        const hora = ahora.getHours();
+        
+        // Si son más de las 23:59 (o sea, después de medianoche) pero aún no cambia la fecha
+        // Este es un mecanismo de respaldo
+        if (hora >= 0 && hora < 3) { // Entre 0 y 3 AM
+            if (ultimoEvento.fecha === fechaHoy && !ultimoEvento.requisitoCumplido) {
+                this.marcarEventoFallido();
             }
         }
     },
@@ -1211,6 +1247,12 @@ const EventosDiarios = {
         const intentarInicio = () => {
             if (typeof sistemaEconomia !== 'undefined' && typeof quintillizasRPG !== 'undefined') {
                 this.iniciarEventoDiario();
+                
+                // Verificar progreso cada minuto (para éxito inmediato)
+                setInterval(() => {
+                    this.verificarProgresoEvento();
+                }, 60000); // Cada minuto
+                
             } else {
                 console.warn('⏳ Esperando dependencias para iniciar evento diario...');
                 setTimeout(intentarInicio, 1000);
@@ -1248,7 +1290,7 @@ const EventosChecker = {
                 // Llamar a la función original
                 originalActualizarProgreso.call(this, contenedor, sub, mazo, porcentaje);
                 
-                // Verificar evento si se completó al 100%
+                // Verificar evento INMEDIATAMENTE si se completó al 100%
                 if (porcentaje === 100) {
                     EventosChecker.verificarProgresoEvento();
                 }
