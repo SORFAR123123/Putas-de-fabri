@@ -143,7 +143,7 @@ const asmrDatabase = {
     // Sub-contenedor 3.2
     '3_2': {
         titulo: " AMIGA DE TU MAMÁ SOBRE ti",
-        driveId: "bc1q94ngmz9mu3zadhvgran4eeakfhraqlpaa3ndcw",
+        driveId: "1F362l9y8alorULgF6A4WuureFk2yKE3E",
         descripcion: "Sonidos relajantes de bambú y campanas de templo con mantras en japonés.",
         timestamps: [
             { tiempo: 0, titulo: "🎋 Bambú meciéndose" },
