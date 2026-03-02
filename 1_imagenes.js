@@ -2127,6 +2127,12 @@ const sistemaDescriptivo = {
                 descripcion: '', 
                 duracion: '' 
             },
+             '9_2': { 
+                nombre: 'side',
+                imagen: 'https://pbs.twimg.com/media/HCa9ZyuWgAAlLX-?format=png&name=small', 
+                descripcion: '', 
+                duracion: '' 
+            },
               '10_1': { 
                 nombre: 'mating',
                 imagen: 'https://pbs.twimg.com/media/HA9mn12bAAAk9FZ?format=png&name=small', 
