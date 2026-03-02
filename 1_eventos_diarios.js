@@ -689,7 +689,7 @@ const EventosDiarios = {
         setTimeout(() => notif.remove(), 2500);
     },
 
-    // Mostrar MODAL GRANDE del evento
+    // Mostrar MODAL GRANDE del evento (VERSIÓN CORREGIDA - TAMAÑO ADAPTATIVO)
     mostrarModalEvento: function(evento) {
         const overlay = document.createElement('div');
         overlay.id = 'evento-modal-overlay';
@@ -705,21 +705,24 @@ const EventosDiarios = {
             justify-content: center;
             align-items: center;
             animation: fadeIn 0.5s ease;
+            padding: 20px;
+            box-sizing: border-box;
         `;
 
         const modal = document.createElement('div');
         modal.style.cssText = `
-            width: 90%;
-            max-width: 900px;
+            width: 100%;
+            max-width: 800px;
             max-height: 90vh;
             overflow-y: auto;
             background: linear-gradient(135deg, #1a1a2e, #16213e);
-            border-radius: 30px;
-            padding: 30px;
-            border: 4px solid #FF1493;
-            box-shadow: 0 0 50px rgba(255, 20, 147, 0.5);
+            border-radius: 20px;
+            padding: 25px;
+            border: 3px solid #FF1493;
+            box-shadow: 0 0 30px rgba(255, 20, 147, 0.5);
             position: relative;
             animation: zoomIn 0.5s ease;
+            margin: auto;
         `;
 
         const nombresPersonajes = evento.personajes.map(p => {
@@ -734,17 +737,17 @@ const EventosDiarios = {
         const colorFracaso = '#F44336';
 
         modal.innerHTML = `
-            <div style="text-align: center;">
+            <div style="text-align: center; position: relative;">
                 <button onclick="EventosDiarios.cerrarModalEvento()" style="
-                    position: absolute;
-                    top: 20px;
-                    right: 20px;
-                    background: rgba(255,255,255,0.2);
+                    position: sticky;
+                    top: 0;
+                    float: right;
+                    background: linear-gradient(135deg, #FF1493, #8A5AF7);
                     border: none;
                     color: white;
-                    font-size: 30px;
-                    width: 50px;
-                    height: 50px;
+                    font-size: 24px;
+                    width: 45px;
+                    height: 45px;
                     border-radius: 50%;
                     cursor: pointer;
                     display: flex;
@@ -752,40 +755,46 @@ const EventosDiarios = {
                     justify-content: center;
                     transition: all 0.3s;
                     border: 2px solid white;
-                ">✕</button>
+                    margin-bottom: 10px;
+                    z-index: 10;
+                " onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+                    ✕
+                </button>
 
                 <h1 style="
                     color: #FFD166;
-                    font-size: 2.5rem;
-                    margin-bottom: 20px;
+                    font-size: clamp(1.5rem, 5vw, 2.5rem);
+                    margin-bottom: 15px;
                     text-shadow: 0 0 10px #FF1493;
+                    padding-right: 45px;
                 ">📅 ¡EVENTO DIARIO!</h1>
 
                 <div style="
-                    width: 250px;
-                    height: 250px;
-                    margin: 20px auto;
+                    width: min(200px, 40vw);
+                    height: min(200px, 40vw);
+                    margin: 15px auto;
                     border-radius: 50%;
                     overflow: hidden;
-                    border: 5px solid #FF1493;
-                    box-shadow: 0 0 30px #FF1493;
+                    border: 4px solid #FF1493;
+                    box-shadow: 0 0 25px #FF1493;
                 ">
                     <img src="${evento.imagen}" alt="${evento.titulo}" style="width: 100%; height: 100%; object-fit: cover;">
                 </div>
 
                 <h2 style="
                     color: #FF1493;
-                    font-size: 2rem;
-                    margin: 20px 0;
+                    font-size: clamp(1.2rem, 4vw, 2rem);
+                    margin: 15px 0;
                     text-transform: uppercase;
+                    word-break: break-word;
                 ">${evento.titulo}</h2>
 
                 <p style="
                     color: white;
-                    font-size: 1.2rem;
-                    line-height: 1.6;
-                    margin: 20px 0;
-                    padding: 0 20px;
+                    font-size: clamp(0.9rem, 3vw, 1.2rem);
+                    line-height: 1.5;
+                    margin: 15px 0;
+                    padding: 0 10px;
                     max-width: 700px;
                     margin-left: auto;
                     margin-right: auto;
@@ -793,22 +802,24 @@ const EventosDiarios = {
 
                 <div style="
                     background: rgba(255, 20, 147, 0.2);
-                    padding: 15px;
+                    padding: 10px 20px;
                     border-radius: 50px;
                     display: inline-block;
-                    margin: 20px auto;
-                    font-size: 1.3rem;
+                    margin: 10px auto;
+                    font-size: clamp(0.9rem, 3vw, 1.3rem);
                     border: 2px solid #FF1493;
+                    max-width: 90%;
+                    word-break: break-word;
                 ">
                     👥 ${nombresPersonajes}
                 </div>
 
                 <div style="
                     background: linear-gradient(135deg, #5864F5, #8A5AF7);
-                    padding: 20px;
-                    border-radius: 20px;
-                    margin: 25px 0;
-                    font-size: 1.5rem;
+                    padding: 15px;
+                    border-radius: 15px;
+                    margin: 20px 0;
+                    font-size: clamp(1rem, 4vw, 1.5rem);
                     border: 3px solid white;
                 ">
                     🎯 REQUISITO: Completa ${evento.cantidadRequerida} MAZO${evento.cantidadRequerida > 1 ? 'S' : ''} al 100% hoy
@@ -816,34 +827,34 @@ const EventosDiarios = {
 
                 <div style="
                     display: grid;
-                    grid-template-columns: 1fr 1fr;
-                    gap: 20px;
-                    margin: 30px 0;
+                    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                    gap: 15px;
+                    margin: 20px 0;
                 ">
                     <div style="
                         background: rgba(76, 175, 80, 0.2);
                         border: 3px solid ${colorExito};
-                        border-radius: 20px;
-                        padding: 20px;
+                        border-radius: 15px;
+                        padding: 15px;
                     ">
-                        <h3 style="color: ${colorExito}; font-size: 1.8rem; margin-bottom: 15px;">✅ ÉXITO</h3>
+                        <h3 style="color: ${colorExito}; font-size: clamp(1.2rem, 4vw, 1.8rem); margin-bottom: 10px;">✅ ÉXITO</h3>
                         ${evento.personajes.map(p => {
                             const nombre = p.charAt(0).toUpperCase() + p.slice(1);
-                            return `<div style="color: white; font-size: 1.2rem; margin: 5px 0;">${nombre}: +${evento.afinidadExito} afinidad</div>`;
+                            return `<div style="color: white; font-size: clamp(0.9rem, 3vw, 1.2rem); margin: 5px 0;">${nombre}: +${evento.afinidadExito} afinidad</div>`;
                         }).join('')}
-                        <div style="color: #FFD166; font-size: 1.3rem; margin-top: 15px;">💰 +${evento.dineroRecompensa} soles</div>
+                        <div style="color: #FFD166; font-size: clamp(1rem, 3.5vw, 1.3rem); margin-top: 10px;">💰 +${evento.dineroRecompensa} soles</div>
                     </div>
 
                     <div style="
                         background: rgba(244, 67, 54, 0.2);
                         border: 3px solid ${colorFracaso};
-                        border-radius: 20px;
-                        padding: 20px;
+                        border-radius: 15px;
+                        padding: 15px;
                     ">
-                        <h3 style="color: ${colorFracaso}; font-size: 1.8rem; margin-bottom: 15px;">❌ FRACASO</h3>
+                        <h3 style="color: ${colorFracaso}; font-size: clamp(1.2rem, 4vw, 1.8rem); margin-bottom: 10px;">❌ FRACASO</h3>
                         ${evento.personajes.map(p => {
                             const nombre = p.charAt(0).toUpperCase() + p.slice(1);
-                            return `<div style="color: white; font-size: 1.2rem; margin: 5px 0;">${nombre}: ${evento.afinidadFracaso} afinidad</div>`;
+                            return `<div style="color: white; font-size: clamp(0.9rem, 3vw, 1.2rem); margin: 5px 0;">${nombre}: ${evento.afinidadFracaso} afinidad</div>`;
                         }).join('')}
                     </div>
                 </div>
@@ -851,21 +862,24 @@ const EventosDiarios = {
                 <button onclick="EventosDiarios.cerrarModalEvento()" style="
                     background: linear-gradient(135deg, #FF1493, #8A5AF7);
                     color: white;
-                    font-size: 1.5rem;
-                    padding: 15px 50px;
+                    font-size: clamp(1rem, 4vw, 1.5rem);
+                    padding: 12px 30px;
                     border: none;
                     border-radius: 50px;
                     cursor: pointer;
                     font-weight: bold;
-                    margin: 20px 0;
-                    border: 3px solid white;
-                    box-shadow: 0 0 20px #FF1493;
+                    margin: 10px 0;
+                    border: 2px solid white;
+                    box-shadow: 0 0 15px #FF1493;
                     transition: all 0.3s;
+                    width: auto;
+                    min-width: 200px;
+                    max-width: 90%;
                 " onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
                     ¡ENTENDIDO, LO HARÉ!
                 </button>
 
-                <p style="color: rgba(255,255,255,0.5); font-size: 0.9rem; margin-top: 10px;">
+                <p style="color: rgba(255,255,255,0.5); font-size: 0.8rem; margin-top: 15px; padding: 0 10px;">
                     ⚡ Si completas el requisito HOY, verás el video de ÉXITO inmediatamente<br>
                     ❌ Si NO lo completas, verás el video de FRACASO mañana
                 </p>
@@ -887,6 +901,11 @@ const EventosDiarios = {
                     from { transform: scale(0.8); opacity: 0; }
                     to { transform: scale(1); opacity: 1; }
                 }
+                @media (max-width: 480px) {
+                    #evento-modal-overlay > div {
+                        padding: 15px !important;
+                    }
+                }
             `;
             document.head.appendChild(style);
         }
@@ -900,7 +919,7 @@ const EventosDiarios = {
         }
     },
 
-    // Mostrar resultado del evento (video)
+    // Mostrar resultado del evento (video) - VERSIÓN CORREGIDA
     mostrarResultadoEvento: function(evento, exito) {
         const videoId = exito ? evento.videoExito : evento.videoFracaso;
         
@@ -918,63 +937,100 @@ const EventosDiarios = {
             justify-content: center;
             align-items: center;
             animation: fadeIn 0.5s ease;
+            padding: 20px;
+            box-sizing: border-box;
         `;
 
         const modal = document.createElement('div');
         modal.style.cssText = `
-            width: 90%;
-            max-width: 900px;
+            width: 100%;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
             background: linear-gradient(135deg, #1a1a2e, #16213e);
-            border-radius: 30px;
-            padding: 30px;
+            border-radius: 20px;
+            padding: 25px;
             border: 4px solid ${exito ? '#4CAF50' : '#F44336'};
-            box-shadow: 0 0 50px ${exito ? '#4CAF50' : '#F44336'};
+            box-shadow: 0 0 40px ${exito ? '#4CAF50' : '#F44336'};
+            position: relative;
         `;
 
         const cambiosHTML = evento.personajes.map(p => {
             const nombre = p.charAt(0).toUpperCase() + p.slice(1);
             const cambio = exito ? evento.afinidadExito : evento.afinidadFracaso;
-            return `<div style="color: white; font-size: 1.2rem;">${nombre}: ${cambio > 0 ? '+' : ''}${cambio}</div>`;
+            return `<div style="color: white; font-size: clamp(0.9rem, 3vw, 1.2rem);">${nombre}: ${cambio > 0 ? '+' : ''}${cambio}</div>`;
         }).join('');
 
         modal.innerHTML = `
-            <div style="text-align: center;">
+            <div style="text-align: center; position: relative;">
+                <button onclick="EventosDiarios.cerrarResultadoEvento()" style="
+                    position: sticky;
+                    top: 0;
+                    float: right;
+                    background: linear-gradient(135deg, ${exito ? '#4CAF50' : '#F44336'}, #8A5AF7);
+                    border: none;
+                    color: white;
+                    font-size: 24px;
+                    width: 45px;
+                    height: 45px;
+                    border-radius: 50%;
+                    cursor: pointer;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    transition: all 0.3s;
+                    border: 2px solid white;
+                    margin-bottom: 10px;
+                    z-index: 10;
+                " onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+                    ✕
+                </button>
+
                 <h1 style="
                     color: ${exito ? '#4CAF50' : '#F44336'};
-                    font-size: 3rem;
-                    margin-bottom: 20px;
+                    font-size: clamp(1.8rem, 6vw, 3rem);
+                    margin-bottom: 15px;
+                    padding-right: 45px;
                 ">${exito ? '✅ ¡EVENTO SUPERADO!' : '❌ EVENTO FALLIDO'}</h1>
 
-                <h2 style="color: #FFD166; font-size: 2rem; margin-bottom: 30px;">${evento.titulo}</h2>
+                <h2 style="color: #FFD166; font-size: clamp(1.2rem, 4vw, 2rem); margin-bottom: 20px; word-break: break-word;">
+                    ${evento.titulo}
+                </h2>
 
-                <div style="margin: 30px 0; border: 4px solid ${exito ? '#4CAF50' : '#F44336'}; border-radius: 20px; overflow: hidden;">
-                    <iframe
-                        src="https://drive.google.com/file/d/${videoId}/preview"
-                        width="100%"
-                        height="400"
-                        frameborder="0"
-                        allow="autoplay; encrypted-media"
-                        allowfullscreen
-                        style="display: block;"
-                    ></iframe>
+                <div style="
+                    margin: 20px 0;
+                    border: 3px solid ${exito ? '#4CAF50' : '#F44336'};
+                    border-radius: 15px;
+                    overflow: hidden;
+                    background: black;
+                ">
+                    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+                        <iframe
+                            src="https://drive.google.com/file/d/${videoId}/preview"
+                            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
+                            frameborder="0"
+                            allow="autoplay; encrypted-media"
+                            allowfullscreen
+                        ></iframe>
+                    </div>
                 </div>
 
                 <div style="
                     background: rgba(0,0,0,0.5);
-                    border-radius: 20px;
-                    padding: 20px;
-                    margin: 30px 0;
+                    border-radius: 15px;
+                    padding: 15px;
+                    margin: 20px 0;
                 ">
-                    <h3 style="color: #FFD166; font-size: 1.5rem; margin-bottom: 20px;">📊 CONSECUENCIAS</h3>
-                    <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+                    <h3 style="color: #FFD166; font-size: clamp(1.1rem, 4vw, 1.5rem); margin-bottom: 15px;">📊 CONSECUENCIAS</h3>
+                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
                         <div>
-                            <h4 style="color: #FF1493;">💖 Afinidad</h4>
+                            <h4 style="color: #FF1493; font-size: clamp(0.9rem, 3vw, 1.1rem);">💖 Afinidad</h4>
                             ${cambiosHTML}
                         </div>
                         ${exito && evento.dineroRecompensa > 0 ? `
                             <div>
-                                <h4 style="color: #FFD166;">💰 Dinero</h4>
-                                <div style="color: white; font-size: 1.5rem;">+${evento.dineroRecompensa}</div>
+                                <h4 style="color: #FFD166; font-size: clamp(0.9rem, 3vw, 1.1rem);">💰 Dinero</h4>
+                                <div style="color: white; font-size: clamp(1.2rem, 4vw, 1.5rem);">+${evento.dineroRecompensa}</div>
                             </div>
                         ` : ''}
                     </div>
@@ -983,13 +1039,16 @@ const EventosDiarios = {
                 <button onclick="EventosDiarios.cerrarResultadoEvento()" style="
                     background: linear-gradient(135deg, ${exito ? '#4CAF50' : '#F44336'}, #8A5AF7);
                     color: white;
-                    font-size: 1.3rem;
-                    padding: 15px 40px;
+                    font-size: clamp(1rem, 4vw, 1.3rem);
+                    padding: 12px 30px;
                     border: none;
                     border-radius: 50px;
                     cursor: pointer;
                     font-weight: bold;
-                    border: 3px solid white;
+                    border: 2px solid white;
+                    margin: 10px 0;
+                    min-width: 200px;
+                    max-width: 90%;
                 ">
                     ↩️ VOLVER AL INICIO
                 </button>
