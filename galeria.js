@@ -17,8 +17,8 @@ const contenedoresGaleria = {
         categoria: "Nuestra hija putita"
     },
     3: {
-        nombre: "GALERÍA 3",
-        imagen: "https://images.unsplash.com/photo-1543857778-c4a1a569e388",
+        nombre: "Shota",
+        imagen: "https://pbs.twimg.com/media/Gx6Tx1cawAARE3T?format=jpg&name=large",
         descripcion: "Galería especial de paisajes",
         categoria: "Paisajes"
     },
@@ -182,7 +182,44 @@ const galeriaDatabase = {
             { id: 4, url: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e" },
             { id: 5, url: "https://images.unsplash.com/photo-1534528741775-53994a69daeb" }
         ]
+ 
+    },
+    '3_1': {
+        titulo: "Retratos Artísticos",
+        descripcion: "Fotografía de retrato creativa",
+        categoria: "Retrato",
+        imagen: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d",
+        imagenes: [
+            { id: 1, url: "https://pbs.twimg.com/media/HCby8bHWcAA8ym9?format=jpg&name=small" },
+            { id: 2, url: "https://pbs.twimg.com/media/HCbrpWiXsAAMZUg?format=jpg&name=small" },
+            { id: 3, url: "https://pbs.twimg.com/media/HCbsAuJaoAA2_Zy?format=jpg&name=small" },
+            { id: 4, url: "https://pbs.twimg.com/media/HCbsgy5XsAAK37u?format=png&name=small" },
+             { id: 5, url: "https://pbs.twimg.com/media/HCbtHg_bQAAYeoO?format=png&name=small" },
+            { id: 6, url: "https://pbs.twimg.com/media/HCbtZXqXQAAr1CF?format=png&name=small" },
+            { id: 7, url: "https://pbs.twimg.com/media/HCbtP1fa0AE0eNd?format=png&name=small" },
+            { id: 8, url: "https://pbs.twimg.com/media/HCbuP83bcAA8Z04?format=jpg&name=small" },
+              { id: 9, url: "https://pbs.twimg.com/media/HCbuZx5WIAA0REx?format=jpg&name=small" },
+            { id: 10, url: "https://pbs.twimg.com/media/HCbu_dBbsAAylwF?format=jpg&name=small" },
+            { id: 11, url: "https://pbs.twimg.com/media/HCbvMKyXMAELAEn?format=jpg&name=small" }
+        ]
+ 
+    },
+    '4_1': {
+        titulo: "Retratos Artísticos",
+        descripcion: "Fotografía de retrato creativa",
+        categoria: "Retrato",
+        imagen: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d",
+        imagenes: [
+            { id: 1, url: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d" },
+            { id: 2, url: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d" },
+            { id: 3, url: "https://images.unsplash.com/photo-1494790108755-2616b612b786" },
+            { id: 4, url: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e" },
+            { id: 5, url: "https://images.unsplash.com/photo-1534528741775-53994a69daeb" }
+        ]
+ 
     }
+
+    
 };
 
 // ================================================
