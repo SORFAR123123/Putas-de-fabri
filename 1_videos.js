@@ -339,6 +339,22 @@ const videosDatabase = {
         duracion: "0:00",
         categoria: "Música"
     },
+     '3_17': {
+        titulo: "Sentones 1",
+        driveId: "11F4xEJiXNtI1ehxF_NKQkLTnGnnHH9RP", // DEJA VACÍO si no tienes video
+        descripcion: "Belinda te amo",
+        timestamps: [],
+        duracion: "0:00",
+        categoria: "Música"
+    },
+     '3_18': {
+        titulo: "Sentones2",
+        driveId: "1maCrRStN2fy4uVKv67QwV0kjZZGEZPtU", // DEJA VACÍO si no tienes video
+        descripcion: "Belinda te amo",
+        timestamps: [],
+        duracion: "0:00",
+        categoria: "Música"
+    },
 //Contendeor 4 cosplays
 
     
