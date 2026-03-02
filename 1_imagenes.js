@@ -1223,8 +1223,8 @@ const sistemaDescriptivo = {
                 ambiente: 'roleplay'
             },
             4: { 
-                nombre: 'ASMR CONTAINER 4',
-                imagen: '', 
+                nombre: 'Asmr japones :D',
+                imagen: 'https://pbs.twimg.com/media/HCa56QhWEAANR17?format=png&name=small', 
                 descripcion: 'ASMR de sonidos ambientales',
                 ambiente: 'ambiental'
             }
@@ -1318,14 +1318,14 @@ const sistemaDescriptivo = {
             
             // Contenedor 4
             '4_1': { 
-                nombre: 'ASMR 1',
-                imagen: '', 
+                nombre: 'Maylily ASMR',
+                imagen: 'https://pbs.twimg.com/media/HCa56QhWEAANR17?format=png&name=small', 
                 descripcion: '', 
                 tipoVoz: '' 
             },
             '4_2': { 
-                nombre: 'ASMR 2',
-                imagen: '', 
+                nombre: 'Sachi',
+                imagen: 'https://pbs.twimg.com/media/HCa6SXpW8AARNvR?format=png&name=small', 
                 descripcion: '', 
                 tipoVoz: '' 
             },
