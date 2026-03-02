@@ -1,5 +1,5 @@
 // ================================================
-// SISTEMA DE EVENTOS DIARIOS - VERSIÓN MODAL GRANDE
+// SISTEMA DE EVENTOS DIARIOS - VERSIÓN CORREGIDA
 // Aparece un evento aleatorio cada día en un modal que ocupa casi toda la pantalla
 // TODOS LOS EVENTOS PIDEN SOLO 1 MAZO AL 100% (PARA TESTEO)
 // ================================================
@@ -452,7 +452,7 @@ function guardarEstadoVisibilidadBarra(visible) {
 }
 
 // ================================================
-// SISTEMA DE EVENTOS DIARIOS (CORREGIDO)
+// SISTEMA DE EVENTOS DIARIOS (VERSIÓN CORREGIDA)
 // ================================================
 const EventosDiarios = {
     // Obtener la fecha actual en formato YYYY-MM-DD
@@ -464,12 +464,16 @@ const EventosDiarios = {
     // Verificar si ya se mostró un evento hoy
     verificarEventoHoy: function() {
         const ultimoEvento = localStorage.getItem('evento_diario_ultimo');
-        const fechaHoy = this.obtenerFechaActual();
+        if (!ultimoEvento) return true;
         
-        if (ultimoEvento === fechaHoy) {
-            return false; // Ya hubo evento hoy
+        try {
+            const ultimoEventoData = JSON.parse(ultimoEvento);
+            const fechaHoy = this.obtenerFechaActual();
+            
+            return ultimoEventoData.fecha !== fechaHoy;
+        } catch (e) {
+            return true;
         }
-        return true; // Es primera vez hoy
     },
 
     // Seleccionar un evento aleatorio (sin repetir hasta que se hayan visto todos)
@@ -499,10 +503,15 @@ const EventosDiarios = {
 
     // Guardar el evento de hoy
     guardarEventoHoy: function(evento) {
-        localStorage.setItem('evento_diario_ultimo', this.obtenerFechaActual());
+        const eventoData = {
+            fecha: this.obtenerFechaActual(),
+            evento: evento,
+            requisitoCumplido: false,
+            resultadoMostrado: false
+        };
+        
+        localStorage.setItem('evento_diario_ultimo', JSON.stringify(eventoData));
         localStorage.setItem('evento_diario_actual', JSON.stringify(evento));
-        localStorage.setItem('evento_diario_completado', 'false');
-        localStorage.setItem('evento_diario_resultado_mostrado', 'false');
     },
 
     // Obtener el evento de hoy
@@ -511,24 +520,39 @@ const EventosDiarios = {
         return eventoGuardado ? JSON.parse(eventoGuardado) : null;
     },
 
-    // Marcar evento como procesado
-    marcarEventoProcesado: function() {
-        localStorage.setItem('evento_diario_completado', 'true');
+    // Marcar requisito como cumplido
+    marcarRequisitoCumplido: function() {
+        const ultimoEvento = JSON.parse(localStorage.getItem('evento_diario_ultimo') || '{}');
+        const fechaHoy = this.obtenerFechaActual();
+        
+        // Solo marcar si es el evento de hoy y aún no se ha cumplido
+        if (ultimoEvento.fecha === fechaHoy && !ultimoEvento.requisitoCumplido) {
+            ultimoEvento.requisitoCumplido = true;
+            localStorage.setItem('evento_diario_ultimo', JSON.stringify(ultimoEvento));
+            console.log('✅ Requisito del evento cumplido HOY');
+            
+            // Mostrar notificación de que el requisito está cumplido
+            this.mostrarNotificacionEvento('✅ Requisito cumplido! Mañana verás el resultado', '#4CAF50');
+        }
     },
 
     // Verificar si el evento de hoy ya fue procesado
     eventoYaProcesado: function() {
-        return localStorage.getItem('evento_diario_completado') === 'true';
+        const ultimoEvento = JSON.parse(localStorage.getItem('evento_diario_ultimo') || '{}');
+        return ultimoEvento.requisitoCumplido === true;
     },
 
     // Marcar resultado como mostrado
     marcarResultadoMostrado: function() {
-        localStorage.setItem('evento_diario_resultado_mostrado', 'true');
+        const ultimoEvento = JSON.parse(localStorage.getItem('evento_diario_ultimo') || '{}');
+        ultimoEvento.resultadoMostrado = true;
+        localStorage.setItem('evento_diario_ultimo', JSON.stringify(ultimoEvento));
     },
 
     // Verificar si el resultado ya fue mostrado
     resultadoYaMostrado: function() {
-        return localStorage.getItem('evento_diario_resultado_mostrado') === 'true';
+        const ultimoEvento = JSON.parse(localStorage.getItem('evento_diario_ultimo') || '{}');
+        return ultimoEvento.resultadoMostrado === true;
     },
 
     // Verificar si se cumplió el requisito
@@ -550,7 +574,7 @@ const EventosDiarios = {
         return false;
     },
 
-    // Aplicar consecuencias del evento (VERSIÓN CORREGIDA Y CON LOGS)
+    // Aplicar consecuencias del evento
     aplicarConsecuencias: function(evento, exito) {
         console.log('🎯 Aplicando consecuencias del evento:', evento.id, 'Éxito:', exito);
         
@@ -964,28 +988,48 @@ const EventosDiarios = {
         document.body.appendChild(overlay);
     },
 
-    // Cerrar resultado
+    // Cerrar resultado y mostrar nuevo evento del día
     cerrarResultadoEvento: function() {
         const overlay = document.getElementById('evento-resultado-overlay');
         if (overlay) {
             overlay.remove();
         }
-        // Recargar la página principal para actualizar afinidades
-        location.reload();
+        
+        // Marcar resultado como mostrado
+        this.marcarResultadoMostrado();
+        
+        // Actualizar barra de progreso
+        this.actualizarBarraProgreso();
+        
+        // Verificar si hoy ya hay evento nuevo
+        if (this.verificarEventoHoy()) {
+            // Si ya pasó la fecha del evento anterior, mostrar el nuevo evento
+            const evento = this.seleccionarEventoAleatorio();
+            this.guardarEventoHoy(evento);
+            
+            setTimeout(() => {
+                this.mostrarModalEvento(evento);
+            }, 500);
+        }
     },
 
     // Mostrar último resultado
     mostrarUltimoResultado: function() {
+        const ultimoEvento = JSON.parse(localStorage.getItem('evento_diario_ultimo') || '{}');
         const evento = this.obtenerEventoHoy();
-        const yaProcesado = this.eventoYaProcesado();
         
-        if (evento && yaProcesado) {
-            const exito = this.verificarRequisito(evento);
+        if (evento && ultimoEvento.resultadoMostrado) {
+            const exito = ultimoEvento.requisitoCumplido || false;
             this.mostrarResultadoEvento(evento, exito);
+        } else if (evento && ultimoEvento.requisitoCumplido) {
+            // Si no se ha mostrado el resultado pero el requisito está cumplido
+            const exito = true;
+            this.mostrarResultadoEvento(evento, exito);
+            this.marcarResultadoMostrado();
         } else if (evento) {
-            alert('El evento de hoy aún no ha sido procesado. Completa el requisito primero.');
+            this.mostrarNotificacionEvento('El evento de hoy aún no ha sido procesado. Completa el requisito primero.', '#FF9800');
         } else {
-            alert('No hay eventos recientes.');
+            this.mostrarNotificacionEvento('No hay eventos recientes.', '#FF9800');
         }
     },
 
@@ -993,57 +1037,71 @@ const EventosDiarios = {
     iniciarEventoDiario: function() {
         console.log('📅 Iniciando sistema de eventos diarios...');
         
-        // Verificar si es primera vez hoy
-        if (!this.verificarEventoHoy()) {
-            console.log('📅 Ya hubo evento hoy');
+        // Obtener datos del último evento
+        const ultimoEventoStr = localStorage.getItem('evento_diario_ultimo');
+        const fechaHoy = this.obtenerFechaActual();
+        
+        if (!ultimoEventoStr) {
+            // Primera vez: crear nuevo evento
+            console.log('🎲 Primera vez - Creando nuevo evento...');
+            const evento = this.seleccionarEventoAleatorio();
+            this.guardarEventoHoy(evento);
             
-            // Verificar si hay que mostrar resultado
-            const evento = this.obtenerEventoHoy();
-            const yaProcesado = this.eventoYaProcesado();
-            const resultadoMostrado = this.resultadoYaMostrado();
-            
-            if (evento && !yaProcesado && !resultadoMostrado) {
-                console.log('🎯 Procesando resultado del evento...');
-                
-                // Verificar dependencias antes de procesar
-                if (typeof sistemaEconomia === 'undefined' || typeof quintillizasRPG === 'undefined') {
-                    console.warn('⏳ Dependencias no listas. Reintentando en 2 segundos...');
-                    setTimeout(() => this.iniciarEventoDiario(), 2000);
-                    return;
-                }
-                
-                // Verificar si se cumplió el requisito
-                const exito = this.verificarRequisito(evento);
-                console.log('✅ Requisito verificado, éxito:', exito);
-                
-                // Aplicar consecuencias
-                const aplicadas = this.aplicarConsecuencias(evento, exito);
-                
-                if (aplicadas) {
-                    // Marcar como procesado
-                    this.marcarEventoProcesado();
-                    
-                    // Mostrar resultado
-                    setTimeout(() => {
-                        this.mostrarResultadoEvento(evento, exito);
-                        this.marcarResultadoMostrado();
-                        this.actualizarBarraProgreso();
-                    }, 1000);
-                } else {
-                    console.error('❌ No se pudieron aplicar las consecuencias');
-                }
-            }
+            setTimeout(() => {
+                this.mostrarModalEvento(evento);
+            }, 500);
             return;
         }
-
-        // Es primera vez hoy - seleccionar evento y mostrar modal
-        const evento = this.seleccionarEventoAleatorio();
-        this.guardarEventoHoy(evento);
         
-        // Mostrar modal después de que cargue la página
-        setTimeout(() => {
-            this.mostrarModalEvento(evento);
-        }, 500);
+        const ultimoEvento = JSON.parse(ultimoEventoStr);
+        const eventoGuardado = this.obtenerEventoHoy();
+        
+        // CASO 1: Hay un evento PENDIENTE de resultado del día anterior
+        if (ultimoEvento.fecha && ultimoEvento.fecha !== fechaHoy) {
+            // Si NO se ha mostrado el resultado del día anterior
+            if (!ultimoEvento.resultadoMostrado && eventoGuardado) {
+                console.log('🎬 Mostrando resultado del evento de ayer...');
+                
+                // Verificar si se cumplió el requisito (usando datos guardados)
+                const exito = ultimoEvento.requisitoCumplido || false;
+                
+                // Mostrar video resultado
+                this.mostrarResultadoEvento(eventoGuardado, exito);
+                
+                // Marcar resultado como mostrado (pero no guardar todavía, esperar a que cierre)
+                // Esto se hará en cerrarResultadoEvento
+                
+                // NO mostrar evento nuevo hoy todavía (esperar a que cierre el video)
+                return;
+            }
+            
+            // Si ya se mostró el resultado de ayer, entonces crear nuevo evento para hoy
+            if (ultimoEvento.resultadoMostrado && !document.getElementById('evento-resultado-overlay')) {
+                console.log('🎲 Resultado de ayer ya mostrado. Creando nuevo evento para hoy...');
+                const evento = this.seleccionarEventoAleatorio();
+                this.guardarEventoHoy(evento);
+                
+                setTimeout(() => {
+                    this.mostrarModalEvento(evento);
+                }, 500);
+                return;
+            }
+        }
+        
+        // CASO 2: Es el mismo día (fecha actual)
+        if (ultimoEvento.fecha === fechaHoy) {
+            console.log('📅 Ya hay evento para hoy');
+            
+            // Verificar si hay que mostrar resultado (esto no debería pasar porque es el mismo día)
+            // Pero por si acaso
+            if (ultimoEvento.requisitoCumplido && !ultimoEvento.resultadoMostrado && !document.getElementById('evento-resultado-overlay')) {
+                console.log('⚠️ Caso extraño: requisito cumplido hoy pero resultado no mostrado');
+                // No hacer nada, esperar a mañana
+            }
+            
+            // Actualizar barra de progreso
+            this.actualizarBarraProgreso();
+        }
     },
 
     // Crear contenedor para la barra de progreso con botón toggle
@@ -1126,6 +1184,24 @@ const EventosDiarios = {
         }
     },
 
+    // Verificar progreso del evento (llamar cuando se completa un mazo)
+    verificarProgresoEvento: function() {
+        const estadisticas = sistemaEconomia.obtenerEstadisticas();
+        const ultimoEvento = JSON.parse(localStorage.getItem('evento_diario_ultimo') || '{}');
+        const eventoActual = this.obtenerEventoHoy();
+        const fechaHoy = this.obtenerFechaActual();
+        
+        // Solo verificar si hay evento hoy y no está cumplido aún
+        if (ultimoEvento.fecha === fechaHoy && 
+            !ultimoEvento.requisitoCumplido && 
+            eventoActual) {
+            
+            if (estadisticas.completados100 >= eventoActual.cantidadRequerida) {
+                this.marcarRequisitoCumplido();
+            }
+        }
+    },
+
     // Inicializar todo
     inicializar: function() {
         // Crear contenedor de progreso con toggle
@@ -1152,11 +1228,49 @@ const EventosDiarios = {
     }
 };
 
-// Inicializar eventos al cargar la página
+// ================================================
+// CHECKER DE PROGRESO PARA EVENTOS DIARIOS
+// ================================================
+
+const EventosChecker = {
+    // Llamar esta función cada vez que se completa un mazo al 100%
+    verificarProgresoEvento: function() {
+        if (typeof EventosDiarios !== 'undefined' && typeof sistemaEconomia !== 'undefined') {
+            EventosDiarios.verificarProgresoEvento();
+        }
+    },
+    
+    // Inicializar checker (hook en sistemaEconomia)
+    inicializar: function() {
+        if (typeof sistemaEconomia !== 'undefined' && sistemaEconomia.actualizarProgreso) {
+            const originalActualizarProgreso = sistemaEconomia.actualizarProgreso;
+            sistemaEconomia.actualizarProgreso = function(contenedor, sub, mazo, porcentaje) {
+                // Llamar a la función original
+                originalActualizarProgreso.call(this, contenedor, sub, mazo, porcentaje);
+                
+                // Verificar evento si se completó al 100%
+                if (porcentaje === 100) {
+                    EventosChecker.verificarProgresoEvento();
+                }
+            };
+            console.log('✅ EventosChecker inicializado correctamente');
+        } else {
+            console.warn('⚠️ No se pudo inicializar EventosChecker: sistemaEconomia no disponible');
+        }
+    }
+};
+
+// Inicializar eventos y checker al cargar la página
 document.addEventListener('DOMContentLoaded', function() {
     EventosDiarios.inicializar();
+    
+    // Inicializar checker después de que sistemaEconomia esté listo
+    setTimeout(() => {
+        EventosChecker.inicializar();
+    }, 2000);
 });
 
 // Exponer globalmente
 window.EventosDiarios = EventosDiarios;
 window.SistemaProgresoEventos = SistemaProgresoEventos;
+window.EventosChecker = EventosChecker;
