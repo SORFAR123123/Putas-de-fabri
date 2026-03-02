@@ -185,10 +185,10 @@ const galeriaDatabase = {
  
     },
     '3_1': {
-        titulo: "Retratos Artísticos",
-        descripcion: "Fotografía de retrato creativa",
-        categoria: "Retrato",
-        imagen: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d",
+        titulo: "Putonas",
+        descripcion: "",
+        categoria: "Putardas",
+        imagen: "https://pbs.twimg.com/media/HCby8bHWcAA8ym9?format=jpg&name=small",
         imagenes: [
             { id: 1, url: "https://pbs.twimg.com/media/HCby8bHWcAA8ym9?format=jpg&name=small" },
             { id: 2, url: "https://pbs.twimg.com/media/HCbrpWiXsAAMZUg?format=jpg&name=small" },
