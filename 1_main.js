@@ -1426,67 +1426,8 @@ function iniciarMazoDificilDesdeUI() {
 }
 
 // ====================
-// ===== NUEVA FUNCIÓN: VERIFICAR EVENTO DIARIO AL COMPLETAR MAZO =====
+// ===== ELIMINADA LA FUNCIÓN verificarEventoDiarioAlCompletarMazo =====
 // ====================
-
-function verificarEventoDiarioAlCompletarMazo(porcentaje) {
-    // Solo verificar cuando es 100% para eventos que requieren mazos completados
-    if (porcentaje !== 100) return;
-    
-    // Verificar si existe el sistema de eventos
-    if (typeof EventosDiarios === 'undefined') {
-        console.log('📅 Sistema de eventos no disponible');
-        return;
-    }
-    
-    // Obtener evento de hoy
-    const evento = EventosDiarios.obtenerEventoHoy();
-    if (!evento) {
-        console.log('📅 No hay evento activo hoy');
-        return;
-    }
-    
-    // Verificar si ya fue procesado o resultado mostrado
-    if (EventosDiarios.eventoYaProcesado()) {
-        console.log('📅 Evento ya fue procesado');
-        return;
-    }
-    
-    if (EventosDiarios.resultadoYaMostrado()) {
-        console.log('📅 Resultado ya fue mostrado');
-        return;
-    }
-    
-    console.log('📅 Verificando evento diario al completar mazo 100%...');
-    console.log('🎯 Evento actual:', evento.titulo);
-    console.log('🎯 Requisito: Completar', evento.cantidadRequerida, 'mazo(s) al 100%');
-    
-    // Verificar si se cumplió el requisito
-    const exito = EventosDiarios.verificarRequisito(evento);
-    console.log('✅ ¿Requisito cumplido?', exito);
-    
-    if (exito) {
-        console.log('✅ Requisito de evento cumplido al completar mazo 100%');
-        
-        // Aplicar consecuencias del evento
-        const aplicadas = EventosDiarios.aplicarConsecuencias(evento, true);
-        
-        if (aplicadas) {
-            EventosDiarios.marcarEventoProcesado();
-            
-            // Mostrar resultado después de un pequeño delay
-            setTimeout(() => {
-                EventosDiarios.mostrarResultadoEvento(evento, true);
-                EventosDiarios.marcarResultadoMostrado();
-                EventosDiarios.actualizarBarraProgreso();
-            }, 1500);
-        }
-    } else {
-        console.log('❌ Requisito aún no cumplido. Progreso actual:', 
-                    sistemaEconomia.obtenerEstadisticas().completados100, 
-                    'de', evento.cantidadRequerida);
-    }
-}
 
 // ====================
 // NAVEGACIÓN PRINCIPAL - TODOS LOS MODOS (AHORA DINÁMICA)
@@ -3244,7 +3185,7 @@ function irAMazo(direccion) {
 }
 
 // ====================
-// FUNCIÓN FINALIZAR QUIZ - MODIFICADA PARA VERIFICAR EVENTO DIARIO
+// FUNCIÓN FINALIZAR QUIZ - MODIFICADA (SE ELIMINÓ LA LÍNEA DEL EVENTO)
 // ====================
 
 function finalizarQuiz() {
@@ -3263,9 +3204,7 @@ function finalizarQuiz() {
         porcentaje
     );
     
-    // ===== NUEVA LÍNEA - VERIFICAR EVENTO DIARIO =====
-    verificarEventoDiarioAlCompletarMazo(porcentaje);
-    // ==================================================
+    // ===== ELIMINADA LA LÍNEA QUE VERIFICABA EL EVENTO DIARIO =====
     
     const dineroAhora = sistemaEconomia.obtenerDinero();
     const recompensa = dineroAhora - dineroAntes;
@@ -3656,11 +3595,4 @@ document.addEventListener('DOMContentLoaded', function() {
         console.log('   - Audios contenedor 1: ' + obtenerSubcontenedoresDisponibles('audios', 1).length + ' subcontenedores');
         console.log('   - ASMR contenedor 1: ' + obtenerSubcontenedoresDisponibles('asmr', 1).length + ' subcontenedores');
     }, 3000);
-    
-    // Verificar eventos al iniciar
-    setTimeout(() => {
-        if (typeof EventosDiarios !== 'undefined') {
-            console.log('📅 Sistema de eventos diarios detectado');
-        }
-    }, 1000);
 });
