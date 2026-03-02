@@ -1610,6 +1610,18 @@ const sistemaDescriptivo = {
                 descripcion: '', 
                 duracion: '' 
             },
+            '3_17': { 
+                nombre: ' Luna aoki',
+                imagen: 'https://pbs.twimg.com/media/HCa_VgbWAAApoMm?format=png&name=small', 
+                descripcion: '', 
+                duracion: '' 
+            },
+            '3_18': { 
+                nombre: ' Luna aoki 2',
+                imagen: 'https://pbs.twimg.com/media/HCa_cB6WgAAxqJd?format=png&name=small', 
+                descripcion: '', 
+                duracion: '' 
+            },
             '4_1': { 
                 nombre: 'Zerotwo quiere pene',
                 imagen: 'https://pbs.twimg.com/media/G_DzDM8XQAAd3dA?format=jpg&name=small', 
