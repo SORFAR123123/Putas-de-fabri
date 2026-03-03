@@ -200,7 +200,9 @@ const galeriaDatabase = {
             { id: 8, url: "https://pbs.twimg.com/media/HCbuP83bcAA8Z04?format=jpg&name=small" },
               { id: 9, url: "https://pbs.twimg.com/media/HCbuZx5WIAA0REx?format=jpg&name=small" },
             { id: 10, url: "https://pbs.twimg.com/media/HCbu_dBbsAAylwF?format=jpg&name=small" },
-            { id: 11, url: "https://pbs.twimg.com/media/HCbvMKyXMAELAEn?format=jpg&name=small" }
+            { id: 11, url: "https://pbs.twimg.com/media/HCbvMKyXMAELAEn?format=jpg&name=small" },
+             { id: 12, url: "https://pbs.twimg.com/media/HCgdpGGbYAA84Y0?format=png&name=small" },
+              { id: 13, url: "https://pbs.twimg.com/media/HCe-aKjawAADi3N?format=jpg&name=small" }
         ]
  
     },
