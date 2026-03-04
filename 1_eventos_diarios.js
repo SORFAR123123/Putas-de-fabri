@@ -8,11 +8,11 @@ const EVENTOS_DIARIOS = [
     { // Evento 1 - Solo Nino
         id: 'nino_ex',
         titulo: '😤 ¡EL EX DE NINO APARECIÓ!',
-        descripcion: 'Mientras estudiabas en la cafetería, ves a Nino hablando acaloradamente con un chico. ¡Es su ex! Te mira y te hace una seña para que te acerques. Necesitas demostrarle que eres mejor que él completando 1 MAZO AL 100% hoy.',
+        descripcion: 'Mientras estudiabas en la cafetería, ves a Nino hablando acaloradamente con un chico. ¡Es su ex! Te mira y te hace una seña para que te acerques. Necesitas demostrarle que eres mejor que él completando 10 MAZOS AL 100% hoy.',
         imagen: 'https://pbs.twimg.com/media/G7qfpGZXAAAib4A?format=png&name=small',
         personajes: ['nino'],
         tipoRequisito: 'mazos_completados',
-        cantidadRequerida: 1,
+        cantidadRequerida: 10,
         videoExito: '1aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe',
         videoFracaso: '1-wYJYTaw0ZOKQy8BBPR7Fmhlzs0IVx9K',
         afinidadExito: 15,
@@ -22,11 +22,11 @@ const EVENTOS_DIARIOS = [
     { // Evento 2 - Solo Ichika
         id: 'ichika_trabajo',
         titulo: '💼 ¡ICHIKA ESTÁ AGOTADA!',
-        descripcion: 'Ichika está agotada por el trabajo y necesita que la ayudes a estudiar para un examen importante. Si no completas 1 MAZO AL 100% hoy, perderá el año.',
+        descripcion: 'Ichika está agotada por el trabajo y necesita que la ayudes a estudiar para un examen importante. Si no completas 10 MAZOS AL 100% hoy, perderá el año.',
         imagen: 'https://pbs.twimg.com/media/G7qfcGRWkAAV74w?format=png&name=small',
         personajes: ['ichika'],
         tipoRequisito: 'mazos_completados',
-        cantidadRequerida: 1,
+        cantidadRequerida: 10,
         videoExito: '1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS',
         videoFracaso: '1tS-gKr6bf4MY5Yrw7zRvP2uP_zq9rsLl',
         afinidadExito: 10,
@@ -36,11 +36,11 @@ const EVENTOS_DIARIOS = [
     { // Evento 3 - Solo Miku
         id: 'miku_concierto',
         titulo: '🎶 ¡MIKU PERDIÓ LAS ENTRADAS!',
-        descripcion: 'Miku tiene un concierto de música tradicional hoy, pero perdió las entradas. Necesita que la ayudes a buscarlas. Completa 1 MAZO AL 100% hoy. ¡No la dejes plantada!',
+        descripcion: 'Miku tiene un concierto de música tradicional hoy, pero perdió las entradas. Necesita que la ayudes a buscarlas. Completa 10 MAZOS AL 100% hoy. ¡No la dejes plantada!',
         imagen: 'https://pbs.twimg.com/media/G7qfrrKWsAAv6ZT?format=png&name=small',
         personajes: ['miku'],
         tipoRequisito: 'mazos_completados',
-        cantidadRequerida: 1,
+        cantidadRequerida: 10,
         videoExito: '1tS-gKr6bf4MY5Yrw7zRvP2uP_zq9rsLl',
         videoFracaso: '1aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe',
         afinidadExito: 12,
@@ -50,11 +50,11 @@ const EVENTOS_DIARIOS = [
     { // Evento 4 - Solo Yotsuba
         id: 'yotsuba_carrera',
         titulo: '🏃‍♀️ ¡YOTSUBA NECESITA APOYO!',
-        descripcion: 'Yotsuba tiene una carrera importante mañana y está nerviosa. Quiere que estudien juntos para calmarse. Completa 1 MAZO AL 100% hoy para demostrarle que puedes con todo.',
+        descripcion: 'Yotsuba tiene una carrera importante mañana y está nerviosa. Quiere que estudien juntos para calmarse. Completa 10 MAZOS AL 100% hoy para demostrarle que puedes con todo.',
         imagen: 'https://pbs.twimg.com/media/G7qfupkXUAAX0aS?format=png&name=small',
         personajes: ['yotsuba'],
         tipoRequisito: 'mazos_completados',
-        cantidadRequerida: 1,
+        cantidadRequerida: 10,
         videoExito: '1-wYJYTaw0ZOKQy8BBPR7Fmhlzs0IVx9K',
         videoFracaso: '1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS',
         afinidadExito: 8,
@@ -64,11 +64,11 @@ const EVENTOS_DIARIOS = [
     { // Evento 5 - Solo Itsuki
         id: 'itsuki_buffet',
         titulo: '🍣 ¡ITSUKI QUIERE BUFFET LIBRE!',
-        descripcion: 'Itsuki quiere ir a un buffet libre pero le da vergüenza ir sola. Prometiste acompañarla si completas 1 MAZO AL 100% hoy. ¡No la decepciones!',
+        descripcion: 'Itsuki quiere ir a un buffet libre pero le da vergüenza ir sola. Prometiste acompañarla si completas 10 MAZOS AL 100% hoy. ¡No la decepciones!',
         imagen: 'https://pbs.twimg.com/media/G7qfxnsX0AIbJK1?format=png&name=small',
         personajes: ['itsuki'],
         tipoRequisito: 'mazos_completados',
-        cantidadRequerida: 1,
+        cantidadRequerida: 10,
         videoExito: '1aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe',
         videoFracaso: '1-wYJYTaw0ZOKQy8BBPR7Fmhlzs0IVx9K',
         afinidadExito: 10,
@@ -78,11 +78,11 @@ const EVENTOS_DIARIOS = [
     { // Evento 6 - Dúo Nino e Ichika
         id: 'duo_nino_ichika_discusion',
         titulo: '👯‍♀️ ¡NINO E ICHIKA DISCUTEN!',
-        descripcion: 'Nino e Ichika están discutiendo por quién cocinará hoy. Tienes que mediar para que se reconcilien. Demuestra tu habilidad completando 1 MAZO AL 100% hoy.',
+        descripcion: 'Nino e Ichika están discutiendo por quién cocinará hoy. Tienes que mediar para que se reconcilien. Demuestra tu habilidad completando 10 MAZOS AL 100% hoy.',
         imagen: 'https://pbs.twimg.com/media/G7qfcGRWkAAV74w?format=png&name=small',
         personajes: ['nino', 'ichika'],
         tipoRequisito: 'mazos_completados',
-        cantidadRequerida: 1,
+        cantidadRequerida: 10,
         videoExito: '1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS',
         videoFracaso: '1tS-gKr6bf4MY5Yrw7zRvP2uP_zq9rsLl',
         afinidadExito: 12,
@@ -92,11 +92,11 @@ const EVENTOS_DIARIOS = [
     { // Evento 7 - Dúo Miku y Yotsuba
         id: 'duo_miku_yotsuba_estudio',
         titulo: '📚 ¡MIKU Y YOTSUBA NECESITAN AYUDA!',
-        descripcion: 'Miku no entiende historia y Yotsuba quiere ayudarle pero no sabe cómo. Completa 1 MAZO AL 100% hoy para darles material de estudio.',
+        descripcion: 'Miku no entiende historia y Yotsuba quiere ayudarle pero no sabe cómo. Completa 10 MAZOS AL 100% hoy para darles material de estudio.',
         imagen: 'https://pbs.twimg.com/media/G7qfrrKWsAAv6ZT?format=png&name=small',
         personajes: ['miku', 'yotsuba'],
         tipoRequisito: 'mazos_completados',
-        cantidadRequerida: 1,
+        cantidadRequerida: 10,
         videoExito: '1-wYJYTaw0ZOKQy8BBPR7Fmhlzs0IVx9K',
         videoFracaso: '1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS',
         afinidadExito: 10,
@@ -106,11 +106,11 @@ const EVENTOS_DIARIOS = [
     { // Evento 8 - Trío (Nino, Miku, Itsuki)
         id: 'trio_examen',
         titulo: '📝 ¡EXAMEN SORPRESA!',
-        descripcion: 'Las profesoras anunciaron un examen sorpresa. Nino, Miku e Itsuki entran en pánico. Necesitan que las ayudes a repasar completando 1 MAZO AL 100% hoy.',
+        descripcion: 'Las profesoras anunciaron un examen sorpresa. Nino, Miku e Itsuki entran en pánico. Necesitan que las ayudes a repasar completando 10 MAZOS AL 100% hoy.',
         imagen: 'https://pbs.twimg.com/media/G7qfxnsX0AIbJK1?format=png&name=small',
         personajes: ['nino', 'miku', 'itsuki'],
         tipoRequisito: 'mazos_completados',
-        cantidadRequerida: 1,
+        cantidadRequerida: 10,
         videoExito: '1aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe',
         videoFracaso: '1tS-gKr6bf4MY5Yrw7zRvP2uP_zq9rsLl',
         afinidadExito: 15,
@@ -120,11 +120,11 @@ const EVENTOS_DIARIOS = [
     { // Evento 9 - Cuarteto (Ichika, Nino, Miku, Yotsuba)
         id: 'cuarteto_festival',
         titulo: '🎪 ¡FESTIVAL ESCOLAR!',
-        descripcion: 'El festival escolar está cerca y 4 de las hermanas necesitan ayuda para preparar el stand. Completa 1 MAZO AL 100% hoy para que todo salga perfecto.',
+        descripcion: 'El festival escolar está cerca y 4 de las hermanas necesitan ayuda para preparar el stand. Completa 10 MAZOS AL 100% hoy para que todo salga perfecto.',
         imagen: 'https://pbs.twimg.com/media/G7qfcGRWkAAV74w?format=png&name=small',
         personajes: ['ichika', 'nino', 'miku', 'yotsuba'],
         tipoRequisito: 'mazos_completados',
-        cantidadRequerida: 1,
+        cantidadRequerida: 10,
         videoExito: '1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS',
         videoFracaso: '1-wYJYTaw0ZOKQy8BBPR7Fmhlzs0IVx9K',
         afinidadExito: 18,
@@ -134,11 +134,11 @@ const EVENTOS_DIARIOS = [
     { // Evento 10 - QUINTETO (TODAS)
         id: 'quinteto_viaje',
         titulo: '👯‍♀️👯‍♀️👯‍♀️👯‍♀️👯‍♀️ ¡VIAJE DE HERMANAS!',
-        descripcion: '¡Las 5 hermanas quieren hacer un viaje juntas! Te invitaron, pero debes demostrar que eres responsable completando 1 MAZO AL 100% hoy.',
+        descripcion: '¡Las 5 hermanas quieren hacer un viaje juntas! Te invitaron, pero debes demostrar que eres responsable completando 10 MAZOS AL 100% hoy.',
         imagen: 'https://pbs.twimg.com/media/G7qfpGZXAAAib4A?format=png&name=small',
         personajes: ['ichika', 'nino', 'miku', 'yotsuba', 'itsuki'],
         tipoRequisito: 'mazos_completados',
-        cantidadRequerida: 1,
+        cantidadRequerida: 10,
         videoExito: '1tS-gKr6bf4MY5Yrw7zRvP2uP_zq9rsLl',
         videoFracaso: '1aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe',
         afinidadExito: 25,
@@ -579,15 +579,15 @@ const EventosDiarios = {
         return !ultimoEvento.requisitoCumplido && ultimoEvento.fecha === fechaHoy;
     },
 
-    // Verificar si hay que mostrar fracaso de ayer
+    // Verificar si hay que mostrar fracaso de ayer (VERSIÓN CORREGIDA)
     debeMostrarFracasoAyer: function() {
         const ultimoEvento = JSON.parse(localStorage.getItem('evento_diario_ultimo') || '{}');
         const fechaHoy = this.obtenerFechaActual();
         
-        // Verificar si el evento de ayer fue fallido y no se ha mostrado
-        return ultimoEvento.fecha && 
-               ultimoEvento.fecha !== fechaHoy && 
-               !ultimoEvento.requisitoCumplido && 
+        // Verificar si hay un evento que falló en una fecha anterior (no hoy)
+        // y que aún no se ha mostrado su resultado de fracaso
+        return ultimoEvento.fechaFracaso && 
+               ultimoEvento.fechaFracaso !== fechaHoy && 
                !ultimoEvento.resultadoFracasoMostrado;
     },
 
@@ -822,7 +822,7 @@ const EventosDiarios = {
                     font-size: clamp(1rem, 4vw, 1.5rem);
                     border: 3px solid white;
                 ">
-                    🎯 REQUISITO: Completa ${evento.cantidadRequerida} MAZO${evento.cantidadRequerida > 1 ? 'S' : ''} al 100% hoy
+                    🎯 REQUISITO: Completa ${evento.cantidadRequerida} MAZOS AL 100% hoy
                 </div>
 
                 <div style="
@@ -1118,7 +1118,7 @@ const EventosDiarios = {
         const ultimoEvento = JSON.parse(ultimoEventoStr);
         const eventoGuardado = this.obtenerEventoHoy();
         
-        // CASO 1: Verificar si hay que mostrar FRACASO de ayer
+        // CASO 1: Verificar si hay que mostrar FRACASO de ayer (VERSIÓN CORREGIDA)
         if (this.debeMostrarFracasoAyer()) {
             console.log('🎬 Mostrando video de FRACASO del día anterior...');
             
@@ -1163,6 +1163,7 @@ const EventosDiarios = {
             // Marcar el evento anterior como fallido si no fue exitoso
             if (!ultimoEvento.requisitoCumplido && ultimoEvento.fecha) {
                 ultimoEvento.fechaFracaso = ultimoEvento.fecha;
+                ultimoEvento.resultadoFracasoMostrado = false;
                 localStorage.setItem('evento_diario_ultimo', JSON.stringify(ultimoEvento));
             }
             
