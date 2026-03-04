@@ -15,7 +15,7 @@ const EVENTOS_NTR = [
         tipo: 'ntr',
         opciones: [
             {
-                texto: '💔 Putarda (NTR)',
+                texto: '💔  Te coges bien duro a la puta(NTR)',
                 afinidadNino: -25,
                 afinidadIchika: -25,
                 afinidadMiku: -25,
