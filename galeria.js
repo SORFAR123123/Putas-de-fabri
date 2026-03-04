@@ -206,6 +206,29 @@ const galeriaDatabase = {
         ]
  
     },
+      '3_2': {
+        titulo: "Shotas se kachan a Nino",
+        descripcion: "culona rosada",
+        categoria: "Putardas",
+        imagen: "https://pbs.twimg.com/media/HClAtq7XAAAnVxh?format=jpg&name=small",
+        imagenes: [
+            { id: 1, url: "https://pbs.twimg.com/media/HClAtq7XAAAnVxh?format=jpg&name=small" },
+            { id: 2, url: "https://pbs.twimg.com/media/HClAxtlXsAA_rC5?format=jpg&name=small" },
+            { id: 3, url: "https://pbs.twimg.com/media/HClA9eXawAwhdFo?format=jpg&name=small" },
+            { id: 4, url: "https://pbs.twimg.com/media/HClA-wWXsAAdDNs?format=jpg&name=small" },
+            { id: 5, url: "https://pbs.twimg.com/media/HClA_p4XYAArQKD?format=jpg&name=small" },
+            { id: 6, url: "https://pbs.twimg.com/media/HClB4sMWkAAZRK8?format=jpg&name=small" },
+            { id: 7, url: "https://pbs.twimg.com/media/HClB6n0WMAANEqH?format=jpg&name=small" },
+            { id: 8, url: "https://pbs.twimg.com/media/HClC0beWIAAKAju?format=jpg&name=small" },
+            { id: 9, url: "https://pbs.twimg.com/media/HClB-UzawAQe_VV?format=jpg&name=small" },
+            { id: 10, url: "https://pbs.twimg.com/media/HClB_xOWgAE1xPl?format=jpg&name=small" },
+            { id: 11, url: "https://pbs.twimg.com/media/HClCBCMXMAAd6qi?format=jpg&name=small" },
+            { id: 12, url: "https://pbs.twimg.com/media/HClCE68WYAAuFly?format=jpg&name=small" },
+            { id: 13, url: "https://pbs.twimg.com/media/HClCGqZakAA4SE4?format=jpg&name=small" },
+            { id: 14, url: "https://pbs.twimg.com/media/HClCIlHa8AABwfo?format=jpg&name=small" }
+        
+        ]
+    },
     '4_1': {
         titulo: "Retratos Artísticos",
         descripcion: "Fotografía de retrato creativa",
