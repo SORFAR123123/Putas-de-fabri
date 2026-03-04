@@ -990,7 +990,7 @@ const EventosDiarios = {
                     padding-right: 45px;
                 ">📅 ¡EVENTO DIARIO!</h1>
 
-                <!-- IMAGEN MODIFICADA: Ahora es más grande, cuadrada y se ve completa -->
+                <!-- IMAGEN MODIFICADA: Ahora es cuadrada y se ve COMPLETA (sin recortes) -->
                 <div style="
                     width: min(300px, 60vw);
                     height: min(300px, 60vw);
@@ -1000,12 +1000,16 @@ const EventosDiarios = {
                     border: 4px solid #FF1493;
                     box-shadow: 0 0 25px #FF1493;
                     background: #000;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
                 ">
                     <img src="${evento.imagen}" alt="${evento.titulo}" style="
                         width: 100%;
                         height: 100%;
-                        object-fit: cover;
+                        object-fit: contain;
                         display: block;
+                        background-color: #000;
                     ">
                 </div>
 
