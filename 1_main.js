@@ -1,6 +1,6 @@
 // ================================================
 // SISTEMA PRINCIPAL DE NAVEGACIÓN Y QUIZ - VERSIÓN COMPLETAMENTE DINÁMICA
-// CON BOTÓN DE EVENTO DIARIO EN PANTALLA DE MISIONES
+// CON BOTÓN DE REINICIO DE EVENTO DIARIO EN PANTALLA DE MISIONES
 // ================================================
 
 // Variables globales
@@ -1134,7 +1134,31 @@ function actualizarContadorDineroInicio() {
 }
 
 // ====================
-// SISTEMA DE MISIONES - MODIFICADO CON BOTÓN DE EVENTO DIARIO
+// NUEVA FUNCIÓN: FORZAR REINICIO DE EVENTO DIARIO
+// ====================
+
+function forzarReinicioEventoDiario() {
+    // Borrar TODOS los datos del evento diario
+    localStorage.removeItem('evento_diario_ultimo');
+    localStorage.removeItem('evento_diario_actual');
+    localStorage.removeItem('eventos_diarios_vistos');
+    
+    // Mostrar mensaje
+    mostrarNotificacionQuiz('🔄 Reiniciando evento diario...');
+    
+    // Forzar la creación de un nuevo evento
+    if (typeof EventosDiarios !== 'undefined') {
+        // Pequeño retraso para asegurar que se limpió
+        setTimeout(() => {
+            EventosDiarios.iniciarEventoDiario();
+        }, 500);
+    } else {
+        alert('Error: Sistema de eventos no disponible');
+    }
+}
+
+// ====================
+// SISTEMA DE MISIONES - CON BOTÓN QUE REINICIA EVENTO DIARIO
 // ====================
 
 function cargarPaginaMisiones() {
@@ -1148,10 +1172,10 @@ function cargarPaginaMisiones() {
     // Crear el contenido base de misiones
     let contenidoMisiones = crearUIMisiones();
     
-    // Añadir el botón de Evento Diario ANTES del contenido
+    // BOTÓN QUE REINICIA EL EVENTO DIARIO (SIEMPRE FUNCIONA)
     const botonEventoDiario = `
         <div style="text-align: center; margin: 20px auto 30px auto; max-width: 800px;">
-            <button onclick="EventosDiarios.iniciarEventoDiario()" style="
+            <button onclick="forzarReinicioEventoDiario()" style="
                 background: linear-gradient(135deg, #FF1493, #8A5AF7);
                 color: white;
                 font-size: 1.3rem;
@@ -1171,10 +1195,10 @@ function cargarPaginaMisiones() {
                 letter-spacing: 1px;
             " onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 0 30px #FF1493, 0 0 50px #8A5AF7';" 
                onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 0 20px #FF1493';">
-                📅 EVENTO DIARIO (50% NTR)
+                🔄 REINICIAR EVENTO DIARIO AHORA
             </button>
             <p style="color: rgba(255,255,255,0.7); margin-top: 12px; font-size: 0.95rem;">
-                ⚡ 50% de probabilidad: Evento normal o NTR de Uzaki
+                ⚡ Reinicia el evento como si fuera un nuevo día (50% NTR)
             </p>
             <div style="width: 80px; height: 3px; background: linear-gradient(90deg, transparent, #FF1493, #8A5AF7, transparent); margin: 15px auto 0 auto;"></div>
         </div>
