@@ -15,7 +15,8 @@ const EVENTOS_NTR = [
         tipo: 'ntr',
         opciones: [
             {
-                texto: '💔  Te coges bien duro a la puta(NTR)',
+                texto: '💔 Aceptar la invitación (NTR)',
+                textoResultado: 'Has aceptado la invitación de la madre de Uzaki... Pasaron cosas que nunca debieron pasar. Las quintillizas se enteraron y su confianza en ti se ha roto por completo.',
                 afinidadNino: -25,
                 afinidadIchika: -25,
                 afinidadMiku: -25,
@@ -26,6 +27,7 @@ const EVENTOS_NTR = [
             },
             {
                 texto: '💖 Rechazar y ser fiel a las quintillizas',
+                textoResultado: 'Has rechazado cortésmente la invitación, demostrando tu lealtad a las quintillizas. Ellas se enteraron de tu fidelidad y te lo agradecen profundamente.',
                 afinidadNino: 10,
                 afinidadIchika: 10,
                 afinidadMiku: 10,
@@ -735,7 +737,7 @@ const EventosDiarios = {
     },
 
     // ================================================
-    // PROCESAR OPCIÓN NTR (nueva función)
+    // PROCESAR OPCIÓN NTR (AHORA CON TEXTO PERSONALIZADO)
     // ================================================
     procesarOpcionNTR: function(eventoId, opcionIndex) {
         // Buscar el evento en EVENTOS_NTR
@@ -803,7 +805,7 @@ const EventosDiarios = {
         // Cerrar el modal actual
         this.cerrarModalEvento();
         
-        // Mostrar el video correspondiente
+        // Mostrar el video correspondiente con el texto personalizado
         this.mostrarResultadoNTR(evento, opcion, esOpcionFiel);
         
         // Registrar en el sistema de progreso
@@ -988,16 +990,23 @@ const EventosDiarios = {
                     padding-right: 45px;
                 ">📅 ¡EVENTO DIARIO!</h1>
 
+                <!-- IMAGEN MODIFICADA: Ahora es más grande, cuadrada y se ve completa -->
                 <div style="
-                    width: min(200px, 40vw);
-                    height: min(200px, 40vw);
-                    margin: 15px auto;
-                    border-radius: 50%;
+                    width: min(300px, 60vw);
+                    height: min(300px, 60vw);
+                    margin: 20px auto;
+                    border-radius: 15px;
                     overflow: hidden;
                     border: 4px solid #FF1493;
                     box-shadow: 0 0 25px #FF1493;
+                    background: #000;
                 ">
-                    <img src="${evento.imagen}" alt="${evento.titulo}" style="width: 100%; height: 100%; object-fit: cover;">
+                    <img src="${evento.imagen}" alt="${evento.titulo}" style="
+                        width: 100%;
+                        height: 100%;
+                        object-fit: cover;
+                        display: block;
+                    ">
                 </div>
 
                 <h2 style="
@@ -1262,7 +1271,7 @@ const EventosDiarios = {
     },
 
     // ================================================
-    // MOSTRAR RESULTADO NTR (con video)
+    // MOSTRAR RESULTADO NTR (con video y TEXTO PERSONALIZADO)
     // ================================================
     mostrarResultadoNTR: function(evento, opcion, esOpcionFiel) {
         const overlay = document.createElement('div');
@@ -1375,9 +1384,19 @@ const EventosDiarios = {
                     ${evento.titulo}
                 </h2>
 
-                <p style="color: white; font-size: 1.2rem; margin-bottom: 20px; padding: 0 20px;">
-                    ${opcion.texto}
-                </p>
+                <!-- TEXTO PERSONALIZADO DEL RESULTADO -->
+                <div style="
+                    background: rgba(255, 255, 255, 0.1);
+                    border-left: 4px solid ${esOpcionFiel ? '#4CAF50' : '#F44336'};
+                    border-radius: 10px;
+                    padding: 15px 20px;
+                    margin: 15px 0 25px 0;
+                    text-align: left;
+                ">
+                    <p style="color: white; font-size: clamp(1rem, 3.5vw, 1.2rem); line-height: 1.6; margin: 0; font-style: italic;">
+                        " ${opcion.textoResultado} "
+                    </p>
+                </div>
 
                 <div style="
                     margin: 20px 0;
