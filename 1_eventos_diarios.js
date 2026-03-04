@@ -11,7 +11,7 @@ const EVENTOS_NTR = [
         id: 'ntr_uzaki_madre',
         titulo: '🔥 ¡LA MADRE DE UZAKI APARECIÓ!',
         descripcion: 'La madre de Uzaki te ha invitado a su casa "para tomar un té". Está sola, coqueta y muy insistente. Sabes que si aceptas, las quintillizas se enterarán y se pondrán furiosas. ¿Qué decides?',
-        imagen: 'https://i.imgur.com/7K7qXxH.jpg',
+        imagen: 'https://pbs.twimg.com/media/HClhFX_XgAA3V-O?format=jpg&name=small',
         tipo: 'ntr',
         opciones: [
             {
@@ -22,7 +22,7 @@ const EVENTOS_NTR = [
                 afinidadYotsuba: -25,
                 afinidadItsuki: -25,
                 dinero: 200,
-                video: '1aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe'
+                video: '1_i7QBRnNr8fpMha22BM-T5i10H-Y0Vej'
             },
             {
                 texto: '💖 Rechazar y ser fiel a las quintillizas',
