@@ -1,5 +1,6 @@
 // ================================================
 // SISTEMA PRINCIPAL DE NAVEGACIÓN Y QUIZ - VERSIÓN COMPLETAMENTE DINÁMICA
+// CON BOTÓN DE EVENTO DIARIO EN PANTALLA DE MISIONES
 // ================================================
 
 // Variables globales
@@ -1133,7 +1134,7 @@ function actualizarContadorDineroInicio() {
 }
 
 // ====================
-// SISTEMA DE MISIONES
+// SISTEMA DE MISIONES - MODIFICADO CON BOTÓN DE EVENTO DIARIO
 // ====================
 
 function cargarPaginaMisiones() {
@@ -1143,10 +1144,61 @@ function cargarPaginaMisiones() {
     
     const mangaSection = document.getElementById('manga-section');
     mangaSection.style.display = 'block';
-    mangaSection.innerHTML = crearUIMisiones();
+    
+    // Crear el contenido base de misiones
+    let contenidoMisiones = crearUIMisiones();
+    
+    // Añadir el botón de Evento Diario ANTES del contenido
+    const botonEventoDiario = `
+        <div style="text-align: center; margin: 20px auto 30px auto; max-width: 800px;">
+            <button onclick="EventosDiarios.iniciarEventoDiario()" style="
+                background: linear-gradient(135deg, #FF1493, #8A5AF7);
+                color: white;
+                font-size: 1.3rem;
+                padding: 18px 35px;
+                border: none;
+                border-radius: 60px;
+                cursor: pointer;
+                font-weight: bold;
+                border: 3px solid white;
+                box-shadow: 0 0 20px #FF1493;
+                transition: all 0.3s;
+                width: 90%;
+                max-width: 450px;
+                margin: 0 auto;
+                display: block;
+                animation: pulse-evento 2s infinite;
+                letter-spacing: 1px;
+            " onmouseover="this.style.transform='scale(1.05)'; this.style.boxShadow='0 0 30px #FF1493, 0 0 50px #8A5AF7';" 
+               onmouseout="this.style.transform='scale(1)'; this.style.boxShadow='0 0 20px #FF1493';">
+                📅 EVENTO DIARIO (50% NTR)
+            </button>
+            <p style="color: rgba(255,255,255,0.7); margin-top: 12px; font-size: 0.95rem;">
+                ⚡ 50% de probabilidad: Evento normal o NTR de Uzaki
+            </p>
+            <div style="width: 80px; height: 3px; background: linear-gradient(90deg, transparent, #FF1493, #8A5AF7, transparent); margin: 15px auto 0 auto;"></div>
+        </div>
+    `;
+    
+    // Combinar: botón + contenido
+    mangaSection.innerHTML = botonEventoDiario + contenidoMisiones;
     
     const botonVolver = crearBotonVolver(volverAlInicio);
     mangaSection.insertBefore(botonVolver, mangaSection.firstChild);
+    
+    // Añadir animación pulse si no existe
+    if (!document.getElementById('evento-pulse-style')) {
+        const style = document.createElement('style');
+        style.id = 'evento-pulse-style';
+        style.textContent = `
+            @keyframes pulse-evento {
+                0% { box-shadow: 0 0 20px #FF1493; }
+                50% { box-shadow: 0 0 40px #FF1493, 0 0 70px #8A5AF7; transform: scale(1.02); }
+                100% { box-shadow: 0 0 20px #FF1493; }
+            }
+        `;
+        document.head.appendChild(style);
+    }
 }
 
 function crearUIMisiones() {
