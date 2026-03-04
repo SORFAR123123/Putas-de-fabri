@@ -1,7 +1,42 @@
 // ================================================
-// SISTEMA DE EVENTOS DIARIOS - VERSIÓN CORREGIDA
-// Éxito inmediato, fracaso al día siguiente
+// SISTEMA DE EVENTOS DIARIOS - VERSIÓN CON NTR 50/50
+// Éxito inmediato, fracaso al día siguiente + Evento NTR de Uzaki
 // ================================================
+
+// ================================================
+// EVENTO ESPECIAL NTR - MAMÁ DE UZAKI (SOLO 1)
+// ================================================
+const EVENTOS_NTR = [
+    {
+        id: 'ntr_uzaki_madre',
+        titulo: '🔥 ¡LA MADRE DE UZAKI APARECIÓ!',
+        descripcion: 'La madre de Uzaki te ha invitado a su casa "para tomar un té". Está sola, coqueta y muy insistente. Sabes que si aceptas, las quintillizas se enterarán y se pondrán furiosas. ¿Qué decides?',
+        imagen: 'https://i.imgur.com/7K7qXxH.jpg',
+        tipo: 'ntr',
+        opciones: [
+            {
+                texto: '💔 Aceptar la invitación (NTR)',
+                afinidadNino: -25,
+                afinidadIchika: -25,
+                afinidadMiku: -25,
+                afinidadYotsuba: -25,
+                afinidadItsuki: -25,
+                dinero: 200,
+                video: '1aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe'
+            },
+            {
+                texto: '💖 Rechazar y ser fiel a las quintillizas',
+                afinidadNino: 10,
+                afinidadIchika: 10,
+                afinidadMiku: 10,
+                afinidadYotsuba: 10,
+                afinidadItsuki: 10,
+                dinero: 0,
+                video: '1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS'
+            }
+        ]
+    }
+];
 
 // Lista de 10 eventos con requisitos y consecuencias
 const EVENTOS_DIARIOS = [
@@ -156,7 +191,7 @@ const SistemaProgresoEventos = {
     inicializarContadores: function() {
         if (!localStorage.getItem('eventos_progreso')) {
             const progresoInicial = {
-                totalEventos: EVENTOS_DIARIOS.length,
+                totalEventos: EVENTOS_DIARIOS.length + EVENTOS_NTR.length,
                 eventosCompletados: 0,
                 eventosFallidos: 0,
                 ultimaSemana: this.obtenerNumeroSemana(),
@@ -451,8 +486,8 @@ function guardarEstadoVisibilidadBarra(visible) {
 }
 
 // ================================================
-// SISTEMA DE EVENTOS DIARIOS (VERSIÓN CORREGIDA)
-// Éxito inmediato, fracaso al día siguiente
+// SISTEMA DE EVENTOS DIARIOS (VERSIÓN CON NTR)
+// Éxito inmediato, fracaso al día siguiente + Eventos NTR con opciones
 // ================================================
 const EventosDiarios = {
     // Obtener la fecha actual en formato YYYY-MM-DD
@@ -476,18 +511,47 @@ const EventosDiarios = {
         }
     },
 
-    // Seleccionar un evento aleatorio (sin repetir hasta que se hayan visto todos)
+    // ================================================
+    // SELECCIONAR EVENTO (50% NORMAL - 50% NTR)
+    // ================================================
     seleccionarEventoAleatorio: function() {
-        // Obtener IDs de eventos ya vistos
+        // Decidir el tipo de evento (50/50)
+        const esEventoNTR = Math.random() < 0.5;
+        
+        // Seleccionar la lista correspondiente
+        const listaEventos = esEventoNTR ? EVENTOS_NTR : EVENTOS_DIARIOS;
+        
+        // Si la lista está vacía, usar la otra como fallback
+        if (listaEventos.length === 0) {
+            console.warn(`⚠️ No hay eventos ${esEventoNTR ? 'NTR' : 'normales'}. Usando la otra lista.`);
+            const listaFallback = esEventoNTR ? EVENTOS_DIARIOS : EVENTOS_NTR;
+            if (listaFallback.length === 0) {
+                console.error('❌ No hay eventos de ningún tipo configurados');
+                return EVENTOS_DIARIOS[0]; // Fallback al primer evento normal
+            }
+            return this.seleccionarDeLista(listaFallback);
+        }
+        
+        console.log(`📅 Seleccionando evento ${esEventoNTR ? 'NTR' : 'normal'}...`);
+        return this.seleccionarDeLista(listaEventos);
+    },
+
+    // ================================================
+    // SELECCIONAR DE UNA LISTA ESPECÍFICA (con sistema de no repetición)
+    // ================================================
+    seleccionarDeLista: function(listaEventos) {
+        // Obtener IDs de eventos ya vistos (para TODOS los eventos)
         const eventosVistos = JSON.parse(localStorage.getItem('eventos_diarios_vistos') || '[]');
         
-        // Filtrar eventos no vistos
-        const eventosDisponibles = EVENTOS_DIARIOS.filter(e => !eventosVistos.includes(e.id));
+        // Filtrar eventos no vistos de la lista proporcionada
+        let eventosDisponibles = listaEventos.filter(e => !eventosVistos.includes(e.id));
         
-        // Si ya vio todos, reiniciar lista
+        // Si ya vio todos, reiniciar
         if (eventosDisponibles.length === 0) {
+            // Para reiniciar, solo quitamos los de esta lista? O todos?
+            // Opción simple: reiniciar todos los vistos
             localStorage.removeItem('eventos_diarios_vistos');
-            return this.seleccionarEventoAleatorio();
+            eventosDisponibles = listaEventos;
         }
         
         // Seleccionar uno aleatorio
@@ -495,8 +559,9 @@ const EventosDiarios = {
         const evento = eventosDisponibles[indice];
         
         // Guardar como visto
-        eventosVistos.push(evento.id);
-        localStorage.setItem('eventos_diarios_vistos', JSON.stringify(eventosVistos));
+        const nuevosVistos = JSON.parse(localStorage.getItem('eventos_diarios_vistos') || '[]');
+        nuevosVistos.push(evento.id);
+        localStorage.setItem('eventos_diarios_vistos', JSON.stringify(nuevosVistos));
         
         return evento;
     },
@@ -522,14 +587,14 @@ const EventosDiarios = {
         return eventoGuardado ? JSON.parse(eventoGuardado) : null;
     },
 
-    // Marcar requisito como cumplido (y mostrar éxito inmediato)
+    // Marcar requisito como cumplido (y mostrar éxito inmediato) - SOLO PARA EVENTOS NORMALES
     marcarRequisitoCumplido: function() {
         const ultimoEvento = JSON.parse(localStorage.getItem('evento_diario_ultimo') || '{}');
         const fechaHoy = this.obtenerFechaActual();
         const evento = this.obtenerEventoHoy();
         
-        // Solo marcar si es el evento de hoy y aún no se ha cumplido
-        if (ultimoEvento.fecha === fechaHoy && !ultimoEvento.requisitoCumplido && evento) {
+        // Solo marcar si es el evento de hoy, no es NTR y aún no se ha cumplido
+        if (ultimoEvento.fecha === fechaHoy && !ultimoEvento.requisitoCumplido && evento && evento.tipo !== 'ntr') {
             ultimoEvento.requisitoCumplido = true;
             ultimoEvento.resultadoExitoMostrado = false; // Aún no se ha mostrado el éxito
             localStorage.setItem('evento_diario_ultimo', JSON.stringify(ultimoEvento));
@@ -549,13 +614,14 @@ const EventosDiarios = {
         }
     },
 
-    // Marcar evento como fallido (para mostrar mañana)
+    // Marcar evento como fallido (para mostrar mañana) - SOLO PARA EVENTOS NORMALES
     marcarEventoFallido: function() {
         const ultimoEvento = JSON.parse(localStorage.getItem('evento_diario_ultimo') || '{}');
         const fechaHoy = this.obtenerFechaActual();
+        const evento = this.obtenerEventoHoy();
         
-        // Solo marcar si es el evento de hoy y no está cumplido
-        if (ultimoEvento.fecha === fechaHoy && !ultimoEvento.requisitoCumplido) {
+        // Solo marcar si es el evento de hoy, no es NTR y no está cumplido
+        if (ultimoEvento.fecha === fechaHoy && !ultimoEvento.requisitoCumplido && evento && evento.tipo !== 'ntr') {
             ultimoEvento.fechaFracaso = fechaHoy; // Guardar que falló hoy
             ultimoEvento.resultadoFracasoMostrado = false;
             localStorage.setItem('evento_diario_ultimo', JSON.stringify(ultimoEvento));
@@ -596,8 +662,10 @@ const EventosDiarios = {
         return this.obtenerEventoHoy(); // Es el mismo porque solo guardamos el último
     },
 
-    // Verificar si se cumplió el requisito
+    // Verificar si se cumplió el requisito (SOLO PARA EVENTOS NORMALES)
     verificarRequisito: function(evento) {
+        if (evento.tipo === 'ntr') return false; // Los NTR no tienen requisitos
+        
         if (evento.tipoRequisito === 'mazos_completados') {
             if (typeof sistemaEconomia === 'undefined') {
                 console.error('❌ sistemaEconomia no está definido al verificar requisito');
@@ -614,7 +682,7 @@ const EventosDiarios = {
         return false;
     },
 
-    // Aplicar consecuencias del evento
+    // Aplicar consecuencias del evento (PARA EVENTOS NORMALES)
     aplicarConsecuencias: function(evento, exito) {
         console.log('🎯 Aplicando consecuencias del evento:', evento.id, 'Éxito:', exito);
         
@@ -666,6 +734,82 @@ const EventosDiarios = {
         return true;
     },
 
+    // ================================================
+    // PROCESAR OPCIÓN NTR (nueva función)
+    // ================================================
+    procesarOpcionNTR: function(eventoId, opcionIndex) {
+        // Buscar el evento en EVENTOS_NTR
+        const evento = EVENTOS_NTR.find(e => e.id === eventoId);
+        if (!evento) return;
+        
+        const opcion = evento.opciones[opcionIndex];
+        const esOpcionFiel = opcionIndex === 1; // Segunda opción es la fiel
+        
+        // Aplicar cambios de afinidad a CADA hermana
+        if (typeof quintillizasRPG !== 'undefined' && quintillizasRPG.datosPersonajes) {
+            // Nino
+            if (quintillizasRPG.datosPersonajes.nino) {
+                quintillizasRPG.datosPersonajes.nino.afinidad += opcion.afinidadNino || 0;
+                this.mostrarNotificacionEvento(
+                    `👩 Nino: ${opcion.afinidadNino > 0 ? '+' : ''}${opcion.afinidadNino || 0} afinidad`,
+                    opcion.afinidadNino > 0 ? '#4CAF50' : '#F44336'
+                );
+            }
+            // Ichika
+            if (quintillizasRPG.datosPersonajes.ichika) {
+                quintillizasRPG.datosPersonajes.ichika.afinidad += opcion.afinidadIchika || 0;
+                this.mostrarNotificacionEvento(
+                    `👩 Ichika: ${opcion.afinidadIchika > 0 ? '+' : ''}${opcion.afinidadIchika || 0} afinidad`,
+                    opcion.afinidadIchika > 0 ? '#4CAF50' : '#F44336'
+                );
+            }
+            // Miku
+            if (quintillizasRPG.datosPersonajes.miku) {
+                quintillizasRPG.datosPersonajes.miku.afinidad += opcion.afinidadMiku || 0;
+                this.mostrarNotificacionEvento(
+                    `👩 Miku: ${opcion.afinidadMiku > 0 ? '+' : ''}${opcion.afinidadMiku || 0} afinidad`,
+                    opcion.afinidadMiku > 0 ? '#4CAF50' : '#F44336'
+                );
+            }
+            // Yotsuba
+            if (quintillizasRPG.datosPersonajes.yotsuba) {
+                quintillizasRPG.datosPersonajes.yotsuba.afinidad += opcion.afinidadYotsuba || 0;
+                this.mostrarNotificacionEvento(
+                    `👩 Yotsuba: ${opcion.afinidadYotsuba > 0 ? '+' : ''}${opcion.afinidadYotsuba || 0} afinidad`,
+                    opcion.afinidadYotsuba > 0 ? '#4CAF50' : '#F44336'
+                );
+            }
+            // Itsuki
+            if (quintillizasRPG.datosPersonajes.itsuki) {
+                quintillizasRPG.datosPersonajes.itsuki.afinidad += opcion.afinidadItsuki || 0;
+                this.mostrarNotificacionEvento(
+                    `👩 Itsuki: ${opcion.afinidadItsuki > 0 ? '+' : ''}${opcion.afinidadItsuki || 0} afinidad`,
+                    opcion.afinidadItsuki > 0 ? '#4CAF50' : '#F44336'
+                );
+            }
+            
+            quintillizasRPG.guardarDatosPersonajes();
+        }
+        
+        // Dar dinero si tiene
+        if (opcion.dinero > 0 && typeof sistemaEconomia !== 'undefined') {
+            sistemaEconomia.agregarDinero(opcion.dinero);
+            this.mostrarNotificacionEvento(`💰 +${opcion.dinero} soles`, '#FFD166');
+            if (typeof actualizarContadorDineroInicio === 'function') {
+                actualizarContadorDineroInicio();
+            }
+        }
+        
+        // Cerrar el modal actual
+        this.cerrarModalEvento();
+        
+        // Mostrar el video correspondiente
+        this.mostrarResultadoNTR(evento, opcion, esOpcionFiel);
+        
+        // Registrar en el sistema de progreso
+        SistemaProgresoEventos.registrarResultado(evento.id, esOpcionFiel);
+    },
+
     // Mostrar notificación pequeña
     mostrarNotificacionEvento: function(mensaje, color = '#FF1493') {
         const notif = document.createElement('div');
@@ -689,7 +833,9 @@ const EventosDiarios = {
         setTimeout(() => notif.remove(), 2500);
     },
 
-    // Mostrar MODAL GRANDE del evento (VERSIÓN CORREGIDA - TAMAÑO ADAPTATIVO)
+    // ================================================
+    // MOSTRAR MODAL DEL EVENTO (VERSIÓN QUE SOPORTA NTR)
+    // ================================================
     mostrarModalEvento: function(evento) {
         const overlay = document.createElement('div');
         overlay.id = 'evento-modal-overlay';
@@ -725,16 +871,89 @@ const EventosDiarios = {
             margin: auto;
         `;
 
-        const nombresPersonajes = evento.personajes.map(p => {
+        // Verificar si es evento NTR (tiene opciones)
+        const esNTR = evento.tipo === 'ntr' && evento.opciones && evento.opciones.length > 0;
+        
+        let botonesHTML = '';
+        if (esNTR) {
+            // Crear 2 botones para las opciones NTR
+            botonesHTML = `
+                <div style="display: flex; gap: 20px; justify-content: center; margin: 30px 0; flex-wrap: wrap;">
+                    <button onclick="EventosDiarios.procesarOpcionNTR('${evento.id}', 0)" style="
+                        background: linear-gradient(135deg, #F44336, #FF9800);
+                        color: white;
+                        font-size: clamp(1rem, 4vw, 1.3rem);
+                        padding: 15px 25px;
+                        border: none;
+                        border-radius: 50px;
+                        cursor: pointer;
+                        font-weight: bold;
+                        border: 3px solid white;
+                        box-shadow: 0 0 20px #F44336;
+                        transition: all 0.3s;
+                        min-width: 250px;
+                    " onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                        ${evento.opciones[0].texto}
+                    </button>
+                    
+                    <button onclick="EventosDiarios.procesarOpcionNTR('${evento.id}', 1)" style="
+                        background: linear-gradient(135deg, #4CAF50, #2196F3);
+                        color: white;
+                        font-size: clamp(1rem, 4vw, 1.3rem);
+                        padding: 15px 25px;
+                        border: none;
+                        border-radius: 50px;
+                        cursor: pointer;
+                        font-weight: bold;
+                        border: 3px solid white;
+                        box-shadow: 0 0 20px #4CAF50;
+                        transition: all 0.3s;
+                        min-width: 250px;
+                    " onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                        ${evento.opciones[1].texto}
+                    </button>
+                </div>
+                
+                <p style="color: rgba(255,255,255,0.5); font-size: 0.9rem; margin-top: 10px;">
+                    ⚠️ Tu decisión afectará tu relación con las 5 hermanas
+                </p>
+            `;
+        } else {
+            // Botón normal de "Aceptar" para eventos regulares
+            botonesHTML = `
+                <button onclick="EventosDiarios.cerrarModalEvento()" style="
+                    background: linear-gradient(135deg, #FF1493, #8A5AF7);
+                    color: white;
+                    font-size: clamp(1rem, 4vw, 1.5rem);
+                    padding: 12px 30px;
+                    border: none;
+                    border-radius: 50px;
+                    cursor: pointer;
+                    font-weight: bold;
+                    margin: 10px 0;
+                    border: 2px solid white;
+                    box-shadow: 0 0 15px #FF1493;
+                    transition: all 0.3s;
+                    width: auto;
+                    min-width: 200px;
+                    max-width: 90%;
+                " onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                    ¡ENTENDIDO, LO HARÉ!
+                </button>
+                <p style="color: rgba(255,255,255,0.5); font-size: 0.8rem; margin-top: 15px; padding: 0 10px;">
+                    ⚡ Si completas el requisito HOY, verás el video de ÉXITO inmediatamente<br>
+                    ❌ Si NO lo completas, verás el video de FRACASO mañana
+                </p>
+            `;
+        }
+
+        const nombresPersonajes = evento.personajes ? evento.personajes.map(p => {
             const nombres = {
                 'ichika': 'Ichika', 'nino': 'Nino', 'miku': 'Miku', 
                 'yotsuba': 'Yotsuba', 'itsuki': 'Itsuki'
             };
             return nombres[p] || p;
-        }).join(' • ');
-
-        const colorExito = '#4CAF50';
-        const colorFracaso = '#F44336';
+        }).join(' • ') : '';
 
         modal.innerHTML = `
             <div style="text-align: center; position: relative;">
@@ -800,89 +1019,72 @@ const EventosDiarios = {
                     margin-right: auto;
                 ">${evento.descripcion}</p>
 
-                <div style="
-                    background: rgba(255, 20, 147, 0.2);
-                    padding: 10px 20px;
-                    border-radius: 50px;
-                    display: inline-block;
-                    margin: 10px auto;
-                    font-size: clamp(0.9rem, 3vw, 1.3rem);
-                    border: 2px solid #FF1493;
-                    max-width: 90%;
-                    word-break: break-word;
-                ">
-                    👥 ${nombresPersonajes}
-                </div>
-
-                <div style="
-                    background: linear-gradient(135deg, #5864F5, #8A5AF7);
-                    padding: 15px;
-                    border-radius: 15px;
-                    margin: 20px 0;
-                    font-size: clamp(1rem, 4vw, 1.5rem);
-                    border: 3px solid white;
-                ">
-                    🎯 REQUISITO: Completa ${evento.cantidadRequerida} MAZOS AL 100% hoy
-                </div>
-
-                <div style="
-                    display: grid;
-                    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-                    gap: 15px;
-                    margin: 20px 0;
-                ">
+                ${evento.personajes ? `
                     <div style="
-                        background: rgba(76, 175, 80, 0.2);
-                        border: 3px solid ${colorExito};
-                        border-radius: 15px;
-                        padding: 15px;
+                        background: rgba(255, 20, 147, 0.2);
+                        padding: 10px 20px;
+                        border-radius: 50px;
+                        display: inline-block;
+                        margin: 10px auto;
+                        font-size: clamp(0.9rem, 3vw, 1.3rem);
+                        border: 2px solid #FF1493;
+                        max-width: 90%;
+                        word-break: break-word;
                     ">
-                        <h3 style="color: ${colorExito}; font-size: clamp(1.2rem, 4vw, 1.8rem); margin-bottom: 10px;">✅ ÉXITO</h3>
-                        ${evento.personajes.map(p => {
-                            const nombre = p.charAt(0).toUpperCase() + p.slice(1);
-                            return `<div style="color: white; font-size: clamp(0.9rem, 3vw, 1.2rem); margin: 5px 0;">${nombre}: +${evento.afinidadExito} afinidad</div>`;
-                        }).join('')}
-                        <div style="color: #FFD166; font-size: clamp(1rem, 3.5vw, 1.3rem); margin-top: 10px;">💰 +${evento.dineroRecompensa} soles</div>
+                        👥 ${nombresPersonajes}
                     </div>
+                ` : ''}
 
+                ${!esNTR ? `
                     <div style="
-                        background: rgba(244, 67, 54, 0.2);
-                        border: 3px solid ${colorFracaso};
-                        border-radius: 15px;
+                        background: linear-gradient(135deg, #5864F5, #8A5AF7);
                         padding: 15px;
+                        border-radius: 15px;
+                        margin: 20px 0;
+                        font-size: clamp(1rem, 4vw, 1.5rem);
+                        border: 3px solid white;
                     ">
-                        <h3 style="color: ${colorFracaso}; font-size: clamp(1.2rem, 4vw, 1.8rem); margin-bottom: 10px;">❌ FRACASO</h3>
-                        ${evento.personajes.map(p => {
-                            const nombre = p.charAt(0).toUpperCase() + p.slice(1);
-                            return `<div style="color: white; font-size: clamp(0.9rem, 3vw, 1.2rem); margin: 5px 0;">${nombre}: ${evento.afinidadFracaso} afinidad</div>`;
-                        }).join('')}
+                        🎯 REQUISITO: Completa ${evento.cantidadRequerida} MAZOS AL 100% hoy
                     </div>
-                </div>
+                ` : ''}
 
-                <button onclick="EventosDiarios.cerrarModalEvento()" style="
-                    background: linear-gradient(135deg, #FF1493, #8A5AF7);
-                    color: white;
-                    font-size: clamp(1rem, 4vw, 1.5rem);
-                    padding: 12px 30px;
-                    border: none;
-                    border-radius: 50px;
-                    cursor: pointer;
-                    font-weight: bold;
-                    margin: 10px 0;
-                    border: 2px solid white;
-                    box-shadow: 0 0 15px #FF1493;
-                    transition: all 0.3s;
-                    width: auto;
-                    min-width: 200px;
-                    max-width: 90%;
-                " onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
-                    ¡ENTENDIDO, LO HARÉ!
-                </button>
+                ${!esNTR ? `
+                    <div style="
+                        display: grid;
+                        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+                        gap: 15px;
+                        margin: 20px 0;
+                    ">
+                        <div style="
+                            background: rgba(76, 175, 80, 0.2);
+                            border: 3px solid #4CAF50;
+                            border-radius: 15px;
+                            padding: 15px;
+                        ">
+                            <h3 style="color: #4CAF50; font-size: clamp(1.2rem, 4vw, 1.8rem); margin-bottom: 10px;">✅ ÉXITO</h3>
+                            ${evento.personajes.map(p => {
+                                const nombre = p.charAt(0).toUpperCase() + p.slice(1);
+                                return `<div style="color: white; font-size: clamp(0.9rem, 3vw, 1.2rem); margin: 5px 0;">${nombre}: +${evento.afinidadExito} afinidad</div>`;
+                            }).join('')}
+                            <div style="color: #FFD166; font-size: clamp(1rem, 3.5vw, 1.3rem); margin-top: 10px;">💰 +${evento.dineroRecompensa} soles</div>
+                        </div>
 
-                <p style="color: rgba(255,255,255,0.5); font-size: 0.8rem; margin-top: 15px; padding: 0 10px;">
-                    ⚡ Si completas el requisito HOY, verás el video de ÉXITO inmediatamente<br>
-                    ❌ Si NO lo completas, verás el video de FRACASO mañana
-                </p>
+                        <div style="
+                            background: rgba(244, 67, 54, 0.2);
+                            border: 3px solid #F44336;
+                            border-radius: 15px;
+                            padding: 15px;
+                        ">
+                            <h3 style="color: #F44336; font-size: clamp(1.2rem, 4vw, 1.8rem); margin-bottom: 10px;">❌ FRACASO</h3>
+                            ${evento.personajes.map(p => {
+                                const nombre = p.charAt(0).toUpperCase() + p.slice(1);
+                                return `<div style="color: white; font-size: clamp(0.9rem, 3vw, 1.2rem); margin: 5px 0;">${nombre}: ${evento.afinidadFracaso} afinidad</div>`;
+                            }).join('')}
+                        </div>
+                    </div>
+                ` : ''}
+
+                ${botonesHTML}
             </div>
         `;
 
@@ -1038,6 +1240,175 @@ const EventosDiarios = {
 
                 <button onclick="EventosDiarios.cerrarResultadoEvento()" style="
                     background: linear-gradient(135deg, ${exito ? '#4CAF50' : '#F44336'}, #8A5AF7);
+                    color: white;
+                    font-size: clamp(1rem, 4vw, 1.3rem);
+                    padding: 12px 30px;
+                    border: none;
+                    border-radius: 50px;
+                    cursor: pointer;
+                    font-weight: bold;
+                    border: 2px solid white;
+                    margin: 10px 0;
+                    min-width: 200px;
+                    max-width: 90%;
+                ">
+                    ↩️ VOLVER AL INICIO
+                </button>
+            </div>
+        `;
+
+        overlay.appendChild(modal);
+        document.body.appendChild(overlay);
+    },
+
+    // ================================================
+    // MOSTRAR RESULTADO NTR (con video)
+    // ================================================
+    mostrarResultadoNTR: function(evento, opcion, esOpcionFiel) {
+        const overlay = document.createElement('div');
+        overlay.id = 'evento-resultado-overlay';
+        overlay.style.cssText = `
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.95);
+            z-index: 9999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            animation: fadeIn 0.5s ease;
+            padding: 20px;
+            box-sizing: border-box;
+        `;
+
+        const modal = document.createElement('div');
+        modal.style.cssText = `
+            width: 100%;
+            max-width: 800px;
+            max-height: 90vh;
+            overflow-y: auto;
+            background: linear-gradient(135deg, #1a1a2e, #16213e);
+            border-radius: 20px;
+            padding: 25px;
+            border: 4px solid ${esOpcionFiel ? '#4CAF50' : '#F44336'};
+            box-shadow: 0 0 40px ${esOpcionFiel ? '#4CAF50' : '#F44336'};
+            position: relative;
+        `;
+
+        // Calcular cambios para mostrar
+        const cambiosHTML = `
+            <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin-top: 10px;">
+                <div style="background: rgba(255,255,255,0.05); padding: 10px; border-radius: 8px;">
+                    <span style="color: #FFD166;">Nino:</span> 
+                    <span style="color: ${opcion.afinidadNino > 0 ? '#4CAF50' : '#F44336'}; font-weight: bold;">
+                        ${opcion.afinidadNino > 0 ? '+' : ''}${opcion.afinidadNino || 0}
+                    </span>
+                </div>
+                <div style="background: rgba(255,255,255,0.05); padding: 10px; border-radius: 8px;">
+                    <span style="color: #FFD166;">Ichika:</span> 
+                    <span style="color: ${opcion.afinidadIchika > 0 ? '#4CAF50' : '#F44336'}; font-weight: bold;">
+                        ${opcion.afinidadIchika > 0 ? '+' : ''}${opcion.afinidadIchika || 0}
+                    </span>
+                </div>
+                <div style="background: rgba(255,255,255,0.05); padding: 10px; border-radius: 8px;">
+                    <span style="color: #FFD166;">Miku:</span> 
+                    <span style="color: ${opcion.afinidadMiku > 0 ? '#4CAF50' : '#F44336'}; font-weight: bold;">
+                        ${opcion.afinidadMiku > 0 ? '+' : ''}${opcion.afinidadMiku || 0}
+                    </span>
+                </div>
+                <div style="background: rgba(255,255,255,0.05); padding: 10px; border-radius: 8px;">
+                    <span style="color: #FFD166;">Yotsuba:</span> 
+                    <span style="color: ${opcion.afinidadYotsuba > 0 ? '#4CAF50' : '#F44336'}; font-weight: bold;">
+                        ${opcion.afinidadYotsuba > 0 ? '+' : ''}${opcion.afinidadYotsuba || 0}
+                    </span>
+                </div>
+                <div style="background: rgba(255,255,255,0.05); padding: 10px; border-radius: 8px;">
+                    <span style="color: #FFD166;">Itsuki:</span> 
+                    <span style="color: ${opcion.afinidadItsuki > 0 ? '#4CAF50' : '#F44336'}; font-weight: bold;">
+                        ${opcion.afinidadItsuki > 0 ? '+' : ''}${opcion.afinidadItsuki || 0}
+                    </span>
+                </div>
+                ${opcion.dinero > 0 ? `
+                    <div style="background: rgba(255,255,255,0.05); padding: 10px; border-radius: 8px; grid-column: span 2;">
+                        <span style="color: #FFD166;">Dinero:</span> 
+                        <span style="color: #4CAF50; font-weight: bold;">+${opcion.dinero} soles</span>
+                    </div>
+                ` : ''}
+            </div>
+        `;
+
+        modal.innerHTML = `
+            <div style="text-align: center; position: relative;">
+                <button onclick="EventosDiarios.cerrarResultadoEvento()" style="
+                    position: sticky;
+                    top: 0;
+                    float: right;
+                    background: linear-gradient(135deg, ${esOpcionFiel ? '#4CAF50' : '#F44336'}, #8A5AF7);
+                    border: none;
+                    color: white;
+                    font-size: 24px;
+                    width: 45px;
+                    height: 45px;
+                    border-radius: 50%;
+                    cursor: pointer;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    transition: all 0.3s;
+                    border: 2px solid white;
+                    margin-bottom: 10px;
+                    z-index: 10;
+                " onmouseover="this.style.transform='scale(1.1)'" onmouseout="this.style.transform='scale(1)'">
+                    ✕
+                </button>
+
+                <h1 style="
+                    color: ${esOpcionFiel ? '#4CAF50' : '#F44336'};
+                    font-size: clamp(1.8rem, 6vw, 3rem);
+                    margin-bottom: 15px;
+                    padding-right: 45px;
+                ">${esOpcionFiel ? '✅ ¡DECISIÓN CORRECTA!' : '❌ NTR ACTIVADO'}</h1>
+
+                <h2 style="color: #FFD166; font-size: clamp(1.2rem, 4vw, 2rem); margin-bottom: 20px; word-break: break-word;">
+                    ${evento.titulo}
+                </h2>
+
+                <p style="color: white; font-size: 1.2rem; margin-bottom: 20px; padding: 0 20px;">
+                    ${opcion.texto}
+                </p>
+
+                <div style="
+                    margin: 20px 0;
+                    border: 3px solid ${esOpcionFiel ? '#4CAF50' : '#F44336'};
+                    border-radius: 15px;
+                    overflow: hidden;
+                    background: black;
+                ">
+                    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+                        <iframe
+                            src="https://drive.google.com/file/d/${opcion.video}/preview"
+                            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
+                            frameborder="0"
+                            allow="autoplay; encrypted-media"
+                            allowfullscreen
+                        ></iframe>
+                    </div>
+                </div>
+
+                <div style="
+                    background: rgba(0,0,0,0.5);
+                    border-radius: 15px;
+                    padding: 15px;
+                    margin: 20px 0;
+                ">
+                    <h3 style="color: #FFD166; font-size: clamp(1.1rem, 4vw, 1.5rem); margin-bottom: 15px;">📊 CONSECUENCIAS</h3>
+                    ${cambiosHTML}
+                </div>
+
+                <button onclick="EventosDiarios.cerrarResultadoEvento()" style="
+                    background: linear-gradient(135deg, ${esOpcionFiel ? '#4CAF50' : '#F44336'}, #8A5AF7);
                     color: white;
                     font-size: clamp(1rem, 4vw, 1.3rem);
                     padding: 12px 30px;
@@ -1260,17 +1631,18 @@ const EventosDiarios = {
         }
     },
 
-    // Verificar progreso del evento (llamar cuando se completa un mazo)
+    // Verificar progreso del evento (llamar cuando se completa un mazo) - SOLO PARA EVENTOS NORMALES
     verificarProgresoEvento: function() {
         const estadisticas = sistemaEconomia.obtenerEstadisticas();
         const ultimoEvento = JSON.parse(localStorage.getItem('evento_diario_ultimo') || '{}');
         const eventoActual = this.obtenerEventoHoy();
         const fechaHoy = this.obtenerFechaActual();
         
-        // Solo verificar si hay evento hoy y no está cumplido aún
+        // Solo verificar si hay evento hoy, no es NTR y no está cumplido aún
         if (ultimoEvento.fecha === fechaHoy && 
             !ultimoEvento.requisitoCumplido && 
-            eventoActual) {
+            eventoActual && 
+            eventoActual.tipo !== 'ntr') {
             
             if (estadisticas.completados100 >= eventoActual.cantidadRequerida) {
                 this.marcarRequisitoCumplido(); // Esto mostrará éxito inmediato
@@ -1278,7 +1650,6 @@ const EventosDiarios = {
         }
         
         // Verificar al final del día (para marcar como fallido)
-        // Esto se puede llamar desde un timer o al cerrar la página
         this.verificarFinDelDia();
     },
 
