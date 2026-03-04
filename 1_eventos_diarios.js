@@ -15,7 +15,7 @@ const EVENTOS_NTR = [
         tipo: 'ntr',
         opciones: [
             {
-                texto: '💔 Aceptar la invitación (NTR)',
+                texto: '💔 Putarda (NTR)',
                 afinidadNino: -25,
                 afinidadIchika: -25,
                 afinidadMiku: -25,
