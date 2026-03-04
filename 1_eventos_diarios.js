@@ -44,7 +44,7 @@ const EVENTOS_DIARIOS = [
         id: 'nino_ex',
         titulo: '😤 ¡EL EX DE NINO APARECIÓ!',
         descripcion: 'Mientras estudiabas en la cafetería, ves a Nino hablando acaloradamente con un chico. ¡Es su ex! Te mira y te hace una seña para que te acerques. Necesitas demostrarle que eres mejor que él completando 10 MAZOS AL 100% hoy.',
-        imagen: 'https://pbs.twimg.com/media/G7qfpGZXAAAib4A?format=png&name=small',
+        imagen: 'https://pbs.twimg.com/media/HClw6mKW4AAy0kf?format=jpg&name=small',
         personajes: ['nino'],
         tipoRequisito: 'mazos_completados',
         cantidadRequerida: 10,
