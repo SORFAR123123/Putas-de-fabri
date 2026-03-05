@@ -1,5 +1,5 @@
 // ================================================
-// SISTEMA DE EVENTOS DIARIOS - VERSIÓN CON NTR 50/50
+// SISTEMA DE EVENTOS DIARIOS - VERSIÓN CON NTR 30/70
 // Éxito inmediato, fracaso al día siguiente + Evento NTR de Uzaki
 // VERSIÓN CORREGIDA - Progreso basado en mazos de HOY
 // ================================================
@@ -572,11 +572,11 @@ const EventosDiarios = {
     },
 
     // ================================================
-    // SELECCIONAR EVENTO (50% NORMAL - 50% NTR)
+    // SELECCIONAR EVENTO (70% NORMAL - 30% NTR)
     // ================================================
     seleccionarEventoAleatorio: function() {
-        // Decidir el tipo de evento (50/50)
-        const esEventoNTR = Math.random() < 0.5;
+        // Decidir el tipo de evento (70/30)
+        const esEventoNTR = Math.random() < 0.3;  // 30% de probabilidad NTR
         
         // Seleccionar la lista correspondiente
         const listaEventos = esEventoNTR ? EVENTOS_NTR : EVENTOS_DIARIOS;
@@ -930,65 +930,14 @@ const EventosDiarios = {
 
         // Verificar si es evento NTR (tiene opciones)
         const esNTR = evento.tipo === 'ntr' && evento.opciones && evento.opciones.length > 0;
-        
-        // ================================================
-        // VERSIÓN CORREGIDA: Imagen arriba, video debajo
-        // ================================================
-        let multimediaHTML = '';
-        
-        // SIEMPRE mostrar la imagen si existe (primero)
-        if (evento.imagen) {
-            multimediaHTML += `
-                <!-- IMAGEN DE PRESENTACIÓN -->
-                <div style="
-                    width: 100%;
-                    max-width: 400px;
-                    margin: 10px auto;
-                    border-radius: 15px;
-                    overflow: hidden;
-                    border: 4px solid #FF1493;
-                    box-shadow: 0 0 25px #FF1493;
-                    background: #000;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                ">
-                    <img src="${evento.imagen}" alt="${evento.titulo}" style="
-                        width: 100%;
-                        height: auto;
-                        display: block;
-                        background-color: #000;
-                    ">
-                </div>
-            `;
-        }
-        
-        // LUEGO mostrar el video si existe (debajo)
-        if (evento.video) {
-            multimediaHTML += `
-                <!-- VIDEO DE PRESENTACIÓN -->
-                <div style="
-                    width: 100%;
-                    max-width: 560px;
-                    margin: 20px auto;
-                    border-radius: 15px;
-                    overflow: hidden;
-                    border: 4px solid #FF1493;
-                    box-shadow: 0 0 25px #FF1493;
-                    background: #000;
-                ">
-                    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-                        <iframe
-                            src="https://drive.google.com/file/d/${evento.video}/preview"
-                            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
-                            frameborder="0"
-                            allow="autoplay; encrypted-media"
-                            allowfullscreen
-                        ></iframe>
-                    </div>
-                </div>
-            `;
-        }
+
+        const nombresPersonajes = evento.personajes ? evento.personajes.map(p => {
+            const nombres = {
+                'ichika': 'Ichika', 'nino': 'Nino', 'miku': 'Miku', 
+                'yotsuba': 'Yotsuba', 'itsuki': 'Itsuki'
+            };
+            return nombres[p] || p;
+        }).join(' • ') : '';
 
         let botonesHTML = '';
         if (esNTR) {
@@ -1063,14 +1012,6 @@ const EventosDiarios = {
             `;
         }
 
-        const nombresPersonajes = evento.personajes ? evento.personajes.map(p => {
-            const nombres = {
-                'ichika': 'Ichika', 'nino': 'Nino', 'miku': 'Miku', 
-                'yotsuba': 'Yotsuba', 'itsuki': 'Itsuki'
-            };
-            return nombres[p] || p;
-        }).join(' • ') : '';
-
         modal.innerHTML = `
             <div style="text-align: center; position: relative;">
                 <button onclick="EventosDiarios.cerrarModalEvento()" style="
@@ -1104,9 +1045,7 @@ const EventosDiarios = {
                     padding-right: 45px;
                 ">📅 ¡EVENTO DIARIO!</h1>
 
-                <!-- IMAGEN Y VIDEO DE PRESENTACIÓN (IMAGEN ARRIBA, VIDEO DEBAJO) -->
-                ${multimediaHTML}
-
+                <!-- PRIMERO EL TÍTULO Y DESCRIPCIÓN -->
                 <h2 style="
                     color: #FF1493;
                     font-size: clamp(1.2rem, 4vw, 2rem);
@@ -1119,12 +1058,60 @@ const EventosDiarios = {
                     color: white;
                     font-size: clamp(0.9rem, 3vw, 1.2rem);
                     line-height: 1.5;
-                    margin: 15px 0;
+                    margin: 15px 0 25px 0;
                     padding: 0 10px;
                     max-width: 700px;
                     margin-left: auto;
                     margin-right: auto;
                 ">${evento.descripcion}</p>
+
+                <!-- LUEGO LA IMAGEN -->
+                ${evento.imagen ? `
+                    <div style="
+                        width: 100%;
+                        max-width: 400px;
+                        margin: 10px auto;
+                        border-radius: 15px;
+                        overflow: hidden;
+                        border: 4px solid #FF1493;
+                        box-shadow: 0 0 25px #FF1493;
+                        background: #000;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                    ">
+                        <img src="${evento.imagen}" alt="${evento.titulo}" style="
+                            width: 100%;
+                            height: auto;
+                            display: block;
+                            background-color: #000;
+                        ">
+                    </div>
+                ` : ''}
+
+                <!-- FINALMENTE EL VIDEO -->
+                ${evento.video ? `
+                    <div style="
+                        width: 100%;
+                        max-width: 560px;
+                        margin: 20px auto;
+                        border-radius: 15px;
+                        overflow: hidden;
+                        border: 4px solid #FF1493;
+                        box-shadow: 0 0 25px #FF1493;
+                        background: #000;
+                    ">
+                        <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+                            <iframe
+                                src="https://drive.google.com/file/d/${evento.video}/preview"
+                                style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
+                                frameborder="0"
+                                allow="autoplay; encrypted-media"
+                                allowfullscreen
+                            ></iframe>
+                        </div>
+                    </div>
+                ` : ''}
 
                 ${evento.personajes ? `
                     <div style="
