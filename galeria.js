@@ -23,8 +23,8 @@ const contenedoresGaleria = {
         categoria: "Paisajes"
     },
     4: {
-        nombre: "Yotsuba",
-        imagen: "https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0",
+        nombre: "Yotsuba la putarda",
+        imagen: "https://pbs.twimg.com/media/HCreLRRWoAEMJ40?format=jpg&name=medium",
         descripcion: "Galería de Yotsuba - La más enérgica",
         categoria: "Quintillizas"
     },
