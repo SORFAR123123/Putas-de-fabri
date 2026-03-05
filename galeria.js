@@ -23,16 +23,28 @@ const contenedoresGaleria = {
         categoria: "Paisajes"
     },
     4: {
-        nombre: "GALERÍA 4",
+        nombre: "Yotsuba",
         imagen: "https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0",
-        descripcion: "Arte y fotografía creativa",
-        categoria: "Arte"
+        descripcion: "Galería de Yotsuba - La más enérgica",
+        categoria: "Quintillizas"
     },
     5: {
-        nombre: "GALERÍA 5",
+        nombre: "Ichika",
         imagen: "https://images.unsplash.com/photo-1518834103328-371bb64201b4",
-        descripcion: "Galería miscelánea",
-        categoria: "Miscelánea"
+        descripcion: "Galería de Ichika - La mayor de las quintillizas",
+        categoria: "Quintillizas"
+    },
+    6: {
+        nombre: "Miku",
+        imagen: "https://images.unsplash.com/photo-1513584684374-8bab748fbf90",
+        descripcion: "Galería de Miku - La chica tsundere",
+        categoria: "Quintillizas"
+    },
+    7: {
+        nombre: "Itsuki",
+        imagen: "https://images.unsplash.com/photo-1501854140801-50d01698950b",
+        descripcion: "Galería de Itsuki - La glotona del grupo",
+        categoria: "Quintillizas"
     }
 };
 
@@ -43,15 +55,11 @@ const galeriaDatabase = {
         titulo: "Nino mi novia putona ",
         descripcion: "Nino mi novia puta culona tetona putona buen culo buen orto buena concha orto y conchas rosada buenas curvas mi putita putona ",
         categoria: "Mi puta novia culona tetona buen culo",
-        imagen: "https://pbs.twimg.com/media/G7fsiFCXQAAhtKq?format=png&name=900x900",
+        imagen: "https://pbs.twimg.com/media/G7fsiFCXQAAhtqK?format=png&name=900x900",
         imagenes: [
             { id: 1, url: "https://pbs.twimg.com/media/GrNWikuWsAAVYtt?format=jpg&name=4096x4096" },
             { id: 2, url: "https://pbs.twimg.com/media/GztU8Y3XsAA5Yzm?format=png&name=small" },
-        
-        
-        
             { id: 3, url: "https://pbs.twimg.com/media/HCrZxBIW8AE9F4E?format=jpg&name=small" },
-        
             { id: 4, url: "https://pbs.twimg.com/media/HCrbuHAaUAI3sCB?format=jpg&name=small" }
         ]
     },
@@ -263,22 +271,65 @@ const galeriaDatabase = {
             { id: 28, url: "https://pbs.twimg.com/media/HCre_jXWwAAz2P5?format=jpg&name=small" }
         ]
     },
+    // CONTENEDOR 4 - Yotsuba
     '4_1': {
-        titulo: "Retratos Artísticos",
-        descripcion: "Fotografía de retrato creativa",
-        categoria: "Retrato",
-        imagen: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d",
+        titulo: "Yotsuba - La más enérgica",
+        descripcion: "Colección de imágenes de Yotsuba, la quintilliza más alegre y deportista",
+        categoria: "Quintillizas",
+        imagen: "https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0",
         imagenes: [
-            { id: 1, url: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d" },
-            { id: 2, url: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d" },
-            { id: 3, url: "https://images.unsplash.com/photo-1494790108755-2616b612b786" },
-            { id: 4, url: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e" },
-            { id: 5, url: "https://images.unsplash.com/photo-1534528741775-53994a69daeb" }
+            { id: 1, url: "https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0" },
+            { id: 2, url: "https://images.unsplash.com/photo-1518834103328-371bb64201b4" },
+            { id: 3, url: "https://images.unsplash.com/photo-1513584684374-8bab748fbf90" },
+            { id: 4, url: "https://images.unsplash.com/photo-1501854140801-50d01698950b" },
+            { id: 5, url: "https://images.unsplash.com/photo-1447752875215-b2761acb3c5d" }
         ]
- 
-    }
-
+    },
     
+    // CONTENEDOR 5 - Ichika
+    '5_1': {
+        titulo: "Ichika - La mayor",
+        descripcion: "Galería de Ichika, la hermana mayor y actriz del grupo",
+        categoria: "Quintillizas",
+        imagen: "https://images.unsplash.com/photo-1518834103328-371bb64201b4",
+        imagenes: [
+            { id: 1, url: "https://images.unsplash.com/photo-1518834103328-371bb64201b4" },
+            { id: 2, url: "https://images.unsplash.com/photo-1513584684374-8bab748fbf90" },
+            { id: 3, url: "https://images.unsplash.com/photo-1501854140801-50d01698950b" },
+            { id: 4, url: "https://images.unsplash.com/photo-1447752875215-b2761acb3c5d" },
+            { id: 5, url: "https://images.unsplash.com/photo-1418065460487-3e41a6c84dc5" }
+        ]
+    },
+    
+    // CONTENEDOR 6 - Miku
+    '6_1': {
+        titulo: "Miku - La tsundere",
+        descripcion: "Imágenes de Miku, la chica dulce y amante de la historia",
+        categoria: "Quintillizas",
+        imagen: "https://images.unsplash.com/photo-1513584684374-8bab748fbf90",
+        imagenes: [
+            { id: 1, url: "https://images.unsplash.com/photo-1513584684374-8bab748fbf90" },
+            { id: 2, url: "https://images.unsplash.com/photo-1501854140801-50d01698950b" },
+            { id: 3, url: "https://images.unsplash.com/photo-1447752875215-b2761acb3c5d" },
+            { id: 4, url: "https://images.unsplash.com/photo-1418065460487-3e41a6c84dc5" },
+            { id: 5, url: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05" }
+        ]
+    },
+    
+    // CONTENEDOR 7 - Itsuki
+    '7_1': {
+        titulo: "Itsuki - La glotona",
+        descripcion: "Colección de Itsuki, la estudiosa que siempre está comiendo",
+        categoria: "Quintillizas",
+        imagen: "https://images.unsplash.com/photo-1501854140801-50d01698950b",
+        imagenes: [
+            { id: 1, url: "https://images.unsplash.com/photo-1501854140801-50d01698950b" },
+            { id: 2, url: "https://images.unsplash.com/photo-1447752875215-b2761acb3c5d" },
+            { id: 3, url: "https://images.unsplash.com/photo-1418065460487-3e41a6c84dc5" },
+            { id: 4, url: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05" },
+            { id: 5, url: "https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07" }
+        ]
+    }
 };
 
 // ================================================
@@ -591,5 +642,5 @@ function imagenSiguiente() {
 // ================================================
 
 console.log('📦 Sistema de Galería cargado correctamente');
-console.log('📁 Contenedores disponibles: 5');
+console.log('📁 Contenedores disponibles: 7');
 console.log('📂 Sub-galerías disponibles: ' + Object.keys(galeriaDatabase).length);
