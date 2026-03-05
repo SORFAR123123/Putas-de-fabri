@@ -1,8 +1,8 @@
 // ================================================
-// SISTEMA COMPLETO DE GALERÃÂA DE IMÃÂGENES
+// SISTEMA COMPLETO DE GALERÃÂÃÂA DE IMÃÂÃÂGENES
 // ================================================
 
-// ============ CONTENEDORES DE GALERÃÂA ============
+// ============ CONTENEDORES DE GALERÃÂÃÂA ============
 const contenedoresGaleria = {
     1: {
         nombre: "Nino mi novia putona",
@@ -19,24 +19,24 @@ const contenedoresGaleria = {
     3: {
         nombre: "Shota",
         imagen: "https://pbs.twimg.com/media/Gx6Tx1cawAARE3T?format=jpg&name=large",
-        descripcion: "GalerÃÂ­a especial de paisajes",
+        descripcion: "GalerÃÂÃÂ­a especial de paisajes",
         categoria: "Paisajes"
     },
     4: {
-        nombre: "GALERÃÂA 4",
+        nombre: "GALERÃÂÃÂA 4",
         imagen: "https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0",
-        descripcion: "Arte y fotografÃÂ­a creativa",
+        descripcion: "Arte y fotografÃÂÃÂ­a creativa",
         categoria: "Arte"
     },
     5: {
-        nombre: "GALERÃÂA 5",
+        nombre: "GALERÃÂÃÂA 5",
         imagen: "https://images.unsplash.com/photo-1518834103328-371bb64201b4",
-        descripcion: "GalerÃÂ­a miscelÃÂ¡nea",
-        categoria: "MiscelÃÂ¡nea"
+        descripcion: "GalerÃÂÃÂ­a miscelÃÂÃÂ¡nea",
+        categoria: "MiscelÃÂÃÂ¡nea"
     }
 };
 
-// ============ SUB-CONTENEDORES DE GALERÃÂA ============
+// ============ SUB-CONTENEDORES DE GALERÃÂÃÂA ============
 const galeriaDatabase = {
     // CONTENEDOR 1
     '1_1': {
@@ -55,7 +55,7 @@ const galeriaDatabase = {
     
     '1_2': {
         titulo: "Nino Parque de las putas",
-        descripcion: "ImÃÂ¡genes artÃÂ­sticas variadas",
+        descripcion: "ImÃÂÃÂ¡genes artÃÂÃÂ­sticas variadas",
         categoria: "Arte",
         imagen: "https://pbs.twimg.com/media/G8EObAoXYAA0mI0?format=png&name=small",
         imagenes: [
@@ -115,7 +115,7 @@ const galeriaDatabase = {
     
     '1_3': {
         titulo: "Arquitectura Moderna",
-        descripcion: "Edificios y estructuras contemporÃÂ¡neas",
+        descripcion: "Edificios y estructuras contemporÃÂÃÂ¡neas",
         categoria: "Arquitectura",
         imagen: "https://images.unsplash.com/photo-1513584684374-8bab748fbf90",
         imagenes: [
@@ -129,7 +129,7 @@ const galeriaDatabase = {
     
     '1_4': {
         titulo: "Naturaleza y Paisajes",
-        descripcion: "FotografÃÂ­as de paisajes naturales",
+        descripcion: "FotografÃÂÃÂ­as de paisajes naturales",
         categoria: "Naturaleza",
         imagen: "https://images.unsplash.com/photo-1501854140801-50d01698950b",
         imagenes: [
@@ -142,9 +142,9 @@ const galeriaDatabase = {
     },
     
     '1_5': {
-        titulo: "GalerÃÂ­a TecnolÃÂ³gica",
-        descripcion: "TecnologÃÂ­a y dispositivos modernos",
-        categoria: "TecnologÃÂ­a",
+        titulo: "GalerÃÂÃÂ­a TecnolÃÂÃÂ³gica",
+        descripcion: "TecnologÃÂÃÂ­a y dispositivos modernos",
+        categoria: "TecnologÃÂÃÂ­a",
         imagen: "https://images.unsplash.com/photo-1518709268805-4e9042af2176",
         imagenes: [
             { id: 1, url: "https://images.unsplash.com/photo-1518709268805-4e9042af2176" },
@@ -171,8 +171,8 @@ const galeriaDatabase = {
     },
     
     '2_2': {
-        titulo: "Retratos ArtÃÂ­sticos",
-        descripcion: "FotografÃÂ­a de retrato creativa",
+        titulo: "Retratos ArtÃÂÃÂ­sticos",
+        descripcion: "FotografÃÂÃÂ­a de retrato creativa",
         categoria: "Retrato",
         imagen: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d",
         imagenes: [
@@ -236,12 +236,14 @@ const galeriaDatabase = {
         
             { id: 16, url: "https://pbs.twimg.com/media/HCrLwetWIAEYdr5?format=jpg&name=small" },
         
-            { id: 17, url: "https://pbs.twimg.com/media/HCrJoF-XMAAWJra?format=jpg&name=small" }
+            { id: 17, url: "https://pbs.twimg.com/media/HCrJoF-XMAAWJra?format=jpg&name=small" },
+        
+            { id: 18, url: "https://pbs.twimg.com/media/HCrQkIKW8AAlQY6?format=jpg&name=small" }
         ]
     },
     '4_1': {
-        titulo: "Retratos ArtÃÂ­sticos",
-        descripcion: "FotografÃÂ­a de retrato creativa",
+        titulo: "Retratos ArtÃÂÃÂ­sticos",
+        descripcion: "FotografÃÂÃÂ­a de retrato creativa",
         categoria: "Retrato",
         imagen: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d",
         imagenes: [
@@ -263,9 +265,9 @@ const galeriaDatabase = {
 
 function obtenerContenedorGaleria(numero) {
     return contenedoresGaleria[numero] || {
-        nombre: `GALERÃÂA ${numero}`,
+        nombre: `GALERÃÂÃÂA ${numero}`,
         imagen: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=400&fit=crop',
-        descripcion: '5 sub-contenedores con galerÃÂ­as de imÃÂ¡genes',
+        descripcion: '5 sub-contenedores con galerÃÂÃÂ­as de imÃÂÃÂ¡genes',
         categoria: 'General'
     };
 }
@@ -273,8 +275,8 @@ function obtenerContenedorGaleria(numero) {
 function obtenerSubcontenedorGaleria(contenedor, subcontenedor) {
     const key = `${contenedor}_${subcontenedor}`;
     return galeriaDatabase[key] || {
-        titulo: `GalerÃÂ­a ${subcontenedor}`,
-        descripcion: 'ColecciÃÂ³n de imÃÂ¡genes',
+        titulo: `GalerÃÂÃÂ­a ${subcontenedor}`,
+        descripcion: 'ColecciÃÂÃÂ³n de imÃÂÃÂ¡genes',
         categoria: 'General',
         imagen: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w-300&h=300&fit=crop',
         imagenes: []
@@ -309,7 +311,7 @@ function existeGaleria(contenedor, subcontenedor) {
 // FUNCIONES PARA LA UI (para usar en main.js)
 // ================================================
 
-// 1. FunciÃÂ³n para cargar la pÃÂ¡gina principal de galerÃÂ­as
+// 1. FunciÃÂÃÂ³n para cargar la pÃÂÃÂ¡gina principal de galerÃÂÃÂ­as
 function cargarPaginaGaleria() {
     modoActual = 'galeria';
     modoMazoDificil = false;
@@ -323,15 +325,15 @@ function cargarPaginaGaleria() {
     mangaSection.insertBefore(botonVolver, mangaSection.firstChild);
 }
 
-// 2. Crear UI de contenedores de galerÃÂ­a
+// 2. Crear UI de contenedores de galerÃÂÃÂ­a
 function crearContenedoresGaleria() {
-    let html = '<h2 style="text-align: center; margin-bottom: 30px; color: #FFD166;">Ã°ÂÂÂ¼Ã¯Â¸Â CONTENEDORES DE GALERÃÂA</h2>';
+    let html = '<h2 style="text-align: center; margin-bottom: 30px; color: #FFD166;">ÃÂ°ÃÂÃÂÃÂ¼ÃÂ¯ÃÂ¸ÃÂ CONTENEDORES DE GALERÃÂÃÂA</h2>';
     html += '<div class="manga-contenedores">';
     
     for (let i = 1; i <= 10; i++) {
         const contenedorData = obtenerContenedorGaleria(i);
-        const nombre = contenedorData.nombre || `GALERÃÂA ${i}`;
-        const desc = contenedorData.descripcion || '5 sub-contenedores con imÃÂ¡genes';
+        const nombre = contenedorData.nombre || `GALERÃÂÃÂA ${i}`;
+        const desc = contenedorData.descripcion || '5 sub-contenedores con imÃÂÃÂ¡genes';
         
         html += `
             <div class="contenedor-item" onclick="cargarSubcontenedoresGaleria(${i})">
@@ -339,7 +341,7 @@ function crearContenedoresGaleria() {
                 <div class="contenedor-numero">${nombre}</div>
                 <p>${desc}</p>
                 <div class="card-button" style="background: linear-gradient(135deg, #FF1493, #FF69B4);">
-                    Ver GalerÃÂ­as
+                    Ver GalerÃÂÃÂ­as
                 </div>
             </div>
         `;
@@ -349,7 +351,7 @@ function crearContenedoresGaleria() {
     return html;
 }
 
-// 3. Cargar subcontenedores de galerÃÂ­a
+// 3. Cargar subcontenedores de galerÃÂÃÂ­a
 function cargarSubcontenedoresGaleria(contenedor) {
     contenedorActual = contenedor;
     modoActual = 'galeria';
@@ -365,7 +367,7 @@ function cargarSubcontenedoresGaleria(contenedor) {
 // 4. Crear UI de subcontenedores
 function crearSubcontenedoresGaleriaUI(contenedor) {
     let html = `<h2 style="text-align: center; margin-bottom: 30px; color: #FFD166;">
-        Ã°ÂÂÂ¼Ã¯Â¸Â ${obtenerContenedorGaleria(contenedor).nombre} - SUB-GALERÃÂAS
+        ÃÂ°ÃÂÃÂÃÂ¼ÃÂ¯ÃÂ¸ÃÂ ${obtenerContenedorGaleria(contenedor).nombre} - SUB-GALERÃÂÃÂAS
     </h2>`;
     html += '<div class="subcontenedores-grid">';
     
@@ -375,19 +377,19 @@ function crearSubcontenedoresGaleriaUI(contenedor) {
     for (let i = 1; i <= 5; i++) {
         const tieneGaleria = subcontenedoresDisponibles.includes(i.toString());
         const subData = obtenerSubcontenedorGaleria(contenedor, i);
-        const desc = subData.descripcion || (tieneGaleria ? 'GalerÃÂ­a disponible' : '(Sin imÃÂ¡genes configuradas)');
+        const desc = subData.descripcion || (tieneGaleria ? 'GalerÃÂÃÂ­a disponible' : '(Sin imÃÂÃÂ¡genes configuradas)');
         const galeriaInfo = tieneGaleria ? obtenerGaleria(contenedor, i) : null;
         
         html += `
-            <div class="subcontenedor-item" onclick="${tieneGaleria ? `cargarGaleria(${contenedor}, ${i})` : 'alert("Esta galerÃÂ­a no tiene imÃÂ¡genes configuradas")'}">
+            <div class="subcontenedor-item" onclick="${tieneGaleria ? `cargarGaleria(${contenedor}, ${i})` : 'alert("Esta galerÃÂÃÂ­a no tiene imÃÂÃÂ¡genes configuradas")'}">
                 <div class="subcontenedor-img" style="background-image: url('${subData.imagen}')"></div>
-                <h3>${tieneGaleria ? galeriaInfo.titulo.split(' ')[0] : `GalerÃÂ­a ${i}`}</h3>
+                <h3>${tieneGaleria ? galeriaInfo.titulo.split(' ')[0] : `GalerÃÂÃÂ­a ${i}`}</h3>
                 ${tieneGaleria ? 
                     `<p><strong>${galeriaInfo.titulo}</strong></p>
-                     <p style="font-size: 0.9rem; opacity: 0.8;">${galeriaInfo.categoria} Ã¢ÂÂ¢ ${galeriaInfo.imagenes.length} imÃÂ¡genes</p>` 
+                     <p style="font-size: 0.9rem; opacity: 0.8;">${galeriaInfo.categoria} ÃÂ¢ÃÂÃÂ¢ ${galeriaInfo.imagenes.length} imÃÂÃÂ¡genes</p>` 
                     : `<p style="color: #FF6B6B;">${desc}</p>`}
                 <div class="card-button" style="margin-top: 10px; padding: 10px 20px; font-size: 0.9rem; background: linear-gradient(135deg, #FF1493, #FF69B4);">
-                    ${tieneGaleria ? 'Ã°ÂÂÂ¼Ã¯Â¸Â Ver GalerÃÂ­a' : 'VacÃÂ­o'}
+                    ${tieneGaleria ? 'ÃÂ°ÃÂÃÂÃÂ¼ÃÂ¯ÃÂ¸ÃÂ Ver GalerÃÂÃÂ­a' : 'VacÃÂÃÂ­o'}
                 </div>
             </div>
         `;
@@ -397,14 +399,14 @@ function crearSubcontenedoresGaleriaUI(contenedor) {
     return html;
 }
 
-// 5. Cargar galerÃÂ­a especÃÂ­fica
+// 5. Cargar galerÃÂÃÂ­a especÃÂÃÂ­fica
 function cargarGaleria(contenedor, subcontenedor) {
     contenedorActual = contenedor;
     subcontenedorActual = subcontenedor;
     
     const galeriaInfo = obtenerGaleria(contenedor, subcontenedor);
     if (!galeriaInfo || !galeriaInfo.imagenes || galeriaInfo.imagenes.length === 0) {
-        alert('No hay imÃÂ¡genes disponibles en esta galerÃÂ­a');
+        alert('No hay imÃÂÃÂ¡genes disponibles en esta galerÃÂÃÂ­a');
         return;
     }
     
@@ -415,7 +417,7 @@ function cargarGaleria(contenedor, subcontenedor) {
     mangaSection.insertBefore(botonVolver, mangaSection.firstChild);
 }
 
-// 6. Crear UI de la galerÃÂ­a con vista en grande
+// 6. Crear UI de la galerÃÂÃÂ­a con vista en grande
 function crearGaleriaUI(galeriaInfo) {
     let html = `
         <div class="galeria-container" style="max-width: 1200px; margin: 0 auto; padding: 20px;">
@@ -424,14 +426,14 @@ function crearGaleriaUI(galeriaInfo) {
             
             <div style="background: rgba(255, 20, 147, 0.1); border-radius: 15px; padding: 20px; margin-bottom: 30px; border-left: 5px solid #FF1493;">
                 <p style="text-align: center; color: #FFD166; font-size: 1.1rem;">
-                    Ã°ÂÂÂ¼Ã¯Â¸Â ${galeriaInfo.imagenes.length} imÃÂ¡genes Ã¢ÂÂ¢ CategorÃÂ­a: ${galeriaInfo.categoria}
+                    ÃÂ°ÃÂÃÂÃÂ¼ÃÂ¯ÃÂ¸ÃÂ ${galeriaInfo.imagenes.length} imÃÂÃÂ¡genes ÃÂ¢ÃÂÃÂ¢ CategorÃÂÃÂ­a: ${galeriaInfo.categoria}
                 </p>
                 <p style="text-align: center; opacity: 0.8; margin-top: 10px; font-size: 0.9rem;">
-                    Haz clic en cualquier imagen para verla en tamaÃÂ±o completo
+                    Haz clic en cualquier imagen para verla en tamaÃÂÃÂ±o completo
                 </p>
             </div>
             
-            <!-- GALERÃÂA DE IMÃÂGENES -->
+            <!-- GALERÃÂÃÂA DE IMÃÂÃÂGENES -->
             <div id="galeria-grid" class="galeria-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; margin: 30px 0;">
     `;
     
@@ -453,7 +455,7 @@ function crearGaleriaUI(galeriaInfo) {
             <!-- VISOR DE IMAGEN GRANDE (OCULTO INICIALMENTE) -->
             <div id="visor-grande" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.95); z-index: 9999; align-items: center; justify-content: center; flex-direction: column;">
                 <button onclick="cerrarVisor()" style="position: absolute; top: 20px; right: 20px; background: #FF1493; color: white; border: none; padding: 12px 25px; border-radius: 50px; font-size: 1.1rem; cursor: pointer; z-index: 10001; border: 2px solid white;">
-                    Ã¢ÂÂ Cerrar
+                    ÃÂ¢ÃÂÃÂ Cerrar
                 </button>
                 
                 <div style="max-width: 90%; max-height: 80%; margin-top: 60px;">
@@ -462,7 +464,7 @@ function crearGaleriaUI(galeriaInfo) {
                 
                 <div style="margin-top: 30px; display: flex; gap: 20px; align-items: center;">
                     <button onclick="imagenAnterior()" class="control-btn" style="background: #5864F5; padding: 12px 25px; border-radius: 50px; border: none; color: white; font-size: 1rem; cursor: pointer;">
-                        Ã¢ÂÂ Anterior
+                        ÃÂ¢ÃÂÃÂ Anterior
                     </button>
                     
                     <div id="contador-imagen" style="color: #FFD166; font-size: 1.2rem; font-weight: bold; min-width: 100px; text-align: center;">
@@ -470,7 +472,7 @@ function crearGaleriaUI(galeriaInfo) {
                     </div>
                     
                     <button onclick="imagenSiguiente()" class="control-btn" style="background: #FF1493; padding: 12px 25px; border-radius: 50px; border: none; color: white; font-size: 1rem; cursor: pointer;">
-                        Siguiente Ã¢ÂÂ
+                        Siguiente ÃÂ¢ÃÂÃÂ
                     </button>
                 </div>
             </div>
@@ -563,9 +565,9 @@ function imagenSiguiente() {
 }
 
 // ================================================
-// INICIALIZACIÃÂN
+// INICIALIZACIÃÂÃÂN
 // ================================================
 
-console.log('Ã°ÂÂÂ¼Ã¯Â¸Â Sistema de GalerÃÂ­a cargado correctamente');
-console.log('Ã°ÂÂÂ¦ Contenedores disponibles: 5');
-console.log('Ã°ÂÂÂ¸ Sub-galerÃÂ­as disponibles: ' + Object.keys(galeriaDatabase).length);
+console.log('ÃÂ°ÃÂÃÂÃÂ¼ÃÂ¯ÃÂ¸ÃÂ Sistema de GalerÃÂÃÂ­a cargado correctamente');
+console.log('ÃÂ°ÃÂÃÂÃÂ¦ Contenedores disponibles: 5');
+console.log('ÃÂ°ÃÂÃÂÃÂ¸ Sub-galerÃÂÃÂ­as disponibles: ' + Object.keys(galeriaDatabase).length);
