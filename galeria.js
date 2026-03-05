@@ -286,7 +286,9 @@ const galeriaDatabase = {
         
             { id: 27, url: "https://pbs.twimg.com/media/HCreqhoXIAAuICJ?format=jpg&name=small" },
         
-            { id: 28, url: "https://pbs.twimg.com/media/HCre_jXWwAAz2P5?format=jpg&name=small" }
+            { id: 28, url: "https://pbs.twimg.com/media/HCre_jXWwAAz2P5?format=jpg&name=small" },
+        
+            { id: 29, url: "https://pbs.twimg.com/media/HCrlW3IaUAEZY_1?format=jpg&name=small" }
         ]
     },
     // CONTENEDOR 4 - Yotsuba
