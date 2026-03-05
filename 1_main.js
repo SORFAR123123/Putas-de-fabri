@@ -89,12 +89,6 @@ function obtenerContenedoresDisponibles(modo) {
     return contenedores.sort((a, b) => a - b);
 }
 
-// Obtener el número máximo de contenedores de un modo
-function obtenerMaxContenedores(modo) {
-    const contenedores = obtenerContenedoresDisponibles(modo);
-    return contenedores.length > 0 ? Math.max(...contenedores) : 0;
-}
-
 // Obtener todos los subcontenedores disponibles de un contenedor específico
 function obtenerSubcontenedoresDisponibles(modo, contenedor) {
     if (!sistemaDescriptivo[modo]) return [];
@@ -112,12 +106,6 @@ function obtenerSubcontenedoresDisponibles(modo, contenedor) {
     }
     
     return disponibles.sort((a, b) => a - b);
-}
-
-// Obtener el número máximo de subcontenedores de un contenedor
-function obtenerMaxSubcontenedores(modo, contenedor) {
-    const subs = obtenerSubcontenedoresDisponibles(modo, contenedor);
-    return subs.length > 0 ? Math.max(...subs) : 0;
 }
 
 // Obtener todos los mazos disponibles para un subcontenedor
@@ -163,14 +151,8 @@ function obtenerMazosDisponibles(contenedor, subcontenedor) {
     return mazos;
 }
 
-// Obtener el número máximo de mazos disponibles
-function obtenerMaxMazos(contenedor, subcontenedor) {
-    const mazos = obtenerMazosDisponibles(contenedor, subcontenedor);
-    return mazos.length > 0 ? Math.max(...mazos) : 0;
-}
-
 // ====================
-// NUEVO: SISTEMA SRS (Spaced Repetition System)
+// SISTEMA SRS (Spaced Repetition System)
 // ====================
 
 // Almacenamiento local para palabras SRS
@@ -1349,7 +1331,7 @@ function crearUIMisiones() {
                     <div style="font-weight: bold; color: #FFD166;">+${mision.recompensa} soles</div>
                 </div>
                 <div style="background: rgba(255,255,255,0.1); height: 8px; border-radius: 4px; margin-bottom: 10px;">
-                    <div style="background: ${mision.completada ? '#4CAF50' : '#5864F50'}; width: ${Math.min(porcentaje, 100)}%; height: 100%; border-radius: 4px;"></div>
+                    <div style="background: ${mision.completada ? '#4CAF50' : '#5864F5'}; width: ${Math.min(porcentaje, 100)}%; height: 100%; border-radius: 4px;"></div>
                 </div>
                 <div style="display: flex; justify-content: space-between; font-size: 0.9rem;">
                     <span>${mision.progreso}/${mision.objetivo}</span>
@@ -1502,11 +1484,7 @@ function iniciarMazoDificilDesdeUI() {
 }
 
 // ====================
-// ===== ELIMINADA LA FUNCIÓN verificarEventoDiarioAlCompletarMazo =====
-// ====================
-
-// ====================
-// NAVEGACIÓN PRINCIPAL - TODOS LOS MODOS (AHORA DINÁMICA)
+// NAVEGACIÓN PRINCIPAL - TODOS LOS MODOS
 // ====================
 
 function cargarPaginaMangas() {
@@ -1643,7 +1621,7 @@ function volverAlInicio() {
 }
 
 // ====================
-// CREACIÓN DE UI - MANGAS (VERSIÓN DINÁMICA)
+// CREACIÓN DE UI - MANGAS (VERSIÓN SIMPLIFICADA)
 // ====================
 
 function crearContenedoresMangas() {
@@ -1661,9 +1639,12 @@ function crearContenedoresMangas() {
             const nombre = contenedorData.nombre || `CONTAINER ${numero}`;
             const desc = contenedorData.descripcion || 'Sub-contenedores con vocabulario y manga';
             
+            // Usar imagen directamente del sistema descriptivo
+            const imagenUrl = contenedorData.imagen || 'https://images.unsplash.com/photo-1572372052381-f0eb744f9d29?w=400&h=400&fit=crop';
+            
             html += `
                 <div class="contenedor-item" onclick="cargarSubcontenedores(${numero})">
-                    <div class="contenedor-img" style="background-image: url('${contenedorData.imagen || obtenerImagenContenedor(numero)}')"></div>
+                    <div class="contenedor-img" style="background-image: url('${imagenUrl}')"></div>
                     <div class="contenedor-numero">${nombre}</div>
                     <p>${desc}</p>
                     <div class="card-button">Abrir</div>
@@ -1690,9 +1671,12 @@ function crearContenedoresVideos() {
             const nombre = contenedorData.nombre || `VIDEO CONTAINER ${numero}`;
             const desc = contenedorData.descripcion || 'Videos privados con timestamps';
             
+            // Usar imagen directamente del sistema descriptivo
+            const imagenUrl = contenedorData.imagen || 'https://images.unsplash.com/photo-1578022768017-5867e12b20d2?w=400&h=400&fit=crop';
+            
             html += `
                 <div class="contenedor-item" onclick="cargarSubcontenedoresVideos(${numero})">
-                    <div class="contenedor-img" style="background-image: url('${contenedorData.imagen || obtenerImagenContenedor(numero)}')"></div>
+                    <div class="contenedor-img" style="background-image: url('${imagenUrl}')"></div>
                     <div class="contenedor-numero">${nombre}</div>
                     <p>${desc}</p>
                     <div class="card-button">Ver videos</div>
@@ -1720,9 +1704,12 @@ function crearContenedoresAnimes() {
             const tieneAnimes = obtenerSubcontenedoresDisponibles('animes', numero).length > 0;
             const desc = contenedorData.descripcion || (tieneAnimes ? 'Sub-contenedores con animes' : 'Sub-contenedores disponibles');
             
+            // Usar imagen directamente del sistema descriptivo
+            const imagenUrl = contenedorData.imagen || 'https://images.unsplash.com/photo-1618336753974-8f76e52bb7f6?w=400&h=400&fit=crop';
+            
             html += `
                 <div class="contenedor-item" onclick="cargarSubcontenedoresAnimes(${numero})">
-                    <div class="contenedor-img" style="background-image: url('${contenedorData.imagen || obtenerImagenContenedorAnime(numero)}')"></div>
+                    <div class="contenedor-img" style="background-image: url('${imagenUrl}')"></div>
                     <div class="contenedor-numero">${contenedorData.nombre || `ANIME CONTAINER ${numero}`}</div>
                     <p>${desc}</p>
                     <div class="card-button">${tieneAnimes ? 'Ver animes' : 'Explorar'}</div>
@@ -1746,15 +1733,17 @@ function crearContenedoresAudios() {
         html += '<div style="text-align: center; padding: 50px; opacity: 0.7;">No hay contenedores configurados</div>';
     } else {
         contenedores.forEach(numero => {
+            const contenedorData = obtenerContenedorAudio(numero);
             const tieneAudios = obtenerSubcontenedoresDisponibles('audios', numero).length > 0;
-            const desc = tieneAudios ? 'Sub-contenedores con openings' : 'Sub-contenedores disponibles';
+            const desc = contenedorData.descripcion || (tieneAudios ? 'Sub-contenedores con openings' : 'Sub-contenedores disponibles');
             
-            let imagenContenedor = obtenerImagenContenedorAudio(numero);
+            // Usar imagen directamente del sistema descriptivo
+            const imagenUrl = contenedorData.imagen || 'https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=400&h=400&fit=crop';
             
             html += `
                 <div class="contenedor-item" onclick="cargarSubcontenedoresAudios(${numero})">
-                    <div class="contenedor-img" style="background-image: url('${imagenContenedor}')"></div>
-                    <div class="contenedor-numero">${obtenerContenedorAudio(numero).nombre || `AUDIO CONTAINER ${numero}`}</div>
+                    <div class="contenedor-img" style="background-image: url('${imagenUrl}')"></div>
+                    <div class="contenedor-numero">${contenedorData.nombre || `AUDIO CONTAINER ${numero}`}</div>
                     <p>${desc}</p>
                     <div class="card-button" style="background: linear-gradient(135deg, #FF6B6B, #FFD166);">
                         ${tieneAudios ? '🎵 Escuchar audios' : 'Explorar'}
@@ -1783,9 +1772,12 @@ function crearContenedoresASMR() {
             const tieneAudios = obtenerSubcontenedoresDisponibles('asmr', numero).length > 0;
             const desc = contenedorData.descripcion || (tieneAudios ? 'Sub-contenedores con audios' : 'Sub-contenedores disponibles');
             
+            // Usar imagen directamente del sistema descriptivo
+            const imagenUrl = contenedorData.imagen || 'https://images.unsplash.com/photo-1572860177022-8fda92a90b95?w=400&h=400&fit=crop';
+            
             html += `
                 <div class="contenedor-item" onclick="cargarSubcontenedoresASMR(${numero})">
-                    <div class="contenedor-img" style="background-image: url('${contenedorData.imagen}')"></div>
+                    <div class="contenedor-img" style="background-image: url('${imagenUrl}')"></div>
                     <div class="contenedor-numero">${contenedorData.nombre || `ASMR CONTAINER ${numero}`}</div>
                     <p>${desc}</p>
                     <div class="card-button" style="background: linear-gradient(135deg, #9C27B0, #673AB7);">
@@ -1801,7 +1793,7 @@ function crearContenedoresASMR() {
 }
 
 // ====================
-// FUNCIONES PARA SUBCONTENEDORES (AHORA DINÁMICAS)
+// FUNCIONES PARA SUBCONTENEDORES
 // ====================
 
 function cargarSubcontenedores(contenedor) {
@@ -1834,9 +1826,12 @@ function crearSubcontenedoresUI(contenedor) {
             const tieneContenido = tieneVocabularioEnSubcontenedor(contenedor, i);
             const tieneManga = existeManga(contenedor, i);
             
+            // Usar imagen directamente del sistema descriptivo
+            const imagenUrl = subData.imagen || 'https://images.unsplash.com/photo-1572372052381-f0eb744f9d29?w=300&h=300&fit=crop';
+            
             html += `
                 <div class="subcontenedor-item">
-                    <div class="subcontenedor-img" style="background-image: url('${subData.imagen || obtenerImagenSubcontenedor(contenedor, i)}')"></div>
+                    <div class="subcontenedor-img" style="background-image: url('${imagenUrl}')"></div>
                     <h3>${nombre}</h3>
                     <p>${desc}</p>
                     ${tieneContenido ? '' : '<p style="color: #FF6B6B; font-size: 0.9rem;">(Sin vocabulario)</p>'}
@@ -1890,9 +1885,12 @@ function crearSubcontenedoresVideosUI(contenedor) {
             
             const desc = tieneVideo ? videoInfo.descripcion : subData.descripcion || '(Sin video)';
             
+            // Usar imagen directamente del sistema descriptivo
+            const imagenUrl = subData.imagen || 'https://images.unsplash.com/photo-1578022768017-5867e12b20d2?w=300&h=300&fit=crop';
+            
             html += `
                 <div class="subcontenedor-item" onclick="${tieneVideo ? `cargarVideo(${contenedor}, ${i})` : 'alert("Este sub-contenedor no tiene video disponible")'}">
-                    <div class="subcontenedor-img" style="background-image: url('${subData.imagen || obtenerImagenSubcontenedor(contenedor, i)}')"></div>
+                    <div class="subcontenedor-img" style="background-image: url('${imagenUrl}')"></div>
                     <h3>${tieneVideo ? videoInfo.titulo : `Video ${i}`}</h3>
                     ${tieneVideo ? 
                         `<p><strong>${videoInfo.titulo}</strong></p>
@@ -2040,7 +2038,7 @@ function crearMazosUI(contenedor, subcontenedor) {
 }
 
 // ====================
-// FUNCIONES PARA ANIMES (VERSIÓN DINÁMICA)
+// FUNCIONES PARA ANIMES
 // ====================
 
 function cargarSubcontenedoresAnimes(contenedor) {
@@ -2074,9 +2072,12 @@ function crearSubcontenedoresAnimesUI(contenedor) {
             
             const desc = subData.descripcion || (tieneAnime ? 'Anime disponible' : '(Sin anime configurado)');
             
+            // Usar imagen directamente del sistema descriptivo
+            const imagenUrl = subData.imagen || 'https://images.unsplash.com/photo-1618336753974-8f76e52bb7f6?w=300&h=300&fit=crop';
+            
             html += `
                 <div class="subcontenedor-item" onclick="${tieneAnime ? `seleccionarAccionAnime(${contenedor}, ${i})` : `cargarMazosAnimes(${contenedor}, ${i})`}">
-                    <div class="subcontenedor-img" style="background-image: url('${subData.imagen || obtenerImagenSubcontenedorAnime(contenedor, i)}')"></div>
+                    <div class="subcontenedor-img" style="background-image: url('${imagenUrl}')"></div>
                     <h3>${subData.nombre || (tieneAnime ? animeInfo.titulo : `Anime ${i}`)}</h3>
                     ${tieneAnime ? 
                         `<p><strong>${animeInfo.titulo}</strong></p>
@@ -2244,7 +2245,7 @@ function crearMazosAnimesUI(contenedor, subcontenedor) {
 }
 
 // ====================
-// FUNCIONES PARA AUDIOS (VERSIÓN DINÁMICA)
+// FUNCIONES PARA AUDIOS
 // ====================
 
 function cargarSubcontenedoresAudios(contenedor) {
@@ -2271,15 +2272,18 @@ function crearSubcontenedoresAudiosUI(contenedor) {
         html += '<div style="text-align: center; padding: 50px; opacity: 0.7;">No hay subcontenedores configurados</div>';
     } else {
         subcontenedores.forEach(i => {
-            let imagenSubcontenedor = obtenerImagenSubcontenedorAudio(contenedor, i);
+            const subData = obtenerSubcontenedorAudio(contenedor, i);
             const audioInfo = obtenerAudio(contenedor, i);
             const tieneAudio = audioInfo !== null;
             
             const desc = tieneAudio ? audioInfo.descripcion : '(Sin audio configurado)';
             
+            // Usar imagen directamente del sistema descriptivo
+            const imagenUrl = subData.imagen || 'https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=300&h=300&fit=crop';
+            
             html += `
                 <div class="subcontenedor-item" onclick="${tieneAudio ? `seleccionarAccionAudio(${contenedor}, ${i})` : `cargarMazosAudios(${contenedor}, ${i})`}">
-                    <div class="subcontenedor-img" style="background-image: url('${imagenSubcontenedor}')"></div>
+                    <div class="subcontenedor-img" style="background-image: url('${imagenUrl}')"></div>
                     <h3>${tieneAudio ? audioInfo.titulo : `Audio ${i}`}</h3>
                     ${tieneAudio ? 
                         `<p><strong>${audioInfo.titulo}</strong></p>
@@ -2469,7 +2473,7 @@ function crearMazosAudiosUI(contenedor, subcontenedor) {
 }
 
 // ====================
-// FUNCIONES PARA ASMR (VERSIÓN DINÁMICA)
+// FUNCIONES PARA ASMR
 // ====================
 
 function cargarSubcontenedoresASMR(contenedor) {
@@ -2503,9 +2507,12 @@ function crearSubcontenedoresASMRUI(contenedor) {
             
             const desc = subData.descripcion || (tieneASMR ? 'ASMR disponible' : '(Sin audio ASMR configurado)');
             
+            // Usar imagen directamente del sistema descriptivo
+            const imagenUrl = subData.imagen || 'https://images.unsplash.com/photo-1572860177022-8fda92a90b95?w=300&h=300&fit=crop';
+            
             html += `
                 <div class="subcontenedor-item" onclick="${tieneASMR ? `seleccionarAccionASMR(${contenedor}, ${i})` : 'alert("Este sub-contenedor no tiene audio ASMR disponible")'}">
-                    <div class="subcontenedor-img" style="background-image: url('${subData.imagen || obtenerImagenSubcontenedorASMR(contenedor, i)}')"></div>
+                    <div class="subcontenedor-img" style="background-image: url('${imagenUrl}')"></div>
                     <h3>${tieneASMR ? asmrInfo.titulo : `ASMR ${i}`}</h3>
                     ${tieneASMR ? 
                         `<p><strong>${asmrInfo.titulo}</strong></p>
@@ -3261,7 +3268,7 @@ function irAMazo(direccion) {
 }
 
 // ====================
-// FUNCIÓN FINALIZAR QUIZ - MODIFICADA (SE ELIMINÓ LA LÍNEA DEL EVENTO)
+// FUNCIÓN FINALIZAR QUIZ
 // ====================
 
 function finalizarQuiz() {
@@ -3279,8 +3286,6 @@ function finalizarQuiz() {
         mazoActual, 
         porcentaje
     );
-    
-    // ===== ELIMINADA LA LÍNEA QUE VERIFICABA EL EVENTO DIARIO =====
     
     const dineroAhora = sistemaEconomia.obtenerDinero();
     const recompensa = dineroAhora - dineroAntes;
@@ -3577,37 +3582,8 @@ function verificarVocabularioDisponible(contenedor, subcontenedor, mazo) {
     return vocabulario && vocabulario.length > 0;
 }
 
-function obtenerImagenSubcontenedorAudio(contenedor, subcontenedor) {
-    const key = `${contenedor}_${subcontenedor}`;
-    const subData = sistemaDescriptivo.audios.subcontenedores[key];
-    
-    if (subData && subData.imagen) {
-        return subData.imagen;
-    }
-    
-    const contenedorData = obtenerContenedorAudio(contenedor);
-    return contenedorData.imagen || 'https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=300&h=300&fit=crop';
-}
-
-function obtenerImagenContenedorAudio(numero) {
-    const audioData = obtenerContenedorAudio(numero);
-    return audioData.imagen || 'https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=400&h=400&fit=crop';
-}
-
-function obtenerImagenSubcontenedorASMR(contenedor, subcontenedor) {
-    const key = `${contenedor}_${subcontenedor}`;
-    const subData = sistemaDescriptivo.asmr.subcontenedores[key];
-    
-    if (subData && subData.imagen) {
-        return subData.imagen;
-    }
-    
-    const contenedorData = obtenerContenedorASMR(contenedor);
-    return contenedorData.imagen || 'https://images.unsplash.com/photo-1572860177022-8fda92a90b95?w=300&h=300&fit=crop';
-}
-
 // ====================
-// INICIALIZACIÓN COMPLETA (ACTUALIZADA CON SRS Y DINÁMICA)
+// INICIALIZACIÓN COMPLETA
 // ====================
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -3649,12 +3625,6 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log('   - Animes: ' + obtenerContenedoresDisponibles('animes').length + ' contenedores');
     console.log('   - Audios: ' + obtenerContenedoresDisponibles('audios').length + ' contenedores');
     console.log('   - ASMR: ' + obtenerContenedoresDisponibles('asmr').length + ' contenedores');
-    console.log('');
-    console.log('🔄 Sistema dinámico activado:');
-    console.log('   - Detecta automáticamente TODOS los contenedores configurados');
-    console.log('   - Detecta automáticamente TODOS los subcontenedores configurados');
-    console.log('   - Detecta automáticamente TODOS los mazos con vocabulario');
-    console.log('   - No hay límites fijos (puedes tener contenedores 1, 2, 3, 11, 12, 20, etc.)');
     
     setTimeout(() => {
         const pendientes = verificarRepeticionesPendientes();
@@ -3662,13 +3632,4 @@ document.addEventListener('DOMContentLoaded', function() {
             mostrarNotificacionQuiz(`🔄 Tienes ${pendientes} palabras pendientes en el SRS`);
         }
     }, 2000);
-    
-    setTimeout(() => {
-        console.log('📊 Configuración dinámica detectada:');
-        console.log('   - Mangas contenedor 1: ' + obtenerSubcontenedoresDisponibles('mangas', 1).length + ' subcontenedores');
-        console.log('   - Videos contenedor 1: ' + obtenerSubcontenedoresDisponibles('videos', 1).length + ' subcontenedores');
-        console.log('   - Animes contenedor 1: ' + obtenerSubcontenedoresDisponibles('animes', 1).length + ' subcontenedores');
-        console.log('   - Audios contenedor 1: ' + obtenerSubcontenedoresDisponibles('audios', 1).length + ' subcontenedores');
-        console.log('   - ASMR contenedor 1: ' + obtenerSubcontenedoresDisponibles('asmr', 1).length + ' subcontenedores');
-    }, 3000);
 });
