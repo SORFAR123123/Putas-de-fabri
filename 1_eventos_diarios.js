@@ -65,7 +65,7 @@ const EVENTOS_DIARIOS = [
         id: 'ichika_trabajo',
         titulo: '💼 ¡ICHIKA ESTÁ AGOTADA!',
         descripcion: 'Ichika está agotada por el trabajo y necesita que la ayudes a estudiar para un examen importante. Si no completas 10 MAZOS AL 100% hoy, perderá el año.',
-        imagen: 'https://pbs.twimg.com/media/G7qfcGRWkAAV74w?format=png&name=small',
+        imagen: 'https://pbs.twimg.com/media/HCqdUZ2W8AA1Kg0?format=jpg&name=small',
         video: '1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS', // Video de presentación
         personajes: ['ichika'],
         tipoRequisito: 'mazos_completados',
