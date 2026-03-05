@@ -50,7 +50,9 @@ const galeriaDatabase = {
         
         
         
-            { id: 3, url: "https://pbs.twimg.com/media/HCrZxBIW8AE9F4E?format=jpg&name=small" }
+            { id: 3, url: "https://pbs.twimg.com/media/HCrZxBIW8AE9F4E?format=jpg&name=small" },
+        
+            { id: 4, url: "https://pbs.twimg.com/media/HCrbuHAaUAI3sCB?format=jpg&name=small" }
         ]
     },
     
