@@ -280,7 +280,9 @@ const galeriaDatabase = {
         
             { id: 33, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772753687142.jpg" },
         
-            { id: 34, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772753822185.jpg" }
+            { id: 34, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772753822185.jpg" },
+        
+            { id: 35, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772754025618.jpg" }
         ]
     },
     // CONTENEDOR 4 - Yotsuba
