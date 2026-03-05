@@ -274,7 +274,9 @@ const galeriaDatabase = {
             { id: 29, url: "https://pbs.twimg.com/media/HCrlW3IaUAEZY_1?format=jpg&name=small" },
             { id: 30, url: "https://pbs.twimg.com/media/HCroIllWAAE-Trf?format=jpg&name=medium" },
         
-            { id: 31, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772753330013.jpg" }
+            { id: 31, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772753330013.jpg" },
+        
+            { id: 32, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772753542109.jpg" }
         ]
     },
     // CONTENEDOR 4 - Yotsuba
