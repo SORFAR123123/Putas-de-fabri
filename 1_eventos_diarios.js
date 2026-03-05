@@ -1600,24 +1600,38 @@ const EventosDiarios = {
             return;
         }
         
-        // CASO 3: Es un día nuevo (sin evento hoy)
+        // CASO 3: Es un día nuevo (sin evento hoy) - VERSIÓN CORREGIDA
         if (ultimoEvento.fecha !== fechaHoy) {
-            console.log('🎲 Día nuevo - Creando nuevo evento...');
+            console.log('🎲 Día nuevo - Verificando evento anterior...');
             
-            // Marcar el evento anterior como fallido si no fue exitoso
-            if (!ultimoEvento.requisitoCumplido && ultimoEvento.fecha) {
-                ultimoEvento.fechaFracaso = ultimoEvento.fecha;
-                ultimoEvento.resultadoFracasoMostrado = false;
+            const eventoAnterior = this.obtenerEventoHoy(); // evento del día anterior
+            let mostrandoFracaso = false;
+            
+            // Si el evento anterior no fue exitoso y no es NTR, mostrar fracaso
+            if (!ultimoEvento.requisitoCumplido && eventoAnterior && eventoAnterior.tipo !== 'ntr') {
+                console.log('🎬 Mostrando video de FRACASO del día anterior...');
+                this.mostrarResultadoEvento(eventoAnterior, false);
+                
+                // Marcar como mostrado
+                ultimoEvento.resultadoFracasoMostrado = true;
                 localStorage.setItem('evento_diario_ultimo', JSON.stringify(ultimoEvento));
+                mostrandoFracaso = true;
             }
             
-            // Crear nuevo evento para hoy
-            const nuevoEvento = this.seleccionarEventoAleatorio();
-            this.guardarEventoHoy(nuevoEvento);
+            // Función para crear el nuevo evento (se ejecuta después de mostrar el fracaso si corresponde)
+            const crearNuevoEvento = () => {
+                const nuevoEvento = this.seleccionarEventoAleatorio();
+                this.guardarEventoHoy(nuevoEvento);
+                setTimeout(() => {
+                    this.mostrarModalEvento(nuevoEvento);
+                }, 500);
+            };
             
-            setTimeout(() => {
-                this.mostrarModalEvento(nuevoEvento);
-            }, 500);
+            if (mostrandoFracaso) {
+                setTimeout(crearNuevoEvento, 1000); // Espera a que termine el video (aprox.)
+            } else {
+                crearNuevoEvento();
+            }
             return;
         }
         
