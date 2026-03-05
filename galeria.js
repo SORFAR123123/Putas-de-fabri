@@ -348,25 +348,14 @@ const galeriaDatabase = {
     
     // CONTENEDOR 8 - Trolas Random
     '8_1': {
-        titulo: "Memes y Trolas",
+        titulo: " Trolas",
         descripcion: "Recopilación de los mejores memes y contenido divertido",
         categoria: "Humor",
         imagen: "https://images.unsplash.com/photo-1554177255-61502b3520e7?w=300&h=300&fit=crop",
         imagenes: [
-            { id: 1, url: "https://images.unsplash.com/photo-1554177255-61502b3520e7?w=600&h=600&fit=crop" },
-            { id: 2, url: "https://images.unsplash.com/photo-1578328819058-b69f3a3b0f6b?w=600&h=600&fit=crop" },
-            { id: 3, url: "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=600&h=600&fit=crop" },
-            { id: 4, url: "https://images.unsplash.com/photo-1527224857830-43a7acc85260?w=600&h=600&fit=crop" },
-            { id: 5, url: "https://images.unsplash.com/photo-1531482615713-2afd69097998?w=600&h=600&fit=crop" },
-            { id: 6, url: "https://images.unsplash.com/photo-1544717302-de2939b7ef71?w=600&h=600&fit=crop" },
-            { id: 7, url: "https://images.unsplash.com/photo-1500462918059-b1a0cb512f1d?w=600&h=600&fit=crop" },
-            { id: 8, url: "https://images.unsplash.com/photo-1524419986249-348e8fa6ad4a?w=600&h=600&fit=crop" },
-            { id: 9, url: "https://images.unsplash.com/photo-1523867574498-1c0d169b5c9a?w=600&h=600&fit=crop" },
-            { id: 10, url: "https://images.unsplash.com/photo-1553882809-a4f57e59501d?w=600&h=600&fit=crop" },
-        
-            { id: 11, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772752779732.jpg" },
-        
-            { id: 12, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772754183899.jpg" }
+            { id: 1, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772752779732.jpg" },
+            { id: 2, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772754183899.jpg" }
+       
         ]
     },
     
