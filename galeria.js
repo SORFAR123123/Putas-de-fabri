@@ -1,8 +1,8 @@
 // ================================================
-// SISTEMA COMPLETO DE GALERÃA DE IMÃGENES
+// SISTEMA COMPLETO DE GALERÍA DE IMÁGENES
 // ================================================
 
-// ============ CONTENEDORES DE GALERÃA ============
+// ============ CONTENEDORES DE GALERÍA ============
 const contenedoresGaleria = {
     1: {
         nombre: "Nino mi novia putona",
@@ -19,24 +19,24 @@ const contenedoresGaleria = {
     3: {
         nombre: "Shota",
         imagen: "https://pbs.twimg.com/media/Gx6Tx1cawAARE3T?format=jpg&name=large",
-        descripcion: "GalerÃ­a especial de paisajes",
+        descripcion: "Galería especial de paisajes",
         categoria: "Paisajes"
     },
     4: {
-        nombre: "GALERÃA 4",
+        nombre: "GALERÍA 4",
         imagen: "https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0",
-        descripcion: "Arte y fotografÃ­a creativa",
+        descripcion: "Arte y fotografía creativa",
         categoria: "Arte"
     },
     5: {
-        nombre: "GALERÃA 5",
+        nombre: "GALERÍA 5",
         imagen: "https://images.unsplash.com/photo-1518834103328-371bb64201b4",
-        descripcion: "GalerÃ­a miscelÃ¡nea",
-        categoria: "MiscelÃ¡nea"
+        descripcion: "Galería miscelánea",
+        categoria: "Miscelánea"
     }
 };
 
-// ============ SUB-CONTENEDORES DE GALERÃA ============
+// ============ SUB-CONTENEDORES DE GALERÍA ============
 const galeriaDatabase = {
     // CONTENEDOR 1
     '1_1': {
@@ -55,7 +55,7 @@ const galeriaDatabase = {
     
     '1_2': {
         titulo: "Nino Parque de las putas",
-        descripcion: "ImÃ¡genes artÃ­sticas variadas",
+        descripcion: "Imágenes artísticas variadas",
         categoria: "Arte",
         imagen: "https://pbs.twimg.com/media/G8EObAoXYAA0mI0?format=png&name=small",
         imagenes: [
@@ -115,7 +115,7 @@ const galeriaDatabase = {
     
     '1_3': {
         titulo: "Arquitectura Moderna",
-        descripcion: "Edificios y estructuras contemporÃ¡neas",
+        descripcion: "Edificios y estructuras contemporáneas",
         categoria: "Arquitectura",
         imagen: "https://images.unsplash.com/photo-1513584684374-8bab748fbf90",
         imagenes: [
@@ -129,7 +129,7 @@ const galeriaDatabase = {
     
     '1_4': {
         titulo: "Naturaleza y Paisajes",
-        descripcion: "FotografÃ­as de paisajes naturales",
+        descripcion: "Fotografías de paisajes naturales",
         categoria: "Naturaleza",
         imagen: "https://images.unsplash.com/photo-1501854140801-50d01698950b",
         imagenes: [
@@ -142,9 +142,9 @@ const galeriaDatabase = {
     },
     
     '1_5': {
-        titulo: "GalerÃ­a TecnolÃ³gica",
-        descripcion: "TecnologÃ­a y dispositivos modernos",
-        categoria: "TecnologÃ­a",
+        titulo: "Galería Tecnológica",
+        descripcion: "Tecnología y dispositivos modernos",
+        categoria: "Tecnología",
         imagen: "https://images.unsplash.com/photo-1518709268805-4e9042af2176",
         imagenes: [
             { id: 1, url: "https://images.unsplash.com/photo-1518709268805-4e9042af2176" },
@@ -171,8 +171,8 @@ const galeriaDatabase = {
     },
     
     '2_2': {
-        titulo: "Retratos ArtÃ­sticos",
-        descripcion: "FotografÃ­a de retrato creativa",
+        titulo: "Retratos Artísticos",
+        descripcion: "Fotografía de retrato creativa",
         categoria: "Retrato",
         imagen: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d",
         imagenes: [
@@ -233,12 +233,11 @@ const galeriaDatabase = {
             { id: 14, url: "https://pbs.twimg.com/media/HClCIlHa8AABwfo?format=jpg&name=small" },
             { id: 15, url: "https://pbs.twimg.com/media/HCqEZzsaoAAhtRm?format=jpg&name=small" }
         
-        
-            { id: 16, url: "https://pbs.twimg.com/media/HCrJoF-XMAAWJra?format=jpg&name=large" },]
+        ]
     },
     '4_1': {
-        titulo: "Retratos ArtÃ­sticos",
-        descripcion: "FotografÃ­a de retrato creativa",
+        titulo: "Retratos Artísticos",
+        descripcion: "Fotografía de retrato creativa",
         categoria: "Retrato",
         imagen: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d",
         imagenes: [
@@ -260,9 +259,9 @@ const galeriaDatabase = {
 
 function obtenerContenedorGaleria(numero) {
     return contenedoresGaleria[numero] || {
-        nombre: `GALERÃA ${numero}`,
+        nombre: `GALERÍA ${numero}`,
         imagen: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=400&h=400&fit=crop',
-        descripcion: '5 sub-contenedores con galerÃ­as de imÃ¡genes',
+        descripcion: '5 sub-contenedores con galerías de imágenes',
         categoria: 'General'
     };
 }
@@ -270,8 +269,8 @@ function obtenerContenedorGaleria(numero) {
 function obtenerSubcontenedorGaleria(contenedor, subcontenedor) {
     const key = `${contenedor}_${subcontenedor}`;
     return galeriaDatabase[key] || {
-        titulo: `GalerÃ­a ${subcontenedor}`,
-        descripcion: 'ColecciÃ³n de imÃ¡genes',
+        titulo: `Galería ${subcontenedor}`,
+        descripcion: 'Colección de imágenes',
         categoria: 'General',
         imagen: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w-300&h=300&fit=crop',
         imagenes: []
@@ -306,7 +305,7 @@ function existeGaleria(contenedor, subcontenedor) {
 // FUNCIONES PARA LA UI (para usar en main.js)
 // ================================================
 
-// 1. FunciÃ³n para cargar la pÃ¡gina principal de galerÃ­as
+// 1. Función para cargar la página principal de galerías
 function cargarPaginaGaleria() {
     modoActual = 'galeria';
     modoMazoDificil = false;
@@ -320,15 +319,15 @@ function cargarPaginaGaleria() {
     mangaSection.insertBefore(botonVolver, mangaSection.firstChild);
 }
 
-// 2. Crear UI de contenedores de galerÃ­a
+// 2. Crear UI de contenedores de galería
 function crearContenedoresGaleria() {
-    let html = '<h2 style="text-align: center; margin-bottom: 30px; color: #FFD166;">ð¼ï¸ CONTENEDORES DE GALERÃA</h2>';
+    let html = '<h2 style="text-align: center; margin-bottom: 30px; color: #FFD166;">🖼️ CONTENEDORES DE GALERÍA</h2>';
     html += '<div class="manga-contenedores">';
     
     for (let i = 1; i <= 10; i++) {
         const contenedorData = obtenerContenedorGaleria(i);
-        const nombre = contenedorData.nombre || `GALERÃA ${i}`;
-        const desc = contenedorData.descripcion || '5 sub-contenedores con imÃ¡genes';
+        const nombre = contenedorData.nombre || `GALERÍA ${i}`;
+        const desc = contenedorData.descripcion || '5 sub-contenedores con imágenes';
         
         html += `
             <div class="contenedor-item" onclick="cargarSubcontenedoresGaleria(${i})">
@@ -336,7 +335,7 @@ function crearContenedoresGaleria() {
                 <div class="contenedor-numero">${nombre}</div>
                 <p>${desc}</p>
                 <div class="card-button" style="background: linear-gradient(135deg, #FF1493, #FF69B4);">
-                    Ver GalerÃ­as
+                    Ver Galerías
                 </div>
             </div>
         `;
@@ -346,7 +345,7 @@ function crearContenedoresGaleria() {
     return html;
 }
 
-// 3. Cargar subcontenedores de galerÃ­a
+// 3. Cargar subcontenedores de galería
 function cargarSubcontenedoresGaleria(contenedor) {
     contenedorActual = contenedor;
     modoActual = 'galeria';
@@ -362,7 +361,7 @@ function cargarSubcontenedoresGaleria(contenedor) {
 // 4. Crear UI de subcontenedores
 function crearSubcontenedoresGaleriaUI(contenedor) {
     let html = `<h2 style="text-align: center; margin-bottom: 30px; color: #FFD166;">
-        ð¼ï¸ ${obtenerContenedorGaleria(contenedor).nombre} - SUB-GALERÃAS
+        🖼️ ${obtenerContenedorGaleria(contenedor).nombre} - SUB-GALERÍAS
     </h2>`;
     html += '<div class="subcontenedores-grid">';
     
@@ -372,19 +371,19 @@ function crearSubcontenedoresGaleriaUI(contenedor) {
     for (let i = 1; i <= 5; i++) {
         const tieneGaleria = subcontenedoresDisponibles.includes(i.toString());
         const subData = obtenerSubcontenedorGaleria(contenedor, i);
-        const desc = subData.descripcion || (tieneGaleria ? 'GalerÃ­a disponible' : '(Sin imÃ¡genes configuradas)');
+        const desc = subData.descripcion || (tieneGaleria ? 'Galería disponible' : '(Sin imágenes configuradas)');
         const galeriaInfo = tieneGaleria ? obtenerGaleria(contenedor, i) : null;
         
         html += `
-            <div class="subcontenedor-item" onclick="${tieneGaleria ? `cargarGaleria(${contenedor}, ${i})` : 'alert("Esta galerÃ­a no tiene imÃ¡genes configuradas")'}">
+            <div class="subcontenedor-item" onclick="${tieneGaleria ? `cargarGaleria(${contenedor}, ${i})` : 'alert("Esta galería no tiene imágenes configuradas")'}">
                 <div class="subcontenedor-img" style="background-image: url('${subData.imagen}')"></div>
-                <h3>${tieneGaleria ? galeriaInfo.titulo.split(' ')[0] : `GalerÃ­a ${i}`}</h3>
+                <h3>${tieneGaleria ? galeriaInfo.titulo.split(' ')[0] : `Galería ${i}`}</h3>
                 ${tieneGaleria ? 
                     `<p><strong>${galeriaInfo.titulo}</strong></p>
-                     <p style="font-size: 0.9rem; opacity: 0.8;">${galeriaInfo.categoria} â¢ ${galeriaInfo.imagenes.length} imÃ¡genes</p>` 
+                     <p style="font-size: 0.9rem; opacity: 0.8;">${galeriaInfo.categoria} • ${galeriaInfo.imagenes.length} imágenes</p>` 
                     : `<p style="color: #FF6B6B;">${desc}</p>`}
                 <div class="card-button" style="margin-top: 10px; padding: 10px 20px; font-size: 0.9rem; background: linear-gradient(135deg, #FF1493, #FF69B4);">
-                    ${tieneGaleria ? 'ð¼ï¸ Ver GalerÃ­a' : 'VacÃ­o'}
+                    ${tieneGaleria ? '🖼️ Ver Galería' : 'Vacío'}
                 </div>
             </div>
         `;
@@ -394,14 +393,14 @@ function crearSubcontenedoresGaleriaUI(contenedor) {
     return html;
 }
 
-// 5. Cargar galerÃ­a especÃ­fica
+// 5. Cargar galería específica
 function cargarGaleria(contenedor, subcontenedor) {
     contenedorActual = contenedor;
     subcontenedorActual = subcontenedor;
     
     const galeriaInfo = obtenerGaleria(contenedor, subcontenedor);
     if (!galeriaInfo || !galeriaInfo.imagenes || galeriaInfo.imagenes.length === 0) {
-        alert('No hay imÃ¡genes disponibles en esta galerÃ­a');
+        alert('No hay imágenes disponibles en esta galería');
         return;
     }
     
@@ -412,7 +411,7 @@ function cargarGaleria(contenedor, subcontenedor) {
     mangaSection.insertBefore(botonVolver, mangaSection.firstChild);
 }
 
-// 6. Crear UI de la galerÃ­a con vista en grande
+// 6. Crear UI de la galería con vista en grande
 function crearGaleriaUI(galeriaInfo) {
     let html = `
         <div class="galeria-container" style="max-width: 1200px; margin: 0 auto; padding: 20px;">
@@ -421,14 +420,14 @@ function crearGaleriaUI(galeriaInfo) {
             
             <div style="background: rgba(255, 20, 147, 0.1); border-radius: 15px; padding: 20px; margin-bottom: 30px; border-left: 5px solid #FF1493;">
                 <p style="text-align: center; color: #FFD166; font-size: 1.1rem;">
-                    ð¼ï¸ ${galeriaInfo.imagenes.length} imÃ¡genes â¢ CategorÃ­a: ${galeriaInfo.categoria}
+                    🖼️ ${galeriaInfo.imagenes.length} imágenes • Categoría: ${galeriaInfo.categoria}
                 </p>
                 <p style="text-align: center; opacity: 0.8; margin-top: 10px; font-size: 0.9rem;">
-                    Haz clic en cualquier imagen para verla en tamaÃ±o completo
+                    Haz clic en cualquier imagen para verla en tamaño completo
                 </p>
             </div>
             
-            <!-- GALERÃA DE IMÃGENES -->
+            <!-- GALERÍA DE IMÁGENES -->
             <div id="galeria-grid" class="galeria-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; margin: 30px 0;">
     `;
     
@@ -450,7 +449,7 @@ function crearGaleriaUI(galeriaInfo) {
             <!-- VISOR DE IMAGEN GRANDE (OCULTO INICIALMENTE) -->
             <div id="visor-grande" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0, 0, 0, 0.95); z-index: 9999; align-items: center; justify-content: center; flex-direction: column;">
                 <button onclick="cerrarVisor()" style="position: absolute; top: 20px; right: 20px; background: #FF1493; color: white; border: none; padding: 12px 25px; border-radius: 50px; font-size: 1.1rem; cursor: pointer; z-index: 10001; border: 2px solid white;">
-                    â Cerrar
+                    ✕ Cerrar
                 </button>
                 
                 <div style="max-width: 90%; max-height: 80%; margin-top: 60px;">
@@ -459,7 +458,7 @@ function crearGaleriaUI(galeriaInfo) {
                 
                 <div style="margin-top: 30px; display: flex; gap: 20px; align-items: center;">
                     <button onclick="imagenAnterior()" class="control-btn" style="background: #5864F5; padding: 12px 25px; border-radius: 50px; border: none; color: white; font-size: 1rem; cursor: pointer;">
-                        â Anterior
+                        ← Anterior
                     </button>
                     
                     <div id="contador-imagen" style="color: #FFD166; font-size: 1.2rem; font-weight: bold; min-width: 100px; text-align: center;">
@@ -467,7 +466,7 @@ function crearGaleriaUI(galeriaInfo) {
                     </div>
                     
                     <button onclick="imagenSiguiente()" class="control-btn" style="background: #FF1493; padding: 12px 25px; border-radius: 50px; border: none; color: white; font-size: 1rem; cursor: pointer;">
-                        Siguiente â
+                        Siguiente →
                     </button>
                 </div>
             </div>
@@ -560,9 +559,9 @@ function imagenSiguiente() {
 }
 
 // ================================================
-// INICIALIZACIÃN
+// INICIALIZACIÓN
 // ================================================
 
-console.log('ð¼ï¸ Sistema de GalerÃ­a cargado correctamente');
-console.log('ð¦ Contenedores disponibles: 5');
-console.log('ð¸ Sub-galerÃ­as disponibles: ' + Object.keys(galeriaDatabase).length);
+console.log('🖼️ Sistema de Galería cargado correctamente');
+console.log('📦 Contenedores disponibles: 5');
+console.log('📸 Sub-galerías disponibles: ' + Object.keys(galeriaDatabase).length);
