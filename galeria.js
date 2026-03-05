@@ -68,7 +68,9 @@ const galeriaDatabase = {
         
             { id: 7, url: "https://pbs.twimg.com/media/HCri27xbwAAaBmv?format=jpg&name=small" },
         
-            { id: 8, url: "https://pbs.twimg.com/media/HCrjXkwXgAApyPj?format=jpg&name=medium" }
+            { id: 8, url: "https://pbs.twimg.com/media/HCrjXkwXgAApyPj?format=jpg&name=medium" },
+        
+            { id: 9, url: "https://pbs.twimg.com/media/HCrjnnTWUAApDRm?format=jpg&name=large" }
         ]
     },
     
