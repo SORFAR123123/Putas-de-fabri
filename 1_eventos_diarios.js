@@ -13,6 +13,7 @@ const EVENTOS_NTR = [
         titulo: '🔥 ¡LA MADRE DE UZAKI APARECIÓ!',
         descripcion: 'La madre de Uzaki te ha invitado a su casa "para tomar un té". Está sola, coqueta y muy insistente. Sabes que si aceptas, las quintillizas se enterarán y se pondrán furiosas. ¿Qué decides?',
         imagen: 'https://pbs.twimg.com/media/HClhFX_XgAA3V-O?format=jpg&name=small',
+        video: '1_i7QBRnNr8fpMha22BM-T5i10H-Y0Vej', // Video de presentación
         tipo: 'ntr',
         opciones: [
             {
@@ -41,13 +42,14 @@ const EVENTOS_NTR = [
     }
 ];
 
-// Lista de 10 eventos con requisitos y consecuencias - AHORA CON TEXTOS PERSONALIZADOS
+// Lista de 10 eventos con requisitos y consecuencias - CON IMAGEN Y VIDEO
 const EVENTOS_DIARIOS = [
     { // Evento 1 - Solo Nino
         id: 'nino_ex',
         titulo: '😤 ¡EL EX DE NINO APARECIÓ!',
         descripcion: 'Mientras estudiabas en la cafetería, ves a Nino hablando acaloradamente con un chico. ¡Es su ex! Te mira y te hace una seña para que te acerques. Necesitas demostrarle que eres mejor que él completando 10 MAZOS AL 100% hoy.',
         imagen: 'https://pbs.twimg.com/media/HClw6mKW4AAy0kf?format=jpg&name=small',
+        video: '1aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe', // Video de presentación
         personajes: ['nino'],
         tipoRequisito: 'mazos_completados',
         cantidadRequerida: 10,
@@ -64,6 +66,7 @@ const EVENTOS_DIARIOS = [
         titulo: '💼 ¡ICHIKA ESTÁ AGOTADA!',
         descripcion: 'Ichika está agotada por el trabajo y necesita que la ayudes a estudiar para un examen importante. Si no completas 10 MAZOS AL 100% hoy, perderá el año.',
         imagen: 'https://pbs.twimg.com/media/G7qfcGRWkAAV74w?format=png&name=small',
+        video: '1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS', // Video de presentación
         personajes: ['ichika'],
         tipoRequisito: 'mazos_completados',
         cantidadRequerida: 10,
@@ -80,6 +83,7 @@ const EVENTOS_DIARIOS = [
         titulo: '🎶 ¡MIKU PERDIÓ LAS ENTRADAS!',
         descripcion: 'Miku tiene un concierto de música tradicional hoy, pero perdió las entradas. Necesita que la ayudes a buscarlas. Completa 10 MAZOS AL 100% hoy. ¡No la dejes plantada!',
         imagen: 'https://pbs.twimg.com/media/G7qfrrKWsAAv6ZT?format=png&name=small',
+        video: '1tS-gKr6bf4MY5Yrw7zRvP2uP_zq9rsLl', // Video de presentación
         personajes: ['miku'],
         tipoRequisito: 'mazos_completados',
         cantidadRequerida: 10,
@@ -96,6 +100,7 @@ const EVENTOS_DIARIOS = [
         titulo: '🏃‍♀️ ¡YOTSUBA NECESITA APOYO!',
         descripcion: 'Yotsuba tiene una carrera importante mañana y está nerviosa. Quiere que estudien juntos para calmarse. Completa 10 MAZOS AL 100% hoy para demostrarle que puedes con todo.',
         imagen: 'https://pbs.twimg.com/media/G7qfupkXUAAX0aS?format=png&name=small',
+        video: '1-wYJYTaw0ZOKQy8BBPR7Fmhlzs0IVx9K', // Video de presentación
         personajes: ['yotsuba'],
         tipoRequisito: 'mazos_completados',
         cantidadRequerida: 10,
@@ -112,6 +117,7 @@ const EVENTOS_DIARIOS = [
         titulo: '🍣 ¡ITSUKI QUIERE BUFFET LIBRE!',
         descripcion: 'Itsuki quiere ir a un buffet libre pero le da vergüenza ir sola. Prometiste acompañarla si completas 10 MAZOS AL 100% hoy. ¡No la decepciones!',
         imagen: 'https://pbs.twimg.com/media/G7qfxnsX0AIbJK1?format=png&name=small',
+        video: '1aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe', // Video de presentación
         personajes: ['itsuki'],
         tipoRequisito: 'mazos_completados',
         cantidadRequerida: 10,
@@ -128,6 +134,7 @@ const EVENTOS_DIARIOS = [
         titulo: '👯‍♀️ ¡NINO E ICHIKA DISCUTEN!',
         descripcion: 'Nino e Ichika están discutiendo por quién cocinará hoy. Tienes que mediar para que se reconcilien. Demuestra tu habilidad completando 10 MAZOS AL 100% hoy.',
         imagen: 'https://pbs.twimg.com/media/G7qfcGRWkAAV74w?format=png&name=small',
+        video: '1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS', // Video de presentación
         personajes: ['nino', 'ichika'],
         tipoRequisito: 'mazos_completados',
         cantidadRequerida: 10,
@@ -144,6 +151,7 @@ const EVENTOS_DIARIOS = [
         titulo: '📚 ¡MIKU Y YOTSUBA NECESITAN AYUDA!',
         descripcion: 'Miku no entiende historia y Yotsuba quiere ayudarle pero no sabe cómo. Completa 10 MAZOS AL 100% hoy para darles material de estudio.',
         imagen: 'https://pbs.twimg.com/media/G7qfrrKWsAAv6ZT?format=png&name=small',
+        video: '1-wYJYTaw0ZOKQy8BBPR7Fmhlzs0IVx9K', // Video de presentación
         personajes: ['miku', 'yotsuba'],
         tipoRequisito: 'mazos_completados',
         cantidadRequerida: 10,
@@ -160,6 +168,7 @@ const EVENTOS_DIARIOS = [
         titulo: '📝 ¡EXAMEN SORPRESA!',
         descripcion: 'Las profesoras anunciaron un examen sorpresa. Nino, Miku e Itsuki entran en pánico. Necesitan que las ayudes a repasar completando 10 MAZOS AL 100% hoy.',
         imagen: 'https://pbs.twimg.com/media/G7qfxnsX0AIbJK1?format=png&name=small',
+        video: '1aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe', // Video de presentación
         personajes: ['nino', 'miku', 'itsuki'],
         tipoRequisito: 'mazos_completados',
         cantidadRequerida: 10,
@@ -176,6 +185,7 @@ const EVENTOS_DIARIOS = [
         titulo: '🎪 ¡FESTIVAL ESCOLAR!',
         descripcion: 'El festival escolar está cerca y 4 de las hermanas necesitan ayuda para preparar el stand. Completa 10 MAZOS AL 100% hoy para que todo salga perfecto.',
         imagen: 'https://pbs.twimg.com/media/G7qfcGRWkAAV74w?format=png&name=small',
+        video: '1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS', // Video de presentación
         personajes: ['ichika', 'nino', 'miku', 'yotsuba'],
         tipoRequisito: 'mazos_completados',
         cantidadRequerida: 10,
@@ -192,6 +202,7 @@ const EVENTOS_DIARIOS = [
         titulo: '👯‍♀️👯‍♀️👯‍♀️👯‍♀️👯‍♀️ ¡VIAJE DE HERMANAS!',
         descripcion: '¡Las 5 hermanas quieren hacer un viaje juntas! Te invitaron, pero debes demostrar que eres responsable completando 10 MAZOS AL 100% hoy.',
         imagen: 'https://pbs.twimg.com/media/G7qfpGZXAAAib4A?format=png&name=small',
+        video: '1tS-gKr6bf4MY5Yrw7zRvP2uP_zq9rsLl', // Video de presentación
         personajes: ['ichika', 'nino', 'miku', 'yotsuba', 'itsuki'],
         tipoRequisito: 'mazos_completados',
         cantidadRequerida: 10,
@@ -920,6 +931,108 @@ const EventosDiarios = {
         // Verificar si es evento NTR (tiene opciones)
         const esNTR = evento.tipo === 'ntr' && evento.opciones && evento.opciones.length > 0;
         
+        // Construir el contenedor de imagen y video
+        let multimediaHTML = '';
+        
+        if (evento.imagen && evento.video) {
+            // Tiene imagen Y video - mostrar ambos
+            multimediaHTML = `
+                <!-- IMAGEN DE PRESENTACIÓN -->
+                <div style="
+                    width: min(300px, 60vw);
+                    height: min(300px, 60vw);
+                    margin: 10px auto;
+                    border-radius: 15px;
+                    overflow: hidden;
+                    border: 4px solid #FF1493;
+                    box-shadow: 0 0 25px #FF1493;
+                    background: #000;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                ">
+                    <img src="${evento.imagen}" alt="${evento.titulo}" style="
+                        width: 100%;
+                        height: 100%;
+                        object-fit: contain;
+                        display: block;
+                        background-color: #000;
+                    ">
+                </div>
+                
+                <!-- VIDEO DE PRESENTACIÓN -->
+                <div style="
+                    width: 100%;
+                    max-width: 560px;
+                    margin: 20px auto;
+                    border-radius: 15px;
+                    overflow: hidden;
+                    border: 4px solid #FF1493;
+                    box-shadow: 0 0 25px #FF1493;
+                    background: #000;
+                ">
+                    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+                        <iframe
+                            src="https://drive.google.com/file/d/${evento.video}/preview"
+                            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
+                            frameborder="0"
+                            allow="autoplay; encrypted-media"
+                            allowfullscreen
+                        ></iframe>
+                    </div>
+                </div>
+            `;
+        } else if (evento.imagen) {
+            // Solo imagen
+            multimediaHTML = `
+                <div style="
+                    width: min(300px, 60vw);
+                    height: min(300px, 60vw);
+                    margin: 20px auto;
+                    border-radius: 15px;
+                    overflow: hidden;
+                    border: 4px solid #FF1493;
+                    box-shadow: 0 0 25px #FF1493;
+                    background: #000;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                ">
+                    <img src="${evento.imagen}" alt="${evento.titulo}" style="
+                        width: 100%;
+                        height: 100%;
+                        object-fit: contain;
+                        display: block;
+                        background-color: #000;
+                    ">
+                </div>
+            `;
+        } else if (evento.video) {
+            // Solo video
+            multimediaHTML = `
+                <div style="
+                    width: 100%;
+                    max-width: 560px;
+                    margin: 20px auto;
+                    border-radius: 15px;
+                    overflow: hidden;
+                    border: 4px solid #FF1493;
+                    box-shadow: 0 0 25px #FF1493;
+                    background: #000;
+                ">
+                    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+                        <iframe
+                            src="https://drive.google.com/file/d/${evento.video}/preview"
+                            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
+                            frameborder="0"
+                            allow="autoplay; encrypted-media"
+                            allowfullscreen
+                        ></iframe>
+                    </div>
+                </div>
+            `;
+        }
+
         let botonesHTML = '';
         if (esNTR) {
             // Crear 2 botones para las opciones NTR
@@ -1034,28 +1147,8 @@ const EventosDiarios = {
                     padding-right: 45px;
                 ">📅 ¡EVENTO DIARIO!</h1>
 
-                <!-- IMAGEN MODIFICADA: Ahora es cuadrada y se ve COMPLETA (sin recortes) -->
-                <div style="
-                    width: min(300px, 60vw);
-                    height: min(300px, 60vw);
-                    margin: 20px auto;
-                    border-radius: 15px;
-                    overflow: hidden;
-                    border: 4px solid #FF1493;
-                    box-shadow: 0 0 25px #FF1493;
-                    background: #000;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                ">
-                    <img src="${evento.imagen}" alt="${evento.titulo}" style="
-                        width: 100%;
-                        height: 100%;
-                        object-fit: contain;
-                        display: block;
-                        background-color: #000;
-                    ">
-                </div>
+                <!-- IMAGEN Y VIDEO DE PRESENTACIÓN -->
+                ${multimediaHTML}
 
                 <h2 style="
                     color: #FF1493;
