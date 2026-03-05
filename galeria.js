@@ -205,6 +205,7 @@ const galeriaDatabase = {
               { id: 13, url: "https://pbs.twimg.com/media/HCe-aKjawAADi3N?format=jpg&name=small" },
                { id: 14, url: "https://pbs.twimg.com/media/HCqB5bFXgAAjgl9?format=png&name=small" },
                { id: 15, url: "https://pbs.twimg.com/media/HCqB91TWoAAy3Dt?format=png&name=small" }
+            
         ]
  
     },
@@ -227,7 +228,8 @@ const galeriaDatabase = {
             { id: 11, url: "https://pbs.twimg.com/media/HClCBCMXMAAd6qi?format=jpg&name=small" },
             { id: 12, url: "https://pbs.twimg.com/media/HClCE68WYAAuFly?format=jpg&name=small" },
             { id: 13, url: "https://pbs.twimg.com/media/HClCGqZakAA4SE4?format=jpg&name=small" },
-            { id: 14, url: "https://pbs.twimg.com/media/HClCIlHa8AABwfo?format=jpg&name=small" }
+            { id: 14, url: "https://pbs.twimg.com/media/HClCIlHa8AABwfo?format=jpg&name=small" },
+            { id: 15, url: "https://pbs.twimg.com/media/HCqEZzsaoAAhtRm?format=jpg&name=small" }
         
         ]
     },
