@@ -891,7 +891,7 @@ const EventosDiarios = {
     },
 
     // ================================================
-    // MOSTRAR MODAL DEL EVENTO (VERSIÓN QUE SOPORTA NTR)
+    // MOSTRAR MODAL DEL EVENTO - VERSIÓN CORREGIDA
     // ================================================
     mostrarModalEvento: function(evento) {
         const overlay = document.createElement('div');
@@ -931,16 +931,18 @@ const EventosDiarios = {
         // Verificar si es evento NTR (tiene opciones)
         const esNTR = evento.tipo === 'ntr' && evento.opciones && evento.opciones.length > 0;
         
-        // Construir el contenedor de imagen y video
+        // ================================================
+        // VERSIÓN CORREGIDA: Imagen arriba, video debajo
+        // ================================================
         let multimediaHTML = '';
         
-        if (evento.imagen && evento.video) {
-            // Tiene imagen Y video - mostrar ambos
-            multimediaHTML = `
+        // SIEMPRE mostrar la imagen si existe (primero)
+        if (evento.imagen) {
+            multimediaHTML += `
                 <!-- IMAGEN DE PRESENTACIÓN -->
                 <div style="
-                    width: min(300px, 60vw);
-                    height: min(300px, 60vw);
+                    width: 100%;
+                    max-width: 400px;
                     margin: 10px auto;
                     border-radius: 15px;
                     overflow: hidden;
@@ -953,63 +955,18 @@ const EventosDiarios = {
                 ">
                     <img src="${evento.imagen}" alt="${evento.titulo}" style="
                         width: 100%;
-                        height: 100%;
-                        object-fit: contain;
+                        height: auto;
                         display: block;
                         background-color: #000;
                     ">
                 </div>
-                
+            `;
+        }
+        
+        // LUEGO mostrar el video si existe (debajo)
+        if (evento.video) {
+            multimediaHTML += `
                 <!-- VIDEO DE PRESENTACIÓN -->
-                <div style="
-                    width: 100%;
-                    max-width: 560px;
-                    margin: 20px auto;
-                    border-radius: 15px;
-                    overflow: hidden;
-                    border: 4px solid #FF1493;
-                    box-shadow: 0 0 25px #FF1493;
-                    background: #000;
-                ">
-                    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-                        <iframe
-                            src="https://drive.google.com/file/d/${evento.video}/preview"
-                            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
-                            frameborder="0"
-                            allow="autoplay; encrypted-media"
-                            allowfullscreen
-                        ></iframe>
-                    </div>
-                </div>
-            `;
-        } else if (evento.imagen) {
-            // Solo imagen
-            multimediaHTML = `
-                <div style="
-                    width: min(300px, 60vw);
-                    height: min(300px, 60vw);
-                    margin: 20px auto;
-                    border-radius: 15px;
-                    overflow: hidden;
-                    border: 4px solid #FF1493;
-                    box-shadow: 0 0 25px #FF1493;
-                    background: #000;
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                ">
-                    <img src="${evento.imagen}" alt="${evento.titulo}" style="
-                        width: 100%;
-                        height: 100%;
-                        object-fit: contain;
-                        display: block;
-                        background-color: #000;
-                    ">
-                </div>
-            `;
-        } else if (evento.video) {
-            // Solo video
-            multimediaHTML = `
                 <div style="
                     width: 100%;
                     max-width: 560px;
@@ -1147,7 +1104,7 @@ const EventosDiarios = {
                     padding-right: 45px;
                 ">📅 ¡EVENTO DIARIO!</h1>
 
-                <!-- IMAGEN Y VIDEO DE PRESENTACIÓN -->
+                <!-- IMAGEN Y VIDEO DE PRESENTACIÓN (IMAGEN ARRIBA, VIDEO DEBAJO) -->
                 ${multimediaHTML}
 
                 <h2 style="
