@@ -55,7 +55,7 @@ const galeriaDatabase = {
         titulo: "Nino mi novia putona ",
         descripcion: "Nino mi novia puta culona tetona putona buen culo buen orto buena concha orto y conchas rosada buenas curvas mi putita putona ",
         categoria: "Mi puta novia culona tetona buen culo",
-        imagen: "https://pbs.twimg.com/media/G7fsiFCXQAAhtqK?format=png&name=900x900",
+        imagen: "https://pbs.twimg.com/media/G7fsiFCXQAAhtKq?format=png&name=900x900",
         imagenes: [
             { id: 1, url: "https://pbs.twimg.com/media/GrNWikuWsAAVYtt?format=jpg&name=4096x4096" },
             { id: 2, url: "https://pbs.twimg.com/media/GztU8Y3XsAA5Yzm?format=png&name=small" },
