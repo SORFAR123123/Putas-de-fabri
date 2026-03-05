@@ -278,11 +278,8 @@ const galeriaDatabase = {
         categoria: "Quintillizas",
         imagen: "https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0",
         imagenes: [
-            { id: 1, url: "https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0" },
-            { id: 2, url: "https://images.unsplash.com/photo-1518834103328-371bb64201b4" },
-            { id: 3, url: "https://images.unsplash.com/photo-1513584684374-8bab748fbf90" },
-            { id: 4, url: "https://images.unsplash.com/photo-1501854140801-50d01698950b" },
-            { id: 5, url: "https://images.unsplash.com/photo-1447752875215-b2761acb3c5d" }
+            { id: 1, url: "https://pbs.twimg.com/media/HCreLRRWoAEMJ40?format=jpg&name=small" },
+            
         ]
     },
     
