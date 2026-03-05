@@ -294,7 +294,7 @@ const galeriaDatabase = {
         titulo: "Yotsuba - La más enérgica",
         descripcion: "Colección de imágenes de Yotsuba, la quintilliza más alegre y deportista",
         categoria: "Quintillizas",
-        imagen: "https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0",
+        imagen: "https://pbs.twimg.com/media/HCreLRRWoAEMJ40?format=jpg&name=medium",
         imagenes: [
             { id: 1, url: "https://pbs.twimg.com/media/HCreLRRWoAEMJ40?format=jpg&name=small" },
             
