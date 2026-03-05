@@ -299,7 +299,9 @@ const galeriaDatabase = {
         
             { id: 2, url: "https://pbs.twimg.com/media/HCrhHmxWMAAHCFy?format=jpg&name=small" },
         
-            { id: 3, url: "https://pbs.twimg.com/media/HCriATyaUAEr65q?format=jpg&name=medium" }
+            { id: 3, url: "https://pbs.twimg.com/media/HCriATyaUAEr65q?format=jpg&name=medium" },
+        
+            { id: 4, url: "https://pbs.twimg.com/media/HCrkMgbWwAAK4Ij?format=jpg&name=medium" }
         ]
     },
     
