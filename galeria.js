@@ -280,6 +280,8 @@ const galeriaDatabase = {
         imagenes: [
             { id: 1, url: "https://pbs.twimg.com/media/HCreLRRWoAEMJ40?format=jpg&name=small" },
             
+        
+            { id: 2, url: "https://pbs.twimg.com/media/HCrhHmxWMAAHCFy?format=jpg&name=small" }
         ]
     },
     
