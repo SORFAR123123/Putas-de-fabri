@@ -45,6 +45,12 @@ const contenedoresGaleria = {
         imagen: "https://pbs.twimg.com/media/HCrph-HXcAIXa81?format=png&name=small",
         descripcion: "Galería de Itsuki - La glotona del grupo",
         categoria: "Quintillizas"
+    },
+    8: {
+        nombre: "Trolas Random",
+        imagen: "https://images.unsplash.com/photo-1526512340740-9217d0159da9?w=400&h=400&fit=crop",
+        descripcion: "Colección variada de imágenes aleatorias y divertidas",
+        categoria: "Random"
     }
 };
 
@@ -55,31 +61,21 @@ const galeriaDatabase = {
         titulo: "Nino mi novia putona ",
         descripcion: "Nino mi novia puta culona tetona putona buen culo buen orto buena concha orto y conchas rosada buenas curvas mi putita putona ",
         categoria: "Mi puta novia culona tetona buen culo",
-        imagen: "https://pbs.twimg.com/media/G7fsiFCXQAAhtKq?format=png&name=900x900",
+        imagen: "https://pbs.twimg.com/media/G7fsiFCXQAAhtqK?format=png&name=900x900",
         imagenes: [
             { id: 1, url: "https://pbs.twimg.com/media/GrNWikuWsAAVYtt?format=jpg&name=4096x4096" },
             { id: 2, url: "https://pbs.twimg.com/media/GztU8Y3XsAA5Yzm?format=png&name=small" },
             { id: 3, url: "https://pbs.twimg.com/media/HCrZxBIW8AE9F4E?format=jpg&name=small" },
             { id: 4, url: "https://pbs.twimg.com/media/HCrbuHAaUAI3sCB?format=jpg&name=small" },
-        
             { id: 5, url: "https://pbs.twimg.com/media/HCriPewaUAAUBxj?format=jpg&name=medium" },
-        
             { id: 6, url: "https://pbs.twimg.com/media/HCriW0RW4AAflH_?format=jpg&name=medium" },
-        
             { id: 7, url: "https://pbs.twimg.com/media/HCri27xbwAAaBmv?format=jpg&name=small" },
-        
             { id: 8, url: "https://pbs.twimg.com/media/HCrjXkwXgAApyPj?format=jpg&name=medium" },
-        
             { id: 9, url: "https://pbs.twimg.com/media/HCrjnnTWUAApDRm?format=jpg&name=large" },
-        
             { id: 10, url: "https://pbs.twimg.com/media/HCrj5B6WoAEp_zY?format=jpg&name=large" },
-        
             { id: 11, url: "https://pbs.twimg.com/media/HCrkCODbYAAn1ax?format=jpg&name=small" },
-        
             { id: 12, url: "https://pbs.twimg.com/media/HCrkRxTXEAAKM1K?format=jpg&name=large" },
-        
             { id: 13, url: "https://pbs.twimg.com/media/HCrmd9GXwAA0waZ?format=jpg&name=small" },
-        
             { id: 14, url: "https://pbs.twimg.com/media/HCrrmjBXwAAb90l?format=jpg&name=medium" }
         ]
     },
@@ -94,53 +90,52 @@ const galeriaDatabase = {
             { id: 2, url: "https://pbs.twimg.com/media/G8ERgh8WMAcfn28?format=jpg&name=medium" },
             { id: 3, url: "https://pbs.twimg.com/media/G8ERhgCW8AI2bzV?format=jpg&name=medium" },
             { id: 4, url: "https://pbs.twimg.com/media/G8ERiiXXEAQ1rGT?format=jpg&name=medium" },
-             { id: 5, url: "https://pbs.twimg.com/media/G8ERji_W8AEFkcv?format=jpg&name=medium" },
+            { id: 5, url: "https://pbs.twimg.com/media/G8ERji_W8AEFkcv?format=jpg&name=medium" },
             { id: 6, url: "https://pbs.twimg.com/media/G8ERkaUWsAIFBp5?format=jpg&name=medium" },
             { id: 7, url: "https://pbs.twimg.com/media/G8ERlhxWwAEX5A1?format=jpg&name=medium" },
             { id: 8, url: "https://pbs.twimg.com/media/G8ERmU0W0AAJ5xK?format=jpg&name=medium" },
-             { id: 9, url: "https://pbs.twimg.com/media/G8ERnY-XAAIOlHO?format=jpg&name=medium" },
+            { id: 9, url: "https://pbs.twimg.com/media/G8ERnY-XAAIOlHO?format=jpg&name=medium" },
             { id: 10, url: "https://pbs.twimg.com/media/G8ERoSYXcAUhMqa?format=jpg&name=medium" },
             { id: 11, url: "https://pbs.twimg.com/media/G8ERpRNXIAEp_IJ?format=jpg&name=medium" },
             { id: 12, url: "https://pbs.twimg.com/media/G8ERqHJXwAQ69iE?format=jpg&name=medium" },
-             { id: 13, url: "https://pbs.twimg.com/media/G8ERrEfW8AMKweP?format=jpg&name=medium" },
+            { id: 13, url: "https://pbs.twimg.com/media/G8ERrEfW8AMKweP?format=jpg&name=medium" },
             { id: 14, url: "https://pbs.twimg.com/media/G8ERsD9WIAAJ0oG?format=jpg&name=medium" },
             { id: 15, url: "https://pbs.twimg.com/media/G8ERtMBWYAUo-U4?format=jpg&name=medium" },
             { id: 16, url: "https://pbs.twimg.com/media/G8ERuGgWEAQNJQ_?format=jpg&name=medium" },
-             { id: 17, url: "https://pbs.twimg.com/media/G8ERu42WcAYBpHn?format=jpg&name=medium" },
+            { id: 17, url: "https://pbs.twimg.com/media/G8ERu42WcAYBpHn?format=jpg&name=medium" },
             { id: 18, url: "https://pbs.twimg.com/media/G8ERvtcXYAE9fNP?format=jpg&name=medium" },
             { id: 19, url: "https://pbs.twimg.com/media/G8ERwlrWoAQ2kIT?format=jpg&name=medium" },
             { id: 20, url: "https://pbs.twimg.com/media/G8ERxkeXMAIddri?format=jpg&name=medium" },
-             { id: 21, url: "https://pbs.twimg.com/media/G8ESLKMW0AEobk1?format=jpg&name=medium" },
+            { id: 21, url: "https://pbs.twimg.com/media/G8ESLKMW0AEobk1?format=jpg&name=medium" },
             { id: 22, url: "https://pbs.twimg.com/media/G8ESMkPW4AYMcDp?format=jpg&name=medium" },
             { id: 23, url: "https://pbs.twimg.com/media/G8ESRIMXMAY6Ga4?format=jpg&name=medium" },
             { id: 24, url: "https://pbs.twimg.com/media/G8ESSN8W0AAws-T?format=jpg&name=medium" },
-             { id: 25, url: "https://pbs.twimg.com/media/G8ESTToXcAIjoqT?format=jpg&name=medium" },
+            { id: 25, url: "https://pbs.twimg.com/media/G8ESTToXcAIjoqT?format=jpg&name=medium" },
             { id: 26, url: "https://pbs.twimg.com/media/G8ESUSQXsAM9YoJ?format=jpg&name=medium" },
             { id: 27, url: "https://pbs.twimg.com/media/G8ESVMlWwAApww5?format=jpg&name=medium" },
             { id: 28, url: "https://pbs.twimg.com/media/G8ESWI4WUAImEb8?format=jpg&name=medium" },
-             { id: 29, url: "https://pbs.twimg.com/media/G8ESW8RWcAQGOrd?format=jpg&name=medium" },
+            { id: 29, url: "https://pbs.twimg.com/media/G8ESW8RWcAQGOrd?format=jpg&name=medium" },
             { id: 30, url: "https://pbs.twimg.com/media/G8ESXzfWAAAm3mC?format=jpg&name=medium" },
             { id: 31, url: "https://pbs.twimg.com/media/G8ESY-9W8AQ8a5b?format=jpg&name=medium" },
             { id: 32, url: "https://pbs.twimg.com/media/G8ESZ6EXIAMTVpa?format=jpg&name=medium" },
-             { id: 33, url: "https://pbs.twimg.com/media/G8ESatJWcAMXPYb?format=jpg&name=medium" },
+            { id: 33, url: "https://pbs.twimg.com/media/G8ESatJWcAMXPYb?format=jpg&name=medium" },
             { id: 34, url: "https://pbs.twimg.com/media/G8ESbgaXQAgc1wU?format=jpg&name=medium" },
             { id: 35, url: "https://pbs.twimg.com/media/G8ESciiXcAIcG9M?format=jpg&name=medium" },
             { id: 36, url: "https://media.discordapp.net/attachments/1200278976225091684/1449466115649441923/133435171_p35_master1200.png?ex=693f0003&is=693dae83&hm=84ce66381b0e64a987260a831756c4d762f3212bbc0ab1e07f78f48b5b8f8614&=&format=webp&quality=lossless&width=449&height=655" },
             { id: 37, url: "https://pbs.twimg.com/media/G8ESfL3WgAEemUq?format=jpg&name=medium" },
-             { id: 38, url: "https://pbs.twimg.com/media/G8ESeOGXYAE_uZG?format=jpg&name=medium" },
+            { id: 38, url: "https://pbs.twimg.com/media/G8ESeOGXYAE_uZG?format=jpg&name=medium" },
             { id: 39, url: "https://media.discordapp.net/attachments/1200278976225091684/1449464514373222532/133435171_p38_master1200.png?ex=693efe85&is=693dad05&hm=ad0520f28c924a9d3fb5085ca09788cbe4fa4c5e8c092dbd4bbe39c746641f90&=&format=webp&quality=lossless&width=449&height=655" },
             { id: 40, url: "https://media.discordapp.net/attachments/1200278976225091684/1449464519926747339/133435171_p39_master1200.png?ex=693efe87&is=693dad07&hm=0bc8ba713839ca14611f801fed830da47a94503037c3f83fabbdbf3232bb7f42&=&format=webp&quality=lossless&width=240&height=350" },
             { id: 41, url: "https://media.discordapp.net/attachments/1200278976225091684/1449464536695443658/133435171_p40_master1200.png?ex=693efe8b&is=693dad0b&hm=ac8fc18344ea56f633375a889f555352425b4019bb2f20c839f7291fec5dbb3b&=&format=webp&quality=lossless&width=449&height=655" },
-             { id: 42, url: "https://media.discordapp.net/attachments/1200278976225091684/1449464547470610716/133435171_p41_master1200.png?ex=693efe8d&is=693dad0d&hm=b0f0b9dfa04a636d3a37873a38d2d221bca09bcc9d15276b7790108b40b5e6e0&=&format=webp&quality=lossless&width=449&height=655" },
+            { id: 42, url: "https://media.discordapp.net/attachments/1200278976225091684/1449464547470610716/133435171_p41_master1200.png?ex=693efe8d&is=693dad0d&hm=b0f0b9dfa04a636d3a37873a38d2d221bca09bcc9d15276b7790108b40b5e6e0&=&format=webp&quality=lossless&width=449&height=655" },
             { id: 43, url: "https://media.discordapp.net/attachments/1200278976225091684/1449464559512453342/133435171_p42_master1200.png?ex=693efe90&is=693dad10&hm=351a8b59a42d9a59764d64799d2cfee1b5e2dfd78d1836f4e5f0309da5967ff7&=&format=webp&quality=lossless&width=449&height=655" },
             { id: 44, url: "https://media.discordapp.net/attachments/1200278976225091684/1449464570748997764/133435171_p43_master1200.png?ex=693efe93&is=693dad13&hm=b973f8e9b503818091c6b2473bf8c2b966ea4fdcbb6416220b80628f7ed483d8&=&format=webp&quality=lossless&width=449&height=655" },
             { id: 45, url: "https://media.discordapp.net/attachments/1200278976225091684/1449464583092834388/133435171_p44_master1200.png?ex=693efe96&is=693dad16&hm=f6c7520745b7ebe52b3bfb14ec5594ce5ccd4a8fded4b0f2ed46f1e616c947f3&=&format=webp&quality=lossless&width=449&height=655" },
-             { id: 46, url: "https://media.discordapp.net/attachments/1200278976225091684/1449464592773152788/133435171_p45_master1200.png?ex=693efe98&is=693dad18&hm=d97735dc3e8e2f1104f95c7df259733a03b758cd301d75ab9906544c728ba6a2&=&format=webp&quality=lossless&width=449&height=655" },
+            { id: 46, url: "https://media.discordapp.net/attachments/1200278976225091684/1449464592773152788/133435171_p45_master1200.png?ex=693efe98&is=693dad18&hm=d97735dc3e8e2f1104f95c7df259733a03b758cd301d75ab9906544c728ba6a2&=&format=webp&quality=lossless&width=449&height=655" },
             { id: 47, url: "https://media.discordapp.net/attachments/1200278976225091684/1449464604429254666/133435171_p46_master1200.png?ex=693efe9b&is=693dad1b&hm=94897d06814259ab9347177f86e5b480913d6588f3dcfbb9d75ef06ad31c4b0d&=&format=webp&quality=lossless&width=449&height=655" },
             { id: 48, url: "https://media.discordapp.net/attachments/1200278976225091684/1449464620854022235/133435171_p47_master1200.png?ex=693efe9f&is=693dad1f&hm=05a84cef95bc80b48e795401e0b63987a0120b6c08573866449e8f69a95e1d7c&=&format=webp&quality=lossless&width=449&height=655" },
             { id: 49, url: "https://media.discordapp.net/attachments/1200278976225091684/1449464631188918474/133435171_p48_master1200.png?ex=693efea1&is=693dad21&hm=eb9ffc6dae4d5a6ddc0cf2e914cda694a3b23ff517bdfac026f746d2884b6fcc&=&format=webp&quality=lossless&width=449&height=655" },
-             { id: 50, url: "https://cdn.discordapp.com/attachments/1200278976225091684/1449464640848269454/133435171_p49_master1200.png?ex=693efea4&is=693dad24&hm=4a853d8146ff9efafa473b189c89f2a53ea5772279f4cc22682e1726fed935df&" }    
-          
+            { id: 50, url: "https://cdn.discordapp.com/attachments/1200278976225091684/1449464640848269454/133435171_p49_master1200.png?ex=693efea4&is=693dad24&hm=4a853d8146ff9efafa473b189c89f2a53ea5772279f4cc22682e1726fed935df&" }    
         ]
     },
     
@@ -213,7 +208,6 @@ const galeriaDatabase = {
             { id: 4, url: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e" },
             { id: 5, url: "https://images.unsplash.com/photo-1534528741775-53994a69daeb" }
         ]
- 
     },
     '3_1': {
         titulo: "Putonas",
@@ -225,30 +219,25 @@ const galeriaDatabase = {
             { id: 2, url: "https://pbs.twimg.com/media/HCbrpWiXsAAMZUg?format=jpg&name=small" },
             { id: 3, url: "https://pbs.twimg.com/media/HCbsAuJaoAA2_Zy?format=jpg&name=small" },
             { id: 4, url: "https://pbs.twimg.com/media/HCbsgy5XsAAK37u?format=png&name=small" },
-             { id: 5, url: "https://pbs.twimg.com/media/HCbtHg_bQAAYeoO?format=png&name=small" },
+            { id: 5, url: "https://pbs.twimg.com/media/HCbtHg_bQAAYeoO?format=png&name=small" },
             { id: 6, url: "https://pbs.twimg.com/media/HCbtZXqXQAAr1CF?format=png&name=small" },
             { id: 7, url: "https://pbs.twimg.com/media/HCbtP1fa0AE0eNd?format=png&name=small" },
             { id: 8, url: "https://pbs.twimg.com/media/HCbuP83bcAA8Z04?format=jpg&name=small" },
-              { id: 9, url: "https://pbs.twimg.com/media/HCbuZx5WIAA0REx?format=jpg&name=small" },
+            { id: 9, url: "https://pbs.twimg.com/media/HCbuZx5WIAA0REx?format=jpg&name=small" },
             { id: 10, url: "https://pbs.twimg.com/media/HCbu_dBbsAAylwF?format=jpg&name=small" },
             { id: 11, url: "https://pbs.twimg.com/media/HCbvMKyXMAELAEn?format=jpg&name=small" },
-             { id: 12, url: "https://pbs.twimg.com/media/HCgdpGGbYAA84Y0?format=png&name=small" },
-              { id: 13, url: "https://pbs.twimg.com/media/HCe-aKjawAADi3N?format=jpg&name=small" },
-               { id: 14, url: "https://pbs.twimg.com/media/HCqB5bFXgAAjgl9?format=png&name=small" },
-               { id: 15, url: "https://pbs.twimg.com/media/HCqB91TWoAAy3Dt?format=png&name=small" },
-              { id: 16, url: "https://pbs.twimg.com/media/HCq3vdHXYAEffD7?format=png&name=small" },
-              { id: 17, url: "https://pbs.twimg.com/media/HCq3uDLW4AA9bKm?format=png&name=small" },
-            
-        
+            { id: 12, url: "https://pbs.twimg.com/media/HCgdpGGbYAA84Y0?format=png&name=small" },
+            { id: 13, url: "https://pbs.twimg.com/media/HCe-aKjawAADi3N?format=jpg&name=small" },
+            { id: 14, url: "https://pbs.twimg.com/media/HCqB5bFXgAAjgl9?format=png&name=small" },
+            { id: 15, url: "https://pbs.twimg.com/media/HCqB91TWoAAy3Dt?format=png&name=small" },
+            { id: 16, url: "https://pbs.twimg.com/media/HCq3vdHXYAEffD7?format=png&name=small" },
+            { id: 17, url: "https://pbs.twimg.com/media/HCq3uDLW4AA9bKm?format=png&name=small" },
             { id: 18, url: "https://pbs.twimg.com/media/HCrY9OhWMAAGqaz?format=jpg&name=small" },
-        
             { id: 19, url: "https://pbs.twimg.com/media/HCrjyH_W8AEZXuN?format=png&name=small" },
-        
             { id: 20, url: "https://pbs.twimg.com/media/HCrsaa6WcAEQbE6?format=jpg&name=large" }
         ]
- 
     },
-      '3_2': {
+    '3_2': {
         titulo: "Shotas se kachan a Nino",
         descripcion: "culona rosada",
         categoria: "Putardas",
@@ -271,31 +260,18 @@ const galeriaDatabase = {
             { id: 15, url: "https://pbs.twimg.com/media/HCqEZzsaoAAhtRm?format=jpg&name=small" },
             { id: 16, url: "https://pbs.twimg.com/media/HCrLwetWIAEYdr5?format=jpg&name=small" },
             { id: 17, url: "https://pbs.twimg.com/media/HCrJoF-XMAAWJra?format=jpg&name=small" },
-        
             { id: 18, url: "https://pbs.twimg.com/media/HCrQkIKW8AAlQY6?format=jpg&name=small" },
-        
             { id: 19, url: "https://pbs.twimg.com/media/HCrQmL8XMAAy3uh?format=jpg&name=small" },
-        
             { id: 20, url: "https://pbs.twimg.com/media/HCrTLFgaUAExqjv?format=jpg&name=small" },
-        
             { id: 21, url: "https://pbs.twimg.com/media/HCrWiMXWkAA-wCf?format=jpg&name=small" },
-        
             { id: 22, url: "https://pbs.twimg.com/media/HCrWkT0WcAAMjVS?format=jpg&name=small" },
-        
             { id: 23, url: "https://pbs.twimg.com/media/HCrdo3TXgAAPZJ_?format=jpg&name=small" },
-        
             { id: 24, url: "https://pbs.twimg.com/media/HCrdp_HaUAEiRRJ?format=jpg&name=small" },
-        
             { id: 25, url: "https://pbs.twimg.com/media/HCrdwzdaUAIi_H8?format=jpg&name=small" },
-        
             { id: 26, url: "https://pbs.twimg.com/media/HCrdyDBXoAEyPa-?format=jpg&name=small" },
-        
             { id: 27, url: "https://pbs.twimg.com/media/HCreqhoXIAAuICJ?format=jpg&name=small" },
-        
             { id: 28, url: "https://pbs.twimg.com/media/HCre_jXWwAAz2P5?format=jpg&name=small" },
-        
             { id: 29, url: "https://pbs.twimg.com/media/HCrlW3IaUAEZY_1?format=jpg&name=small" },
-        
             { id: 30, url: "https://pbs.twimg.com/media/HCroIllWAAE-Trf?format=jpg&name=medium" }
         ]
     },
@@ -307,12 +283,8 @@ const galeriaDatabase = {
         imagen: "https://pbs.twimg.com/media/HCreLRRWoAEMJ40?format=jpg&name=medium",
         imagenes: [
             { id: 1, url: "https://pbs.twimg.com/media/HCreLRRWoAEMJ40?format=jpg&name=small" },
-            
-        
             { id: 2, url: "https://pbs.twimg.com/media/HCrhHmxWMAAHCFy?format=jpg&name=small" },
-        
             { id: 3, url: "https://pbs.twimg.com/media/HCriATyaUAEr65q?format=jpg&name=medium" },
-        
             { id: 4, url: "https://pbs.twimg.com/media/HCrkMgbWwAAK4Ij?format=jpg&name=medium" }
         ]
     },
@@ -359,6 +331,50 @@ const galeriaDatabase = {
             { id: 3, url: "https://images.unsplash.com/photo-1418065460487-3e41a6c84dc5" },
             { id: 4, url: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05" },
             { id: 5, url: "https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07" }
+        ]
+    },
+    
+    // CONTENEDOR 8 - Trolas Random
+    '8_1': {
+        titulo: "Memes y Trolas",
+        descripcion: "Recopilación de los mejores memes y contenido divertido",
+        categoria: "Humor",
+        imagen: "https://images.unsplash.com/photo-1554177255-61502b3520e7?w=300&h=300&fit=crop",
+        imagenes: [
+            { id: 1, url: "https://images.unsplash.com/photo-1554177255-61502b3520e7?w=600&h=600&fit=crop" },
+            { id: 2, url: "https://images.unsplash.com/photo-1578328819058-b69f3a3b0f6b?w=600&h=600&fit=crop" },
+            { id: 3, url: "https://images.unsplash.com/photo-1591047139829-d91aecb6caea?w=600&h=600&fit=crop" },
+            { id: 4, url: "https://images.unsplash.com/photo-1527224857830-43a7acc85260?w=600&h=600&fit=crop" },
+            { id: 5, url: "https://images.unsplash.com/photo-1531482615713-2afd69097998?w=600&h=600&fit=crop" },
+            { id: 6, url: "https://images.unsplash.com/photo-1544717302-de2939b7ef71?w=600&h=600&fit=crop" },
+            { id: 7, url: "https://images.unsplash.com/photo-1500462918059-b1a0cb512f1d?w=600&h=600&fit=crop" },
+            { id: 8, url: "https://images.unsplash.com/photo-1524419986249-348e8fa6ad4a?w=600&h=600&fit=crop" },
+            { id: 9, url: "https://images.unsplash.com/photo-1523867574498-1c0d169b5c9a?w=600&h=600&fit=crop" },
+            { id: 10, url: "https://images.unsplash.com/photo-1553882809-a4f57e59501d?w=600&h=600&fit=crop" }
+        ]
+    },
+    
+    '8_2': {
+        titulo: "Videos y GIFs Random",
+        descripcion: "Contenido audiovisual variado para entretenimiento",
+        categoria: "Multimedia",
+        imagen: "https://images.unsplash.com/photo-1492619375914-88005aa9e8fb?w=300&h=300&fit=crop",
+        imagenes: [
+            { id: 1, url: "https://images.unsplash.com/photo-1492619375914-88005aa9e8fb?w=600&h=600&fit=crop" },
+            { id: 2, url: "https://images.unsplash.com/photo-1522869635100-9f4c5e86aa37?w=600&h=600&fit=crop" },
+            { id: 3, url: "https://images.unsplash.com/photo-1485846234645-a62644f84728?w=600&h=600&fit=crop" },
+            { id: 4, url: "https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?w=600&h=600&fit=crop" },
+            { id: 5, url: "https://images.unsplash.com/photo-1535016120720-40c646be5580?w=600&h=600&fit=crop" },
+            { id: 6, url: "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=600&h=600&fit=crop" },
+            { id: 7, url: "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=600&h=600&fit=crop" },
+            { id: 8, url: "https://images.unsplash.com/photo-1512149177596-f817c7ef5d4c?w=600&h=600&fit=crop" },
+            { id: 9, url: "https://images.unsplash.com/photo-1516259762381-22954d7d3ad2?w=600&h=600&fit=crop" },
+            { id: 10, url: "https://images.unsplash.com/photo-1504609813442-a8924e83f76e?w=600&h=600&fit=crop" },
+            { id: 11, url: "https://images.unsplash.com/photo-1508704019882-f9cf40e475b4?w=600&h=600&fit=crop" },
+            { id: 12, url: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=600&h=600&fit=crop" },
+            { id: 13, url: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=600&h=600&fit=crop" },
+            { id: 14, url: "https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=600&h=600&fit=crop" },
+            { id: 15, url: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&h=600&fit=crop" }
         ]
     }
 };
@@ -673,5 +689,5 @@ function imagenSiguiente() {
 // ================================================
 
 console.log('📦 Sistema de Galería cargado correctamente');
-console.log('📁 Contenedores disponibles: 7');
+console.log('📁 Contenedores disponibles: 8');
 console.log('📂 Sub-galerías disponibles: ' + Object.keys(galeriaDatabase).length);
