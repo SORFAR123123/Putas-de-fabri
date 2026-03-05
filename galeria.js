@@ -350,7 +350,9 @@ const galeriaDatabase = {
             { id: 7, url: "https://images.unsplash.com/photo-1500462918059-b1a0cb512f1d?w=600&h=600&fit=crop" },
             { id: 8, url: "https://images.unsplash.com/photo-1524419986249-348e8fa6ad4a?w=600&h=600&fit=crop" },
             { id: 9, url: "https://images.unsplash.com/photo-1523867574498-1c0d169b5c9a?w=600&h=600&fit=crop" },
-            { id: 10, url: "https://images.unsplash.com/photo-1553882809-a4f57e59501d?w=600&h=600&fit=crop" }
+            { id: 10, url: "https://images.unsplash.com/photo-1553882809-a4f57e59501d?w=600&h=600&fit=crop" },
+        
+            { id: 11, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772752779732.jpg" }
         ]
     },
     
