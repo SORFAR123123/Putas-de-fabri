@@ -1,6 +1,7 @@
 // ================================================
 // SISTEMA DE EVENTOS DIARIOS - VERSIÓN CON NTR 50/50
 // Éxito inmediato, fracaso al día siguiente + Evento NTR de Uzaki
+// VERSIÓN CORREGIDA - Progreso basado en mazos de HOY
 // ================================================
 
 // ================================================
@@ -498,6 +499,32 @@ const EventosDiarios = {
         return `${fecha.getFullYear()}-${String(fecha.getMonth() + 1).padStart(2, '0')}-${String(fecha.getDate()).padStart(2, '0')}`;
     },
 
+    // ================================================
+    // NUEVA FUNCIÓN - Obtener mazos completados HOY
+    // ================================================
+    obtenerMazosCompletadosHoy: function() {
+        const fechaHoy = this.obtenerFechaActual();
+        
+        // Usar el sistema que YA EXISTE en main.js (progreso_mazos_diario)
+        try {
+            const progresoDiario = JSON.parse(localStorage.getItem('progreso_mazos_diario') || '{}');
+            
+            // Si no hay registro para hoy, retornar 0
+            if (!progresoDiario[fechaHoy]) {
+                return 0;
+            }
+            
+            // Retornar cuántos mazos completó hoy
+            const mazosHoy = parseInt(progresoDiario[fechaHoy]) || 0;
+            console.log(`📊 Mazos completados HOY (${fechaHoy}): ${mazosHoy}`);
+            return mazosHoy;
+            
+        } catch (e) {
+            console.error('Error al obtener mazos de hoy:', e);
+            return 0;
+        }
+    },
+
     // Verificar si ya se mostró un evento hoy
     verificarEventoHoy: function() {
         const ultimoEvento = localStorage.getItem('evento_diario_ultimo');
@@ -669,17 +696,14 @@ const EventosDiarios = {
         if (evento.tipo === 'ntr') return false; // Los NTR no tienen requisitos
         
         if (evento.tipoRequisito === 'mazos_completados') {
-            if (typeof sistemaEconomia === 'undefined') {
-                console.error('❌ sistemaEconomia no está definido al verificar requisito');
-                return false;
-            }
-            const estadisticas = sistemaEconomia.obtenerEstadisticas();
-            console.log('📊 Verificando requisito:', {
-                completados100: estadisticas.completados100,
+            // Usar los mazos completados HOY, NO el total histórico
+            const mazosHoy = this.obtenerMazosCompletadosHoy();
+            console.log('📊 Verificando requisito HOY:', {
+                mazosHoy: mazosHoy,
                 requerido: evento.cantidadRequerida,
-                resultado: estadisticas.completados100 >= evento.cantidadRequerida
+                resultado: mazosHoy >= evento.cantidadRequerida
             });
-            return estadisticas.completados100 >= evento.cantidadRequerida;
+            return mazosHoy >= evento.cantidadRequerida;
         }
         return false;
     },
@@ -1490,6 +1514,32 @@ const EventosDiarios = {
         }
     },
 
+    // ================================================
+    // VERSIÓN CORREGIDA - Verifica progreso con mazos de HOY
+    // ================================================
+    verificarProgresoEvento: function() {
+        const ultimoEvento = JSON.parse(localStorage.getItem('evento_diario_ultimo') || '{}');
+        const eventoActual = this.obtenerEventoHoy();
+        const fechaHoy = this.obtenerFechaActual();
+        
+        // Solo verificar si hay evento hoy, no es NTR y no está cumplido aún
+        if (ultimoEvento.fecha === fechaHoy && 
+            !ultimoEvento.requisitoCumplido && 
+            eventoActual && 
+            eventoActual.tipo !== 'ntr') {
+            
+            // Obtener mazos completados HOY (no total histórico)
+            const mazosHoy = this.obtenerMazosCompletadosHoy();
+            
+            if (mazosHoy >= eventoActual.cantidadRequerida) {
+                this.marcarRequisitoCumplido();
+            }
+        }
+        
+        // Verificar al final del día (para marcar como fallido)
+        this.verificarFinDelDia();
+    },
+
     // Iniciar evento diario (VERSIÓN CORREGIDA - Éxito inmediato, fracaso al día siguiente)
     iniciarEventoDiario: function() {
         console.log('📅 Iniciando sistema de eventos diarios...');
@@ -1652,28 +1702,6 @@ const EventosDiarios = {
         if (contenido) {
             contenido.innerHTML = SistemaProgresoEventos.crearBarraProgreso();
         }
-    },
-
-    // Verificar progreso del evento (llamar cuando se completa un mazo) - SOLO PARA EVENTOS NORMALES
-    verificarProgresoEvento: function() {
-        const estadisticas = sistemaEconomia.obtenerEstadisticas();
-        const ultimoEvento = JSON.parse(localStorage.getItem('evento_diario_ultimo') || '{}');
-        const eventoActual = this.obtenerEventoHoy();
-        const fechaHoy = this.obtenerFechaActual();
-        
-        // Solo verificar si hay evento hoy, no es NTR y no está cumplido aún
-        if (ultimoEvento.fecha === fechaHoy && 
-            !ultimoEvento.requisitoCumplido && 
-            eventoActual && 
-            eventoActual.tipo !== 'ntr') {
-            
-            if (estadisticas.completados100 >= eventoActual.cantidadRequerida) {
-                this.marcarRequisitoCumplido(); // Esto mostrará éxito inmediato
-            }
-        }
-        
-        // Verificar al final del día (para marcar como fallido)
-        this.verificarFinDelDia();
     },
 
     // Verificar si terminó el día y marcar como fallido
