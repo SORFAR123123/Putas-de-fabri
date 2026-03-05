@@ -30,19 +30,19 @@ const contenedoresGaleria = {
     },
     5: {
         nombre: "Ichika",
-        imagen: "https://images.unsplash.com/photo-1518834103328-371bb64201b4",
+        imagen: "https://pbs.twimg.com/media/HCrpe4jWQAAstF7?format=jpg&name=small",
         descripcion: "Galería de Ichika - La mayor de las quintillizas",
         categoria: "Quintillizas"
     },
     6: {
         nombre: "Miku",
-        imagen: "https://images.unsplash.com/photo-1513584684374-8bab748fbf90",
+        imagen: "https://pbs.twimg.com/media/HCrpm_8bAAAwYby?format=jpg&name=small",
         descripcion: "Galería de Miku - La chica tsundere",
         categoria: "Quintillizas"
     },
     7: {
         nombre: "Itsuki",
-        imagen: "https://images.unsplash.com/photo-1501854140801-50d01698950b",
+        imagen: "https://pbs.twimg.com/media/HCrph-HXcAIXa81?format=png&name=small",
         descripcion: "Galería de Itsuki - La glotona del grupo",
         categoria: "Quintillizas"
     }
