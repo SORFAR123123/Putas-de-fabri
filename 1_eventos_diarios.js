@@ -41,7 +41,7 @@ const EVENTOS_NTR = [
     }
 ];
 
-// Lista de 10 eventos con requisitos y consecuencias
+// Lista de 10 eventos con requisitos y consecuencias - AHORA CON TEXTOS PERSONALIZADOS
 const EVENTOS_DIARIOS = [
     { // Evento 1 - Solo Nino
         id: 'nino_ex',
@@ -53,6 +53,8 @@ const EVENTOS_DIARIOS = [
         cantidadRequerida: 10,
         videoExito: '1aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe',
         videoFracaso: '1-wYJYTaw0ZOKQy8BBPR7Fmhlzs0IVx9K',
+        textoExito: '¡Completaste los 10 mazos justo a tiempo! Te acercaste a Nino y su ex, y con confianza le demostraste que eres mucho mejor que él. Nino se sonroja y te toma del brazo, mientras el ex se retira humillado. ¡Has ganado su confianza!',
+        textoFracaso: 'No pudiste completar los mazos a tiempo... Cuando llegaste a la cafetería, Nino ya se había ido con su ex. Más tarde la encuentras llorando en el parque. "¿Por qué no viniste?" te dice entre lágrimas. La relación con Nino se ha enfriado.',
         afinidadExito: 15,
         afinidadFracaso: -30,
         dineroRecompensa: 50
@@ -67,6 +69,8 @@ const EVENTOS_DIARIOS = [
         cantidadRequerida: 10,
         videoExito: '1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS',
         videoFracaso: '1tS-gKr6bf4MY5Yrw7zRvP2uP_zq9rsLl',
+        textoExito: 'Estudiaste con Ichika toda la noche y lograron repasar todos los temas. Al día siguiente, Ichika pasa el examen con nota sobresaliente. "¡No lo habría logrado sin ti!" te abraza emocionada. Su gratitud hacia ti ha crecido enormemente.',
+        textoFracaso: 'Ichika esperó tu ayuda toda la noche, pero nunca llegaste. Al día siguiente, suspende el examen. La encuentras cabizbaja a la salida del colegio. "Creí que podía contar contigo..." dice con tristeza. La confianza de Ichika se ha debilitado.',
         afinidadExito: 10,
         afinidadFracaso: -25,
         dineroRecompensa: 40
@@ -81,6 +85,8 @@ const EVENTOS_DIARIOS = [
         cantidadRequerida: 10,
         videoExito: '1tS-gKr6bf4MY5Yrw7zRvP2uP_zq9rsLl',
         videoFracaso: '1aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe',
+        textoExito: 'Buscaron juntos por todas partes y finalmente encontraron las entradas detrás de la biblioteca. Llegaron justo a tiempo al concierto. Miku te toma de la mano durante la presentación. "Gracias por no rendirte", susurra emocionada.',
+        textoFracaso: 'Miku te esperó horas en la entrada del colegio, pero nunca apareciste. Perdió el concierto que tanto esperaba. Días después, apenas te dirige la palabra. Su amor por la música ahora le recuerda tu decepción.',
         afinidadExito: 12,
         afinidadFracaso: -28,
         dineroRecompensa: 45
@@ -95,6 +101,8 @@ const EVENTOS_DIARIOS = [
         cantidadRequerida: 10,
         videoExito: '1-wYJYTaw0ZOKQy8BBPR7Fmhlzs0IVx9K',
         videoFracaso: '1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS',
+        textoExito: 'Pasaron la tarde estudiando y riendo. Yotsuba se olvidó de sus nervios gracias a ti. Al día siguiente, gana la carrera y corre a abrazarte. "¡Lo logramos! ¡Eres mi amuleto de la suerte!" exclama con su eterna sonrisa.',
+        textoFracaso: 'Yotsuba te esperó en la biblioteca toda la tarde, pero nunca llegaste. Al día siguiente, corre la carrera distraída, buscándote entre el público, y termina última. "Pensé que vendrías..." dice sin mirarte a los ojos.',
         afinidadExito: 8,
         afinidadFracaso: -20,
         dineroRecompensa: 30
@@ -109,6 +117,8 @@ const EVENTOS_DIARIOS = [
         cantidadRequerida: 10,
         videoExito: '1aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe',
         videoFracaso: '1-wYJYTaw0ZOKQy8BBPR7Fmhlzs0IVx9K',
+        textoExito: 'Itsuki está feliz porque al fin puede comer todo lo que quiere sin sentirse juzgada. "¡Eres el mejor acompañante!" dice con la boca llena. Pasan una tarde divertida probando todos los platillos. Su confianza en ti crece.',
+        textoFracaso: 'Itsuki fue sola al buffet, pero se sintió incómoda y se fue a los 20 minutos. Te envía un mensaje: "No importa, ya estoy acostumbrada a que me fallen..." Su voz transmite una tristeza que te llega al alma.',
         afinidadExito: 10,
         afinidadFracaso: -25,
         dineroRecompensa: 40
@@ -123,6 +133,8 @@ const EVENTOS_DIARIOS = [
         cantidadRequerida: 10,
         videoExito: '1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS',
         videoFracaso: '1tS-gKr6bf4MY5Yrw7zRvP2uP_zq9rsLl',
+        textoExito: 'Lograste mediar en la discusión y proponer que cocinen juntas. Terminan haciendo una cena deliciosa entre risas. Ambas te agradecen por separado: "Eres el único que sabe calmarlas". La armonía vuelve a casa.',
+        textoFracaso: 'La discusión escaló y terminaron sin hablarse. La cena fue un desastre y tú eres el centro de la discordia. "Si hubieras hecho algo..." te reclama Nino. Ichika solo niega con la cabeza. El ambiente es tenso.',
         afinidadExito: 12,
         afinidadFracaso: -20,
         dineroRecompensa: 60
@@ -137,6 +149,8 @@ const EVENTOS_DIARIOS = [
         cantidadRequerida: 10,
         videoExito: '1-wYJYTaw0ZOKQy8BBPR7Fmhlzs0IVx9K',
         videoFracaso: '1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS',
+        textoExito: 'Creas un resumen perfecto que Miku entiende a la perfección. Yotsuba aprende tanto que termina ayudando a otras compañeras. "¡Eres un genio!" te dicen al unísono. Su admiración por ti no tiene límites.',
+        textoFracaso: 'Sin tu ayuda, Miku se confunde aún más y Yotsuba termina frustrada. Suspenden el examen y te miran con decepción. "Creíamos que podíamos contar contigo", murmura Yotsuba. La confianza se resquebraja.',
         afinidadExito: 10,
         afinidadFracaso: -18,
         dineroRecompensa: 50
@@ -151,6 +165,8 @@ const EVENTOS_DIARIOS = [
         cantidadRequerida: 10,
         videoExito: '1aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe',
         videoFracaso: '1tS-gKr6bf4MY5Yrw7zRvP2uP_zq9rsLl',
+        textoExito: 'Hiciste una maratón de estudio con las tres. Aunque agotador, todas pasaron el examen. "¡Eres nuestro salvador!" gritan emocionadas. Ese día, las tres compiten por tu atención, creando un ambiente divertido.',
+        textoFracaso: 'Ninguna pudo prepararse bien. Suspenden el examen y te culpan en silencio. "Para eso no sirves", murmura Nino. Miku evita tu mirada e Itsuki solo come en silencio. La distancia crece.',
         afinidadExito: 15,
         afinidadFracaso: -25,
         dineroRecompensa: 80
@@ -165,6 +181,8 @@ const EVENTOS_DIARIOS = [
         cantidadRequerida: 10,
         videoExito: '1X6qhQxLNemXus_5WjLlMIWOAsHsJSsRS',
         videoFracaso: '1-wYJYTaw0ZOKQy8BBPR7Fmhlzs0IVx9K',
+        textoExito: 'El stand es un éxito rotundo. Las cuatro hermanas te sonríen orgullosas. "No podríamos haberlo hecho sin ti", dice Ichika. Yotsuba te abraza, Miku te regala un dibujo y Nino, sonrojada, te da las gracias. Es el mejor día.',
+        textoFracaso: 'El stand es un desastre. Las colas son largas, la comida se quema y los clientes se quejan. Las hermanas están estresadas y frustradas. "Para qué prometiste si no ibas a ayudar", te reclama Nino. El festival es un recuerdo amargo.',
         afinidadExito: 18,
         afinidadFracaso: -30,
         dineroRecompensa: 100
@@ -179,6 +197,8 @@ const EVENTOS_DIARIOS = [
         cantidadRequerida: 10,
         videoExito: '1tS-gKr6bf4MY5Yrw7zRvP2uP_zq9rsLl',
         videoFracaso: '1aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe',
+        textoExito: 'El viaje es inolvidable. Las cinco hermanas compiten por sentarse a tu lado, por compartir habitación contigo, por hacerte probar sus comidas favoritas. "Eres parte de la familia ahora", dice Itsuki. Es el sueño hecho realidad.',
+        textoFracaso: 'El viaje se cancela porque "alguien no cumplió su parte". Las hermanas hacen el viaje sin ti y, aunque se divierten, tu nombre no se menciona. Regresan con fotos donde siempre falta alguien: tú. La exclusión duele más que cualquier reclamo.',
         afinidadExito: 25,
         afinidadFracaso: -40,
         dineroRecompensa: 150
@@ -1158,9 +1178,10 @@ const EventosDiarios = {
         }
     },
 
-    // Mostrar resultado del evento (video) - VERSIÓN CORREGIDA
+    // Mostrar resultado del evento (video) - AHORA CON TEXTO PERSONALIZADO PARA EVENTOS NORMALES
     mostrarResultadoEvento: function(evento, exito) {
         const videoId = exito ? evento.videoExito : evento.videoFracaso;
+        const textoPersonalizado = exito ? evento.textoExito : evento.textoFracaso;
         
         const overlay = document.createElement('div');
         overlay.id = 'evento-resultado-overlay';
@@ -1235,6 +1256,20 @@ const EventosDiarios = {
                 <h2 style="color: #FFD166; font-size: clamp(1.2rem, 4vw, 2rem); margin-bottom: 20px; word-break: break-word;">
                     ${evento.titulo}
                 </h2>
+
+                <!-- TEXTO PERSONALIZADO PARA EVENTOS NORMALES (IGUAL QUE NTR) -->
+                <div style="
+                    background: rgba(255, 255, 255, 0.1);
+                    border-left: 4px solid ${exito ? '#4CAF50' : '#F44336'};
+                    border-radius: 10px;
+                    padding: 15px 20px;
+                    margin: 15px 0 25px 0;
+                    text-align: left;
+                ">
+                    <p style="color: white; font-size: clamp(1rem, 3.5vw, 1.2rem); line-height: 1.6; margin: 0; font-style: italic;">
+                        " ${textoPersonalizado} "
+                    </p>
+                </div>
 
                 <div style="
                     margin: 20px 0;
