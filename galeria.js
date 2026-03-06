@@ -305,22 +305,22 @@ const galeriaDatabase = {
             { id: 26, url: "https://pbs.twimg.com/media/HCrdyDBXoAEyPa-?format=jpg&name=small" },
             { id: 27, url: "https://pbs.twimg.com/media/HCreqhoXIAAuICJ?format=jpg&name=small" },
             { id: 28, url: "https://pbs.twimg.com/media/HCre_jXWwAAz2P5?format=jpg&name=small" },
-            { id: 29, url: "https://pbs.twimg.com/media/HCrlW3IaUAEZY_1?format=jpg&name=small" },
-            { id: 30, url: "https://pbs.twimg.com/media/HCroIllWAAE-Trf?format=jpg&name=medium" },
+
+            { id: 29, url: "https://pbs.twimg.com/media/HCroIllWAAE-Trf?format=jpg&name=medium" },
         
-            { id: 31, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772753330013.jpg" },
+            { id: 30, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772753330013.jpg" },
         
-            { id: 32, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772753542109.jpg" },
+            { id: 31, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772753542109.jpg" },
         
-            { id: 33, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772753687142.jpg" },
+            { id: 32, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772753687142.jpg" },
         
-            { id: 34, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772753822185.jpg" },
+            { id: 33, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772753822185.jpg" },
         
-            { id: 35, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772754025618.jpg" },
+            { id: 34, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772754025618.jpg" },
         
-            { id: 36, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772755174751.jpg" },
+            { id: 35, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772755174751.jpg" },
         
-            { id: 37, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772755373301.jpg" }
+            { id: 36, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772755373301.jpg" }
         ]
     },
     // CONTENEDOR 4 - Yotsuba
