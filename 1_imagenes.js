@@ -1725,6 +1725,12 @@ const sistemaDescriptivo = {
                 descripcion: 'putoans', 
                 duracion: '' 
             },
+            '4_18': { 
+                nombre: 'Shinobu ortaso',
+                imagen: 'https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772838028301.jpg', 
+                descripcion: 'naomi soraya', 
+                duracion: '' 
+            },
            
             '5_1': { 
                 nombre: 'Colombianas putardas',
