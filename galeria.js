@@ -494,10 +494,9 @@ const galeriaDatabase = {
         descripcion: "Las dos hermanas mayores - Nino la putona e Ichika la actriz",
         categoria: "Quintillizas - Duo",
         imagen: "https://pbs.twimg.com/media/HCqB5bFXgAAjgl9?format=png&name=small",
-        imagenes: [
-              { id: 1, url: "https://pbs.twimg.com/media/GrNWikuWsAAVYtt?format=jpg&name=4096x4096" },
-            { id: 2, url: "https://pbs.twimg.com/media/GztU8Y3XsAA5Yzm?format=png&name=small" }
-        ]
+        imagenes: []
+             
+      
     },
     '9_Nino_Miku': {
         titulo: "Nino & Miku",
