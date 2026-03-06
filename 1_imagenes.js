@@ -1665,6 +1665,12 @@ const sistemaDescriptivo = {
                 descripcion: '', 
                 duracion: '' 
             },
+            '4_9': { 
+                nombre: '2b potona',
+                imagen: 'https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772835583926.jpg', 
+                descripcion: 'potona', 
+                duracion: '' 
+            }
            
             '5_1': { 
                 nombre: 'Colombianas putardas',
