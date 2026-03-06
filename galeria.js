@@ -533,7 +533,9 @@ const galeriaDatabase = {
         descripcion: "Nino y Yotsuba - La putona y la enérgica",
         categoria: "Quintillizas - Duo",
         imagen: "https://pbs.twimg.com/media/HCrY9OhWMAAGqaz?format=jpg&name=small",
-        imagenes: []
+        imagenes: [
+            { id: 1, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772841436455.jpg" }
+        ]
     },
     '9_Nino_Itsuki': {
         titulo: "Nino & Itsuki",
