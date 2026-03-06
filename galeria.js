@@ -504,7 +504,9 @@ const galeriaDatabase = {
         descripcion: "Nino y Miku - La putona y la tsundere",
         categoria: "Quintillizas - Duo",
         imagen: "https://pbs.twimg.com/media/HCq3vdHXYAEffD7?format=png&name=small",
-        imagenes: []
+        imagenes: [
+            { id: 1, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772839012283.jpg" }
+        ]
     },
     '9_Nino_Yotsuba': {
         titulo: "Nino & Yotsuba",
