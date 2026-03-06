@@ -575,7 +575,9 @@ const galeriaDatabase = {
         categoria: "Quintillizas - Duo",
         imagen: "https://pbs.twimg.com/media/HClA9eXawAwhdFo?format=jpg&name=small",
         imagenes: [
-            { id: 1, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772841464859.jpg" }
+            { id: 1, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772841464859.jpg" },
+        
+            { id: 2, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772841475394.jpg" }
         ]
     },
     '9_Miku_Itsuki': {
