@@ -688,7 +688,9 @@ const galeriaDatabase = {
         descripcion: "Todas las hermanas Nakano juntas - Nino, Ichika, Miku, Yotsuba e Itsuki",
         categoria: "Quintillizas - Quinteto",
         imagen: "https://pbs.twimg.com/media/HCroIllWAAE-Trf?format=jpg&name=medium",
-        imagenes: []
+        imagenes: [
+            { id: 1, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772840393339.jpg" }
+        ]
     },
 
     // ============ CONTENEDOR 13 - PRUEBA ============
