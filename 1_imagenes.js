@@ -1671,6 +1671,12 @@ const sistemaDescriptivo = {
                 descripcion: 'potona', 
                 duracion: '' 
             },
+            '4_10': { 
+                nombre: '2b culo suave',
+                imagen: 'https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772835779166.jpg', 
+                descripcion: '2b culo suave', 
+                duracion: '' 
+            },
            
             '5_1': { 
                 nombre: 'Colombianas putardas',
