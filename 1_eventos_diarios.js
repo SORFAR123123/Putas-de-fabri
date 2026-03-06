@@ -1,7 +1,7 @@
 // ================================================
-// SISTEMA DE EVENTOS DIARIOS - VERSIÓN CORREGIDA
+// SISTEMA DE EVENTOS DIARIOS - VERSIÓN CON NTR 30/70
 // Éxito inmediato, fracaso al día siguiente + Evento NTR de Uzaki
-// VERSIÓN CORREGIDA - Arreglado texto undefined y eventos en PC
+// VERSIÓN CORREGIDA - Con botones de prueba para simular fallos
 // ================================================
 
 // ================================================
@@ -42,7 +42,7 @@ const EVENTOS_NTR = [
     }
 ];
 
-// Lista de 10 eventos con requisitos y consecuencias
+// Lista de 10 eventos con requisitos y consecuencias - CON IMAGEN Y VIDEO
 const EVENTOS_DIARIOS = [
     { // Evento 1 - Solo Nino
         id: 'nino_ex',
@@ -217,10 +217,11 @@ const EVENTOS_DIARIOS = [
 ];
 
 // ================================================
-// SISTEMA DE PROGRESO DE EVENTOS DIARIOS
+// SISTEMA DE PROGRESO DE EVENTOS DIARIOS (BARRA VISIBLE CON TOGGLE)
 // ================================================
 
 const SistemaProgresoEventos = {
+    // Inicializar contadores
     inicializarContadores: function() {
         if (!localStorage.getItem('eventos_progreso')) {
             const progresoInicial = {
@@ -236,6 +237,7 @@ const SistemaProgresoEventos = {
         return JSON.parse(localStorage.getItem('eventos_progreso'));
     },
 
+    // Obtener número de semana del año
     obtenerNumeroSemana: function() {
         const fecha = new Date();
         const inicioAño = new Date(fecha.getFullYear(), 0, 1);
@@ -243,9 +245,11 @@ const SistemaProgresoEventos = {
         return Math.ceil((dias + inicioAño.getDay() + 1) / 7);
     },
 
+    // Registrar resultado de evento
     registrarResultado: function(eventoId, exito) {
         const progreso = this.inicializarContadores();
         
+        // Verificar si cambió de semana
         const semanaActual = this.obtenerNumeroSemana();
         if (semanaActual !== progreso.ultimaSemana) {
             progreso.eventosCompletados = 0;
@@ -254,6 +258,7 @@ const SistemaProgresoEventos = {
             progreso.historial = [];
         }
 
+        // Actualizar contadores
         if (exito) {
             progreso.eventosCompletados++;
         } else {
@@ -262,12 +267,14 @@ const SistemaProgresoEventos = {
 
         progreso.ultimoEventoFecha = new Date().toISOString();
 
+        // Añadir al historial
         progreso.historial.unshift({
             id: eventoId,
             fecha: new Date().toISOString(),
             exito: exito
         });
         
+        // Mantener solo últimos 10 eventos en historial
         if (progreso.historial.length > 10) {
             progreso.historial.pop();
         }
@@ -276,13 +283,15 @@ const SistemaProgresoEventos = {
         return progreso;
     },
 
+    // Obtener estadísticas
     obtenerEstadisticas: function() {
         return this.inicializarContadores();
     },
 
+    // Calcular porcentaje de progreso semanal
     obtenerPorcentajeSemanal: function() {
         const progreso = this.obtenerEstadisticas();
-        const totalEventosSemana = 7;
+        const totalEventosSemana = 7; // Máximo 7 eventos por semana (1 por día)
         const totalCompletados = progreso.eventosCompletados;
         
         return {
@@ -292,6 +301,7 @@ const SistemaProgresoEventos = {
         };
     },
 
+    // Obtener racha actual (días seguidos completando)
     obtenerRacha: function() {
         const progreso = this.obtenerEstadisticas();
         let racha = 0;
@@ -307,20 +317,23 @@ const SistemaProgresoEventos = {
         return racha;
     },
 
+    // Crear barra de progreso visual
     crearBarraProgreso: function() {
         const stats = this.obtenerPorcentajeSemanal();
         const racha = this.obtenerRacha();
         const progreso = this.obtenerEstadisticas();
         
+        // Colores para los días
         const diasSemana = ['Lun', 'Mar', 'Mié', 'Jue', 'Vie', 'Sáb', 'Dom'];
-        const hoy = new Date().getDay();
-        const hoyIndex = hoy === 0 ? 6 : hoy - 1;
+        const hoy = new Date().getDay(); // 0 = Domingo, 1 = Lunes...
+        const hoyIndex = hoy === 0 ? 6 : hoy - 1; // Convertir a índice 0-6 (Lun-Dom)
         
         let diasHTML = '';
         for (let i = 0; i < 7; i++) {
             let estado = 'pendiente';
             let color = '#2a2a3a';
             
+            // Determinar estado del día basado en historial
             if (i < progreso.eventosCompletados) {
                 estado = 'completado';
                 color = '#4CAF50';
@@ -329,6 +342,7 @@ const SistemaProgresoEventos = {
                 color = '#F44336';
             }
             
+            // Si es hoy y no tiene estado, poner borde especial
             const esHoy = i === hoyIndex;
             
             diasHTML += `
@@ -385,6 +399,7 @@ const SistemaProgresoEventos = {
                     </div>
                 </div>
                 
+                <!-- Barra de progreso principal -->
                 <div style="margin-bottom: 20px;">
                     <div style="display: flex; justify-content: space-between; margin-bottom: 5px;">
                         <span style="color: #FFD166; font-weight: bold; font-size: 0.9rem;">
@@ -422,6 +437,7 @@ const SistemaProgresoEventos = {
                     </div>
                 </div>
                 
+                <!-- Días de la semana -->
                 <div style="
                     display: grid;
                     grid-template-columns: repeat(7, 1fr);
@@ -431,6 +447,7 @@ const SistemaProgresoEventos = {
                     ${diasHTML}
                 </div>
                 
+                <!-- Leyenda -->
                 <div style="
                     display: flex;
                     gap: 20px;
@@ -457,10 +474,31 @@ const SistemaProgresoEventos = {
                         <span style="font-size: 0.8rem; opacity: 0.8;">Hoy</span>
                     </div>
                 </div>
+
+                <!-- Botón para ver detalles del último evento -->
+                ${progreso.ultimoEventoFecha ? `
+                    <div style="text-align: center; margin-top: 15px;">
+                        <button onclick="EventosDiarios.mostrarUltimoResultado()" style="
+                            background: linear-gradient(135deg, #FF1493, #8A5AF7);
+                            color: white;
+                            border: none;
+                            padding: 8px 20px;
+                            border-radius: 50px;
+                            font-weight: bold;
+                            cursor: pointer;
+                            font-size: 0.9rem;
+                            border: 2px solid white;
+                            transition: all 0.3s;
+                        " onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'">
+                            📊 Ver último resultado
+                        </button>
+                    </div>
+                ` : ''}
             </div>
         `;
     },
 
+    // Mostrar la barra en un contenedor específico
     mostrarEnContenedor: function(contenedorId) {
         const contenedor = document.getElementById(contenedorId);
         if (contenedor) {
@@ -482,24 +520,32 @@ function guardarEstadoVisibilidadBarra(visible) {
 }
 
 // ================================================
-// SISTEMA DE EVENTOS DIARIOS (VERSIÓN CORREGIDA)
+// SISTEMA DE EVENTOS DIARIOS (VERSIÓN CON NTR)
+// Éxito inmediato, fracaso al día siguiente + Eventos NTR con opciones
 // ================================================
 const EventosDiarios = {
+    // Obtener la fecha actual en formato YYYY-MM-DD
     obtenerFechaActual: function() {
         const fecha = new Date();
         return `${fecha.getFullYear()}-${String(fecha.getMonth() + 1).padStart(2, '0')}-${String(fecha.getDate()).padStart(2, '0')}`;
     },
 
+    // ================================================
+    // NUEVA FUNCIÓN - Obtener mazos completados HOY
+    // ================================================
     obtenerMazosCompletadosHoy: function() {
         const fechaHoy = this.obtenerFechaActual();
         
+        // Usar el sistema que YA EXISTE en main.js (progreso_mazos_diario)
         try {
             const progresoDiario = JSON.parse(localStorage.getItem('progreso_mazos_diario') || '{}');
             
+            // Si no hay registro para hoy, retornar 0
             if (!progresoDiario[fechaHoy]) {
                 return 0;
             }
             
+            // Retornar cuántos mazos completó hoy
             const mazosHoy = parseInt(progresoDiario[fechaHoy]) || 0;
             console.log(`📊 Mazos completados HOY (${fechaHoy}): ${mazosHoy}`);
             return mazosHoy;
@@ -510,6 +556,7 @@ const EventosDiarios = {
         }
     },
 
+    // Verificar si ya se mostró un evento hoy
     verificarEventoHoy: function() {
         const ultimoEvento = localStorage.getItem('evento_diario_ultimo');
         if (!ultimoEvento) return true;
@@ -524,17 +571,23 @@ const EventosDiarios = {
         }
     },
 
+    // ================================================
+    // SELECCIONAR EVENTO (70% NORMAL - 30% NTR)
+    // ================================================
     seleccionarEventoAleatorio: function() {
-        const esEventoNTR = Math.random() < 0.3;
+        // Decidir el tipo de evento (70/30)
+        const esEventoNTR = Math.random() < 0.3;  // 30% de probabilidad NTR
         
+        // Seleccionar la lista correspondiente
         const listaEventos = esEventoNTR ? EVENTOS_NTR : EVENTOS_DIARIOS;
         
+        // Si la lista está vacía, usar la otra como fallback
         if (listaEventos.length === 0) {
             console.warn(`⚠️ No hay eventos ${esEventoNTR ? 'NTR' : 'normales'}. Usando la otra lista.`);
             const listaFallback = esEventoNTR ? EVENTOS_DIARIOS : EVENTOS_NTR;
             if (listaFallback.length === 0) {
                 console.error('❌ No hay eventos de ningún tipo configurados');
-                return EVENTOS_DIARIOS[0];
+                return EVENTOS_DIARIOS[0]; // Fallback al primer evento normal
             }
             return this.seleccionarDeLista(listaFallback);
         }
@@ -543,19 +596,29 @@ const EventosDiarios = {
         return this.seleccionarDeLista(listaEventos);
     },
 
+    // ================================================
+    // SELECCIONAR DE UNA LISTA ESPECÍFICA (con sistema de no repetición)
+    // ================================================
     seleccionarDeLista: function(listaEventos) {
+        // Obtener IDs de eventos ya vistos (para TODOS los eventos)
         const eventosVistos = JSON.parse(localStorage.getItem('eventos_diarios_vistos') || '[]');
         
+        // Filtrar eventos no vistos de la lista proporcionada
         let eventosDisponibles = listaEventos.filter(e => !eventosVistos.includes(e.id));
         
+        // Si ya vio todos, reiniciar
         if (eventosDisponibles.length === 0) {
+            // Para reiniciar, solo quitamos los de esta lista? O todos?
+            // Opción simple: reiniciar todos los vistos
             localStorage.removeItem('eventos_diarios_vistos');
             eventosDisponibles = listaEventos;
         }
         
+        // Seleccionar uno aleatorio
         const indice = Math.floor(Math.random() * eventosDisponibles.length);
         const evento = eventosDisponibles[indice];
         
+        // Guardar como visto
         const nuevosVistos = JSON.parse(localStorage.getItem('eventos_diarios_vistos') || '[]');
         nuevosVistos.push(evento.id);
         localStorage.setItem('eventos_diarios_vistos', JSON.stringify(nuevosVistos));
@@ -563,54 +626,63 @@ const EventosDiarios = {
         return evento;
     },
 
+    // Guardar el evento de hoy
     guardarEventoHoy: function(evento) {
         const eventoData = {
             fecha: this.obtenerFechaActual(),
             evento: evento,
             requisitoCumplido: false,
-            resultadoExitoMostrado: false,
-            resultadoFracasoMostrado: false,
-            fechaFracaso: null
+            resultadoExitoMostrado: false,  // Para éxito inmediato
+            resultadoFracasoMostrado: false, // Para fracaso al día siguiente
+            fechaFracaso: null // Fecha en que se debe mostrar el fracaso
         };
         
         localStorage.setItem('evento_diario_ultimo', JSON.stringify(eventoData));
         localStorage.setItem('evento_diario_actual', JSON.stringify(evento));
     },
 
+    // Obtener el evento de hoy
     obtenerEventoHoy: function() {
         const eventoGuardado = localStorage.getItem('evento_diario_actual');
         return eventoGuardado ? JSON.parse(eventoGuardado) : null;
     },
 
+    // Marcar requisito como cumplido (y mostrar éxito inmediato) - SOLO PARA EVENTOS NORMALES
     marcarRequisitoCumplido: function() {
         const ultimoEvento = JSON.parse(localStorage.getItem('evento_diario_ultimo') || '{}');
         const fechaHoy = this.obtenerFechaActual();
         const evento = this.obtenerEventoHoy();
         
+        // Solo marcar si es el evento de hoy, no es NTR y aún no se ha cumplido
         if (ultimoEvento.fecha === fechaHoy && !ultimoEvento.requisitoCumplido && evento && evento.tipo !== 'ntr') {
             ultimoEvento.requisitoCumplido = true;
-            ultimoEvento.resultadoExitoMostrado = false;
+            ultimoEvento.resultadoExitoMostrado = false; // Aún no se ha mostrado el éxito
             localStorage.setItem('evento_diario_ultimo', JSON.stringify(ultimoEvento));
             
             console.log('✅ Requisito del evento cumplido HOY - Mostrando éxito inmediato');
             
+            // Mostrar éxito INMEDIATAMENTE
             setTimeout(() => {
                 this.mostrarResultadoEvento(evento, true);
+                // Marcar como mostrado después de mostrar
                 ultimoEvento.resultadoExitoMostrado = true;
                 localStorage.setItem('evento_diario_ultimo', JSON.stringify(ultimoEvento));
             }, 500);
             
+            // Notificación
             this.mostrarNotificacionEvento('✅ ¡Requisito cumplido!', '#4CAF50');
         }
     },
 
+    // Marcar evento como fallido (para mostrar mañana) - SOLO PARA EVENTOS NORMALES
     marcarEventoFallido: function() {
         const ultimoEvento = JSON.parse(localStorage.getItem('evento_diario_ultimo') || '{}');
         const fechaHoy = this.obtenerFechaActual();
         const evento = this.obtenerEventoHoy();
         
+        // Solo marcar si es el evento de hoy, no es NTR y no está cumplido
         if (ultimoEvento.fecha === fechaHoy && !ultimoEvento.requisitoCumplido && evento && evento.tipo !== 'ntr') {
-            ultimoEvento.fechaFracaso = fechaHoy;
+            ultimoEvento.fechaFracaso = fechaHoy; // Guardar que falló hoy
             ultimoEvento.resultadoFracasoMostrado = false;
             localStorage.setItem('evento_diario_ultimo', JSON.stringify(ultimoEvento));
             
@@ -618,35 +690,44 @@ const EventosDiarios = {
         }
     },
 
+    // Verificar si el evento de hoy fue exitoso
     eventoExitoso: function() {
         const ultimoEvento = JSON.parse(localStorage.getItem('evento_diario_ultimo') || '{}');
         return ultimoEvento.requisitoCumplido === true;
     },
 
+    // Verificar si el evento de hoy fue fallido
     eventoFallido: function() {
         const ultimoEvento = JSON.parse(localStorage.getItem('evento_diario_ultimo') || '{}');
         const fechaHoy = this.obtenerFechaActual();
         
+        // Fue fallido si: no está cumplido Y la fecha es de hoy
         return !ultimoEvento.requisitoCumplido && ultimoEvento.fecha === fechaHoy;
     },
 
+    // Verificar si hay que mostrar fracaso de ayer (VERSIÓN CORREGIDA)
     debeMostrarFracasoAyer: function() {
         const ultimoEvento = JSON.parse(localStorage.getItem('evento_diario_ultimo') || '{}');
         const fechaHoy = this.obtenerFechaActual();
         
+        // Verificar si hay un evento que falló en una fecha anterior (no hoy)
+        // y que aún no se ha mostrado su resultado de fracaso
         return ultimoEvento.fechaFracaso && 
                ultimoEvento.fechaFracaso !== fechaHoy && 
                !ultimoEvento.resultadoFracasoMostrado;
     },
 
+    // Obtener evento de ayer (el último evento guardado)
     obtenerEventoAyer: function() {
-        return this.obtenerEventoHoy();
+        return this.obtenerEventoHoy(); // Es el mismo porque solo guardamos el último
     },
 
+    // Verificar si se cumplió el requisito (SOLO PARA EVENTOS NORMALES)
     verificarRequisito: function(evento) {
-        if (evento.tipo === 'ntr') return false;
+        if (evento.tipo === 'ntr') return false; // Los NTR no tienen requisitos
         
         if (evento.tipoRequisito === 'mazos_completados') {
+            // Usar los mazos completados HOY, NO el total histórico
             const mazosHoy = this.obtenerMazosCompletadosHoy();
             console.log('📊 Verificando requisito HOY:', {
                 mazosHoy: mazosHoy,
@@ -658,6 +739,7 @@ const EventosDiarios = {
         return false;
     },
 
+    // Aplicar consecuencias del evento (PARA EVENTOS NORMALES)
     aplicarConsecuencias: function(evento, exito) {
         console.log('🎯 Aplicando consecuencias del evento:', evento.id, 'Éxito:', exito);
         
@@ -672,6 +754,7 @@ const EventosDiarios = {
             return false;
         }
 
+        // Aplicar afinidad a cada personaje involucrado
         evento.personajes.forEach(personajeId => {
             if (quintillizasRPG.datosPersonajes && quintillizasRPG.datosPersonajes[personajeId]) {
                 const afinidadActual = quintillizasRPG.datosPersonajes[personajeId].afinidad;
@@ -688,6 +771,7 @@ const EventosDiarios = {
             }
         });
 
+        // Dar dinero si fue éxito
         if (exito && evento.dineroRecompensa > 0) {
             sistemaEconomia.agregarDinero(evento.dineroRecompensa);
             console.log(`💰 +${evento.dineroRecompensa} soles por evento`);
@@ -707,14 +791,20 @@ const EventosDiarios = {
         return true;
     },
 
+    // ================================================
+    // PROCESAR OPCIÓN NTR (AHORA CON TEXTO PERSONALIZADO)
+    // ================================================
     procesarOpcionNTR: function(eventoId, opcionIndex) {
+        // Buscar el evento en EVENTOS_NTR
         const evento = EVENTOS_NTR.find(e => e.id === eventoId);
         if (!evento) return;
         
         const opcion = evento.opciones[opcionIndex];
-        const esOpcionFiel = opcionIndex === 1;
+        const esOpcionFiel = opcionIndex === 1; // Segunda opción es la fiel
         
+        // Aplicar cambios de afinidad a CADA hermana
         if (typeof quintillizasRPG !== 'undefined' && quintillizasRPG.datosPersonajes) {
+            // Nino
             if (quintillizasRPG.datosPersonajes.nino) {
                 quintillizasRPG.datosPersonajes.nino.afinidad += opcion.afinidadNino || 0;
                 this.mostrarNotificacionEvento(
@@ -722,6 +812,7 @@ const EventosDiarios = {
                     opcion.afinidadNino > 0 ? '#4CAF50' : '#F44336'
                 );
             }
+            // Ichika
             if (quintillizasRPG.datosPersonajes.ichika) {
                 quintillizasRPG.datosPersonajes.ichika.afinidad += opcion.afinidadIchika || 0;
                 this.mostrarNotificacionEvento(
@@ -729,6 +820,7 @@ const EventosDiarios = {
                     opcion.afinidadIchika > 0 ? '#4CAF50' : '#F44336'
                 );
             }
+            // Miku
             if (quintillizasRPG.datosPersonajes.miku) {
                 quintillizasRPG.datosPersonajes.miku.afinidad += opcion.afinidadMiku || 0;
                 this.mostrarNotificacionEvento(
@@ -736,6 +828,7 @@ const EventosDiarios = {
                     opcion.afinidadMiku > 0 ? '#4CAF50' : '#F44336'
                 );
             }
+            // Yotsuba
             if (quintillizasRPG.datosPersonajes.yotsuba) {
                 quintillizasRPG.datosPersonajes.yotsuba.afinidad += opcion.afinidadYotsuba || 0;
                 this.mostrarNotificacionEvento(
@@ -743,6 +836,7 @@ const EventosDiarios = {
                     opcion.afinidadYotsuba > 0 ? '#4CAF50' : '#F44336'
                 );
             }
+            // Itsuki
             if (quintillizasRPG.datosPersonajes.itsuki) {
                 quintillizasRPG.datosPersonajes.itsuki.afinidad += opcion.afinidadItsuki || 0;
                 this.mostrarNotificacionEvento(
@@ -754,6 +848,7 @@ const EventosDiarios = {
             quintillizasRPG.guardarDatosPersonajes();
         }
         
+        // Dar dinero si tiene
         if (opcion.dinero > 0 && typeof sistemaEconomia !== 'undefined') {
             sistemaEconomia.agregarDinero(opcion.dinero);
             this.mostrarNotificacionEvento(`💰 +${opcion.dinero} soles`, '#FFD166');
@@ -762,13 +857,17 @@ const EventosDiarios = {
             }
         }
         
+        // Cerrar el modal actual
         this.cerrarModalEvento();
         
+        // Mostrar el video correspondiente con el texto personalizado
         this.mostrarResultadoNTR(evento, opcion, esOpcionFiel);
         
+        // Registrar en el sistema de progreso
         SistemaProgresoEventos.registrarResultado(evento.id, esOpcionFiel);
     },
 
+    // Mostrar notificación pequeña
     mostrarNotificacionEvento: function(mensaje, color = '#FF1493') {
         const notif = document.createElement('div');
         notif.textContent = mensaje;
@@ -791,6 +890,9 @@ const EventosDiarios = {
         setTimeout(() => notif.remove(), 2500);
     },
 
+    // ================================================
+    // MOSTRAR MODAL DEL EVENTO - VERSIÓN CORREGIDA
+    // ================================================
     mostrarModalEvento: function(evento) {
         const overlay = document.createElement('div');
         overlay.id = 'evento-modal-overlay';
@@ -826,6 +928,7 @@ const EventosDiarios = {
             margin: auto;
         `;
 
+        // Verificar si es evento NTR (tiene opciones)
         const esNTR = evento.tipo === 'ntr' && evento.opciones && evento.opciones.length > 0;
 
         const nombresPersonajes = evento.personajes ? evento.personajes.map(p => {
@@ -838,6 +941,7 @@ const EventosDiarios = {
 
         let botonesHTML = '';
         if (esNTR) {
+            // Crear 2 botones para las opciones NTR
             botonesHTML = `
                 <div style="display: flex; gap: 20px; justify-content: center; margin: 30px 0; flex-wrap: wrap;">
                     <button onclick="EventosDiarios.procesarOpcionNTR('${evento.id}', 0)" style="
@@ -880,6 +984,7 @@ const EventosDiarios = {
                 </p>
             `;
         } else {
+            // Botón normal de "Aceptar" para eventos regulares
             botonesHTML = `
                 <button onclick="EventosDiarios.cerrarModalEvento()" style="
                     background: linear-gradient(135deg, #FF1493, #8A5AF7);
@@ -940,6 +1045,7 @@ const EventosDiarios = {
                     padding-right: 45px;
                 ">📅 ¡EVENTO DIARIO!</h1>
 
+                <!-- PRIMERO EL TÍTULO Y DESCRIPCIÓN -->
                 <h2 style="
                     color: #FF1493;
                     font-size: clamp(1.2rem, 4vw, 2rem);
@@ -959,6 +1065,7 @@ const EventosDiarios = {
                     margin-right: auto;
                 ">${evento.descripcion}</p>
 
+                <!-- LUEGO LA IMAGEN -->
                 ${evento.imagen ? `
                     <div style="
                         width: 100%;
@@ -982,6 +1089,7 @@ const EventosDiarios = {
                     </div>
                 ` : ''}
 
+                <!-- FINALMENTE EL VIDEO -->
                 ${evento.video ? `
                     <div style="
                         width: 100%;
@@ -1089,14 +1197,6 @@ const EventosDiarios = {
                     from { transform: scale(0.8); opacity: 0; }
                     to { transform: scale(1); opacity: 1; }
                 }
-                @keyframes slideIn {
-                    from { transform: translateX(100%); opacity: 0; }
-                    to { transform: translateX(0); opacity: 1; }
-                }
-                @keyframes fadeOut {
-                    from { opacity: 1; }
-                    to { opacity: 0; }
-                }
                 @media (max-width: 480px) {
                     #evento-modal-overlay > div {
                         padding: 15px !important;
@@ -1107,6 +1207,7 @@ const EventosDiarios = {
         }
     },
 
+    // Cerrar modal
     cerrarModalEvento: function() {
         const overlay = document.getElementById('evento-modal-overlay');
         if (overlay) {
@@ -1114,19 +1215,10 @@ const EventosDiarios = {
         }
     },
 
-    // ================================================
-    // VERSIÓN CORREGIDA - Mostrar resultado con texto personalizado
-    // ================================================
+    // Mostrar resultado del evento (video) - AHORA CON TEXTO PERSONALIZADO PARA EVENTOS NORMALES
     mostrarResultadoEvento: function(evento, exito) {
-        // Verificar que evento existe
-        if (!evento) {
-            console.error('❌ Error: evento es undefined en mostrarResultadoEvento');
-            return;
-        }
-        
         const videoId = exito ? evento.videoExito : evento.videoFracaso;
-        // CORREGIDO: Asegurar que el texto existe
-        const textoPersonalizado = exito ? (evento.textoExito || '¡Has completado el evento con éxito!') : (evento.textoFracaso || 'No has podido completar el evento...');
+        const textoPersonalizado = exito ? evento.textoExito : evento.textoFracaso;
         
         const overlay = document.createElement('div');
         overlay.id = 'evento-resultado-overlay';
@@ -1160,11 +1252,11 @@ const EventosDiarios = {
             position: relative;
         `;
 
-        const cambiosHTML = evento.personajes ? evento.personajes.map(p => {
+        const cambiosHTML = evento.personajes.map(p => {
             const nombre = p.charAt(0).toUpperCase() + p.slice(1);
             const cambio = exito ? evento.afinidadExito : evento.afinidadFracaso;
             return `<div style="color: white; font-size: clamp(0.9rem, 3vw, 1.2rem);">${nombre}: ${cambio > 0 ? '+' : ''}${cambio}</div>`;
-        }).join('') : '';
+        }).join('');
 
         modal.innerHTML = `
             <div style="text-align: center; position: relative;">
@@ -1199,10 +1291,10 @@ const EventosDiarios = {
                 ">${exito ? '✅ ¡EVENTO SUPERADO!' : '❌ EVENTO FALLIDO'}</h1>
 
                 <h2 style="color: #FFD166; font-size: clamp(1.2rem, 4vw, 2rem); margin-bottom: 20px; word-break: break-word;">
-                    ${evento.titulo || 'Evento'}
+                    ${evento.titulo}
                 </h2>
 
-                <!-- TEXTO PERSONALIZADO - CORREGIDO -->
+                <!-- TEXTO PERSONALIZADO PARA EVENTOS NORMALES (IGUAL QUE NTR) -->
                 <div style="
                     background: rgba(255, 255, 255, 0.1);
                     border-left: 4px solid ${exito ? '#4CAF50' : '#F44336'};
@@ -1212,29 +1304,27 @@ const EventosDiarios = {
                     text-align: left;
                 ">
                     <p style="color: white; font-size: clamp(1rem, 3.5vw, 1.2rem); line-height: 1.6; margin: 0; font-style: italic;">
-                        "${textoPersonalizado}"
+                        " ${textoPersonalizado} "
                     </p>
                 </div>
 
-                ${videoId ? `
-                    <div style="
-                        margin: 20px 0;
-                        border: 3px solid ${exito ? '#4CAF50' : '#F44336'};
-                        border-radius: 15px;
-                        overflow: hidden;
-                        background: black;
-                    ">
-                        <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
-                            <iframe
-                                src="https://drive.google.com/file/d/${videoId}/preview"
-                                style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
-                                frameborder="0"
-                                allow="autoplay; encrypted-media"
-                                allowfullscreen
-                            ></iframe>
-                        </div>
+                <div style="
+                    margin: 20px 0;
+                    border: 3px solid ${exito ? '#4CAF50' : '#F44336'};
+                    border-radius: 15px;
+                    overflow: hidden;
+                    background: black;
+                ">
+                    <div style="position: relative; padding-bottom: 56.25%; height: 0; overflow: hidden;">
+                        <iframe
+                            src="https://drive.google.com/file/d/${videoId}/preview"
+                            style="position: absolute; top: 0; left: 0; width: 100%; height: 100%;"
+                            frameborder="0"
+                            allow="autoplay; encrypted-media"
+                            allowfullscreen
+                        ></iframe>
                     </div>
-                ` : ''}
+                </div>
 
                 <div style="
                     background: rgba(0,0,0,0.5);
@@ -1244,7 +1334,10 @@ const EventosDiarios = {
                 ">
                     <h3 style="color: #FFD166; font-size: clamp(1.1rem, 4vw, 1.5rem); margin-bottom: 15px;">📊 CONSECUENCIAS</h3>
                     <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 15px;">
-                        ${cambiosHTML ? `<div><h4 style="color: #FF1493; font-size: clamp(0.9rem, 3vw, 1.1rem);">💖 Afinidad</h4>${cambiosHTML}</div>` : ''}
+                        <div>
+                            <h4 style="color: #FF1493; font-size: clamp(0.9rem, 3vw, 1.1rem);">💖 Afinidad</h4>
+                            ${cambiosHTML}
+                        </div>
                         ${exito && evento.dineroRecompensa > 0 ? `
                             <div>
                                 <h4 style="color: #FFD166; font-size: clamp(0.9rem, 3vw, 1.1rem);">💰 Dinero</h4>
@@ -1277,6 +1370,9 @@ const EventosDiarios = {
         document.body.appendChild(overlay);
     },
 
+    // ================================================
+    // MOSTRAR RESULTADO NTR (con video y TEXTO PERSONALIZADO)
+    // ================================================
     mostrarResultadoNTR: function(evento, opcion, esOpcionFiel) {
         const overlay = document.createElement('div');
         overlay.id = 'evento-resultado-overlay';
@@ -1310,6 +1406,7 @@ const EventosDiarios = {
             position: relative;
         `;
 
+        // Calcular cambios para mostrar
         const cambiosHTML = `
             <div style="display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; margin-top: 10px;">
                 <div style="background: rgba(255,255,255,0.05); padding: 10px; border-radius: 8px;">
@@ -1397,7 +1494,7 @@ const EventosDiarios = {
                     text-align: left;
                 ">
                     <p style="color: white; font-size: clamp(1rem, 3.5vw, 1.2rem); line-height: 1.6; margin: 0; font-style: italic;">
-                        "${opcion.textoResultado || ''}"
+                        " ${opcion.textoResultado} "
                     </p>
                 </div>
 
@@ -1452,9 +1549,7 @@ const EventosDiarios = {
         document.body.appendChild(overlay);
     },
 
-    // ================================================
-    // VERSIÓN CORREGIDA - cerrarResultadoEvento con creación de nuevo evento
-    // ================================================
+    // Cerrar resultado
     cerrarResultadoEvento: function() {
         const overlay = document.getElementById('evento-resultado-overlay');
         if (overlay) {
@@ -1463,46 +1558,26 @@ const EventosDiarios = {
         
         // Actualizar barra de progreso
         this.actualizarBarraProgreso();
-        
-        // CORREGIDO: Verificar si debemos mostrar un nuevo evento
-        setTimeout(() => {
-            this.verificarYMostrarNuevoEvento();
-        }, 500);
     },
 
-    // ================================================
-    // NUEVA FUNCIÓN - Verificar y mostrar nuevo evento después de cerrar resultado
-    // ================================================
-    verificarYMostrarNuevoEvento: function() {
-        const ultimoEvento = JSON.parse(localStorage.getItem('evento_diario_ultimo') || '{}');
-        const fechaHoy = this.obtenerFechaActual();
-        
-        // Si el evento que acabamos de cerrar es de un día anterior (fracaso)
-        // y no hay evento para hoy, crear uno nuevo
-        if (ultimoEvento.fecha !== fechaHoy || !ultimoEvento.fecha) {
-            console.log('📅 Creando nuevo evento después de cerrar resultado...');
-            const nuevoEvento = this.seleccionarEventoAleatorio();
-            this.guardarEventoHoy(nuevoEvento);
-            
-            setTimeout(() => {
-                this.mostrarModalEvento(nuevoEvento);
-            }, 500);
-        }
-    },
-
+    // Mostrar último resultado
     mostrarUltimoResultado: function() {
         const ultimoEvento = JSON.parse(localStorage.getItem('evento_diario_ultimo') || '{}');
         const evento = this.obtenerEventoHoy();
         
         if (evento && ultimoEvento.resultadoExitoMostrado) {
+            // Mostrar éxito ya mostrado
             this.mostrarResultadoEvento(evento, true);
         } else if (evento && ultimoEvento.resultadoFracasoMostrado) {
+            // Mostrar fracaso ya mostrado
             this.mostrarResultadoEvento(evento, false);
         } else if (evento && ultimoEvento.requisitoCumplido && !ultimoEvento.resultadoExitoMostrado) {
+            // Éxito pendiente de mostrar
             this.mostrarResultadoEvento(evento, true);
             ultimoEvento.resultadoExitoMostrado = true;
             localStorage.setItem('evento_diario_ultimo', JSON.stringify(ultimoEvento));
         } else if (evento && !ultimoEvento.requisitoCumplido && ultimoEvento.fechaFracaso) {
+            // Fracaso pendiente de mostrar
             this.mostrarResultadoEvento(evento, false);
             ultimoEvento.resultadoFracasoMostrado = true;
             localStorage.setItem('evento_diario_ultimo', JSON.stringify(ultimoEvento));
@@ -1511,16 +1586,21 @@ const EventosDiarios = {
         }
     },
 
+    // ================================================
+    // VERSIÓN CORREGIDA - Verifica progreso con mazos de HOY
+    // ================================================
     verificarProgresoEvento: function() {
         const ultimoEvento = JSON.parse(localStorage.getItem('evento_diario_ultimo') || '{}');
         const eventoActual = this.obtenerEventoHoy();
         const fechaHoy = this.obtenerFechaActual();
         
+        // Solo verificar si hay evento hoy, no es NTR y no está cumplido aún
         if (ultimoEvento.fecha === fechaHoy && 
             !ultimoEvento.requisitoCumplido && 
             eventoActual && 
             eventoActual.tipo !== 'ntr') {
             
+            // Obtener mazos completados HOY (no total histórico)
             const mazosHoy = this.obtenerMazosCompletadosHoy();
             
             if (mazosHoy >= eventoActual.cantidadRequerida) {
@@ -1528,23 +1608,19 @@ const EventosDiarios = {
             }
         }
         
+        // Verificar al final del día (para marcar como fallido)
         this.verificarFinDelDia();
     },
 
-    // ================================================
-    // VERSIÓN CORREGIDA - iniciarEventoDiario con mejor manejo de estados
-    // ================================================
+    // Iniciar evento diario (VERSIÓN CORREGIDA - Éxito inmediato, fracaso al día siguiente)
     iniciarEventoDiario: function() {
         console.log('📅 Iniciando sistema de eventos diarios...');
         
         const ultimoEventoStr = localStorage.getItem('evento_diario_ultimo');
         const fechaHoy = this.obtenerFechaActual();
         
-        // Limpiar cualquier overlay residual
-        this.limpiarOverlays();
-        
         if (!ultimoEventoStr) {
-            // Primera vez
+            // Primera vez: crear nuevo evento
             console.log('🎲 Primera vez - Creando nuevo evento...');
             const evento = this.seleccionarEventoAleatorio();
             this.guardarEventoHoy(evento);
@@ -1555,109 +1631,88 @@ const EventosDiarios = {
             return;
         }
         
-        try {
-            const ultimoEvento = JSON.parse(ultimoEventoStr);
-            const eventoGuardado = this.obtenerEventoHoy();
+        const ultimoEvento = JSON.parse(ultimoEventoStr);
+        const eventoGuardado = this.obtenerEventoHoy();
+        
+        // CASO 1: Verificar si hay que mostrar FRACASO de ayer (VERSIÓN CORREGIDA)
+        if (this.debeMostrarFracasoAyer()) {
+            console.log('🎬 Mostrando video de FRACASO del día anterior...');
             
-            // CASO 1: Mostrar fracaso de ayer
-            if (this.debeMostrarFracasoAyer()) {
-                console.log('🎬 Mostrando video de FRACASO del día anterior...');
+            if (eventoGuardado) {
+                this.mostrarResultadoEvento(eventoGuardado, false);
                 
-                if (eventoGuardado) {
-                    this.mostrarResultadoEvento(eventoGuardado, false);
-                    
-                    ultimoEvento.resultadoFracasoMostrado = true;
-                    localStorage.setItem('evento_diario_ultimo', JSON.stringify(ultimoEvento));
-                    
-                    // IMPORTANTE: No crear nuevo evento aquí, se creará al cerrar
-                }
-                return;
-            }
-            
-            // CASO 2: Mostrar éxito pendiente de hoy
-            if (ultimoEvento.fecha === fechaHoy && 
-                ultimoEvento.requisitoCumplido && 
-                !ultimoEvento.resultadoExitoMostrado && 
-                eventoGuardado) {
-                
-                console.log('🎬 Mostrando video de ÉXITO pendiente de hoy...');
-                this.mostrarResultadoEvento(eventoGuardado, true);
-                
-                ultimoEvento.resultadoExitoMostrado = true;
+                // Marcar como mostrado
+                ultimoEvento.resultadoFracasoMostrado = true;
                 localStorage.setItem('evento_diario_ultimo', JSON.stringify(ultimoEvento));
-                return;
-            }
-            
-            // CASO 3: Día nuevo
-            if (ultimoEvento.fecha !== fechaHoy) {
-                console.log('🎲 Día nuevo - Verificando evento anterior...');
                 
-                const eventoAnterior = eventoGuardado;
-                
-                // Si el evento anterior no fue exitoso y no es NTR, marcar para mostrar fracaso
-                if (!ultimoEvento.requisitoCumplido && eventoAnterior && eventoAnterior.tipo !== 'ntr' && !ultimoEvento.resultadoFracasoMostrado) {
-                    console.log('📝 Marcando evento anterior como fallido para mostrar hoy');
-                    ultimoEvento.fechaFracaso = ultimoEvento.fecha;
-                    ultimoEvento.resultadoFracasoMostrado = false;
-                    localStorage.setItem('evento_diario_ultimo', JSON.stringify(ultimoEvento));
-                    
-                    // Mostrar el fracaso ahora
-                    setTimeout(() => {
-                        this.mostrarResultadoEvento(eventoAnterior, false);
-                        ultimoEvento.resultadoFracasoMostrado = true;
-                        localStorage.setItem('evento_diario_ultimo', JSON.stringify(ultimoEvento));
-                    }, 500);
-                } else {
-                    // Si no hay fracaso que mostrar, crear nuevo evento directamente
-                    console.log('🎲 Creando nuevo evento para hoy...');
+                // Después de mostrar fracaso, crear nuevo evento para hoy
+                setTimeout(() => {
                     const nuevoEvento = this.seleccionarEventoAleatorio();
                     this.guardarEventoHoy(nuevoEvento);
                     
                     setTimeout(() => {
                         this.mostrarModalEvento(nuevoEvento);
                     }, 500);
-                }
-                return;
+                }, 1000);
             }
-            
-            // CASO 4: Mismo día, evento ya mostrado
-            console.log('📅 Ya hay evento para hoy - verificando si debemos mostrarlo');
-            
-            // Verificar si el evento de hoy ya se mostró
-            const eventoHoyMostrado = localStorage.getItem('evento_hoy_mostrado') === fechaHoy;
-            
-            if (!eventoHoyMostrado && eventoGuardado) {
-                console.log('🎬 Mostrando evento de hoy (no mostrado aún)');
-                this.mostrarModalEvento(eventoGuardado);
-                localStorage.setItem('evento_hoy_mostrado', fechaHoy);
-            }
-            
-            this.actualizarBarraProgreso();
-            
-        } catch (e) {
-            console.error('Error al procesar evento:', e);
-            // En caso de error, reiniciar
-            localStorage.removeItem('evento_diario_ultimo');
-            localStorage.removeItem('evento_diario_actual');
-            this.iniciarEventoDiario();
+            return;
         }
-    },
-
-    // Limpiar overlays residuales
-    limpiarOverlays: function() {
-        const overlays = [
-            'evento-modal-overlay',
-            'evento-resultado-overlay'
-        ];
         
-        overlays.forEach(id => {
-            const overlay = document.getElementById(id);
-            if (overlay) {
-                overlay.remove();
+        // CASO 2: Verificar si hay que mostrar ÉXITO pendiente de hoy
+        if (ultimoEvento.fecha === fechaHoy && 
+            ultimoEvento.requisitoCumplido && 
+            !ultimoEvento.resultadoExitoMostrado && 
+            eventoGuardado) {
+            
+            console.log('🎬 Mostrando video de ÉXITO pendiente de hoy...');
+            this.mostrarResultadoEvento(eventoGuardado, true);
+            
+            ultimoEvento.resultadoExitoMostrado = true;
+            localStorage.setItem('evento_diario_ultimo', JSON.stringify(ultimoEvento));
+            return;
+        }
+        
+        // CASO 3: Es un día nuevo (sin evento hoy) - VERSIÓN CORREGIDA
+        if (ultimoEvento.fecha !== fechaHoy) {
+            console.log('🎲 Día nuevo - Verificando evento anterior...');
+            
+            const eventoAnterior = this.obtenerEventoHoy(); // evento del día anterior
+            let mostrandoFracaso = false;
+            
+            // Si el evento anterior no fue exitoso y no es NTR, mostrar fracaso
+            if (!ultimoEvento.requisitoCumplido && eventoAnterior && eventoAnterior.tipo !== 'ntr') {
+                console.log('🎬 Mostrando video de FRACASO del día anterior...');
+                this.mostrarResultadoEvento(eventoAnterior, false);
+                
+                // Marcar como mostrado
+                ultimoEvento.resultadoFracasoMostrado = true;
+                localStorage.setItem('evento_diario_ultimo', JSON.stringify(ultimoEvento));
+                mostrandoFracaso = true;
             }
-        });
+            
+            // Función para crear el nuevo evento (se ejecuta después de mostrar el fracaso si corresponde)
+            const crearNuevoEvento = () => {
+                const nuevoEvento = this.seleccionarEventoAleatorio();
+                this.guardarEventoHoy(nuevoEvento);
+                setTimeout(() => {
+                    this.mostrarModalEvento(nuevoEvento);
+                }, 500);
+            };
+            
+            if (mostrandoFracaso) {
+                setTimeout(crearNuevoEvento, 1000); // Espera a que termine el video (aprox.)
+            } else {
+                crearNuevoEvento();
+            }
+            return;
+        }
+        
+        // CASO 4: Mismo día, evento ya mostrado
+        console.log('📅 Ya hay evento para hoy');
+        this.actualizarBarraProgreso();
     },
 
+    // Crear contenedor para la barra de progreso con botón toggle
     crearContenedorProgreso: function() {
         if (document.getElementById('eventos-progreso-container')) {
             return;
@@ -1735,29 +1790,41 @@ const EventosDiarios = {
         }
     },
 
+    // Verificar si terminó el día y marcar como fallido
     verificarFinDelDia: function() {
         const ultimoEvento = JSON.parse(localStorage.getItem('evento_diario_ultimo') || '{}');
         const fechaHoy = this.obtenerFechaActual();
         const ahora = new Date();
         const hora = ahora.getHours();
         
-        if (hora >= 23 || hora < 3) {
-            if (ultimoEvento.fecha === fechaHoy && !ultimoEvento.requisitoCumplido && !ultimoEvento.fechaFracaso) {
+        // Si son más de las 23:59 (o sea, después de medianoche) pero aún no cambia la fecha
+        // Este es un mecanismo de respaldo
+        if (hora >= 0 && hora < 3) { // Entre 0 y 3 AM
+            if (ultimoEvento.fecha === fechaHoy && !ultimoEvento.requisitoCumplido) {
                 this.marcarEventoFallido();
             }
         }
     },
 
+    // Inicializar todo
     inicializar: function() {
+        // Crear contenedor de progreso con toggle
         this.crearContenedorProgreso();
 
+        // Iniciar evento diario con reintento si las dependencias no están listas
         const intentarInicio = () => {
             if (typeof sistemaEconomia !== 'undefined' && typeof quintillizasRPG !== 'undefined') {
                 this.iniciarEventoDiario();
                 
+                // Verificar progreso cada minuto (para éxito inmediato)
                 setInterval(() => {
                     this.verificarProgresoEvento();
-                }, 60000);
+                }, 60000); // Cada minuto
+                
+                // Crear botones de prueba después de que todo esté listo
+                setTimeout(() => {
+                    crearBotonesPrueba();
+                }, 2000);
                 
             } else {
                 console.warn('⏳ Esperando dependencias para iniciar evento diario...');
@@ -1766,26 +1833,311 @@ const EventosDiarios = {
         };
         
         setTimeout(intentarInicio, 1500);
+
+        // Hook para actualizar barra al mostrar resultado
+        const originalMostrarResultado = this.mostrarResultadoEvento;
+        this.mostrarResultadoEvento = function(evento, exito) {
+            originalMostrarResultado.call(this, evento, exito);
+            this.actualizarBarraProgreso();
+        };
     }
 };
+
+// ================================================
+// BOTONES DE PRUEBA - SIMULAR FALLOS DE EVENTO
+// ================================================
+
+function crearBotonesPrueba() {
+    // Buscar donde insertar los botones (junto al botón de reiniciar evento)
+    const botonesExistentes = document.querySelectorAll('button');
+    let botonReiniciar = null;
+    
+    for (let boton of botonesExistentes) {
+        if (boton.textContent.includes('REINICIAR') || boton.textContent.includes('Reiniciar')) {
+            botonReiniciar = boton;
+            break;
+        }
+    }
+    
+    // Si no encontramos botón de reiniciar, crear un contenedor aparte
+    const contenedorBotones = document.createElement('div');
+    contenedorBotones.id = 'eventos-test-buttons';
+    contenedorBotones.style.cssText = `
+        position: fixed;
+        top: 100px;
+        right: 20px;
+        z-index: 9999;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    `;
+    
+    // Botón 1: Simular fallo (marca para mañana)
+    const btnSimularFallo = document.createElement('button');
+    btnSimularFallo.innerHTML = '⚠️ SIMULAR FALLO (mañana)';
+    btnSimularFallo.title = 'Marca el evento de hoy como fallido (verás el video mañana)';
+    btnSimularFallo.style.cssText = `
+        background: linear-gradient(135deg, #F44336, #FF9800);
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 50px;
+        font-weight: bold;
+        cursor: pointer;
+        font-size: 0.9rem;
+        border: 2px solid white;
+        box-shadow: 0 0 15px #F44336;
+        transition: all 0.3s;
+        width: 200px;
+    `;
+    btnSimularFallo.onmouseover = () => {
+        btnSimularFallo.style.transform = 'scale(1.05)';
+        btnSimularFallo.style.boxShadow = '0 0 25px #F44336';
+    };
+    btnSimularFallo.onmouseout = () => {
+        btnSimularFallo.style.transform = 'scale(1)';
+        btnSimularFallo.style.boxShadow = '0 0 15px #F44336';
+    };
+    btnSimularFallo.onclick = simularFalloEvento;
+
+    // Botón 2: Forzar fracaso ahora
+    const btnForzarFracaso = document.createElement('button');
+    btnForzarFracaso.innerHTML = '🎬 FORZAR FRACASO AHORA';
+    btnForzarFracaso.title = 'Muestra el video de fracaso del evento actual inmediatamente';
+    btnForzarFracaso.style.cssText = `
+        background: linear-gradient(135deg, #8B0000, #F44336);
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 50px;
+        font-weight: bold;
+        cursor: pointer;
+        font-size: 0.9rem;
+        border: 2px solid white;
+        box-shadow: 0 0 15px #8B0000;
+        transition: all 0.3s;
+        width: 200px;
+    `;
+    btnForzarFracaso.onmouseover = () => {
+        btnForzarFracaso.style.transform = 'scale(1.05)';
+        btnForzarFracaso.style.boxShadow = '0 0 25px #8B0000';
+    };
+    btnForzarFracaso.onmouseout = () => {
+        btnForzarFracaso.style.transform = 'scale(1)';
+        btnForzarFracaso.style.boxShadow = '0 0 15px #8B0000';
+    };
+    btnForzarFracaso.onclick = forzarFracasoAhora;
+
+    // Botón 3: Resetear estado de eventos
+    const btnResetEventos = document.createElement('button');
+    btnResetEventos.innerHTML = '🔄 RESETEAR EVENTOS';
+    btnResetEventos.title = 'Reinicia el sistema de eventos (para pruebas)';
+    btnResetEventos.style.cssText = `
+        background: linear-gradient(135deg, #2196F3, #03A9F4);
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        border-radius: 50px;
+        font-weight: bold;
+        cursor: pointer;
+        font-size: 0.9rem;
+        border: 2px solid white;
+        box-shadow: 0 0 15px #2196F3;
+        transition: all 0.3s;
+        width: 200px;
+    `;
+    btnResetEventos.onmouseover = () => {
+        btnResetEventos.style.transform = 'scale(1.05)';
+        btnResetEventos.style.boxShadow = '0 0 25px #2196F3';
+    };
+    btnResetEventos.onmouseout = () => {
+        btnResetEventos.style.transform = 'scale(1)';
+        btnResetEventos.style.boxShadow = '0 0 15px #2196F3';
+    };
+    btnResetEventos.onclick = resetearEventosPrueba;
+
+    // Agregar botones al contenedor
+    contenedorBotones.appendChild(btnSimularFallo);
+    contenedorBotones.appendChild(btnForzarFracaso);
+    contenedorBotones.appendChild(btnResetEventos);
+    
+    // Agregar al body
+    document.body.appendChild(contenedorBotones);
+    
+    console.log('✅ Botones de prueba creados');
+}
+
+// Función para simular fallo (aparece mañana)
+function simularFalloEvento() {
+    if (!confirm('⚠️ ¿Simular que fallaste el evento de HOY?\n\nEsto marcará el evento actual como fallido y MAÑANA verás el video de fracaso.')) {
+        return;
+    }
+    
+    try {
+        const ultimoEvento = JSON.parse(localStorage.getItem('evento_diario_ultimo') || '{}');
+        const eventoActual = EventosDiarios.obtenerEventoHoy();
+        const fechaHoy = EventosDiarios.obtenerFechaActual();
+        
+        if (!eventoActual) {
+            alert('❌ No hay evento activo hoy');
+            return;
+        }
+        
+        if (eventoActual.tipo === 'ntr') {
+            alert('⚠️ Los eventos NTR no se pueden simular como fallo (tienen opciones)');
+            return;
+        }
+        
+        // Marcar como fallido
+        ultimoEvento.requisitoCumplido = false;
+        ultimoEvento.fechaFracaso = fechaHoy;
+        ultimoEvento.resultadoFracasoMostrado = false;
+        
+        localStorage.setItem('evento_diario_ultimo', JSON.stringify(ultimoEvento));
+        
+        mostrarNotificacionPrueba(
+            '⚠️ EVENTO MARCADO COMO FALLIDO',
+            `El evento "${eventoActual.titulo}" se mostrará como fracaso MAÑANA`,
+            '#F44336'
+        );
+        
+        console.log('✅ Evento marcado como fallido:', {
+            evento: eventoActual.id,
+            fecha: fechaHoy
+        });
+        
+    } catch (e) {
+        console.error('Error al simular fallo:', e);
+        alert('❌ Error al simular el fallo');
+    }
+}
+
+// Función para forzar fracaso ahora mismo
+function forzarFracasoAhora() {
+    if (!confirm('🎬 ¿Forzar video de FRACASO AHORA?\n\nEsto mostrará el video de fracaso del evento actual inmediatamente.')) {
+        return;
+    }
+    
+    try {
+        const eventoActual = EventosDiarios.obtenerEventoHoy();
+        
+        if (!eventoActual) {
+            alert('❌ No hay evento activo');
+            return;
+        }
+        
+        if (eventoActual.tipo === 'ntr') {
+            alert('⚠️ Los eventos NTR no tienen video de fracaso (tienen opciones)');
+            return;
+        }
+        
+        // Mostrar el video de fracaso directamente
+        EventosDiarios.mostrarResultadoEvento(eventoActual, false);
+        
+        // Actualizar el estado
+        const ultimoEvento = JSON.parse(localStorage.getItem('evento_diario_ultimo') || '{}');
+        ultimoEvento.requisitoCumplido = false;
+        ultimoEvento.resultadoFracasoMostrado = true;
+        ultimoEvento.fechaFracaso = EventosDiarios.obtenerFechaActual();
+        localStorage.setItem('evento_diario_ultimo', JSON.stringify(ultimoEvento));
+        
+    } catch (e) {
+        console.error('Error al forzar fracaso:', e);
+        alert('❌ Error al forzar el fracaso');
+    }
+}
+
+// Función para resetear eventos (para pruebas)
+function resetearEventosPrueba() {
+    if (!confirm('🔄 ¿Resetear sistema de eventos?\n\nEsto borrará todo el historial de eventos y comenzará de nuevo.')) {
+        return;
+    }
+    
+    try {
+        // Limpiar localStorage
+        localStorage.removeItem('evento_diario_ultimo');
+        localStorage.removeItem('evento_diario_actual');
+        localStorage.removeItem('eventos_diarios_vistos');
+        localStorage.removeItem('eventos_progreso');
+        localStorage.removeItem('evento_hoy_mostrado');
+        
+        // Limpiar overlays
+        const overlays = ['evento-modal-overlay', 'evento-resultado-overlay'];
+        overlays.forEach(id => {
+            const overlay = document.getElementById(id);
+            if (overlay) overlay.remove();
+        });
+        
+        mostrarNotificacionPrueba(
+            '🔄 EVENTOS RESETEADOS',
+            'El sistema de eventos se ha reiniciado. Recargando...',
+            '#2196F3'
+        );
+        
+        // Recargar después de 2 segundos
+        setTimeout(() => {
+            location.reload();
+        }, 2000);
+        
+    } catch (e) {
+        console.error('Error al resetear:', e);
+        alert('❌ Error al resetear eventos');
+    }
+}
+
+// Mostrar notificación de prueba
+function mostrarNotificacionPrueba(titulo, mensaje, color) {
+    const notif = document.createElement('div');
+    notif.style.cssText = `
+        position: fixed;
+        top: 200px;
+        right: 240px;
+        background: ${color};
+        color: white;
+        padding: 20px;
+        border-radius: 15px;
+        font-weight: bold;
+        border: 3px solid white;
+        box-shadow: 0 0 30px ${color};
+        z-index: 10001;
+        max-width: 300px;
+        animation: slideIn 0.3s ease;
+        text-align: center;
+    `;
+    notif.innerHTML = `
+        <div style="font-size: 1.2rem; margin-bottom: 10px;">${titulo}</div>
+        <div style="font-size: 0.9rem; opacity: 0.9;">${mensaje}</div>
+    `;
+    
+    document.body.appendChild(notif);
+    
+    setTimeout(() => {
+        notif.style.animation = 'fadeOut 0.3s ease forwards';
+        setTimeout(() => notif.remove(), 300);
+    }, 3000);
+}
 
 // ================================================
 // CHECKER DE PROGRESO PARA EVENTOS DIARIOS
 // ================================================
 
 const EventosChecker = {
+    // Llamar esta función cada vez que se completa un mazo al 100%
     verificarProgresoEvento: function() {
         if (typeof EventosDiarios !== 'undefined' && typeof sistemaEconomia !== 'undefined') {
             EventosDiarios.verificarProgresoEvento();
         }
     },
     
+    // Inicializar checker (hook en sistemaEconomia)
     inicializar: function() {
         if (typeof sistemaEconomia !== 'undefined' && sistemaEconomia.actualizarProgreso) {
             const originalActualizarProgreso = sistemaEconomia.actualizarProgreso;
             sistemaEconomia.actualizarProgreso = function(contenedor, sub, mazo, porcentaje) {
+                // Llamar a la función original
                 originalActualizarProgreso.call(this, contenedor, sub, mazo, porcentaje);
                 
+                // Verificar evento INMEDIATAMENTE si se completó al 100%
                 if (porcentaje === 100) {
                     EventosChecker.verificarProgresoEvento();
                 }
@@ -1801,6 +2153,7 @@ const EventosChecker = {
 document.addEventListener('DOMContentLoaded', function() {
     EventosDiarios.inicializar();
     
+    // Inicializar checker después de que sistemaEconomia esté listo
     setTimeout(() => {
         EventosChecker.inicializar();
     }, 2000);
