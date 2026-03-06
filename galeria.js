@@ -391,10 +391,7 @@ const galeriaDatabase = {
         imagen: "https://pbs.twimg.com/media/HCrpe4jWQAAstF7?format=jpg&name=small",
         imagenes: [
             { id: 1, url: "https://pbs.twimg.com/media/HCrpe4jWQAAstF7?format=jpg&name=small" },
-            { id: 2, url: "https://pbs.twimg.com/media/HCrkFxWX0AELUpZ?format=jpg&name=small" },
-            { id: 3, url: "https://pbs.twimg.com/media/HCriDf2WcAAi2sp?format=jpg&name=small" },
-        
-            { id: 4, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772839634566.jpg" }
+            { id: 2, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772839634566.jpg" }
         ]
     },
     
@@ -406,10 +403,8 @@ const galeriaDatabase = {
         imagen: "https://pbs.twimg.com/media/HCrpm_8bAAAwYby?format=jpg&name=small",
         imagenes: [
             { id: 1, url: "https://pbs.twimg.com/media/HCrpm_8bAAAwYby?format=jpg&name=small" },
-            { id: 2, url: "https://pbs.twimg.com/media/HCrkd6uXgAArvWE?format=jpg&name=small" },
-            { id: 3, url: "https://pbs.twimg.com/media/HCrj51JWUAA4qQK?format=jpg&name=small" },
-        
-            { id: 4, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772839869325.jpg" }
+            { id: 2, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772839869325.jpg" }
+       
         ]
     },
     
@@ -421,10 +416,8 @@ const galeriaDatabase = {
         imagen: "https://pbs.twimg.com/media/HCrph-HXcAIXa81?format=png&name=small",
         imagenes: [
             { id: 1, url: "https://pbs.twimg.com/media/HCrph-HXcAIXa81?format=png&name=small" },
-            { id: 2, url: "https://pbs.twimg.com/media/HCrkCNWWEAAY7Kt?format=jpg&name=small" },
-            { id: 3, url: "https://pbs.twimg.com/media/HCrjZ75XkAAqL7A?format=jpg&name=small" },
-        
-            { id: 4, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772840025743.jpg" }
+            { id: 2, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772840025743.jpg" }
+      
         ]
     },
     
