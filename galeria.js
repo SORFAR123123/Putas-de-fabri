@@ -586,7 +586,9 @@ const galeriaDatabase = {
         categoria: "Quintillizas - Duo",
         imagen: "https://pbs.twimg.com/media/HClA-wWXsAAdDNs?format=jpg&name=small",
         imagenes: [
-            { id: 1, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772841513541.jpg" }
+            { id: 1, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772841513541.jpg" },
+        
+            { id: 2, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772841524312.jpg" }
         ]
     },
     '9_Yotsuba_Itsuki': {
