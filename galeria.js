@@ -557,7 +557,9 @@ const galeriaDatabase = {
         descripcion: "Ichika y Miku - La actriz y la tsundere",
         categoria: "Quintillizas - Duo",
         imagen: "https://pbs.twimg.com/media/HCrsaa6WcAEQbE6?format=jpg&name=large",
-        imagenes: []
+        imagenes: [
+            { id: 1, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772841584126.jpg" }
+        ]
     },
     '9_Ichika_Yotsuba': {
         titulo: "Ichika & Yotsuba",
