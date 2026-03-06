@@ -534,7 +534,9 @@ const galeriaDatabase = {
         categoria: "Quintillizas - Duo",
         imagen: "https://pbs.twimg.com/media/HCrY9OhWMAAGqaz?format=jpg&name=small",
         imagenes: [
-            { id: 1, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772841436455.jpg" }
+            { id: 1, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772841436455.jpg" },
+        
+            { id: 2, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772841449305.jpg" }
         ]
     },
     '9_Nino_Itsuki': {
