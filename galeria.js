@@ -536,7 +536,9 @@ const galeriaDatabase = {
         descripcion: "Nino y Itsuki - La putona y la glotona",
         categoria: "Quintillizas - Duo",
         imagen: "https://pbs.twimg.com/media/HCrjyH_W8AEZXuN?format=png&name=small",
-        imagenes: []
+        imagenes: [
+            { id: 1, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772840608337.jpg" }
+        ]
     },
     '9_Ichika_Miku': {
         titulo: "Ichika & Miku",
