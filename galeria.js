@@ -51,6 +51,36 @@ const contenedoresGaleria = {
         imagen: "https://images.unsplash.com/photo-1526512340740-9217d0159da9?w=400&h=400&fit=crop",
         descripcion: "Colección variada de imágenes aleatorias y divertidas",
         categoria: "Random"
+    },
+    9: {
+        nombre: "Quintillizas DUO",
+        imagen: "https://pbs.twimg.com/media/HCqB5bFXgAAjgl9?format=png&name=small",
+        descripcion: "Todas las combinaciones de parejas de las quintillizas Nakano",
+        categoria: "Quintillizas - Duos"
+    },
+    10: {
+        nombre: "Quintillizas TRIO",
+        imagen: "https://pbs.twimg.com/media/HCq3vdHXYAEffD7?format=png&name=small",
+        descripcion: "Todas las combinaciones de tríos de las quintillizas Nakano",
+        categoria: "Quintillizas - Trios"
+    },
+    11: {
+        nombre: "Quintillizas CUARTETO",
+        imagen: "https://pbs.twimg.com/media/HCrY9OhWMAAGqaz?format=jpg&name=small",
+        descripcion: "Todas las combinaciones de cuartetos de las quintillizas Nakano",
+        categoria: "Quintillizas - Cuartetos"
+    },
+    12: {
+        nombre: "Quintillizas QUINTETO",
+        imagen: "https://pbs.twimg.com/media/HCrjyH_W8AEZXuN?format=png&name=small",
+        descripcion: "Las cinco quintillizas juntas",
+        categoria: "Quintillizas - Quinteto"
+    },
+    13: {
+        nombre: "PRUEBA",
+        imagen: "https://pbs.twimg.com/media/HCrsaa6WcAEQbE6?format=jpg&name=large",
+        descripcion: "Galería de prueba con dos subcontenedores",
+        categoria: "Prueba"
     }
 };
 
@@ -58,8 +88,8 @@ const contenedoresGaleria = {
 const galeriaDatabase = {
     // CONTENEDOR 1
     '1_1': {
-        titulo: "Nino mi novia putona ",
-        descripcion: "Nino mi novia puta culona tetona putona buen culo buen orto buena concha orto y conchas rosada buenas curvas mi putita putona ",
+        titulo: "Nino mi novia putona",
+        descripcion: "Nino mi novia puta culona tetona putona buen culo buen orto buena concha orto y conchas rosada buenas curvas mi putita putona",
         categoria: "Mi puta novia culona tetona buen culo",
         imagen: "https://pbs.twimg.com/media/G7fsiFCXQAAhtqK?format=png&name=900x900",
         imagenes: [
@@ -77,75 +107,39 @@ const galeriaDatabase = {
             { id: 12, url: "https://pbs.twimg.com/media/HCrkRxTXEAAKM1K?format=jpg&name=large" },
             { id: 13, url: "https://pbs.twimg.com/media/HCrmd9GXwAA0waZ?format=jpg&name=small" },
             { id: 14, url: "https://pbs.twimg.com/media/HCrrmjBXwAAb90l?format=jpg&name=medium" },
-        
             { id: 15, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772756482259.jpg" },
-        
             { id: 16, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772756607757.jpg" },
-        
             { id: 17, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772756614619.jpg" },
-        
             { id: 18, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772757031795.jpg" },
-        
             { id: 19, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772757252065.jpg" },
-        
             { id: 20, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772757381208.jpg" },
-        
             { id: 21, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772757389477.jpg" },
-        
             { id: 22, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772757397609.jpg" },
-        
             { id: 23, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772757457605.jpg" },
-        
             { id: 24, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772757587309.jpg" },
-        
             { id: 25, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772803986401.jpg" },
-        
             { id: 26, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772804014599.jpg" },
-        
             { id: 27, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772804054828.jpg" },
-        
             { id: 28, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772804223459.jpg" },
-        
             { id: 29, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772812158216.jpg" },
-        
             { id: 30, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772812847734.jpg" },
-        
             { id: 31, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772813249168.jpg" },
-        
             { id: 32, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772813462416.jpg" },
-        
             { id: 33, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772813612199.jpg" },
-        
-           
-        
             { id: 34, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772816585193.jpg" },
-        
             { id: 35, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772816595968.jpg" },
-        
             { id: 36, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772817259777.jpg" },
-        
             { id: 37, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772817287965.jpg" },
-        
             { id: 38, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772817402487.jpg" },
-        
             { id: 39, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772817412711.jpg" },
-        
             { id: 40, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772817497560.jpg" },
-        
             { id: 41, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772817550101.jpg" },
-        
             { id: 42, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772817651608.jpg" },
-        
             { id: 43, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772817663417.jpg" },
-        
             { id: 44, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772817858912.jpg" },
-        
             { id: 45, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772817885022.jpg" },
-        
             { id: 46, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772817896871.jpg" },
-        
             { id: 47, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772817974915.jpg" },
-        
             { id: 48, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772819869432.jpg" }
         ]
     },
@@ -254,7 +248,7 @@ const galeriaDatabase = {
     // CONTENEDOR 2
     '2_1': {
         titulo: "Kaz mi hija zorra",
-        descripcion: "Heredó la putería de su madre y ",
+        descripcion: "Heredó la putería de su madre",
         categoria: "Abstracto",
         imagen: "https://pbs.twimg.com/media/G7fxREHW0AAxf0_?format=png&name=900x900",
         imagenes: [
@@ -305,17 +299,11 @@ const galeriaDatabase = {
             { id: 18, url: "https://pbs.twimg.com/media/HCrY9OhWMAAGqaz?format=jpg&name=small" },
             { id: 19, url: "https://pbs.twimg.com/media/HCrjyH_W8AEZXuN?format=png&name=small" },
             { id: 20, url: "https://pbs.twimg.com/media/HCrsaa6WcAEQbE6?format=jpg&name=large" },
-        
             { id: 21, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772754337361.jpg" },
-        
             { id: 22, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772754508960.jpg" },
-        
             { id: 23, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772755425956.jpg" },
-        
             { id: 24, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772755569708.jpg" },
-        
             { id: 25, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772809577659.jpg" },
-        
             { id: 26, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772818011690.jpg" }
         ]
     },
@@ -353,23 +341,14 @@ const galeriaDatabase = {
             { id: 26, url: "https://pbs.twimg.com/media/HCrdyDBXoAEyPa-?format=jpg&name=small" },
             { id: 27, url: "https://pbs.twimg.com/media/HCreqhoXIAAuICJ?format=jpg&name=small" },
             { id: 28, url: "https://pbs.twimg.com/media/HCre_jXWwAAz2P5?format=jpg&name=small" },
-
             { id: 29, url: "https://pbs.twimg.com/media/HCroIllWAAE-Trf?format=jpg&name=medium" },
-        
             { id: 30, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772753330013.jpg" },
-        
             { id: 31, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772753542109.jpg" },
-        
             { id: 32, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772753687142.jpg" },
-        
             { id: 33, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772753822185.jpg" },
-        
             { id: 34, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772754025618.jpg" },
-        
             { id: 35, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772755174751.jpg" },
-        
             { id: 36, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772755373301.jpg" },
-        
             { id: 37, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772812336330.jpg" }
         ]
     },
@@ -384,35 +363,20 @@ const galeriaDatabase = {
             { id: 2, url: "https://pbs.twimg.com/media/HCrhHmxWMAAHCFy?format=jpg&name=small" },
             { id: 3, url: "https://pbs.twimg.com/media/HCriATyaUAEr65q?format=jpg&name=medium" },
             { id: 4, url: "https://pbs.twimg.com/media/HCrkMgbWwAAK4Ij?format=jpg&name=medium" },
-        
             { id: 5, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772756583662.jpg" },
-        
             { id: 6, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772756651337.jpg" },
-        
             { id: 7, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772757260488.jpg" },
-        
             { id: 8, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772804026174.jpg" },
-        
             { id: 9, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772804067351.jpg" },
-        
             { id: 10, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772804209770.jpg" },
-        
             { id: 11, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772804687591.jpg" },
-        
             { id: 12, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772804695376.jpg" },
-        
             { id: 13, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772812918884.jpg" },
-        
             { id: 14, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772817503431.jpg" },
-        
             { id: 15, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772817515060.jpg" },
-        
             { id: 16, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772818040391.jpg" },
-        
             { id: 17, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772836254471.jpg" },
-        
             { id: 18, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772836263656.jpg" },
-        
             { id: 19, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772836274566.jpg" }
         ]
     },
@@ -422,13 +386,11 @@ const galeriaDatabase = {
         titulo: "Ichika - La mayor",
         descripcion: "Galería de Ichika, la hermana mayor y actriz del grupo",
         categoria: "Quintillizas",
-        imagen: "https://images.unsplash.com/photo-1518834103328-371bb64201b4",
+        imagen: "https://pbs.twimg.com/media/HCrpe4jWQAAstF7?format=jpg&name=small",
         imagenes: [
-            { id: 1, url: "https://images.unsplash.com/photo-1518834103328-371bb64201b4" },
-            { id: 2, url: "https://images.unsplash.com/photo-1513584684374-8bab748fbf90" },
-            { id: 3, url: "https://images.unsplash.com/photo-1501854140801-50d01698950b" },
-            { id: 4, url: "https://images.unsplash.com/photo-1447752875215-b2761acb3c5d" },
-            { id: 5, url: "https://images.unsplash.com/photo-1418065460487-3e41a6c84dc5" }
+            { id: 1, url: "https://pbs.twimg.com/media/HCrpe4jWQAAstF7?format=jpg&name=small" },
+            { id: 2, url: "https://pbs.twimg.com/media/HCrkFxWX0AELUpZ?format=jpg&name=small" },
+            { id: 3, url: "https://pbs.twimg.com/media/HCriDf2WcAAi2sp?format=jpg&name=small" }
         ]
     },
     
@@ -437,13 +399,11 @@ const galeriaDatabase = {
         titulo: "Miku - La tsundere",
         descripcion: "Imágenes de Miku, la chica dulce y amante de la historia",
         categoria: "Quintillizas",
-        imagen: "https://images.unsplash.com/photo-1513584684374-8bab748fbf90",
+        imagen: "https://pbs.twimg.com/media/HCrpm_8bAAAwYby?format=jpg&name=small",
         imagenes: [
-            { id: 1, url: "https://images.unsplash.com/photo-1513584684374-8bab748fbf90" },
-            { id: 2, url: "https://images.unsplash.com/photo-1501854140801-50d01698950b" },
-            { id: 3, url: "https://images.unsplash.com/photo-1447752875215-b2761acb3c5d" },
-            { id: 4, url: "https://images.unsplash.com/photo-1418065460487-3e41a6c84dc5" },
-            { id: 5, url: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05" }
+            { id: 1, url: "https://pbs.twimg.com/media/HCrpm_8bAAAwYby?format=jpg&name=small" },
+            { id: 2, url: "https://pbs.twimg.com/media/HCrkd6uXgAArvWE?format=jpg&name=small" },
+            { id: 3, url: "https://pbs.twimg.com/media/HCrj51JWUAA4qQK?format=jpg&name=small" }
         ]
     },
     
@@ -452,89 +412,54 @@ const galeriaDatabase = {
         titulo: "Itsuki - La glotona",
         descripcion: "Colección de Itsuki, la estudiosa que siempre está comiendo",
         categoria: "Quintillizas",
-        imagen: "https://images.unsplash.com/photo-1501854140801-50d01698950b",
+        imagen: "https://pbs.twimg.com/media/HCrph-HXcAIXa81?format=png&name=small",
         imagenes: [
-            { id: 1, url: "https://images.unsplash.com/photo-1501854140801-50d01698950b" },
-            { id: 2, url: "https://images.unsplash.com/photo-1447752875215-b2761acb3c5d" },
-            { id: 3, url: "https://images.unsplash.com/photo-1418065460487-3e41a6c84dc5" },
-            { id: 4, url: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05" },
-            { id: 5, url: "https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07" }
+            { id: 1, url: "https://pbs.twimg.com/media/HCrph-HXcAIXa81?format=png&name=small" },
+            { id: 2, url: "https://pbs.twimg.com/media/HCrkCNWWEAAY7Kt?format=jpg&name=small" },
+            { id: 3, url: "https://pbs.twimg.com/media/HCrjZ75XkAAqL7A?format=jpg&name=small" }
         ]
     },
     
     // CONTENEDOR 8 - Trolas Random
     '8_1': {
-        titulo: " Trolas",
+        titulo: "Trolas",
         descripcion: "Recopilación de los mejores memes y contenido divertido",
         categoria: "Humor",
         imagen: "https://images.unsplash.com/photo-1554177255-61502b3520e7?w=300&h=300&fit=crop",
         imagenes: [
             { id: 1, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772752779732.jpg" },
             { id: 2, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772754183899.jpg" },
-       
-        
             { id: 3, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772755482182.jpg" },
-        
             { id: 4, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772755822700.jpg" },
-        
             { id: 5, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772755832880.jpg" },
-        
             { id: 6, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772755852312.jpg" },
-        
             { id: 7, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772755901844.jpg" },
-        
             { id: 8, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772755909972.jpg" },
-        
             { id: 9, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772755994925.jpg" },
-        
             { id: 10, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772756147137.jpg" },
-        
             { id: 11, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772756161117.jpg" },
-        
             { id: 12, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772756234430.jpg" },
-        
             { id: 13, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772804287679.jpg" },
-        
             { id: 14, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772804296934.jpg" },
-        
             { id: 15, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772806129474.jpg" },
-        
             { id: 16, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772807067036.jpg" },
-        
             { id: 17, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772807488716.jpg" },
-        
             { id: 18, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772807496880.jpg" },
-        
             { id: 19, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772807502782.jpg" },
-        
             { id: 20, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772807507094.jpg" },
-        
             { id: 21, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772809524535.jpg" },
-        
             { id: 22, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772810924859.jpg" },
-        
             { id: 23, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772810957105.jpg" },
-        
             { id: 24, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772812316381.jpg" },
-        
             { id: 25, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772812765688.jpg" },
-        
             { id: 26, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772817133537.jpg" },
-        
             { id: 27, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772817479054.jpg" },
-        
             { id: 28, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772817532302.jpg" },
-        
             { id: 29, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772817543066.jpg" },
-        
             { id: 30, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772817567995.jpg" },
-        
             { id: 31, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772817633790.jpg" },
-        
             { id: 32, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772818093418.jpg" },
-        
             { id: 33, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772819157914.jpg" },
-        
             { id: 34, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772819883600.jpg" }
         ]
     },
@@ -561,6 +486,218 @@ const galeriaDatabase = {
             { id: 14, url: "https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=600&h=600&fit=crop" },
             { id: 15, url: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&h=600&fit=crop" }
         ]
+    },
+
+    // ============ CONTENEDOR 9 - DUOS (TODAS LAS COMBINACIONES) ============
+    '9_Nino_Ichika': {
+        titulo: "Nino & Ichika",
+        descripcion: "Las dos hermanas mayores - Nino la putona e Ichika la actriz",
+        categoria: "Quintillizas - Duo",
+        imagen: "https://pbs.twimg.com/media/HCqB5bFXgAAjgl9?format=png&name=small",
+        imagenes: []
+    },
+    '9_Nino_Miku': {
+        titulo: "Nino & Miku",
+        descripcion: "Nino y Miku - La putona y la tsundere",
+        categoria: "Quintillizas - Duo",
+        imagen: "https://pbs.twimg.com/media/HCq3vdHXYAEffD7?format=png&name=small",
+        imagenes: []
+    },
+    '9_Nino_Yotsuba': {
+        titulo: "Nino & Yotsuba",
+        descripcion: "Nino y Yotsuba - La putona y la enérgica",
+        categoria: "Quintillizas - Duo",
+        imagen: "https://pbs.twimg.com/media/HCrY9OhWMAAGqaz?format=jpg&name=small",
+        imagenes: []
+    },
+    '9_Nino_Itsuki': {
+        titulo: "Nino & Itsuki",
+        descripcion: "Nino y Itsuki - La putona y la glotona",
+        categoria: "Quintillizas - Duo",
+        imagen: "https://pbs.twimg.com/media/HCrjyH_W8AEZXuN?format=png&name=small",
+        imagenes: []
+    },
+    '9_Ichika_Miku': {
+        titulo: "Ichika & Miku",
+        descripcion: "Ichika y Miku - La actriz y la tsundere",
+        categoria: "Quintillizas - Duo",
+        imagen: "https://pbs.twimg.com/media/HCrsaa6WcAEQbE6?format=jpg&name=large",
+        imagenes: []
+    },
+    '9_Ichika_Yotsuba': {
+        titulo: "Ichika & Yotsuba",
+        descripcion: "Ichika y Yotsuba - La mayor y la más enérgica",
+        categoria: "Quintillizas - Duo",
+        imagen: "https://pbs.twimg.com/media/HClAtq7XAAAnVxh?format=jpg&name=small",
+        imagenes: []
+    },
+    '9_Ichika_Itsuki': {
+        titulo: "Ichika & Itsuki",
+        descripcion: "Ichika y Itsuki - Dos hermanas muy diferentes",
+        categoria: "Quintillizas - Duo",
+        imagen: "https://pbs.twimg.com/media/HClAxtlXsAA_rC5?format=jpg&name=small",
+        imagenes: []
+    },
+    '9_Miku_Yotsuba': {
+        titulo: "Miku & Yotsuba",
+        descripcion: "Miku y Yotsuba - La tímida y la extrovertida",
+        categoria: "Quintillizas - Duo",
+        imagen: "https://pbs.twimg.com/media/HClA9eXawAwhdFo?format=jpg&name=small",
+        imagenes: []
+    },
+    '9_Miku_Itsuki': {
+        titulo: "Miku & Itsuki",
+        descripcion: "Miku y Itsuki - Amantes de la historia y la comida",
+        categoria: "Quintillizas - Duo",
+        imagen: "https://pbs.twimg.com/media/HClA-wWXsAAdDNs?format=jpg&name=small",
+        imagenes: []
+    },
+    '9_Yotsuba_Itsuki': {
+        titulo: "Yotsuba & Itsuki",
+        descripcion: "Yotsuba y Itsuki - Energía y apetito",
+        categoria: "Quintillizas - Duo",
+        imagen: "https://pbs.twimg.com/media/HClA_p4XYAArQKD?format=jpg&name=small",
+        imagenes: []
+    },
+
+    // ============ CONTENEDOR 10 - TRIOS (TODAS LAS COMBINACIONES) ============
+    '10_Nino_Ichika_Miku': {
+        titulo: "Nino, Ichika & Miku",
+        descripcion: "Tres hermanas - Nino, Ichika y Miku",
+        categoria: "Quintillizas - Trio",
+        imagen: "https://pbs.twimg.com/media/HClB4sMWkAAZRK8?format=jpg&name=small",
+        imagenes: []
+    },
+    '10_Nino_Ichika_Yotsuba': {
+        titulo: "Nino, Ichika & Yotsuba",
+        descripcion: "Nino, Ichika y Yotsuba juntas",
+        categoria: "Quintillizas - Trio",
+        imagen: "https://pbs.twimg.com/media/HClB6n0WMAANEqH?format=jpg&name=small",
+        imagenes: []
+    },
+    '10_Nino_Ichika_Itsuki': {
+        titulo: "Nino, Ichika & Itsuki",
+        descripcion: "Nino, Ichika y Itsuki en trio",
+        categoria: "Quintillizas - Trio",
+        imagen: "https://pbs.twimg.com/media/HClC0beWIAAKAju?format=jpg&name=small",
+        imagenes: []
+    },
+    '10_Nino_Miku_Yotsuba': {
+        titulo: "Nino, Miku & Yotsuba",
+        descripcion: "Nino con Miku y Yotsuba",
+        categoria: "Quintillizas - Trio",
+        imagen: "https://pbs.twimg.com/media/HClB-UzawAQe_VV?format=jpg&name=small",
+        imagenes: []
+    },
+    '10_Nino_Miku_Itsuki': {
+        titulo: "Nino, Miku & Itsuki",
+        descripcion: "Nino, Miku e Itsuki",
+        categoria: "Quintillizas - Trio",
+        imagen: "https://pbs.twimg.com/media/HClB_xOWgAE1xPl?format=jpg&name=small",
+        imagenes: []
+    },
+    '10_Nino_Yotsuba_Itsuki': {
+        titulo: "Nino, Yotsuba & Itsuki",
+        descripcion: "Nino con Yotsuba e Itsuki",
+        categoria: "Quintillizas - Trio",
+        imagen: "https://pbs.twimg.com/media/HClCBCMXMAAd6qi?format=jpg&name=small",
+        imagenes: []
+    },
+    '10_Ichika_Miku_Yotsuba': {
+        titulo: "Ichika, Miku & Yotsuba",
+        descripcion: "Ichika, Miku y Yotsuba",
+        categoria: "Quintillizas - Trio",
+        imagen: "https://pbs.twimg.com/media/HClCE68WYAAuFly?format=jpg&name=small",
+        imagenes: []
+    },
+    '10_Ichika_Miku_Itsuki': {
+        titulo: "Ichika, Miku & Itsuki",
+        descripcion: "Ichika, Miku e Itsuki",
+        categoria: "Quintillizas - Trio",
+        imagen: "https://pbs.twimg.com/media/HClCGqZakAA4SE4?format=jpg&name=small",
+        imagenes: []
+    },
+    '10_Ichika_Yotsuba_Itsuki': {
+        titulo: "Ichika, Yotsuba & Itsuki",
+        descripcion: "Ichika con Yotsuba e Itsuki",
+        categoria: "Quintillizas - Trio",
+        imagen: "https://pbs.twimg.com/media/HClCIlHa8AABwfo?format=jpg&name=small",
+        imagenes: []
+    },
+    '10_Miku_Yotsuba_Itsuki': {
+        titulo: "Miku, Yotsuba & Itsuki",
+        descripcion: "Miku, Yotsuba e Itsuki",
+        categoria: "Quintillizas - Trio",
+        imagen: "https://pbs.twimg.com/media/HCqEZzsaoAAhtRm?format=jpg&name=small",
+        imagenes: []
+    },
+
+    // ============ CONTENEDOR 11 - CUARTETOS (TODAS LAS COMBINACIONES) ============
+    '11_Nino_Ichika_Miku_Yotsuba': {
+        titulo: "Nino, Ichika, Miku & Yotsuba",
+        descripcion: "Cuarteto sin Itsuki",
+        categoria: "Quintillizas - Cuarteto",
+        imagen: "https://pbs.twimg.com/media/HCrLwetWIAEYdr5?format=jpg&name=small",
+        imagenes: []
+    },
+    '11_Nino_Ichika_Miku_Itsuki': {
+        titulo: "Nino, Ichika, Miku & Itsuki",
+        descripcion: "Cuarteto sin Yotsuba",
+        categoria: "Quintillizas - Cuarteto",
+        imagen: "https://pbs.twimg.com/media/HCrJoF-XMAAWJra?format=jpg&name=small",
+        imagenes: []
+    },
+    '11_Nino_Ichika_Yotsuba_Itsuki': {
+        titulo: "Nino, Ichika, Yotsuba & Itsuki",
+        descripcion: "Cuarteto sin Miku",
+        categoria: "Quintillizas - Cuarteto",
+        imagen: "https://pbs.twimg.com/media/HCrQkIKW8AAlQY6?format=jpg&name=small",
+        imagenes: []
+    },
+    '11_Nino_Miku_Yotsuba_Itsuki': {
+        titulo: "Nino, Miku, Yotsuba & Itsuki",
+        descripcion: "Cuarteto sin Ichika",
+        categoria: "Quintillizas - Cuarteto",
+        imagen: "https://pbs.twimg.com/media/HCrQmL8XMAAy3uh?format=jpg&name=small",
+        imagenes: []
+    },
+    '11_Ichika_Miku_Yotsuba_Itsuki': {
+        titulo: "Ichika, Miku, Yotsuba & Itsuki",
+        descripcion: "Cuarteto sin Nino",
+        categoria: "Quintillizas - Cuarteto",
+        imagen: "https://pbs.twimg.com/media/HCrTLFgaUAExqjv?format=jpg&name=small",
+        imagenes: []
+    },
+
+    // ============ CONTENEDOR 12 - QUINTETO (UNA SOLA COMBINACIÓN) ============
+    '12_Nino_Ichika_Miku_Yotsuba_Itsuki': {
+        titulo: "LAS CINCO QUINTILLIZAS",
+        descripcion: "Todas las hermanas Nakano juntas - Nino, Ichika, Miku, Yotsuba e Itsuki",
+        categoria: "Quintillizas - Quinteto",
+        imagen: "https://pbs.twimg.com/media/HCroIllWAAE-Trf?format=jpg&name=medium",
+        imagenes: []
+    },
+
+    // ============ CONTENEDOR 13 - PRUEBA ============
+    '13_Prueba_1': {
+        titulo: "Prueba 1",
+        descripcion: "Primer subcontenedor de prueba",
+        categoria: "Prueba",
+        imagen: "https://pbs.twimg.com/media/HCrsaa6WcAEQbE6?format=jpg&name=large",
+        imagenes: [
+            { id: 1, url: "https://pbs.twimg.com/media/HCrsaa6WcAEQbE6?format=jpg&name=large" },
+            { id: 2, url: "https://pbs.twimg.com/media/HCrjyH_W8AEZXuN?format=png&name=small" }
+        ]
+    },
+    '13_Prueba_2': {
+        titulo: "Prueba 2",
+        descripcion: "Segundo subcontenedor de prueba",
+        categoria: "Prueba",
+        imagen: "https://pbs.twimg.com/media/HCrY9OhWMAAGqaz?format=jpg&name=small",
+        imagenes: [
+            { id: 1, url: "https://pbs.twimg.com/media/HCrY9OhWMAAGqaz?format=jpg&name=small" },
+            { id: 2, url: "https://pbs.twimg.com/media/HCq3vdHXYAEffD7?format=png&name=small" }
+        ]
     }
 };
 
@@ -578,25 +715,41 @@ function obtenerContenedorGaleria(numero) {
 }
 
 function obtenerSubcontenedorGaleria(contenedor, subcontenedor) {
-    const key = `${contenedor}_${subcontenedor}`;
-    return galeriaDatabase[key] || {
-        titulo: `Galería ${subcontenedor}`,
-        descripcion: 'Colección de imágenes',
-        categoria: 'General',
-        imagen: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=300&h=300&fit=crop',
-        imagenes: []
-    };
+    // Para los contenedores 9-13 que usan nombres en lugar de números
+    if (contenedor >= 9) {
+        const key = `${contenedor}_${subcontenedor}`;
+        return galeriaDatabase[key] || {
+            titulo: `Galería ${subcontenedor}`,
+            descripcion: 'Colección de imágenes',
+            categoria: 'General',
+            imagen: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=300&h=300&fit=crop',
+            imagenes: []
+        };
+    } else {
+        const key = `${contenedor}_${subcontenedor}`;
+        return galeriaDatabase[key] || {
+            titulo: `Galería ${subcontenedor}`,
+            descripcion: 'Colección de imágenes',
+            categoria: 'General',
+            imagen: 'https://images.unsplash.com/photo-1578662996442-48f60103fc96?w=300&h=300&fit=crop',
+            imagenes: []
+        };
+    }
 }
 
 function obtenerContenedoresGaleriaDisponibles() {
     const contenedores = {};
     
     Object.keys(galeriaDatabase).forEach(key => {
-        const [contenedor, subcontenedor] = key.split('_');
+        const partes = key.split('_');
+        const contenedor = partes[0];
+        
         if (!contenedores[contenedor]) {
             contenedores[contenedor] = [];
         }
-        contenedores[contenedor].push(subcontenedor);
+        
+        // Guardamos el nombre completo del subcontenedor
+        contenedores[contenedor].push(partes.slice(1).join('_'));
     });
     
     return contenedores;
@@ -635,10 +788,10 @@ function crearContenedoresGaleria() {
     let html = '<h2 style="text-align: center; margin-bottom: 30px; color: #FFD166;">📦 CONTENEDORES DE GALERÍA</h2>';
     html += '<div class="manga-contenedores">';
     
-    for (let i = 1; i <= 10; i++) {
+    for (let i = 1; i <= 13; i++) {
         const contenedorData = obtenerContenedorGaleria(i);
         const nombre = contenedorData.nombre || `GALERÍA ${i}`;
-        const desc = contenedorData.descripcion || '5 sub-contenedores con imágenes';
+        const desc = contenedorData.descripcion || 'Sub-contenedores con imágenes';
         
         html += `
             <div class="contenedor-item" onclick="cargarSubcontenedoresGaleria(${i})">
@@ -679,25 +832,46 @@ function crearSubcontenedoresGaleriaUI(contenedor) {
     const contenedores = obtenerContenedoresGaleriaDisponibles();
     const subcontenedoresDisponibles = contenedores[contenedor] || [];
     
-    for (let i = 1; i <= 5; i++) {
-        const tieneGaleria = subcontenedoresDisponibles.includes(i.toString());
-        const subData = obtenerSubcontenedorGaleria(contenedor, i);
-        const desc = subData.descripcion || (tieneGaleria ? 'Galería disponible' : '(Sin imágenes configuradas)');
-        const galeriaInfo = tieneGaleria ? obtenerGaleria(contenedor, i) : null;
-        
-        html += `
-            <div class="subcontenedor-item" onclick="${tieneGaleria ? `cargarGaleria(${contenedor}, ${i})` : 'alert("Esta galería no tiene imágenes configuradas")'}">
-                <div class="subcontenedor-img" style="background-image: url('${subData.imagen}')"></div>
-                <h3>${tieneGaleria ? galeriaInfo.titulo.split(' ')[0] : `Galería ${i}`}</h3>
-                ${tieneGaleria ? 
-                    `<p><strong>${galeriaInfo.titulo}</strong></p>
-                     <p style="font-size: 0.9rem; opacity: 0.8;">${galeriaInfo.categoria} • ${galeriaInfo.imagenes.length} imágenes</p>` 
-                    : `<p style="color: #FF6B6B;">${desc}</p>`}
-                <div class="card-button" style="margin-top: 10px; padding: 10px 20px; font-size: 0.9rem; background: linear-gradient(135deg, #FF1493, #FF69B4);">
-                    ${tieneGaleria ? '📦 Ver Galería' : 'Vacío'}
+    // Para contenedores 1-8 mostramos siempre 5 subcontenedores
+    if (contenedor <= 8) {
+        for (let i = 1; i <= 5; i++) {
+            const tieneGaleria = subcontenedoresDisponibles.includes(i.toString());
+            const subData = obtenerSubcontenedorGaleria(contenedor, i);
+            const desc = subData.descripcion || (tieneGaleria ? 'Galería disponible' : '(Sin imágenes configuradas)');
+            const galeriaInfo = tieneGaleria ? obtenerGaleria(contenedor, i) : null;
+            
+            html += `
+                <div class="subcontenedor-item" onclick="${tieneGaleria ? `cargarGaleria(${contenedor}, '${i}')` : 'alert("Esta galería no tiene imágenes configuradas")'}">
+                    <div class="subcontenedor-img" style="background-image: url('${subData.imagen}')"></div>
+                    <h3>${tieneGaleria ? galeriaInfo.titulo.split(' ')[0] : `Galería ${i}`}</h3>
+                    ${tieneGaleria ? 
+                        `<p><strong>${galeriaInfo.titulo}</strong></p>
+                         <p style="font-size: 0.9rem; opacity: 0.8;">${galeriaInfo.categoria} • ${galeriaInfo.imagenes.length} imágenes</p>` 
+                        : `<p style="color: #FF6B6B;">${desc}</p>`}
+                    <div class="card-button" style="margin-top: 10px; padding: 10px 20px; font-size: 0.9rem; background: linear-gradient(135deg, #FF1493, #FF69B4);">
+                        ${tieneGaleria ? '📦 Ver Galería' : 'Vacío'}
+                    </div>
                 </div>
-            </div>
-        `;
+            `;
+        }
+    } 
+    // Para contenedores 9-13 mostramos todos los subcontenedores disponibles
+    else {
+        subcontenedoresDisponibles.forEach(subKey => {
+            const galeriaInfo = obtenerGaleria(contenedor, subKey);
+            if (galeriaInfo) {
+                html += `
+                    <div class="subcontenedor-item" onclick="cargarGaleria(${contenedor}, '${subKey}')">
+                        <div class="subcontenedor-img" style="background-image: url('${galeriaInfo.imagen}')"></div>
+                        <h3>${galeriaInfo.titulo}</h3>
+                        <p style="font-size: 0.9rem; opacity: 0.8;">${galeriaInfo.categoria} • ${galeriaInfo.imagenes.length} imágenes</p>
+                        <div class="card-button" style="margin-top: 10px; padding: 10px 20px; font-size: 0.9rem; background: linear-gradient(135deg, #FF1493, #FF69B4);">
+                            📦 Ver Galería
+                        </div>
+                    </div>
+                `;
+            }
+        });
     }
     
     html += '</div>';
@@ -870,9 +1044,35 @@ function imagenSiguiente() {
 }
 
 // ================================================
+// FUNCIÓN AUXILIAR PARA CREAR BOTÓN VOLVER
+// ================================================
+
+function crearBotonVolver(funcionVolver) {
+    const boton = document.createElement('button');
+    boton.textContent = '← Volver';
+    boton.style.cssText = `
+        background: linear-gradient(135deg, #FF1493, #FF69B4);
+        color: white;
+        border: none;
+        padding: 12px 25px;
+        border-radius: 50px;
+        font-size: 1rem;
+        cursor: pointer;
+        margin: 20px;
+        font-weight: bold;
+        border: 2px solid white;
+        transition: transform 0.3s ease;
+    `;
+    boton.onmouseover = () => boton.style.transform = 'scale(1.05)';
+    boton.onmouseout = () => boton.style.transform = 'scale(1)';
+    boton.onclick = funcionVolver;
+    return boton;
+}
+
+// ================================================
 // INICIALIZACIÓN
 // ================================================
 
 console.log('📦 Sistema de Galería cargado correctamente');
-console.log('📁 Contenedores disponibles: 8');
+console.log('📁 Contenedores disponibles: 13');
 console.log('📂 Sub-galerías disponibles: ' + Object.keys(galeriaDatabase).length);
