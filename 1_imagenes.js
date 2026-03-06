@@ -1677,6 +1677,12 @@ const sistemaDescriptivo = {
                 descripcion: '2b culo suave', 
                 duracion: '' 
             },
+            '4_11': { 
+                nombre: '2b culona',
+                imagen: 'https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772836894875.jpg', 
+                descripcion: '2b', 
+                duracion: '' 
+            },
            
             '5_1': { 
                 nombre: 'Colombianas putardas',
