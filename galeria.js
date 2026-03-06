@@ -571,7 +571,9 @@ const galeriaDatabase = {
         descripcion: "Ichika y Itsuki - Dos hermanas muy diferentes",
         categoria: "Quintillizas - Duo",
         imagen: "https://pbs.twimg.com/media/HClAxtlXsAA_rC5?format=jpg&name=small",
-        imagenes: []
+        imagenes: [
+            { id: 1, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772841558446.jpg" }
+        ]
     },
     '9_Miku_Yotsuba': {
         titulo: "Miku & Yotsuba",
