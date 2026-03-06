@@ -1506,6 +1506,12 @@ const sistemaDescriptivo = {
                 descripcion: '', 
                 duracion: '' 
             },
+            '2_10': { 
+                nombre: 'Mona culona',
+                imagen: 'https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772837929843.jpg', 
+                descripcion: 'kawaicouple', 
+                duracion: '' 
+            },
            
             
             // Contenedor 3
