@@ -1689,6 +1689,12 @@ const sistemaDescriptivo = {
                 descripcion: 'god', 
                 duracion: '' 
             },
+            '4_13': { 
+                nombre: 'Pelean por mi pija',
+                imagen: 'https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772837168571.jpg', 
+                descripcion: 'god', 
+                duracion: '' 
+            },
            
             '5_1': { 
                 nombre: 'Colombianas putardas',
