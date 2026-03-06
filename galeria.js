@@ -545,7 +545,9 @@ const galeriaDatabase = {
         categoria: "Quintillizas - Duo",
         imagen: "https://pbs.twimg.com/media/HCrjyH_W8AEZXuN?format=png&name=small",
         imagenes: [
-            { id: 1, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772840608337.jpg" }
+            { id: 1, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772840608337.jpg" },
+        
+            { id: 2, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772841534873.jpg" }
         ]
     },
     '9_Ichika_Miku': {
