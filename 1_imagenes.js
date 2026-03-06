@@ -1506,12 +1506,7 @@ const sistemaDescriptivo = {
                 descripcion: '', 
                 duracion: '' 
             },
-            '2_10': { 
-                nombre: 'Raiden chupa hambreada   ',
-                imagen: 'https:4AA-204?format=png&name=small', 
-                descripcion: '', 
-                duracion: '' 
-            },
+           
             
             // Contenedor 3
             '3_1': { 
@@ -1670,18 +1665,7 @@ const sistemaDescriptivo = {
                 descripcion: '', 
                 duracion: '' 
             },
-             '4_9': { 
-                nombre: 'Sempai putarda',
-                imagen: 'https://pbs.twimg.com/media/G_IbjvhWYAAlCZ5?format=png&name=small', 
-                descripcion: '', 
-                duracion: '' 
-            },
-             '4_10': { 
-                nombre: 'Sempai putarda',
-                imagen: 'https://pbs.twimg.com/media/G_IbjvhWYAAlCZ5?format=png&name=small', 
-                descripcion: '', 
-                duracion: '' 
-            },
+           
             '5_1': { 
                 nombre: 'Colombianas putardas',
                 imagen: 'https://pbs.twimg.com/media/G_Hrih3WkAYINc8?format=jpg&name=small', 
@@ -2043,30 +2027,7 @@ const sistemaDescriptivo = {
                 descripcion: '', 
                 duracion: '' 
             },
-             '6_57': { 
-                nombre: 'Nino y itsuki kachadas a todas y las grabo dios',
-                imagen: 'https://pbs.twimg.com/media/G_Td4CkX0AAS3if?format=png&name=small', 
-                descripcion: '', 
-                duracion: '' 
-            },
-             '6_58': { 
-                nombre: 'Nino y itsuki kachadas a todas y las grabo dios',
-                imagen: 'https://pbs.twimg.com/media/G_TP3mVWkAAanyR?format=jpg&name=small', 
-                descripcion: '', 
-                duracion: '' 
-            },
-             '6_59': { 
-                nombre: 'Nino y itsuki kachadas a todas y las grabo dios',
-                imagen: 'https://pbs.twimg.com/media/G_TP3mVWkAAanyR?format=jpg&name=small', 
-                descripcion: '', 
-                duracion: '' 
-            },
-             '6_60': { 
-                nombre: 'Nino y itsuki kachadas a todas y las grabo dios',
-                imagen: 'https://pbs.twimg.com/media/G_TP3mVWkAAanyR?format=jpg&name=small', 
-                descripcion: '', 
-                duracion: '' 
-            },
+           
              '7_1': { 
                 nombre: 'Alya de la u',
                 imagen: 'https://pbs.twimg.com/media/G_SimAFXsAAwrel?format=png&name=small', 
@@ -2079,54 +2040,7 @@ const sistemaDescriptivo = {
                 descripcion: '', 
                 duracion: '' 
             },
-             '7_3': { 
-                nombre: '  de la u',
-                imagen: 'https://bs.twimg.com/media/G_SimAFXsAAwrel?format=png&name=small', 
-                descripcion: '', 
-                duracion: '' 
-            },
-             '7_4': { 
-                nombre: ' u',
-                imagen: 'https://pbstwimg.com/media/G_SimAFXsAAwrel?format=png&name=small', 
-                descripcion: '', 
-                duracion: '' 
-            },
-             '7_5': { 
-                nombre: 'A',
-                imagen: 'https://bs.twimg.com/media/G_SimAFXsAAwrel?format=png&name=small', 
-                descripcion: '', 
-                duracion: '' 
-            },
-             '7_6': { 
-                nombre: 'u',
-                imagen: 'https://ps.twimg.com/media/G_SimAFXsAAwrel?format=png&name=small', 
-                descripcion: '', 
-                duracion: '' 
-            },
-             '7_7': { 
-                nombre: 'Alya',
-                imagen: 'httwimg.com/media/G_SimAFXsAAwrel?format=png&name=small', 
-                descripcion: '', 
-                duracion: '' 
-            },
-             '7_8': { 
-                nombre: 'Aly',
-                imagen: 'https://pbs.twimg.om/media/G_SimAFXsAAwrel?format=png&name=small', 
-                descripcion: '', 
-                duracion: '' 
-            },
-             '7_9': { 
-                nombre: 'A',
-                imagen: 'https://pbs.twimg.co/media/G_SimAFXsAAwrel?format=png&name=small', 
-                descripcion: '', 
-                duracion: '' 
-            },
-             '7_10': { 
-                nombre: '',
-                imagen: 'https://pbs.twimgcom/media/G_SimAFXsAAwrel?format=png&name=small', 
-                descripcion: '', 
-                duracion: '' 
-            },
+             
              '8_1': { 
                 nombre: 'fabri putardo',
                 imagen: 'https://pbs.twimg.com/media/G_2dDpBX0AAcGz6?format=png&name=small', 
