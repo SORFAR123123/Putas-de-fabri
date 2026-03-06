@@ -1701,6 +1701,12 @@ const sistemaDescriptivo = {
                 descripcion: 'chera', 
                 duracion: '' 
             },
+            '4_15': { 
+                nombre: 'emilia kacherasa',
+                imagen: 'https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772837447038.jpg', 
+                descripcion: 'chera', 
+                duracion: '' 
+            },
            
             '5_1': { 
                 nombre: 'Colombianas putardas',
