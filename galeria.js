@@ -585,7 +585,9 @@ const galeriaDatabase = {
         descripcion: "Miku y Itsuki - Amantes de la historia y la comida",
         categoria: "Quintillizas - Duo",
         imagen: "https://pbs.twimg.com/media/HClA-wWXsAAdDNs?format=jpg&name=small",
-        imagenes: []
+        imagenes: [
+            { id: 1, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772841513541.jpg" }
+        ]
     },
     '9_Yotsuba_Itsuki': {
         titulo: "Yotsuba & Itsuki",
