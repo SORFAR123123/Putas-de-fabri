@@ -1683,6 +1683,12 @@ const sistemaDescriptivo = {
                 descripcion: '2b', 
                 duracion: '' 
             },
+            '4_12': { 
+                nombre: 'Asuka trio god',
+                imagen: 'https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772837075498.jpg', 
+                descripcion: 'god', 
+                duracion: '' 
+            },
            
             '5_1': { 
                 nombre: 'Colombianas putardas',
