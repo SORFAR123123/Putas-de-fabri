@@ -1001,14 +1001,7 @@ function existeVideo(contenedor, subcontenedor) {
 }
 
 function obtenerContenedoresDisponibles() {
-    const contenedores = {    '4_9': {
-        titulo: "2b culona",
-        driveId: "11LQ-kJTu8puVXCOa0wGw62Gvyt04nL2f",
-        descripcion: "rico culo",
-        timestamps: [],
-        categoria: "Basico"
-    },
-};
+    const contenedores = {};
     
     Object.keys(videosDatabase).forEach(key => {
         const [contenedor, subcontenedor] = key.split('_');
