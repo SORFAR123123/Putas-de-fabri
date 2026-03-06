@@ -1713,6 +1713,12 @@ const sistemaDescriptivo = {
                 descripcion: 'god', 
                 duracion: '' 
             },
+            '4_17': { 
+                nombre: 'Makima trio de putonas',
+                imagen: 'https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772837635040.jpg', 
+                descripcion: 'putoans', 
+                duracion: '' 
+            },
            
             '5_1': { 
                 nombre: 'Colombianas putardas',
