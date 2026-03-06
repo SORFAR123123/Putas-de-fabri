@@ -1731,6 +1731,12 @@ const sistemaDescriptivo = {
                 descripcion: 'naomi soraya', 
                 duracion: '' 
             },
+            '4_19': { 
+                nombre: 'Ortaso de azur lane',
+                imagen: 'https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772838092596.jpg', 
+                descripcion: 'Sweet darling', 
+                duracion: '' 
+            },
            
             '5_1': { 
                 nombre: 'Colombianas putardas',
