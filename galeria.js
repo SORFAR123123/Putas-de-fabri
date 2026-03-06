@@ -565,7 +565,9 @@ const galeriaDatabase = {
         descripcion: "Yotsuba y Itsuki - Energía y apetito",
         categoria: "Quintillizas - Duo",
         imagen: "https://pbs.twimg.com/media/HClA_p4XYAArQKD?format=jpg&name=small",
-        imagenes: []
+        imagenes: [
+            { id: 1, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772839260751.jpg" }
+        ]
     },
 
     // ============ CONTENEDOR 10 - TRIOS (TODAS LAS COMBINACIONES) ============
