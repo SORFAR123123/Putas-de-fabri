@@ -2078,7 +2078,13 @@ const sistemaDescriptivo = {
                 duracion: '' 
             }
             // ... puedes agregar más si necesitas
-        }
+                    '4_9': { 
+                nombre: '2b culona',
+                imagen: 'https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772834630965.jpg', 
+                descripcion: 'rico culo', 
+                duracion: '' 
+            },
+}
     }
 };
 
