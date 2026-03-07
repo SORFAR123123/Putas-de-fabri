@@ -649,7 +649,7 @@ const galeriaDatabase = {
         titulo: "Nino & Itsuki",
         descripcion: "Nino y Itsuki - La putona y la glotona",
         categoria: "Quintillizas - Duo",
-        imagen: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772840608337.jpg",
+        imagen: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772841534873.jpg",
         imagenes: [
             { id: 1, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772840608337.jpg" },
         
