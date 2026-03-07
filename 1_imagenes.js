@@ -2099,6 +2099,12 @@ const sistemaDescriptivo = {
                 descripcion: '', 
                 duracion: '' 
             },
+               '6_57': { 
+                nombre: 'Petarda',
+                imagen: 'https://pbs.twimg.com/media/G_Td4CkX0AAS3if?format=png&name=small', 
+                descripcion: '', 
+                duracion: '' 
+            },
            
              '7_1': { 
                 nombre: 'Alya de la u',
