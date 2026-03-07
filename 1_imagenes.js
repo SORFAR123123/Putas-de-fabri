@@ -2154,6 +2154,12 @@ const sistemaDescriptivo = {
                 descripcion: 'puta', 
                 duracion: '' 
             },
+             '7_7': { 
+                nombre: 'Zhuyuan mi puta',
+                imagen: 'https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772907849079.jpg', 
+                descripcion: 'policia putona', 
+                duracion: '' 
+            },
              
              '8_1': { 
                 nombre: 'fabri putardo',
