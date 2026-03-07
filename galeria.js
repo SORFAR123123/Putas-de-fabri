@@ -397,6 +397,13 @@ const galeriaDatabase = {
             
         ]
     },
+    '1_6': {
+        titulo: "",
+        descripcion: "",
+        categoria: "",
+        imagen: "",
+        imagenes: []
+    },
    
     
     // CONTENEDOR 2
