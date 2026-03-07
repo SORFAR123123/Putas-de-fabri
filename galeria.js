@@ -48,7 +48,7 @@ const contenedoresGaleria = {
     },
     8: {
         nombre: "Trolas Random",
-        imagen: "https://images.unsplash.com/photo-1526512340740-9217d0159da9?w=400&h=400&fit=crop",
+        imagen: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772819883600.jpg",
         descripcion: "Colección variada de imágenes aleatorias y divertidas",
         categoria: "Random"
     },
