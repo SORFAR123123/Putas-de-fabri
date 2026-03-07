@@ -718,7 +718,9 @@ const galeriaDatabase = {
         
             { id: 2, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772841524312.jpg" },
         
-            { id: 3, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772843379703.jpg" }
+            { id: 3, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772843379703.jpg" },
+        
+            { id: 4, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772843530130.jpg" }
         ]
     },
     '9_Yotsuba_Itsuki': {
