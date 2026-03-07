@@ -959,7 +959,9 @@ const galeriaDatabase = {
         descripcion: "Ichika con Yotsuba e Itsuki",
         categoria: "Quintillizas - Trio",
         imagen: "https://pbs.twimg.com/media/HClCIlHa8AABwfo?format=jpg&name=small",
-        imagenes: []
+        imagenes: [
+            { id: 1, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772896937651.jpg" }
+        ]
     },
     '10_Miku_Yotsuba_Itsuki': {
         titulo: "Miku, Yotsuba & Itsuki",
