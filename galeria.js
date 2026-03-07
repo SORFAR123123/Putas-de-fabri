@@ -666,7 +666,9 @@ const galeriaDatabase = {
         descripcion: "Nino, Ichika y Yotsuba juntas",
         categoria: "Quintillizas - Trio",
         imagen: "https://pbs.twimg.com/media/HClB6n0WMAANEqH?format=jpg&name=small",
-        imagenes: []
+        imagenes: [
+            { id: 1, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772842250442.jpg" }
+        ]
     },
     '10_Nino_Ichika_Itsuki': {
         titulo: "Nino, Ichika & Itsuki",
