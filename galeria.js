@@ -422,10 +422,8 @@ const galeriaDatabase = {
         imagen: "https://pbs.twimg.com/media/G7fxREHW0AAxf0_?format=png&name=900x900",
         imagenes: [
             { id: 1, url: "https://pbs.twimg.com/media/G7fxbA5WsAAMcky?format=png&name=900x900" },
-            { id: 2, url: "https://pbs.twimg.com/media/G7fxREHW0AAxf0_?format=png&name=900x900" },
-            { id: 3, url: "https://images.unsplash.com/photo-1543857778-c4a1a569e388" },
-            { id: 4, url: "https://images.unsplash.com/photo-1513475382585-d06e58bcb0e0" },
-            { id: 5, url: "https://images.unsplash.com/photo-1518834103328-371bb64201b4" }
+            { id: 2, url: "https://pbs.twimg.com/media/G7fxREHW0AAxf0_?format=png&name=900x900" }
+          
         ]
     },
     
