@@ -1183,7 +1183,9 @@ function crearContenedoresGaleria() {
     let html = '<h2 style="text-align: center; margin-bottom: 30px; color: #FFD166;">📦 CONTENEDORES DE GALERÍA</h2>';
     html += '<div class="manga-contenedores">';
     
-    for (let i = 1; i <= 13; i++) {
+    const totalContenedores = Object.keys(contenedoresGaleria).length;
+    
+    for (let i = 1; i <= totalContenedores; i++) {
         const contenedorData = obtenerContenedorGaleria(i);
         const nombre = contenedorData.nombre || `GALERÍA ${i}`;
         const desc = contenedorData.descripcion || 'Sub-contenedores con imágenes';
