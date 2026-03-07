@@ -2111,6 +2111,12 @@ const sistemaDescriptivo = {
                 descripcion: 'petera', 
                 duracion: '' 
             },
+             '6_59': { 
+                nombre: 'Miku matting press',
+                imagen: 'https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772848119830.jpg', 
+                descripcion: 'puta rica', 
+                duracion: '' 
+            },
            
              '7_1': { 
                 nombre: 'Alya de la u',
