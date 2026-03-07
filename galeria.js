@@ -366,6 +366,8 @@ const galeriaDatabase = {
         imagen: "https://images.unsplash.com/photo-1513584684374-8bab748fbf90",
         imagenes: [
            
+        
+            { id: 1, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772923583449.jpg" }
         ]
     },
     
