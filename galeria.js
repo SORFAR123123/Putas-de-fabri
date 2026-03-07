@@ -741,7 +741,7 @@ const galeriaDatabase = {
         titulo: "Yotsuba & Itsuki",
         descripcion: "Yotsuba y Itsuki - Energía y apetito",
         categoria: "Quintillizas - Duo",
-        imagen: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772839260751.jpg",
+        imagen: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772841498573.jpg",
         imagenes: [
             { id: 1, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772839260751.jpg" },
         
