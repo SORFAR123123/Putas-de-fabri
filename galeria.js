@@ -707,7 +707,9 @@ const galeriaDatabase = {
         descripcion: "Cuarteto sin Itsuki",
         categoria: "Quintillizas - Cuarteto",
         imagen: "https://pbs.twimg.com/media/HCrLwetWIAEYdr5?format=jpg&name=small",
-        imagenes: []
+        imagenes: [
+            { id: 1, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772841774913.jpg" }
+        ]
     },
     '11_Nino_Ichika_Miku_Itsuki': {
         titulo: "Nino, Ichika, Miku & Itsuki",
