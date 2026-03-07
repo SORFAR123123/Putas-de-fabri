@@ -1464,15 +1464,7 @@ const galeriaDatabase = {
           
         ]
     },
-    '13_2': {
-        titulo: "",
-        descripcion: "",
-        categoria: "",
-        imagen: "",
-        imagenes: [
-            { id: 1, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772926286653.jpg" }
-        ]
-    },
+   
   
 
     //contendor 14 emilia putona
