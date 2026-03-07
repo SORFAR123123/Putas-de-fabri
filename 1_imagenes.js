@@ -2342,7 +2342,12 @@ function editarSubcontenedor(modo, contenedor, subcontenedor, nuevosDatos) {
     sistemaDescriptivo[modo].subcontenedores[key] = {
         ...sistemaDescriptivo[modo].subcontenedores[key],
         ...nuevosDatos
-    };
+                '6_58': { 
+                nombre: 'Miku matting press',
+                imagen: 'https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772845789751.jpg', 
+                descripcion: 'culaso de putona', 
+                duracion: '' 
+            },};
     
     console.log(`✅ Subcontenedor ${key} actualizado en modo ${modo}:`, nuevosDatos);
     return true;
