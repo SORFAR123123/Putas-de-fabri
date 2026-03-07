@@ -960,7 +960,9 @@ const galeriaDatabase = {
         categoria: "Quintillizas - Trio",
         imagen: "https://pbs.twimg.com/media/HClCIlHa8AABwfo?format=jpg&name=small",
         imagenes: [
-            { id: 1, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772896937651.jpg" }
+            { id: 1, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772896937651.jpg" },
+        
+            { id: 2, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772896955823.jpg" }
         ]
     },
     '10_Miku_Yotsuba_Itsuki': {
