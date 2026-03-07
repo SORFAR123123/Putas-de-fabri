@@ -634,7 +634,9 @@ const galeriaDatabase = {
         
             { id: 4, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772842166122.jpg" },
         
-            { id: 5, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772842863989.jpg" }
+            { id: 5, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772842863989.jpg" },
+        
+            { id: 6, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772843646826.jpg" }
         ]
     },
     '9_Nino_Itsuki': {
