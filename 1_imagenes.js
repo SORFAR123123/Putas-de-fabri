@@ -2105,6 +2105,12 @@ const sistemaDescriptivo = {
                 descripcion: '', 
                 duracion: '' 
             },
+             '6_58': { 
+                nombre: 'Nino petarda',
+                imagen: 'https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772848037029.jpg', 
+                descripcion: 'petera', 
+                duracion: '' 
+            },
            
              '7_1': { 
                 nombre: 'Alya de la u',
