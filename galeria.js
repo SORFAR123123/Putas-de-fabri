@@ -705,7 +705,9 @@ const galeriaDatabase = {
         
             { id: 3, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772842901967.jpg" },
         
-            { id: 4, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772843394593.jpg" }
+            { id: 4, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772843394593.jpg" },
+        
+            { id: 5, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772843541018.jpg" }
         ]
     },
     '9_Miku_Itsuki': {
