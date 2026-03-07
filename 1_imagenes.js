@@ -2178,6 +2178,12 @@ const sistemaDescriptivo = {
                 descripcion: 'le gusta montar', 
                 duracion: '' 
             },
+             '7_11': { 
+                nombre: 'Topaz culona',
+                imagen: 'https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772909471582.jpg', 
+                descripcion: 'culona', 
+                duracion: '' 
+            },
              
              '8_1': { 
                 nombre: 'fabri putardo',
