@@ -1024,7 +1024,9 @@ const galeriaDatabase = {
         
             { id: 16, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772901789820.jpg" },
         
-            { id: 17, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772901800913.jpg" }
+            { id: 17, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772901800913.jpg" },
+        
+            { id: 18, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772901810215.jpg" }
         ]
     },
     '9_Ichika_Yotsuba': {
