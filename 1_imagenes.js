@@ -2150,12 +2150,7 @@ const sistemaDescriptivo = {
                 duracion: '' 
             }
             // ... puedes agregar más si necesitas
-                    '6_58': { 
-                nombre: 'Nino petera',
-                imagen: 'https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772846815251.jpg', 
-                descripcion: 'putona', 
-                duracion: '' 
-            },}
+        }
     }
 };
 
