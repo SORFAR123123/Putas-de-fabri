@@ -673,7 +673,9 @@ const galeriaDatabase = {
         descripcion: "Nino, Miku e Itsuki",
         categoria: "Quintillizas - Trio",
         imagen: "https://pbs.twimg.com/media/HClB_xOWgAE1xPl?format=jpg&name=small",
-        imagenes: []
+        imagenes: [
+            { id: 1, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772841970628.jpg" }
+        ]
     },
     '10_Nino_Yotsuba_Itsuki': {
         titulo: "Nino, Yotsuba & Itsuki",
