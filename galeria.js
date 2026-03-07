@@ -1573,8 +1573,20 @@ function obtenerContenedoresGaleriaDisponibles() {
             contenedores[contenedor] = [];
         }
         
-        // Guardamos el nombre completo del subcontenedor
+        // Guardamos el nombre completo del subcontenedor (join para casos como '9_Nino_Ichika')
         contenedores[contenedor].push(partes.slice(1).join('_'));
+    });
+    
+    // Opcional: Ordenar los subcontenedores
+    Object.keys(contenedores).forEach(key => {
+        contenedores[key].sort((a, b) => {
+            // Intentar ordenar numéricamente si son números
+            if (!isNaN(a) && !isNaN(b)) {
+                return parseInt(a) - parseInt(b);
+            }
+            // Ordenar alfabéticamente para los que tienen nombres
+            return a.localeCompare(b);
+        });
     });
     
     return contenedores;
@@ -1636,7 +1648,6 @@ function crearContenedoresGaleria() {
     return html;
 }
 
-// 3. Cargar subcontenedores de galería
 function cargarSubcontenedoresGaleria(contenedor) {
     contenedorActual = contenedor;
     modoActual = 'galeria';
@@ -1647,6 +1658,10 @@ function cargarSubcontenedoresGaleria(contenedor) {
     
     const botonVolver = crearBotonVolver(cargarPaginaGaleria);
     mangaSection.insertBefore(botonVolver, mangaSection.firstChild);
+    
+    // Log para verificar qué subcontenedores se cargaron
+    const disponibles = obtenerContenedoresGaleriaDisponibles();
+    console.log(`📂 Subcontenedores para contenedor ${contenedor}:`, disponibles[contenedor] || []);
 }
 
 // 4. Crear UI de subcontenedores
@@ -1656,42 +1671,38 @@ function crearSubcontenedoresGaleriaUI(contenedor) {
     </h2>`;
     html += '<div class="subcontenedores-grid">';
     
+    // Obtener TODOS los subcontenedores disponibles para este contenedor
     const contenedores = obtenerContenedoresGaleriaDisponibles();
     const subcontenedoresDisponibles = contenedores[contenedor] || [];
     
-    // Para contenedores 1-8 mostramos siempre 5 subcontenedores
-    if (contenedor <= 8) {
-        for (let i = 1; i <= 5; i++) {
-            const tieneGaleria = subcontenedoresDisponibles.includes(i.toString());
-            const subData = obtenerSubcontenedorGaleria(contenedor, i);
-            const desc = subData.descripcion || (tieneGaleria ? 'Galería disponible' : '(Sin imágenes configuradas)');
-            const galeriaInfo = tieneGaleria ? obtenerGaleria(contenedor, i) : null;
-            
-            html += `
-                <div class="subcontenedor-item" onclick="${tieneGaleria ? `cargarGaleria(${contenedor}, '${i}')` : 'alert("Esta galería no tiene imágenes configuradas")'}">
-                    <div class="subcontenedor-img" style="background-image: url('${subData.imagen}')"></div>
-                    <h3>${tieneGaleria ? galeriaInfo.titulo.split(' ')[0] : `Galería ${i}`}</h3>
-                    ${tieneGaleria ? 
-                        `<p><strong>${galeriaInfo.titulo}</strong></p>
-                         <p style="font-size: 0.9rem; opacity: 0.8;">${galeriaInfo.categoria} • ${galeriaInfo.imagenes.length} imágenes</p>` 
-                        : `<p style="color: #FF6B6B;">${desc}</p>`}
-                    <div class="card-button" style="margin-top: 10px; padding: 10px 20px; font-size: 0.9rem; background: linear-gradient(135deg, #FF1493, #FF69B4);">
-                        ${tieneGaleria ? '📦 Ver Galería' : 'Vacío'}
-                    </div>
-                </div>
-            `;
-        }
-    } 
-    // Para contenedores 9-13 mostramos todos los subcontenedores disponibles
-    else {
+    // Si no hay subcontenedores, mostrar mensaje
+    if (subcontenedoresDisponibles.length === 0) {
+        html += `
+            <div style="grid-column: 1/-1; text-align: center; padding: 50px; background: rgba(255,255,255,0.1); border-radius: 20px;">
+                <p style="color: #FFD166; font-size: 1.2rem;">No hay subgalerías disponibles para este contenedor</p>
+            </div>
+        `;
+    } else {
+        // Recorrer SOLO los subcontenedores que existen
         subcontenedoresDisponibles.forEach(subKey => {
             const galeriaInfo = obtenerGaleria(contenedor, subKey);
             if (galeriaInfo) {
+                // Determinar el título a mostrar
+                let tituloMostrar = galeriaInfo.titulo;
+                let subtitulo = '';
+                
+                // Si es un contenedor con números (1-8), mostrar "Galería X"
+                if (contenedor <= 8 && !isNaN(subKey)) {
+                    tituloMostrar = `Galería ${subKey}`;
+                    subtitulo = galeriaInfo.titulo;
+                }
+                
                 html += `
                     <div class="subcontenedor-item" onclick="cargarGaleria(${contenedor}, '${subKey}')">
                         <div class="subcontenedor-img" style="background-image: url('${galeriaInfo.imagen}')"></div>
-                        <h3>${galeriaInfo.titulo}</h3>
-                        <p style="font-size: 0.9rem; opacity: 0.8;">${galeriaInfo.categoria} • ${galeriaInfo.imagenes.length} imágenes</p>
+                        <h3>${tituloMostrar}</h3>
+                        ${subtitulo ? `<p style="font-size: 0.9rem; font-weight: bold; color: #FFD166;">${subtitulo}</p>` : ''}
+                        <p style="font-size: 0.85rem; opacity: 0.8;">${galeriaInfo.categoria} • ${galeriaInfo.imagenes.length} imágenes</p>
                         <div class="card-button" style="margin-top: 10px; padding: 10px 20px; font-size: 0.9rem; background: linear-gradient(135deg, #FF1493, #FF69B4);">
                             📦 Ver Galería
                         </div>
@@ -1704,7 +1715,6 @@ function crearSubcontenedoresGaleriaUI(contenedor) {
     html += '</div>';
     return html;
 }
-
 // 5. Cargar galería específica
 function cargarGaleria(contenedor, subcontenedor) {
     contenedorActual = contenedor;
