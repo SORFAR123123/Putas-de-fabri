@@ -568,7 +568,9 @@ const galeriaDatabase = {
         descripcion: "Ichika y Yotsuba - La mayor y la más enérgica",
         categoria: "Quintillizas - Duo",
         imagen: "https://pbs.twimg.com/media/HClAtq7XAAAnVxh?format=jpg&name=small",
-        imagenes: []
+        imagenes: [
+            { id: 1, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772841613839.jpg" }
+        ]
     },
     '9_Ichika_Itsuki': {
         titulo: "Ichika & Itsuki",
