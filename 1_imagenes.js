@@ -2142,6 +2142,12 @@ const sistemaDescriptivo = {
                 descripcion: 'putarda', 
                 duracion: '' 
             },
+             '7_5': { 
+                nombre: 'Uzaki y su amiga putona',
+                imagen: 'https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772906100159.jpg', 
+                descripcion: 'Putonas', 
+                duracion: '' 
+            },
              
              '8_1': { 
                 nombre: 'fabri putardo',
