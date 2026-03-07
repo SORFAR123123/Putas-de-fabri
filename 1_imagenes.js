@@ -2148,6 +2148,12 @@ const sistemaDescriptivo = {
                 descripcion: 'Putonas', 
                 duracion: '' 
             },
+             '7_6': { 
+                nombre: 'Me Kacho a uzaki',
+                imagen: 'https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772906147340.jpg', 
+                descripcion: 'puta', 
+                duracion: '' 
+            },
              
              '8_1': { 
                 nombre: 'fabri putardo',
