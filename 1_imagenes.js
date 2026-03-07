@@ -2150,7 +2150,14 @@ const sistemaDescriptivo = {
                 duracion: '' 
             }
             // ... puedes agregar más si necesitas
-        }
+        
+             '6_58': { 
+                nombre: 'putona',
+                imagen: 'https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772847810729.jpg', 
+                descripcion: 'putarda', 
+                duracion: '' 
+            },
+}
     }
 };
 
