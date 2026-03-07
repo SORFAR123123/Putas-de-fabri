@@ -54,25 +54,25 @@ const contenedoresGaleria = {
     },
     9: {
         nombre: "Quintillizas DUO",
-        imagen: "https://pbs.twimg.com/media/HCqB5bFXgAAjgl9?format=png&name=small",
+        imagen: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772839068623.jpg",
         descripcion: "Todas las combinaciones de parejas de las quintillizas Nakano",
         categoria: "Quintillizas - Duos"
     },
     10: {
         nombre: "Quintillizas TRIO",
-        imagen: "https://pbs.twimg.com/media/HCq3vdHXYAEffD7?format=png&name=small",
+        imagen: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772842066494.jpg",
         descripcion: "Todas las combinaciones de tríos de las quintillizas Nakano",
         categoria: "Quintillizas - Trios"
     },
     11: {
         nombre: "Quintillizas CUARTETO",
-        imagen: "https://pbs.twimg.com/media/HCrY9OhWMAAGqaz?format=jpg&name=small",
+        imagen: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772842513938.jpg",
         descripcion: "Todas las combinaciones de cuartetos de las quintillizas Nakano",
         categoria: "Quintillizas - Cuartetos"
     },
     12: {
         nombre: "Quintillizas QUINTETO",
-        imagen: "https://pbs.twimg.com/media/HCrjyH_W8AEZXuN?format=png&name=small",
+        imagen: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772840393339.jpg",
         descripcion: "Las cinco quintillizas juntas",
         categoria: "Quintillizas - Quinteto"
     },
@@ -431,9 +431,9 @@ const galeriaDatabase = {
         
             { id: 24, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772842883624.jpg" },
         
-            { id: 25, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772843007151.jpg" },
+            { id: 25, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772843007151.jpg" }
         
-            { id: 26, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772843069189.jpg" }
+            
         ]
     },
     
@@ -614,7 +614,7 @@ const galeriaDatabase = {
         titulo: "Nino & Yotsuba",
         descripcion: "Nino y Yotsuba - La putona y la enérgica",
         categoria: "Quintillizas - Duo",
-        imagen: "https://pbs.twimg.com/media/HCrY9OhWMAAGqaz?format=jpg&name=small",
+        imagen: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772841436455.jpg",
         imagenes: [
             { id: 1, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772841436455.jpg" },
         
@@ -631,7 +631,7 @@ const galeriaDatabase = {
         titulo: "Nino & Itsuki",
         descripcion: "Nino y Itsuki - La putona y la glotona",
         categoria: "Quintillizas - Duo",
-        imagen: "https://pbs.twimg.com/media/HCrjyH_W8AEZXuN?format=png&name=small",
+        imagen: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772840608337.jpg",
         imagenes: [
             { id: 1, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772840608337.jpg" },
         
@@ -654,7 +654,7 @@ const galeriaDatabase = {
         titulo: "Ichika & Miku",
         descripcion: "Ichika y Miku - La actriz y la tsundere",
         categoria: "Quintillizas - Duo",
-        imagen: "https://pbs.twimg.com/media/HCrsaa6WcAEQbE6?format=jpg&name=large",
+        imagen: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772841584126.jpg",
         imagenes: [
             { id: 1, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772841584126.jpg" },
         
@@ -665,7 +665,7 @@ const galeriaDatabase = {
         titulo: "Ichika & Yotsuba",
         descripcion: "Ichika y Yotsuba - La mayor y la más enérgica",
         categoria: "Quintillizas - Duo",
-        imagen: "https://pbs.twimg.com/media/HClAtq7XAAAnVxh?format=jpg&name=small",
+        imagen: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772841613839.jpg",
         imagenes: [
             { id: 1, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772841613839.jpg" },
         
@@ -676,7 +676,7 @@ const galeriaDatabase = {
         titulo: "Ichika & Itsuki",
         descripcion: "Ichika y Itsuki - Dos hermanas muy diferentes",
         categoria: "Quintillizas - Duo",
-        imagen: "https://pbs.twimg.com/media/HClAxtlXsAA_rC5?format=jpg&name=small",
+        imagen: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772841558446.jpg",
         imagenes: [
             { id: 1, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772841558446.jpg" },
         
@@ -687,7 +687,7 @@ const galeriaDatabase = {
         titulo: "Miku & Yotsuba",
         descripcion: "Miku y Yotsuba - La tímida y la extrovertida",
         categoria: "Quintillizas - Duo",
-        imagen: "https://pbs.twimg.com/media/HClA9eXawAwhdFo?format=jpg&name=small",
+        imagen: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772841464859.jpg",
         imagenes: [
             { id: 1, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772841464859.jpg" },
         
@@ -700,7 +700,7 @@ const galeriaDatabase = {
         titulo: "Miku & Itsuki",
         descripcion: "Miku y Itsuki - Amantes de la historia y la comida",
         categoria: "Quintillizas - Duo",
-        imagen: "https://pbs.twimg.com/media/HClA-wWXsAAdDNs?format=jpg&name=small",
+        imagen: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772841513541.jpg",
         imagenes: [
             { id: 1, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772841513541.jpg" },
         
@@ -733,7 +733,7 @@ const galeriaDatabase = {
         titulo: "Nino, Ichika & Yotsuba",
         descripcion: "Nino, Ichika y Yotsuba juntas",
         categoria: "Quintillizas - Trio",
-        imagen: "https://pbs.twimg.com/media/HClB6n0WMAANEqH?format=jpg&name=small",
+        imagen: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772842250442.jpg",
         imagenes: [
             { id: 1, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772842250442.jpg" }
         ]
@@ -749,7 +749,7 @@ const galeriaDatabase = {
         titulo: "Nino, Miku & Yotsuba",
         descripcion: "Nino con Miku y Yotsuba",
         categoria: "Quintillizas - Trio",
-        imagen: "https://pbs.twimg.com/media/HClB-UzawAQe_VV?format=jpg&name=small",
+        imagen: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772842066494.jpg",
         imagenes: [
             { id: 1, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772842066494.jpg" },
         
@@ -768,7 +768,7 @@ const galeriaDatabase = {
         titulo: "Nino, Miku & Itsuki",
         descripcion: "Nino, Miku e Itsuki",
         categoria: "Quintillizas - Trio",
-        imagen: "https://pbs.twimg.com/media/HClB_xOWgAE1xPl?format=jpg&name=small",
+        imagen: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772841970628.jpg",
         imagenes: [
             { id: 1, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772841970628.jpg" }
         ]
@@ -814,7 +814,7 @@ const galeriaDatabase = {
         titulo: "Nino, Ichika, Miku & Yotsuba",
         descripcion: "Cuarteto sin Itsuki",
         categoria: "Quintillizas - Cuarteto",
-        imagen: "https://pbs.twimg.com/media/HCrLwetWIAEYdr5?format=jpg&name=small",
+        imagen: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772841774913.jpg",
         imagenes: [
             { id: 1, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772841774913.jpg" }
         ]
@@ -823,7 +823,7 @@ const galeriaDatabase = {
         titulo: "Nino, Ichika, Miku & Itsuki",
         descripcion: "Cuarteto sin Yotsuba",
         categoria: "Quintillizas - Cuarteto",
-        imagen: "https://pbs.twimg.com/media/HCrJoF-XMAAWJra?format=jpg&name=small",
+        imagen: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772842513938.jpg",
         imagenes: [
             { id: 1, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772842513938.jpg" }
         ]
@@ -832,7 +832,7 @@ const galeriaDatabase = {
         titulo: "Nino, Ichika, Yotsuba & Itsuki",
         descripcion: "Cuarteto sin Miku",
         categoria: "Quintillizas - Cuarteto",
-        imagen: "https://pbs.twimg.com/media/HCrQkIKW8AAlQY6?format=jpg&name=small",
+        imagen: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772842732907.jpg",
         imagenes: [
             { id: 1, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772842732907.jpg" }
         ]
@@ -841,7 +841,7 @@ const galeriaDatabase = {
         titulo: "Nino, Miku, Yotsuba & Itsuki",
         descripcion: "Cuarteto sin Ichika",
         categoria: "Quintillizas - Cuarteto",
-        imagen: "https://pbs.twimg.com/media/HCrQmL8XMAAy3uh?format=jpg&name=small",
+        imagen: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772841739980.jpg",
         imagenes: [
             { id: 1, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772841739980.jpg" }
         ]
@@ -859,7 +859,7 @@ const galeriaDatabase = {
         titulo: "LAS CINCO QUINTILLIZAS",
         descripcion: "Todas las hermanas Nakano juntas - Nino, Ichika, Miku, Yotsuba e Itsuki",
         categoria: "Quintillizas - Quinteto",
-        imagen: "https://pbs.twimg.com/media/HCroIllWAAE-Trf?format=jpg&name=medium",
+        imagen: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772840393339.jpg",
         imagenes: [
             { id: 1, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772840393339.jpg" },
         
