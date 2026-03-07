@@ -838,7 +838,9 @@ const galeriaDatabase = {
         categoria: "Quintillizas - Cuarteto",
         imagen: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772842732907.jpg",
         imagenes: [
-            { id: 1, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772842732907.jpg" }
+            { id: 1, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772842732907.jpg" },
+        
+            { id: 2, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772843434180.jpg" }
         ]
     },
     '11_Nino_Miku_Yotsuba_Itsuki': {
