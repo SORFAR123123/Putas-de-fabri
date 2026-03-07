@@ -375,11 +375,7 @@ const galeriaDatabase = {
         categoria: "Naturaleza",
         imagen: "https://images.unsplash.com/photo-1501854140801-50d01698950b",
         imagenes: [
-            { id: 1, url: "https://images.unsplash.com/photo-1501854140801-50d01698950b" },
-            { id: 2, url: "https://images.unsplash.com/photo-1447752875215-b2761acb3c5d" },
-            { id: 3, url: "https://images.unsplash.com/photo-1418065460487-3e41a6c84dc5" },
-            { id: 4, url: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05" },
-            { id: 5, url: "https://images.unsplash.com/photo-1465146344425-f00d5f5c8f07" }
+           
         ]
     },
     
@@ -389,11 +385,7 @@ const galeriaDatabase = {
         categoria: "Tecnología",
         imagen: "https://images.unsplash.com/photo-1518709268805-4e9042af2176",
         imagenes: [
-            { id: 1, url: "https://images.unsplash.com/photo-1518709268805-4e9042af2176" },
-            { id: 2, url: "https://images.unsplash.com/photo-1519389950473-47ba0277781c" },
-            { id: 3, url: "https://images.unsplash.com/photo-1517077304055-6e89abbf09b0" },
-            { id: 4, url: "https://images.unsplash.com/photo-1542744095-fcf48d80b0fd" },
-            { id: 5, url: "https://images.unsplash.com/photo-1550745165-9bc0b252726f" }
+            
         ]
     },
     
