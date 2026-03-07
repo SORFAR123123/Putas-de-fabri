@@ -2166,6 +2166,12 @@ const sistemaDescriptivo = {
                 descripcion: 'Putona hinata', 
                 duracion: '' 
             },
+             '7_9': { 
+                nombre: 'Evelynn putona',
+                imagen: 'https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772908567345.jpg', 
+                descripcion: 'zorra', 
+                duracion: '' 
+            },
              
              '8_1': { 
                 nombre: 'fabri putardo',
