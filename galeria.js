@@ -256,16 +256,12 @@ const galeriaDatabase = {
     },
     
     '1_3': {
-        titulo: "Arquitectura Moderna",
+        titulo: "Kachando y grabando con nino",
         descripcion: "Edificios y estructuras contemporáneas",
         categoria: "Arquitectura",
         imagen: "https://images.unsplash.com/photo-1513584684374-8bab748fbf90",
         imagenes: [
-            { id: 1, url: "https://images.unsplash.com/photo-1513584684374-8bab748fbf90" },
-            { id: 2, url: "https://images.unsplash.com/photo-1487956382158-bb926046304a" },
-            { id: 3, url: "https://images.unsplash.com/photo-1508385082359-f38ae991e8f2" },
-            { id: 4, url: "https://images.unsplash.com/photo-1512917774080-9991f1c4c750" },
-            { id: 5, url: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4" }
+           
         ]
     },
     
