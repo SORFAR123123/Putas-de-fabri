@@ -1466,8 +1466,8 @@ const galeriaDatabase = {
     },
     '13_2': {
         titulo: "Emilia mi zorra",
-        descripcion: "Emilia centie",
-        categoria: "",
+        descripcion: "",
+        categoria: "Emilia centie",
         imagen: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772926509054.jpg",
         imagenes: [
             { id: 1, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772926360060.jpg" },
