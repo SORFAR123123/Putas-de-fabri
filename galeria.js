@@ -398,10 +398,10 @@ const galeriaDatabase = {
         ]
     },
     '1_6': {
-        titulo: "",
-        descripcion: "",
+        titulo: "Kimedasenpai",
+        descripcion: "nino putona",
         categoria: "",
-        imagen: "",
+        imagen: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772925734083.jpg",
         imagenes: [
             { id: 1, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772925664901.jpg" },
             { id: 2, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772925674305.jpg" },
