@@ -77,14 +77,14 @@ const contenedoresGaleria = {
         categoria: "Quintillizas - Quinteto"
     },
     13: {
-        nombre: "PRUEBA",
-        imagen: "https://pbs.twimg.com/media/HCrsaa6WcAEQbE6?format=jpg&name=large",
+        nombre: "Emilia putarda",
+        imagen: "https://pbs.twimg.com/media/HC0LphVa8AAIWTj?format=jpg&name=small",
         descripcion: "Galería de prueba con dos subcontenedores",
         categoria: "Prueba"
     },
     14: {
-        nombre: "Emilia putarda",
-        imagen: "https://pbs.twimg.com/media/HC0LphVa8AAIWTj?format=jpg&name=small",
+        nombre: "PRUEBA",
+        imagen: "https://pbs.twimg.com/media/HC1ED-sWIAAOY0b?format=jpg&name=medium",
         descripcion: "Galería de prueba con dos subcontenedores",
         categoria: "Prueba"
     }
@@ -1455,26 +1455,16 @@ const galeriaDatabase = {
     },
 
     // ============ CONTENEDOR 13 - PRUEBA ============
-    '13_Prueba_1': {
-        titulo: "Prueba 1",
-        descripcion: "Primer subcontenedor de prueba",
+    '13_1': {
+        titulo: "Emilia putona",
+        descripcion: "putardas",
         categoria: "Prueba",
-        imagen: "https://pbs.twimg.com/media/HCrsaa6WcAEQbE6?format=jpg&name=large",
+        imagen: "https://pbs.twimg.com/media/HC0LphVa8AAIWTj?format=jpg&name=large",
         imagenes: [
-            { id: 1, url: "https://pbs.twimg.com/media/HCrsaa6WcAEQbE6?format=jpg&name=large" },
-            { id: 2, url: "https://pbs.twimg.com/media/HCrjyH_W8AEZXuN?format=png&name=small" }
+          
         ]
     },
-    '13_Prueba_2': {
-        titulo: "Prueba 2",
-        descripcion: "Segundo subcontenedor de prueba",
-        categoria: "Prueba",
-        imagen: "https://pbs.twimg.com/media/HCrY9OhWMAAGqaz?format=jpg&name=small",
-        imagenes: [
-            { id: 1, url: "https://pbs.twimg.com/media/HCrY9OhWMAAGqaz?format=jpg&name=small" },
-            { id: 2, url: "https://pbs.twimg.com/media/HCq3vdHXYAEffD7?format=png&name=small" }
-        ]
-    },
+  
 
     //contendor 14 emilia putona
      '14_1': {
