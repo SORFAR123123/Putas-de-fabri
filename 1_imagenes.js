@@ -2347,6 +2347,12 @@ function editarSubcontenedor(modo, contenedor, subcontenedor, nuevosDatos) {
                 imagen: 'https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772845789751.jpg', 
                 descripcion: 'culaso de putona', 
                 duracion: '' 
+            },
+            '6_59': { 
+                nombre: 'Nino petera',
+                imagen: 'https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772845836216.jpg', 
+                descripcion: 'putona', 
+                duracion: '' 
             },};
     
     console.log(`✅ Subcontenedor ${key} actualizado en modo ${modo}:`, nuevosDatos);
