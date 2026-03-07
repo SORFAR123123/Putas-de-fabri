@@ -81,6 +81,12 @@ const contenedoresGaleria = {
         imagen: "https://pbs.twimg.com/media/HCrsaa6WcAEQbE6?format=jpg&name=large",
         descripcion: "Galería de prueba con dos subcontenedores",
         categoria: "Prueba"
+    },
+    14: {
+        nombre: "Emilia putarda",
+        imagen: "https://pbs.twimg.com/media/HC0LphVa8AAIWTj?format=jpg&name=small",
+        descripcion: "Galería de prueba con dos subcontenedores",
+        categoria: "Prueba"
     }
 };
 
@@ -1059,6 +1065,28 @@ const galeriaDatabase = {
     '13_Prueba_2': {
         titulo: "Prueba 2",
         descripcion: "Segundo subcontenedor de prueba",
+        categoria: "Prueba",
+        imagen: "https://pbs.twimg.com/media/HCrY9OhWMAAGqaz?format=jpg&name=small",
+        imagenes: [
+            { id: 1, url: "https://pbs.twimg.com/media/HCrY9OhWMAAGqaz?format=jpg&name=small" },
+            { id: 2, url: "https://pbs.twimg.com/media/HCq3vdHXYAEffD7?format=png&name=small" }
+        ]
+    }
+
+    //contendor 14 emilia putona
+     '14_1': {
+        titulo: "Emilia putona",
+        descripcion: "Primer subcontenedor de prueba",
+        categoria: "Prueba",
+        imagen: "https://pbs.twimg.com/media/HCrsaa6WcAEQbE6?format=jpg&name=large",
+        imagenes: [
+            { id: 1, url: "https://pbs.twimg.com/media/HCrsaa6WcAEQbE6?format=jpg&name=large" },
+            { id: 2, url: "https://pbs.twimg.com/media/HCrjyH_W8AEZXuN?format=png&name=small" }
+        ]
+    },
+    '14_2': {
+        titulo: "cambiar xd",
+        descripcion: "xdxdxdxdxd",
         categoria: "Prueba",
         imagen: "https://pbs.twimg.com/media/HCrY9OhWMAAGqaz?format=jpg&name=small",
         imagenes: [
