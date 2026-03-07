@@ -419,11 +419,7 @@ const galeriaDatabase = {
         categoria: "Retrato",
         imagen: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d",
         imagenes: [
-            { id: 1, url: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d" },
-            { id: 2, url: "https://images.unsplash.com/photo-1506794778202-cad84cf45f1d" },
-            { id: 3, url: "https://images.unsplash.com/photo-1494790108755-2616b612b786" },
-            { id: 4, url: "https://images.unsplash.com/photo-1500648767791-00dcc994a43e" },
-            { id: 5, url: "https://images.unsplash.com/photo-1534528741775-53994a69daeb" }
+            
         ]
     },
     '3_1': {
@@ -912,21 +908,7 @@ const galeriaDatabase = {
         categoria: "Multimedia",
         imagen: "https://images.unsplash.com/photo-1492619375914-88005aa9e8fb?w=300&h=300&fit=crop",
         imagenes: [
-            { id: 1, url: "https://images.unsplash.com/photo-1492619375914-88005aa9e8fb?w=600&h=600&fit=crop" },
-            { id: 2, url: "https://images.unsplash.com/photo-1522869635100-9f4c5e86aa37?w=600&h=600&fit=crop" },
-            { id: 3, url: "https://images.unsplash.com/photo-1485846234645-a62644f84728?w=600&h=600&fit=crop" },
-            { id: 4, url: "https://images.unsplash.com/photo-1517604931442-7e0c8ed2963c?w=600&h=600&fit=crop" },
-            { id: 5, url: "https://images.unsplash.com/photo-1535016120720-40c646be5580?w=600&h=600&fit=crop" },
-            { id: 6, url: "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=600&h=600&fit=crop" },
-            { id: 7, url: "https://images.unsplash.com/photo-1557804506-669a67965ba0?w=600&h=600&fit=crop" },
-            { id: 8, url: "https://images.unsplash.com/photo-1512149177596-f817c7ef5d4c?w=600&h=600&fit=crop" },
-            { id: 9, url: "https://images.unsplash.com/photo-1516259762381-22954d7d3ad2?w=600&h=600&fit=crop" },
-            { id: 10, url: "https://images.unsplash.com/photo-1504609813442-a8924e83f76e?w=600&h=600&fit=crop" },
-            { id: 11, url: "https://images.unsplash.com/photo-1508704019882-f9cf40e475b4?w=600&h=600&fit=crop" },
-            { id: 12, url: "https://images.unsplash.com/photo-1492684223066-81342ee5ff30?w=600&h=600&fit=crop" },
-            { id: 13, url: "https://images.unsplash.com/photo-1470071459604-3b5ec3a7fe05?w=600&h=600&fit=crop" },
-            { id: 14, url: "https://images.unsplash.com/photo-1446776811953-b23d57bd21aa?w=600&h=600&fit=crop" },
-            { id: 15, url: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=600&h=600&fit=crop" }
+            
         ]
     },
 
