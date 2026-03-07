@@ -2130,6 +2130,12 @@ const sistemaDescriptivo = {
                 descripcion: '', 
                 duracion: '' 
             },
+             '7_3': { 
+                nombre: 'Zhu yuan putarda',
+                imagen: 'https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772905574769.jpg', 
+                descripcion: 'paja', 
+                duracion: '' 
+            },
              
              '8_1': { 
                 nombre: 'fabri putardo',
