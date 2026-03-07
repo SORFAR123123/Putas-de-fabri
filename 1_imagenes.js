@@ -2100,8 +2100,8 @@ const sistemaDescriptivo = {
                 duracion: '' 
             },
                '6_57': { 
-                nombre: 'Petarda',
-                imagen: 'https://pbs.twimg.com/media/G_Td4CkX0AAS3if?format=png&name=small', 
+                nombre: 'Itsuki y nino las grabo que rico csm',
+                imagen: 'https://pbs.twimg.com/media/HCxcaeUXsAAThK6?format=png&name=small', 
                 descripcion: '', 
                 duracion: '' 
             },
