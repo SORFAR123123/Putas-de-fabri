@@ -1468,7 +1468,7 @@ const galeriaDatabase = {
 
     //contendor 14 emilia putona
      '14_1': {
-        titulo: "Emilia putona",
+        titulo: "PRUEBA",
         descripcion: "Primer subcontenedor de prueba",
         categoria: "Prueba",
         imagen: "https://pbs.twimg.com/media/HCrsaa6WcAEQbE6?format=jpg&name=large",
@@ -1478,7 +1478,7 @@ const galeriaDatabase = {
         ]
     },
     '14_2': {
-        titulo: "cambiar xd",
+        titulo: "PRUEBA",
         descripcion: "xdxdxdxdxd",
         categoria: "Prueba",
         imagen: "https://pbs.twimg.com/media/HCrY9OhWMAAGqaz?format=jpg&name=small",
