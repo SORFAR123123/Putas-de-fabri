@@ -953,7 +953,9 @@ const galeriaDatabase = {
         
             { id: 27, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772901319407.jpg" },
         
-            { id: 28, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772901330906.jpg" }
+            { id: 28, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772901330906.jpg" },
+        
+            { id: 29, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772903169188.jpg" }
         ]
     },
     '9_Nino_Yotsuba': {
