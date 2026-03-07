@@ -592,7 +592,7 @@ const galeriaDatabase = {
         titulo: "Nino & Ichika",
         descripcion: "Las dos hermanas mayores - Nino la putona e Ichika la actriz",
         categoria: "Quintillizas - Duo",
-        imagen: "https://pbs.twimg.com/media/HCqB5bFXgAAjgl9?format=png&name=small",
+        imagen: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772841651283.jpg",
         imagenes: [
             { id: 1, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772841651283.jpg" },
         
