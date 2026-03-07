@@ -360,10 +360,10 @@ const galeriaDatabase = {
     },
     
     '1_3': {
-        titulo: "Kachando y grabando con nino",
+        titulo: "Centie Nino",
         descripcion: "Edificios y estructuras contemporáneas",
         categoria: "Arquitectura",
-        imagen: "https://images.unsplash.com/photo-1513584684374-8bab748fbf90",
+        imagen: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772923583449.jpg",
         imagenes: [
            
         
