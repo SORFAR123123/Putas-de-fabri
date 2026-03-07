@@ -555,7 +555,9 @@ const galeriaDatabase = {
         
             { id: 3, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772841545557.jpg" },
         
-            { id: 4, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772841702598.jpg" }
+            { id: 4, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772841702598.jpg" },
+        
+            { id: 5, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772841715538.jpg" }
         ]
     },
     '9_Ichika_Miku': {
