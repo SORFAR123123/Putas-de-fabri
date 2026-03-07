@@ -2172,6 +2172,12 @@ const sistemaDescriptivo = {
                 descripcion: 'zorra', 
                 duracion: '' 
             },
+             '7_10': { 
+                nombre: 'Zhuyuan matting press',
+                imagen: 'https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772908732549.jpg', 
+                descripcion: 'le gusta montar', 
+                duracion: '' 
+            },
              
              '8_1': { 
                 nombre: 'fabri putardo',
