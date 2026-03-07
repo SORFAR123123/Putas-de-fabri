@@ -2136,6 +2136,12 @@ const sistemaDescriptivo = {
                 descripcion: 'paja', 
                 duracion: '' 
             },
+             '7_4': { 
+                nombre: 'Eula putona',
+                imagen: 'https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772905623093.jpg', 
+                descripcion: 'putarda', 
+                duracion: '' 
+            },
              
              '8_1': { 
                 nombre: 'fabri putardo',
