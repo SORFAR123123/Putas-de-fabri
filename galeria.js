@@ -910,7 +910,9 @@ const galeriaDatabase = {
         categoria: "Quintillizas - Trio",
         imagen: "https://pbs.twimg.com/media/HClB4sMWkAAZRK8?format=jpg&name=small",
         imagenes: [
-            { id: 1, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772897713827.jpg" }
+            { id: 1, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772897713827.jpg" },
+        
+            { id: 2, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772897792586.jpg" }
         ]
     },
     '10_Nino_Ichika_Yotsuba': {
