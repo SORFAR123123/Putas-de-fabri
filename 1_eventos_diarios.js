@@ -58,8 +58,8 @@ async function sincronizarEventosDiarios() {
     }
 }
 
-// Ejecutar sync al cargar
-sincronizarEventosDiarios();
+// Ejecutar sync al cargar (con delay para esperar dependencias)
+setTimeout(() => sincronizarEventosDiarios(), 2000);
 
 // ================================================
 // SISTEMA DE EVENTOS DIARIOS - VERSIÓN CORREGIDA
