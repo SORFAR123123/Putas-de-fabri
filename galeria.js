@@ -1533,10 +1533,10 @@ const galeriaDatabase = {
         imagenes: []
     },
     '15_2': {
-        titulo: "",
+        titulo: "Alya putarda",
         descripcion: "",
-        categoria: "",
-        imagen: "",
+        categoria: "Centie",
+        imagen: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772930210010.jpg",
         imagenes: [
             { id: 1, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772930036242.jpg" },
             { id: 2, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772930040389.jpg" },
