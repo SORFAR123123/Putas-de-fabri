@@ -83,6 +83,12 @@ const contenedoresGaleria = {
         categoria: "Prueba"
     },
     14: {
+        nombre: "mao mao",
+        imagen: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772929213878.jpg",
+        descripcion: "Zorra chinarda",
+        categoria: "mao mao"
+    },
+    15: {
         nombre: "PRUEBA",
         imagen: "https://pbs.twimg.com/media/HC1ED-sWIAAOY0b?format=jpg&name=medium",
         descripcion: "Galería de prueba con dos subcontenedores",
@@ -1506,7 +1512,14 @@ const galeriaDatabase = {
   
 
     //contendor 14 emilia putona
-     '14_1': {
+    '14_1': {
+        titulo: "Maomao putita",
+        descripcion: "",
+        categoria: "Mi zorra",
+        imagen: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772929248085.jpg",
+        imagenes: []
+    },
+     '15_1': {
         titulo: "PRUEBA",
         descripcion: "Primer subcontenedor de prueba",
         categoria: "Prueba",
@@ -1516,7 +1529,7 @@ const galeriaDatabase = {
             { id: 2, url: "https://pbs.twimg.com/media/HCrjyH_W8AEZXuN?format=png&name=small" }
         ]
     },
-    '14_2': {
+    '15_2': {
         titulo: "PRUEBA",
         descripcion: "xdxdxdxdxd",
         categoria: "Prueba",
