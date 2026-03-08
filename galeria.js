@@ -1649,6 +1649,8 @@ const galeriaDatabase = {
         imagen: "https://pbs.twimg.com/media/HC0LphVa8AAIWTj?format=jpg&name=large",
         imagenes: [
           
+        
+            { id: 1, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1773013760474.jpg" }
         ]
     },
     '13_2': {
