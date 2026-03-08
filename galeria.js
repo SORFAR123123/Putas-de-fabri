@@ -101,6 +101,12 @@ const contenedoresGaleria = {
         categoria: "Uzaki"
     },
     17: {
+        nombre: "Rias",
+        imagen: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772988503678.jpg",
+        descripcion: "Pelirroja Zorra",
+        categoria: "Rias"
+    },
+    18: {
         nombre: "PRUEBA",
         imagen: "https://pbs.twimg.com/media/HC1ED-sWIAAOY0b?format=jpg&name=medium",
         descripcion: "Galería de prueba con dos subcontenedores",
@@ -1828,7 +1834,14 @@ const galeriaDatabase = {
             { id: 6, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772986599652.jpg" }
         ]
     },
-     '17_1': {
+    '17_1': {
+        titulo: "Rias putarda",
+        descripcion: "",
+        categoria: "Puta roja",
+        imagen: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772988556227.jpg",
+        imagenes: []
+    },
+     '18_1': {
         titulo: "PRUEBA",
         descripcion: "Primer subcontenedor de prueba",
         categoria: "Prueba",
@@ -1838,7 +1851,7 @@ const galeriaDatabase = {
             { id: 2, url: "https://pbs.twimg.com/media/HCrjyH_W8AEZXuN?format=png&name=small" }
         ]
     },
-    '17_2': {
+    '18_2': {
         titulo: "PRUEBA",
         descripcion: "xdxdxdxdxd",
         categoria: "Prueba",
