@@ -1898,7 +1898,7 @@ function cargarSubcontenedoresGaleria(contenedor) {
     console.log(`📂 Subcontenedores para contenedor ${contenedor}:`, disponibles[contenedor] || []);
 }
 
-// 4. Crear UI de subcontenedores (CORREGIDO)
+// 4. Crear UI de subcontenedores (CORREGIDO - muestra nombres originales en TODAS las galerías)
 function crearSubcontenedoresGaleriaUI(contenedor) {
     let html = `<h2 style="text-align: center; margin-bottom: 30px; color: #FFD166;">
         📦 ${obtenerContenedorGaleria(contenedor).nombre} - SUB-GALERÍAS
@@ -1921,22 +1921,19 @@ function crearSubcontenedoresGaleriaUI(contenedor) {
         subcontenedoresDisponibles.forEach(subKey => {
             const galeriaInfo = obtenerGaleria(contenedor, subKey);
             if (galeriaInfo) {
-                // Determinar el título a mostrar
-                let tituloMostrar = galeriaInfo.titulo; // Por defecto, usamos el título definido
-                let subtitulo = '';
+                // CORREGIDO: Usar el título original SIEMPRE
+                // Para todos los contenedores, mostramos el título original definido en galeriaInfo.titulo
+                let tituloMostrar = galeriaInfo.titulo;
                 
-                // CORREGIDO: Solo si es un contenedor del 1 al 8 y subKey es un número, forzamos "Galería X"
-                if (contenedor <= 8 && !isNaN(subKey)) {
+                // Si por alguna razón el título está vacío, usamos un genérico
+                if (!tituloMostrar || tituloMostrar.trim() === '') {
                     tituloMostrar = `Galería ${subKey}`;
-                    subtitulo = galeriaInfo.titulo; // Movemos el título real a subtítulo
                 }
-                // Para contenedores >8, simplemente usamos galeriaInfo.titulo como título principal
                 
                 html += `
                     <div class="subcontenedor-item" onclick="cargarGaleria(${contenedor}, '${subKey}')">
                         <div class="subcontenedor-img" style="background-image: url('${galeriaInfo.imagen}')"></div>
                         <h3>${tituloMostrar}</h3>
-                        ${subtitulo ? `<p style="font-size: 0.9rem; font-weight: bold; color: #FFD166;">${subtitulo}</p>` : ''}
                         <p style="font-size: 0.85rem; opacity: 0.8;">${galeriaInfo.categoria} • ${galeriaInfo.imagenes.length} imágenes</p>
                         <div class="card-button" style="margin-top: 10px; padding: 10px 20px; font-size: 0.9rem; background: linear-gradient(135deg, #FF1493, #FF69B4);">
                             📦 Ver Galería
