@@ -286,8 +286,8 @@ class FantasiaRPG {
                     nombreCorto: personaje.nombre.split(' ')[0],
                     imagen: personaje.imagen,
                     color: personaje.color,
-                    nivel: personaje.nivel,
-                    afinidad: personaje.afinidad
+                    nivel: personaje.nivel ?? 1,
+                    afinidad: personaje.afinidad ?? 0
                 };
             }
         }
@@ -300,9 +300,19 @@ class FantasiaRPG {
                     nombre: data.nombre,
                     nombreCorto: data.nombre.split(' ')[0],
                     imagen: data.imagen,
-                    color: data.color || '#FF1493'
+                    color: data.color || '#FF1493',
+                    nivel: data.nivel ?? 1,
+                    afinidad: data.afinidad ?? 0
                 };
             }
+        }
+
+        // Si RPG aún no cargó, reintentar en 1 segundo
+        if (!this.noviaActual) {
+            setTimeout(() => {
+                this.actualizarNoviaActual();
+                if (this.noviaActual && !this.enCombate) this.actualizarUI();
+            }, 1000);
         }
         
         return this.noviaActual;
@@ -1208,8 +1218,8 @@ class FantasiaRPG {
                     <div style="flex: 1;">
                         <h3 style="color: ${this.noviaActual.color}; margin: 0 0 10px 0;">💖 ${this.noviaActual.nombre.toUpperCase()}</h3>
                         <div style="display: flex; gap: 20px; font-size: 0.9rem;">
-                            <div>Nivel: ${this.noviaActual.nivel || '?'}</div>
-                            <div>Afinidad: ${this.noviaActual.afinidad || '?'}/200</div>
+                            <div>Nivel: ${this.noviaActual.nivel != null ? this.noviaActual.nivel : '?'}</div>
+                            <div>Afinidad: ${this.noviaActual.afinidad != null ? this.noviaActual.afinidad : '?'}/200</div>
                             <div>Bonus: +${this.calcularBonusParaHermana(this.noviaActual.id).toFixed(1)}%</div>
                         </div>
                     </div>
