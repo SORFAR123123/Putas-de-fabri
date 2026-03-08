@@ -1,4 +1,67 @@
 // ================================================
+// SUPABASE SYNC - EVENTOS DIARIOS
+// ================================================
+const _EV_URL = 'https://lcspqpdjvdcbzhmcrhqi.supabase.co';
+const _EV_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxjc3BxcGRqdmRjYnpobWNyaHFpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI5OTE1NjcsImV4cCI6MjA4ODU2NzU2N30.Lls-iTGdt90gtbi-mXXkYvB26u9Yt65DMOcskmVgx1Q';
+const _EV_USER = 'user_qdhg1lunm_1772995224949';
+
+async function _evGuardar(clave, valor) {
+    try {
+        await fetch(`${_EV_URL}/rest/v1/progreso`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'apikey': _EV_KEY,
+                'Authorization': `Bearer ${_EV_KEY}`,
+                'Prefer': 'resolution=merge-duplicates,return=minimal'
+            },
+            body: JSON.stringify({ user_id: _EV_USER, clave, valor: JSON.stringify(valor), actualizado_en: new Date().toISOString() })
+        });
+    } catch {}
+}
+
+async function _evCargar(clave) {
+    try {
+        const res = await fetch(`${_EV_URL}/rest/v1/progreso?user_id=eq.${_EV_USER}&clave=eq.${clave}&select=valor`, {
+            headers: { 'apikey': _EV_KEY, 'Authorization': `Bearer ${_EV_KEY}` }
+        });
+        const data = await res.json();
+        if (data && data.length > 0) return JSON.parse(data[0].valor);
+        return null;
+    } catch { return null; }
+}
+
+// Sincronizar eventos diarios al cargar la página
+async function sincronizarEventosDiarios() {
+    const claves = ['eventos_progreso', 'evento_diario_ultimo', 'evento_diario_actual', 'eventos_diarios_vistos'];
+    
+    const [progreso, ultimo, actual, vistos] = await Promise.all(claves.map(c => _evCargar(c)));
+    
+    const supabaseVacio = progreso === null && ultimo === null;
+    
+    if (supabaseVacio) {
+        // Subir local a Supabase
+        await Promise.all([
+            _evGuardar('eventos_progreso', JSON.parse(localStorage.getItem('eventos_progreso') || 'null')),
+            _evGuardar('evento_diario_ultimo', JSON.parse(localStorage.getItem('evento_diario_ultimo') || 'null')),
+            _evGuardar('evento_diario_actual', JSON.parse(localStorage.getItem('evento_diario_actual') || 'null')),
+            _evGuardar('eventos_diarios_vistos', JSON.parse(localStorage.getItem('eventos_diarios_vistos') || '[]'))
+        ]);
+        console.log('☁️ Eventos diarios subidos a Supabase');
+    } else {
+        // Descargar de Supabase
+        if (progreso !== null) localStorage.setItem('eventos_progreso', JSON.stringify(progreso));
+        if (ultimo !== null) localStorage.setItem('evento_diario_ultimo', JSON.stringify(ultimo));
+        if (actual !== null) localStorage.setItem('evento_diario_actual', JSON.stringify(actual));
+        if (vistos !== null) localStorage.setItem('eventos_diarios_vistos', JSON.stringify(vistos));
+        console.log('☁️ Eventos diarios sincronizados desde Supabase');
+    }
+}
+
+// Ejecutar sync al cargar
+sincronizarEventosDiarios();
+
+// ================================================
 // SISTEMA DE EVENTOS DIARIOS - VERSIÓN CORREGIDA
 // Éxito inmediato, fracaso al día siguiente + Evento NTR de Uzaki
 // VERSIÓN CORREGIDA - Arreglado texto undefined y eventos en PC
@@ -273,6 +336,7 @@ const SistemaProgresoEventos = {
         }
 
         localStorage.setItem('eventos_progreso', JSON.stringify(progreso));
+        _evGuardar('eventos_progreso', progreso);
         return progreso;
     },
 
@@ -575,6 +639,8 @@ const EventosDiarios = {
         
         localStorage.setItem('evento_diario_ultimo', JSON.stringify(eventoData));
         localStorage.setItem('evento_diario_actual', JSON.stringify(evento));
+        _evGuardar('evento_diario_ultimo', eventoData);
+        _evGuardar('evento_diario_actual', evento);
     },
 
     obtenerEventoHoy: function() {
