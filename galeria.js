@@ -1839,7 +1839,9 @@ const galeriaDatabase = {
         descripcion: "",
         categoria: "Puta roja",
         imagen: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772988556227.jpg",
-        imagenes: []
+        imagenes: [
+            { id: 1, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772988912969.jpg" }
+        ]
     },
      '18_1': {
         titulo: "PRUEBA",
