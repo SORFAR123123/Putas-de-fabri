@@ -1792,6 +1792,7 @@ function obtenerSubcontenedorGaleria(contenedor, subcontenedor) {
 function obtenerContenedoresGaleriaDisponibles() {
     const contenedores = {};
     
+    // Almacenaremos las claves ORIGINALES para preservar el orden
     Object.keys(galeriaDatabase).forEach(key => {
         const partes = key.split('_');
         const contenedor = partes[0];
@@ -1804,21 +1805,27 @@ function obtenerContenedoresGaleriaDisponibles() {
         contenedores[contenedor].push(partes.slice(1).join('_'));
     });
     
-    // Opcional: Ordenar los subcontenedores
+    // Opcional: Ordenar los subcontenedores de los contenedores 1-8 numéricamente,
+    // pero DEJAR SIN ORDENAR los de los contenedores 9+ para mantener el orden de definición.
     Object.keys(contenedores).forEach(key => {
-        contenedores[key].sort((a, b) => {
-            // Intentar ordenar numéricamente si son números
-            if (!isNaN(a) && !isNaN(b)) {
-                return parseInt(a) - parseInt(b);
-            }
-            // Ordenar alfabéticamente para los que tienen nombres
-            return a.localeCompare(b);
-        });
+        // Si el contenedor es del 1 al 8, ordenamos numéricamente sus subcontenedores
+        if (parseInt(key) <= 8) {
+            contenedores[key].sort((a, b) => {
+                // Intentar ordenar numéricamente si son números
+                if (!isNaN(a) && !isNaN(b)) {
+                    return parseInt(a) - parseInt(b);
+                }
+                // Ordenar alfabéticamente para los que tienen nombres (por si acaso)
+                return a.localeCompare(b);
+            });
+        }
+        // Para contenedores 9 y superiores, NO HACEMOS NINGÚN SORT
+        // Esto preservará el orden en que las claves fueron insertadas en galeriaDatabase
+        // (Nota: El orden de inserción en objetos modernos se mantiene para claves que no son números)
     });
     
     return contenedores;
 }
-
 function obtenerGaleria(contenedor, subcontenedor) {
     const key = `${contenedor}_${subcontenedor}`;
     return galeriaDatabase[key] || null;
@@ -1891,7 +1898,7 @@ function cargarSubcontenedoresGaleria(contenedor) {
     console.log(`📂 Subcontenedores para contenedor ${contenedor}:`, disponibles[contenedor] || []);
 }
 
-// 4. Crear UI de subcontenedores
+// 4. Crear UI de subcontenedores (CORREGIDO)
 function crearSubcontenedoresGaleriaUI(contenedor) {
     let html = `<h2 style="text-align: center; margin-bottom: 30px; color: #FFD166;">
         📦 ${obtenerContenedorGaleria(contenedor).nombre} - SUB-GALERÍAS
@@ -1915,14 +1922,15 @@ function crearSubcontenedoresGaleriaUI(contenedor) {
             const galeriaInfo = obtenerGaleria(contenedor, subKey);
             if (galeriaInfo) {
                 // Determinar el título a mostrar
-                let tituloMostrar = galeriaInfo.titulo;
+                let tituloMostrar = galeriaInfo.titulo; // Por defecto, usamos el título definido
                 let subtitulo = '';
                 
-                // Si es un contenedor con números (1-8), mostrar "Galería X"
+                // CORREGIDO: Solo si es un contenedor del 1 al 8 y subKey es un número, forzamos "Galería X"
                 if (contenedor <= 8 && !isNaN(subKey)) {
                     tituloMostrar = `Galería ${subKey}`;
-                    subtitulo = galeriaInfo.titulo;
+                    subtitulo = galeriaInfo.titulo; // Movemos el título real a subtítulo
                 }
+                // Para contenedores >8, simplemente usamos galeriaInfo.titulo como título principal
                 
                 html += `
                     <div class="subcontenedor-item" onclick="cargarGaleria(${contenedor}, '${subKey}')">
