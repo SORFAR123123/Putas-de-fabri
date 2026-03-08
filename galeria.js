@@ -1797,10 +1797,10 @@ const galeriaDatabase = {
         imagenes: []
     },
     '16_2': {
-        titulo: "",
+        titulo: "Uzaki kachera",
         descripcion: "",
-        categoria: "",
-        imagen: "",
+        categoria: "Centia",
+        imagen: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772986498473.jpg",
         imagenes: [
             { id: 1, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772986449637.jpg" },
             { id: 2, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772986453636.jpg" },
