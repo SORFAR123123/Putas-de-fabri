@@ -1806,7 +1806,9 @@ const galeriaDatabase = {
         descripcion: "",
         categoria: "3 albinas zorras de mrd",
         imagen: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772986146811.jpg",
-        imagenes: []
+        imagenes: [
+            { id: 1, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772995724249.jpg" }
+        ]
     },
     '16_2': {
         titulo: "Uzaki kachera",
