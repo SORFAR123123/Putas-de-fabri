@@ -1676,10 +1676,10 @@ const galeriaDatabase = {
         ]
     },
     '15_6': {
-        titulo: "",
+        titulo: "Alya putona Rusa",
         descripcion: "",
-        categoria: "",
-        imagen: "",
+        categoria: "Centie",
+        imagen: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772932341332.jpg",
         imagenes: [
             { id: 1, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772932287733.jpg" },
             { id: 2, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772932291902.jpg" },
