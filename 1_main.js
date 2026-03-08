@@ -1,4 +1,37 @@
 // ================================================
+// SUPABASE SYNC - SRS
+// ================================================
+const _SB_URL = 'https://lcspqpdjvdcbzhmcrhqi.supabase.co';
+const _SB_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxjc3BxcGRqdmRjYnpobWNyaHFpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI5OTE1NjcsImV4cCI6MjA4ODU2NzU2N30.Lls-iTGdt90gtbi-mXXkYvB26u9Yt65DMOcskmVgx1Q';
+const _SB_USER = 'user_qdhg1lunm_1772995224949';
+
+async function _sbGuardar(clave, valor) {
+    try {
+        await fetch(`${_SB_URL}/rest/v1/progreso`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'apikey': _SB_KEY,
+                'Authorization': `Bearer ${_SB_KEY}`,
+                'Prefer': 'resolution=merge-duplicates,return=minimal'
+            },
+            body: JSON.stringify({ user_id: _SB_USER, clave, valor: JSON.stringify(valor), actualizado_en: new Date().toISOString() })
+        });
+    } catch {}
+}
+
+async function _sbCargar(clave) {
+    try {
+        const res = await fetch(`${_SB_URL}/rest/v1/progreso?user_id=eq.${_SB_USER}&clave=eq.${clave}&select=valor`, {
+            headers: { 'apikey': _SB_KEY, 'Authorization': `Bearer ${_SB_KEY}` }
+        });
+        const data = await res.json();
+        if (data && data.length > 0) return JSON.parse(data[0].valor);
+        return null;
+    } catch { return null; }
+}
+
+// ================================================
 // SISTEMA PRINCIPAL DE NAVEGACIÓN Y QUIZ - VERSIÓN COMPLETAMENTE DINÁMICA
 // CON BOTÓN DE REINICIO DE EVENTO DIARIO EN PANTALLA DE MISIONES
 // ================================================
@@ -167,7 +200,7 @@ let srsDatabase = {
     }
 };
 
-// Inicializar SRS desde localStorage
+// Inicializar SRS desde localStorage + Supabase
 function inicializarSRS() {
     const savedSRS = localStorage.getItem('japonesSRS');
     if (savedSRS) {
@@ -177,11 +210,25 @@ function inicializarSRS() {
     
     // Verificar repeticiones pendientes
     verificarRepeticionesPendientes();
+
+    // Sincronizar con Supabase en segundo plano
+    _sbCargar('srs_database').then(data => {
+        if (data === null) {
+            // Supabase vacío, subir local
+            _sbGuardar('srs_database', srsDatabase);
+        } else {
+            // Descargar de Supabase
+            srsDatabase = data;
+            localStorage.setItem('japonesSRS', JSON.stringify(srsDatabase));
+            console.log('☁️ SRS sincronizado desde Supabase');
+        }
+    });
 }
 
-// Guardar SRS en localStorage
+// Guardar SRS en localStorage + Supabase
 function guardarSRS() {
     localStorage.setItem('japonesSRS', JSON.stringify(srsDatabase));
+    _sbGuardar('srs_database', srsDatabase);
     console.log('💾 SRS guardado:', srsDatabase.palabras.length, 'palabras');
 }
 
