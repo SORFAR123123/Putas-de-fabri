@@ -376,7 +376,7 @@ const galeriaDatabase = {
     '1_3': {
         titulo: "Centie Nino",
         descripcion: "Edificios y estructuras contemporáneas",
-        categoria: "Arquitectura",
+        categoria: "Centie",
         imagen: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772923583449.jpg",
         imagenes: [
            
@@ -414,7 +414,7 @@ const galeriaDatabase = {
     '1_6': {
         titulo: "Kimedasenpai",
         descripcion: "nino putona",
-        categoria: "",
+        categoria: "Putarda",
         imagen: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772925734083.jpg",
         imagenes: [
             { id: 1, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772925664901.jpg" },
