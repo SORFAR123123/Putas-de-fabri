@@ -2008,6 +2008,13 @@ const galeriaDatabase = {
             { id: 9, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772990147167.jpg" }
         ]
     },
+    '17_3': {
+        titulo: "",
+        descripcion: "",
+        categoria: "",
+        imagen: "",
+        imagenes: []
+    },
     '18_1': {
         titulo: "OshiNoPutas",
         descripcion: "",
