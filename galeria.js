@@ -1866,6 +1866,13 @@ const galeriaDatabase = {
             { id: 9, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772932319575.jpg" }
         ]
     },
+    '15_7': {
+        titulo: "",
+        descripcion: "",
+        categoria: "",
+        imagen: "",
+        imagenes: []
+    },
     '16_1': {
         titulo: "3 putas",
         descripcion: "",
