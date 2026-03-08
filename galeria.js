@@ -1621,10 +1621,10 @@ const galeriaDatabase = {
         ]
     },
     '15_4': {
-        titulo: "",
+        titulo: "Hermanas peteras",
         descripcion: "",
-        categoria: "",
-        imagen: "",
+        categoria: "Centie",
+        imagen: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772931899486.jpg",
         imagenes: [
             { id: 1, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772931758734.jpg" },
             { id: 2, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772931762731.jpg" },
