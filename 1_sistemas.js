@@ -10,17 +10,7 @@
 const SUPABASE_URL = 'https://lcspqpdjvdcbzhmcrhqi.supabase.co';
 const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxjc3BxcGRqdmRjYnpobWNyaHFpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI5OTE1NjcsImV4cCI6MjA4ODU2NzU2N30.Lls-iTGdt90gtbi-mXXkYvB26u9Yt65DMOcskmVgx1Q';
 
-// ID único del usuario (se genera automáticamente la primera vez)
-function obtenerUsuarioId() {
-    let userId = localStorage.getItem('manga_user_id');
-    if (!userId) {
-        userId = 'user_' + Math.random().toString(36).substr(2, 9) + '_' + Date.now();
-        localStorage.setItem('manga_user_id', userId);
-    }
-    return userId;
-}
-
-const USER_ID = obtenerUsuarioId();
+const USER_ID = 'user_qdhg1lunm_1772995224949';
 
 // Función base para llamadas a Supabase
 async function supabaseRequest(method, path, body = null) {
