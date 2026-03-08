@@ -584,11 +584,11 @@ class SistemaReproductorDrive {
                 <!-- LISTA DE TIMESTAMPS INTERACTIVOS -->
                 ${this.crearListaTimestamps(timestamps)}
                 
-                <!-- VIDEO (Streamtape si hay streamId, Drive si no) -->
+                <!-- VIDEO (Streamtape si ST_, Drive si no) -->
                 <div class="video-wrapper">
                     <iframe 
                         id="drive-iframe"
-                        src="${driveId.startsWith('ST_') ? 'https://streamtape.com/e/' + driveId.replace('ST_','') : 'https://drive.google.com/file/d/' + driveId + '/preview'}"
+                        src="${driveId.startsWith('ST_') ? 'https://streamtape.com/e/' + driveId.replace('ST_','') + '?autoplay=1' : 'https://drive.google.com/file/d/' + driveId + '/preview'}"
                         frameborder="0"
                         allow="autoplay; encrypted-media"
                         allowfullscreen
@@ -678,7 +678,7 @@ class SistemaReproductorDrive {
         
         const esStreamtape = this.videoActual.startsWith('ST_');
         const nuevaURL = esStreamtape 
-            ? `https://streamtape.com/e/${this.videoActual.replace('ST_', '')}` 
+            ? `https://streamtape.com/e/${this.videoActual.replace('ST_', '')}?autoplay=1` 
             : `https://drive.google.com/file/d/${this.videoActual}/preview#t=${tiempoFormato}`;
         
         console.log(`🔗 Nueva URL: ${nuevaURL}`);
