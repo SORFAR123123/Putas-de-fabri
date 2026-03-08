@@ -980,16 +980,22 @@ class FantasiaRPG {
         if (!this.videosNovias[noviaId]) { alert(`❌ No hay videos para esta novia`); return; }
         const videoId = this.videosNovias[noviaId][accion];
         if (!videoId) { alert(`❌ Video no disponible`); return; }
-        this.cerrarRecompensas();
-        this.mostrarVideo(videoId, `${this.noviaEnRecompensas.nombre} - ${accion}`, this.noviaEnRecompensas.imagen, 'novia');
+        const titulo = `${this.noviaEnRecompensas.nombre} - ${accion}`;
+        const imagen = this.noviaEnRecompensas.imagen;
+        const overlay = document.getElementById('recompensas-overlay');
+        if (overlay) overlay.remove();
+        this.mostrarVideo(videoId, titulo, imagen, 'novia');
     }
 
     verVideoRecompensaBoss(accion) {
         if (!this.bossDerrotado) return;
         const videoId = this.bossDerrotado.videos[accion];
         if (!videoId || videoId.startsWith("ID_VIDEO")) { alert("❌ Video no disponible"); return; }
-        this.cerrarRecompensas();
-        this.mostrarVideo(videoId, `${this.bossDerrotado.nombre} - ${accion}`, this.bossDerrotado.imagen, 'boss');
+        const titulo = `${this.bossDerrotado.nombre} - ${accion}`;
+        const imagen = this.bossDerrotado.imagen;
+        const overlay = document.getElementById('recompensas-overlay');
+        if (overlay) overlay.remove();
+        this.mostrarVideo(videoId, titulo, imagen, 'boss');
     }
 
     cerrarRecompensas() {
@@ -1103,12 +1109,13 @@ class FantasiaRPG {
     calcularBonusParaHermana(hermanaId) {
         if (!this.jugador || !this.jugador.stats) return 0;
         const stats = this.jugador.stats;
+        // Base 5% + 0.5% por cada punto de stat (stat base=5 da 7.5%, stat 10 da 10%, max 20%)
         switch(hermanaId) {
-            case 'ichika': return Math.min(stats.fuerza * 0.1, 10);
-            case 'nino': return Math.min(stats.resistencia * 0.1, 10);
-            case 'yotsuba': return Math.min(stats.velocidad * 0.1, 10);
-            case 'miku': return Math.min(stats.inteligencia * 0.1, 10);
-            case 'itsuki': return Math.min(stats.carisma * 0.1, 10);
+            case 'ichika': return Math.min(5 + stats.fuerza * 0.5, 20);
+            case 'nino': return Math.min(5 + stats.resistencia * 0.5, 20);
+            case 'yotsuba': return Math.min(5 + stats.velocidad * 0.5, 20);
+            case 'miku': return Math.min(5 + stats.inteligencia * 0.5, 20);
+            case 'itsuki': return Math.min(5 + stats.carisma * 0.5, 20);
             default: return 0;
         }
     }
@@ -1462,23 +1469,42 @@ class FantasiaRPG {
         const claseColor = this.jugador.claseColor || '#FF1493';
         
         const statsHTML = Object.entries({
-            fuerza: { icono: '💪', nombre: 'Fuerza', hermana: 'Ichika', color: '#FF6B6B' },
-            resistencia: { icono: '🔋', nombre: 'Resistencia', hermana: 'Nino', color: '#FFD166' },
-            velocidad: { icono: '⚡', nombre: 'Velocidad', hermana: 'Yotsuba', color: '#4CAF50' },
-            inteligencia: { icono: '🧠', nombre: 'Inteligencia', hermana: 'Miku', color: '#5864F5' },
-            carisma: { icono: '😎', nombre: 'Carisma (mejora drops)', hermana: 'Itsuki', color: 'gold' }
-        }).map(([key, data]) => `
+            fuerza:       { icono: '💪', nombre: 'Fuerza',                  hermana: 'Ichika',  hermanaId: 'ichika',  color: '#FF6B6B' },
+            resistencia:  { icono: '🔋', nombre: 'Resistencia',             hermana: 'Nino',    hermanaId: 'nino',    color: '#FFD166' },
+            velocidad:    { icono: '⚡', nombre: 'Velocidad',               hermana: 'Yotsuba', hermanaId: 'yotsuba', color: '#4CAF50' },
+            inteligencia: { icono: '🧠', nombre: 'Inteligencia',            hermana: 'Miku',    hermanaId: 'miku',    color: '#5864F5' },
+            carisma:      { icono: '😎', nombre: 'Carisma (mejora drops)', hermana: 'Itsuki',  hermanaId: 'itsuki',  color: 'gold'    }
+        }).map(([key, data]) => {
+            const bonusActual  = this.calcularBonusParaHermana(data.hermanaId).toFixed(1);
+            // Simular el bonus con +1 en ese stat
+            const statsFuturo = { ...this.jugador.stats, [key]: this.jugador.stats[key] + 1 };
+            const jugadorTemp = { stats: statsFuturo };
+            const bonusFuturo = (() => {
+                switch(data.hermanaId) {
+                    case 'ichika':  return Math.min(5 + statsFuturo.fuerza * 0.5, 20);
+                    case 'nino':    return Math.min(5 + statsFuturo.resistencia * 0.5, 20);
+                    case 'yotsuba': return Math.min(5 + statsFuturo.velocidad * 0.5, 20);
+                    case 'miku':    return Math.min(5 + statsFuturo.inteligencia * 0.5, 20);
+                    case 'itsuki':  return Math.min(5 + statsFuturo.carisma * 0.5, 20);
+                    default: return 0;
+                }
+            })().toFixed(1);
+            const mejora = (bonusFuturo - bonusActual).toFixed(1);
+            return `
             <div style="background: rgba(255,255,255,0.05); border-radius: 12px; padding: 15px; margin-bottom: 12px; border-left: 4px solid ${data.color};">
                 <div style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 10px;">
                     <div>
                         <span>${data.icono}</span> <strong style="color: ${data.color};">${data.nombre}</strong>
-                        <div style="font-size: 0.8rem; opacity: 0.6;">+${this.calcularBonusParaHermana(key).toFixed(1)}% para ${data.hermana}</div>
+                        <div style="font-size: 0.8rem; opacity: 0.7;">
+                            Bonus ${data.hermana}: <span style="color:${data.color};">${bonusActual}%</span>
+                            → <span style="color:#4CAF50;">+${mejora}% por nivel</span>
+                        </div>
                     </div>
                     <div style="font-size: 1.8rem; font-weight: bold;">${stats[key]}</div>
                     <button class="card-button" onclick="fantasiaRPG.comprarStat('${key}')" style="background: linear-gradient(135deg, ${data.color}, #333); padding: 8px 16px;">+1 (10💎)</button>
                 </div>
             </div>
-        `).join('');
+        `}).join('');
         
         const consumibles = [
             { key: 'pocionVidaPequena', label: '💊 Poción Pequeña', desc: '+30 HP', precio: 3, color: '#4CAF50' },
