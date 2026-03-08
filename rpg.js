@@ -1207,12 +1207,16 @@ class QuintillizasRPG {
                     </p>
                 </div>
 
-                <div style="text-align: center; margin-bottom: 30px;">
-                    <button class="card-button" onclick="quintillizasRPG.cargarPantallaMomentosGrupales()"
-                            style="background: linear-gradient(135deg, #FF1493, #8A5AF7); padding: 20px 50px; font-size: 1.5rem; border-radius: 50px; animation: pulse 2s infinite;">
+                <div style="text-align: center; margin-bottom: 30px; display: flex; flex-direction: column; align-items: center; gap: 15px;">
+                    <button class="card-button" onclick="quintillizasRPG.iniciarFlujoGrupal()"
+                            style="background: linear-gradient(135deg, #FF1493, #8A5AF7); padding: 20px 50px; font-size: 1.5rem; border-radius: 50px; animation: pulse 2s infinite; width: 100%; max-width: 500px;">
                         👯‍♀️ MOMENTOS ESPECIALES EN GRUPO 👯‍♀️
                     </button>
-                    <p style="margin-top: 10px; opacity: 0.8;">¡Dúos, tríos, cuartetos y quinteto! Requieren condones 0.01</p>
+                    <p style="opacity: 0.8; margin-top: -5px;">¡Dúos con hotel o dormitorio! Requieren nivel 8+ y 2 condones 0.01</p>
+                    <button class="card-button" onclick="quintillizasRPG.mostrarUIDormitorio()"
+                            style="background: linear-gradient(135deg, #4a1a6a, #8A2BE2); padding: 15px 40px; font-size: 1.1rem; border-radius: 50px; width: 100%; max-width: 500px;">
+                        🛏️ MI DORMITORIO — Nivel: ${['Sin decorar','Básico','Romántico','Lujoso'][this._dormitorioNivel()]}
+                    </button>
                 </div>
 
                 <div style="background: rgba(255, 20, 147, 0.1); border-radius: 20px; padding: 25px; margin-bottom: 40px; border: 2px solid #FF1493;">
@@ -1389,90 +1393,474 @@ class QuintillizasRPG {
     }
 
     // ====================
-    // NUEVA PANTALLA DE MOMENTOS GRUPALES
+    // PANTALLA MOMENTOS GRUPALES — NUEVO FLUJO
     // ====================
 
     cargarPantallaMomentosGrupales() {
-        const html = `
-            <div style="max-width: 1400px; margin: 0 auto; padding: 20px;">
-                <h1 style="text-align: center; color: #FF1493; margin-bottom: 30px; font-size: 2.5rem;">
-                    👯‍♀️ MOMENTOS ESPECIALES EN GRUPO
-                </h1>
-                <p style="text-align: center; opacity: 0.8; margin-bottom: 40px;">
-                    Necesitas <span style="color: #5864F5; font-weight: bold;">condones 0.01</span> (1 por cada chica) y cumplir los requisitos
-                </p>
+        this.iniciarFlujoGrupal();
+    }
 
-                <div style="background: rgba(88, 100, 245, 0.1); border-radius: 20px; padding: 20px; margin-bottom: 30px; border: 2px solid #5864F5;">
-                    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 15px; text-align: center;">
-                        <div>
-                            <div style="color: #5864F5; font-size: 0.9rem;">💎 Condones 0.01</div>
-                            <div style="font-size: 2rem; font-weight: bold;">${this.condones001}</div>
-                        </div>
-                        <div>
-                            <div style="color: #FF1493; font-size: 0.9rem;">Nivel Máximo</div>
-                            <div style="font-size: 1.5rem;">${Math.max(...Object.values(this.datosPersonajes).map(p => p.nivel))}/10</div>
-                        </div>
-                        <div>
-                            <div style="color: #4CAF50; font-size: 0.9rem;">Afinidad Promedio</div>
-                            <div style="font-size: 1.5rem;">${Math.round(Object.values(this.datosPersonajes).reduce((acc, p) => acc + p.afinidad, 0) / 5)}/200</div>
-                        </div>
+    // ====================
+    // SISTEMA DORMITORIO
+    // ====================
+
+    _dormitorioInicializar() {
+        if (this._dormitorio) return;
+        try {
+            const d = localStorage.getItem('dormitorio_datos');
+            this._dormitorio = d ? JSON.parse(d) : {
+                items: { velas: false, flores: false, almohadasAmor: false, lucesLED: false, champagne: false, alfombra: false, cortinas: false, espejo: false }
+            };
+        } catch { 
+            this._dormitorio = { items: { velas: false, flores: false, almohadasAmor: false, lucesLED: false, champagne: false, alfombra: false, cortinas: false, espejo: false } };
+        }
+    }
+
+    _dormitorioGuardar() {
+        localStorage.setItem('dormitorio_datos', JSON.stringify(this._dormitorio));
+        if (window._sbGuardar) _sbGuardar('dormitorio_datos', this._dormitorio);
+    }
+
+    _dormitorioNivel() {
+        this._dormitorioInicializar();
+        const cant = Object.values(this._dormitorio.items).filter(Boolean).length;
+        if (cant >= 6) return 3;
+        if (cant >= 3) return 2;
+        if (cant >= 1) return 1;
+        return 0;
+    }
+
+    dormitorioComprarItem(itemKey) {
+        this._dormitorioInicializar();
+        const precios = {
+            velas: { precio: 20, nombre: '🕯️ Velas románticas' },
+            flores: { precio: 35, nombre: '🌸 Flores y pétalos' },
+            almohadasAmor: { precio: 25, nombre: '💕 Almohadas de amor' },
+            lucesLED: { precio: 50, nombre: '✨ Luces LED' },
+            champagne: { precio: 60, nombre: '🍾 Champagne' },
+            alfombra: { precio: 40, nombre: '🟥 Alfombra de piel' },
+            cortinas: { precio: 45, nombre: '🪟 Cortinas de terciopelo' },
+            espejo: { precio: 80, nombre: '🪞 Espejo de cuerpo entero' }
+        };
+        const item = precios[itemKey];
+        if (!item) return;
+        if (this._dormitorio.items[itemKey]) { this.mostrarNotificacion('❌ Ya tienes ese item'); return; }
+        if (!sistemaEconomia || sistemaEconomia.dinero < item.precio) { this.mostrarNotificacion('❌ No tienes suficientes soles'); return; }
+        sistemaEconomia.gastarDinero(item.precio);
+        this._dormitorio.items[itemKey] = true;
+        this._dormitorioGuardar();
+        this.mostrarNotificacion(`✅ ${item.nombre} comprado!`);
+        this.mostrarUIDormitorio();
+    }
+
+    mostrarUIDormitorio() {
+        this._dormitorioInicializar();
+        const items = this._dormitorio.items;
+        const nivel = this._dormitorioNivel();
+        const nivelNombre = ['Sin decorar 😅', 'Básico 🕯️', 'Romántico 🌸', 'Lujoso ✨'][nivel];
+
+        const catalogo = [
+            { key: 'velas',         nombre: '🕯️ Velas románticas',       precio: 20, desc: 'Luz cálida y ambiente íntimo' },
+            { key: 'flores',        nombre: '🌸 Flores y pétalos',        precio: 35, desc: 'Pétalos de rosa esparcidos' },
+            { key: 'almohadasAmor', nombre: '💕 Almohadas de amor',       precio: 25, desc: 'Almohadas con corazones bordados' },
+            { key: 'lucesLED',      nombre: '✨ Luces LED',               precio: 50, desc: 'Luces de colores en el techo' },
+            { key: 'champagne',     nombre: '🍾 Champagne',               precio: 60, desc: 'Botella de champagne fría' },
+            { key: 'alfombra',      nombre: '🟥 Alfombra de piel',        precio: 40, desc: 'Alfombra suave y cálida' },
+            { key: 'cortinas',      nombre: '🪟 Cortinas de terciopelo',  precio: 45, desc: 'Cortinas opacas y elegantes' },
+            { key: 'espejo',        nombre: '🪞 Espejo de cuerpo entero', precio: 80, desc: 'Espejo grande con marco dorado' },
+        ];
+
+        const itemsHTML = catalogo.map(it => {
+            const comprado = items[it.key];
+            return `
+                <div style="background:rgba(255,255,255,0.05);border-radius:12px;padding:15px;
+                            border:2px solid ${comprado ? '#4CAF50' : 'rgba(255,255,255,0.1)'};
+                            display:flex;justify-content:space-between;align-items:center;gap:10px;">
+                    <div>
+                        <div style="font-weight:bold;">${it.nombre}</div>
+                        <div style="font-size:0.8rem;opacity:0.6;">${it.desc}</div>
                     </div>
-                </div>
+                    ${comprado
+                        ? `<div style="color:#4CAF50;font-weight:bold;white-space:nowrap;">✅ Comprado</div>`
+                        : `<button class="card-button" onclick="quintillizasRPG.dormitorioComprarItem('${it.key}')"
+                                   style="background:linear-gradient(135deg,#FF1493,#8A5AF7);padding:8px 15px;white-space:nowrap;font-size:0.85rem;">
+                               ${it.precio} 💰
+                           </button>`}
+                </div>`;
+        }).join('');
 
-                <div style="margin-bottom: 50px;">
-                    <h2 style="color: #4CAF50; margin-bottom: 20px; border-bottom: 2px solid #4CAF50; padding-bottom: 10px;">
-                        👯‍♀️ DÚOS (10 combinaciones) - Nivel 5+, Afinidad 100+
-                    </h2>
-                    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: 20px;">
-                        ${this.crearCardsMomentosGrupales('duo')}
-                    </div>
-                </div>
-
-                <div style="margin-bottom: 50px;">
-                    <h2 style="color: #FF9800; margin-bottom: 20px; border-bottom: 2px solid #FF9800; padding-bottom: 10px;">
-                        👯‍♀️👯‍♀️ TRÍOS (10 combinaciones) - Nivel 7+, Afinidad 150+
-                    </h2>
-                    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 20px;">
-                        ${this.crearCardsMomentosGrupales('trio')}
-                    </div>
-                </div>
-
-                <div style="margin-bottom: 50px;">
-                    <h2 style="color: #FF1493; margin-bottom: 20px; border-bottom: 2px solid #FF1493; padding-bottom: 10px;">
-                        👯‍♀️👯‍♀️👯‍♀️ CUARTETOS (5 combinaciones) - Nivel 9+, Afinidad 175+
-                    </h2>
-                    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(360px, 1fr)); gap: 20px;">
-                        ${this.crearCardsMomentosGrupales('cuarteto')}
-                    </div>
-                </div>
-
-                <div style="margin-bottom: 50px;">
-                    <h2 style="color: gold; margin-bottom: 20px; border-bottom: 2px solid gold; padding-bottom: 10px;">
-                        👯‍♀️👯‍♀️👯‍♀️👯‍♀️👯‍♀️ QUINTETO (TODAS) - Nivel 10+, Afinidad 200+
-                    </h2>
-                    <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(380px, 1fr)); gap: 20px;">
-                        ${this.crearCardsMomentosGrupales('quinteto')}
-                    </div>
-                </div>
-
-                <div style="text-align: center; margin-top: 40px;">
-                    <button class="card-button" onclick="quintillizasRPG.volverAPaginaPrincipal()"
-                            style="background: linear-gradient(135deg, #5864F5, #8A5AF7); padding: 15px 40px; font-size: 1.2rem;">
-                        ↩️ Volver al RPG Principal
-                    </button>
-                </div>
-            </div>
-        `;
+        // Preview visual con overlays
+        const previewItems = [
+            items.lucesLED ? `<div style="position:absolute;top:0;left:0;width:100%;height:6px;background:repeating-linear-gradient(90deg,#FF69B4 0,#FF69B4 8px,transparent 8px,transparent 16px);"></div>` : '',
+            items.velas ? `<span style="position:absolute;bottom:48px;left:15px;font-size:1.3rem;">🕯️</span><span style="position:absolute;bottom:48px;right:15px;font-size:1.3rem;">🕯️</span>` : '',
+            items.flores ? `<span style="position:absolute;bottom:32px;left:50%;transform:translateX(-50%);font-size:1rem;">🌸🌹🌸</span>` : '',
+            items.champagne ? `<span style="position:absolute;top:10px;right:10px;font-size:1.2rem;">🍾</span>` : '',
+            items.almohadasAmor ? `<span style="position:absolute;bottom:58px;left:50%;transform:translateX(-50%);font-size:0.9rem;">💕💕</span>` : '',
+            items.espejo ? `<span style="position:absolute;top:10px;left:10px;font-size:1.2rem;">🪞</span>` : '',
+        ].join('');
 
         const mangaSection = document.getElementById('manga-section');
-        mangaSection.innerHTML = html;
+        if (!mangaSection) return;
+        mangaSection.innerHTML = `
+            <div style="max-width:900px;margin:0 auto;padding:20px;">
+                <h1 style="text-align:center;color:#FF1493;margin-bottom:5px;">🛏️ MI DORMITORIO</h1>
+                <p style="text-align:center;color:#FFD166;margin-bottom:25px;">Nivel: ${nivelNombre}</p>
 
-        const botonVolver = document.createElement('button');
-        botonVolver.className = 'btn-atras-especifico';
-        botonVolver.innerHTML = '← Volver al RPG';
-        botonVolver.style.margin = '20px';
-        botonVolver.onclick = () => this.volverAPaginaPrincipal();
-        mangaSection.insertBefore(botonVolver, mangaSection.firstChild);
+                <div style="position:relative;width:100%;height:180px;border-radius:20px;overflow:hidden;
+                            background:linear-gradient(135deg,#1a1028,#251535);
+                            border:2px solid ${nivel >= 2 ? '#FF1493' : 'rgba(255,255,255,0.1)'};margin-bottom:25px;">
+                    ${previewItems}
+                    <div style="position:absolute;bottom:0;left:50%;transform:translateX(-50%);
+                                width:180px;height:70px;background:#2a1a40;border-radius:10px 10px 0 0;border-top:10px solid #4a2a60;"></div>
+                    <div style="position:absolute;bottom:10px;left:50%;transform:translateX(-50%);
+                                width:164px;height:30px;background:#e8d5f5;border-radius:6px 6px 0 0;"></div>
+                    ${nivel === 0 ? `<div style="position:absolute;top:50%;left:50%;transform:translate(-50%,-60%);text-align:center;opacity:0.4;font-size:0.8rem;">Decora tu dormitorio para usarlo</div>` : ''}
+                </div>
+
+                <div style="background:rgba(255,20,147,0.1);border:1px solid rgba(255,20,147,0.3);border-radius:12px;padding:15px;margin-bottom:20px;text-align:center;">
+                    <p style="font-size:0.9rem;">Para momentos grupales necesitas <strong style="color:#FF1493;">nivel Romántico o superior</strong></p>
+                    <div style="display:flex;justify-content:center;gap:15px;margin-top:10px;font-size:0.85rem;flex-wrap:wrap;">
+                        <span style="${nivel >= 1 ? 'color:#4CAF50' : 'opacity:0.4'}">1️⃣ Básico (1 item)</span>
+                        <span style="${nivel >= 2 ? 'color:#FF1493' : 'opacity:0.4'}">2️⃣ Romántico (3 items) ✅</span>
+                        <span style="${nivel >= 3 ? 'color:gold' : 'opacity:0.4'}">3️⃣ Lujoso (6 items)</span>
+                    </div>
+                </div>
+
+                <h3 style="color:#FFD166;margin-bottom:15px;">🛒 Comprar Items</h3>
+                <div style="display:grid;gap:10px;margin-bottom:25px;">${itemsHTML}</div>
+
+                <button class="card-button" onclick="quintillizasRPG.volverAPaginaPrincipal()"
+                        style="width:100%;background:linear-gradient(135deg,#5864F5,#8A5AF7);padding:15px;">↩️ Volver al RPG</button>
+            </div>`;
+    }
+
+    // ====================
+    // FLUJO GRUPAL COMPLETO
+    // ====================
+
+    _modalFlujo(contenido) {
+        this._cerrarModalFlujo();
+        const overlay = document.createElement('div');
+        overlay.id = 'flujo-modal';
+        overlay.style.cssText = `position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.92);display:flex;justify-content:center;align-items:center;z-index:10000;padding:20px;`;
+        overlay.innerHTML = `<div style="background:linear-gradient(135deg,#1a1a2e,#16213e);border:2px solid #FF1493;border-radius:25px;padding:30px;max-width:500px;width:100%;max-height:90vh;overflow-y:auto;">${contenido}</div>`;
+        document.body.appendChild(overlay);
+    }
+
+    _cerrarModalFlujo() {
+        const m = document.getElementById('flujo-modal');
+        if (m) m.remove();
+    }
+
+    iniciarFlujoGrupal() {
+        if (!this.personajeSeleccionado) {
+            this._modalFlujo(`<div style="text-align:center;"><p>❌ No tienes ninguna chica seleccionada.</p><button class="card-button" onclick="quintillizasRPG._cerrarModalFlujo()" style="margin-top:15px;background:linear-gradient(135deg,#666,#333);padding:10px 25px;">Cerrar</button></div>`);
+            return;
+        }
+
+        const noviaId = this.personajeSeleccionado;
+        const novia = this.datosPersonajes[noviaId];
+        const NIVEL_REQ = 8;
+
+        const RECHAZOS = {
+            ichika: ["Ichika te mira con una sonrisa forzada... 'Lo siento, creo que no nos conocemos tan bien todavía...' 💔", "Ichika se sonroja y voltea la vista. 'Eso es... demasiado pronto, ¿no crees?' 😳"],
+            nino:   ["Nino te lanza una mirada asesina. '¿QUÉEEEE?! ¿Estás LOCO?! ¡NI EN SUEÑOS, IDIOTA!' 😡", "Nino te avienta el cojín a la cara. '¡PERVERTIDO! ¡Largo de aquí!' 💢"],
+            miku:   ["Miku baja la mirada, sus auriculares temblando. 'Y-yo... todavía no... disculpa...' 🎧", "Miku se esconde detrás de sus auriculares. 'N-no es que no quiera... aún no...' 😶"],
+            yotsuba:["Yotsuba ríe nerviosamente. '¡Ehh! ¡Eso es mucho muy rápido! ¡Gana más puntos conmigo!' 🏃", "Yotsuba agita los brazos. '¡Todavía no llegamos a ese nivel! ¡Sigue intentando!' 😅"],
+            itsuki: ["Itsuki frunce el ceño con dignidad. 'Eso requiere más confianza. Aún no la has ganado.' 😤", "Itsuki cruza los brazos. '¿Me tomas por alguien fácil? Esfuérzate mucho más.' 🍰"]
+        };
+
+        if (novia.nivel < NIVEL_REQ) {
+            const rechazo = RECHAZOS[noviaId][Math.floor(Math.random() * 2)];
+            this._modalFlujo(`
+                <div style="text-align:center;">
+                    <img src="${novia.imagen}" style="width:100px;height:100px;border-radius:50%;border:3px solid ${novia.color};object-fit:cover;margin-bottom:15px;">
+                    <h2 style="color:${novia.color};margin-bottom:15px;">😤 RECHAZADO</h2>
+                    <p style="font-size:1rem;line-height:1.6;">${rechazo}</p>
+                    <p style="margin-top:15px;opacity:0.6;font-size:0.85rem;">Nivel actual: ${novia.nivel}/${NIVEL_REQ} ⭐</p>
+                    <button class="card-button" onclick="quintillizasRPG._cerrarModalFlujo()" style="margin-top:20px;background:linear-gradient(135deg,#FF6B6B,#FF1493);padding:12px 30px;">Entendido 😢</button>
+                </div>`);
+            return;
+        }
+
+        // Elegir segunda chica
+        const chicasHTML = Object.entries(this.datosPersonajes)
+            .filter(([id]) => id !== noviaId)
+            .map(([id, p]) => {
+                const ok = p.nivel >= NIVEL_REQ;
+                return `
+                    <div onclick="${ok ? `quintillizasRPG._elegirSegundaChica('${noviaId}','${id}')` : ''}"
+                         style="text-align:center;padding:15px;border-radius:15px;border:2px solid ${ok ? p.color : '#444'};
+                                background:${ok ? p.color + '22' : 'rgba(0,0,0,0.3)'};cursor:${ok ? 'pointer' : 'not-allowed'};
+                                opacity:${ok ? 1 : 0.4};transition:transform 0.2s;"
+                         ${ok ? `onmouseover="this.style.transform='scale(1.05)'" onmouseout="this.style.transform='scale(1)'"` : ''}>
+                        <img src="${p.imagen}" style="width:65px;height:65px;border-radius:50%;border:2px solid ${p.color};object-fit:cover;margin-bottom:8px;">
+                        <div style="color:${p.color};font-weight:bold;font-size:0.85rem;">${p.nombre.split(' ')[0]}</div>
+                        <div style="font-size:0.75rem;margin-top:4px;opacity:0.8;">${ok ? `✅ Nivel ${p.nivel}` : `🔒 Nivel ${p.nivel}/${NIVEL_REQ}`}</div>
+                    </div>`;
+            }).join('');
+
+        this._modalFlujo(`
+            <div style="text-align:center;">
+                <h2 style="color:#FF1493;margin-bottom:8px;">💕 MOMENTO DÚO</h2>
+                <div style="display:flex;align-items:center;justify-content:center;gap:10px;margin-bottom:15px;">
+                    <img src="${novia.imagen}" style="width:45px;height:45px;border-radius:50%;border:2px solid ${novia.color};object-fit:cover;">
+                    <span style="color:${novia.color};font-weight:bold;">${novia.nombre.split(' ')[0]}</span>
+                    <span>+ ¿Quién más?</span>
+                </div>
+                <p style="opacity:0.6;margin-bottom:15px;font-size:0.85rem;">Elige tu segunda compañera (necesitas nivel 8+)</p>
+                <div style="display:grid;grid-template-columns:repeat(2,1fr);gap:12px;margin-bottom:15px;">${chicasHTML}</div>
+                <button class="card-button" onclick="quintillizasRPG._cerrarModalFlujo()" style="background:linear-gradient(135deg,#666,#333);padding:10px 25px;">Cancelar</button>
+            </div>`);
+    }
+
+    _elegirSegundaChica(noviaId, segundaId) {
+        if (this.condones001 < 2) {
+            const novia = this.datosPersonajes[noviaId];
+            const segunda = this.datosPersonajes[segundaId];
+            this._modalFlujo(`
+                <div style="text-align:center;">
+                    <h2 style="color:#5864F5;margin-bottom:15px;">💎 FALTAN CONDONES 0.01</h2>
+                    <div style="display:flex;justify-content:center;gap:15px;margin-bottom:20px;">
+                        <img src="${novia.imagen}" style="width:60px;height:60px;border-radius:50%;border:2px solid ${novia.color};object-fit:cover;">
+                        <img src="${segunda.imagen}" style="width:60px;height:60px;border-radius:50%;border:2px solid ${segunda.color};object-fit:cover;">
+                    </div>
+                    <p>Necesitas <strong style="color:#5864F5;">2 condones 0.01</strong></p>
+                    <p style="opacity:0.6;margin-top:8px;">Tienes: ${this.condones001}/2</p>
+                    <button class="card-button" onclick="quintillizasRPG._cerrarModalFlujo()" style="margin-top:20px;background:linear-gradient(135deg,#5864F5,#8A5AF7);padding:12px 30px;">Entendido</button>
+                </div>`);
+            return;
+        }
+        this._votacionLugar(noviaId, segundaId);
+    }
+
+    _votacionLugar(noviaId, segundaId) {
+        const novia = this.datosPersonajes[noviaId];
+        const segunda = this.datosPersonajes[segundaId];
+        const VOTOS = {
+            ichika: { hotel: "Ichika sonríe coqueta. '¿Un hotel? Me parece romántico~ 🏨'", dorm: "Ichika te mira curiosa. '¿Tu dormitorio? Suena... íntimo~' 😏" },
+            nino:   { hotel: "Nino resopla. 'Si vas a invitarme, que sea a algo decente. Hotel.' 💅", dorm: "Nino entrecierra los ojos. '¿Tu cuarto? Más vale que esté presentable, idiota.' 😤" },
+            miku:   { hotel: "Miku susurra tímidamente. 'Un... hotel sería bien... más privado...' 🎧", dorm: "Miku se sonroja mucho. 'T-tu dormitorio... como quieras...' 😶" },
+            yotsuba:{ hotel: "Yotsuba salta emocionada. '¡HOTEL! ¡Nunca he estado en uno de noche! ¡Vamos!' 🏃", dorm: "Yotsuba sonríe. '¡Tu cuarto está bien! ¡Más cómodo y sin gastar!' 😊" },
+            itsuki: { hotel: "Itsuki asiente con elegancia. 'Un hotel es lo mínimo esperado.' 🍰", dorm: "Itsuki te evalúa. 'Tu dormitorio... aceptable, si está bien decorado.' 😒" }
+        };
+        const prefHotel = { ichika: 0.7, nino: 0.8, miku: 0.5, yotsuba: 0.4, itsuki: 0.7 };
+        const lugar = Math.random() < ((prefHotel[noviaId] + prefHotel[segundaId]) / 2) ? 'hotel' : 'dormitorio';
+
+        this._modalFlujo(`
+            <div style="text-align:center;">
+                <h2 style="color:#FFD166;margin-bottom:20px;">🗳️ ¿DÓNDE VAMOS?</h2>
+                <div style="display:flex;justify-content:center;gap:15px;margin-bottom:20px;flex-wrap:wrap;">
+                    <div style="background:${novia.color}22;border:2px solid ${novia.color};border-radius:15px;padding:15px;max-width:190px;">
+                        <img src="${novia.imagen}" style="width:45px;height:45px;border-radius:50%;border:2px solid ${novia.color};object-fit:cover;margin-bottom:8px;">
+                        <p style="font-size:0.82rem;line-height:1.4;">${VOTOS[noviaId][lugar]}</p>
+                    </div>
+                    <div style="background:${segunda.color}22;border:2px solid ${segunda.color};border-radius:15px;padding:15px;max-width:190px;">
+                        <img src="${segunda.imagen}" style="width:45px;height:45px;border-radius:50%;border:2px solid ${segunda.color};object-fit:cover;margin-bottom:8px;">
+                        <p style="font-size:0.82rem;line-height:1.4;">${VOTOS[segundaId][lugar]}</p>
+                    </div>
+                </div>
+                <p style="color:#FFD166;font-size:1.1rem;margin-bottom:20px;">¡Acordaron ir a: <strong>${lugar === 'hotel' ? '🏨 Hotel' : '🛏️ Tu Dormitorio'}</strong>!</p>
+                <button class="card-button" onclick="quintillizasRPG.${lugar === 'hotel' ? `_seleccionHotel('${noviaId}','${segundaId}')` : `_verificarDormitorio('${noviaId}','${segundaId}')`}"
+                        style="background:linear-gradient(135deg,#FF1493,#8A5AF7);padding:15px 35px;">¡Vamos! ${lugar === 'hotel' ? '🏨' : '🛏️'}</button>
+                <br><button class="card-button" onclick="quintillizasRPG._cerrarModalFlujo()" style="margin-top:10px;background:linear-gradient(135deg,#666,#333);padding:10px 25px;">Cancelar</button>
+            </div>`);
+    }
+
+    _seleccionHotel(noviaId, segundaId) {
+        const hoteles = [
+            { id: 'barato',  nombre: '🏚️ Hotel Económico',    precio: 50,  color: '#9E9E9E', reaccion: '😬 "¿En serio nos trajiste aquí...?"',      img: 'URL_HOTEL_BARATO' },
+            { id: 'mediano', nombre: '🏨 Hotel Estándar',      precio: 150, color: '#4CAF50', reaccion: '😊 "Está bastante bien~"',                   img: 'URL_HOTEL_MEDIANO' },
+            { id: 'lujoso',  nombre: '👑 Suite Presidencial',  precio: 400, color: '#FFD700', reaccion: '🤩 "¡¡Es INCREÍBLE!!"',                       img: 'URL_HOTEL_LUJOSO' }
+        ];
+        const dinero = sistemaEconomia ? sistemaEconomia.dinero : 0;
+        const hotelesHTML = hoteles.map(h => {
+            const ok = dinero >= h.precio;
+            return `
+                <div onclick="${ok ? `quintillizasRPG._elegirHotel('${noviaId}','${segundaId}','${h.id}')` : ''}"
+                     style="border-radius:15px;border:2px solid ${ok ? h.color : '#444'};background:${ok ? h.color + '22' : 'rgba(0,0,0,0.3)'};
+                            padding:18px;cursor:${ok ? 'pointer' : 'not-allowed'};opacity:${ok ? 1 : 0.5};transition:transform 0.2s;text-align:center;"
+                     ${ok ? `onmouseover="this.style.transform='scale(1.03)'" onmouseout="this.style.transform='scale(1)'"` : ''}>
+                    <h3 style="color:${h.color};margin-bottom:6px;">${h.nombre}</h3>
+                    <div style="font-size:1.2rem;font-weight:bold;color:${ok ? h.color : '#666'};">${h.precio} 💰</div>
+                    ${!ok ? `<div style="font-size:0.75rem;color:#FF6B6B;margin-top:4px;">Te faltan ${h.precio - dinero} soles</div>` : ''}
+                </div>`;
+        }).join('');
+
+        this._modalFlujo(`
+            <div style="text-align:center;">
+                <h2 style="color:#FFD166;margin-bottom:8px;">🏨 ELIGE EL HOTEL</h2>
+                <p style="opacity:0.6;margin-bottom:15px;font-size:0.85rem;">Saldo: ${dinero.toFixed(2)} 💰</p>
+                <div style="display:grid;gap:12px;margin-bottom:15px;">${hotelesHTML}</div>
+                <button class="card-button" onclick="quintillizasRPG._cerrarModalFlujo()" style="background:linear-gradient(135deg,#666,#333);padding:10px 25px;">Cancelar</button>
+            </div>`);
+    }
+
+    _elegirHotel(noviaId, segundaId, hotelId) {
+        const hoteles = {
+            barato:  { nombre: '🏚️ Hotel Económico',   precio: 50,  img: 'URL_HOTEL_BARATO',  reaccion: '😬 Las chicas se miran incómodas... "¿En serio nos trajiste aquí?"' },
+            mediano: { nombre: '🏨 Hotel Estándar',     precio: 150, img: 'URL_HOTEL_MEDIANO', reaccion: '😊 Las chicas asienten satisfechas. "Está bastante bien~"' },
+            lujoso:  { nombre: '👑 Suite Presidencial', precio: 400, img: 'URL_HOTEL_LUJOSO',  reaccion: '🤩 Las chicas quedan boquiabiertas. "¡¡Es increíble!!"' }
+        };
+        const hotel = hoteles[hotelId];
+        if (sistemaEconomia) sistemaEconomia.gastarDinero(hotel.precio);
+        this._mostrarEscenario(noviaId, segundaId, hotel.img, hotel.nombre, hotel.reaccion);
+    }
+
+    _verificarDormitorio(noviaId, segundaId) {
+        this._dormitorioInicializar();
+        const novia = this.datosPersonajes[noviaId];
+        const segunda = this.datosPersonajes[segundaId];
+        if (this._dormitorioNivel() < 2) {
+            const rechazos = [
+                `${novia.nombre.split(' ')[0]} arruga la nariz. "¿ESTO es tu cuarto?! ¡IDIOTA PROBETÓN! ¡Esfuérzate más!" 😤`,
+                `${segunda.nombre.split(' ')[0]} mira alrededor incómoda. "Necesitas... decorarlo más antes de invitarnos..." 😅`,
+                `Ambas se miran. "${novia.nombre.split(' ')[0]}: '¿Hablas en serio?' ${segunda.nombre.split(' ')[0]}: 'Necesita más trabajo...' " 💢`
+            ];
+            this._modalFlujo(`
+                <div style="text-align:center;">
+                    <div style="font-size:3rem;margin-bottom:15px;">😤</div>
+                    <h2 style="color:#FF6B6B;margin-bottom:15px;">DORMITORIO INSUFICIENTE</h2>
+                    <p style="font-size:0.95rem;line-height:1.6;margin-bottom:15px;">${rechazos[Math.floor(Math.random()*3)]}</p>
+                    <p style="opacity:0.6;font-size:0.85rem;margin-bottom:20px;">Nivel: ${this._dormitorioNivel()}/3 — Necesitas nivel 2 (romántico)</p>
+                    <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap;">
+                        <button class="card-button" onclick="quintillizasRPG._cerrarModalFlujo();quintillizasRPG.mostrarUIDormitorio()" style="background:linear-gradient(135deg,#FF1493,#8A5AF7);padding:12px 20px;">🛏️ Decorar Dormitorio</button>
+                        <button class="card-button" onclick="quintillizasRPG._cerrarModalFlujo()" style="background:linear-gradient(135deg,#666,#333);padding:12px 20px;">Cancelar</button>
+                    </div>
+                </div>`);
+            return;
+        }
+        const nivelNombre = ['','básico','romántico','lujoso'][this._dormitorioNivel()];
+        const reaccion = this._dormitorioNivel() >= 3
+            ? '🤩 "¡Tu cuarto es increíble! ¡Pusiste mucho esfuerzo~!" 💕'
+            : '😊 "Mmm... está bastante romántico aquí..." 🌸';
+        this._mostrarEscenario(noviaId, segundaId, 'URL_DORMITORIO', `🛏️ Tu Dormitorio (${nivelNombre})`, reaccion);
+    }
+
+    _mostrarEscenario(noviaId, segundaId, imgFondo, lugarNombre, reaccion) {
+        this._cerrarModalFlujo();
+        const novia = this.datosPersonajes[noviaId];
+        const segunda = this.datosPersonajes[segundaId];
+        const acciones = [
+            { id: 'doble_mamada',  nombre: '😮 Doble Mamada',     desc: 'Las dos te complacen juntas',      color: '#FF1493', dark: '#8A1060' },
+            { id: 'doble_paizuri', nombre: '🌸 Doble Paizuri',    desc: 'Las dos usan sus encantos',        color: '#FF69B4', dark: '#C7508A' },
+            { id: 'doble_sexo',    nombre: '🔥 Sexo en Grupo',    desc: 'La experiencia completa',          color: '#FF4500', dark: '#A02500' },
+            { id: 'beso_trio',     nombre: '💋 Beso de las Tres', desc: 'Un momento único e íntimo',        color: '#E91E63', dark: '#880E4F' },
+        ];
+        const accionesHTML = acciones.map(a =>
+            `<button class="card-button" onclick="quintillizasRPG._ejecutarAccion('${noviaId}','${segundaId}','${a.id}')"
+                     style="background:linear-gradient(135deg,${a.color},${a.dark});padding:14px;text-align:left;">
+                 <div style="font-weight:bold;">${a.nombre}</div>
+                 <div style="font-size:0.8rem;opacity:0.8;margin-top:3px;">${a.desc}</div>
+             </button>`
+        ).join('');
+
+        const esDormitorio = imgFondo === 'URL_DORMITORIO';
+        const tieneImg = imgFondo && !imgFondo.startsWith('URL_');
+        const estiloFondo = tieneImg
+            ? `background-image:url('${imgFondo}');background-size:cover;background-position:center;`
+            : `background:linear-gradient(135deg,#1a0a2e,#2a1040);`;
+
+        // Overlays de items del dormitorio
+        let itemsOverlay = '';
+        if (esDormitorio) {
+            this._dormitorioInicializar();
+            const it = this._dormitorio.items;
+            if (it.lucesLED) itemsOverlay += `<div style="position:absolute;top:0;left:0;width:100%;height:8px;background:repeating-linear-gradient(90deg,#FF69B4 0,#FF69B4 10px,transparent 10px,transparent 20px);z-index:1;"></div>`;
+            if (it.velas) itemsOverlay += `<div style="position:absolute;bottom:80px;left:30px;font-size:2rem;z-index:1;">🕯️</div><div style="position:absolute;bottom:80px;right:30px;font-size:2rem;z-index:1;">🕯️</div>`;
+            if (it.flores) itemsOverlay += `<div style="position:absolute;bottom:60px;left:50%;transform:translateX(-50%);font-size:1.5rem;z-index:1;">🌸🌹🌷🌹🌸</div>`;
+            if (it.champagne) itemsOverlay += `<div style="position:absolute;top:20px;right:20px;font-size:2rem;z-index:1;">🍾</div>`;
+            if (it.almohadasAmor) itemsOverlay += `<div style="position:absolute;bottom:130px;left:50%;transform:translateX(-50%);font-size:1.2rem;z-index:1;">💕 💕</div>`;
+        }
+
+        const overlay = document.createElement('div');
+        overlay.id = 'escenario-grupal';
+        overlay.style.cssText = `position:fixed;top:0;left:0;width:100%;height:100%;z-index:9999;${estiloFondo}display:flex;flex-direction:column;`;
+        overlay.innerHTML = `
+            ${itemsOverlay}
+            <div style="position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.55);"></div>
+            <div style="position:relative;z-index:2;display:flex;flex-direction:column;height:100%;padding:20px;max-width:680px;margin:0 auto;width:100%;">
+                <div style="text-align:center;margin-bottom:15px;">
+                    <h2 style="color:gold;font-size:1.3rem;">${lugarNombre}</h2>
+                    <p style="opacity:0.8;font-size:0.9rem;font-style:italic;">${reaccion}</p>
+                </div>
+                <div style="display:flex;justify-content:center;gap:20px;margin-bottom:20px;">
+                    <div style="text-align:center;">
+                        <img src="${novia.imagen}" style="width:75px;height:75px;border-radius:50%;border:3px solid ${novia.color};object-fit:cover;">
+                        <div style="color:${novia.color};font-weight:bold;margin-top:5px;font-size:0.9rem;">${novia.nombre.split(' ')[0]}</div>
+                    </div>
+                    <div style="display:flex;align-items:center;font-size:1.5rem;">💕</div>
+                    <div style="text-align:center;">
+                        <img src="${segunda.imagen}" style="width:75px;height:75px;border-radius:50%;border:3px solid ${segunda.color};object-fit:cover;">
+                        <div style="color:${segunda.color};font-weight:bold;margin-top:5px;font-size:0.9rem;">${segunda.nombre.split(' ')[0]}</div>
+                    </div>
+                </div>
+                <div style="flex:1;overflow-y:auto;">
+                    <p style="text-align:center;opacity:0.6;font-size:0.85rem;margin-bottom:12px;">¿Qué harán las tres?</p>
+                    <div style="display:grid;gap:10px;">${accionesHTML}</div>
+                </div>
+                <button class="card-button" onclick="document.getElementById('escenario-grupal').remove()" style="margin-top:15px;background:rgba(0,0,0,0.6);border:1px solid rgba(255,255,255,0.3);padding:12px;">↩️ Salir</button>
+            </div>`;
+        document.body.appendChild(overlay);
+    }
+
+    _ejecutarAccion(noviaId, segundaId, accionId) {
+        this.condones001 -= 2;
+        this.guardarCondones001();
+
+        const expGanada = 300;
+        const afinGanada = 80;
+        this.agregarEXP(noviaId, expGanada);
+        this.agregarEXP(segundaId, expGanada);
+        this.datosPersonajes[noviaId].afinidad = Math.min(200, this.datosPersonajes[noviaId].afinidad + afinGanada);
+        this.datosPersonajes[segundaId].afinidad = Math.min(200, this.datosPersonajes[segundaId].afinidad + afinGanada);
+        this.guardarDatosPersonajes();
+
+        // Buscar video
+        const duoKey = [noviaId, segundaId].sort().join('_');
+        let videoId = null, videoNombre = accionId;
+        for (const duo of this.momentosGrupales.duo || []) {
+            if (duo.integrantes.slice().sort().join('_') === duoKey) { videoId = duo.videoId; videoNombre = duo.nombre; break; }
+        }
+
+        const escenario = document.getElementById('escenario-grupal');
+        if (escenario) escenario.remove();
+
+        if (!videoId || videoId.startsWith('ID_VIDEO')) {
+            this._modalFlujo(`
+                <div style="text-align:center;padding:20px;">
+                    <div style="font-size:3rem;margin-bottom:15px;">🎬</div>
+                    <h2 style="color:#FF1493;margin-bottom:15px;">¡Momento Completado!</h2>
+                    <p style="opacity:0.8;margin-bottom:10px;">+${expGanada} EXP y +${afinGanada} afinidad para ambas 💕</p>
+                    <p style="opacity:0.5;font-size:0.85rem;margin-bottom:20px;">(Video no configurado aún)</p>
+                    <button class="card-button" onclick="quintillizasRPG._cerrarModalFlujo()" style="background:linear-gradient(135deg,#FF1493,#8A5AF7);padding:12px 30px;">¡Genial! 💕</button>
+                </div>`);
+            return;
+        }
+
+        const novia = this.datosPersonajes[noviaId];
+        const segunda = this.datosPersonajes[segundaId];
+        const ovVideo = document.createElement('div');
+        ovVideo.id = 'video-grupal';
+        ovVideo.style.cssText = `position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.98);z-index:10001;display:flex;justify-content:center;align-items:center;`;
+        ovVideo.innerHTML = `
+            <div style="max-width:900px;width:95%;background:#1a1a2e;border-radius:25px;padding:20px;border:3px solid #FF1493;">
+                <div style="display:flex;justify-content:center;gap:15px;margin-bottom:15px;">
+                    <img src="${novia.imagen}" style="width:55px;height:55px;border-radius:50%;border:2px solid ${novia.color};object-fit:cover;">
+                    <img src="${segunda.imagen}" style="width:55px;height:55px;border-radius:50%;border:2px solid ${segunda.color};object-fit:cover;">
+                </div>
+                <h2 style="text-align:center;color:#FF1493;margin-bottom:15px;">🎬 ${videoNombre}</h2>
+                <div style="position:relative;padding-bottom:56.25%;height:0;border-radius:12px;overflow:hidden;">
+                    <iframe style="position:absolute;top:0;left:0;width:100%;height:100%;"
+                            src="https://drive.google.com/file/d/${videoId}/preview"
+                            frameborder="0" allow="autoplay;encrypted-media" allowfullscreen></iframe>
+                </div>
+                <div style="text-align:center;margin-top:15px;">
+                    <button class="card-button" onclick="document.getElementById('video-grupal').remove()"
+                            style="background:linear-gradient(135deg,#FF1493,#8A5AF7);padding:12px 30px;">↩️ Cerrar</button>
+                </div>
+            </div>`;
+        document.body.appendChild(ovVideo);
     }
 
     crearCardsMomentosGrupales(tipo) {
@@ -2160,6 +2548,8 @@ class QuintillizasRPG {
         window.seleccionarTipoCondon = (tipo) => this.seleccionarTipoCondon(tipo);
 
         window.cargarMomentosGrupales = () => this.cargarPantallaMomentosGrupales();
+        window.abrirDormitorio = () => this.mostrarUIDormitorio();
+        window.iniciarFlujoGrupal = () => this.iniciarFlujoGrupal();
     }
 }
 
