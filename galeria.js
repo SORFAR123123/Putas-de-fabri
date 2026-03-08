@@ -1867,10 +1867,10 @@ const galeriaDatabase = {
         ]
     },
     '15_7': {
-        titulo: "",
+        titulo: "Alya kachando",
         descripcion: "",
-        categoria: "",
-        imagen: "",
+        categoria: "Kachando ntr",
+        imagen: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1773002681051.jpg",
         imagenes: [
             { id: 1, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1773002509737.jpg" },
             { id: 2, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1773002514208.jpg" },
