@@ -1515,6 +1515,13 @@ const galeriaDatabase = {
             { id: 30, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772926485831.jpg" }
         ]
     },
+    '13_3': {
+        titulo: "",
+        descripcion: "",
+        categoria: "",
+        imagen: "",
+        imagenes: []
+    },
    
   
 
