@@ -1530,7 +1530,9 @@ const galeriaDatabase = {
         descripcion: "",
         categoria: "Putarda Rusa",
         imagen: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772929413357.jpg",
-        imagenes: []
+        imagenes: [
+            { id: 1, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772930305267.jpg" }
+        ]
     },
     '15_2': {
         titulo: "Alya putarda",
