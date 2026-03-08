@@ -107,6 +107,12 @@ const contenedoresGaleria = {
         categoria: "Rias"
     },
     18: {
+        nombre: "Ruby",
+        imagen: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772992045070.jpg",
+        descripcion: "OshinoTrolas",
+        categoria: "Ruby"
+    },
+    19: {
         nombre: "PRUEBA",
         imagen: "https://pbs.twimg.com/media/HC1ED-sWIAAOY0b?format=jpg&name=medium",
         descripcion: "Galería de prueba con dos subcontenedores",
@@ -1861,7 +1867,14 @@ const galeriaDatabase = {
             { id: 9, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772990147167.jpg" }
         ]
     },
-     '18_1': {
+    '18_1': {
+        titulo: "OshiNoPutas",
+        descripcion: "",
+        categoria: "Putonas",
+        imagen: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772992063587.jpg",
+        imagenes: []
+    },
+     '19_1': {
         titulo: "PRUEBA",
         descripcion: "Primer subcontenedor de prueba",
         categoria: "Prueba",
@@ -1871,7 +1884,7 @@ const galeriaDatabase = {
             { id: 2, url: "https://pbs.twimg.com/media/HCrjyH_W8AEZXuN?format=png&name=small" }
         ]
     },
-    '18_2': {
+    '19_2': {
         titulo: "PRUEBA",
         descripcion: "xdxdxdxdxd",
         categoria: "Prueba",
