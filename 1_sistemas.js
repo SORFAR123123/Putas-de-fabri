@@ -584,15 +584,27 @@ class SistemaReproductorDrive {
                 <!-- LISTA DE TIMESTAMPS INTERACTIVOS -->
                 ${this.crearListaTimestamps(timestamps)}
                 
-                <!-- VIDEO DRIVE (carga inicial) -->
+                <!-- VIDEO NATIVO EN ALTA CALIDAD -->
                 <div class="video-wrapper">
-                    <iframe 
+                    <video 
                         id="drive-iframe"
+                        src="https://drive.google.com/uc?export=download&id=${driveId}"
+                        controls
+                        preload="metadata"
+                        class="drive-iframe"
+                        style="width:100%; height:100%; background:#000; border-radius:12px;"
+                        onerror="this.style.display='none'; document.getElementById('fallback-${driveId}').style.display='block';"
+                    >
+                        Tu navegador no soporta este video.
+                    </video>
+                    <iframe 
+                        id="fallback-${driveId}"
                         src="https://drive.google.com/file/d/${driveId}/preview"
                         frameborder="0"
                         allow="autoplay; encrypted-media"
                         allowfullscreen
                         class="drive-iframe"
+                        style="display:none; width:100%; height:100%;"
                     ></iframe>
                 </div>
                 
@@ -676,45 +688,43 @@ class SistemaReproductorDrive {
         // FORMATO CONFIRMADO QUE FUNCIONA CON GOOGLE DRIVE:
         // https://drive.google.com/file/d/ID/preview#t=XXmYYs
         
+        console.log(`🔗 Saltando a: ${minutos}:${segs.toString().padStart(2, '0')}`);
+        
+        // MÉTODO 1: Video nativo HTML5 - salto directo sin recargar (MÁS EFECTIVO)
+        const videoEl = document.getElementById('drive-iframe');
+        if (videoEl && videoEl.tagName === 'VIDEO') {
+            videoEl.currentTime = segundos;
+            videoEl.play();
+            this.mostrarNotificacion(`✅ Saltando a ${minutos}:${segs.toString().padStart(2, '0')}`);
+            return true;
+        }
+        
+        // MÉTODO 2: Fallback - iframe de Drive con timestamp
         const nuevaURL = `https://drive.google.com/file/d/${this.videoActual}/preview#t=${tiempoFormato}`;
-        
-        console.log(`🔗 Nueva URL: ${nuevaURL}`);
-        
-        // MÉTODO 1: Reemplazar el iframe completamente (MÁS EFECTIVO)
         const videoWrapper = document.querySelector('.video-wrapper');
         if (videoWrapper) {
-            // Mostrar mensaje de carga
             this.mostrarNotificacion(`⏳ Cargando video en ${minutos}:${segs.toString().padStart(2, '0')}...`);
-            
-            // Crear nuevo iframe
             const nuevoIframe = document.createElement('iframe');
             nuevoIframe.id = 'drive-iframe';
             nuevoIframe.className = 'drive-iframe';
             nuevoIframe.src = nuevaURL;
             nuevoIframe.frameborder = '0';
             nuevoIframe.allow = 'autoplay; encrypted-media';
-            nuevoIframe.allowfullscreen = true;
-            nuevoIframe.style.width = '100%';
-            nuevoIframe.style.height = '100%';
-            nuevoIframe.style.borderRadius = '15px';
-            
-            // Reemplazar el contenido del wrapper
+            nuevoIframe.allowFullscreen = true;
+            nuevoIframe.style.cssText = 'width:100%; height:100%; border-radius:15px;';
             videoWrapper.innerHTML = '';
             videoWrapper.appendChild(nuevoIframe);
-            
-            // Actualizar notificación
             setTimeout(() => {
-                this.mostrarNotificacion(`✅ Video cargado en ${minutos}:${segs.toString().padStart(2, '0')} - Dale PLAY`);
+                this.mostrarNotificacion(`✅ Video en ${minutos}:${segs.toString().padStart(2, '0')} - Dale PLAY`);
             }, 1000);
-            
             return true;
         }
         
-        // MÉTODO 2: Intentar modificar iframe existente (respaldo)
+        // MÉTODO 3: Modificar iframe existente (respaldo)
         const iframe = document.getElementById('drive-iframe');
         if (iframe) {
             console.log('🔄 Modificando iframe existente...');
-            iframe.src = nuevaURL;
+            iframe.src = `https://drive.google.com/file/d/${this.videoActual}/preview#t=${tiempoFormato}`;
             
             this.mostrarNotificacion(`✅ Saltando a ${minutos}:${segs.toString().padStart(2, '0')}`);
             return true;
