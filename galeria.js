@@ -1815,10 +1815,10 @@ const galeriaDatabase = {
         ]
     },
     '16_3': {
-        titulo: "",
+        titulo: "Uzaki y 2 pijas",
         descripcion: "",
-        categoria: "",
-        imagen: "",
+        categoria: "Centia kachera",
+        imagen: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772986620568.jpg",
         imagenes: [
             { id: 1, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772986580515.jpg" },
             { id: 2, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772986584780.jpg" },
