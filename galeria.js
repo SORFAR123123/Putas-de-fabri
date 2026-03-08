@@ -1659,10 +1659,10 @@ const galeriaDatabase = {
         ]
     },
     '15_5': {
-        titulo: "",
+        titulo: "Coneja putarda",
         descripcion: "",
-        categoria: "",
-        imagen: "",
+        categoria: "centie",
+        imagen: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772932250035.jpg",
         imagenes: [
             { id: 1, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772932203453.jpg" },
             { id: 2, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772932207800.jpg" },
