@@ -1578,10 +1578,10 @@ const galeriaDatabase = {
         ]
     },
     '15_3': {
-        titulo: "",
+        titulo: "Rusa petera",
         descripcion: "",
-        categoria: "",
-        imagen: "",
+        categoria: "Centie",
+        imagen: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772931620647.jpg",
         imagenes: [
             { id: 1, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772931464651.jpg" },
             { id: 2, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772931469277.jpg" },
