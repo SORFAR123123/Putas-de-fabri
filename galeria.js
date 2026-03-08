@@ -1844,10 +1844,10 @@ const galeriaDatabase = {
         ]
     },
     '17_2': {
-        titulo: "",
+        titulo: "Rias Shexyo",
         descripcion: "",
-        categoria: "",
-        imagen: "",
+        categoria: "Shexyo",
+        imagen: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772989250471.jpg",
         imagenes: [
             { id: 1, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772989235171.jpg" }
         ]
