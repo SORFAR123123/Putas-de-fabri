@@ -121,11 +121,26 @@ class SistemaEconomia {
                 supabaseCargar('ultimo_reinicio')
             ]);
 
-            if (dinero !== null) { this.dinero = dinero; this.guardarDineroLocal(); }
-            if (progreso !== null) { this.progreso = progreso; this.guardarProgresoLocal(); }
-            if (palabras !== null) { this.palabrasDificiles = palabras; this.guardarPalabrasDificilesLocal(); }
-            if (misiones !== null) { this.misiones = misiones; this.guardarMisionesLocal(); }
-            if (reinicio !== null) { this.ultimoReinicio = reinicio; localStorage.setItem('manga_ultimo_reinicio', reinicio); }
+            const supabaseVacio = dinero === null && progreso === null;
+
+            if (supabaseVacio) {
+                // Supabase vacio -> subir progreso local a la nube
+                console.log('Supabase vacio, subiendo progreso local...');
+                await Promise.all([
+                    supabaseGuardar('dinero', this.dinero),
+                    supabaseGuardar('progreso', this.progreso),
+                    supabaseGuardar('palabras_dificiles', this.palabrasDificiles),
+                    supabaseGuardar('misiones', this.misiones),
+                    supabaseGuardar('ultimo_reinicio', this.ultimoReinicio)
+                ]);
+            } else {
+                // Supabase tiene datos -> descargar a este dispositivo
+                if (dinero !== null) { this.dinero = dinero; this.guardarDineroLocal(); }
+                if (progreso !== null) { this.progreso = progreso; this.guardarProgresoLocal(); }
+                if (palabras !== null) { this.palabrasDificiles = palabras; this.guardarPalabrasDificilesLocal(); }
+                if (misiones !== null) { this.misiones = misiones; this.guardarMisionesLocal(); }
+                if (reinicio !== null) { this.ultimoReinicio = reinicio; localStorage.setItem('manga_ultimo_reinicio', reinicio); }
+            }
 
             this._sincronizado = true;
             console.log('✅ Sincronización completada');
