@@ -17,8 +17,8 @@ class QuintillizasRPG {
         // Exponer funciones globalmente al iniciar
         this.exponerFuncionesGlobales();
 
-        // Sincronizar con Supabase en segundo plano
-        this.sincronizarDesdeSupabase();
+        // Sincronizar con Supabase en segundo plano (con delay)
+        setTimeout(() => this.sincronizarDesdeSupabase(), 2000);
     }
 
     // ====================
