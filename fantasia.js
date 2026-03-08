@@ -18,6 +18,9 @@ class FantasiaRPG {
         this.pisoActual = this.cargarPisoActual() || 1;
         this.enemigoActual = null;
         this.indiceEnemigoActual = 0;
+
+        // Sincronizar con Supabase en segundo plano
+        this.sincronizarDesdeSupabase();
         this.enCombate = false;
         this.mensajesCombate = [];
         this.spriteBossActual = 'normal';
@@ -1514,11 +1517,76 @@ class FantasiaRPG {
     // LOCAL STORAGE
     // ====================
 
+    // ====================
+    // SUPABASE SYNC
+    // ====================
+
+    async sincronizarDesdeSupabase() {
+        const USER_ID = 'user_qdhg1lunm_1772995224949';
+        const URL = 'https://lcspqpdjvdcbzhmcrhqi.supabase.co';
+        const KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxjc3BxcGRqdmRjYnpobWNyaHFpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI5OTE1NjcsImV4cCI6MjA4ODU2NzU2N30.Lls-iTGdt90gtbi-mXXkYvB26u9Yt65DMOcskmVgx1Q';
+
+        const cargar = async (clave) => {
+            try {
+                const res = await fetch(`${URL}/rest/v1/progreso?user_id=eq.${USER_ID}&clave=eq.${clave}&select=valor`, {
+                    headers: { 'apikey': KEY, 'Authorization': `Bearer ${KEY}` }
+                });
+                const data = await res.json();
+                if (data && data.length > 0) return JSON.parse(data[0].valor);
+                return null;
+            } catch { return null; }
+        };
+
+        const [jugador, pisos, piso] = await Promise.all([
+            cargar('fantasia_jugador'),
+            cargar('fantasia_pisos'),
+            cargar('fantasia_pisoActual')
+        ]);
+
+        const supabaseVacio = jugador === null && pisos === null;
+
+        if (supabaseVacio) {
+            await Promise.all([
+                this.supabaseGuardar('fantasia_jugador', this.jugador),
+                this.supabaseGuardar('fantasia_pisos', this.pisos),
+                this.supabaseGuardar('fantasia_pisoActual', this.pisoActual)
+            ]);
+            console.log('✅ Fantasia subida a Supabase');
+        } else {
+            if (jugador !== null) { this.jugador = jugador; localStorage.setItem('fantasia_jugador', JSON.stringify(jugador)); }
+            if (pisos !== null) { this.pisos = pisos; localStorage.setItem('fantasia_pisos', JSON.stringify(pisos)); }
+            if (piso !== null) { this.pisoActual = piso; localStorage.setItem('fantasia_pisoActual', piso.toString()); }
+            console.log('✅ Fantasia sincronizada desde Supabase');
+        }
+    }
+
+    async supabaseGuardar(clave, valor) {
+        const USER_ID = 'user_qdhg1lunm_1772995224949';
+        const URL = 'https://lcspqpdjvdcbzhmcrhqi.supabase.co';
+        const KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxjc3BxcGRqdmRjYnpobWNyaHFpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI5OTE1NjcsImV4cCI6MjA4ODU2NzU2N30.Lls-iTGdt90gtbi-mXXkYvB26u9Yt65DMOcskmVgx1Q';
+        try {
+            await fetch(`${URL}/rest/v1/progreso`, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'apikey': KEY,
+                    'Authorization': `Bearer ${KEY}`,
+                    'Prefer': 'resolution=merge-duplicates,return=minimal'
+                },
+                body: JSON.stringify({ user_id: USER_ID, clave, valor: JSON.stringify(valor), actualizado_en: new Date().toISOString() })
+            });
+        } catch {}
+    }
+
     guardarTodo() {
         try {
             localStorage.setItem('fantasia_jugador', JSON.stringify(this.jugador));
             localStorage.setItem('fantasia_pisos', JSON.stringify(this.pisos));
             localStorage.setItem('fantasia_pisoActual', this.pisoActual.toString());
+            // Supabase
+            this.supabaseGuardar('fantasia_jugador', this.jugador);
+            this.supabaseGuardar('fantasia_pisos', this.pisos);
+            this.supabaseGuardar('fantasia_pisoActual', this.pisoActual);
             console.log("💾 Datos guardados:", this.jugador);
         } catch (e) {
             console.warn('Error guardando:', e);
