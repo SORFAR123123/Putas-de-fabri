@@ -1848,7 +1848,9 @@ const galeriaDatabase = {
         descripcion: "",
         categoria: "",
         imagen: "",
-        imagenes: []
+        imagenes: [
+            { id: 1, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772989235171.jpg" }
+        ]
     },
      '18_1': {
         titulo: "PRUEBA",
