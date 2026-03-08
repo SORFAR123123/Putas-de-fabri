@@ -584,11 +584,11 @@ class SistemaReproductorDrive {
                 <!-- LISTA DE TIMESTAMPS INTERACTIVOS -->
                 ${this.crearListaTimestamps(timestamps)}
                 
-                <!-- VIDEO DRIVE (carga inicial) -->
+                <!-- VIDEO (Streamtape si hay streamId, Drive si no) -->
                 <div class="video-wrapper">
                     <iframe 
                         id="drive-iframe"
-                        src="https://drive.google.com/file/d/${driveId}/preview"
+                        src="${driveId.startsWith('ST_') ? 'https://streamtape.com/e/' + driveId.replace('ST_','') : 'https://drive.google.com/file/d/' + driveId + '/preview'}"
                         frameborder="0"
                         allow="autoplay; encrypted-media"
                         allowfullscreen
@@ -676,7 +676,10 @@ class SistemaReproductorDrive {
         // FORMATO CONFIRMADO QUE FUNCIONA CON GOOGLE DRIVE:
         // https://drive.google.com/file/d/ID/preview#t=XXmYYs
         
-        const nuevaURL = `https://drive.google.com/file/d/${this.videoActual}/preview#t=${tiempoFormato}`;
+        const esStreamtape = this.videoActual.startsWith('ST_');
+        const nuevaURL = esStreamtape 
+            ? `https://streamtape.com/e/${this.videoActual.replace('ST_', '')}` 
+            : `https://drive.google.com/file/d/${this.videoActual}/preview#t=${tiempoFormato}`;
         
         console.log(`🔗 Nueva URL: ${nuevaURL}`);
         
