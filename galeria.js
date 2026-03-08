@@ -89,6 +89,12 @@ const contenedoresGaleria = {
         categoria: "mao mao"
     },
     15: {
+        nombre: "Alya",
+        imagen: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772929377147.jpg",
+        descripcion: "Zorra Rusa",
+        categoria: "Alya"
+    },
+    16: {
         nombre: "PRUEBA",
         imagen: "https://pbs.twimg.com/media/HC1ED-sWIAAOY0b?format=jpg&name=medium",
         descripcion: "Galería de prueba con dos subcontenedores",
@@ -1519,7 +1525,14 @@ const galeriaDatabase = {
         imagen: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772929248085.jpg",
         imagenes: []
     },
-     '15_1': {
+    '15_1': {
+        titulo: "Alya Rusarda",
+        descripcion: "",
+        categoria: "Putarda Rusa",
+        imagen: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772929413357.jpg",
+        imagenes: []
+    },
+     '16_1': {
         titulo: "PRUEBA",
         descripcion: "Primer subcontenedor de prueba",
         categoria: "Prueba",
@@ -1529,7 +1542,7 @@ const galeriaDatabase = {
             { id: 2, url: "https://pbs.twimg.com/media/HCrjyH_W8AEZXuN?format=png&name=small" }
         ]
     },
-    '15_2': {
+    '16_2': {
         titulo: "PRUEBA",
         descripcion: "xdxdxdxdxd",
         categoria: "Prueba",
