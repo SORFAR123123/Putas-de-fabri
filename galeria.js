@@ -424,8 +424,8 @@ const galeriaDatabase = {
         imagen: "https://pbs.twimg.com/media/G7fxREHW0AAxf0_?format=png&name=900x900",
         imagenes: [
             { id: 1, url: "https://pbs.twimg.com/media/G7fxbA5WsAAMcky?format=png&name=900x900" },
-            { id: 2, url: "https://pbs.twimg.com/media/G7fxREHW0AAxf0_?format=png&name=900x900" }
-          
+            { id: 2, url: "https://pbs.twimg.com/media/G7fxREHW0AAxf0_?format=png&name=900x900" },
+            { id: 3, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772928275220.jpg" }
         ]
     },
     
