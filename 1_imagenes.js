@@ -2184,6 +2184,12 @@ const sistemaDescriptivo = {
                 descripcion: 'culona', 
                 duracion: '' 
             },
+             '7_12': { 
+                nombre: 'Nobara culona',
+                imagen: 'https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772990353177.jpg', 
+                descripcion: 'ortaso', 
+                duracion: '' 
+            },
              
              '8_1': { 
                 nombre: 'fabri putardo',
