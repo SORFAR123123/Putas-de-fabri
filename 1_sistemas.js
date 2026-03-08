@@ -31,7 +31,7 @@ async function supabaseRequest(method, path, body = null) {
                 'Content-Type': 'application/json',
                 'apikey': SUPABASE_KEY,
                 'Authorization': `Bearer ${SUPABASE_KEY}`,
-                'Prefer': method === 'POST' ? 'resolution=merge-duplicates' : ''
+                'Prefer': method === 'POST' ? 'return=minimal,resolution=merge-duplicates' : 'return=minimal'
             }
         };
         if (body) options.body = JSON.stringify(body);
@@ -45,14 +45,29 @@ async function supabaseRequest(method, path, body = null) {
     }
 }
 
-// Guardar dato en Supabase
+// Guardar dato en Supabase (upsert)
 async function supabaseGuardar(clave, valor) {
-    return await supabaseRequest('POST', 'progreso', {
-        user_id: USER_ID,
-        clave: clave,
-        valor: JSON.stringify(valor),
-        actualizado_en: new Date().toISOString()
-    });
+    try {
+        const res = await fetch(`${SUPABASE_URL}/rest/v1/progreso`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'apikey': SUPABASE_KEY,
+                'Authorization': `Bearer ${SUPABASE_KEY}`,
+                'Prefer': 'resolution=merge-duplicates,return=minimal'
+            },
+            body: JSON.stringify({
+                user_id: USER_ID,
+                clave: clave,
+                valor: JSON.stringify(valor),
+                actualizado_en: new Date().toISOString()
+            })
+        });
+        return res.ok;
+    } catch (e) {
+        console.warn('Error guardando en Supabase:', e);
+        return false;
+    }
 }
 
 // Cargar dato de Supabase
