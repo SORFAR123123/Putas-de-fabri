@@ -16,6 +16,94 @@ class QuintillizasRPG {
         
         // Exponer funciones globalmente al iniciar
         this.exponerFuncionesGlobales();
+
+        // Sincronizar con Supabase en segundo plano
+        this.sincronizarDesdeSupabase();
+    }
+
+    // ====================
+    // SINCRONIZACIÓN SUPABASE
+    // ====================
+
+    async sincronizarDesdeSupabase() {
+        try {
+            const RPG_USER_ID = 'user_qdhg1lunm_1772995224949';
+            const SUPABASE_URL = 'https://lcspqpdjvdcbzhmcrhqi.supabase.co';
+            const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxjc3BxcGRqdmRjYnpobWNyaHFpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI5OTE1NjcsImV4cCI6MjA4ODU2NzU2N30.Lls-iTGdt90gtbi-mXXkYvB26u9Yt65DMOcskmVgx1Q';
+
+            const cargar = async (clave) => {
+                try {
+                    const res = await fetch(, {
+                        headers: { 'apikey': SUPABASE_KEY, 'Authorization':  }
+                    });
+                    const data = await res.json();
+                    if (data && data.length > 0) return JSON.parse(data[0].valor);
+                    return null;
+                } catch { return null; }
+            };
+
+            const guardar = async (clave, valor) => {
+                try {
+                    await fetch(, {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'apikey': SUPABASE_KEY,
+                            'Authorization': ,
+                            'Prefer': 'resolution=merge-duplicates,return=minimal'
+                        },
+                        body: JSON.stringify({ user_id: RPG_USER_ID, clave, valor: JSON.stringify(valor), actualizado_en: new Date().toISOString() })
+                    });
+                } catch {}
+            };
+
+            const [personaje, datos, condones, condones001] = await Promise.all([
+                cargar('rpg_personaje_seleccionado'),
+                cargar('rpg_datos_personajes'),
+                cargar('rpg_condones'),
+                cargar('rpg_condones001')
+            ]);
+
+            const supabaseVacio = personaje === null && datos === null;
+
+            if (supabaseVacio) {
+                // Subir progreso local a Supabase
+                await Promise.all([
+                    guardar('rpg_personaje_seleccionado', this.personajeSeleccionado),
+                    guardar('rpg_datos_personajes', this.datosPersonajes),
+                    guardar('rpg_condones', this.condones),
+                    guardar('rpg_condones001', this.condones001)
+                ]);
+            } else {
+                // Descargar de Supabase
+                if (personaje !== null) { this.personajeSeleccionado = personaje; localStorage.setItem('rpg_personaje_seleccionado', personaje); }
+                if (datos !== null) { this.datosPersonajes = datos; localStorage.setItem('rpg_datos_personajes', JSON.stringify(datos)); }
+                if (condones !== null) { this.condones = condones; localStorage.setItem('rpg_condones', condones.toString()); }
+                if (condones001 !== null) { this.condones001 = condones001; localStorage.setItem('rpg_condones001', condones001.toString()); }
+            }
+
+            console.log('✅ RPG sincronizado con Supabase');
+        } catch (e) {
+            console.warn('No se pudo sincronizar RPG:', e);
+        }
+    }
+
+    async guardarEnSupabase(clave, valor) {
+        const RPG_USER_ID = 'user_qdhg1lunm_1772995224949';
+        const SUPABASE_URL = 'https://lcspqpdjvdcbzhmcrhqi.supabase.co';
+        const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Imxjc3BxcGRqdmRjYnpobWNyaHFpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzI5OTE1NjcsImV4cCI6MjA4ODU2NzU2N30.Lls-iTGdt90gtbi-mXXkYvB26u9Yt65DMOcskmVgx1Q';
+        try {
+            await fetch(, {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'apikey': SUPABASE_KEY,
+                    'Authorization': ,
+                    'Prefer': 'resolution=merge-duplicates,return=minimal'
+                },
+                body: JSON.stringify({ user_id: RPG_USER_ID, clave, valor: JSON.stringify(valor), actualizado_en: new Date().toISOString() })
+            });
+        } catch {}
     }
 
     // ====================
@@ -1998,6 +2086,7 @@ class QuintillizasRPG {
     guardarPersonajeSeleccionado() {
         try {
             localStorage.setItem('rpg_personaje_seleccionado', this.personajeSeleccionado);
+            this.guardarEnSupabase('rpg_personaje_seleccionado', this.personajeSeleccionado);
         } catch (e) {
             console.warn('No se pudo guardar personaje seleccionado:', e);
         }
@@ -2015,6 +2104,7 @@ class QuintillizasRPG {
     guardarDatosPersonajes() {
         try {
             localStorage.setItem('rpg_datos_personajes', JSON.stringify(this.datosPersonajes));
+            this.guardarEnSupabase('rpg_datos_personajes', this.datosPersonajes);
         } catch (e) {
             console.warn('No se pudo guardar datos personajes:', e);
         }
@@ -2033,6 +2123,7 @@ class QuintillizasRPG {
     guardarCondones() {
         try {
             localStorage.setItem('rpg_condones', this.condones.toString());
+            this.guardarEnSupabase('rpg_condones', this.condones);
         } catch (e) {
             console.warn('No se pudo guardar condones:', e);
         }
@@ -2051,6 +2142,7 @@ class QuintillizasRPG {
     guardarCondones001() {
         try {
             localStorage.setItem('rpg_condones001', this.condones001.toString());
+            this.guardarEnSupabase('rpg_condones001', this.condones001);
         } catch (e) {
             console.warn('No se pudo guardar condones001:', e);
         }
