@@ -922,7 +922,9 @@ class QuintillizasRPG {
         personaje.expNecesaria = Math.round(personaje.expNecesaria * 1.8);
 
         console.log(`🎉 ¡${personaje.nombre} subió al nivel ${personaje.nivel}!`);
-        this.mostrarNotificacion(`🎉 ${personaje.nombre} nivel ${personaje.nivel}! (Necesitas ${personaje.expNecesaria} EXP para el siguiente)`);
+        if (window.innerWidth >= 768) {
+            this.mostrarNotificacion(`🎉 ${personaje.nombre} nivel ${personaje.nivel}! (Necesitas ${personaje.expNecesaria} EXP para el siguiente)`);
+        }
 
         this.desbloquearVideo(personajeId);
         this.guardarDatosPersonajes();
