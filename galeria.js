@@ -83,7 +83,7 @@ const contenedoresGaleria = {
         categoria: "Prueba"
     },
     14: {
-        nombre: "mao mao",
+        nombre: "MaoMao",
         imagen: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772929213878.jpg",
         descripcion: "Zorra chinarda",
         categoria: "mao mao"
