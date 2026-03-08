@@ -1532,6 +1532,13 @@ const galeriaDatabase = {
         imagen: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772929413357.jpg",
         imagenes: []
     },
+    '15_2': {
+        titulo: "",
+        descripcion: "",
+        categoria: "",
+        imagen: "",
+        imagenes: []
+    },
      '16_1': {
         titulo: "PRUEBA",
         descripcion: "Primer subcontenedor de prueba",
