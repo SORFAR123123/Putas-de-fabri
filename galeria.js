@@ -1140,10 +1140,10 @@ const galeriaDatabase = {
     },
 
     '6_3': {
-        titulo: "",
+        titulo: "Miku putarda",
         descripcion: "",
-        categoria: "",
-        imagen: "",
+        categoria: "Miku Kairo art",
+        imagen: "https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773065085688.jpg",
         imagenes: [
             { id: 1, url: "https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773064317791.jpg" },
             { id: 2, url: "https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773064323831.jpg" },
