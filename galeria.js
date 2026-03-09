@@ -2831,10 +2831,10 @@ function obtenerSubcontenedorGaleria(contenedor, subcontenedor) {
 function obtenerContenedoresGaleriaDisponibles() {
     const contenedores = {
     '9_Perras_Playeras': {
-        titulo: "",
+        titulo: "putas",
         descripcion: "",
-        categoria: "",
-        imagen: "",
+        categoria: "ag",
+        imagen: "https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773023954628.png",
         imagenes: [
             { id: 1, url: "https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773023765285.png" },
             { id: 2, url: "https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773023771826.png" },
