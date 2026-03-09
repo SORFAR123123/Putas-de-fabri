@@ -534,15 +534,7 @@ const galeriaDatabase = {
         ]
     },
     
-    '2_2': {
-        titulo: "Retratos Artísticos",
-        descripcion: "Fotografía de retrato creativa",
-        categoria: "Retrato",
-        imagen: "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d",
-        imagenes: [
-            
-        ]
-    },
+   
     '3_1': {
         titulo: "Putonas",
         descripcion: "",
