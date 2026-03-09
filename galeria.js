@@ -2829,7 +2829,15 @@ function obtenerSubcontenedorGaleria(contenedor, subcontenedor) {
 }
 
 function obtenerContenedoresGaleriaDisponibles() {
-    const contenedores = {};
+    const contenedores = {
+    '9_Perras_Playeras': {
+        titulo: "",
+        descripcion: "",
+        categoria: "",
+        imagen: "",
+        imagenes: []
+    },
+};
     
     // Almacenaremos las claves ORIGINALES para preservar el orden
     Object.keys(galeriaDatabase).forEach(key => {
