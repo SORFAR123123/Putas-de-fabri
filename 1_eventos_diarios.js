@@ -33,9 +33,9 @@ async function _evCargar(clave) {
 
 // Sincronizar eventos diarios al cargar la página
 async function sincronizarEventosDiarios() {
-    const claves = ['eventos_progreso', 'evento_diario_ultimo', 'evento_diario_actual', 'eventos_diarios_vistos'];
+    const claves = ['eventos_progreso', 'evento_diario_ultimo', 'evento_diario_actual', 'eventos_diarios_vistos', 'progreso_mazos_diario'];
     
-    const [progreso, ultimo, actual, vistos] = await Promise.all(claves.map(c => _evCargar(c)));
+    const [progreso, ultimo, actual, vistos, mazosData] = await Promise.all(claves.map(c => _evCargar(c)));
     
     const supabaseVacio = progreso === null && ultimo === null;
     
@@ -45,7 +45,8 @@ async function sincronizarEventosDiarios() {
             _evGuardar('eventos_progreso', JSON.parse(localStorage.getItem('eventos_progreso') || 'null')),
             _evGuardar('evento_diario_ultimo', JSON.parse(localStorage.getItem('evento_diario_ultimo') || 'null')),
             _evGuardar('evento_diario_actual', JSON.parse(localStorage.getItem('evento_diario_actual') || 'null')),
-            _evGuardar('eventos_diarios_vistos', JSON.parse(localStorage.getItem('eventos_diarios_vistos') || '[]'))
+            _evGuardar('eventos_diarios_vistos', JSON.parse(localStorage.getItem('eventos_diarios_vistos') || '[]')),
+            _evGuardar('progreso_mazos_diario', JSON.parse(localStorage.getItem('progreso_mazos_diario') || '{}'))
         ]);
         console.log('☁️ Eventos diarios subidos a Supabase');
     } else {
@@ -54,6 +55,7 @@ async function sincronizarEventosDiarios() {
         if (ultimo !== null) localStorage.setItem('evento_diario_ultimo', JSON.stringify(ultimo));
         if (actual !== null) localStorage.setItem('evento_diario_actual', JSON.stringify(actual));
         if (vistos !== null) localStorage.setItem('eventos_diarios_vistos', JSON.stringify(vistos));
+        if (mazosData !== null) localStorage.setItem('progreso_mazos_diario', JSON.stringify(mazosData));
         console.log('☁️ Eventos diarios sincronizados desde Supabase');
     }
 }
@@ -448,13 +450,26 @@ const SistemaProgresoEventos = {
         }
 
         return `
-            <div style="
-                background: ${completado ? 'rgba(76, 175, 80, 0.15)' : 'rgba(255, 165, 0, 0.1)'};
-                border: 2px solid ${completado ? '#4CAF50' : '#FFD166'};
-                border-radius: 15px;
-                padding: 14px 16px;
-                margin-bottom: 16px;
-            ">
+                <div style="
+                    background: ${completado ? 'rgba(76, 175, 80, 0.15)' : 'rgba(255, 165, 0, 0.1)'};
+                    border: 2px solid ${completado ? '#4CAF50' : '#FFD166'};
+                    border-radius: 15px;
+                    padding: 14px 16px;
+                    margin-bottom: 16px;
+                ">
+                    <div style="
+                        color: white;
+                        font-weight: bold;
+                        font-size: 0.9rem;
+                        margin-bottom: 10px;
+                        padding-bottom: 8px;
+                        border-bottom: 1px solid rgba(255,255,255,0.15);
+                        white-space: nowrap;
+                        overflow: hidden;
+                        text-overflow: ellipsis;
+                    ">
+                        ${eventoActual.titulo || '📅 Evento del día'}
+                    </div>
                 <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; flex-wrap: wrap; gap: 6px;">
                     <span style="color: #FFD166; font-weight: bold; font-size: 0.9rem;">
                         🃏 Mazos hoy (evento actual):
@@ -1980,6 +1995,20 @@ const EventosChecker = {
         }
     },
     
+    registrarMazoDiario: function() {
+        try {
+            const f = new Date();
+            const fecha = `${f.getFullYear()}-${String(f.getMonth()+1).padStart(2,'0')}-${String(f.getDate()).padStart(2,'0')}`;
+            const pd = JSON.parse(localStorage.getItem('progreso_mazos_diario') || '{}');
+            pd[fecha] = (parseInt(pd[fecha]) || 0) + 1;
+            localStorage.setItem('progreso_mazos_diario', JSON.stringify(pd));
+            _evGuardar('progreso_mazos_diario', pd);
+            console.log(`🃏 Mazo registrado: ${pd[fecha]} mazos hoy (${fecha})`);
+        } catch(e) {
+            console.error('Error registrando mazo diario:', e);
+        }
+    },
+
     inicializar: function() {
         if (typeof sistemaEconomia !== 'undefined' && sistemaEconomia.actualizarProgreso) {
             const originalActualizarProgreso = sistemaEconomia.actualizarProgreso;
@@ -1987,10 +2016,10 @@ const EventosChecker = {
                 originalActualizarProgreso.call(this, contenedor, sub, mazo, porcentaje);
                 
                 if (porcentaje === 100) {
+                    EventosChecker.registrarMazoDiario();
                     EventosChecker.verificarProgresoEvento();
-                    // Actualizar el contador de mazos en la barra de progreso
                     if (typeof EventosDiarios !== 'undefined' && EventosDiarios.actualizarBarraProgreso) {
-                        EventosDiarios.actualizarBarraProgreso();
+                        setTimeout(() => EventosDiarios.actualizarBarraProgreso(), 100);
                     }
                 }
             };
