@@ -3136,7 +3136,8 @@ const galeriaDatabase = {
         categoria: "",
         imagen: "",
         imagenes: [
-            { id: 1, url: "https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773099582799.jpg" }
+            { id: 1, url: "https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773099582799.jpg" },
+            { id: 2, url: "https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773099588764.jpg" }
         ]
     },
     '15_1': {
