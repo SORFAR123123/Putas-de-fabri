@@ -1321,10 +1321,10 @@ const galeriaDatabase = {
     },
 
     '7_2': {
-        titulo: "",
+        titulo: "Itsuki putita",
         descripcion: "",
-        categoria: "",
-        imagen: "",
+        categoria: "Kairo aRT",
+        imagen: "https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773065946134.jpg",
         imagenes: [
             { id: 1, url: "https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773065147993.jpg" },
             { id: 2, url: "https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773065154259.jpg" },
