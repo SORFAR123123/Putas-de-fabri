@@ -2877,7 +2877,8 @@ function obtenerContenedoresGaleriaDisponibles() {
             { id: 6, url: "https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773024105613.png" },
             { id: 7, url: "https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773024112409.png" },
             { id: 8, url: "https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773024119040.png" },
-            { id: 9, url: "https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773024125744.png" }
+            { id: 9, url: "https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773024125744.png" },
+            { id: 10, url: "https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773024132376.png" }
         ]
     },);
     
