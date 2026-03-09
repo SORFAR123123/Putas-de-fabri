@@ -1448,7 +1448,7 @@ class QuintillizasRPG {
         const item = precios[itemKey];
         if (!item) return;
         if (this._dormitorio.items[itemKey]) { this.mostrarNotificacion('❌ Ya tienes ese item'); return; }
-        if (!sistemaEconomia || sistemaEconomia.dinero < item.precio) { this.mostrarNotificacion('❌ No tienes suficientes soles'); return; }
+        if (!sistemaEconomia || sistemaEconomia.obtenerDinero() < item.precio) { this.mostrarNotificacion('❌ No tienes suficientes soles'); return; }
         sistemaEconomia.gastarDinero(item.precio);
         this._dormitorio.items[itemKey] = true;
         this._dormitorioGuardar();
