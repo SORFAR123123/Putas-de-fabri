@@ -2045,6 +2045,52 @@ const vocabularioDatabase = {
         
     },
 
+    // Sub-contenedor 1.9
+    'sub1_9': {
+        // MAZO 1
+        1: [
+            { japones: '適当に', lectura: 'tekitou ni', opciones: ['de cualquier manera', 'vena', 'lo que has visto', 'coño'], respuesta: 0 },
+            { japones: '演技', lectura: 'engi', opciones: ['actuación', 'rechazado', 'mierda débil', 'caer'], respuesta: 0 },
+            { japones: 'さっさと', lectura: 'sassato', opciones: ['rápido', 'amo', 'mierda débil', 'terminar'], respuesta: 0 },
+            { japones: '終わらせ', lectura: 'owarase', opciones: ['terminar', 'rápido', 'coño', 'vena'], respuesta: 0 },
+            { japones: '抱かれる', lectura: 'dakareru', opciones: ['ser abrazado', 'nos separamos', 'insertar', 'actuación'], respuesta: 0 },
+            { japones: '子供', lectura: 'kodomo', opciones: ['niño', 'rápido', 'rápido', 'actuación'], respuesta: 0 },
+            { japones: '相手', lectura: 'aite', opciones: ['pareja', 'rechazado', 'ser abrazado', 'tranquilidad'], respuesta: 0 },
+            { japones: '堕ちる', lectura: 'ochiru', opciones: ['caer', 'rechazado', 'mierda débil', 'lo que has visto'], respuesta: 0 },
+            { japones: '安心', lectura: 'anshin', opciones: ['tranquilidad', 'destruir', 'actuación', 'terminar'], respuesta: 0 },
+            { japones: '見たこと', lectura: 'mita koto', opciones: ['lo que has visto', 'onahole', 'insertar', 'coño'], respuesta: 0 },
+        ],
+
+        // MAZO 2
+        2: [
+            { japones: '血管', lectura: 'kekkan', opciones: ['vena', 'ser abrazado', 'polla', 'pareja'], respuesta: 0 },
+            { japones: 'バキバキ', lectura: 'bakibaki', opciones: ['duro como piedra', 'embarazo', 'destruir', 'coño'], respuesta: 0 },
+            { japones: '子宮', lectura: 'shikyuu', opciones: ['útero', 'rechazado', 'ser abrazado', 'onahole'], respuesta: 0 },
+            { japones: '早く', lectura: 'hayaku', opciones: ['rápido', 'pene corto y pequeño', 'onahole', 'perdedor'], respuesta: 0 },
+            { japones: 'ハメ', lectura: 'hame', opciones: ['insertar', 'exclusivo', 'patéticamente', 'coño'], respuesta: 0 },
+            { japones: 'イケメン', lectura: 'ikemen', opciones: ['guapo', 'onahole', 'ser abrazado', 'pene corto y pequeño'], respuesta: 0 },
+            { japones: 'チンポ', lectura: 'chinpo', opciones: ['polla', 'ser abrazado', 'terminar', 'amo'], respuesta: 0 },
+            { japones: 'おマンコ', lectura: 'oman ko', opciones: ['coño', 'pareja', 'mierda débil', 'exclusivo'], respuesta: 0 },
+            { japones: 'ぶっ壊す', lectura: 'bukkowasu', opciones: ['destruir', 'tranquilidad', 'nos separamos', 'ser abrazado'], respuesta: 0 },
+            { japones: '旦那様', lectura: 'danna-sama', opciones: ['amo', 'patéticamente', 'vena', 'pareja'], respuesta: 0 },
+        ],
+
+        // MAZO 3
+        3: [
+            { japones: '専用', lectura: 'senyou', opciones: ['exclusivo', 'caer', 'terminar', 'de cualquier manera'], respuesta: 0 },
+            { japones: '孕み', lectura: 'harami', opciones: ['embarazo', 'lo que has visto', 'coño', 'tranquilidad'], respuesta: 0 },
+            { japones: 'オナホ', lectura: 'onaho', opciones: ['onahole', 'útero', 'patéticamente', 'mierda débil'], respuesta: 0 },
+            { japones: 'クソ雑魚', lectura: 'kuso zako', opciones: ['mierda débil', 'amo', 'actuación', 'guapo'], respuesta: 0 },
+            { japones: '短小', lectura: 'tanshou', opciones: ['pene corto y pequeño', 'caer', 'destruir', 'coño'], respuesta: 0 },
+            { japones: '別れます', lectura: 'wakarimasu', opciones: ['nos separamos', 'exclusivo', 'pene corto y pequeño', 'masturbarse'], respuesta: 0 },
+            { japones: '負け組', lectura: 'makegumi', opciones: ['perdedor', 'mierda débil', 'actuación', 'rápido'], respuesta: 0 },
+            { japones: '情けなく', lectura: 'nasakenaku', opciones: ['patéticamente', 'embarazo', 'terminar', 'onahole'], respuesta: 0 },
+            { japones: 'シコって', lectura: 'shikotte', opciones: ['masturbarse', 'exclusivo', 'coño', 'rechazado'], respuesta: 0 },
+            { japones: 'お断り', lectura: 'okotowari', opciones: ['rechazado', 'lo que has visto', 'pene corto y pequeño', 'mierda débil'], respuesta: 0 },
+        ],
+
+    },
+
   
  
 
