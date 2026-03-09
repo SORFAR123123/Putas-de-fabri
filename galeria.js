@@ -1614,6 +1614,14 @@ const galeriaDatabase = {
         ]
     },
 
+    '9_Perras_Playeras': {
+        titulo: "",
+        descripcion: "",
+        categoria: "",
+        imagen: "",
+        imagenes: []
+    },
+
     // ============ CONTENEDOR 10 - TRIOS (TODAS LAS COMBINACIONES) ============
     '10_Nino_Ichika_Miku': {
         titulo: "Nino, Ichika & Miku",
