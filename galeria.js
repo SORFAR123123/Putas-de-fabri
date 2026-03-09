@@ -113,6 +113,12 @@ const contenedoresGaleria = {
         categoria: "Ruby"
     },
     19: {
+        nombre: "Makima",
+        imagen: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1773069577108.jpg",
+        descripcion: "putita pelirroja",
+        categoria: "Makima"
+    },
+    20: {
         nombre: "PRUEBA",
         imagen: "https://pbs.twimg.com/media/HC1ED-sWIAAOY0b?format=jpg&name=medium",
         descripcion: "Galería de prueba con dos subcontenedores",
@@ -3311,7 +3317,14 @@ const galeriaDatabase = {
             { id: 30, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772992230812.jpg" }
         ]
     },
-     '19_1': {
+    '19_1': {
+        titulo: "Trola",
+        descripcion: "",
+        categoria: "pelirroja",
+        imagen: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1773069620083.jpg",
+        imagenes: []
+    },
+     '20_1': {
         titulo: "PRUEBA",
         descripcion: "Primer subcontenedor de prueba",
         categoria: "Prueba",
@@ -3321,7 +3334,7 @@ const galeriaDatabase = {
             { id: 2, url: "https://pbs.twimg.com/media/HCrjyH_W8AEZXuN?format=png&name=small" }
         ]
     },
-    '19_2': {
+    '20_2': {
         titulo: "PRUEBA",
         descripcion: "xdxdxdxdxd",
         categoria: "Prueba",
