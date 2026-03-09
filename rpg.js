@@ -41,11 +41,12 @@ class QuintillizasRPG {
             } catch { return null; }
         };
 
-        const [personaje, datos, condones, condones001] = await Promise.all([
+        const [personaje, datos, condones, condones001, dormitorio] = await Promise.all([
             cargar('rpg_personaje_seleccionado'),
             cargar('rpg_datos_personajes'),
             cargar('rpg_condones'),
-            cargar('rpg_condones001')
+            cargar('rpg_condones001'),
+            cargar('dormitorio_datos')
         ]);
 
         const supabaseVacio = personaje === null && datos === null;
@@ -55,7 +56,8 @@ class QuintillizasRPG {
                 this.supabaseGuardar('rpg_personaje_seleccionado', this.personajeSeleccionado),
                 this.supabaseGuardar('rpg_datos_personajes', this.datosPersonajes),
                 this.supabaseGuardar('rpg_condones', this.condones),
-                this.supabaseGuardar('rpg_condones001', this.condones001)
+                this.supabaseGuardar('rpg_condones001', this.condones001),
+                this.supabaseGuardar('dormitorio_datos', this._dormitorio || null)
             ]);
             console.log('☁️ RPG subido a Supabase');
         } else {
@@ -63,6 +65,7 @@ class QuintillizasRPG {
             if (datos !== null) { this.datosPersonajes = datos; localStorage.setItem('rpg_datos_personajes', JSON.stringify(datos)); }
             if (condones !== null) { this.condones = condones; localStorage.setItem('rpg_condones', condones.toString()); }
             if (condones001 !== null) { this.condones001 = condones001; localStorage.setItem('rpg_condones001', condones001.toString()); }
+            if (dormitorio !== null) { this._dormitorio = dormitorio; localStorage.setItem('dormitorio_datos', JSON.stringify(dormitorio)); }
             console.log('☁️ RPG sincronizado desde Supabase');
         }
     }
@@ -1418,7 +1421,7 @@ class QuintillizasRPG {
 
     _dormitorioGuardar() {
         localStorage.setItem('dormitorio_datos', JSON.stringify(this._dormitorio));
-        if (window._sbGuardar) _sbGuardar('dormitorio_datos', this._dormitorio);
+        this.supabaseGuardar('dormitorio_datos', this._dormitorio);
     }
 
     _dormitorioNivel() {
@@ -1433,14 +1436,14 @@ class QuintillizasRPG {
     dormitorioComprarItem(itemKey) {
         this._dormitorioInicializar();
         const precios = {
-            velas: { precio: 20, nombre: '🕯️ Velas románticas' },
-            flores: { precio: 35, nombre: '🌸 Flores y pétalos' },
-            almohadasAmor: { precio: 25, nombre: '💕 Almohadas de amor' },
-            lucesLED: { precio: 50, nombre: '✨ Luces LED' },
-            champagne: { precio: 60, nombre: '🍾 Champagne' },
-            alfombra: { precio: 40, nombre: '🟥 Alfombra de piel' },
-            cortinas: { precio: 45, nombre: '🪟 Cortinas de terciopelo' },
-            espejo: { precio: 80, nombre: '🪞 Espejo de cuerpo entero' }
+            velas: { precio: 200, nombre: '🕯️ Velas románticas' },
+            flores: { precio: 350, nombre: '🌸 Flores y pétalos' },
+            almohadasAmor: { precio: 250, nombre: '💕 Almohadas de amor' },
+            lucesLED: { precio: 500, nombre: '✨ Luces LED' },
+            champagne: { precio: 600, nombre: '🍾 Champagne' },
+            alfombra: { precio: 400, nombre: '🟥 Alfombra de piel' },
+            cortinas: { precio: 450, nombre: '🪟 Cortinas de terciopelo' },
+            espejo: { precio: 800, nombre: '🪞 Espejo de cuerpo entero' }
         };
         const item = precios[itemKey];
         if (!item) return;
@@ -1460,14 +1463,14 @@ class QuintillizasRPG {
         const nivelNombre = ['Sin decorar 😅', 'Básico 🕯️', 'Romántico 🌸', 'Lujoso ✨'][nivel];
 
         const catalogo = [
-            { key: 'velas',         nombre: '🕯️ Velas románticas',       precio: 20, desc: 'Luz cálida y ambiente íntimo' },
-            { key: 'flores',        nombre: '🌸 Flores y pétalos',        precio: 35, desc: 'Pétalos de rosa esparcidos' },
-            { key: 'almohadasAmor', nombre: '💕 Almohadas de amor',       precio: 25, desc: 'Almohadas con corazones bordados' },
-            { key: 'lucesLED',      nombre: '✨ Luces LED',               precio: 50, desc: 'Luces de colores en el techo' },
-            { key: 'champagne',     nombre: '🍾 Champagne',               precio: 60, desc: 'Botella de champagne fría' },
-            { key: 'alfombra',      nombre: '🟥 Alfombra de piel',        precio: 40, desc: 'Alfombra suave y cálida' },
-            { key: 'cortinas',      nombre: '🪟 Cortinas de terciopelo',  precio: 45, desc: 'Cortinas opacas y elegantes' },
-            { key: 'espejo',        nombre: '🪞 Espejo de cuerpo entero', precio: 80, desc: 'Espejo grande con marco dorado' },
+            { key: 'velas',         nombre: '🕯️ Velas románticas',       precio: 200, desc: 'Luz cálida y ambiente íntimo' },
+            { key: 'flores',        nombre: '🌸 Flores y pétalos',        precio: 350, desc: 'Pétalos de rosa esparcidos' },
+            { key: 'almohadasAmor', nombre: '💕 Almohadas de amor',       precio: 250, desc: 'Almohadas con corazones bordados' },
+            { key: 'lucesLED',      nombre: '✨ Luces LED',               precio: 500, desc: 'Luces de colores en el techo' },
+            { key: 'champagne',     nombre: '🍾 Champagne',               precio: 600, desc: 'Botella de champagne fría' },
+            { key: 'alfombra',      nombre: '🟥 Alfombra de piel',        precio: 400, desc: 'Alfombra suave y cálida' },
+            { key: 'cortinas',      nombre: '🪟 Cortinas de terciopelo',  precio: 450, desc: 'Cortinas opacas y elegantes' },
+            { key: 'espejo',        nombre: '🪞 Espejo de cuerpo entero', precio: 800, desc: 'Espejo grande con marco dorado' },
         ];
 
         const itemsHTML = catalogo.map(it => {
@@ -1507,8 +1510,10 @@ class QuintillizasRPG {
                 <p style="text-align:center;color:#FFD166;margin-bottom:25px;">Nivel: ${nivelNombre}</p>
 
                 <div style="position:relative;width:100%;height:180px;border-radius:20px;overflow:hidden;
-                            background:linear-gradient(135deg,#1a1028,#251535);
+                            background-image:url('https://pbs.twimg.com/media/HC_g7mxboAAPgzW?format=jpg&name=medium');
+                            background-size:cover;background-position:center;
                             border:2px solid ${nivel >= 2 ? '#FF1493' : 'rgba(255,255,255,0.1)'};margin-bottom:25px;">
+                    <div style="position:absolute;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.35);border-radius:18px;"></div>
                     ${previewItems}
                     <div style="position:absolute;bottom:0;left:50%;transform:translateX(-50%);
                                 width:180px;height:70px;background:#2a1a40;border-radius:10px 10px 0 0;border-top:10px solid #4a2a60;"></div>
@@ -1755,10 +1760,12 @@ class QuintillizasRPG {
              </button>`
         ).join('');
 
+        const DORMITORIO_IMG = 'https://pbs.twimg.com/media/HC_g7mxboAAPgzW?format=jpg&name=medium';
         const esDormitorio = imgFondo === 'URL_DORMITORIO';
-        const tieneImg = imgFondo && !imgFondo.startsWith('URL_');
+        const imgFondoFinal = esDormitorio ? DORMITORIO_IMG : imgFondo;
+        const tieneImg = imgFondoFinal && !imgFondoFinal.startsWith('URL_');
         const estiloFondo = tieneImg
-            ? `background-image:url('${imgFondo}');background-size:cover;background-position:center;`
+            ? `background-image:url('${imgFondoFinal}');background-size:cover;background-position:center;`
             : `background:linear-gradient(135deg,#1a0a2e,#2a1040);`;
 
         // Overlays de items del dormitorio
