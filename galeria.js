@@ -1731,10 +1731,10 @@ const galeriaDatabase = {
     },
 
     '13_4': {
-        titulo: "",
+        titulo: "Emilia putita",
         descripcion: "",
-        categoria: "",
-        imagen: "",
+        categoria: "Oki Senpai",
+        imagen: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1773019036198.jpg",
         imagenes: [
             { id: 1, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1773017610297.jpg" },
             { id: 2, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1773017616081.jpg" },
