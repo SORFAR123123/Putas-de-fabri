@@ -3298,10 +3298,10 @@ const galeriaDatabase = {
     },
 
     '17_4': {
-        titulo: "",
+        titulo: "Rias putarda",
         descripcion: "",
-        categoria: "",
-        imagen: "",
+        categoria: "YKNO",
+        imagen: "https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773072142244.jpg",
         imagenes: [
             { id: 1, url: "https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773071828255.jpg" },
             { id: 2, url: "https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773071834651.jpg" },
