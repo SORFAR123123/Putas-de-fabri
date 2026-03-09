@@ -2807,10 +2807,10 @@ const galeriaDatabase = {
     },
 
     '13_7': {
-        titulo: "",
+        titulo: "Emilia trola",
         descripcion: "",
-        categoria: "",
-        imagen: "",
+        categoria: "MilkyMil",
+        imagen: "https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773068230003.jpg",
         imagenes: [
             { id: 1, url: "https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773067882499.jpg" },
             { id: 2, url: "https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773067890754.jpg" },
