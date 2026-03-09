@@ -3129,6 +3129,14 @@ const galeriaDatabase = {
         imagen: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772929248085.jpg",
         imagenes: []
     },
+
+    '14_2': {
+        titulo: "",
+        descripcion: "",
+        categoria: "",
+        imagen: "",
+        imagenes: []
+    },
     '15_1': {
         titulo: "Alya Rusarda",
         descripcion: "",
