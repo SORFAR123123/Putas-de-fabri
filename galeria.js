@@ -1257,10 +1257,10 @@ const galeriaDatabase = {
     },
 
     '6_4': {
-        titulo: "",
+        titulo: "Miku trola",
         descripcion: "",
-        categoria: "",
-        imagen: "",
+        categoria: "VenusMuffin",
+        imagen: "https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773069359205.jpg",
         imagenes: [
             { id: 1, url: "https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773068369650.jpg" },
             { id: 2, url: "https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773068375688.jpg" },
