@@ -127,12 +127,7 @@ const sistemaDescriptivo = {
                 descripcion: '', 
                 nivel: '' 
             },
-            '1_9': { 
-                nombre: 'Nino miku sanvalentin',
-                imagen: 'https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773078373120.webp', 
-                descripcion: 'kacheras del 14', 
-                nivel: '' 
-            },
+           
             
             
           
