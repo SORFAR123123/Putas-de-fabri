@@ -535,10 +535,10 @@ const galeriaDatabase = {
     },
 
     '2_2': {
-        titulo: "",
+        titulo: "zorra",
         descripcion: "",
         categoria: "",
-        imagen: "",
+        imagen: "https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773072996039.jpg",
         imagenes: [
             { id: 1, url: "https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773072892443.jpg" },
             { id: 2, url: "https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773072898999.jpg" },
