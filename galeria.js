@@ -1976,10 +1976,10 @@ const galeriaDatabase = {
     },
 
     '13_5': {
-        titulo: "",
+        titulo: "Emilia playera putona",
         descripcion: "",
-        categoria: "",
-        imagen: "",
+        categoria: "Oki senpai",
+        imagen: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1773020661872.jpg",
         imagenes: [
             { id: 1, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1773019157438.jpg" },
             { id: 2, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1773019163086.jpg" },
