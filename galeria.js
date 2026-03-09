@@ -1615,10 +1615,10 @@ const galeriaDatabase = {
     },
 
     '9_Perras_Playeras': {
-        titulo: "",
+        titulo: "Miku nino putas playeras",
         descripcion: "",
-        categoria: "",
-        imagen: "",
+        categoria: "putardas",
+        imagen: "https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773024707685.png",
         imagenes: [
             { id: 1, url: "https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773024299607.png" },
             { id: 2, url: "https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773024306167.png" },
