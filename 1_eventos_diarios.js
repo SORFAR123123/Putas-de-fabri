@@ -1882,7 +1882,7 @@ const EventosDiarios = {
         contenedor.id = 'eventos-progreso-container';
         contenedor.style.cssText = `
             position: fixed;
-            bottom: 20px;
+            bottom: 75px;
             right: 20px;
             z-index: 1000;
             width: 350px;
@@ -1894,19 +1894,19 @@ const EventosDiarios = {
         toggleBtn.id = 'toggle-progreso-btn';
         toggleBtn.innerHTML = '📅';
         toggleBtn.style.cssText = `
-            position: absolute;
-            top: -10px;
-            right: -10px;
-            width: 40px;
-            height: 40px;
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            width: 44px;
+            height: 44px;
             border-radius: 50%;
             background: linear-gradient(135deg, #FF1493, #8A5AF7);
             border: 2px solid white;
             color: white;
-            font-size: 1.2rem;
+            font-size: 1.3rem;
             cursor: pointer;
             box-shadow: 0 0 15px rgba(255,20,147,0.5);
-            z-index: 1001;
+            z-index: 1002;
             display: flex;
             align-items: center;
             justify-content: center;
@@ -1922,7 +1922,7 @@ const EventosDiarios = {
 
         const visible = obtenerEstadoVisibilidadBarra();
         contenido.style.display = visible ? 'block' : 'none';
-        toggleBtn.innerHTML = visible ? '📅' : '📌';
+        // El botón siempre se ve, solo cambia el emoji
 
         contenedor.appendChild(toggleBtn);
         contenedor.appendChild(contenido);
@@ -1933,13 +1933,11 @@ const EventosDiarios = {
 
     alternarVisibilidadBarra: function() {
         const contenido = document.getElementById('progreso-contenido');
-        const toggleBtn = document.getElementById('toggle-progreso-btn');
-        if (!contenido || !toggleBtn) return;
+        if (!contenido) return;
 
         const visible = contenido.style.display !== 'none';
         const nuevaVisibilidad = !visible;
         contenido.style.display = nuevaVisibilidad ? 'block' : 'none';
-        toggleBtn.innerHTML = nuevaVisibilidad ? '📅' : '📌';
         guardarEstadoVisibilidadBarra(nuevaVisibilidad);
     },
 
