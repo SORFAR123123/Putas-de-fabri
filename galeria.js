@@ -1731,10 +1731,10 @@ const galeriaDatabase = {
     },
 
     '13_4': {
-        titulo: "",
+        titulo: "Prueba elfa",
         descripcion: "",
-        categoria: "",
-        imagen: "",
+        categoria: "elfa puta",
+        imagen: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1773016891360.jpg",
         imagenes: [
             { id: 1, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1773016856610.jpg" },
             { id: 2, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1773016862428.jpg" },
