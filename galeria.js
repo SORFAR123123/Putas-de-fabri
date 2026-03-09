@@ -3135,7 +3135,9 @@ const galeriaDatabase = {
         descripcion: "",
         categoria: "",
         imagen: "",
-        imagenes: []
+        imagenes: [
+            { id: 1, url: "https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773099582799.jpg" }
+        ]
     },
     '15_1': {
         titulo: "Alya Rusarda",
