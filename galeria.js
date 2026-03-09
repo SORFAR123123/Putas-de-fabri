@@ -1731,10 +1731,10 @@ const galeriaDatabase = {
     },
 
     '13_4': {
-        titulo: "",
+        titulo: "Emilia prueba",
         descripcion: "",
-        categoria: "",
-        imagen: "",
+        categoria: "puta rica",
+        imagen: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1773015607560.jpg",
         imagenes: [
             { id: 1, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1773015432627.jpg" },
             { id: 2, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1773015439106.jpg" }
