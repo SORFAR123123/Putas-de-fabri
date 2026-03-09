@@ -127,6 +127,12 @@ const sistemaDescriptivo = {
                 descripcion: '', 
                 nivel: '' 
             },
+            '1_9': { 
+                nombre: 'Nino kachando',
+                imagen: 'https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773082214670.webp', 
+                descripcion: 'Nino kachera', 
+                nivel: '' 
+            },
             
            
             
