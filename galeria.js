@@ -2861,7 +2861,15 @@ function obtenerContenedoresGaleriaDisponibles() {
         // Para contenedores 9 y superiores, NO HACEMOS NINGÚN SORT
         // Esto preservará el orden en que las claves fueron insertadas en galeriaDatabase
         // (Nota: El orden de inserción en objetos modernos se mantiene para claves que no son números)
-    });
+    },
+
+    '9_Perras_Playeras': {
+        titulo: "",
+        descripcion: "",
+        categoria: "",
+        imagen: "",
+        imagenes: []
+    },);
     
     return contenedores;
 }
