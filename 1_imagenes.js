@@ -127,16 +127,9 @@ const sistemaDescriptivo = {
                 descripcion: '', 
                 nivel: '' 
             },
-            '1_9': { 
-                nombre: 'Nino y miku putardas',
-                imagen: 'https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773077863468.webp', 
-                descripcion: 'Putonas san valentin', 
-                nivel: '' 
-            },
-          
-          
-          
             
+          
+          
             
             // Contenedor 2
             '2_1': { 
