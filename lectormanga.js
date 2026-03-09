@@ -306,6 +306,22 @@ const mangaDatabase = {
         ]
     },
 
+    // Sub-contenedor 1.9
+    '1_9': {
+        titulo: "Kachera",
+        descripcion: "coneja kachera",
+        paginas: 5,
+        año: 2024,
+        autor: "Desconocido",
+        paginasUrls: [
+            "https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773076200458.webp", // Página 1
+            "https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773076203318.webp", // Página 2
+            "https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773076206870.webp", // Página 3
+            "https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773076210064.webp", // Página 4
+            "https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773076212738.webp" // Página 5
+        ]
+    },
+
    
     
     // ================================================
