@@ -1849,7 +1849,8 @@ const galeriaDatabase = {
             { id: 111, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1773018258464.jpg" },
             { id: 112, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1773018264270.jpg" },
             { id: 113, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1773018269999.jpg" },
-            { id: 114, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1773018275793.jpg" }
+            { id: 114, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1773018275793.jpg" },
+            { id: 115, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1773018281607.jpg" }
         ]
     },
 
