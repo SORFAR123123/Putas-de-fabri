@@ -1560,16 +1560,7 @@ const galeriaDatabase = {
         ]
     },
     
-    '8_2': {
-        titulo: "Videos y GIFs Random",
-        descripcion: "Contenido audiovisual variado para entretenimiento",
-        categoria: "Multimedia",
-        imagen: "https://images.unsplash.com/photo-1492619375914-88005aa9e8fb?w=300&h=300&fit=crop",
-        imagenes: [
-            
-        ]
-    },
-
+  
     // ============ CONTENEDOR 9 - DUOS (TODAS LAS COMBINACIONES) ============
     '9_Nino_Ichika': {
         titulo: "Nino & Ichika",
