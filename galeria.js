@@ -1561,10 +1561,10 @@ const galeriaDatabase = {
     },
 
     '8_2': {
-        titulo: "",
+        titulo: "Kurumi putarda",
         descripcion: "",
-        categoria: "",
-        imagen: "",
+        categoria: "kairo art",
+        imagen: "https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773067518012.jpg",
         imagenes: [
             { id: 1, url: "https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773066571878.jpg" },
             { id: 2, url: "https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773066577988.jpg" },
