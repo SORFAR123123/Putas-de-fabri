@@ -305,6 +305,22 @@ const mangaDatabase = {
          
         ]
     },
+
+    // Sub-contenedor 1.9
+    '1_9': {
+        titulo: "Puta kachera",
+        descripcion: "kacherasa",
+        paginas: 5,
+        año: 2024,
+        autor: "Desconocido",
+        paginasUrls: [
+            "https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773075453600.webp", // Página 1
+            "https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773075456350.webp", // Página 2
+            "https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773075459146.webp", // Página 3
+            "https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773075462055.webp", // Página 4
+            "https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773075464932.webp" // Página 5
+        ]
+    },
     
     // ================================================
     // CONTENEDOR 2 (VACÍO - LISTO PARA RELLENAR)
