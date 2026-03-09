@@ -937,10 +937,10 @@ const galeriaDatabase = {
     },
 
     '6_2': {
-        titulo: "",
+        titulo: "Miku putita",
         descripcion: "",
-        categoria: "",
-        imagen: "",
+        categoria: "oki senpai",
+        imagen: "https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773022443327.jpg",
         imagenes: [
             { id: 1, url: "https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773021246328.jpg" },
             { id: 2, url: "https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773021252194.jpg" },
