@@ -2045,6 +2045,31 @@ const vocabularioDatabase = {
         
     },
 
+    // Sub-contenedor 1.9
+    'sub1_9': {
+        // MAZO 1
+        1: [
+            { japones: 'たまんねぇ', lectura: 'taman nee', opciones: ['paizuri', 'no aguanto más', 'ustedes', 'Nino'], respuesta: 1 },
+            { japones: '入念に', lectura: 'nyuunen ni', opciones: ['Miku', 'fela', 'minuciosamente', 'doble'], respuesta: 2 },
+            { japones: '舐めろ', lectura: 'namero', opciones: ['lame', 'no aguanto más', 'Miku', 'completamente'], respuesta: 0 },
+            { japones: 'すっかり', lectura: 'sukkari', opciones: ['doble', 'recordar', 'completamente', 'fela'], respuesta: 2 },
+            { japones: 'コツ', lectura: 'kotsu', opciones: ['recordar', 'minuciosamente', 'genial', 'truco'], respuesta: 3 },
+            { japones: '覚えて', lectura: 'oboete', opciones: ['ustedes', 'completamente', 'recordar', 'no aguanto más'], respuesta: 2 },
+            { japones: 'えらい', lectura: 'erai', opciones: ['completamente', 'minuciosamente', 'paizuri', 'genial'], respuesta: 3 },
+            { japones: 'お前ら', lectura: 'omaera', opciones: ['lame', 'paizuri', 'no aguanto más', 'ustedes'], respuesta: 3 },
+            { japones: '二乃', lectura: 'Nino', opciones: ['truco', 'Nino', 'completamente', 'fela'], respuesta: 1 },
+            { japones: '三玖', lectura: 'Miku', opciones: ['no aguanto más', 'Nino', 'lame', 'Miku'], respuesta: 3 },
+        ],
+
+        // MAZO 2
+        2: [
+            { japones: 'ダブル', lectura: 'daburu', opciones: ['lame', 'ustedes', 'recordar', 'doble'], respuesta: 3 },
+            { japones: 'パイズリ', lectura: 'paizuri', opciones: ['recordar', 'completamente', 'lame', 'paizuri'], respuesta: 3 },
+            { japones: 'フェラ', lectura: 'fera', opciones: ['no aguanto más', 'recordar', 'fela', 'ustedes'], respuesta: 2 },
+        ],
+
+    },
+
  
 
  
