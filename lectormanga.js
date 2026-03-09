@@ -306,6 +306,18 @@ const mangaDatabase = {
         ]
     },
 
+    // Sub-contenedor 1.9
+    '1_9': {
+        titulo: "nino puta",
+        descripcion: "miku puta",
+        paginas: 1,
+        año: 2024,
+        autor: "Desconocido",
+        paginasUrls: [
+            "https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773081313209.webp" // Página 1
+        ]
+    },
+
    
 
 
