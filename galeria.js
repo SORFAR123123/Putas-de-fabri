@@ -936,6 +936,14 @@ const galeriaDatabase = {
         ]
     },
 
+    '6_2': {
+        titulo: "",
+        descripcion: "",
+        categoria: "",
+        imagen: "",
+        imagenes: []
+    },
+
    
     
     // CONTENEDOR 7 - Itsuki
