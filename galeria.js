@@ -3343,10 +3343,10 @@ const galeriaDatabase = {
     },
 
     '18_3': {
-        titulo: "",
+        titulo: "Ruby kachera",
         descripcion: "",
-        categoria: "",
-        imagen: "",
+        categoria: "wawanwan",
+        imagen: "https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773071584012.jpg",
         imagenes: [
             { id: 1, url: "https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773071427582.jpg" },
             { id: 2, url: "https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773071434291.jpg" },
