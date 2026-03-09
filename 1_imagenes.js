@@ -127,12 +127,7 @@ const sistemaDescriptivo = {
                 descripcion: '', 
                 nivel: '' 
             },
-            '1_9': { 
-                nombre: 'Putarda doble',
-                imagen: 'https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773081313209.webp', 
-                descripcion: 'doble miku nino', 
-                nivel: '' 
-            },
+            
            
             
             
