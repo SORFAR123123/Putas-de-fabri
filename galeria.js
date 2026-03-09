@@ -1139,6 +1139,14 @@ const galeriaDatabase = {
         ]
     },
 
+    '6_Miku_putarda': {
+        titulo: "",
+        descripcion: "",
+        categoria: "",
+        imagen: "",
+        imagenes: []
+    },
+
    
     
     // CONTENEDOR 7 - Itsuki
