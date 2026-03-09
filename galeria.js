@@ -1669,7 +1669,8 @@ const galeriaDatabase = {
             { id: 101, url: "https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773067184721.jpg" },
             { id: 102, url: "https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773067190868.jpg" },
             { id: 103, url: "https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773067196831.jpg" },
-            { id: 104, url: "https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773067202923.jpg" }
+            { id: 104, url: "https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773067202923.jpg" },
+            { id: 105, url: "https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773067209030.jpg" }
         ]
     },
     
