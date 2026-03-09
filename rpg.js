@@ -1449,7 +1449,7 @@ class QuintillizasRPG {
         if (!item) return;
         if (this._dormitorio.items[itemKey]) { this.mostrarNotificacion('❌ Ya tienes ese item'); return; }
         if (!sistemaEconomia || sistemaEconomia.obtenerDinero() < item.precio) { this.mostrarNotificacion('❌ No tienes suficientes soles'); return; }
-        sistemaEconomia.gastarDinero(item.precio);
+        sistemaEconomia.agregarDinero(-item.precio);
         this._dormitorio.items[itemKey] = true;
         this._dormitorioGuardar();
         this.mostrarNotificacion(`✅ ${item.nombre} comprado!`);
@@ -1708,7 +1708,7 @@ class QuintillizasRPG {
             lujoso:  { nombre: '👑 Suite Presidencial', precio: 400, img: 'URL_HOTEL_LUJOSO',  reaccion: '🤩 Las chicas quedan boquiabiertas. "¡¡Es increíble!!"' }
         };
         const hotel = hoteles[hotelId];
-        if (sistemaEconomia) sistemaEconomia.gastarDinero(hotel.precio);
+        if (sistemaEconomia) sistemaEconomia.agregarDinero(-hotel.precio);
         this._mostrarEscenario(noviaId, segundaId, hotel.img, hotel.nombre, hotel.reaccion);
     }
 
