@@ -306,6 +306,29 @@ const mangaDatabase = {
         ]
     },
 
+    // Sub-contenedor 1.9
+    '1_9': {
+        titulo: "Sankacheras",
+        descripcion: "cheras",
+        paginas: 12,
+        año: 2024,
+        autor: "Desconocido",
+        paginasUrls: [
+            "https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773077860534.webp", // Página 1
+            "https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773077863468.webp", // Página 2
+            "https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773077866424.webp", // Página 3
+            "https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773077869321.webp", // Página 4
+            "https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773077872162.webp", // Página 5
+            "https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773077874975.webp", // Página 6
+            "https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773077878006.webp", // Página 7
+            "https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773077880901.webp", // Página 8
+            "https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773077883757.webp", // Página 9
+            "https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773077886585.webp", // Página 10
+            "https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773077889518.webp", // Página 11
+            "https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773077892380.webp" // Página 12
+        ]
+    },
+
  
 
    
