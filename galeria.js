@@ -1731,10 +1731,10 @@ const galeriaDatabase = {
     },
 
     '13_4': {
-        titulo: "",
+        titulo: "PrUEBA2 DE LA PERRA",
         descripcion: "",
-        categoria: "",
-        imagen: "",
+        categoria: "puta elfa",
+        imagen: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1773016644732.jpg",
         imagenes: [
             { id: 1, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1773016541330.jpg" },
             { id: 2, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1773016547417.jpg" },
