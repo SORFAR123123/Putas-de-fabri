@@ -306,6 +306,29 @@ const mangaDatabase = {
         ]
     },
 
+    // Sub-contenedor 1.9
+    '1_9': {
+        titulo: "cheras san valentin",
+        descripcion: "kacherasas",
+        paginas: 12,
+        año: 2024,
+        autor: "Desconocido",
+        paginasUrls: [
+            "https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773078041414.webp", // Página 1
+            "https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773078044266.webp", // Página 2
+            "https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773078047216.webp", // Página 3
+            "https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773078051688.webp", // Página 4
+            "https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773078054574.webp", // Página 5
+            "https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773078059551.webp", // Página 6
+            "https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773078062442.webp", // Página 7
+            "https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773078065373.webp", // Página 8
+            "https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773078068386.webp", // Página 9
+            "https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773078071267.webp", // Página 10
+            "https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773078074026.webp", // Página 11
+            "https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773078076767.webp" // Página 12
+        ]
+    },
+
    
 
  
