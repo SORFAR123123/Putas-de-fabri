@@ -1975,6 +1975,14 @@ const galeriaDatabase = {
         ]
     },
 
+    '13_5': {
+        titulo: "",
+        descripcion: "",
+        categoria: "",
+        imagen: "",
+        imagenes: []
+    },
+
  
 
     //contendor 14 emilia putona
