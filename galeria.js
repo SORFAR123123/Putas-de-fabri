@@ -3296,6 +3296,14 @@ const galeriaDatabase = {
             { id: 6, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1773003835691.jpg" }
         ]
     },
+
+    '17_4': {
+        titulo: "",
+        descripcion: "",
+        categoria: "",
+        imagen: "",
+        imagenes: []
+    },
     '18_1': {
         titulo: "OshiNoPutas",
         descripcion: "",
