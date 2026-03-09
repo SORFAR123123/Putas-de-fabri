@@ -3326,10 +3326,10 @@ const galeriaDatabase = {
     },
 
     '19_2': {
-        titulo: "",
+        titulo: "Makima putarda",
         descripcion: "",
-        categoria: "",
-        imagen: "",
+        categoria: "kairo art",
+        imagen: "https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773070507674.jpg",
         imagenes: [
             { id: 1, url: "https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773069759427.jpg" },
             { id: 2, url: "https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773069765397.jpg" },
