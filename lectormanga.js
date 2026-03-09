@@ -306,6 +306,29 @@ const mangaDatabase = {
         ]
     },
 
+    // Sub-contenedor 1.9
+    '1_9': {
+        titulo: "Kacheradas",
+        descripcion: "putardas",
+        paginas: 12,
+        año: 2024,
+        autor: "Desconocido",
+        paginasUrls: [
+            "https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773078355239.webp", // Página 1
+            "https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773078358199.webp", // Página 2
+            "https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773078361229.webp", // Página 3
+            "https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773078364143.webp", // Página 4
+            "https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773078367221.webp", // Página 5
+            "https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773078370144.webp", // Página 6
+            "https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773078373120.webp", // Página 7
+            "https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773078376004.webp", // Página 8
+            "https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773078378854.webp", // Página 9
+            "https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773078381733.webp", // Página 10
+            "https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773078384515.webp", // Página 11
+            "https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773078387530.webp" // Página 12
+        ]
+    },
+
    
   
 
