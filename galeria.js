@@ -2358,10 +2358,10 @@ const galeriaDatabase = {
     },
 
     '13_6': {
-        titulo: "",
+        titulo: "Emilia Rem putitas",
         descripcion: "",
-        categoria: "",
-        imagen: "",
+        categoria: "駄肉の極み pixiv",
+        imagen: "https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773023165083.png",
         imagenes: [
             { id: 1, url: "https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773022559697.png" },
             { id: 2, url: "https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773022566678.png" },
