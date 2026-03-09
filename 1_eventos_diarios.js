@@ -371,6 +371,138 @@ const SistemaProgresoEventos = {
         return racha;
     },
 
+    crearContadorMazosHoy: function() {
+        // Lee el evento actual y los mazos completados hoy
+        const eventoActual = (() => {
+            try { return JSON.parse(localStorage.getItem('evento_diario_actual') || 'null'); } catch(e) { return null; }
+        })();
+        const ultimoEvento = (() => {
+            try { return JSON.parse(localStorage.getItem('evento_diario_ultimo') || '{}'); } catch(e) { return {}; }
+        })();
+
+        // Si no hay evento activo, no mostrar nada
+        if (!eventoActual) return '';
+
+        // Si es evento NTR, mostrar mensaje especial
+        if (eventoActual.tipo === 'ntr') {
+            return `
+                <div style="
+                    background: rgba(255, 50, 50, 0.12);
+                    border: 2px solid #FF4444;
+                    border-radius: 15px;
+                    padding: 14px 16px;
+                    margin-bottom: 16px;
+                    text-align: center;
+                ">
+                    <div style="font-size: 1.3rem; margin-bottom: 6px;">🔥</div>
+                    <div style="color: #FF4444; font-weight: bold; font-size: 0.95rem; margin-bottom: 4px;">
+                        EVENTO NTR ACTIVO
+                    </div>
+                    <div style="color: rgba(255,255,255,0.7); font-size: 0.82rem;">
+                        Este evento no requiere mazos.<br>Tomá una decisión cuando aparezca el modal.
+                    </div>
+                </div>
+            `;
+        }
+
+        // Solo mostrar contador si el evento requiere mazos
+        if (eventoActual.tipoRequisito !== 'mazos_completados') {
+            return '';
+        }
+
+        const fechaHoy = (() => {
+            const f = new Date();
+            return `${f.getFullYear()}-${String(f.getMonth()+1).padStart(2,'0')}-${String(f.getDate()).padStart(2,'0')}`;
+        })();
+
+        // Si el evento ya fue resuelto hoy (éxito o fracaso registrado), no mostrar
+        if (ultimoEvento.requisitoCumplido || (ultimoEvento.fechaFracaso && ultimoEvento.fechaFracaso === fechaHoy)) {
+            return '';
+        }
+
+        const mazosHoy = (() => {
+            try {
+                const pd = JSON.parse(localStorage.getItem('progreso_mazos_diario') || '{}');
+                return parseInt(pd[fechaHoy]) || 0;
+            } catch(e) { return 0; }
+        })();
+
+        const requerido = eventoActual.cantidadRequerida || 10;
+        const faltan = Math.max(0, requerido - mazosHoy);
+        const porcentajeMazos = Math.min(100, Math.round((mazosHoy / requerido) * 100));
+        const completado = mazosHoy >= requerido;
+
+        // Generar iconitos de mazos (cuadraditos llenos/vacíos)
+        let iconosMazos = '';
+        for (let i = 0; i < requerido; i++) {
+            const lleno = i < mazosHoy;
+            iconosMazos += `<div style="
+                width: 18px;
+                height: 18px;
+                border-radius: 4px;
+                background: ${lleno ? 'linear-gradient(135deg, #FF1493, #8A5AF7)' : 'rgba(255,255,255,0.1)'};
+                border: 1.5px solid ${lleno ? '#FF1493' : 'rgba(255,255,255,0.25)'};
+                box-shadow: ${lleno ? '0 0 6px rgba(255,20,147,0.6)' : 'none'};
+                transition: all 0.3s;
+            "></div>`;
+        }
+
+        return `
+            <div style="
+                background: ${completado ? 'rgba(76, 175, 80, 0.15)' : 'rgba(255, 165, 0, 0.1)'};
+                border: 2px solid ${completado ? '#4CAF50' : '#FFD166'};
+                border-radius: 15px;
+                padding: 14px 16px;
+                margin-bottom: 16px;
+            ">
+                <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 10px; flex-wrap: wrap; gap: 6px;">
+                    <span style="color: #FFD166; font-weight: bold; font-size: 0.9rem;">
+                        🃏 Mazos hoy (evento actual):
+                    </span>
+                    <span style="
+                        font-weight: bold;
+                        font-size: 1.1rem;
+                        color: ${completado ? '#4CAF50' : (mazosHoy >= requerido * 0.7 ? '#FFD166' : '#FF6B6B')};
+                    ">
+                        ${completado ? '✅ ¡COMPLETADO!' : `${mazosHoy} / ${requerido}`}
+                    </span>
+                </div>
+
+                ${!completado ? `
+                <div style="
+                    background: rgba(0,0,0,0.3);
+                    height: 18px;
+                    border-radius: 10px;
+                    overflow: hidden;
+                    border: 1.5px solid rgba(255,209,102,0.4);
+                    margin-bottom: 10px;
+                ">
+                    <div style="
+                        background: linear-gradient(90deg, #FF1493, #8A5AF7);
+                        width: ${porcentajeMazos}%;
+                        height: 100%;
+                        transition: width 0.5s ease;
+                        border-radius: 10px;
+                    "></div>
+                </div>
+                <div style="
+                    text-align: center;
+                    color: #FF6B6B;
+                    font-size: 0.85rem;
+                    font-weight: bold;
+                    margin-bottom: 10px;
+                ">
+                    ⏳ Faltan <span style="font-size: 1.1rem; color: #FFD166;">${faltan}</span> mazo${faltan !== 1 ? 's' : ''} para completar el evento
+                </div>
+                ` : ''}
+
+                <div style="display: flex; flex-wrap: wrap; gap: 4px; justify-content: center;">
+                    ${iconosMazos}
+                </div>
+            </div>
+        `;
+    },
+
     crearBarraProgreso: function() {
         const stats = this.obtenerPorcentajeSemanal();
         const racha = this.obtenerRacha();
@@ -485,6 +617,8 @@ const SistemaProgresoEventos = {
                         </div>
                     </div>
                 </div>
+                
+                ${this.crearContadorMazosHoy()}
                 
                 <div style="
                     display: grid;
@@ -1854,6 +1988,10 @@ const EventosChecker = {
                 
                 if (porcentaje === 100) {
                     EventosChecker.verificarProgresoEvento();
+                    // Actualizar el contador de mazos en la barra de progreso
+                    if (typeof EventosDiarios !== 'undefined' && EventosDiarios.actualizarBarraProgreso) {
+                        EventosDiarios.actualizarBarraProgreso();
+                    }
                 }
             };
             console.log('✅ EventosChecker inicializado correctamente');
