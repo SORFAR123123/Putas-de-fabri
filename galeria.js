@@ -2864,10 +2864,10 @@ function obtenerContenedoresGaleriaDisponibles() {
     },
 
     '9_Perras_Playeras': {
-        titulo: "",
+        titulo: "asd",
         descripcion: "",
-        categoria: "",
-        imagen: "",
+        categoria: "d1d1",
+        imagen: "https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773024218221.png",
         imagenes: [
             { id: 1, url: "https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773024072183.png" },
             { id: 2, url: "https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773024078871.png" },
