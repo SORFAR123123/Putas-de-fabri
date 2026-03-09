@@ -127,6 +127,12 @@ const sistemaDescriptivo = {
                 descripcion: '', 
                 nivel: '' 
             },
+            '1_9': { 
+                nombre: 'Yotsuba cherasa',
+                imagen: 'https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773076203318.webp', 
+                descripcion: 'chera', 
+                nivel: '' 
+            },
           
           
             
