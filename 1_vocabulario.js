@@ -2045,11 +2045,7 @@ const vocabularioDatabase = {
         
     },
 
-    // Sub-contenedor 1.9
-    'sub1_9': {
-        // Sin vocabulario aún
-    },
-
+ 
     
 
   
