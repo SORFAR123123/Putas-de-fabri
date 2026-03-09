@@ -941,7 +941,9 @@ const galeriaDatabase = {
         descripcion: "",
         categoria: "",
         imagen: "",
-        imagenes: []
+        imagenes: [
+            { id: 1, url: "https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773021027550.jpg" }
+        ]
     },
     
     // CONTENEDOR 7 - Itsuki
