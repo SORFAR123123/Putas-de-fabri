@@ -1121,6 +1121,14 @@ const galeriaDatabase = {
         ]
     },
 
+    '3_5': {
+        titulo: "",
+        descripcion: "",
+        categoria: "",
+        imagen: "",
+        imagenes: []
+    },
+
  
     // CONTENEDOR 4 - Yotsuba
     '4_1': {
