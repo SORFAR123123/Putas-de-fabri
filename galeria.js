@@ -1121,7 +1121,7 @@ const galeriaDatabase = {
         ]
     },
 
-    '3_conejas_kacheras': {
+    '3_5': {
         titulo: "Conejtas peteras",
         descripcion: "",
         categoria: "putonas",
