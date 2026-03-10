@@ -454,26 +454,8 @@ const galeriaDatabase = {
         ]
     },
     
+   
     '1_4': {
-        titulo: "Naturaleza y Paisajes",
-        descripcion: "Fotografías de paisajes naturales",
-        categoria: "Naturaleza",
-        imagen: "https://images.unsplash.com/photo-1501854140801-50d01698950b",
-        imagenes: [
-           
-        ]
-    },
-    
-    '1_5': {
-        titulo: "Galería Tecnológica",
-        descripcion: "Tecnología y dispositivos modernos",
-        categoria: "Tecnología",
-        imagen: "https://images.unsplash.com/photo-1518709268805-4e9042af2176",
-        imagenes: [
-            
-        ]
-    },
-    '1_6': {
         titulo: "Kimedasenpai",
         descripcion: "nino putona",
         categoria: "Putarda",
@@ -489,7 +471,7 @@ const galeriaDatabase = {
         ]
     },
 
-    '1_7': {
+    '1_5': {
         titulo: "Nino kachera",
         descripcion: "",
         categoria: "wawanwan",
@@ -513,7 +495,7 @@ const galeriaDatabase = {
         ]
     },
 
-    '1_8': {
+    '1_6': {
         titulo: "Nino trolita",
         descripcion: "",
         categoria: "Trola",
