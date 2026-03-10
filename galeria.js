@@ -3632,10 +3632,10 @@ const galeriaDatabase = {
     },
 
     '15_9': {
-        titulo: "",
+        titulo: "Culaso de alya",
         descripcion: "",
-        categoria: "",
-        imagen: "",
+        categoria: "トラトラ",
+        imagen: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD/main/imagenes/img_1773104501442.jpg",
         imagenes: [
             { id: 1, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD/main/imagenes/img_1773104075360.jpg" },
             { id: 2, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD/main/imagenes/img_1773104081740.jpg" },
