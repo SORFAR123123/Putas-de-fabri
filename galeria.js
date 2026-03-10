@@ -2017,10 +2017,10 @@ const galeriaDatabase = {
     },
 
     '8_3': {
-        titulo: "",
+        titulo: "firefly kachera",
         descripcion: "",
-        categoria: "",
-        imagen: "",
+        categoria: "kacherasa",
+        imagen: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD/main/imagenes/img_1773102926383.jpg",
         imagenes: [
             { id: 1, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD/main/imagenes/img_1773102359112.jpg" },
             { id: 2, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD/main/imagenes/img_1773102365241.jpg" },
