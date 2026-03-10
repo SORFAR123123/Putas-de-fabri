@@ -3542,10 +3542,10 @@ const galeriaDatabase = {
     },
 
     '13_8': {
-        titulo: "",
+        titulo: "chera",
         descripcion: "",
-        categoria: "",
-        imagen: "",
+        categoria: "helltoyou",
+        imagen: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD/main/imagenes/img_1773111037530.jpg",
         imagenes: [
             { id: 1, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD/main/imagenes/img_1773110899620.jpg" },
             { id: 2, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD/main/imagenes/img_1773110906146.jpg" },
