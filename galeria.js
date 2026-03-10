@@ -5247,7 +5247,8 @@ const galeriaDatabase = {
         categoria: "",
         imagen: "https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/img_1773159738987.jpg",
         imagenes: [
-            { id: 1, url: "https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/img_1773159801734.jpg" }
+            { id: 1, url: "https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/img_1773159801734.jpg" },
+            { id: 2, url: "https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/img_1773159837753.jpg" }
         ]
     },
      '21_1': {
