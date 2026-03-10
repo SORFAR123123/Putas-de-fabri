@@ -1793,6 +1793,14 @@ const galeriaDatabase = {
         ]
     },
 
+    '6_5': {
+        titulo: "",
+        descripcion: "",
+        categoria: "",
+        imagen: "",
+        imagenes: []
+    },
+
    
 
   
