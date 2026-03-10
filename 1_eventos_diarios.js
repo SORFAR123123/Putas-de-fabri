@@ -32,6 +32,8 @@ async function _evCargar(clave) {
 }
 
 // Sincronizar eventos diarios al cargar la página
+window._sincronizacionLista = false;
+
 async function sincronizarEventosDiarios() {
     const claves = ['eventos_progreso', 'evento_diario_ultimo', 'evento_diario_actual', 'eventos_diarios_vistos', 'progreso_mazos_diario'];
     
@@ -58,10 +60,17 @@ async function sincronizarEventosDiarios() {
         if (mazosData !== null) localStorage.setItem('progreso_mazos_diario', JSON.stringify(mazosData));
         console.log('☁️ Eventos diarios sincronizados desde Supabase');
     }
+    
+    // Marcar sincronización como lista
+    window._sincronizacionLista = true;
+    console.log('✅ Sincronización completada — eventos diarios pueden iniciarse');
 }
 
-// Ejecutar sync al cargar (con delay para esperar dependencias)
-setTimeout(() => sincronizarEventosDiarios(), 2000);
+// Ejecutar sync al cargar sin delay — el flag controla el flujo
+sincronizarEventosDiarios().catch(e => {
+    console.warn('⚠️ Error en sincronización, usando datos locales:', e);
+    window._sincronizacionLista = true; // igual dejar pasar para no bloquear
+});
 
 // ================================================
 // SISTEMA DE EVENTOS DIARIOS - VERSIÓN CORREGIDA
@@ -1686,6 +1695,14 @@ const EventosDiarios = {
         const ultimoEvento = JSON.parse(localStorage.getItem('evento_diario_ultimo') || '{}');
         const fechaHoy = this.obtenerFechaActual();
         
+        // Si el resultado que se acaba de cerrar es de HOY (éxito o fracaso ya procesado),
+        // no volver a mostrar nada — el evento del día ya terminó
+        if (ultimoEvento.fecha === fechaHoy && 
+            (ultimoEvento.requisitoCumplido || ultimoEvento.resultadoFracasoMostrado)) {
+            console.log('📅 Evento de hoy ya procesado — no se muestra nada más');
+            return;
+        }
+        
         // Si el evento que acabamos de cerrar es de un día anterior (fracaso)
         // y no hay evento para hoy, crear uno nuevo
         if (ultimoEvento.fecha !== fechaHoy || !ultimoEvento.fecha) {
@@ -1959,21 +1976,40 @@ const EventosDiarios = {
         this.crearContenedorProgreso();
 
         const intentarInicio = () => {
-            if (typeof sistemaEconomia !== 'undefined' && typeof quintillizasRPG !== 'undefined') {
+            const sincLista = window._sincronizacionLista === true;
+            const depListas = typeof sistemaEconomia !== 'undefined' && typeof quintillizasRPG !== 'undefined';
+
+            if (sincLista && depListas) {
+                console.log('🚀 Todo listo — iniciando eventos diarios');
                 this.iniciarEventoDiario();
-                
-                setInterval(() => {
-                    this.verificarProgresoEvento();
-                }, 60000);
-                
+                setInterval(() => this.verificarProgresoEvento(), 60000);
             } else {
-                console.warn('⏳ Esperando dependencias para iniciar evento diario...');
-                setTimeout(intentarInicio, 1000);
+                if (!sincLista) console.warn('⏳ Esperando sincronización con Supabase...');
+                if (!depListas) console.warn('⏳ Esperando dependencias RPG/Economía...');
+                setTimeout(intentarInicio, 500);
             }
         };
-        
-        setTimeout(intentarInicio, 1500);
+
+        // Arrancar inmediatamente, reintenta cada 500ms hasta que todo esté listo
+        intentarInicio();
     }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 };
 
 // ================================================
