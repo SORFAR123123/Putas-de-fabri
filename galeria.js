@@ -1120,6 +1120,14 @@ const galeriaDatabase = {
             { id: 47, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD1/main/imagenes/img_1773152124057.png" }
         ]
     },
+
+    '3_conejas_kacheras': {
+        titulo: "",
+        descripcion: "",
+        categoria: "",
+        imagen: "",
+        imagenes: []
+    },
     // CONTENEDOR 4 - Yotsuba
     '4_1': {
         titulo: "Yotsuba - La más enérgica",
