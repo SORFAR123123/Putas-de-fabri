@@ -1966,10 +1966,10 @@ const galeriaDatabase = {
     },
 
     '7_3': {
-        titulo: "",
+        titulo: "Petera",
         descripcion: "",
-        categoria: "",
-        imagen: "",
+        categoria: "okumix",
+        imagen: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD/main/imagenes/img_1773108106784.png",
         imagenes: [
             { id: 1, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD/main/imagenes/img_1773107741113.png" },
             { id: 2, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD/main/imagenes/img_1773107751097.png" },
