@@ -5167,13 +5167,7 @@ const galeriaDatabase = {
         ]
     },
 
-    '16_5': {
-        titulo: "",
-        descripcion: "",
-        categoria: "",
-        imagen: "",
-        imagenes: []
-    },
+   
     '17_1': {
         titulo: "Rias putarda",
         descripcion: "",
