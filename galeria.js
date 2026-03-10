@@ -3949,6 +3949,14 @@ const galeriaDatabase = {
             { id: 6, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772986599652.jpg" }
         ]
     },
+
+    '16_4': {
+        titulo: "",
+        descripcion: "",
+        categoria: "",
+        imagen: "",
+        imagenes: []
+    },
     '17_1': {
         titulo: "Rias putarda",
         descripcion: "",
