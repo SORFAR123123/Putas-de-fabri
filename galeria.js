@@ -968,6 +968,14 @@ const galeriaDatabase = {
             { id: 42, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772900437495.jpg" }
         ]
     },
+
+    '3_3': {
+        titulo: "",
+        descripcion: "",
+        categoria: "",
+        imagen: "",
+        imagenes: []
+    },
     // CONTENEDOR 4 - Yotsuba
     '4_1': {
         titulo: "Yotsuba - La más enérgica",
