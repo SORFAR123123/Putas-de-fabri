@@ -1003,6 +1003,14 @@ const galeriaDatabase = {
             { id: 70, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1773001541284.jpg" }
         ]
     },
+
+    '4_2': {
+        titulo: "",
+        descripcion: "",
+        categoria: "",
+        imagen: "",
+        imagenes: []
+    },
     
     // CONTENEDOR 5 - Ichika
     '5_1': {
