@@ -809,6 +809,14 @@ const galeriaDatabase = {
             { id: 115, url: "https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773073644491.jpg" }
         ]
     },
+
+    '2_3': {
+        titulo: "",
+        descripcion: "",
+        categoria: "",
+        imagen: "",
+        imagenes: []
+    },
     
    
     '3_1': {
