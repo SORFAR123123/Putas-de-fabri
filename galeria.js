@@ -2182,10 +2182,10 @@ const galeriaDatabase = {
     },
 
     '7_4': {
-        titulo: "",
+        titulo: "Culona",
         descripcion: "",
-        categoria: "",
-        imagen: "",
+        categoria: "okumix",
+        imagen: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD1/main/imagenes/img_1773113685430.png",
         imagenes: [
             { id: 1, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD1/main/imagenes/img_1773113137464.png" },
             { id: 2, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD1/main/imagenes/img_1773113144072.png" },
