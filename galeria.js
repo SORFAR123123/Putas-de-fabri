@@ -2172,6 +2172,14 @@ const galeriaDatabase = {
         ]
     },
 
+    '6_8': {
+        titulo: "",
+        descripcion: "",
+        categoria: "",
+        imagen: "",
+        imagenes: []
+    },
+
    
 
   
