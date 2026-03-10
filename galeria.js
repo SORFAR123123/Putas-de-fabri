@@ -3104,6 +3104,14 @@ const galeriaDatabase = {
             { id: 88, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD/main/imagenes/img_1773102899046.jpg" }
         ]
     },
+
+    '8_4': {
+        titulo: "",
+        descripcion: "",
+        categoria: "",
+        imagen: "",
+        imagenes: []
+    },
     
   
     // ============ CONTENEDOR 9 - DUOS (TODAS LAS COMBINACIONES) ============
