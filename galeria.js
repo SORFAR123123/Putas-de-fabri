@@ -5327,6 +5327,14 @@ const galeriaDatabase = {
             { id: 17, url: "https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773071536204.jpg" }
         ]
     },
+
+    '18_4': {
+        titulo: "",
+        descripcion: "",
+        categoria: "",
+        imagen: "",
+        imagenes: []
+    },
     '19_1': {
         titulo: "Trola",
         descripcion: "",
