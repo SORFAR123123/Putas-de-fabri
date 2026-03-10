@@ -3383,10 +3383,10 @@ const galeriaDatabase = {
     },
 
     '15_8': {
-        titulo: "",
+        titulo: "Alya putona",
         descripcion: "",
-        categoria: "",
-        imagen: "",
+        categoria: "rusa putarda",
+        imagen: "https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773101036442.jpg",
         imagenes: [
             { id: 1, url: "https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773100856939.jpg" },
             { id: 2, url: "https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773100863135.jpg" },
