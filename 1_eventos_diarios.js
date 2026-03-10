@@ -796,16 +796,17 @@ const EventosDiarios = {
         const evento = this.obtenerEventoHoy();
         
         if (ultimoEvento.fecha === fechaHoy && !ultimoEvento.requisitoCumplido && evento && evento.tipo !== 'ntr') {
+            // BUGFIX: guardar ambos flags ANTES del setTimeout para evitar que
+            // iniciarEventoDiario vuelva a mostrar la ventana si el usuario está AFK
             ultimoEvento.requisitoCumplido = true;
-            ultimoEvento.resultadoExitoMostrado = false;
+            ultimoEvento.resultadoExitoMostrado = true;
             localStorage.setItem('evento_diario_ultimo', JSON.stringify(ultimoEvento));
+            _evGuardar('evento_diario_ultimo', ultimoEvento);
             
             console.log('✅ Requisito del evento cumplido HOY - Mostrando éxito inmediato');
             
             setTimeout(() => {
                 this.mostrarResultadoEvento(evento, true);
-                ultimoEvento.resultadoExitoMostrado = true;
-                localStorage.setItem('evento_diario_ultimo', JSON.stringify(ultimoEvento));
             }, 500);
             
             this.mostrarNotificacionEvento('✅ ¡Requisito cumplido!', '#4CAF50');
