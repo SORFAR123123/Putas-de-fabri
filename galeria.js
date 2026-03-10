@@ -5246,7 +5246,9 @@ const galeriaDatabase = {
         descripcion: "",
         categoria: "",
         imagen: "https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/img_1773159738987.jpg",
-        imagenes: []
+        imagenes: [
+            { id: 1, url: "https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/img_1773159801734.jpg" }
+        ]
     },
      '21_1': {
         titulo: "PRUEBA",
