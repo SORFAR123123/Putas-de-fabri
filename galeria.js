@@ -514,10 +514,10 @@ const galeriaDatabase = {
     },
 
     '1_8': {
-        titulo: "",
+        titulo: "Nino trolita",
         descripcion: "",
-        categoria: "",
-        imagen: "",
+        categoria: "Trola",
+        imagen: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD/main/imagenes/img_1773103712653.png",
         imagenes: [
             { id: 1, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD/main/imagenes/img_1773103302357.png" },
             { id: 2, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD/main/imagenes/img_1773103308970.png" },
