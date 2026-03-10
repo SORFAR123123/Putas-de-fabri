@@ -118,9 +118,15 @@ const contenedoresGaleria = {
         descripcion: "putita pelirroja",
         categoria: "Makima"
     },
-  
-  
     20: {
+        nombre: "Chisato",
+        imagen: "",
+        descripcion: "",
+        categoria: "Chisato"
+    },
+  
+  
+    21: {
         nombre: "PRUEBA",
         imagen: "https://pbs.twimg.com/media/HC1ED-sWIAAOY0b?format=jpg&name=medium",
         descripcion: "Galería de prueba con dos subcontenedores",
@@ -5253,6 +5259,14 @@ const galeriaDatabase = {
             { id: 2, url: "https://pbs.twimg.com/media/HCq3vdHXYAEffD7?format=png&name=small" }
         ]
     }
+
+    '20_1': {
+        titulo: "Chisato",
+        descripcion: "",
+        categoria: "",
+        imagen: "https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/img_1773159585245.jpg",
+        imagenes: []
+    },
 };
 
 // ================================================
