@@ -1038,10 +1038,10 @@ const galeriaDatabase = {
     },
 
     '5_2': {
-        titulo: "",
+        titulo: "Ichika zorra calata",
         descripcion: "",
-        categoria: "",
-        imagen: "",
+        categoria: "calata",
+        imagen: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD/main/imagenes/img_1773102266017.png",
         imagenes: [
             { id: 1, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD/main/imagenes/img_1773101877342.png" },
             { id: 2, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD/main/imagenes/img_1773101883672.png" },
