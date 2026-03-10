@@ -4713,6 +4713,14 @@ const galeriaDatabase = {
             { id: 12, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD/main/imagenes/img_1773110386772.jpg" }
         ]
     },
+
+    '16_5': {
+        titulo: "",
+        descripcion: "",
+        categoria: "",
+        imagen: "",
+        imagenes: []
+    },
     '17_1': {
         titulo: "Rias putarda",
         descripcion: "",
