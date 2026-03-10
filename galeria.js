@@ -5081,6 +5081,14 @@ const galeriaDatabase = {
             { id: 38, url: "https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773072098119.jpg" }
         ]
     },
+
+    '17_5': {
+        titulo: "",
+        descripcion: "",
+        categoria: "",
+        imagen: "",
+        imagenes: []
+    },
     '18_1': {
         titulo: "OshiNoPutas",
         descripcion: "",
