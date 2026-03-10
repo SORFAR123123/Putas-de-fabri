@@ -575,7 +575,7 @@ class SistemaReproductorDrive {
                     </p>
                 </div>
                 <div class="video-controls">
-                    <button class="video-btn btn-volver" onclick="volverASubcontenedoresVideos()">
+                    <button class="video-btn btn-volver" onclick="cargarSubcontenedoresVideos(contenedorActual)">
                         ↩️ Volver a Videos
                     </button>
                 </div>
