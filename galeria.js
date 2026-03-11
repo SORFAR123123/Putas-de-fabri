@@ -6146,14 +6146,7 @@ const galeriaDatabase = {
         ]
     },
 
-    '13_10': {
-        titulo: "",
-        descripcion: "",
-        categoria: "",
-        imagen: "",
-        imagenes: []
-    },
-
+    
 
 
  
