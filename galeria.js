@@ -6348,6 +6348,14 @@ const galeriaDatabase = {
         ]
     },
 
+    '8_9': {
+        titulo: "",
+        descripcion: "",
+        categoria: "",
+        imagen: "",
+        imagenes: []
+    },
+
    
     
     
