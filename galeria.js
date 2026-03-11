@@ -5226,6 +5226,14 @@ const galeriaDatabase = {
         ]
     },
 
+    '8_10': {
+        titulo: "",
+        descripcion: "",
+        categoria: "",
+        imagen: "",
+        imagenes: []
+    },
+
     
     
   
