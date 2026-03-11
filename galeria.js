@@ -2777,15 +2777,9 @@ const galeriaDatabase = {
         ]
     },
 
-    '3_12': {
-        titulo: "",
-        descripcion: "",
-        categoria: "",
-        imagen: "",
-        imagenes: []
-    },
+  
 
-    '3_13': {
+    '3_12': {
         titulo: "culona",
         descripcion: "",
         categoria: "",
