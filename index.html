@@ -66,7 +66,8 @@
                 <p>Anime con vocabulario + videos español/japonés</p>
                 <button class="card-button" onclick="cargarPaginaAnimes()">Ver animes</button>
             </div>
-               <!-- CARD 11 - SISTEMA SRS (NUEVA) -->
+
+            <!-- CARD 11 - SISTEMA SRS (NUEVA) -->
             <div class="card card-purple" style="background: linear-gradient(135deg, rgba(76, 175, 80, 0.2), rgba(33, 150, 243, 0.2)); border-color: rgba(76, 175, 80, 0.5);">
                 <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400&h=400&fit=crop')"></div>
                 <h3>🔄 SISTEMA SRS</h3>
@@ -75,6 +76,7 @@
                     Ir al SRS
                 </button>
             </div>
+
             <!-- CARD 5 - ASMR -->
             <div class="card card-purple" style="background: linear-gradient(135deg, rgba(156, 39, 176, 0.2), rgba(103, 58, 183, 0.2)); border-color: rgba(156, 39, 176, 0.5);">
                 <div class="card-img" style="background-image: url('https://pbs.twimg.com/media/G_CpDeXXAAAoqV5?format=png&name=small')"></div>
@@ -95,7 +97,7 @@
                 </button>
             </div>
 
-            <!-- CARD 7 - RPG FANTASÍA (NUEVO) -->
+            <!-- CARD 7 - RPG FANTASÍA -->
             <div class="card card-purple" style="background: linear-gradient(135deg, rgba(255, 107, 107, 0.2), rgba(255, 20, 147, 0.2)); border-color: rgba(255, 107, 107, 0.5);">
                 <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1511512578047-dfb367046420?w=400&h=400&fit=crop')"></div>
                 <h3>⚔️ RPG FANTASÍA</h3>
@@ -105,8 +107,7 @@
                 </button>
             </div>
 
-          
-            <!-- CARD 9 - MISIONES (NUEVA) -->
+            <!-- CARD 9 - MISIONES -->
             <div class="card card-green" style="background: linear-gradient(135deg, rgba(255, 209, 102, 0.2), rgba(255, 20, 147, 0.2)); border-color: rgba(255, 209, 102, 0.5);">
                 <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1536922246289-88c42f957773?w=400&h=400&fit=crop')"></div>
                 <h3>🎯 SISTEMA DE MISIONES</h3>
@@ -116,13 +117,13 @@
                 </button>
             </div>
 
-            <!-- CARD 10 - RUSO (NUEVA) -->
+            <!-- CARD 10 - RUSO -->
             <div class="card card-blue" style="background: linear-gradient(135deg, rgba(255, 0, 0, 0.2), rgba(0, 0, 255, 0.2)); border-color: rgba(255, 0, 0, 0.5);">
                 <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1541701494587-cb58502866ab?w=400&h=400&fit=crop&auto=format'); background-position: center;"></div>
                 <h3>🇷🇺 RUSO</h3>
-                <p>Recursos y herramientas para aprender ruso</p>
-                <button class="card-button" style="background: linear-gradient(135deg, #FF0000, #0000FF);" onclick="window.open('https://sorfar123123.github.io/Ruso/', '_blank')">
-                    Ir a Ruso
+                <p>Aprende el alfabeto cirílico con mazos de práctica</p>
+                <button class="card-button" style="background: linear-gradient(135deg, #FF0000, #0000FF);" onclick="cargarPaginaRuso()">
+                    Aprender Ruso
                 </button>
             </div>
         </div>
@@ -175,9 +176,12 @@
     <script src="1_audios_vocabulario.js"></script>
     <script src="1_asmr.js"></script>
     
-    <!-- ARCHIVO RPG QUINTILLIZAS (NUEVO) -->
+    <!-- ARCHIVO RPG QUINTILLIZAS -->
     <script src="rpg.js"></script>
     <script src="fantasia.js"></script>
+
+    <!-- ARCHIVO RUSO -->
+    <script src="ruso.js"></script>
     
     <!-- ARCHIVO DE GALERÍA -->
     <!-- engine primero para que galeriaDatabase exista cuando cargan los data -->
@@ -200,7 +204,8 @@
     <script src="galeria/galeria_data_19.js"></script>
     <script src="galeria/galeria_data_20.js"></script>
     <script src="galeria/galeria_data_21.js"></script>
-       <script src="1_eventos_diarios.js"></script>
+    <script src="1_eventos_diarios.js"></script>
+
     <!-- ARCHIVO PRINCIPAL -->
     <script src="1_main.js"></script>
 </body>
