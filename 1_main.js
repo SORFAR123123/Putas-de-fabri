@@ -1665,6 +1665,9 @@ function volverAlInicio() {
     
     modoMazoDificil = false;
     palabrasDificilesQuiz = [];
+    
+    // Volver al tope de la página
+    window.scrollTo({ top: 0, behavior: 'smooth' });
 }
 
 // ====================
