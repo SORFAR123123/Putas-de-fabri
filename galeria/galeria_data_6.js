@@ -1249,6 +1249,14 @@ const galeriaData_6 = {
         ]
     },
 
+    '6_15': {
+        titulo: "",
+        descripcion: "",
+        categoria: "",
+        imagen: "",
+        imagenes: []
+    },
+
    
 
   
