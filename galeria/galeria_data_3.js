@@ -1962,10 +1962,10 @@ const galeriaData_3 = {
     },
 
     '3_14': {
-        titulo: "",
+        titulo: "Hermanas putardas",
         descripcion: "",
         categoria: "",
-        imagen: "",
+        imagen: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD10/main/imagenes/img_1773447431776.jpg",
         imagenes: [
             { id: 1, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD10/main/imagenes/img_1773447229101.jpg" },
             { id: 2, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD10/main/imagenes/img_1773447230291.jpg" },
