@@ -378,3 +378,20 @@ const rusoSistema = (() => {
     return { cargarPagina, _iniciarMazo, _verificar, _siguiente, _volverMenu };
 
 })();
+
+// ─────────────────────────────────────────────
+// FUNCIÓN GLOBAL — se llama desde el index.html
+// ─────────────────────────────────────────────
+
+function cargarPaginaRuso() {
+    if (typeof ocultarHeader === 'function') ocultarHeader();
+    if (typeof modoActual !== 'undefined') modoActual = 'ruso';
+
+    rusoSistema.cargarPagina();
+
+    if (typeof crearBotonVolver === 'function' && typeof volverAlInicio === 'function') {
+        const mangaSection = document.getElementById('manga-section');
+        const botonVolver = crearBotonVolver(volverAlInicio);
+        mangaSection.insertBefore(botonVolver, mangaSection.firstChild);
+    }
+}
