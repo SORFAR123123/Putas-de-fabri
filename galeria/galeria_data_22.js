@@ -6,8 +6,8 @@ const galeriaData_22 = {
         categoria: "",
         imagen: "https://pbs.twimg.com/media/HDZfZxmX0AE5irg?format=png&name=small",
         imagenes: [
-            { id: 1, url: "https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/img_1773521110142.png" },
-            { id: 2, url: "https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/img_1773521404455.png" }
+            { id: 1, url: "https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/img_1773521110142.png" }
+            
         ]
     }
 };
