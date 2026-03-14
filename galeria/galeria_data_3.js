@@ -1962,10 +1962,10 @@ const galeriaData_3 = {
     },
 
     '3_14': {
-        titulo: "Hermanas putardas",
+        titulo: "",
         descripcion: "",
         categoria: "",
-        imagen: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD10/main/imagenes/img_1773448134513.jpg",
+        imagen: "",
         imagenes: [
             { id: 1, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD10/main/imagenes/img_1773447229101.jpg" },
             { id: 2, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD10/main/imagenes/img_1773447230291.jpg" },
@@ -2730,7 +2730,10 @@ const galeriaData_3 = {
             { id: 761, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD10/main/imagenes/img_1773448125766.jpg" },
             { id: 762, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD10/main/imagenes/img_1773448128333.jpg" },
             { id: 763, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD10/main/imagenes/img_1773448130311.jpg" },
-            { id: 764, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD10/main/imagenes/img_1773448132146.jpg" }
+            { id: 764, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD10/main/imagenes/img_1773448132146.jpg" },
+            { id: 765, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD10/main/imagenes/img_1773448134010.jpg" },
+            { id: 766, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD10/main/imagenes/img_1773448136018.jpg" },
+            { id: 767, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD10/main/imagenes/img_1773448137899.jpg" }
         ]
     },
 
