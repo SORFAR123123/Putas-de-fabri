@@ -702,6 +702,14 @@ const galeriaData_4 = {
             { id: 63, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD9/main/imagenes/img_1773421433627.jpg" }
         ]
     },
+
+    '4_9': {
+        titulo: "",
+        descripcion: "",
+        categoria: "",
+        imagen: "",
+        imagenes: []
+    },
     
     // CONTENEDOR 5 - Ichika
 };
