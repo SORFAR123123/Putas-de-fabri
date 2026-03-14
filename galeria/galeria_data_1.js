@@ -1382,6 +1382,14 @@ const galeriaData_1 = {
             { id: 96, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD11/main/imagenes/img_1773503056582.png" }
         ]
     },
+
+    '1_22': {
+        titulo: "",
+        descripcion: "",
+        categoria: "",
+        imagen: "",
+        imagenes: []
+    },
    
     
     // CONTENEDOR 2
