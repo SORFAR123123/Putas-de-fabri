@@ -1583,7 +1583,7 @@ const galeriaData_1 = {
     '1_25': {
         titulo: "misionero a mi trola",
         descripcion: "",
-        categoria: "",
+        categoria: "クッキーやさん",
         imagen: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD19/main/imagenes/img_1773524930191.jpg",
         imagenes: [
             { id: 1, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD19/main/imagenes/img_1773524862669.jpg" },
