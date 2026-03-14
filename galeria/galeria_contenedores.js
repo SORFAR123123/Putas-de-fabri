@@ -132,6 +132,12 @@ const contenedoresGaleria = {
         imagen: "https://pbs.twimg.com/media/HC1ED-sWIAAOY0b?format=jpg&name=medium",
         descripcion: "Galería de prueba con dos subcontenedores",
         categoria: "Prueba"
+    },
+    22: {
+        nombre: "Chizuru",
+        imagen: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773519854964.png",
+        descripcion: "puta de aldo",
+        categoria: "Puta de aldo"
     }
 };
 
