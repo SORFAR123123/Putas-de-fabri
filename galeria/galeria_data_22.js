@@ -4,7 +4,7 @@ const galeriaData_22 = {
         titulo: "Chizuru",
         descripcion: "",
         categoria: "",
-        imagen: "https://tu-url-de-portada...",
+        imagen: "https://pbs.twimg.com/media/HDZfZxmX0AE5irg?format=png&name=small",
         imagenes: []
     }
 };
