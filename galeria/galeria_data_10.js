@@ -104,7 +104,15 @@ const galeriaData_10 = {
         categoria: "Quintillizas - Trio",
         imagen: "https://pbs.twimg.com/media/HCqEZzsaoAAhtRm?format=jpg&name=small",
         imagenes: []
-    }
+    },
+
+    '10_Trio_de_peteras': {
+        titulo: "",
+        descripcion: "",
+        categoria: "",
+        imagen: "",
+        imagenes: []
+    },
 };
 
 if (typeof galeriaDatabase !== 'undefined') {
