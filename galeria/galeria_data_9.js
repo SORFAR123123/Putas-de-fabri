@@ -370,6 +370,14 @@ const galeriaData_9 = {
             { id: 62, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD19/main/imagenes/img_1773599146327.jpg" }
         ]
     },
+
+    '9_nino_y_miku_trolas_orgia': {
+        titulo: "",
+        descripcion: "",
+        categoria: "",
+        imagen: "",
+        imagenes: []
+    },
 };
 
 if (typeof galeriaDatabase !== 'undefined') {
