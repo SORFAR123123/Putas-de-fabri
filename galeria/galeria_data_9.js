@@ -510,6 +510,14 @@ const galeriaData_9 = {
             { id: 131, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD20/main/imagenes/img_1773600409041.jpg" }
         ]
     },
+
+    '9_peteras_en_al_noche': {
+        titulo: "",
+        descripcion: "",
+        categoria: "",
+        imagen: "",
+        imagenes: []
+    },
 };
 
 if (typeof galeriaDatabase !== 'undefined') {
