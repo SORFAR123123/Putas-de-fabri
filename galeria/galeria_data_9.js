@@ -590,6 +590,14 @@ const galeriaData_9 = {
             { id: 71, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD20/main/imagenes/img_1773600964698.jpg" }
         ]
     },
+
+    '9_Vaquitas_kacheras': {
+        titulo: "",
+        descripcion: "",
+        categoria: "",
+        imagen: "",
+        imagenes: []
+    },
 };
 
 if (typeof galeriaDatabase !== 'undefined') {
