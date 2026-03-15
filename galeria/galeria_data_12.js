@@ -33,7 +33,15 @@ const galeriaData_12 = {
             { id: 22, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772902312058.jpg" },
             { id: 23, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772977925237.jpg" }
         ]
-    }
+    },
+
+    '12_Perras_kachando_en_el_colegio': {
+        titulo: "",
+        descripcion: "",
+        categoria: "",
+        imagen: "",
+        imagenes: []
+    },
 };
 
 if (typeof galeriaDatabase !== 'undefined') {
