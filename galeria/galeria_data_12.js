@@ -89,6 +89,14 @@ const galeriaData_12 = {
             { id: 46, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD19/main/imagenes/img_1773597955875.png" }
         ]
     },
+
+    '12_Perras_playeras': {
+        titulo: "",
+        descripcion: "",
+        categoria: "",
+        imagen: "",
+        imagenes: []
+    },
 };
 
 if (typeof galeriaDatabase !== 'undefined') {
