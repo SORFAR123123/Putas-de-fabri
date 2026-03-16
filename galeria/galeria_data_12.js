@@ -867,6 +867,14 @@ const galeriaData_12 = {
             { id: 71, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD21/main/imagenes/img_1773690091855.jpg" }
         ]
     },
+
+    '12_Yotsuba_las_convence_de_kachar': {
+        titulo: "",
+        descripcion: "",
+        categoria: "",
+        imagen: "",
+        imagenes: []
+    },
 };
 
 if (typeof galeriaDatabase !== 'undefined') {
