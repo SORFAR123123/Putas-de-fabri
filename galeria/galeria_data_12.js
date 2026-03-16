@@ -206,6 +206,14 @@ const galeriaData_12 = {
             { id: 108, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD19/main/imagenes/img_1773598556259.png" }
         ]
     },
+
+    '12_cuerpos_de_putitas': {
+        titulo: "",
+        descripcion: "",
+        categoria: "",
+        imagen: "",
+        imagenes: []
+    },
 };
 
 if (typeof galeriaDatabase !== 'undefined') {
