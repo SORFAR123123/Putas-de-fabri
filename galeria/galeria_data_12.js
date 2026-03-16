@@ -650,6 +650,14 @@ const galeriaData_12 = {
             { id: 6, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD20/main/imagenes/img_1773688233877.jpg" }
         ]
     },
+
+    '12_kachando_en_el_colegio_en_el_tehco': {
+        titulo: "",
+        descripcion: "",
+        categoria: "",
+        imagen: "",
+        imagenes: []
+    },
 };
 
 if (typeof galeriaDatabase !== 'undefined') {
