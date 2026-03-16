@@ -788,45 +788,12 @@ const galeriaData_12 = {
         ]
     },
 
-    '12_Perras_en_lenceria': {
-        titulo: "Putas en lenceria",
+    '12_Chupando_en_la_pista_de_carreras': {
+        titulo: "",
         descripcion: "",
         categoria: "",
-        imagen: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD21/main/imagenes/img_1773689814510.jpg",
-        imagenes: [
-            { id: 1, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD21/main/imagenes/img_1773689726192.jpg" },
-            { id: 2, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD21/main/imagenes/img_1773689728837.jpg" },
-            { id: 3, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD21/main/imagenes/img_1773689730983.jpg" },
-            { id: 4, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD21/main/imagenes/img_1773689733110.jpg" },
-            { id: 5, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD21/main/imagenes/img_1773689735354.jpg" },
-            { id: 6, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD21/main/imagenes/img_1773689737570.jpg" },
-            { id: 7, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD21/main/imagenes/img_1773689739779.jpg" },
-            { id: 8, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD21/main/imagenes/img_1773689742022.jpg" },
-            { id: 9, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD21/main/imagenes/img_1773689744316.jpg" },
-            { id: 10, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD21/main/imagenes/img_1773689746473.jpg" },
-            { id: 11, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD21/main/imagenes/img_1773689748697.jpg" },
-            { id: 12, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD21/main/imagenes/img_1773689750794.jpg" },
-            { id: 13, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD21/main/imagenes/img_1773689752881.jpg" },
-            { id: 14, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD21/main/imagenes/img_1773689755220.jpg" },
-            { id: 15, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD21/main/imagenes/img_1773689757278.jpg" },
-            { id: 16, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD21/main/imagenes/img_1773689759499.jpg" },
-            { id: 17, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD21/main/imagenes/img_1773689761733.jpg" },
-            { id: 18, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD21/main/imagenes/img_1773689763900.jpg" },
-            { id: 19, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD21/main/imagenes/img_1773689766121.jpg" },
-            { id: 20, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD21/main/imagenes/img_1773689768234.jpg" },
-            { id: 21, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD21/main/imagenes/img_1773689770397.jpg" },
-            { id: 22, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD21/main/imagenes/img_1773689772832.jpg" },
-            { id: 23, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD21/main/imagenes/img_1773689775153.jpg" },
-            { id: 24, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD21/main/imagenes/img_1773689777344.jpg" },
-            { id: 25, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD21/main/imagenes/img_1773689779706.jpg" },
-            { id: 26, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD21/main/imagenes/img_1773689781913.jpg" },
-            { id: 27, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD21/main/imagenes/img_1773689784051.jpg" },
-            { id: 28, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD21/main/imagenes/img_1773689786419.jpg" },
-            { id: 29, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD21/main/imagenes/img_1773689788682.jpg" },
-            { id: 30, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD21/main/imagenes/img_1773689790859.jpg" },
-            { id: 31, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD21/main/imagenes/img_1773689793053.jpg" },
-            { id: 32, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD21/main/imagenes/img_1773689795514.jpg" }
-        ]
+        imagen: "",
+        imagenes: []
     },
 };
 
