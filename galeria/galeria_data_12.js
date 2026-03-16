@@ -747,6 +747,14 @@ const galeriaData_12 = {
             { id: 88, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD20/main/imagenes/img_1773688783786.jpg" }
         ]
     },
+
+    '12_Tetas_en_la_piscina': {
+        titulo: "",
+        descripcion: "",
+        categoria: "",
+        imagen: "",
+        imagenes: []
+    },
 };
 
 if (typeof galeriaDatabase !== 'undefined') {
