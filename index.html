@@ -9,7 +9,6 @@
 </head>
 
 <body>
-    <!-- BOTÓN CASA PARA VOLVER AL INICIO (visible siempre) -->
     <button id="boton-casa" class="btn-casa" onclick="volverAlInicio()" title="Volver al inicio">
         🏠
     </button>
@@ -67,7 +66,7 @@
                 <button class="card-button" onclick="cargarPaginaAnimes()">Ver animes</button>
             </div>
 
-            <!-- CARD 11 - SISTEMA SRS (NUEVA) -->
+            <!-- CARD 11 - SISTEMA SRS -->
             <div class="card card-purple" style="background: linear-gradient(135deg, rgba(76, 175, 80, 0.2), rgba(33, 150, 243, 0.2)); border-color: rgba(76, 175, 80, 0.5);">
                 <div class="card-img" style="background-image: url('https://images.unsplash.com/photo-1516321318423-f06f85e504b3?w=400&h=400&fit=crop')"></div>
                 <h3>🔄 SISTEMA SRS</h3>
@@ -127,8 +126,8 @@
                 </button>
             </div>
 
-            <!-- ★ CARD NUEVA - YOTSUBA CHAT ★ -->
-            <div class="card" style="background: linear-gradient(135deg, rgba(58, 140, 47, 0.25), rgba(125, 219, 110, 0.15)); border-color: rgba(125, 219, 110, 0.6); box-shadow: 0 0 20px rgba(125,219,110,0.15);">
+            <!-- ★ CARD YOTSUBA CHAT ★ -->
+            <div class="card" style="background: linear-gradient(135deg, rgba(58,140,47,0.25), rgba(125,219,110,0.12)); border-color: rgba(125,219,110,0.55); box-shadow: 0 0 18px rgba(125,219,110,0.12);">
                 <div class="card-img" style="background-image: url('https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524604135.jpg'); background-size: cover; background-position: top;"></div>
                 <h3 style="color: #7ddb6e;">🍀 CHAT CON YOTSUBA</h3>
                 <p style="color: #8ab88a;">Habla con Yotsuba Nakano en tiempo real ♡</p>
@@ -140,7 +139,7 @@
         </div>
     </section>
 
-    <!-- SECCIÓN DINÁMICA PARA MANGAS/VIDEOS/ANIMES/AUDIOS/ASMR/RPG/GALERÍA/CHAT -->
+    <!-- SECCIÓN DINÁMICA -->
     <section id="manga-section" style="display: none;"></section>
 
     <!-- SECCIÓN DEL QUIZ -->
@@ -181,21 +180,12 @@
     <script src="1_animes_vocabulario.js"></script>
     <script src="1_sistemas.js"></script>
     <script src="lectormanga.js"></script>
-    
-    <!-- ARCHIVOS NUEVOS PARA AUDIOS Y ASMR -->
     <script src="1_audios.js"></script>
     <script src="1_audios_vocabulario.js"></script>
     <script src="1_asmr.js"></script>
-    
-    <!-- ARCHIVO RPG QUINTILLIZAS -->
     <script src="rpg.js"></script>
     <script src="fantasia.js"></script>
-
-    <!-- ARCHIVO RUSO -->
     <script src="ruso.js"></script>
-    
-    <!-- ARCHIVO DE GALERÍA -->
-    <!-- engine primero para que galeriaDatabase exista cuando cargan los data -->
     <script src="galeria/galeria_engine.js"></script>
     <script src="galeria/galeria_contenedores.js"></script>
     <script src="galeria/galeria_data_1.js"></script>
@@ -206,10 +196,10 @@
     <script src="galeria/galeria_data_6.js"></script>
     <script src="galeria/galeria_data_7.js"></script>
     <script src="galeria/galeria_data_8.js"></script>
-    <script src="galeria/galeria_data_9.js"></script>   
-    <script src="galeria/galeria_data_10.js"></script> 
-    <script src="galeria/galeria_data_11.js"></script>  
-    <script src="galeria/galeria_data_12.js"></script>  
+    <script src="galeria/galeria_data_9.js"></script>
+    <script src="galeria/galeria_data_10.js"></script>
+    <script src="galeria/galeria_data_11.js"></script>
+    <script src="galeria/galeria_data_12.js"></script>
     <script src="galeria/galeria_data_13.js"></script>
     <script src="galeria/galeria_data_14.js"></script>
     <script src="galeria/galeria_data_15.js"></script>
@@ -221,11 +211,9 @@
     <script src="galeria/galeria_data_21.js"></script>
     <script src="galeria/galeria_data_22.js"></script>
     <script src="1_eventos_diarios.js"></script>
-
-    <!-- ARCHIVO PRINCIPAL -->
     <script src="1_main.js"></script>
 
-    <!-- ★ YOTSUBA CHAT ★ -->
+    <!-- ★ YOTSUBA CHAT — va DESPUÉS de 1_main.js ★ -->
     <script src="yotsuba_chat.js"></script>
 </body>
 </html>
