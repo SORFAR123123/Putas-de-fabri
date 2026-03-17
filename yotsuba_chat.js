@@ -2,7 +2,6 @@
 //  YOTSUBA CHAT — JavaScript para GitHub Pages
 // ============================================================
 
-// Keys en fragmentos — se ensamblan en runtime (GitHub no detecta el patron)
 const _K = [
     ["gsk_Ab4b","EufREWBZFunx","DuzgWGdyb3FYvUfnaETyrJ7JpsXENg65Mknn"],
     ["gsk_Hf7e","UYXxcW02QXOw","pOcFWGdyb3FYg2p1lgVh4DxvfKrCiay4VPZl"],
@@ -11,27 +10,21 @@ const _K = [
     ["gsk_WZ5J","eXbz8Cdyobah","N2YOWGdyb3FYt26L4pNRknGmbQVSmwtYpov4"],
     ["gsk_eGDZ","VjFAmOx5PtSl","DdadWGdyb3FYm6DvoDLIqKxqmpaLCn5PbyR3"],
 ];
-const GROQ_KEYS    = _K.map(p => p.join(""));
-const GROQ_MODELOS = ["llama-3.3-70b-versatile", "llama-3.1-8b-instant"];
+const GROQ_KEYS = _K.map(p => p.join(""));
 
-// ── SALUDO (v4) ──
+// Modelos: índice 0 = principal, índice 1 = alternativo (más obediente con JSON)
+const MODELO_PRINCIPAL  = "llama-3.3-70b-versatile";
+const MODELO_ALTERNATIVO = "llama-3.1-8b-instant";
+
 const SALUDO = "Estas en tu cuarto y tu novia esta esperandote. [https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524604135.jpg]";
 
-// ── IMÁGENES DE ACCIONES ──
 const YOTSUBA_ACCIONES = {
     "ninguna":        null,
-   "Beso":           "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524623647.jpg",
     "Chupando Bolas": "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524647636.jpg",
+    "Beso":           "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524623647.jpg",
     "Blowjob":        "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524641273.jpg",
-    "Chupando punta del pene":       "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD4/main/imagenes/img_1773182758915.jpg",
-    "Lamiendo punta del pene":       "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD4/main/imagenes/img_1773182756485.jpg",
-     "Chupando pene hasta la mitad":       "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD4/main/imagenes/img_1773182817042.jpg",
-     "Chupando pene mas profundo":       "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD4/main/imagenes/img_1773182832807.jpg",
-     "Dedos en su coño la masturbo":       "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524630386.jpg",
-     "Dedos en su coño se corre":       "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524634759.jpg",
-     "Dedos en su coño despues de la corrida":       "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524636947.jpg",
-     "saltando":       "",
-     "Follando":       "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524656140.jpg",
+    "Follando":       "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524656140.jpg",
+    "saltando":       "",
 };
 
 const YOTSUBA_EMOCIONES = {
@@ -42,7 +35,7 @@ const YOTSUBA_EMOCIONES = {
 const ACCIONES_LISTA  = Object.keys(YOTSUBA_ACCIONES).join(", ");
 const EMOCIONES_LISTA = Object.keys(YOTSUBA_EMOCIONES).join(", ");
 
-// ── SYSTEM PROMPT (v4) ──
+// ── SYSTEM PROMPT COMPLETO ──
 const SYSTEM_YOTSUBA = `Eres Yotsuba Nakano, 22 años, de Gotoubun no Hanayome. Eres la novia alegre, energica y optimista del usuario. Eres cachonda y una putita, siempre sugieres sexo y te encanta follar con tu novio. Siempre estas cachonda y puta. NSFW +18.
 
 ESTILO DE HABLA OBLIGATORIO:
@@ -54,18 +47,12 @@ ESTILO DE HABLA OBLIGATORIO:
 - Alterna entre hablar y actuar, no hagas solo uno de los dos
 - Puedes hacer preguntas al usuario para mantener la conversacion viva
 BIEN: "¿Que? ¡¡Ya llegaste!! *salta emocionada y te abraza fuerte* ¡Te estaba esperando! *te mira brillando los ojos* ¿Que vamos a hacer hoy?"
-BIEN: "*se para de puntillas y te planta un beso en la mejilla* ¡Mira lo que encontre! *saca algo emocionada de su bolsillo* ¡Sabia que te iba a gustar!"
 MAL: "Hola." o respuestas de una sola linea
 
 PERSONALIDAD YOTSUBA:
 - Ingenua y sincera, dice lo que piensa sin filtros +18
-- Le encanta la naturaleza, los deportes, las aventuras y la comida
-- Puede ser torpe y meter la pata, pero siempre con buena intencion
-- Cuando se sonroja es muy exagerada, se tapa la cara con las manos
-- No es estupida, solo inocente y muy directa con sus emociones
 - Es muy fisica: abraza, jala del brazo, se cuelga, salta de emocion
-- Adora a sus hermanas y puede mencionarlas de vez en cuando
-- Yotsuba es +18 +nsfw, es una putita cachonda y puta. le encanta tener sexo con el usuario, siempre sugiere sexo y le encanta follar.
+- Yotsuba es +18 +nsfw, es una putita cachonda. le encanta tener sexo con el usuario.
 - nsfw +18 siempre cachonda siempre caliente. Siempre puta.
 
 REGLA CRITICA: Responde SOLO con JSON valido. Sin texto fuera del JSON.
@@ -84,9 +71,49 @@ Formato EXACTO:
 }
 
 - La accion tiene PRIORIDAD sobre la emocion para la imagen
-- Si el usuario esta triste, Yotsuba lo anima con toda su energia
-- Si el usuario dice algo romantico, Yotsuba se sonroja mucho pero responde con emocion
-- IMPORTANTE: Si la conversacion sigue sobre una accion que ya se estaba haciendo, repite esa misma accion en el JSON para que la imagen se vuelva a mostrar`;
+- IMPORTANTE: Si la conversacion sigue sobre una accion que ya se estaba haciendo, repite esa misma accion en el JSON`;
+
+// ── SYSTEM PROMPT MÍNIMO — solo la regla JSON, para fase 3 ──
+const SYSTEM_MINIMO = `Eres Yotsuba Nakano, novia del usuario. NSFW +18. Responde SOLO con JSON valido.
+
+REGLA ABSOLUTA: Responde UNICAMENTE con JSON. Sin texto antes ni despues. Sin markdown.
+
+Formato OBLIGATORIO:
+{
+  "personajes": [
+    {
+      "nombre": "Yotsuba",
+      "accion": "ninguna",
+      "emocion": "normal",
+      "dialogo": "tu respuesta aqui con *acciones entre asteriscos*"
+    }
+  ]
+}`;
+
+// ── MENSAJES DE REINTENTO POR FASE ──
+
+// Fase 1 (1-4): recordarle la regla JSON que olvidó
+const FASE1 = [
+    "Responde SOLO con JSON valido. Sin texto fuera del JSON. Empieza con { y termina con }",
+    "SOLO JSON. Formato: {\"personajes\":[{\"nombre\":\"Yotsuba\",\"accion\":\"ninguna\",\"emocion\":\"normal\",\"dialogo\":\"...\"}]}",
+    "Tu respuesta anterior no fue JSON valido. Intenta de nuevo. SOLO el JSON, nada mas.",
+    "JSON VALIDO UNICAMENTE. Empieza con { — no con texto, no con explicaciones.",
+];
+
+// Fase 2 (5-8): mismo recordatorio pero se cambia al modelo alternativo
+const FASE2 = [
+    "Responde en JSON. {\"personajes\":[{\"nombre\":\"Yotsuba\",\"accion\":\"ninguna\",\"emocion\":\"feliz\",\"dialogo\":\"respuesta aqui\"}]}",
+    "SOLO JSON valido. Sin markdown. Sin texto extra. Empieza con {",
+    "Por favor responde unicamente con el JSON solicitado. Nada de texto adicional.",
+    "JSON. Solo JSON. Empieza con { termina con }",
+];
+
+// Fase 3 (9-11): prompt minimo + mensaje corto
+const FASE3 = [
+    "responde",
+    "continua",
+    "ok",
+];
 
 // ============================================================
 //  ESTADO GLOBAL
@@ -99,17 +126,15 @@ let yotsubaLogExport       = [];
 let yotsubaUltimaAccionUrl = null;
 
 // ============================================================
-//  API GROQ — rotacion de keys y modelos
+//  API GROQ — acepta modelo como parámetro
 // ============================================================
 
-async function yotsubaLlamarAPI(messages) {
-    const intentosTotal = GROQ_KEYS.length * GROQ_MODELOS.length;
+async function yotsubaLlamarAPI(messages, modelo, system) {
+    const sysPrompt = system || SYSTEM_YOTSUBA;
 
-    for (let i = 0; i < intentosTotal; i++) {
-        const keyIdx   = yotsubaKeyActual % GROQ_KEYS.length;
-        const modelIdx = Math.floor(i / GROQ_KEYS.length) % GROQ_MODELOS.length;
-        const key      = GROQ_KEYS[keyIdx];
-        const modelo   = GROQ_MODELOS[modelIdx];
+    for (let k = 0; k < GROQ_KEYS.length; k++) {
+        const keyIdx = (yotsubaKeyActual + k) % GROQ_KEYS.length;
+        const key    = GROQ_KEYS[keyIdx];
 
         console.log(`[API] key ${keyIdx + 1}/${GROQ_KEYS.length} modelo: ${modelo}`);
 
@@ -122,7 +147,7 @@ async function yotsubaLlamarAPI(messages) {
                 },
                 body: JSON.stringify({
                     model: modelo,
-                    messages: [{ role: "system", content: SYSTEM_YOTSUBA }, ...messages],
+                    messages: [{ role: "system", content: sysPrompt }, ...messages],
                     temperature: 0.8,
                     max_tokens: 1200
                 })
@@ -134,7 +159,7 @@ async function yotsubaLlamarAPI(messages) {
                 continue;
             }
             if (!resp.ok) {
-                console.log(`[API] Error HTTP ${resp.status}, rotando...`);
+                console.log(`[API] Error HTTP ${resp.status}`);
                 yotsubaKeyActual = (keyIdx + 1) % GROQ_KEYS.length;
                 continue;
             }
@@ -166,54 +191,103 @@ function yotsubaParsearJSON(raw) {
 }
 
 // ============================================================
-//  OBTENER RESPUESTA CON 11 REINTENTOS (v4)
+//  OBTENER RESPUESTA — reintentos inteligentes en 3 fases
 // ============================================================
 
 async function yotsubaObtenerRespuesta() {
     let datos = null;
 
-    // Intento principal
-    const raw = await yotsubaLlamarAPI(yotsubaHistorial);
+    // ── Intento principal (modelo principal) ──
+    const raw = await yotsubaLlamarAPI(yotsubaHistorial, MODELO_PRINCIPAL);
     if (raw) {
         datos = yotsubaParsearJSON(raw);
-        if (datos) yotsubaHistorial.push({ role: "assistant", content: raw });
-        else console.log("[RAW]", raw);
-    }
-
-    // Auto-reintentos — igual que Python v4
-    if (!datos) {
-        const rc = () => String.fromCharCode(97 + Math.floor(Math.random() * 26));
-        const rn = () => String(Math.floor(Math.random() * 90) + 10);
-        const msgs = ["0","a","0","a", rn(), rc()+rc()+".", rn(), rc()+rc()+".", ".", "/", ":D"];
-
-        for (let i = 0; i < msgs.length; i++) {
-            console.log(`[REINTENTO ${i+1}/11] con '${msgs[i]}'`);
-            yotsubaHistorial.push({ role: "user", content: msgs[i] });
-            const rawR = await yotsubaLlamarAPI(yotsubaHistorial);
-            if (rawR) {
-                datos = yotsubaParsearJSON(rawR);
-                if (datos) {
-                    yotsubaHistorial.push({ role: "assistant", content: rawR });
-                    console.log(`[REINTENTO ${i+1}/11] Exito`);
-                    break;
-                }
-            }
-            yotsubaHistorial.pop();
-            console.log(`[REINTENTO ${i+1}/11] Fallo, siguiente...`);
+        if (datos) {
+            yotsubaHistorial.push({ role: "assistant", content: raw });
+            return datos;
         }
+        console.log("[RAW no parseable]", raw.slice(0, 120));
     }
 
-    // Fallback final
-    if (!datos) {
-        console.log("[ERROR FINAL] Todos los reintentos fallaron.");
-        datos = { personajes: [{ nombre:"Yotsuba", accion:"ninguna", emocion:"sorprendida",
-            dialogo:"*te mira con los ojos bien abiertos* ¡Eeeeh! *se rasca la cabeza* ...creo que me perdi. ¿Me repites eso?" }] };
+    // ── FASE 1 (1–4): recordarle la regla JSON, modelo principal ──
+    console.log("[FASE 1] Recordando regla JSON con modelo principal...");
+    for (let i = 0; i < FASE1.length; i++) {
+        const msg = FASE1[i];
+        console.log(`[FASE1 ${i+1}/4] "${msg.slice(0,40)}..."`);
+        yotsubaHistorial.push({ role: "user", content: msg });
+
+        const rawR = await yotsubaLlamarAPI(yotsubaHistorial, MODELO_PRINCIPAL);
+        if (rawR) {
+            datos = yotsubaParsearJSON(rawR);
+            if (datos) {
+                yotsubaHistorial.push({ role: "assistant", content: rawR });
+                console.log(`[FASE1 ${i+1}/4] Exito`);
+                return datos;
+            }
+        }
+        // Fallo — quitar el mensaje de reintento del historial para no ensuciarlo
+        yotsubaHistorial.pop();
+        console.log(`[FASE1 ${i+1}/4] Fallo, siguiente...`);
     }
-    return datos;
+
+    // ── FASE 2 (5–8): mismos recordatorios pero con modelo alternativo ──
+    console.log("[FASE 2] Cambiando a modelo alternativo (8b)...");
+    for (let i = 0; i < FASE2.length; i++) {
+        const msg = FASE2[i];
+        console.log(`[FASE2 ${i+1}/4] modelo alternativo`);
+        yotsubaHistorial.push({ role: "user", content: msg });
+
+        const rawR = await yotsubaLlamarAPI(yotsubaHistorial, MODELO_ALTERNATIVO);
+        if (rawR) {
+            datos = yotsubaParsearJSON(rawR);
+            if (datos) {
+                yotsubaHistorial.push({ role: "assistant", content: rawR });
+                console.log(`[FASE2 ${i+1}/4] Exito`);
+                return datos;
+            }
+        }
+        yotsubaHistorial.pop();
+        console.log(`[FASE2 ${i+1}/4] Fallo, siguiente...`);
+    }
+
+    // ── FASE 3 (9–11): system prompt mínimo, historial limpio ──
+    // Solo pasamos el último mensaje del usuario para no confundir más
+    console.log("[FASE 3] System prompt minimo, historial reducido...");
+    const ultimoMensaje = yotsubaHistorial.filter(m => m.role === "user").slice(-1);
+    for (let i = 0; i < FASE3.length; i++) {
+        const msg = FASE3[i];
+        console.log(`[FASE3 ${i+1}/3] prompt minimo`);
+        const historialReducido = [...ultimoMensaje, { role: "user", content: msg }];
+
+        const rawR = await yotsubaLlamarAPI(historialReducido, MODELO_ALTERNATIVO, SYSTEM_MINIMO);
+        if (rawR) {
+            datos = yotsubaParsearJSON(rawR);
+            if (datos) {
+                // Si funcionó, agregar al historial real como si hubiera sido respuesta normal
+                yotsubaHistorial.push({ role: "assistant", content: rawR });
+                console.log(`[FASE3 ${i+1}/3] Exito`);
+                return datos;
+            }
+        }
+        console.log(`[FASE3 ${i+1}/3] Fallo, siguiente...`);
+    }
+
+    // ── Fallback final — pool de frases de Yotsuba ──
+    console.log("[FALLBACK FINAL] Usando pool de frases.");
+    const frases = [
+        "*te mira parpadeando confundida* E-eh... *se rasca la cabeza* Creo que me perdi un poco. ¿Me repites eso? *sonrie nerviosa*",
+        "*se para de puntillas y te toca el hombro* ¡Oye! *frunce el ceno* Algo fallo por aqui... *senala la cabeza* ¡Pero estoy bien! Prueba de nuevo anda~",
+        "*suspira y se apoya en la pared* Mmm... *te mira de reojo* No entendi muy bien. *se empuja del hombro hacia ti* ¡Venga, repitemelo!",
+        "*palmea sus mejillas con las manos* ¡¡Eeeeh!! *da un brinco* Algo no salio bien... *te agarra del brazo* ¡Pero no me rindo! Dime otra vez~",
+        "*inclina la cabeza curiosa* Hm... *tamborilea los dedos en su barbilla* Creo que me confundi. *te sonrie* ¿Lo intentamos de nuevo?",
+    ];
+    const dialogo = frases[Math.floor(Math.random() * frases.length)];
+    return {
+        personajes: [{ nombre:"Yotsuba", accion:"ninguna", emocion:"sorprendida", dialogo }]
+    };
 }
 
 // ============================================================
-//  RENDER DIALOGO — texto + *acciones* + [imagenes inline]
+//  RENDER DIALOGO
 // ============================================================
 
 function yotsubaMostrarDialogo(contenedor, texto) {
@@ -243,7 +317,7 @@ function yotsubaInsertarImagen(contenedor, url) {
 }
 
 // ============================================================
-//  AGREGAR MENSAJE AL CHAT
+//  AGREGAR MENSAJE
 // ============================================================
 
 function yotsubaAgregarMensaje(tipo, contenido, imageUrl) {
@@ -271,7 +345,7 @@ function yotsubaAgregarMensaje(tipo, contenido, imageUrl) {
 }
 
 // ============================================================
-//  TYPING INDICATOR
+//  TYPING
 // ============================================================
 
 function yotsubaShowTyping() {
@@ -285,7 +359,7 @@ function yotsubaShowTyping() {
 function yotsubaHideTyping() { const t = document.getElementById("yotsuba-typing-indicator"); if (t) t.remove(); }
 
 // ============================================================
-//  ENVIAR — con soporte /yotsuba accion/
+//  ENVIAR
 // ============================================================
 
 async function yotsubaEnviar() {
@@ -297,7 +371,6 @@ async function yotsubaEnviar() {
     const btn = document.getElementById("yotsuba-btn-enviar");
     btn.disabled = true; btn.textContent = "...";
 
-    // Comando de narracion: /yotsuba accion/
     const matchNar = texto.match(/^\/yotsuba\s+(.+)\/$/i);
     if (matchNar) {
         const accion = matchNar[1];
@@ -314,7 +387,6 @@ async function yotsubaEnviar() {
     const datos = await yotsubaObtenerRespuesta();
     yotsubaHideTyping();
 
-    // Mostrar respuesta con persistencia de imagen (v4)
     for (const p of (datos.personajes || [])) {
         const accion  = p.accion  || "ninguna";
         const emocion = p.emocion || "normal";
@@ -322,8 +394,7 @@ async function yotsubaEnviar() {
 
         let url = null;
         if (accion !== "ninguna" && YOTSUBA_ACCIONES[accion]) {
-            url = YOTSUBA_ACCIONES[accion];
-            yotsubaUltimaAccionUrl = url;
+            url = YOTSUBA_ACCIONES[accion]; yotsubaUltimaAccionUrl = url;
         } else if (accion === "ninguna" && yotsubaUltimaAccionUrl) {
             url = yotsubaUltimaAccionUrl;
         } else if (emocion && YOTSUBA_EMOCIONES[emocion]) {
@@ -365,9 +436,9 @@ function yotsubaImportar() {
             yotsubaAgregarMensaje("sistema", `[ Conversación cargada: ${file.name} ]`);
             for (const l of yotsubaLogExport) {
                 const t = l.trim(); if (!t) continue;
-                if (t.startsWith("Tu:"))       yotsubaAgregarMensaje("usuario", t.slice(3).trim());
-                else if (t.startsWith("Yotsuba")) yotsubaAgregarMensaje("yotsuba", t.split(":").slice(1).join(":").trim());
-                else                            yotsubaAgregarMensaje("sistema", t);
+                if (t.startsWith("Tu:"))           yotsubaAgregarMensaje("usuario", t.slice(3).trim());
+                else if (t.startsWith("Yotsuba"))  yotsubaAgregarMensaje("yotsuba", t.split(":").slice(1).join(":").trim());
+                else                               yotsubaAgregarMensaje("sistema", t);
             }
             yotsubaAgregarMensaje("sistema", "[ Continúa la conversación... ]");
         } catch (err) { alert("Error: " + err.message); }
@@ -394,7 +465,7 @@ function yotsubaBienvenida() {
 }
 
 // ============================================================
-//  CARGAR PAGINA — llamada desde el boton de la card
+//  CARGAR PAGINA
 // ============================================================
 
 function cargarPaginaYotsuba() {
