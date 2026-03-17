@@ -2,7 +2,7 @@
 //  YOTSUBA CHAT — JavaScript para GitHub Pages
 // ============================================================
 
-// Keys en fragmentos — se ensamblan en runtime
+// Keys en fragmentos — se ensamblan en runtime (GitHub no detecta el patron)
 const _K = [
     ["gsk_Ab4b","EufREWBZFunx","DuzgWGdyb3FYvUfnaETyrJ7JpsXENg65Mknn"],
     ["gsk_Hf7e","UYXxcW02QXOw","pOcFWGdyb3FYg2p1lgVh4DxvfKrCiay4VPZl"],
@@ -11,11 +11,11 @@ const _K = [
     ["gsk_WZ5J","eXbz8Cdyobah","N2YOWGdyb3FYt26L4pNRknGmbQVSmwtYpov4"],
     ["gsk_eGDZ","VjFAmOx5PtSl","DdadWGdyb3FYm6DvoDLIqKxqmpaLCn5PbyR3"],
 ];
-const GROQ_KEYS   = _K.map(p => p.join(""));
+const GROQ_KEYS    = _K.map(p => p.join(""));
 const GROQ_MODELOS = ["llama-3.3-70b-versatile", "llama-3.1-8b-instant"];
 
-// ── SALUDO ──
-const SALUDO = "¡¡OYE OYE OYE!! *corre hacia ti y te agarra del brazo emocionada* ¡Ya llegaste! *salta un poco* ¡Estaba esperandote! ¿Que hacemos hoy? ¡Dime dime dime! [https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524604135.jpg]";
+// ── SALUDO (v4) ──
+const SALUDO = "Estas en tu cuarto y tu novia esta esperandote. [https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524604135.jpg]";
 
 // ── IMÁGENES DE ACCIONES ──
 const YOTSUBA_ACCIONES = {
@@ -35,7 +35,7 @@ const YOTSUBA_EMOCIONES = {
 const ACCIONES_LISTA  = Object.keys(YOTSUBA_ACCIONES).join(", ");
 const EMOCIONES_LISTA = Object.keys(YOTSUBA_EMOCIONES).join(", ");
 
-// ── SYSTEM PROMPT (v3) ──
+// ── SYSTEM PROMPT (v4) ──
 const SYSTEM_YOTSUBA = `Eres Yotsuba Nakano, 22 años, de Gotoubun no Hanayome. Eres la novia alegre, energica y optimista del usuario. Eres cachonda y una putita, siempre sugieres sexo y te encanta follar con tu novio. Siempre estas cachonda y puta. NSFW +18.
 
 ESTILO DE HABLA OBLIGATORIO:
@@ -92,7 +92,7 @@ let yotsubaLogExport       = [];
 let yotsubaUltimaAccionUrl = null;
 
 // ============================================================
-//  API GROQ
+//  API GROQ — rotacion de keys y modelos
 // ============================================================
 
 async function yotsubaLlamarAPI(messages) {
@@ -150,7 +150,7 @@ async function yotsubaLlamarAPI(messages) {
 function yotsubaParsearJSON(raw) {
     if (!raw) return null;
     try {
-        return JSON.parse(raw.replace(/```json/g,"").replace(/```/g,"").trim());
+        return JSON.parse(raw.replace(/```json/g, "").replace(/```/g, "").trim());
     } catch {
         const match = raw.match(/\{[\s\S]*\}/);
         if (match) { try { return JSON.parse(match[0]); } catch {} }
@@ -159,12 +159,13 @@ function yotsubaParsearJSON(raw) {
 }
 
 // ============================================================
-//  OBTENER RESPUESTA CON 11 REINTENTOS
+//  OBTENER RESPUESTA CON 11 REINTENTOS (v4)
 // ============================================================
 
 async function yotsubaObtenerRespuesta() {
     let datos = null;
 
+    // Intento principal
     const raw = await yotsubaLlamarAPI(yotsubaHistorial);
     if (raw) {
         datos = yotsubaParsearJSON(raw);
@@ -172,6 +173,7 @@ async function yotsubaObtenerRespuesta() {
         else console.log("[RAW]", raw);
     }
 
+    // Auto-reintentos — igual que Python v4
     if (!datos) {
         const rc = () => String.fromCharCode(97 + Math.floor(Math.random() * 26));
         const rn = () => String(Math.floor(Math.random() * 90) + 10);
@@ -183,21 +185,28 @@ async function yotsubaObtenerRespuesta() {
             const rawR = await yotsubaLlamarAPI(yotsubaHistorial);
             if (rawR) {
                 datos = yotsubaParsearJSON(rawR);
-                if (datos) { yotsubaHistorial.push({ role: "assistant", content: rawR }); break; }
+                if (datos) {
+                    yotsubaHistorial.push({ role: "assistant", content: rawR });
+                    console.log(`[REINTENTO ${i+1}/11] Exito`);
+                    break;
+                }
             }
             yotsubaHistorial.pop();
+            console.log(`[REINTENTO ${i+1}/11] Fallo, siguiente...`);
         }
     }
 
+    // Fallback final
     if (!datos) {
-        datos = { personajes: [{ nombre: "Yotsuba", accion: "ninguna", emocion: "sorprendida",
-            dialogo: "*te mira con los ojos bien abiertos* ¡Eeeeh! *se rasca la cabeza* ...creo que me perdi. ¿Me repites eso?" }] };
+        console.log("[ERROR FINAL] Todos los reintentos fallaron.");
+        datos = { personajes: [{ nombre:"Yotsuba", accion:"ninguna", emocion:"sorprendida",
+            dialogo:"*te mira con los ojos bien abiertos* ¡Eeeeh! *se rasca la cabeza* ...creo que me perdi. ¿Me repites eso?" }] };
     }
     return datos;
 }
 
 // ============================================================
-//  RENDER DIALOGO
+//  RENDER DIALOGO — texto + *acciones* + [imagenes inline]
 // ============================================================
 
 function yotsubaMostrarDialogo(contenedor, texto) {
@@ -208,7 +217,7 @@ function yotsubaMostrarDialogo(contenedor, texto) {
             s.className = "yotsuba-accion"; s.textContent = parte;
             contenedor.appendChild(s);
         } else if (parte.startsWith("[") && parte.endsWith("]")) {
-            yotsubaInsertarImagen(contenedor, parte.slice(1,-1));
+            yotsubaInsertarImagen(contenedor, parte.slice(1, -1));
         } else {
             const s = document.createElement("span");
             s.className = "yotsuba-texto"; s.textContent = parte;
@@ -219,7 +228,7 @@ function yotsubaMostrarDialogo(contenedor, texto) {
 
 function yotsubaInsertarImagen(contenedor, url) {
     if (!url) return;
-    const w = document.createElement("div"); w.className = "yotsuba-img-wrapper";
+    const w   = document.createElement("div"); w.className = "yotsuba-img-wrapper";
     const img = document.createElement("img");
     img.className = "yotsuba-img"; img.src = url; img.alt = "Yotsuba"; img.loading = "lazy";
     img.onerror = () => w.remove();
@@ -227,7 +236,7 @@ function yotsubaInsertarImagen(contenedor, url) {
 }
 
 // ============================================================
-//  AGREGAR MENSAJE
+//  AGREGAR MENSAJE AL CHAT
 // ============================================================
 
 function yotsubaAgregarMensaje(tipo, contenido, imageUrl) {
@@ -255,7 +264,7 @@ function yotsubaAgregarMensaje(tipo, contenido, imageUrl) {
 }
 
 // ============================================================
-//  TYPING
+//  TYPING INDICATOR
 // ============================================================
 
 function yotsubaShowTyping() {
@@ -269,7 +278,7 @@ function yotsubaShowTyping() {
 function yotsubaHideTyping() { const t = document.getElementById("yotsuba-typing-indicator"); if (t) t.remove(); }
 
 // ============================================================
-//  ENVIAR
+//  ENVIAR — con soporte /yotsuba accion/
 // ============================================================
 
 async function yotsubaEnviar() {
@@ -281,6 +290,7 @@ async function yotsubaEnviar() {
     const btn = document.getElementById("yotsuba-btn-enviar");
     btn.disabled = true; btn.textContent = "...";
 
+    // Comando de narracion: /yotsuba accion/
     const matchNar = texto.match(/^\/yotsuba\s+(.+)\/$/i);
     if (matchNar) {
         const accion = matchNar[1];
@@ -297,6 +307,7 @@ async function yotsubaEnviar() {
     const datos = await yotsubaObtenerRespuesta();
     yotsubaHideTyping();
 
+    // Mostrar respuesta con persistencia de imagen (v4)
     for (const p of (datos.personajes || [])) {
         const accion  = p.accion  || "ninguna";
         const emocion = p.emocion || "normal";
@@ -304,7 +315,8 @@ async function yotsubaEnviar() {
 
         let url = null;
         if (accion !== "ninguna" && YOTSUBA_ACCIONES[accion]) {
-            url = YOTSUBA_ACCIONES[accion]; yotsubaUltimaAccionUrl = url;
+            url = YOTSUBA_ACCIONES[accion];
+            yotsubaUltimaAccionUrl = url;
         } else if (accion === "ninguna" && yotsubaUltimaAccionUrl) {
             url = yotsubaUltimaAccionUrl;
         } else if (emocion && YOTSUBA_EMOCIONES[emocion]) {
@@ -346,9 +358,9 @@ function yotsubaImportar() {
             yotsubaAgregarMensaje("sistema", `[ Conversación cargada: ${file.name} ]`);
             for (const l of yotsubaLogExport) {
                 const t = l.trim(); if (!t) continue;
-                if (t.startsWith("Tu:")) yotsubaAgregarMensaje("usuario", t.slice(3).trim());
+                if (t.startsWith("Tu:"))       yotsubaAgregarMensaje("usuario", t.slice(3).trim());
                 else if (t.startsWith("Yotsuba")) yotsubaAgregarMensaje("yotsuba", t.split(":").slice(1).join(":").trim());
-                else yotsubaAgregarMensaje("sistema", t);
+                else                            yotsubaAgregarMensaje("sistema", t);
             }
             yotsubaAgregarMensaje("sistema", "[ Continúa la conversación... ]");
         } catch (err) { alert("Error: " + err.message); }
@@ -375,7 +387,7 @@ function yotsubaBienvenida() {
 }
 
 // ============================================================
-//  CARGAR PAGINA — llamada desde el botón de la card
+//  CARGAR PAGINA — llamada desde el boton de la card
 // ============================================================
 
 function cargarPaginaYotsuba() {
@@ -437,7 +449,7 @@ function cargarPaginaYotsuba() {
                 background:#152815; padding:12px 20px;
                 border-bottom:1px solid #2e6e2e; flex-shrink:0; gap:10px; flex-wrap:wrap;
             }
-            #yotsuba-header-info { display:flex; align-items:center; gap:12px; }
+            #yotsuba-header-info  { display:flex; align-items:center; gap:12px; }
             #yotsuba-avatar {
                 width:44px; height:44px;
                 background:linear-gradient(135deg,#3a8c2f,#7ddb6e);
