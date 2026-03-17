@@ -1536,6 +1536,14 @@ const galeriaData_12 = {
             { id: 36, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD21/main/imagenes/img_1773766736534.jpg" }
         ]
     },
+
+    '12_Lenceria_de_trolasas': {
+        titulo: "",
+        descripcion: "",
+        categoria: "",
+        imagen: "",
+        imagenes: []
+    },
 };
 
 if (typeof galeriaDatabase !== 'undefined') {
