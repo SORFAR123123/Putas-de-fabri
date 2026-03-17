@@ -20,11 +20,15 @@ const SALUDO = "Estas en tu cuarto y tu novia esta esperandote. [https://raw.git
 // ── IMÁGENES DE ACCIONES ──
 const YOTSUBA_ACCIONES = {
     "ninguna":        null,
+   "Beso":           "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524623647.jpg",
     "Chupando Bolas": "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524647636.jpg",
-    "Beso":           "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524623647.jpg",
     "Blowjob":        "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524641273.jpg",
-    "Follando":       "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524656140.jpg",
-    "saltando":       "",
+    "Chupando punta del pene":       "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD4/main/imagenes/img_1773182758915.jpg",
+    "Lamiendo punta del pene":       "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD4/main/imagenes/img_1773182756485.jpg",
+     "Chupando pene hasta la mitad":       "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD4/main/imagenes/img_1773182817042.jpg",
+     "Chupando pene mas profundo":       "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD4/main/imagenes/img_1773182832807.jpg",
+     "saltando":       "",
+     "Follando":       "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524656140.jpg",
 };
 
 const YOTSUBA_EMOCIONES = {
