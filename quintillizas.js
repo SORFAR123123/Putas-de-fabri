@@ -494,7 +494,7 @@ async function quintEnviar() {
     });
 
     for (const p of (datos.chicasQueHablan || [])) {
-        if (!CHICAS[p.nombre]) continue;
+        if (!p.nombre || !p.dialogo) continue;
         if (!quintChicasActivas.has(p.nombre)) quintAgregarChicaEscena(p.nombre);
         quintAgregarChica(p.nombre, p.imagen_tag || "normal", p.dialogo || "...");
     }
