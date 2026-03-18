@@ -2091,6 +2091,32 @@ const vocabularioDatabase = {
 
     },
 
+    // Sub-contenedor 1.10
+    'sub1_10': {
+        // MAZO 1
+        1: [
+            { japones: '二人きり', lectura: 'futari kiri', opciones: ['a solas', 'agujero hembra', 'usando', 'ir a meter'], respuesta: 0 },
+            { japones: 'うらやましい', lectura: 'urayamashii', opciones: ['envidiable', '¿puedo recibir?', 'justo a tiempo', 'inmediatamente'], respuesta: 0 },
+            { japones: 'けしからん', lectura: 'keshikaran', opciones: ['indecente', 'usando', 'como puedes ver', 'meterse'], respuesta: 0 },
+            { japones: 'ちょっかい', lectura: 'chokkai', opciones: ['meterse', 'agujero hembra', 'como puedes ver', 'ir a meter'], respuesta: 0 },
+            { japones: '出しに', lectura: 'dashi ni', opciones: ['ir a meter', 'cayó', 'inmediatamente', '¿puedo recibir?'], respuesta: 0 },
+            { japones: 'ちょうどいい', lectura: 'choudo ii', opciones: ['justo a tiempo', 'déjame usar', 'agujero hembra', 'cayó'], respuesta: 0 },
+            { japones: '見ての通り', lectura: 'mite no toori', opciones: ['como puedes ver', 'indecente', 'cayó', 'usando'], respuesta: 0 },
+            { japones: '使って', lectura: 'tsukatte', opciones: ['usando', 'déjame usar', '¿puedo recibir?', 'envidiable'], respuesta: 0 },
+            { japones: '落ちた', lectura: 'ochita', opciones: ['cayó', 'a solas', 'agujero hembra', 'inmediatamente'], respuesta: 0 },
+            { japones: '早速', lectura: 'sassoku', opciones: ['inmediatamente', 'a solas', 'justo a tiempo', 'cayó'], respuesta: 0 },
+        ],
+
+        // MAZO 2
+        2: [
+            { japones: '悪い', lectura: 'warui', opciones: ['malo', 'meterse', 'ir a meter', 'cayó'], respuesta: 0 },
+            { japones: 'メス穴', lectura: 'mesu ana', opciones: ['agujero hembra', 'ir a meter', '¿puedo recibir?', 'inmediatamente'], respuesta: 0 },
+            { japones: '使わせて', lectura: 'tsukawasete', opciones: ['déjame usar', '¿puedo recibir?', 'cayó', 'agujero hembra'], respuesta: 0 },
+            { japones: 'もらえるか', lectura: 'moraeru ka', opciones: ['¿puedo recibir?', 'usando', 'ir a meter', 'déjame usar'], respuesta: 0 },
+        ],
+
+    },
+
   
  
 
