@@ -133,6 +133,12 @@ const sistemaDescriptivo = {
                 descripcion: 'Nino kachera', 
                 nivel: '' 
             },
+            '1_10': { 
+                nombre: 'Nino petera',
+                imagen: 'https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/img_1773851838704.webp', 
+                descripcion: 'Peteando a escondidas', 
+                nivel: '' 
+            },
             
            
             
