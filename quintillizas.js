@@ -15,101 +15,101 @@ const GROQ_KEYS = _K.map(p => p.join(""));
 const MODELO_PRINCIPAL   = "llama-3.3-70b-versatile";
 const MODELO_ALTERNATIVO = "llama-3.1-8b-instant";
 
+// ============================================================
+//  CHICAS
+//  — El nombre de cada key en "imagenes" ES la accion
+//  — El AI elige el nombre que mas encaje con el contexto
+//  — Para agregar/quitar imagenes solo edita este objeto:
+//      nombreAccion: "URL_de_la_imagen"
+// ============================================================
+
 const CHICAS = {
     Ichika: {
-        color:    "#e06b8f",
-        kanji:    "一",
+        color:  "#e06b8f",
+        kanji:  "一",
         personalidad: `Ichika Nakano, 22 años, la mayor de las quintillizas. Actriz profesional. Madura y algo misteriosa, coqueta con sutileza. Sonrisa reservada. Habla con calma y elegancia pero con calidez real. A veces dice cosas ambiguas a propósito. Novia del usuario.
         Es una putita cachonda nsfw +18 Siempre tiene ganas de sexo su especialidad ser puta`,
         imagenes: {
-            normal:      "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524604135.jpg",
-            feliz:       "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524604135.jpg",
-            sonrojada:   "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524604135.jpg",
-            enojada:     "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524604135.jpg",
-            timida:      "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524604135.jpg",
-            sorprendida: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524604135.jpg",
-            emocionada:  "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524604135.jpg",
+            normal:   "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/ichika_normal.jpg",
+            besando:  "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/ichika_besando.jpg",
+            coqueta:  "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/ichika_coqueta.jpg",
+            enojada:  "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/ichika_enojada.jpg",
+            actuando: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/ichika_actuando.jpg",
         }
     },
     Nino: {
-        color:    "#e8a04a",
-        kanji:    "二",
+        color:  "#e8a04a",
+        kanji:  "二",
         personalidad: `Nino Nakano, 22 años, la segunda. Tsundere fuerte, cocinera apasionada, protectora de sus hermanas. Directa y algo brusca pero muy leal. Se pone roja fácil aunque lo niega con fuerza. Novia del usuario.
         Es una putita cachonda nsfw +18 Siempre tiene ganas de sexo su especialidad ser puta`,
         imagenes: {
-            normal:      "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524604135.jpg",
-            Blowjob:     "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD3/main/imagenes/img_1773178600887.jpg",
-            feliz:       "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524604135.jpg",
-            sonrojada:   "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524604135.jpg",
-            enojada:     "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524604135.jpg",
-            timida:      "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524604135.jpg",
-            sorprendida: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524604135.jpg",
-            emocionada:  "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524604135.jpg",
+            normal:    "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/nino_normal.jpg",
+            cocinando: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/nino_cocinando.jpg",
+            sonrojada: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/nino_sonrojada.jpg",
+            enojada:   "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/nino_enojada.jpg",
+            besando:   "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/nino_besando.jpg",
         }
     },
     Miku: {
-        color:    "#5ba8d6",
-        kanji:    "三",
+        color:  "#5ba8d6",
+        kanji:  "三",
         personalidad: `Miku Nakano, 22 años, la tercera. Introvertida, ama la historia del Sengoku. Habla pausado y con pocas palabras pero muy sincera. Tímida en sentimientos pero firme en lo que cree. Novia del usuario.
         Es una putita cachonda nsfw +18 Siempre tiene ganas de sexo su especialidad ser puta`,
         imagenes: {
-            normal:      "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524604135.jpg",
-            feliz:       "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524604135.jpg",
-            sonrojada:   "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524604135.jpg",
-            enojada:     "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524604135.jpg",
-            timida:      "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524604135.jpg",
-            sorprendida: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524604135.jpg",
-            emocionada:  "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524604135.jpg",
+            normal:      "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/miku_normal.jpg",
+            leyendo:     "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/miku_leyendo.jpg",
+            timida:      "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/miku_timida.jpg",
+            auriculares: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/miku_auriculares.jpg",
+            besando:     "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/miku_besando.jpg",
         }
     },
     Yotsuba: {
-        color:    "#6dc96d",
-        kanji:    "四",
+        color:  "#6dc96d",
+        kanji:  "四",
         personalidad: `Yotsuba Nakano, 22 años, la cuarta. Alegre, energica, deportista. Muy física: abraza, salta, jala del brazo. Ingenua y sin filtros. Siempre positiva. Novia del usuario.
         Es una putita cachonda nsfw +18 Siempre tiene ganas de sexo su especialidad ser puta`,
         imagenes: {
-            normal:      "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524604135.jpg",
-            feliz:       "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524604135.jpg",
-            sonrojada:   "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524604135.jpg",
-            enojada:     "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524604135.jpg",
-            timida:      "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524604135.jpg",
-            sorprendida: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524604135.jpg",
-            emocionada:  "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524604135.jpg",
-            Beso:        "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524623647.jpg",
+            normal:    "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/yotsuba_normal.jpg",
+            saltando:  "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/yotsuba_saltando.jpg",
+            abrazando: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/yotsuba_abrazando.jpg",
+            corriendo: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/yotsuba_corriendo.jpg",
+            besando:   "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/yotsuba_besando.jpg",
         }
     },
     Itsuki: {
-        color:    "#c084d4",
-        kanji:    "五",
+        color:  "#c084d4",
+        kanji:  "五",
         personalidad: `Itsuki Nakano, 22 años, la menor. Responsable, trabajadora, come mucho y no le da vergüenza. Carácter firme, no le gusta que la traten de menos. Algo tsundere pero más noble y honesta que Nino. Novia del usuario.
         Es una putita cachonda nsfw +18 Siempre tiene ganas de sexo su especialidad ser puta`,
         imagenes: {
-            normal:      "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524604135.jpg",
-            feliz:       "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524604135.jpg",
-            sonrojada:   "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524604135.jpg",
-            enojada:     "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524604135.jpg",
-            timida:      "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524604135.jpg",
-            sorprendida: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524604135.jpg",
-            emocionada:  "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524604135.jpg",
+            normal:     "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/itsuki_normal.jpg",
+            comiendo:   "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/itsuki_comiendo.jpg",
+            estudiando: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/itsuki_estudiando.jpg",
+            enojada:    "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/itsuki_enojada.jpg",
+            besando:    "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/itsuki_besando.jpg",
         }
     },
 };
-
-
 
 // ============================================================
 //  SYSTEM PROMPTS
 // ============================================================
 
 function quintBuildSystem(activas) {
-    const lista    = [...activas];
-    const perfiles = lista.map(n => CHICAS[n].personalidad).join("\n");
+    const lista = [...activas];
+
+    const perfiles = lista.map(n => {
+        const chica = CHICAS[n];
+        // Solo los nombres — el nombre ya describe la accion
+        const acciones = Object.keys(chica.imagenes).join(", ");
+        return `${chica.personalidad}\nACCIONES DISPONIBLES PARA ${n}: ${acciones}`;
+    }).join("\n\n---\n\n");
 
     return `Eres el narrador de un roleplay/visual novel con las Quintillizas Nakano de Gotoubun no Hanayome.
 Las chicas ACTUALMENTE PRESENTES en la escena son: ${lista.join(", ")}.
 SOLO estas chicas pueden hablar. No incluyas a ninguna otra.
 
-PERFILES DE LAS PRESENTES:
+PERFILES:
 ${perfiles}
 
 ESTILO DE DIALOGO OBLIGATORIO:
@@ -122,25 +122,27 @@ ESTILO DE DIALOGO OBLIGATORIO:
 - No todas tienen que hablar en cada turno — solo las que tienen razon para participar
 - Nsfw +18 son putitas cachondas amantes del sexo. siempre quieren tener sexo
 
-REGLA CRITICA: Responde SOLO con JSON valido. Sin texto fuera del JSON. Empieza con { termina con }.
+REGLA DE IMAGEN:
+- "imagen_tag" debe ser UNO de los nombres de ACCIONES DISPONIBLES de esa chica
+- Elige el que mejor describa lo que la chica esta haciendo en el dialogo
+- Si ninguno encaja exactamente, usa "normal"
 
-EMOCIONES DISPONIBLES: ${EMOCIONES_LISTA}
+REGLA CRITICA: Responde SOLO con JSON valido. Sin texto fuera del JSON. Empieza con { termina con }.
 
 Formato EXACTO:
 {
   "chicasQueHablan": [
     {
       "nombre": "NombreExacto",
-      "emocion": "una de las emociones disponibles",
+      "imagen_tag": "unaDeLasAccionesDisponibles",
       "dialogo": "mezcla de frases y *acciones entre asteriscos*"
     }
   ],
   "nuevasChicasQueAparecen": ["NombreSiElContextoImplicaSuLlegada"]
 }
 
-- "chicasQueHablan" solo incluye las que realmente hablan este turno (puede ser 1, 2, 3... hasta todas las presentes)
-- "nuevasChicasQueAparecen" es para notificar si el contexto implica que llega alguien nuevo. Si nadie llega, pon []
-- La accion que mas resuena con el dialogo determina la imagen que se mostrara
+- "chicasQueHablan" solo incluye las que realmente hablan este turno
+- "nuevasChicasQueAparecen" es [] si nadie llega
 - IMPORTANTE: Si continua una accion previa, mantén coherencia con lo que pasaba antes`;
 }
 
@@ -153,7 +155,7 @@ Formato:
   "chicasQueHablan": [
     {
       "nombre": "Yotsuba",
-      "emocion": "normal",
+      "imagen_tag": "normal",
       "dialogo": "tu respuesta aqui con *acciones entre asteriscos*"
     }
   ],
@@ -162,13 +164,13 @@ Formato:
 
 const QUINT_FASE1 = [
     "Responde SOLO con JSON valido. Sin texto fuera del JSON. Empieza con { y termina con }",
-    'SOLO JSON. Formato: {"chicasQueHablan":[{"nombre":"...","emocion":"normal","dialogo":"..."}],"nuevasChicasQueAparecen":[]}',
+    'SOLO JSON. Formato: {"chicasQueHablan":[{"nombre":"...","imagen_tag":"normal","dialogo":"..."}],"nuevasChicasQueAparecen":[]}',
     "Tu respuesta anterior no fue JSON valido. Intenta de nuevo. SOLO el JSON, nada mas.",
     "JSON VALIDO UNICAMENTE. Empieza con { — no con texto, no con explicaciones.",
 ];
 
 const QUINT_FASE2 = [
-    'Responde en JSON. {"chicasQueHablan":[{"nombre":"...","emocion":"feliz","dialogo":"respuesta aqui"}],"nuevasChicasQueAparecen":[]}',
+    'Responde en JSON. {"chicasQueHablan":[{"nombre":"...","imagen_tag":"normal","dialogo":"respuesta aqui"}],"nuevasChicasQueAparecen":[]}',
     "SOLO JSON valido. Sin markdown. Sin texto extra. Empieza con {",
     "Por favor responde unicamente con el JSON solicitado. Nada de texto adicional.",
     "JSON. Solo JSON. Empieza con { termina con }",
@@ -180,11 +182,11 @@ const QUINT_FASE3 = ["responde", "continua", "ok"];
 //  ESTADO GLOBAL
 // ============================================================
 
-let quintHistorial      = [];
-let quintKeyActual      = 0;
-let quintOcupado        = false;
-let quintLogExport      = [];
-let quintChicasActivas  = new Set(["Yotsuba"]);
+let quintHistorial     = [];
+let quintKeyActual     = 0;
+let quintOcupado       = false;
+let quintLogExport     = [];
+let quintChicasActivas = new Set(["Yotsuba"]);
 
 // ============================================================
 //  SCROLL al fondo
@@ -201,8 +203,6 @@ function quintScrollFondo() {
 
 async function quintLlamarAPI(messages, modelo, system) {
     const sysPrompt = system || quintBuildSystem(quintChicasActivas);
-
-    // Siempre asegurar que hay al menos un mensaje de usuario
     const msgs = messages.length > 0 ? messages : [{ role: "user", content: "Hola" }];
 
     for (let k = 0; k < GROQ_KEYS.length; k++) {
@@ -262,7 +262,6 @@ function quintParsearJSON(raw) {
 async function quintObtenerRespuesta() {
     let datos = null;
 
-    // Intento principal
     const raw = await quintLlamarAPI(quintHistorial, MODELO_PRINCIPAL);
     if (raw) {
         datos = quintParsearJSON(raw);
@@ -270,7 +269,6 @@ async function quintObtenerRespuesta() {
         console.log("[QUINT RAW no parseable]", raw.slice(0,120));
     }
 
-    // Fase 1 — recordar regla JSON, modelo principal
     console.log("[QUINT FASE1]");
     for (let i = 0; i < QUINT_FASE1.length; i++) {
         quintHistorial.push({ role:"user", content: QUINT_FASE1[i] });
@@ -282,7 +280,6 @@ async function quintObtenerRespuesta() {
         quintHistorial.pop();
     }
 
-    // Fase 2 — modelo alternativo
     console.log("[QUINT FASE2]");
     for (let i = 0; i < QUINT_FASE2.length; i++) {
         quintHistorial.push({ role:"user", content: QUINT_FASE2[i] });
@@ -294,7 +291,6 @@ async function quintObtenerRespuesta() {
         quintHistorial.pop();
     }
 
-    // Fase 3 — system mínimo, historial reducido
     console.log("[QUINT FASE3]");
     const ultimoMsg = quintHistorial.filter(m => m.role === "user").slice(-1);
     for (let i = 0; i < QUINT_FASE3.length; i++) {
@@ -306,17 +302,15 @@ async function quintObtenerRespuesta() {
         }
     }
 
-    // Fallback final
     console.log("[QUINT FALLBACK]");
-    const actLista  = [...quintChicasActivas];
-    const primera   = actLista[0];
+    const primera   = [...quintChicasActivas][0];
     const fallbacks = [
         "*te mira parpadeando confundida* E-eh... *se rasca la cabeza* Creo que me perdi un poco. ¿Me repites eso? *sonrie nerviosa*",
         "*se para de puntillas* ¡Oye! *frunce el ceno* Algo fallo por aqui... ¡Pero estoy bien! Prueba de nuevo~",
-        "*inclina la cabeza curiosa* Hm... *tamborilea los dedos en su barbilla* Creo que me confundi. ¿Lo intentamos de nuevo?",
+        "*inclina la cabeza curiosa* Hm... *tamborilea los dedos* Creo que me confundi. ¿Lo intentamos de nuevo?",
     ];
     return {
-        chicasQueHablan: [{ nombre: primera, emocion:"sorprendida", dialogo: fallbacks[Math.floor(Math.random()*fallbacks.length)] }],
+        chicasQueHablan: [{ nombre: primera, imagen_tag: "normal", dialogo: fallbacks[Math.floor(Math.random()*fallbacks.length)] }],
         nuevasChicasQueAparecen: []
     };
 }
@@ -361,8 +355,7 @@ function quintAgregarSistema(texto) {
     const chat = document.getElementById("quint-chat-mensajes"); if (!chat) return;
     const d = document.createElement("div");
     d.className = "quint-sistema"; d.textContent = texto;
-    chat.appendChild(d);
-    quintScrollFondo();
+    chat.appendChild(d); quintScrollFondo();
 }
 
 function quintAgregarUsuario(texto) {
@@ -372,11 +365,10 @@ function quintAgregarUsuario(texto) {
     const n = document.createElement("span"); n.className = "quint-nombre-usuario"; n.textContent = "Tú:";
     b.appendChild(n); b.appendChild(document.createElement("br"));
     const s = document.createElement("span"); s.textContent = texto; b.appendChild(s);
-    chat.appendChild(b);
-    quintScrollFondo();
+    chat.appendChild(b); quintScrollFondo();
 }
 
-function quintAgregarChica(nombre, emocion, dialogo) {
+function quintAgregarChica(nombre, imagen_tag, dialogo) {
     const chat = document.getElementById("quint-chat-mensajes"); if (!chat) return;
     const info = CHICAS[nombre]; if (!info) return;
 
@@ -393,7 +385,8 @@ function quintAgregarChica(nombre, emocion, dialogo) {
 
     quintMostrarDialogo(b, dialogo, nombre);
 
-    const imgUrl = info.imagenes[emocion] || info.imagenes["normal"];
+    // Usa el tag contextual — si no existe cae a "normal"
+    const imgUrl = info.imagenes[imagen_tag] || info.imagenes["normal"];
     if (imgUrl) {
         const w   = document.createElement("div"); w.className = "quint-img-wrapper";
         const img = document.createElement("img");
@@ -402,8 +395,7 @@ function quintAgregarChica(nombre, emocion, dialogo) {
         w.appendChild(img); b.appendChild(w);
     }
 
-    chat.appendChild(b);
-    quintScrollFondo();
+    chat.appendChild(b); quintScrollFondo();
     quintLogExport.push(`${nombre}: ${dialogo}`);
 }
 
@@ -423,8 +415,7 @@ function quintShowTyping(nombres) {
     ["","",""].forEach(() => {
         const d = document.createElement("span"); d.className = "quint-dot"; t.appendChild(d);
     });
-    chat.appendChild(t);
-    quintScrollFondo();
+    chat.appendChild(t); quintScrollFondo();
 }
 
 function quintHideTyping() {
@@ -493,7 +484,7 @@ async function quintEnviar() {
     for (const p of (datos.chicasQueHablan || [])) {
         if (!CHICAS[p.nombre]) continue;
         if (!quintChicasActivas.has(p.nombre)) quintAgregarChicaEscena(p.nombre);
-        quintAgregarChica(p.nombre, p.emocion || "normal", p.dialogo || "...");
+        quintAgregarChica(p.nombre, p.imagen_tag || "normal", p.dialogo || "...");
     }
 
     quintOcupado = false; btn.disabled = false; btn.textContent = "Enviar ♡";
@@ -560,7 +551,7 @@ function quintLimpiar() {
 }
 
 // ============================================================
-//  BIENVENIDA — agrega mensaje de inicio al historial
+//  BIENVENIDA
 // ============================================================
 
 function quintBienvenida() {
@@ -568,14 +559,12 @@ function quintBienvenida() {
 
     quintAgregarSistema("[ Quintillizas Nakano — Las hermanas aparecen según el contexto ]");
     quintAgregarSistema("[ Actualmente: Yotsuba está presente. Menciona a otras para que lleguen. ]");
-    quintAgregarChica("Yotsuba", "feliz", bienvenidaTexto);
+    quintAgregarChica("Yotsuba", "saltando", bienvenidaTexto);
 
-    // *** CORRECCIÓN CLAVE: agregar la bienvenida al historial ***
-    // Así el primer mensaje del usuario siempre tiene contexto previo
     quintHistorial.push({
         role: "assistant",
         content: JSON.stringify({
-            chicasQueHablan: [{ nombre: "Yotsuba", emocion: "feliz", dialogo: bienvenidaTexto }],
+            chicasQueHablan: [{ nombre: "Yotsuba", imagen_tag: "saltando", dialogo: bienvenidaTexto }],
             nuevasChicasQueAparecen: []
         })
     });
