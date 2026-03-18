@@ -221,7 +221,7 @@ async function quintLlamarAPI(messages, modelo, system) {
 
             const data    = await resp.json();
             const content = data?.choices?.[0]?.message?.content?.trim();
-            if (content) { console.log("[QUINT API] OK", content); return content; }
+            if (content) { console.log("[QUINT API] OK"); return content; }
         } catch (e) {
             console.log(`[QUINT API] Error: ${e.message}`);
             quintKeyActual = (keyIdx + 1) % GROQ_KEYS.length;
@@ -240,6 +240,19 @@ function quintParsearJSON(raw) {
     const match = raw.match(/\{[\s\S]*\}/);
     if (match) { try { return JSON.parse(match[0]); } catch {} }
     return null;
+}
+
+
+// ============================================================
+//  NORMALIZAR NOMBRE — "Yotsuba Nakano" → "Yotsuba"
+// ============================================================
+function quintNormalizarNombre(nombre) {
+    if (!nombre) return "";
+    // Buscar si alguna clave de CHICAS está contenida en el nombre
+    for (const clave of Object.keys(CHICAS)) {
+        if (nombre.toLowerCase().includes(clave.toLowerCase())) return clave;
+    }
+    return nombre.trim();
 }
 
 // ============================================================
@@ -484,11 +497,13 @@ async function quintEnviar() {
 
     // Nuevas chicas que el modelo detectó en el contexto
     (datos.nuevasChicasQueAparecen || []).forEach(n => {
-        if (CHICAS[n]) quintAgregarChicaEscena(n);
+        const nNorm = quintNormalizarNombre(n);
+        if (CHICAS[nNorm]) quintAgregarChicaEscena(nNorm);
     });
 
     // Mostrar cada chica en orden: dialogo + imagen
     for (const p of (datos.chicasQueHablan || [])) {
+        p.nombre = quintNormalizarNombre(p.nombre);
         if (!CHICAS[p.nombre]) continue;
         if (!quintChicasActivas.has(p.nombre)) quintAgregarChicaEscena(p.nombre);
         quintAgregarChica(p.nombre, p.emocion || "normal", p.dialogo || "...");
