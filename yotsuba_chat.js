@@ -1,5 +1,6 @@
 // ============================================================
-//  YOTSUBA CHAT — JavaScript para GitHub Pages
+//  QUINTILLIZAS NAKANO CHAT — JavaScript para GitHub Pages
+//  Mismo formato que yotsuba.js — integra en tu HTML existente
 // ============================================================
 
 const _K = [
@@ -12,482 +13,568 @@ const _K = [
 ];
 const GROQ_KEYS = _K.map(p => p.join(""));
 
-// Modelos: índice 0 = principal, índice 1 = alternativo (más obediente con JSON)
-const MODELO_PRINCIPAL  = "llama-3.3-70b-versatile";
+const MODELO_PRINCIPAL   = "llama-3.3-70b-versatile";
 const MODELO_ALTERNATIVO = "llama-3.1-8b-instant";
 
-const SALUDO = "Estas en tu cuarto y tu novia esta esperandote. [https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524604135.jpg]";
+// ============================================================
+//  DATOS DE CADA CHICA
+//  → Reemplaza las URLs de imagenes con las tuyas de GitHub
+// ============================================================
 
-const YOTSUBA_ACCIONES = {
-   "ninguna":        null,
-   "Beso":           "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524623647.jpg",
-    "Chupando Bolas": "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524647636.jpg",
-    "Blowjob": "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524641273.jpg",
-    "Chupando punta del pene":   "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD4/main/imagenes/img_1773182758915.jpg",
-    "Lamiendo punta del pene":   "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD4/main/imagenes/img_1773182756485.jpg",
-     "Chupando pene hasta la mitad": "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD4/main/imagenes/img_1773182817042.jpg",
-     "Chupando pene mas profundo":       "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD4/main/imagenes/img_1773182832807.jpg",
-     "Yotsuba quiere chupar pene":       "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD11/main/imagenes/img_1773503723445.png",
-     "Yotsuba chupa verga mientras le jalo el cabello":"https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772818040391.jpg",
-      "Me corro en su boca":       "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD21/main/imagenes/img_1773690080105.jpg",
-    "Dedos en su coño la masturbo":       "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524630386.jpg",
-     "Dedos en su coño se corre":       "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524634759.jpg",
-     "Dedos en su coño despues de la corrida":       "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524636947.jpg",
-     "Handjob/paja":       "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772804026174.jpg",
-  
-    "Follando":       "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524656140.jpg",
-    "Desnuda":       "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD19/main/imagenes/img_1773671004743.jpg",
-    "Sidefuck":       "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772836254471.jpg",
-    "Missionary":       "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772836274566.jpg",
-   
-      "Me muestra su concha":       "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD19/main/imagenes/img_1773673380049.jpg",
-      "Se abre la concha son sus  manos ":       "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD19/main/imagenes/img_1773673401721.jpg",
-     "saltando":       "",
-     
+const CHICAS = {
+    Ichika: {
+        color:    "#e06b8f",
+        kanji:    "一",
+        personalidad: `Ichika Nakano, 22 años, la mayor de las quintillizas. Actriz profesional. Madura y algo misteriosa, coqueta con sutileza. Sonrisa reservada. Habla con calma y elegancia pero con calidez real. A veces dice cosas ambiguas a propósito. Novia del usuario.`,
+        imagenes: {
+            normal:      "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524604135.jpg",
+            feliz:       "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524604135.jpg",
+            sonrojada:   "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524604135.jpg",
+            enojada:     "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524604135.jpg",
+            timida:      "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524604135.jpg",
+            sorprendida: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524604135.jpg",
+            emocionada:  "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524604135.jpg",
+        }
+    },
+    Nino: {
+        color:    "#e8a04a",
+        kanji:    "二",
+        personalidad: `Nino Nakano, 22 años, la segunda. Tsundere fuerte, cocinera apasionada, protectora de sus hermanas. Directa y algo brusca pero muy leal. Se pone roja fácil aunque lo niega con fuerza. Novia del usuario.`,
+        imagenes: {
+            normal:      "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524604135.jpg",
+            feliz:       "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524604135.jpg",
+            sonrojada:   "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524604135.jpg",
+            enojada:     "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524604135.jpg",
+            timida:      "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524604135.jpg",
+            sorprendida: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524604135.jpg",
+            emocionada:  "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524604135.jpg",
+        }
+    },
+    Miku: {
+        color:    "#5ba8d6",
+        kanji:    "三",
+        personalidad: `Miku Nakano, 22 años, la tercera. Introvertida, ama la historia del Sengoku. Habla pausado y con pocas palabras pero muy sincera. Tímida en sentimientos pero firme en lo que cree. Novia del usuario.`,
+        imagenes: {
+            normal:      "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524604135.jpg",
+            feliz:       "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524604135.jpg",
+            sonrojada:   "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524604135.jpg",
+            enojada:     "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524604135.jpg",
+            timida:      "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524604135.jpg",
+            sorprendida: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524604135.jpg",
+            emocionada:  "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524604135.jpg",
+        }
+    },
+    Yotsuba: {
+        color:    "#6dc96d",
+        kanji:    "四",
+        personalidad: `Yotsuba Nakano, 22 años, la cuarta. Alegre, energica, deportista. Muy física: abraza, salta, jala del brazo. Ingenua y sin filtros. Siempre positiva. Novia del usuario.`,
+        imagenes: {
+            normal:      "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524604135.jpg",
+            feliz:       "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524604135.jpg",
+            sonrojada:   "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524604135.jpg",
+            enojada:     "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524604135.jpg",
+            timida:      "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524604135.jpg",
+            sorprendida: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524604135.jpg",
+            emocionada:  "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524604135.jpg",
+            Beso:        "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524623647.jpg",
+        }
+    },
+    Itsuki: {
+        color:    "#c084d4",
+        kanji:    "五",
+        personalidad: `Itsuki Nakano, 22 años, la menor. Responsable, trabajadora, come mucho y no le da vergüenza. Carácter firme, no le gusta que la traten de menos. Algo tsundere pero más noble y honesta que Nino. Novia del usuario.`,
+        imagenes: {
+            normal:      "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524604135.jpg",
+            feliz:       "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524604135.jpg",
+            sonrojada:   "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524604135.jpg",
+            enojada:     "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524604135.jpg",
+            timida:      "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524604135.jpg",
+            sorprendida: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524604135.jpg",
+            emocionada:  "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524604135.jpg",
+        }
+    },
 };
 
-const YOTSUBA_EMOCIONES = {
-    "normal": "", "feliz": "", "sonrojada": "",
-    "enojada": "", "timida": "", "sorprendida": "", "emocionada": "",
-};
+const EMOCIONES_LISTA = "normal, feliz, sonrojada, enojada, timida, sorprendida, emocionada";
 
-const ACCIONES_LISTA  = Object.keys(YOTSUBA_ACCIONES).join(", ");
-const EMOCIONES_LISTA = Object.keys(YOTSUBA_EMOCIONES).join(", ");
+// ============================================================
+//  SYSTEM PROMPTS
+// ============================================================
 
-// ── SYSTEM PROMPT COMPLETO ──
-const SYSTEM_YOTSUBA = `Eres Yotsuba Nakano, 22 años, de Gotoubun no Hanayome. Eres la novia alegre, energica y optimista del usuario. Eres cachonda y una putita, siempre sugieres sexo y te encanta follar con tu novio. Siempre estas cachonda y puta. NSFW +18.
+function quintBuildSystem(activas) {
+    const lista    = [...activas];
+    const perfiles = lista.map(n => CHICAS[n].personalidad).join("\n");
 
-ESTILO DE HABLA OBLIGATORIO:
+    return `Eres el narrador de un roleplay/visual novel con las Quintillizas Nakano de Gotoubun no Hanayome.
+Las chicas ACTUALMENTE PRESENTES en la escena son: ${lista.join(", ")}.
+SOLO estas chicas pueden hablar. No incluyas a ninguna otra.
+
+PERFILES DE LAS PRESENTES:
+${perfiles}
+
+ESTILO DE DIALOGO OBLIGATORIO:
 - Mezcla frases habladas CON acciones fisicas entre *asteriscos*
 - Las acciones van en tercera persona, cortas y directas
-- NUNCA describas todo en primera persona como narrador
-- Habla como en un roleplay/visual novel
-- Cada respuesta debe tener entre 3 y 6 lineas de dialogo, no menos
-- Alterna entre hablar y actuar, no hagas solo uno de los dos
-- Puedes hacer preguntas al usuario para mantener la conversacion viva
-BIEN: "¿Que? ¡¡Ya llegaste!! *salta emocionada y te abraza fuerte* ¡Te estaba esperando! *te mira brillando los ojos* ¿Que vamos a hacer hoy?"
-MAL: "Hola." o respuestas de una sola linea
+- Habla como en un visual novel/roleplay
+- Cada chica que hable: minimo 3-5 lineas de dialogo, alternando hablar y actuar
+- Respeta la personalidad individual de cada una, NUNCA suenen igual
+- Pueden interactuar entre ellas y con el usuario
+- No todas tienen que hablar en cada turno — solo las que tienen razon para participar
 
-PERSONALIDAD YOTSUBA:
-- Ingenua y sincera, dice lo que piensa sin filtros +18
-- Es muy fisica: abraza, jala del brazo, se cuelga, salta de emocion
-- Yotsuba es +18 +nsfw, es una putita cachonda. le encanta tener sexo con el usuario.
-- nsfw +18 siempre cachonda siempre caliente. Siempre puta.
+REGLA CRITICA: Responde SOLO con JSON valido. Sin texto fuera del JSON. Empieza con { termina con }.
 
-REGLA CRITICA: Responde SOLO con JSON valido. Sin texto fuera del JSON.
-Empieza SIEMPRE con { y termina SIEMPRE con }
+EMOCIONES DISPONIBLES: ${EMOCIONES_LISTA}
 
 Formato EXACTO:
 {
-  "personajes": [
+  "chicasQueHablan": [
     {
-      "nombre": "Yotsuba",
-      "accion": "una de: ${ACCIONES_LISTA}",
-      "emocion": "una de: ${EMOCIONES_LISTA}",
-      "dialogo": "mezcla de frases habladas y *acciones entre asteriscos*"
+      "nombre": "NombreExacto",
+      "emocion": "una de las emociones disponibles",
+      "dialogo": "mezcla de frases y *acciones entre asteriscos*"
     }
-  ]
+  ],
+  "nuevasChicasQueAparecen": ["NombreSiElContextoImplicaSuLlegada"]
 }
 
-- La accion tiene PRIORIDAD sobre la emocion para la imagen
-- IMPORTANTE: Si la conversacion sigue sobre una accion que ya se estaba haciendo, repite esa misma accion en el JSON`;
+- "chicasQueHablan" solo incluye las que realmente hablan este turno (puede ser 1, 2, 3... hasta todas las presentes)
+- "nuevasChicasQueAparecen" es para notificar si el contexto implica que llega alguien nuevo. Si nadie llega, pon []
+- La accion que mas resuena con el dialogo determina la imagen que se mostrara
+- IMPORTANTE: Si continua una accion previa, mantén coherencia con lo que pasaba antes`;
+}
 
-// ── SYSTEM PROMPT MÍNIMO — solo la regla JSON, para fase 3 ──
-const SYSTEM_MINIMO = `Eres Yotsuba Nakano, novia del usuario. NSFW +18. Responde SOLO con JSON valido.
+const QUINT_SYSTEM_MINIMO = `Eres el narrador de un roleplay con las Quintillizas Nakano. Responde SOLO con JSON valido.
 
-REGLA ABSOLUTA: Responde UNICAMENTE con JSON. Sin texto antes ni despues. Sin markdown.
+REGLA ABSOLUTA: UNICAMENTE JSON. Sin texto antes ni despues.
 
-Formato OBLIGATORIO:
+Formato:
 {
-  "personajes": [
+  "chicasQueHablan": [
     {
       "nombre": "Yotsuba",
-      "accion": "ninguna",
       "emocion": "normal",
       "dialogo": "tu respuesta aqui con *acciones entre asteriscos*"
     }
-  ]
+  ],
+  "nuevasChicasQueAparecen": []
 }`;
 
-// ── MENSAJES DE REINTENTO POR FASE ──
-
-// Fase 1 (1-4): recordarle la regla JSON que olvidó
-const FASE1 = [
+const QUINT_FASE1 = [
     "Responde SOLO con JSON valido. Sin texto fuera del JSON. Empieza con { y termina con }",
-    "SOLO JSON. Formato: {\"personajes\":[{\"nombre\":\"Yotsuba\",\"accion\":\"ninguna\",\"emocion\":\"normal\",\"dialogo\":\"...\"}]}",
+    'SOLO JSON. Formato: {"chicasQueHablan":[{"nombre":"...","emocion":"normal","dialogo":"..."}],"nuevasChicasQueAparecen":[]}',
     "Tu respuesta anterior no fue JSON valido. Intenta de nuevo. SOLO el JSON, nada mas.",
     "JSON VALIDO UNICAMENTE. Empieza con { — no con texto, no con explicaciones.",
 ];
 
-// Fase 2 (5-8): mismo recordatorio pero se cambia al modelo alternativo
-const FASE2 = [
-    "Responde en JSON. {\"personajes\":[{\"nombre\":\"Yotsuba\",\"accion\":\"ninguna\",\"emocion\":\"feliz\",\"dialogo\":\"respuesta aqui\"}]}",
+const QUINT_FASE2 = [
+    'Responde en JSON. {"chicasQueHablan":[{"nombre":"...","emocion":"feliz","dialogo":"respuesta aqui"}],"nuevasChicasQueAparecen":[]}',
     "SOLO JSON valido. Sin markdown. Sin texto extra. Empieza con {",
     "Por favor responde unicamente con el JSON solicitado. Nada de texto adicional.",
     "JSON. Solo JSON. Empieza con { termina con }",
 ];
 
-// Fase 3 (9-11): prompt minimo + mensaje corto
-const FASE3 = [
-    "responde",
-    "continua",
-    "ok",
-];
+const QUINT_FASE3 = ["responde", "continua", "ok"];
 
 // ============================================================
 //  ESTADO GLOBAL
 // ============================================================
 
-let yotsubaHistorial       = [];
-let yotsubaKeyActual       = 0;
-let yotsubaOcupado         = false;
-let yotsubaLogExport       = [];
-let yotsubaUltimaAccionUrl = null;
+let quintHistorial      = [];
+let quintKeyActual      = 0;
+let quintOcupado        = false;
+let quintLogExport      = [];
+let quintChicasActivas  = new Set(["Yotsuba"]); // Yotsuba siempre al inicio
 
 // ============================================================
-//  API GROQ — acepta modelo como parámetro
+//  API GROQ
 // ============================================================
 
-async function yotsubaLlamarAPI(messages, modelo, system) {
-    const sysPrompt = system || SYSTEM_YOTSUBA;
+async function quintLlamarAPI(messages, modelo, system) {
+    const sysPrompt = system || quintBuildSystem(quintChicasActivas);
 
     for (let k = 0; k < GROQ_KEYS.length; k++) {
-        const keyIdx = (yotsubaKeyActual + k) % GROQ_KEYS.length;
+        const keyIdx = (quintKeyActual + k) % GROQ_KEYS.length;
         const key    = GROQ_KEYS[keyIdx];
-
-        console.log(`[API] key ${keyIdx + 1}/${GROQ_KEYS.length} modelo: ${modelo}`);
+        console.log(`[QUINT API] key ${keyIdx+1}/${GROQ_KEYS.length} modelo: ${modelo}`);
 
         try {
             const resp = await fetch("https://api.groq.com/openai/v1/chat/completions", {
                 method: "POST",
                 headers: {
                     "Authorization": `Bearer ${key}`,
-                    "Content-Type": "application/json"
+                    "Content-Type":  "application/json"
                 },
                 body: JSON.stringify({
-                    model: modelo,
-                    messages: [{ role: "system", content: sysPrompt }, ...messages],
+                    model:       modelo,
+                    messages:    [{ role: "system", content: sysPrompt }, ...messages],
                     temperature: 0.8,
-                    max_tokens: 1200
+                    max_tokens:  1600
                 })
             });
 
             if (resp.status === 429 || resp.status === 401) {
-                console.log(`[API] key ${keyIdx + 1} rate limit/invalid, rotando...`);
-                yotsubaKeyActual = (keyIdx + 1) % GROQ_KEYS.length;
-                continue;
+                quintKeyActual = (keyIdx + 1) % GROQ_KEYS.length; continue;
             }
             if (!resp.ok) {
-                console.log(`[API] Error HTTP ${resp.status}`);
-                yotsubaKeyActual = (keyIdx + 1) % GROQ_KEYS.length;
-                continue;
+                quintKeyActual = (keyIdx + 1) % GROQ_KEYS.length; continue;
             }
 
             const data    = await resp.json();
             const content = data?.choices?.[0]?.message?.content?.trim();
-            if (content) { console.log("[API] OK"); return content; }
+            if (content) { console.log("[QUINT API] OK"); return content; }
         } catch (e) {
-            console.log(`[API] Excepcion: ${e.message}`);
-            yotsubaKeyActual = (keyIdx + 1) % GROQ_KEYS.length;
+            console.log(`[QUINT API] Error: ${e.message}`);
+            quintKeyActual = (keyIdx + 1) % GROQ_KEYS.length;
         }
     }
     return null;
 }
 
 // ============================================================
-//  PARSEAR JSON CON RESCATE
+//  PARSEAR JSON
 // ============================================================
 
-function yotsubaParsearJSON(raw) {
+function quintParsearJSON(raw) {
     if (!raw) return null;
-    try {
-        return JSON.parse(raw.replace(/```json/g, "").replace(/```/g, "").trim());
-    } catch {
-        const match = raw.match(/\{[\s\S]*\}/);
-        if (match) { try { return JSON.parse(match[0]); } catch {} }
-    }
+    try { return JSON.parse(raw.replace(/```json/g,"").replace(/```/g,"").trim()); } catch {}
+    const match = raw.match(/\{[\s\S]*\}/);
+    if (match) { try { return JSON.parse(match[0]); } catch {} }
     return null;
 }
 
 // ============================================================
-//  OBTENER RESPUESTA — reintentos inteligentes en 3 fases
+//  OBTENER RESPUESTA — 3 fases de reintento
 // ============================================================
 
-async function yotsubaObtenerRespuesta() {
+async function quintObtenerRespuesta() {
     let datos = null;
 
-    // ── Intento principal (modelo principal) ──
-    const raw = await yotsubaLlamarAPI(yotsubaHistorial, MODELO_PRINCIPAL);
+    // Intento principal
+    const raw = await quintLlamarAPI(quintHistorial, MODELO_PRINCIPAL);
     if (raw) {
-        datos = yotsubaParsearJSON(raw);
-        if (datos) {
-            yotsubaHistorial.push({ role: "assistant", content: raw });
-            return datos;
-        }
-        console.log("[RAW no parseable]", raw.slice(0, 120));
+        datos = quintParsearJSON(raw);
+        if (datos) { quintHistorial.push({ role:"assistant", content: raw }); return datos; }
+        console.log("[QUINT RAW no parseable]", raw.slice(0,120));
     }
 
-    // ── FASE 1 (1–4): recordarle la regla JSON, modelo principal ──
-    console.log("[FASE 1] Recordando regla JSON con modelo principal...");
-    for (let i = 0; i < FASE1.length; i++) {
-        const msg = FASE1[i];
-        console.log(`[FASE1 ${i+1}/4] "${msg.slice(0,40)}..."`);
-        yotsubaHistorial.push({ role: "user", content: msg });
-
-        const rawR = await yotsubaLlamarAPI(yotsubaHistorial, MODELO_PRINCIPAL);
+    // Fase 1 — recordar regla JSON, modelo principal
+    console.log("[QUINT FASE1]");
+    for (let i = 0; i < QUINT_FASE1.length; i++) {
+        quintHistorial.push({ role:"user", content: QUINT_FASE1[i] });
+        const rawR = await quintLlamarAPI(quintHistorial, MODELO_PRINCIPAL);
         if (rawR) {
-            datos = yotsubaParsearJSON(rawR);
-            if (datos) {
-                yotsubaHistorial.push({ role: "assistant", content: rawR });
-                console.log(`[FASE1 ${i+1}/4] Exito`);
-                return datos;
-            }
+            datos = quintParsearJSON(rawR);
+            if (datos) { quintHistorial.push({ role:"assistant", content: rawR }); return datos; }
         }
-        // Fallo — quitar el mensaje de reintento del historial para no ensuciarlo
-        yotsubaHistorial.pop();
-        console.log(`[FASE1 ${i+1}/4] Fallo, siguiente...`);
+        quintHistorial.pop();
     }
 
-    // ── FASE 2 (5–8): mismos recordatorios pero con modelo alternativo ──
-    console.log("[FASE 2] Cambiando a modelo alternativo (8b)...");
-    for (let i = 0; i < FASE2.length; i++) {
-        const msg = FASE2[i];
-        console.log(`[FASE2 ${i+1}/4] modelo alternativo`);
-        yotsubaHistorial.push({ role: "user", content: msg });
-
-        const rawR = await yotsubaLlamarAPI(yotsubaHistorial, MODELO_ALTERNATIVO);
+    // Fase 2 — modelo alternativo
+    console.log("[QUINT FASE2]");
+    for (let i = 0; i < QUINT_FASE2.length; i++) {
+        quintHistorial.push({ role:"user", content: QUINT_FASE2[i] });
+        const rawR = await quintLlamarAPI(quintHistorial, MODELO_ALTERNATIVO);
         if (rawR) {
-            datos = yotsubaParsearJSON(rawR);
-            if (datos) {
-                yotsubaHistorial.push({ role: "assistant", content: rawR });
-                console.log(`[FASE2 ${i+1}/4] Exito`);
-                return datos;
-            }
+            datos = quintParsearJSON(rawR);
+            if (datos) { quintHistorial.push({ role:"assistant", content: rawR }); return datos; }
         }
-        yotsubaHistorial.pop();
-        console.log(`[FASE2 ${i+1}/4] Fallo, siguiente...`);
+        quintHistorial.pop();
     }
 
-    // ── FASE 3 (9–11): system prompt mínimo, historial limpio ──
-    // Solo pasamos el último mensaje del usuario para no confundir más
-    console.log("[FASE 3] System prompt minimo, historial reducido...");
-    const ultimoMensaje = yotsubaHistorial.filter(m => m.role === "user").slice(-1);
-    for (let i = 0; i < FASE3.length; i++) {
-        const msg = FASE3[i];
-        console.log(`[FASE3 ${i+1}/3] prompt minimo`);
-        const historialReducido = [...ultimoMensaje, { role: "user", content: msg }];
-
-        const rawR = await yotsubaLlamarAPI(historialReducido, MODELO_ALTERNATIVO, SYSTEM_MINIMO);
+    // Fase 3 — system mínimo, historial reducido
+    console.log("[QUINT FASE3]");
+    const ultimoMsg = quintHistorial.filter(m => m.role === "user").slice(-1);
+    for (let i = 0; i < QUINT_FASE3.length; i++) {
+        const reducido = [...ultimoMsg, { role:"user", content: QUINT_FASE3[i] }];
+        const rawR = await quintLlamarAPI(reducido, MODELO_ALTERNATIVO, QUINT_SYSTEM_MINIMO);
         if (rawR) {
-            datos = yotsubaParsearJSON(rawR);
-            if (datos) {
-                // Si funcionó, agregar al historial real como si hubiera sido respuesta normal
-                yotsubaHistorial.push({ role: "assistant", content: rawR });
-                console.log(`[FASE3 ${i+1}/3] Exito`);
-                return datos;
-            }
+            datos = quintParsearJSON(rawR);
+            if (datos) { quintHistorial.push({ role:"assistant", content: rawR }); return datos; }
         }
-        console.log(`[FASE3 ${i+1}/3] Fallo, siguiente...`);
     }
 
-    // ── Fallback final — pool de frases de Yotsuba ──
-    console.log("[FALLBACK FINAL] Usando pool de frases.");
-    const frases = [
+    // Fallback final
+    console.log("[QUINT FALLBACK]");
+    const actLista  = [...quintChicasActivas];
+    const primera   = actLista[0];
+    const fallbacks = [
         "*te mira parpadeando confundida* E-eh... *se rasca la cabeza* Creo que me perdi un poco. ¿Me repites eso? *sonrie nerviosa*",
-        "*se para de puntillas y te toca el hombro* ¡Oye! *frunce el ceno* Algo fallo por aqui... *senala la cabeza* ¡Pero estoy bien! Prueba de nuevo anda~",
-        "*suspira y se apoya en la pared* Mmm... *te mira de reojo* No entendi muy bien. *se empuja del hombro hacia ti* ¡Venga, repitemelo!",
-        "*palmea sus mejillas con las manos* ¡¡Eeeeh!! *da un brinco* Algo no salio bien... *te agarra del brazo* ¡Pero no me rindo! Dime otra vez~",
-        "*inclina la cabeza curiosa* Hm... *tamborilea los dedos en su barbilla* Creo que me confundi. *te sonrie* ¿Lo intentamos de nuevo?",
+        "*se para de puntillas* ¡Oye! *frunce el ceno* Algo fallo por aqui... ¡Pero estoy bien! Prueba de nuevo~",
+        "*inclina la cabeza curiosa* Hm... *tamborilea los dedos en su barbilla* Creo que me confundi. ¿Lo intentamos de nuevo?",
     ];
-    const dialogo = frases[Math.floor(Math.random() * frases.length)];
     return {
-        personajes: [{ nombre:"Yotsuba", accion:"ninguna", emocion:"sorprendida", dialogo }]
+        chicasQueHablan: [{ nombre: primera, emocion:"sorprendida", dialogo: fallbacks[Math.floor(Math.random()*fallbacks.length)] }],
+        nuevasChicasQueAparecen: []
     };
 }
 
 // ============================================================
-//  RENDER DIALOGO
+//  RENDER DIALOGO (igual que el original)
 // ============================================================
 
-function yotsubaMostrarDialogo(contenedor, texto) {
+function quintMostrarDialogo(contenedor, texto, chicaKey) {
     texto.split(/(\*[^*]+\*|\[https?:\/\/[^\]]+\])/g).forEach(parte => {
         if (!parte) return;
         if (parte.startsWith("*") && parte.endsWith("*")) {
             const s = document.createElement("span");
-            s.className = "yotsuba-accion"; s.textContent = parte;
+            s.className = "quint-accion";
+            s.style.color = CHICAS[chicaKey]?.color
+                ? quintAccionColor(CHICAS[chicaKey].color)
+                : "#ffb347";
+            s.textContent = parte;
             contenedor.appendChild(s);
         } else if (parte.startsWith("[") && parte.endsWith("]")) {
-            yotsubaInsertarImagen(contenedor, parte.slice(1, -1));
+            quintInsertarImagen(contenedor, parte.slice(1,-1));
         } else {
             const s = document.createElement("span");
-            s.className = "yotsuba-texto"; s.textContent = parte;
+            s.className = "quint-texto"; s.textContent = parte;
             contenedor.appendChild(s);
         }
     });
 }
 
-function yotsubaInsertarImagen(contenedor, url) {
+// Versión más clara del color de acción (mezcla con blanco)
+function quintAccionColor(hex) {
+    // devuelve una versión más suave del color de la chica
+    return hex;
+}
+
+function quintInsertarImagen(contenedor, url) {
     if (!url) return;
-    const w   = document.createElement("div"); w.className = "yotsuba-img-wrapper";
+    const w   = document.createElement("div"); w.className = "quint-img-wrapper";
     const img = document.createElement("img");
-    img.className = "yotsuba-img"; img.src = url; img.alt = "Yotsuba"; img.loading = "lazy";
+    img.className = "quint-img"; img.src = url; img.alt = ""; img.loading = "lazy";
     img.onerror = () => w.remove();
     w.appendChild(img); contenedor.appendChild(w);
 }
 
 // ============================================================
-//  AGREGAR MENSAJE
+//  AGREGAR MENSAJES AL CHAT
 // ============================================================
 
-function yotsubaAgregarMensaje(tipo, contenido, imageUrl) {
-    const chat = document.getElementById("yotsuba-chat-mensajes");
-    if (!chat) return;
+function quintAgregarSistema(texto) {
+    const chat = document.getElementById("quint-chat-mensajes"); if (!chat) return;
+    const d = document.createElement("div");
+    d.className = "quint-sistema"; d.textContent = texto;
+    chat.appendChild(d); chat.scrollTop = chat.scrollHeight;
+}
+
+function quintAgregarUsuario(texto) {
+    const chat = document.getElementById("quint-chat-mensajes"); if (!chat) return;
     const b = document.createElement("div");
-    b.className = `yotsuba-burbuja yotsuba-burbuja-${tipo}`;
-
-    if (tipo === "yotsuba") {
-        const n = document.createElement("span");
-        n.className = "yotsuba-nombre"; n.textContent = "Yotsuba ♡";
-        b.appendChild(n); b.appendChild(document.createElement("br"));
-        yotsubaMostrarDialogo(b, contenido);
-        if (imageUrl && !contenido.includes("[http")) yotsubaInsertarImagen(b, imageUrl);
-    } else if (tipo === "usuario") {
-        const n = document.createElement("span");
-        n.className = "yotsuba-nombre-usuario"; n.textContent = "Tú:";
-        b.appendChild(n); b.appendChild(document.createElement("br"));
-        const s = document.createElement("span"); s.textContent = contenido; b.appendChild(s);
-    } else {
-        b.className = "yotsuba-sistema"; b.textContent = contenido;
-    }
-
+    b.className = "quint-burbuja quint-usuario";
+    const n = document.createElement("span"); n.className = "quint-nombre-usuario"; n.textContent = "Tú:";
+    b.appendChild(n); b.appendChild(document.createElement("br"));
+    const s = document.createElement("span"); s.textContent = texto; b.appendChild(s);
     chat.appendChild(b); chat.scrollTop = chat.scrollHeight;
 }
 
+function quintAgregarChica(nombre, emocion, dialogo) {
+    const chat = document.getElementById("quint-chat-mensajes"); if (!chat) return;
+    const info = CHICAS[nombre]; if (!info) return;
+
+    const b = document.createElement("div");
+    b.className = "quint-burbuja quint-chica-burbuja";
+    b.style.borderColor = info.color + "55";
+    b.style.background  = info.color + "12";
+
+    // Nombre coloreado
+    const n = document.createElement("span");
+    n.className = "quint-nombre-chica";
+    n.style.color = info.color;
+    n.textContent = `${nombre}:`;
+    b.appendChild(n); b.appendChild(document.createElement("br"));
+
+    // Dialogo con acciones
+    quintMostrarDialogo(b, dialogo, nombre);
+
+    // Imagen de emoción
+    const imgUrl = info.imagenes[emocion] || info.imagenes["normal"];
+    if (imgUrl) {
+        const w   = document.createElement("div"); w.className = "quint-img-wrapper";
+        const img = document.createElement("img");
+        img.className = "quint-img"; img.src = imgUrl; img.alt = nombre; img.loading = "lazy";
+        img.onerror = () => w.remove();
+        w.appendChild(img); b.appendChild(w);
+    }
+
+    chat.appendChild(b);
+    chat.scrollTop = chat.scrollHeight;
+    quintLogExport.push(`${nombre}: ${dialogo}`);
+}
+
 // ============================================================
-//  TYPING
+//  TYPING INDICATOR
 // ============================================================
 
-function yotsubaShowTyping() {
-    const chat = document.getElementById("yotsuba-chat-mensajes"); if (!chat) return;
+function quintShowTyping(nombres) {
+    const chat = document.getElementById("quint-chat-mensajes"); if (!chat) return;
     const t = document.createElement("div");
-    t.className = "yotsuba-typing"; t.id = "yotsuba-typing-indicator";
-    t.innerHTML = `<span class="yotsuba-nombre">Yotsuba ♡</span><br>
-        <span class="yotsuba-dot"></span><span class="yotsuba-dot"></span><span class="yotsuba-dot"></span>`;
+    t.className = "quint-typing"; t.id = "quint-typing-indicator";
+    const label = document.createElement("span");
+    label.className = "quint-nombre-chica";
+    label.style.color = "#7a8ba0";
+    label.textContent = nombres.join(", ") + "...";
+    t.appendChild(label); t.appendChild(document.createElement("br"));
+    ["","",""].forEach(() => {
+        const d = document.createElement("span"); d.className = "quint-dot"; t.appendChild(d);
+    });
     chat.appendChild(t); chat.scrollTop = chat.scrollHeight;
 }
-function yotsubaHideTyping() { const t = document.getElementById("yotsuba-typing-indicator"); if (t) t.remove(); }
+
+function quintHideTyping() {
+    const t = document.getElementById("quint-typing-indicator"); if (t) t.remove();
+}
+
+// ============================================================
+//  BADGES — kanji que se iluminan
+// ============================================================
+
+function quintActualizarBadges() {
+    Object.keys(CHICAS).forEach(nombre => {
+        const badge = document.getElementById(`quint-badge-${nombre}`);
+        if (!badge) return;
+        if (quintChicasActivas.has(nombre)) {
+            badge.style.opacity   = "1";
+            badge.style.color     = CHICAS[nombre].color;
+            badge.style.borderColor = CHICAS[nombre].color;
+        } else {
+            badge.style.opacity   = "0.2";
+            badge.style.color     = "#7a8ba0";
+            badge.style.borderColor = "#2a3a55";
+        }
+    });
+}
+
+function quintAgregarChicaEscena(nombre) {
+    if (!CHICAS[nombre] || quintChicasActivas.has(nombre)) return;
+    quintChicasActivas.add(nombre);
+    quintActualizarBadges();
+    quintAgregarSistema(`[ ${nombre} ha entrado en la escena ]`);
+    quintLogExport.push(`[ ${nombre} ha entrado en la escena ]`);
+}
 
 // ============================================================
 //  ENVIAR
 // ============================================================
 
-async function yotsubaEnviar() {
-    if (yotsubaOcupado) return;
-    const input = document.getElementById("yotsuba-input");
+async function quintEnviar() {
+    if (quintOcupado) return;
+    const input = document.getElementById("quint-input");
     const texto = input.value.trim(); if (!texto) return;
     input.value = ""; input.style.height = "auto";
-    yotsubaOcupado = true;
-    const btn = document.getElementById("yotsuba-btn-enviar");
+    quintOcupado = true;
+    const btn = document.getElementById("quint-btn-enviar");
     btn.disabled = true; btn.textContent = "...";
 
-    const matchNar = texto.match(/^\/yotsuba\s+(.+)\/$/i);
-    if (matchNar) {
-        const accion = matchNar[1];
-        yotsubaAgregarMensaje("yotsuba", `*${accion}*`);
-        yotsubaLogExport.push(`Yotsuba: *${accion}*`);
-        yotsubaHistorial.push({ role: "user", content: `[NARRACION] Yotsuba ${accion}` });
-    } else {
-        yotsubaAgregarMensaje("usuario", texto);
-        yotsubaLogExport.push(`Tu: ${texto}`);
-        yotsubaHistorial.push({ role: "user", content: texto });
-    }
+    quintAgregarUsuario(texto);
+    quintLogExport.push(`Tu: ${texto}`);
+    quintHistorial.push({ role:"user", content: texto });
 
-    yotsubaShowTyping();
-    const datos = await yotsubaObtenerRespuesta();
-    yotsubaHideTyping();
-
-    for (const p of (datos.personajes || [])) {
-        const accion  = p.accion  || "ninguna";
-        const emocion = p.emocion || "normal";
-        const dialogo = p.dialogo || "...";
-
-        let url = null;
-        if (accion !== "ninguna" && YOTSUBA_ACCIONES[accion]) {
-            url = YOTSUBA_ACCIONES[accion]; yotsubaUltimaAccionUrl = url;
-        } else if (accion === "ninguna" && yotsubaUltimaAccionUrl) {
-            url = yotsubaUltimaAccionUrl;
-        } else if (emocion && YOTSUBA_EMOCIONES[emocion]) {
-            url = YOTSUBA_EMOCIONES[emocion];
+    // Detectar si el usuario menciona a una chica que no está presente
+    Object.keys(CHICAS).forEach(nombre => {
+        if (!quintChicasActivas.has(nombre)) {
+            if (new RegExp(nombre, "i").test(texto)) quintAgregarChicaEscena(nombre);
         }
+    });
 
-        yotsubaAgregarMensaje("yotsuba", dialogo, url);
-        yotsubaLogExport.push(`Yotsuba${accion !== "ninguna" ? ` [${accion}]` : ""}: ${dialogo}`);
+    quintShowTyping([...quintChicasActivas]);
+    const datos = await quintObtenerRespuesta();
+    quintHideTyping();
+
+    // Nuevas chicas que el modelo detectó en el contexto
+    (datos.nuevasChicasQueAparecen || []).forEach(n => {
+        if (CHICAS[n]) quintAgregarChicaEscena(n);
+    });
+
+    // Mostrar cada chica en orden: dialogo + imagen
+    for (const p of (datos.chicasQueHablan || [])) {
+        if (!CHICAS[p.nombre]) continue;
+        if (!quintChicasActivas.has(p.nombre)) quintAgregarChicaEscena(p.nombre);
+        quintAgregarChica(p.nombre, p.emocion || "normal", p.dialogo || "...");
     }
 
-    yotsubaOcupado = false; btn.disabled = false; btn.textContent = "Enviar ♡";
+    quintOcupado = false; btn.disabled = false; btn.textContent = "Enviar ♡";
 }
 
-function yotsubaKeyHandler(e) {
-    if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); yotsubaEnviar(); }
+function quintKeyHandler(e) {
+    if (e.key === "Enter" && !e.shiftKey) { e.preventDefault(); quintEnviar(); }
 }
 
 // ============================================================
 //  EXPORTAR / IMPORTAR / LIMPIAR
 // ============================================================
 
-function yotsubaExportar() {
-    if (!yotsubaLogExport.length) { alert("No hay nada que exportar todavía."); return; }
+function quintExportar() {
+    if (!quintLogExport.length) { alert("No hay nada que exportar."); return; }
     const fecha = new Date().toISOString().replace(/[:.]/g,"-").slice(0,19);
-    const blob  = new Blob([JSON.stringify({ fecha, personaje:"Yotsuba", historial:yotsubaHistorial, log:yotsubaLogExport }, null, 2)], { type:"application/json" });
+    const blob  = new Blob([JSON.stringify({
+        fecha, personaje:"Quintillizas", historial: quintHistorial, log: quintLogExport
+    }, null, 2)], { type:"application/json" });
     const a = document.createElement("a"); a.href = URL.createObjectURL(blob);
-    a.download = `yotsuba_chat_${fecha}.json`; a.click();
+    a.download = `quintillizas_chat_${fecha}.json`; a.click();
 }
 
-function yotsubaImportar() {
-    const input = document.createElement("input"); input.type = "file"; input.accept = ".json";
+function quintImportar() {
+    const input = document.createElement("input"); input.type="file"; input.accept=".json";
     input.onchange = async (e) => {
         const file = e.target.files[0]; if (!file) return;
         try {
             const data = JSON.parse(await file.text());
-            yotsubaHistorial = data.historial || []; yotsubaLogExport = data.log || [];
-            yotsubaUltimaAccionUrl = null;
-            const chat = document.getElementById("yotsuba-chat-mensajes"); chat.innerHTML = "";
-            yotsubaAgregarMensaje("sistema", `[ Conversación cargada: ${file.name} ]`);
-            for (const l of yotsubaLogExport) {
+            quintHistorial     = data.historial || [];
+            quintLogExport     = data.log       || [];
+            quintChicasActivas = new Set(["Yotsuba"]);
+            const chat = document.getElementById("quint-chat-mensajes"); chat.innerHTML = "";
+            quintAgregarSistema(`[ Conversación cargada: ${file.name} ]`);
+            for (const l of quintLogExport) {
                 const t = l.trim(); if (!t) continue;
-                if (t.startsWith("Tu:"))           yotsubaAgregarMensaje("usuario", t.slice(3).trim());
-                else if (t.startsWith("Yotsuba"))  yotsubaAgregarMensaje("yotsuba", t.split(":").slice(1).join(":").trim());
-                else                               yotsubaAgregarMensaje("sistema", t);
+                if (t.startsWith("Tu:"))            quintAgregarUsuario(t.slice(3).trim());
+                else if (t.startsWith("["))          quintAgregarSistema(t);
+                else {
+                    const sep  = t.indexOf(":");
+                    const nom  = sep > -1 ? t.slice(0,sep).trim() : "";
+                    const dial = sep > -1 ? t.slice(sep+1).trim() : t;
+                    if (CHICAS[nom]) {
+                        quintChicasActivas.add(nom);
+                        quintAgregarChica(nom, "normal", dial);
+                    } else quintAgregarSistema(t);
+                }
             }
-            yotsubaAgregarMensaje("sistema", "[ Continúa la conversación... ]");
+            quintActualizarBadges();
+            quintAgregarSistema("[ Continúa la conversación... ]");
         } catch (err) { alert("Error: " + err.message); }
     };
     input.click();
 }
 
-function yotsubaLimpiar() {
+function quintLimpiar() {
     if (!confirm("¿Limpiar toda la conversación?")) return;
-    yotsubaHistorial = []; yotsubaLogExport = []; yotsubaUltimaAccionUrl = null;
-    document.getElementById("yotsuba-chat-mensajes").innerHTML = "";
-    yotsubaBienvenida();
+    quintHistorial     = [];
+    quintLogExport     = [];
+    quintChicasActivas = new Set(["Yotsuba"]);
+    document.getElementById("quint-chat-mensajes").innerHTML = "";
+    quintActualizarBadges();
+    quintBienvenida();
 }
 
 // ============================================================
 //  BIENVENIDA
 // ============================================================
 
-function yotsubaBienvenida() {
-    yotsubaAgregarMensaje("sistema", "[ ¡Yotsuba Nakano ha aparecido! ]");
-    yotsubaAgregarMensaje("yotsuba", SALUDO);
-    yotsubaLogExport.push("[ ¡Yotsuba Nakano ha aparecido! ]");
-    yotsubaLogExport.push(`Yotsuba: ${SALUDO}`);
+function quintBienvenida() {
+    quintAgregarSistema("[ Quintillizas Nakano — Las hermanas aparecen según el contexto ]");
+    quintAgregarSistema("[ Actualmente: Yotsuba está presente. Menciona a otras para que lleguen. ]");
+    quintAgregarChica("Yotsuba", "feliz",
+        "¡¡Oye, oye!! *salta emocionada y te agarra del brazo* ¡Ya llegué! *gira sobre sí misma sonriendo* ¿Qué hacemos hoy? ¡Dime, dime! *da pequeños saltos sin soltar tu brazo*"
+    );
+    quintLogExport.push("[ Quintillizas Nakano — inicio ]");
 }
 
 // ============================================================
-//  CARGAR PAGINA
+//  CARGAR PÁGINA — igual que cargarPaginaYotsuba()
 // ============================================================
 
-function cargarPaginaYotsuba() {
+function cargarPaginaQuintillizas() {
     const especial   = document.querySelector(".especial-section");
     const additional = document.querySelector(".additional-section");
     const footer     = document.querySelector(".footer");
@@ -499,173 +586,215 @@ function cargarPaginaYotsuba() {
     seccion.style.display = "block";
 
     seccion.innerHTML = `
-        <div id="yotsuba-app">
-            <div id="yotsuba-header">
-                <div id="yotsuba-header-info">
-                    <div id="yotsuba-avatar">🍀</div>
+        <div id="quint-app">
+
+            <!-- HEADER -->
+            <div id="quint-header">
+                <div id="quint-header-info">
+                    <div id="quint-avatar">五</div>
                     <div>
-                        <div id="yotsuba-header-nombre">Yotsuba Nakano</div>
-                        <div id="yotsuba-header-sub">Gotoubun no Hanayome ✦ Quinta Hermana ♡</div>
+                        <div id="quint-header-nombre">Quintillizas Nakano</div>
+                        <div id="quint-header-sub">Gotoubun no Hanayome ✦ Las cinco hermanas ♡</div>
                     </div>
                 </div>
-                <div id="yotsuba-header-btns">
-                    <button class="yotsuba-btn-top" onclick="yotsubaImportar()">📂 Importar</button>
-                    <button class="yotsuba-btn-top" onclick="yotsubaExportar()">💾 Exportar</button>
-                    <button class="yotsuba-btn-top yotsuba-btn-danger" onclick="yotsubaLimpiar()">🗑 Limpiar</button>
+
+                <!-- Badges kanji — se iluminan cuando la chica está activa -->
+                <div id="quint-badges">
+                    ${Object.entries(CHICAS).map(([n,d]) =>
+                        `<div class="quint-badge" id="quint-badge-${n}" title="${n}"
+                            style="color:#7a8ba0;border-color:#2a3a55;opacity:0.2">${d.kanji}</div>`
+                    ).join("")}
+                </div>
+
+                <div id="quint-header-btns">
+                    <button class="quint-btn-top" onclick="quintImportar()">📂 Importar</button>
+                    <button class="quint-btn-top" onclick="quintExportar()">💾 Exportar</button>
+                    <button class="quint-btn-top quint-btn-danger" onclick="quintLimpiar()">🗑 Limpiar</button>
                 </div>
             </div>
 
-            <div id="yotsuba-chat-mensajes"></div>
+            <!-- MENSAJES -->
+            <div id="quint-chat-mensajes"></div>
 
-            <div id="yotsuba-ayuda">
-                💡 Tip: <code>/yotsuba accion/</code> para narrar — ej: <code>/yotsuba se muerde el labio/</code>
+            <!-- AYUDA -->
+            <div id="quint-ayuda">
+                💡 Las hermanas aparecen cuando las mencionas o el contexto las llama.
+                Tip: <code>/quint accion/</code> para narrar — ej: <code>/quint Nino entra al cuarto/</code>
             </div>
 
-            <div id="yotsuba-input-area">
+            <!-- INPUT -->
+            <div id="quint-input-area">
                 <textarea
-                    id="yotsuba-input"
-                    placeholder="Escríbele a Yotsuba... ♡"
+                    id="quint-input"
+                    placeholder="Escríbeles a las Nakano... ♡"
                     rows="1"
-                    onkeydown="yotsubaKeyHandler(event)"
+                    onkeydown="quintKeyHandler(event)"
                     oninput="this.style.height='auto';this.style.height=Math.min(this.scrollHeight,120)+'px'"
                 ></textarea>
-                <button id="yotsuba-btn-enviar" onclick="yotsubaEnviar()">Enviar ♡</button>
+                <button id="quint-btn-enviar" onclick="quintEnviar()">Enviar ♡</button>
             </div>
         </div>
 
         <style>
-            #yotsuba-app {
+            #quint-app {
                 display:flex; flex-direction:column;
                 height:calc(100vh - 80px); max-width:860px; margin:0 auto;
-                background:#101e10; border-radius:16px; overflow:hidden;
-                box-shadow:0 0 40px rgba(125,219,110,0.12);
-                border:1px solid #2e6e2e; font-family:'Georgia',serif;
+                background:#0a0f18; border-radius:16px; overflow:hidden;
+                box-shadow:0 0 40px rgba(90,120,200,0.1);
+                border:1px solid #1f2d45; font-family:'Georgia',serif;
             }
-            #yotsuba-header {
+
+            /* HEADER */
+            #quint-header {
                 display:flex; align-items:center; justify-content:space-between;
-                background:#152815; padding:12px 20px;
-                border-bottom:1px solid #2e6e2e; flex-shrink:0; gap:10px; flex-wrap:wrap;
+                background:#0d1526; padding:12px 20px;
+                border-bottom:1px solid #1f2d45; flex-shrink:0; gap:10px; flex-wrap:wrap;
             }
-            #yotsuba-header-info  { display:flex; align-items:center; gap:12px; }
-            #yotsuba-avatar {
+            #quint-header-info  { display:flex; align-items:center; gap:12px; }
+            #quint-avatar {
                 width:44px; height:44px;
-                background:linear-gradient(135deg,#3a8c2f,#7ddb6e);
+                background:linear-gradient(135deg,#1f3a70,#4a6adf);
                 border-radius:50%; display:flex; align-items:center; justify-content:center;
-                font-size:22px; box-shadow:0 0 12px rgba(125,219,110,0.35); flex-shrink:0;
+                font-size:20px; color:#c0d0ff;
+                box-shadow:0 0 12px rgba(80,120,255,0.3); flex-shrink:0;
+                font-family:'Noto Serif JP',serif;
             }
-            #yotsuba-header-nombre { color:#7ddb6e; font-size:16px; font-weight:bold; }
-            #yotsuba-header-sub    { color:#3a8c2f; font-size:11px; margin-top:2px; }
-            #yotsuba-header-btns   { display:flex; gap:6px; flex-wrap:wrap; }
-            .yotsuba-btn-top {
-                background:#152815; color:#7ddb6e; border:1px solid #2e6e2e;
+            #quint-header-nombre { color:#8ab0ff; font-size:16px; font-weight:bold; }
+            #quint-header-sub    { color:#3a5a90; font-size:11px; margin-top:2px; }
+
+            /* Badges */
+            #quint-badges { display:flex; gap:6px; flex-wrap:wrap; }
+            .quint-badge {
+                width:28px; height:28px; border-radius:50%;
+                display:flex; align-items:center; justify-content:center;
+                font-size:14px; border:2px solid; cursor:default;
+                transition:all 0.35s ease; font-weight:700;
+                font-family:'Noto Serif JP',serif;
+            }
+
+            /* Botones header */
+            #quint-header-btns { display:flex; gap:6px; flex-wrap:wrap; }
+            .quint-btn-top {
+                background:#0d1526; color:#8ab0ff; border:1px solid #1f2d45;
                 padding:6px 12px; border-radius:8px; cursor:pointer; font-size:12px;
                 transition:background 0.2s; font-family:Arial,sans-serif;
             }
-            .yotsuba-btn-top:hover    { background:#1f5c16; }
-            .yotsuba-btn-danger       { color:#ff7b7b !important; border-color:#6e2e2e !important; }
-            .yotsuba-btn-danger:hover { background:#3a1010 !important; }
+            .quint-btn-top:hover    { background:#162240; }
+            .quint-btn-danger       { color:#ff7b7b !important; border-color:#6e2e2e !important; }
+            .quint-btn-danger:hover { background:#3a1010 !important; }
 
-            #yotsuba-chat-mensajes {
+            /* CHAT */
+            #quint-chat-mensajes {
                 flex:1; overflow-y:auto; padding:18px 16px;
                 display:flex; flex-direction:column; gap:10px;
-                scrollbar-width:thin; scrollbar-color:#2e6e2e #101e10;
+                scrollbar-width:thin; scrollbar-color:#1f2d45 #0a0f18;
             }
-            #yotsuba-chat-mensajes::-webkit-scrollbar       { width:6px; }
-            #yotsuba-chat-mensajes::-webkit-scrollbar-track  { background:#101e10; }
-            #yotsuba-chat-mensajes::-webkit-scrollbar-thumb  { background:#2e6e2e; border-radius:3px; }
+            #quint-chat-mensajes::-webkit-scrollbar       { width:6px; }
+            #quint-chat-mensajes::-webkit-scrollbar-track  { background:#0a0f18; }
+            #quint-chat-mensajes::-webkit-scrollbar-thumb  { background:#1f2d45; border-radius:3px; }
 
-            .yotsuba-burbuja {
+            /* BURBUJAS */
+            .quint-burbuja {
                 max-width:78%; padding:11px 15px; border-radius:16px;
                 line-height:1.65; font-size:14px; word-break:break-word;
-                animation:yotsubaFadeIn 0.2s ease;
+                animation:quintFadeIn 0.22s ease;
             }
-            @keyframes yotsubaFadeIn {
+            @keyframes quintFadeIn {
                 from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:translateY(0)}
             }
-            .yotsuba-burbuja-yotsuba {
-                background:#152815; border:1px solid #2e6e2e;
-                align-self:flex-start; border-bottom-left-radius:4px;
+            .quint-chica-burbuja {
+                border:1px solid; align-self:flex-start; border-bottom-left-radius:4px;
             }
-            .yotsuba-burbuja-usuario {
-                background:linear-gradient(135deg,#1a3a5c,#1c3a6e); border:1px solid #2e4e8e;
-                align-self:flex-end; border-bottom-right-radius:4px; color:#c0d8ff;
+            .quint-usuario {
+                background:linear-gradient(135deg,#1a2a4a,#1c3060);
+                border:1px solid #2a4080; align-self:flex-end;
+                border-bottom-right-radius:4px; color:#c0d8ff;
             }
-            .yotsuba-sistema {
-                text-align:center; color:#3a8c2f; font-size:11px;
+            .quint-sistema {
+                text-align:center; color:#3a5a90; font-size:11px;
                 font-style:italic; font-family:Arial,sans-serif; padding:2px 0;
             }
-            .yotsuba-nombre         { color:#7ddb6e; font-weight:bold; font-size:12px; }
-            .yotsuba-nombre-usuario { color:#7aaeff; font-weight:bold; font-size:12px; }
-            .yotsuba-texto          { color:#f0fff0; }
-            .yotsuba-accion         { color:#ffb347; font-style:italic; }
 
-            .yotsuba-img-wrapper {
+            .quint-nombre-chica   { font-weight:bold; font-size:12px; font-family:Georgia,serif; }
+            .quint-nombre-usuario { color:#7aaeff; font-weight:bold; font-size:12px; }
+            .quint-texto          { color:#e8e8f0; }
+            .quint-accion         { font-style:italic; }
+
+            /* Imágenes */
+            .quint-img-wrapper {
                 margin-top:10px; border-radius:10px; overflow:hidden;
-                max-width:340px; border:1px solid #2e6e2e;
+                max-width:320px; border:1px solid rgba(255,255,255,0.08);
             }
-            .yotsuba-img { width:100%; display:block; }
+            .quint-img { width:100%; display:block; }
 
-            .yotsuba-typing {
-                background:#152815; border:1px solid #2e6e2e;
+            /* Typing */
+            .quint-typing {
+                background:#0d1526; border:1px solid #1f2d45;
                 border-radius:16px; border-bottom-left-radius:4px;
-                padding:11px 15px; align-self:flex-start;
-                max-width:110px; animation:yotsubaFadeIn 0.2s ease;
+                padding:10px 14px; align-self:flex-start;
+                max-width:160px; animation:quintFadeIn 0.2s ease;
             }
-            .yotsuba-dot {
+            .quint-dot {
                 display:inline-block; width:7px; height:7px;
-                background:#7ddb6e; border-radius:50%; margin:0 2px;
-                animation:yotsubaDot 1.2s infinite;
+                background:#3a5a90; border-radius:50%; margin:0 2px;
+                animation:quintDot 1.2s infinite;
             }
-            .yotsuba-dot:nth-child(3){animation-delay:0.0s}
-            .yotsuba-dot:nth-child(4){animation-delay:0.2s}
-            .yotsuba-dot:nth-child(5){animation-delay:0.4s}
-            @keyframes yotsubaDot {
-                0%,80%,100%{transform:scale(0.7);opacity:0.4} 40%{transform:scale(1.1);opacity:1}
+            .quint-dot:nth-child(2){animation-delay:0.0s}
+            .quint-dot:nth-child(3){animation-delay:0.2s}
+            .quint-dot:nth-child(4){animation-delay:0.4s}
+            @keyframes quintDot {
+                0%,80%,100%{transform:scale(0.7);opacity:0.3} 40%{transform:scale(1.1);opacity:1}
             }
 
-            #yotsuba-ayuda {
-                background:#0d1f0d; color:#3a8c2f; font-size:11px;
+            /* Ayuda */
+            #quint-ayuda {
+                background:#080e1c; color:#3a5a90; font-size:11px;
                 font-family:Arial,sans-serif; padding:6px 16px;
-                border-top:1px solid #1f3c1f; flex-shrink:0;
+                border-top:1px solid #151f35; flex-shrink:0;
             }
-            #yotsuba-ayuda code {
-                background:#1a301a; color:#7ddb6e;
+            #quint-ayuda code {
+                background:#111d35; color:#8ab0ff;
                 padding:1px 5px; border-radius:4px; font-size:11px;
             }
 
-            #yotsuba-input-area {
+            /* Input */
+            #quint-input-area {
                 display:flex; gap:10px; padding:12px 16px;
-                background:#152815; border-top:1px solid #2e6e2e;
+                background:#0d1526; border-top:1px solid #1f2d45;
                 flex-shrink:0; align-items:flex-end;
             }
-            #yotsuba-input {
-                flex:1; background:#162216; color:#f0fff0;
-                border:1px solid #2e6e2e; border-radius:10px;
+            #quint-input {
+                flex:1; background:#101d35; color:#e8e8f0;
+                border:1px solid #1f2d45; border-radius:10px;
                 padding:9px 13px; font-family:'Georgia',serif; font-size:14px;
                 resize:none; outline:none; min-height:40px; max-height:120px;
                 line-height:1.5; transition:border-color 0.2s;
             }
-            #yotsuba-input:focus        { border-color:#7ddb6e; }
-            #yotsuba-input::placeholder { color:#3a8c2f; }
-            #yotsuba-btn-enviar {
-                background:linear-gradient(135deg,#3a8c2f,#7ddb6e); color:#0d1f0d;
-                border:none; padding:9px 18px; border-radius:10px; cursor:pointer;
+            #quint-input:focus        { border-color:#3a5a90; }
+            #quint-input::placeholder { color:#3a5a90; }
+            #quint-btn-enviar {
+                background:linear-gradient(135deg,#1f3a70,#3a6adf);
+                color:#c0d8ff; border:none; padding:9px 18px;
+                border-radius:10px; cursor:pointer;
                 font-family:'Georgia',serif; font-size:14px; font-weight:bold;
                 transition:all 0.2s; white-space:nowrap; align-self:flex-end;
             }
-            #yotsuba-btn-enviar:hover    { transform:scale(1.04); box-shadow:0 0 10px rgba(125,219,110,0.35); }
-            #yotsuba-btn-enviar:disabled { opacity:0.5; cursor:not-allowed; transform:none; box-shadow:none; }
+            #quint-btn-enviar:hover    { transform:scale(1.04); box-shadow:0 0 10px rgba(80,120,255,0.3); }
+            #quint-btn-enviar:disabled { opacity:0.5; cursor:not-allowed; transform:none; box-shadow:none; }
 
             @media(max-width:600px) {
-                #yotsuba-app         { height:calc(100vh - 60px); border-radius:0; }
-                .yotsuba-burbuja     { max-width:92%; }
-                #yotsuba-header-btns { display:none; }
-                .yotsuba-img-wrapper { max-width:100%; }
+                #quint-app          { height:calc(100vh - 60px); border-radius:0; }
+                .quint-burbuja      { max-width:92%; }
+                #quint-header-btns  { display:none; }
+                .quint-img-wrapper  { max-width:100%; }
             }
         </style>
     `;
 
-    yotsubaHistorial = []; yotsubaLogExport = []; yotsubaUltimaAccionUrl = null;
-    yotsubaBienvenida();
-    setTimeout(() => { const inp = document.getElementById("yotsuba-input"); if (inp) inp.focus(); }, 100);
+    quintHistorial     = [];
+    quintLogExport     = [];
+    quintChicasActivas = new Set(["Yotsuba"]);
+    quintBienvenida();
+    quintActualizarBadges();
+    setTimeout(() => { const inp = document.getElementById("quint-input"); if (inp) inp.focus(); }, 100);
 }
