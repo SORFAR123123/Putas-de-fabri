@@ -139,6 +139,12 @@ const sistemaDescriptivo = {
                 descripcion: 'Peteando a escondidas', 
                 nivel: '' 
             },
+            '1_11': { 
+                nombre: 'Nino y miku kachando',
+                imagen: 'https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/img_1773853402946.webp', 
+                descripcion: 'perras', 
+                nivel: '' 
+            },
             
            
             
