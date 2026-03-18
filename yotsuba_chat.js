@@ -22,10 +22,10 @@ const YOTSUBA_ACCIONES = {
    "ninguna":        null,
    "Beso":           "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524623647.jpg",
     "Chupando Bolas": "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524647636.jpg",
-    "Blowjob":        "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524641273.jpg",
-    "Chupando punta del pene":       "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD4/main/imagenes/img_1773182758915.jpg",
-    "Lamiendo punta del pene":       "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD4/main/imagenes/img_1773182756485.jpg",
-     "Chupando pene hasta la mitad":       "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD4/main/imagenes/img_1773182817042.jpg",
+    "Blowjob": "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524641273.jpg",
+    "Chupando punta del pene":   "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD4/main/imagenes/img_1773182758915.jpg",
+    "Lamiendo punta del pene":   "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD4/main/imagenes/img_1773182756485.jpg",
+     "Chupando pene hasta la mitad": "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD4/main/imagenes/img_1773182817042.jpg",
      "Chupando pene mas profundo":       "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD4/main/imagenes/img_1773182832807.jpg",
      "Yotsuba quiere chupar pene":       "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD11/main/imagenes/img_1773503723445.png",
      "Yotsuba chupa verga mientras le jalo el cabello":"https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772818040391.jpg",
@@ -33,12 +33,16 @@ const YOTSUBA_ACCIONES = {
      "Dedos en su coño se corre":       "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524634759.jpg",
      "Dedos en su coño despues de la corrida":       "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524636947.jpg",
      "Handjob/paja":       "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772804026174.jpg",
-   
-   
+  
+    "Follando":       "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524656140.jpg",
+    "Desnuda":       "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD19/main/imagenes/img_1773671004743.jpg",
     "Sidefuck":       "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772836254471.jpg",
-    "saltando":       "",
-    "saltando":       "",
-     "Follando":       "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524656140.jpg",
+    "Missionary":       "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772836274566.jpg",
+   
+      "Me muestra su concha":       "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD19/main/imagenes/img_1773673380049.jpg",
+      "Se abre la concha son sus  manos ":       "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD19/main/imagenes/img_1773673401721.jpg",
+     "saltando":       "",
+     
 };
 
 const YOTSUBA_EMOCIONES = {
