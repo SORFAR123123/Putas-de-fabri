@@ -2117,6 +2117,60 @@ const vocabularioDatabase = {
 
     },
 
+    // Sub-contenedor 1.11
+    'sub1_11': {
+        // MAZO 1
+        1: [
+            { japones: '息', lectura: 'iki', opciones: ['respiración', 'chupar', 'fácil', 'hipnosis'], respuesta: 0 },
+            { japones: '荒い', lectura: 'arai', opciones: ['agitada', 'fácil de engañar', 'cayó bajo', 'chupar'], respuesta: 0 },
+            { japones: '無理', lectura: 'muri', opciones: ['imposible', 'chúpamela ya" o "hazlo ya', 'involucrarse', 'malas palabras'], respuesta: 0 },
+            { japones: 'オナホ', lectura: 'onaho', opciones: ['onahole', 'absolutamente', 'eyaculación', 'hipnosis'], respuesta: 0 },
+            { japones: 'やっば', lectura: 'yabba', opciones: ['joder', 'fácil de engañar', 'malas palabras', 'inmediatamente'], respuesta: 0 },
+            { japones: '関わる', lectura: 'kakawaru', opciones: ['involucrarse', 'molesto', 'chúpamela ya" o "hazlo ya', 'cayó bajo'], respuesta: 0 },
+            { japones: 'めんどくさい', lectura: 'mendokusai', opciones: ['molesto', 'usar hasta romper', 'desprecio', 'joder'], respuesta: 0 },
+            { japones: '絶対', lectura: 'zettai', opciones: ['absolutamente', 'molesto', 'un disparo', 'malas palabras'], respuesta: 0 },
+            { japones: '催眠', lectura: 'saimin', opciones: ['hipnosis', 'siguiente', 'desprecio', 'bien'], respuesta: 0 },
+            { japones: 'かかった', lectura: 'kakatta', opciones: ['cayó bajo', 'fácil de engañar', 'un disparo', 'agitada'], respuesta: 0 },
+        ],
+
+        // MAZO 2
+        2: [
+            { japones: 'いちょろ', lectura: 'ichoro', opciones: ['fácil de engañar', 'bien', 'por ahora', 'molesto'], respuesta: 0 },
+            { japones: '蔑み', lectura: 'sutemi', opciones: ['desprecio', 'chupar', 'respiración', 'chúpamela ya" o "hazlo ya'], respuesta: 0 },
+            { japones: 'ぶち犯す', lectura: 'buchi okasu', opciones: ['follar a la fuerza', 'fácil de engañar', 'chúpamela ya" o "hazlo ya', 'onahole'], respuesta: 0 },
+            { japones: '使い潰す', lectura: 'tsukai tsukusu', opciones: ['usar hasta romper', 'cayó bajo', 'hipnosis', 'imposible'], respuesta: 0 },
+            { japones: '散々', lectura: 'sanzan', opciones: ['repetidamente', 'ven', 'siguiente', 'follar a la fuerza'], respuesta: 0 },
+            { japones: 'じょぶもう', lectura: 'jobu mou', opciones: ['chúpamela ya" o "hazlo ya', 'joder', 'agitada', 'eyaculación'], respuesta: 0 },
+            { japones: 'お手軽', lectura: 'otegaru', opciones: ['fácil', 'imposible', 'absolutamente', 'joder'], respuesta: 0 },
+            { japones: '便所', lectura: 'benjo', opciones: ['baño', 'agitada', 'usar hasta romper', 'absolutamente'], respuesta: 0 },
+            { japones: '呼んだら', lectura: 'yondara', opciones: ['si te llamo', 'molesto', 'bien', 'fácil de engañar'], respuesta: 0 },
+            { japones: 'すぐ', lectura: 'sugu', opciones: ['inmediatamente', 'malas palabras', 'onahole', 'terminó'], respuesta: 0 },
+        ],
+
+        // MAZO 3
+        3: [
+            { japones: '来い', lectura: 'koi', opciones: ['ven', 'por ahora', 'repetidamente', 'si te llamo'], respuesta: 0 },
+            { japones: 'とりあえず', lectura: 'toriaezu', opciones: ['por ahora', 'terminó', 'usar hasta romper', 'malas palabras'], respuesta: 0 },
+            { japones: '一発', lectura: 'ippatsu', opciones: ['un disparo', 'follar a la fuerza', 'terminó', 'molesto'], respuesta: 0 },
+            { japones: '射精', lectura: 'shasei', opciones: ['eyaculación', 'onahole', 'respiración', 'ven'], respuesta: 0 },
+            { japones: 'フィニッシュ', lectura: 'finisshu', opciones: ['finish', 'chúpamela ya" o "hazlo ya', 'involucrarse', 'usar hasta romper'], respuesta: 0 },
+            { japones: '最っ高', lectura: 'saikkou', opciones: ['lo máximo', 'eyaculación', 'baño', 'absolutamente'], respuesta: 0 },
+            { japones: '味見', lectura: 'ajimi', opciones: ['probar', 'involucrarse', 'inmediatamente', 'absolutamente'], respuesta: 0 },
+            { japones: '済んだ', lectura: 'sunda', opciones: ['terminó', 'finish', 'desprecio', 'absolutamente'], respuesta: 0 },
+            { japones: '次', lectura: 'tsugi', opciones: ['siguiente', 'finish', 'fácil de engañar', 'imposible'], respuesta: 0 },
+            { japones: '悪態', lectura: 'akutai', opciones: ['malas palabras', 'hipnosis', 'fácil de engañar', 'respiración'], respuesta: 0 },
+        ],
+
+        // MAZO 4
+        4: [
+            { japones: 'ついてた', lectura: 'tsuiteta', opciones: ['estaba diciendo', 'molesto', 'usar hasta romper', 'desprecio'], respuesta: 0 },
+            { japones: 'しっかり', lectura: 'shikkari', opciones: ['bien', 'baño', 'chúpamela ya" o "hazlo ya', 'siguiente'], respuesta: 0 },
+            { japones: '気持ちよく', lectura: 'kimochi yoku', opciones: ['hacer sentir bien', 'eyaculación', 'follar a la fuerza', 'lo máximo'], respuesta: 0 },
+            { japones: 'じょぶる', lectura: 'joburu', opciones: ['chupar', 'involucrarse', 'siguiente', 'baño'], respuesta: 0 },
+        ],
+
+    },
+
   
  
 
