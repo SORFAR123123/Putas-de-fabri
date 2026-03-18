@@ -221,7 +221,7 @@ async function quintLlamarAPI(messages, modelo, system) {
 
             const data    = await resp.json();
             const content = data?.choices?.[0]?.message?.content?.trim();
-            if (content) { console.log("[QUINT API] OK"); return content; }
+            if (content) { console.log("[QUINT API] OK", content); return content; }
         } catch (e) {
             console.log(`[QUINT API] Error: ${e.message}`);
             quintKeyActual = (keyIdx + 1) % GROQ_KEYS.length;
