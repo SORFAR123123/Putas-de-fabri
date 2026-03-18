@@ -35,6 +35,7 @@ const YOTSUBA_ACCIONES = {
      "Handjob/paja":       "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772804026174.jpg",
    
    
+    "Sidefuck":       "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772836254471.jpg",
     "saltando":       "",
     "saltando":       "",
      "Follando":       "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524656140.jpg",
