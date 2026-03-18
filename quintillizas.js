@@ -95,7 +95,7 @@ const CHICAS = {
     },
 };
 
-const EMOCIONES_LISTA = "normal, feliz, sonrojada, enojada, timida, sorprendida, emocionada";
+
 
 // ============================================================
 //  SYSTEM PROMPTS
