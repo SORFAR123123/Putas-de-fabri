@@ -340,6 +340,20 @@ const mangaDatabase = {
         ]
     },
 
+    // Sub-contenedor 1.11
+    '1_11': {
+        titulo: "putitas",
+        descripcion: "perras",
+        paginas: 3,
+        año: 2024,
+        autor: "Desconocido",
+        paginasUrls: [
+            "https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/img_1773853402946.webp", // Página 1
+            "https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/img_1773853405181.webp", // Página 2
+            "https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/img_1773853407458.webp" // Página 3
+        ]
+    },
+
    
  
 
