@@ -939,6 +939,14 @@ const galeriaData_5 = {
             { id: 10, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD19/main/imagenes/img_1773670521224.jpg" }
         ]
     },
+
+    '5_16': {
+        titulo: "",
+        descripcion: "",
+        categoria: "",
+        imagen: "",
+        imagenes: []
+    },
     
     // CONTENEDOR 6 - Miku
 };
