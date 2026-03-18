@@ -42,6 +42,7 @@ const CHICAS = {
         personalidad: `Nino Nakano, 22 años, la segunda. Tsundere fuerte, cocinera apasionada, protectora de sus hermanas. Directa y algo brusca pero muy leal. Se pone roja fácil aunque lo niega con fuerza. Novia del usuario.`,
         imagenes: {
             normal:      "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524604135.jpg",
+            Blowjob:     "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD3/main/imagenes/img_1773178600887.jpg",
             feliz:       "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524604135.jpg",
             sonrojada:   "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524604135.jpg",
             enojada:     "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524604135.jpg",
@@ -242,19 +243,6 @@ function quintParsearJSON(raw) {
     return null;
 }
 
-
-// ============================================================
-//  NORMALIZAR NOMBRE — "Yotsuba Nakano" → "Yotsuba"
-// ============================================================
-function quintNormalizarNombre(nombre) {
-    if (!nombre) return "";
-    // Buscar si alguna clave de CHICAS está contenida en el nombre
-    for (const clave of Object.keys(CHICAS)) {
-        if (nombre.toLowerCase().includes(clave.toLowerCase())) return clave;
-    }
-    return nombre.trim();
-}
-
 // ============================================================
 //  OBTENER RESPUESTA — 3 fases de reintento
 // ============================================================
@@ -369,7 +357,7 @@ function quintAgregarSistema(texto) {
     const chat = document.getElementById("quint-chat-mensajes"); if (!chat) return;
     const d = document.createElement("div");
     d.className = "quint-sistema"; d.textContent = texto;
-    chat.appendChild(d); chat.scrollTop = chat.scrollHeight;
+    chat.appendChild(d); 
 }
 
 function quintAgregarUsuario(texto) {
@@ -379,7 +367,7 @@ function quintAgregarUsuario(texto) {
     const n = document.createElement("span"); n.className = "quint-nombre-usuario"; n.textContent = "Tú:";
     b.appendChild(n); b.appendChild(document.createElement("br"));
     const s = document.createElement("span"); s.textContent = texto; b.appendChild(s);
-    chat.appendChild(b); chat.scrollTop = chat.scrollHeight;
+    chat.appendChild(b); 
 }
 
 function quintAgregarChica(nombre, emocion, dialogo) {
@@ -412,7 +400,7 @@ function quintAgregarChica(nombre, emocion, dialogo) {
     }
 
     chat.appendChild(b);
-    chat.scrollTop = chat.scrollHeight;
+    
     quintLogExport.push(`${nombre}: ${dialogo}`);
 }
 
@@ -432,7 +420,7 @@ function quintShowTyping(nombres) {
     ["","",""].forEach(() => {
         const d = document.createElement("span"); d.className = "quint-dot"; t.appendChild(d);
     });
-    chat.appendChild(t); chat.scrollTop = chat.scrollHeight;
+    chat.appendChild(t); 
 }
 
 function quintHideTyping() {
@@ -497,13 +485,11 @@ async function quintEnviar() {
 
     // Nuevas chicas que el modelo detectó en el contexto
     (datos.nuevasChicasQueAparecen || []).forEach(n => {
-        const nNorm = quintNormalizarNombre(n);
-        if (CHICAS[nNorm]) quintAgregarChicaEscena(nNorm);
+        if (CHICAS[n]) quintAgregarChicaEscena(n);
     });
 
     // Mostrar cada chica en orden: dialogo + imagen
     for (const p of (datos.chicasQueHablan || [])) {
-        p.nombre = quintNormalizarNombre(p.nombre);
         if (!CHICAS[p.nombre]) continue;
         if (!quintChicasActivas.has(p.nombre)) quintAgregarChicaEscena(p.nombre);
         quintAgregarChica(p.nombre, p.emocion || "normal", p.dialogo || "...");
