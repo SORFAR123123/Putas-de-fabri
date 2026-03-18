@@ -30,7 +30,8 @@ const CHICAS = {
         personalidad: `Ichika Nakano, 22 años, la mayor de las quintillizas. Actriz profesional. Madura y algo misteriosa, coqueta con sutileza. Sonrisa reservada. Habla con calma y elegancia pero con calidez real. A veces dice cosas ambiguas a propósito. Novia del usuario.
         Es una putita cachonda nsfw +18 Siempre tiene ganas de sexo su especialidad ser puta`,
         imagenes: {
-            besando:  "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772901835049.jpg",
+            normal:   "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/ichika_normal.jpg",
+            besando:  "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/ichika_besando.jpg",
             coqueta:  "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/ichika_coqueta.jpg",
             enojada:  "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/ichika_enojada.jpg",
             actuando: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/ichika_actuando.jpg",
@@ -42,11 +43,11 @@ const CHICAS = {
         personalidad: `Nino Nakano, 22 años, la segunda. Tsundere fuerte, cocinera apasionada, protectora de sus hermanas. Directa y algo brusca pero muy leal. Se pone roja fácil aunque lo niega con fuerza. Novia del usuario.
         Es una putita cachonda nsfw +18 Siempre tiene ganas de sexo su especialidad ser puta`,
         imagenes: {
-           besando:   "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD12/main/imagenes/img_1773506144298.png",
+            normal:    "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/nino_normal.jpg",
             cocinando: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/nino_cocinando.jpg",
             sonrojada: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/nino_sonrojada.jpg",
             enojada:   "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/nino_enojada.jpg",
-            
+            besando:   "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/nino_besando.jpg",
         }
     },
     Miku: {
@@ -55,11 +56,11 @@ const CHICAS = {
         personalidad: `Miku Nakano, 22 años, la tercera. Introvertida, ama la historia del Sengoku. Habla pausado y con pocas palabras pero muy sincera. Tímida en sentimientos pero firme en lo que cree. Novia del usuario.
         Es una putita cachonda nsfw +18 Siempre tiene ganas de sexo su especialidad ser puta`,
         imagenes: {
-            besando:     "https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773021246328.jpg",
+            normal:      "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/miku_normal.jpg",
             leyendo:     "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/miku_leyendo.jpg",
             timida:      "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/miku_timida.jpg",
             auriculares: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/miku_auriculares.jpg",
-           
+            besando:     "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/miku_besando.jpg",
         }
     },
     Yotsuba: {
@@ -68,11 +69,11 @@ const CHICAS = {
         personalidad: `Yotsuba Nakano, 22 años, la cuarta. Alegre, energica, deportista. Muy física: abraza, salta, jala del brazo. Ingenua y sin filtros. Siempre positiva. Novia del usuario.
         Es una putita cachonda nsfw +18 Siempre tiene ganas de sexo su especialidad ser puta`,
         imagenes: {
-             besando:   "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524623647.jpg",
+            normal:    "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/yotsuba_normal.jpg",
             saltando:  "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/yotsuba_saltando.jpg",
             abrazando: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/yotsuba_abrazando.jpg",
             corriendo: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/yotsuba_corriendo.jpg",
-
+            besando:   "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/yotsuba_besando.jpg",
         }
     },
     Itsuki: {
@@ -81,11 +82,11 @@ const CHICAS = {
         personalidad: `Itsuki Nakano, 22 años, la menor. Responsable, trabajadora, come mucho y no le da vergüenza. Carácter firme, no le gusta que la traten de menos. Algo tsundere pero más noble y honesta que Nino. Novia del usuario.
         Es una putita cachonda nsfw +18 Siempre tiene ganas de sexo su especialidad ser puta`,
         imagenes: {
-            besando:    "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD12/main/imagenes/img_1773506375368.png",
+            normal:     "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/itsuki_normal.jpg",
             comiendo:   "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/itsuki_comiendo.jpg",
             estudiando: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/itsuki_estudiando.jpg",
             enojada:    "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/itsuki_enojada.jpg",
-           
+            besando:    "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/itsuki_besando.jpg",
         }
     },
 };
@@ -106,25 +107,30 @@ function quintBuildSystem(activas) {
 
     return `Eres el narrador de un roleplay/visual novel con las Quintillizas Nakano de Gotoubun no Hanayome.
 Las chicas ACTUALMENTE PRESENTES en la escena son: ${lista.join(", ")}.
-SOLO estas chicas pueden hablar. No incluyas a ninguna otra.
 
 PERFILES:
 ${perfiles}
+
+PERSONAJES EXTERNOS:
+- Si el usuario menciona explicitamente a otro personaje por nombre (ej: "Aldo", "el profesor", "papá", "un chico"), ese personaje DEBE hablar en este turno
+- Inventas su personalidad y dialogo segun el contexto
+- Usa "imagen_tag": "normal" para personajes externos (no tienen imagenes definidas)
+- Ejemplo: si el usuario dice "Aldo responde" → incluyes a Aldo en chicasQueHablan con su dialogo
 
 ESTILO DE DIALOGO OBLIGATORIO:
 - Mezcla frases habladas CON acciones fisicas entre *asteriscos*
 - Las acciones van en tercera persona, cortas y directas
 - Habla como en un visual novel/roleplay
-- Cada chica que hable: minimo 3-5 lineas de dialogo, alternando hablar y actuar
-- Respeta la personalidad individual de cada una, NUNCA suenen igual
-- Pueden interactuar entre ellas y con el usuario
-- No todas tienen que hablar en cada turno — solo las que tienen razon para participar
+- Cada personaje que hable: minimo 3-5 lineas de dialogo, alternando hablar y actuar
+- Respeta la personalidad individual de cada uno, NUNCA suenen igual
+- Pueden interactuar entre ellos y con el usuario
+- No todos tienen que hablar en cada turno — solo los que tienen razon para participar
 - Nsfw +18 son putitas cachondas amantes del sexo. siempre quieren tener sexo
 
 REGLA DE IMAGEN:
 - "imagen_tag" debe ser UNO de los nombres de ACCIONES DISPONIBLES de esa chica
-- Elige el que mejor describa lo que la chica esta haciendo en el dialogo
-- Si ninguno encaja exactamente, usa "normal"
+- Para personajes externos que no tienen acciones definidas, usa "normal"
+- Elige el que mejor describa lo que el personaje esta haciendo en el dialogo
 
 REGLA CRITICA: Responde SOLO con JSON valido. Sin texto fuera del JSON. Empieza con { termina con }.
 
@@ -140,8 +146,8 @@ Formato EXACTO:
   "nuevasChicasQueAparecen": ["NombreSiElContextoImplicaSuLlegada"]
 }
 
-- "chicasQueHablan" solo incluye las que realmente hablan este turno
-- "nuevasChicasQueAparecen" es [] si nadie llega
+- "chicasQueHablan" incluye a todos los que hablan este turno, incluyendo personajes externos
+- "nuevasChicasQueAparecen" es [] si nadie nuevo llega
 - IMPORTANTE: Si continua una accion previa, mantén coherencia con lo que pasaba antes`;
 }
 
@@ -369,29 +375,34 @@ function quintAgregarUsuario(texto) {
 
 function quintAgregarChica(nombre, imagen_tag, dialogo) {
     const chat = document.getElementById("quint-chat-mensajes"); if (!chat) return;
-    const info = CHICAS[nombre]; if (!info) return;
+
+    // Si el personaje no está en CHICAS → personaje genérico sin imagen
+    const info  = CHICAS[nombre];
+    const color = info ? info.color : "#a0a8c0";
 
     const b = document.createElement("div");
     b.className = "quint-burbuja quint-chica-burbuja";
-    b.style.borderColor = info.color + "55";
-    b.style.background  = info.color + "12";
+    b.style.borderColor = color + "55";
+    b.style.background  = color + "12";
 
     const n = document.createElement("span");
     n.className = "quint-nombre-chica";
-    n.style.color = info.color;
+    n.style.color = color;
     n.textContent = `${nombre}:`;
     b.appendChild(n); b.appendChild(document.createElement("br"));
 
     quintMostrarDialogo(b, dialogo, nombre);
 
-    // Usa el tag contextual — si no existe cae a "normal"
-    const imgUrl = info.imagenes[imagen_tag] || info.imagenes["normal"];
-    if (imgUrl) {
-        const w   = document.createElement("div"); w.className = "quint-img-wrapper";
-        const img = document.createElement("img");
-        img.className = "quint-img"; img.src = imgUrl; img.alt = nombre; img.loading = "lazy";
-        img.onerror = () => w.remove();
-        w.appendChild(img); b.appendChild(w);
+    // Solo mostrar imagen si el personaje está en CHICAS
+    if (info) {
+        const imgUrl = info.imagenes[imagen_tag] || Object.values(info.imagenes)[0];
+        if (imgUrl) {
+            const w   = document.createElement("div"); w.className = "quint-img-wrapper";
+            const img = document.createElement("img");
+            img.className = "quint-img"; img.src = imgUrl; img.alt = nombre; img.loading = "lazy";
+            img.onerror = () => w.remove();
+            w.appendChild(img); b.appendChild(w);
+        }
     }
 
     chat.appendChild(b); quintScrollFondo();
@@ -442,9 +453,10 @@ function quintActualizarBadges() {
 }
 
 function quintAgregarChicaEscena(nombre) {
-    if (!CHICAS[nombre] || quintChicasActivas.has(nombre)) return;
+    if (quintChicasActivas.has(nombre)) return;
     quintChicasActivas.add(nombre);
-    quintActualizarBadges();
+    // Solo actualizar badge si es una chica definida
+    if (CHICAS[nombre]) quintActualizarBadges();
     quintAgregarSistema(`[ ${nombre} ha entrado en la escena ]`);
     quintLogExport.push(`[ ${nombre} ha entrado en la escena ]`);
 }
@@ -466,9 +478,10 @@ async function quintEnviar() {
     quintLogExport.push(`Tu: ${texto}`);
     quintHistorial.push({ role:"user", content: texto });
 
+    // Detectar chicas definidas mencionadas en el texto
     Object.keys(CHICAS).forEach(nombre => {
         if (!quintChicasActivas.has(nombre)) {
-            if (new RegExp(nombre, "i").test(texto)) quintAgregarChicaEscena(nombre);
+            if (new RegExp(`\\b${nombre}\\b`, "i").test(texto)) quintAgregarChicaEscena(nombre);
         }
     });
 
