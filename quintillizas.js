@@ -1,6 +1,5 @@
 // ============================================================
 //  QUINTILLIZAS NAKANO CHAT — JavaScript para GitHub Pages
-//  Mismo formato que yotsuba.js — integra en tu HTML existente
 // ============================================================
 
 const _K = [
@@ -15,11 +14,6 @@ const GROQ_KEYS = _K.map(p => p.join(""));
 
 const MODELO_PRINCIPAL   = "llama-3.3-70b-versatile";
 const MODELO_ALTERNATIVO = "llama-3.1-8b-instant";
-
-// ============================================================
-//  DATOS DE CADA CHICA
-//  → Reemplaza las URLs de imagenes con las tuyas de GitHub
-// ============================================================
 
 const CHICAS = {
     Ichika: {
@@ -190,7 +184,16 @@ let quintHistorial      = [];
 let quintKeyActual      = 0;
 let quintOcupado        = false;
 let quintLogExport      = [];
-let quintChicasActivas  = new Set(["Yotsuba"]); // Yotsuba siempre al inicio
+let quintChicasActivas  = new Set(["Yotsuba"]);
+
+// ============================================================
+//  SCROLL al fondo
+// ============================================================
+
+function quintScrollFondo() {
+    const chat = document.getElementById("quint-chat-mensajes");
+    if (chat) chat.scrollTop = chat.scrollHeight;
+}
 
 // ============================================================
 //  API GROQ
@@ -198,6 +201,9 @@ let quintChicasActivas  = new Set(["Yotsuba"]); // Yotsuba siempre al inicio
 
 async function quintLlamarAPI(messages, modelo, system) {
     const sysPrompt = system || quintBuildSystem(quintChicasActivas);
+
+    // Siempre asegurar que hay al menos un mensaje de usuario
+    const msgs = messages.length > 0 ? messages : [{ role: "user", content: "Hola" }];
 
     for (let k = 0; k < GROQ_KEYS.length; k++) {
         const keyIdx = (quintKeyActual + k) % GROQ_KEYS.length;
@@ -213,7 +219,7 @@ async function quintLlamarAPI(messages, modelo, system) {
                 },
                 body: JSON.stringify({
                     model:       modelo,
-                    messages:    [{ role: "system", content: sysPrompt }, ...messages],
+                    messages:    [{ role: "system", content: sysPrompt }, ...msgs],
                     temperature: 0.8,
                     max_tokens:  1600
                 })
@@ -316,7 +322,7 @@ async function quintObtenerRespuesta() {
 }
 
 // ============================================================
-//  RENDER DIALOGO (igual que el original)
+//  RENDER DIALOGO
 // ============================================================
 
 function quintMostrarDialogo(contenedor, texto, chicaKey) {
@@ -325,9 +331,7 @@ function quintMostrarDialogo(contenedor, texto, chicaKey) {
         if (parte.startsWith("*") && parte.endsWith("*")) {
             const s = document.createElement("span");
             s.className = "quint-accion";
-            s.style.color = CHICAS[chicaKey]?.color
-                ? quintAccionColor(CHICAS[chicaKey].color)
-                : "#ffb347";
+            s.style.color = CHICAS[chicaKey]?.color || "#ffb347";
             s.textContent = parte;
             contenedor.appendChild(s);
         } else if (parte.startsWith("[") && parte.endsWith("]")) {
@@ -338,12 +342,6 @@ function quintMostrarDialogo(contenedor, texto, chicaKey) {
             contenedor.appendChild(s);
         }
     });
-}
-
-// Versión más clara del color de acción (mezcla con blanco)
-function quintAccionColor(hex) {
-    // devuelve una versión más suave del color de la chica
-    return hex;
 }
 
 function quintInsertarImagen(contenedor, url) {
@@ -363,7 +361,8 @@ function quintAgregarSistema(texto) {
     const chat = document.getElementById("quint-chat-mensajes"); if (!chat) return;
     const d = document.createElement("div");
     d.className = "quint-sistema"; d.textContent = texto;
-    chat.appendChild(d); 
+    chat.appendChild(d);
+    quintScrollFondo();
 }
 
 function quintAgregarUsuario(texto) {
@@ -373,7 +372,8 @@ function quintAgregarUsuario(texto) {
     const n = document.createElement("span"); n.className = "quint-nombre-usuario"; n.textContent = "Tú:";
     b.appendChild(n); b.appendChild(document.createElement("br"));
     const s = document.createElement("span"); s.textContent = texto; b.appendChild(s);
-    chat.appendChild(b); 
+    chat.appendChild(b);
+    quintScrollFondo();
 }
 
 function quintAgregarChica(nombre, emocion, dialogo) {
@@ -385,17 +385,14 @@ function quintAgregarChica(nombre, emocion, dialogo) {
     b.style.borderColor = info.color + "55";
     b.style.background  = info.color + "12";
 
-    // Nombre coloreado
     const n = document.createElement("span");
     n.className = "quint-nombre-chica";
     n.style.color = info.color;
     n.textContent = `${nombre}:`;
     b.appendChild(n); b.appendChild(document.createElement("br"));
 
-    // Dialogo con acciones
     quintMostrarDialogo(b, dialogo, nombre);
 
-    // Imagen de emoción
     const imgUrl = info.imagenes[emocion] || info.imagenes["normal"];
     if (imgUrl) {
         const w   = document.createElement("div"); w.className = "quint-img-wrapper";
@@ -406,7 +403,7 @@ function quintAgregarChica(nombre, emocion, dialogo) {
     }
 
     chat.appendChild(b);
-    
+    quintScrollFondo();
     quintLogExport.push(`${nombre}: ${dialogo}`);
 }
 
@@ -426,7 +423,8 @@ function quintShowTyping(nombres) {
     ["","",""].forEach(() => {
         const d = document.createElement("span"); d.className = "quint-dot"; t.appendChild(d);
     });
-    chat.appendChild(t); 
+    chat.appendChild(t);
+    quintScrollFondo();
 }
 
 function quintHideTyping() {
@@ -434,7 +432,7 @@ function quintHideTyping() {
 }
 
 // ============================================================
-//  BADGES — kanji que se iluminan
+//  BADGES
 // ============================================================
 
 function quintActualizarBadges() {
@@ -442,12 +440,12 @@ function quintActualizarBadges() {
         const badge = document.getElementById(`quint-badge-${nombre}`);
         if (!badge) return;
         if (quintChicasActivas.has(nombre)) {
-            badge.style.opacity   = "1";
-            badge.style.color     = CHICAS[nombre].color;
+            badge.style.opacity     = "1";
+            badge.style.color       = CHICAS[nombre].color;
             badge.style.borderColor = CHICAS[nombre].color;
         } else {
-            badge.style.opacity   = "0.2";
-            badge.style.color     = "#7a8ba0";
+            badge.style.opacity     = "0.2";
+            badge.style.color       = "#7a8ba0";
             badge.style.borderColor = "#2a3a55";
         }
     });
@@ -478,7 +476,6 @@ async function quintEnviar() {
     quintLogExport.push(`Tu: ${texto}`);
     quintHistorial.push({ role:"user", content: texto });
 
-    // Detectar si el usuario menciona a una chica que no está presente
     Object.keys(CHICAS).forEach(nombre => {
         if (!quintChicasActivas.has(nombre)) {
             if (new RegExp(nombre, "i").test(texto)) quintAgregarChicaEscena(nombre);
@@ -489,12 +486,10 @@ async function quintEnviar() {
     const datos = await quintObtenerRespuesta();
     quintHideTyping();
 
-    // Nuevas chicas que el modelo detectó en el contexto
     (datos.nuevasChicasQueAparecen || []).forEach(n => {
         if (CHICAS[n]) quintAgregarChicaEscena(n);
     });
 
-    // Mostrar cada chica en orden: dialogo + imagen
     for (const p of (datos.chicasQueHablan || [])) {
         if (!CHICAS[p.nombre]) continue;
         if (!quintChicasActivas.has(p.nombre)) quintAgregarChicaEscena(p.nombre);
@@ -535,8 +530,8 @@ function quintImportar() {
             quintAgregarSistema(`[ Conversación cargada: ${file.name} ]`);
             for (const l of quintLogExport) {
                 const t = l.trim(); if (!t) continue;
-                if (t.startsWith("Tu:"))            quintAgregarUsuario(t.slice(3).trim());
-                else if (t.startsWith("["))          quintAgregarSistema(t);
+                if (t.startsWith("Tu:"))   quintAgregarUsuario(t.slice(3).trim());
+                else if (t.startsWith("[")) quintAgregarSistema(t);
                 else {
                     const sep  = t.indexOf(":");
                     const nom  = sep > -1 ? t.slice(0,sep).trim() : "";
@@ -565,20 +560,31 @@ function quintLimpiar() {
 }
 
 // ============================================================
-//  BIENVENIDA
+//  BIENVENIDA — agrega mensaje de inicio al historial
 // ============================================================
 
 function quintBienvenida() {
+    const bienvenidaTexto = "¡¡Oye, oye!! *salta emocionada y te agarra del brazo* ¡Ya llegué! *gira sobre sí misma sonriendo* ¿Qué hacemos hoy? ¡Dime, dime! *da pequeños saltos sin soltar tu brazo*";
+
     quintAgregarSistema("[ Quintillizas Nakano — Las hermanas aparecen según el contexto ]");
     quintAgregarSistema("[ Actualmente: Yotsuba está presente. Menciona a otras para que lleguen. ]");
-    quintAgregarChica("Yotsuba", "feliz",
-        "¡¡Oye, oye!! *salta emocionada y te agarra del brazo* ¡Ya llegué! *gira sobre sí misma sonriendo* ¿Qué hacemos hoy? ¡Dime, dime! *da pequeños saltos sin soltar tu brazo*"
-    );
+    quintAgregarChica("Yotsuba", "feliz", bienvenidaTexto);
+
+    // *** CORRECCIÓN CLAVE: agregar la bienvenida al historial ***
+    // Así el primer mensaje del usuario siempre tiene contexto previo
+    quintHistorial.push({
+        role: "assistant",
+        content: JSON.stringify({
+            chicasQueHablan: [{ nombre: "Yotsuba", emocion: "feliz", dialogo: bienvenidaTexto }],
+            nuevasChicasQueAparecen: []
+        })
+    });
+
     quintLogExport.push("[ Quintillizas Nakano — inicio ]");
 }
 
 // ============================================================
-//  CARGAR PÁGINA — igual que cargarPaginaYotsuba()
+//  CARGAR PÁGINA
 // ============================================================
 
 function cargarPaginaQuintillizas() {
@@ -605,7 +611,6 @@ function cargarPaginaQuintillizas() {
                     </div>
                 </div>
 
-                <!-- Badges kanji — se iluminan cuando la chica está activa -->
                 <div id="quint-badges">
                     ${Object.entries(CHICAS).map(([n,d]) =>
                         `<div class="quint-badge" id="quint-badge-${n}" title="${n}"
@@ -650,8 +655,6 @@ function cargarPaginaQuintillizas() {
                 box-shadow:0 0 40px rgba(90,120,200,0.1);
                 border:1px solid #1f2d45; font-family:'Georgia',serif;
             }
-
-            /* HEADER */
             #quint-header {
                 display:flex; align-items:center; justify-content:space-between;
                 background:#0d1526; padding:12px 20px;
@@ -668,8 +671,6 @@ function cargarPaginaQuintillizas() {
             }
             #quint-header-nombre { color:#8ab0ff; font-size:16px; font-weight:bold; }
             #quint-header-sub    { color:#3a5a90; font-size:11px; margin-top:2px; }
-
-            /* Badges */
             #quint-badges { display:flex; gap:6px; flex-wrap:wrap; }
             .quint-badge {
                 width:28px; height:28px; border-radius:50%;
@@ -678,8 +679,6 @@ function cargarPaginaQuintillizas() {
                 transition:all 0.35s ease; font-weight:700;
                 font-family:'Noto Serif JP',serif;
             }
-
-            /* Botones header */
             #quint-header-btns { display:flex; gap:6px; flex-wrap:wrap; }
             .quint-btn-top {
                 background:#0d1526; color:#8ab0ff; border:1px solid #1f2d45;
@@ -689,8 +688,6 @@ function cargarPaginaQuintillizas() {
             .quint-btn-top:hover    { background:#162240; }
             .quint-btn-danger       { color:#ff7b7b !important; border-color:#6e2e2e !important; }
             .quint-btn-danger:hover { background:#3a1010 !important; }
-
-            /* CHAT */
             #quint-chat-mensajes {
                 flex:1; overflow-y:auto; padding:18px 16px;
                 display:flex; flex-direction:column; gap:10px;
@@ -699,8 +696,6 @@ function cargarPaginaQuintillizas() {
             #quint-chat-mensajes::-webkit-scrollbar       { width:6px; }
             #quint-chat-mensajes::-webkit-scrollbar-track  { background:#0a0f18; }
             #quint-chat-mensajes::-webkit-scrollbar-thumb  { background:#1f2d45; border-radius:3px; }
-
-            /* BURBUJAS */
             .quint-burbuja {
                 max-width:78%; padding:11px 15px; border-radius:16px;
                 line-height:1.65; font-size:14px; word-break:break-word;
@@ -721,20 +716,15 @@ function cargarPaginaQuintillizas() {
                 text-align:center; color:#3a5a90; font-size:11px;
                 font-style:italic; font-family:Arial,sans-serif; padding:2px 0;
             }
-
             .quint-nombre-chica   { font-weight:bold; font-size:12px; font-family:Georgia,serif; }
             .quint-nombre-usuario { color:#7aaeff; font-weight:bold; font-size:12px; }
             .quint-texto          { color:#e8e8f0; }
             .quint-accion         { font-style:italic; }
-
-            /* Imágenes */
             .quint-img-wrapper {
                 margin-top:10px; border-radius:10px; overflow:hidden;
                 max-width:320px; border:1px solid rgba(255,255,255,0.08);
             }
             .quint-img { width:100%; display:block; }
-
-            /* Typing */
             .quint-typing {
                 background:#0d1526; border:1px solid #1f2d45;
                 border-radius:16px; border-bottom-left-radius:4px;
@@ -752,8 +742,6 @@ function cargarPaginaQuintillizas() {
             @keyframes quintDot {
                 0%,80%,100%{transform:scale(0.7);opacity:0.3} 40%{transform:scale(1.1);opacity:1}
             }
-
-            /* Ayuda */
             #quint-ayuda {
                 background:#080e1c; color:#3a5a90; font-size:11px;
                 font-family:Arial,sans-serif; padding:6px 16px;
@@ -763,8 +751,6 @@ function cargarPaginaQuintillizas() {
                 background:#111d35; color:#8ab0ff;
                 padding:1px 5px; border-radius:4px; font-size:11px;
             }
-
-            /* Input */
             #quint-input-area {
                 display:flex; gap:10px; padding:12px 16px;
                 background:#0d1526; border-top:1px solid #1f2d45;
@@ -788,7 +774,6 @@ function cargarPaginaQuintillizas() {
             }
             #quint-btn-enviar:hover    { transform:scale(1.04); box-shadow:0 0 10px rgba(80,120,255,0.3); }
             #quint-btn-enviar:disabled { opacity:0.5; cursor:not-allowed; transform:none; box-shadow:none; }
-
             @media(max-width:600px) {
                 #quint-app          { height:calc(100vh - 60px); border-radius:0; }
                 .quint-burbuja      { max-width:92%; }
