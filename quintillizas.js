@@ -98,15 +98,19 @@ const CHICAS = {
 function quintBuildSystem(activas) {
     const lista = [...activas];
 
-    const perfiles = lista.map(n => {
+    // Separar chicas definidas de personajes externos (Aldo, etc.)
+    const soloChicas = lista.filter(n => CHICAS[n]);
+    const externos   = lista.filter(n => !CHICAS[n]);
+
+    const perfiles = soloChicas.map(n => {
         const chica = CHICAS[n];
-        // Solo los nombres — el nombre ya describe la accion
         const acciones = Object.keys(chica.imagenes).join(", ");
         return `${chica.personalidad}\nACCIONES DISPONIBLES PARA ${n}: ${acciones}`;
     }).join("\n\n---\n\n");
 
     return `Eres el narrador de un roleplay/visual novel con las Quintillizas Nakano de Gotoubun no Hanayome.
-Las chicas ACTUALMENTE PRESENTES en la escena son: ${lista.join(", ")}.
+Las chicas ACTUALMENTE PRESENTES en la escena son: ${soloChicas.join(", ")}.
+${externos.length > 0 ? "Personajes externos presentes: " + externos.join(", ") + "." : ""}
 
 PERFILES:
 ${perfiles}
