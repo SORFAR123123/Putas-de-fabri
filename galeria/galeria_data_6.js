@@ -48,7 +48,8 @@ const galeriaData_6 = {
             { id: 19, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772978070258.jpg" },
         
             { id: 20, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772978076818.jpg" },
-            { id: 21, url: "https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/img_1773618143917.png" }
+            { id: 21, url: "https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/img_1773618143917.png" },
+            { id: 22, url: "https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/img_1773797988173.png" }
         ]
     },
     '6_2': {
