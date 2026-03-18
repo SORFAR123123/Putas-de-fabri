@@ -326,6 +326,20 @@ const mangaDatabase = {
         ]
     },
 
+    // Sub-contenedor 1.10
+    '1_10': {
+        titulo: "Nino petera",
+        descripcion: "Peteando",
+        paginas: 3,
+        año: 2024,
+        autor: "Desconocido",
+        paginasUrls: [
+            "https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/img_1773851838704.webp", // Página 1
+            "https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/img_1773851841504.webp", // Página 2
+            "https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/img_1773851844146.webp" // Página 3
+        ]
+    },
+
    
  
 
