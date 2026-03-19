@@ -133,7 +133,7 @@ const galeriaData_4 = {
         
             { id: 70, url: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1773001541284.jpg" },
             { id: 71, url: "https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/img_1773798099702.png" },
-            { id: 72, url: "https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/img_1773945194764.png" }
+            { id: 72, url: "https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/img_1773945202652.png" }
         ]
     },
     '4_2': {
