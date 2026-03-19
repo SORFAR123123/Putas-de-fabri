@@ -48,7 +48,7 @@ const CHICAS = {
         imagenes: {
            besando:   "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD12/main/imagenes/img_1773506144298.png",
     Chupando_Solo_La_Punta_Del_Pene: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD3/main/imagenes/img_1773178619655.jpg",
-      Chupando_Solo_La_Mitad_del_pene:  "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD4/main/imagenes/img_1773181766015.jpg",
+      Chupando_Solo_La_Mitad_del_pene:  "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD3/main/imagenes/img_1773178625831.jpg",
     Chupando_TODO_El_pene:  "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD3/main/imagenes/img_1773178636024.jpg",
     Chupando_Bolas: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD3/main/imagenes/img_1773178638202.jpg",
         }
