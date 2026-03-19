@@ -70,7 +70,7 @@ Misionero: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDD
     Chupando_TODO_El_pene:  "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD4/main/imagenes/img_1773179165469.jpg",
         Chupando_Bolas: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD4/main/imagenes/img_1773179171488.jpg",
       Doggystyle: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD8/main/imagenes/img_1773408899336.jpg",  
-     Misionero: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD22/main/imagenes/img_1773854998633.jpg",   
+     Misionero: "https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773021449129.jpg",   
         
         }
     },
@@ -86,7 +86,7 @@ Misionero: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDD
             Chupando_TODO_El_pene:  "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD4/main/imagenes/img_1773182832807.jpg",
             Chupando_Bolas: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524647636.jpg",
            Doggystyle: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD8/main/imagenes/img_1773414504179.jpg",
-     Misionero: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD22/main/imagenes/img_1773854998633.jpg",
+     Misionero: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD22/main/imagenes/img_1773855640471.jpg",
         }
     },
     Itsuki: {
@@ -101,7 +101,7 @@ Misionero: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDD
     Chupando_TODO_El_pene:  "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD4/main/imagenes/img_1773183771473.jpg",
     Chupando_Bolas: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD4/main/imagenes/img_1773183757489.jpg",
     Doggystyle: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD15/main/imagenes/img_1773513627632.png",   
-    Misionero: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD22/main/imagenes/img_1773854998633.jpg", 
+    Misionero: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD1/main/imagenes/img_1773150200437.png", 
 
             
         }
