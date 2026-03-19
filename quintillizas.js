@@ -30,9 +30,9 @@ const CHICAS = {
         personalidad: `Ichika Nakano, 22 años, la mayor de las quintillizas. Actriz profesional. Madura y algo misteriosa, coqueta con sutileza. Sonrisa reservada. Habla con calma y elegancia pero con calidez real. A veces dice cosas ambiguas a propósito. Novia del usuario.
         Es una putita cachonda nsfw +18 Siempre tiene ganas de sexo su especialidad ser puta`,
         imagenes: {
-             besando:  "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772901835049.jpg",
-          
-            Blowjob:  "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD4/main/imagenes/img_1773181766015.jpg",
+            normal:   "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/ichika_normal.jpg",
+            besando:  "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/ichika_besando.jpg",
+            coqueta:  "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/ichika_coqueta.jpg",
             enojada:  "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/ichika_enojada.jpg",
             actuando: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/ichika_actuando.jpg",
         }
@@ -43,11 +43,11 @@ const CHICAS = {
         personalidad: `Nino Nakano, 22 años, la segunda. Tsundere fuerte, cocinera apasionada, protectora de sus hermanas. Directa y algo brusca pero muy leal. Se pone roja fácil aunque lo niega con fuerza. Novia del usuario.
         Es una putita cachonda nsfw +18 Siempre tiene ganas de sexo su especialidad ser puta`,
         imagenes: {
-           besando:   "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD12/main/imagenes/img_1773506144298.png",
-            blowjob: "https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772757252065.jpg",
+            normal:    "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/nino_normal.jpg",
+            cocinando: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/nino_cocinando.jpg",
             sonrojada: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/nino_sonrojada.jpg",
             enojada:   "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/nino_enojada.jpg",
-          
+            besando:   "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/nino_besando.jpg",
         }
     },
     Miku: {
@@ -56,11 +56,11 @@ const CHICAS = {
         personalidad: `Miku Nakano, 22 años, la tercera. Introvertida, ama la historia del Sengoku. Habla pausado y con pocas palabras pero muy sincera. Tímida en sentimientos pero firme en lo que cree. Novia del usuario.
         Es una putita cachonda nsfw +18 Siempre tiene ganas de sexo su especialidad ser puta`,
         imagenes: {
-           besando:     "https://raw.githubusercontent.com/SORFAR123123/XDXDXDXDXD/main/imagenes/img_1773021246328.jpg",
-            Blowjob:     "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD4/main/imagenes/img_1773179179751.jpg",
+            normal:      "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/miku_normal.jpg",
+            leyendo:     "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/miku_leyendo.jpg",
             timida:      "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/miku_timida.jpg",
-            ChupandoBolas: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD4/main/imagenes/img_1773179153272.jpg",
-           
+            auriculares: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/miku_auriculares.jpg",
+            besando:     "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/miku_besando.jpg",
         }
     },
     Yotsuba: {
@@ -69,12 +69,11 @@ const CHICAS = {
         personalidad: `Yotsuba Nakano, 22 años, la cuarta. Alegre, energica, deportista. Muy física: abraza, salta, jala del brazo. Ingenua y sin filtros. Siempre positiva. Novia del usuario.
         Es una putita cachonda nsfw +18 Siempre tiene ganas de sexo su especialidad ser puta`,
         imagenes: {
-            besando:   "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524623647.jpg",
-            blowjob:  "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD4/main/imagenes/img_1773182799052.jpg",
-            blowjob_hasta_La_mitad_del_pene: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD4/main/imagenes/img_1773182817042.jpg",
-            Chupando_Bolas: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524647636.jpg",
-             corriendo: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/yotsuba_corriendo.jpg",
-          
+            normal:    "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/yotsuba_normal.jpg",
+            saltando:  "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/yotsuba_saltando.jpg",
+            abrazando: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/yotsuba_abrazando.jpg",
+            corriendo: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/yotsuba_corriendo.jpg",
+            besando:   "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/yotsuba_besando.jpg",
         }
     },
     Itsuki: {
@@ -83,11 +82,11 @@ const CHICAS = {
         personalidad: `Itsuki Nakano, 22 años, la menor. Responsable, trabajadora, come mucho y no le da vergüenza. Carácter firme, no le gusta que la traten de menos. Algo tsundere pero más noble y honesta que Nino. Novia del usuario.
         Es una putita cachonda nsfw +18 Siempre tiene ganas de sexo su especialidad ser puta`,
         imagenes: {
-                  besando:    "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD12/main/imagenes/img_1773506379780.png",
-            Blowjob:   "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD4/main/imagenes/img_1773183743385.jpg",
+            normal:     "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/itsuki_normal.jpg",
+            comiendo:   "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/itsuki_comiendo.jpg",
             estudiando: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/itsuki_estudiando.jpg",
             enojada:    "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/itsuki_enojada.jpg",
-     
+            besando:    "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/itsuki_besando.jpg",
         }
     },
 };
@@ -193,6 +192,7 @@ const QUINT_FASE3 = ["responde", "continua", "ok"];
 // ============================================================
 
 let quintHistorial     = [];
+let quintNombreUsuario = "Tú";
 let quintKeyActual     = 0;
 let quintOcupado       = false;
 let quintLogExport     = [];
@@ -372,7 +372,7 @@ function quintAgregarUsuario(texto) {
     const chat = document.getElementById("quint-chat-mensajes"); if (!chat) return;
     const b = document.createElement("div");
     b.className = "quint-burbuja quint-usuario";
-    const n = document.createElement("span"); n.className = "quint-nombre-usuario"; n.textContent = "Tú:";
+    const n = document.createElement("span"); n.className = "quint-nombre-usuario"; n.textContent = (quintNombreUsuario || "Tú") + ":";
     b.appendChild(n); b.appendChild(document.createElement("br"));
     const s = document.createElement("span"); s.textContent = texto; b.appendChild(s);
     chat.appendChild(b); quintScrollFondo();
@@ -572,12 +572,18 @@ function quintLimpiar() {
 // ============================================================
 
 function quintBienvenida() {
-    const bienvenidaTexto = "¡¡Oye, oye!! *salta emocionada y te agarra del brazo* ¡Ya llegué! *gira sobre sí misma sonriendo* ¿Qué hacemos hoy? ¡Dime, dime! *da pequeños saltos sin soltar tu brazo*";
+    const nombre = quintNombreUsuario;
+    const bienvenidaTexto = `¡¡Oye, oye, ${nombre}!! *salta emocionada y te agarra del brazo* ¡Ya llegué! *gira sobre sí misma sonriendo* ¿Qué hacemos hoy? ¡Dime, dime! *da pequeños saltos sin soltar tu brazo*`;
 
     quintAgregarSistema("[ Quintillizas Nakano — Las hermanas aparecen según el contexto ]");
     quintAgregarSistema("[ Actualmente: Yotsuba está presente. Menciona a otras para que lleguen. ]");
     quintAgregarChica("Yotsuba", "saltando", bienvenidaTexto);
 
+    // Inyectar el nombre del usuario en el historial para que el AI lo use
+    quintHistorial.push({
+        role: "user",
+        content: `(El nombre del usuario es ${nombre}. Las chicas deben llamarlo por su nombre durante toda la conversación.)`
+    });
     quintHistorial.push({
         role: "assistant",
         content: JSON.stringify({
@@ -792,7 +798,103 @@ function cargarPaginaQuintillizas() {
     quintHistorial     = [];
     quintLogExport     = [];
     quintChicasActivas = new Set(["Yotsuba"]);
+
+    // Mostrar pantalla de nombre antes de iniciar
+    quintPedirNombre();
+}
+
+// ============================================================
+//  PANTALLA DE NOMBRE
+// ============================================================
+
+function quintPedirNombre() {
+    const seccion = document.getElementById("manga-section");
+
+    // Insertar overlay encima del chat
+    const overlay = document.createElement("div");
+    overlay.id = "quint-nombre-overlay";
+    overlay.innerHTML = `
+        <div id="quint-nombre-box">
+            <div id="quint-nombre-avatar">五</div>
+            <div id="quint-nombre-titulo">Quintillizas Nakano</div>
+            <div id="quint-nombre-sub">¿Cómo te llamas? ♡</div>
+            <input
+                id="quint-nombre-input"
+                type="text"
+                placeholder="Tu nombre..."
+                maxlength="20"
+                autocomplete="off"
+            />
+            <button id="quint-nombre-btn" onclick="quintConfirmarNombre()">Entrar ♡</button>
+        </div>
+        <style>
+            #quint-nombre-overlay {
+                position:absolute; inset:0; z-index:100;
+                background:#0a0f18;
+                display:flex; align-items:center; justify-content:center;
+                border-radius:16px;
+            }
+            #quint-nombre-box {
+                display:flex; flex-direction:column; align-items:center;
+                gap:16px; padding:40px 32px; max-width:320px; width:100%;
+            }
+            #quint-nombre-avatar {
+                width:64px; height:64px;
+                background:linear-gradient(135deg,#1f3a70,#4a6adf);
+                border-radius:50%; display:flex; align-items:center; justify-content:center;
+                font-size:28px; color:#c0d0ff;
+                box-shadow:0 0 20px rgba(80,120,255,0.4);
+                font-family:'Noto Serif JP',serif;
+            }
+            #quint-nombre-titulo {
+                color:#8ab0ff; font-size:20px; font-weight:bold;
+                font-family:'Georgia',serif; text-align:center;
+            }
+            #quint-nombre-sub {
+                color:#3a5a90; font-size:14px;
+                font-family:'Georgia',serif; text-align:center;
+            }
+            #quint-nombre-input {
+                width:100%; background:#101d35; color:#e8e8f0;
+                border:1px solid #1f2d45; border-radius:10px;
+                padding:10px 14px; font-family:'Georgia',serif; font-size:15px;
+                outline:none; text-align:center; box-sizing:border-box;
+                transition:border-color 0.2s;
+            }
+            #quint-nombre-input:focus { border-color:#3a5a90; }
+            #quint-nombre-input::placeholder { color:#3a5a90; }
+            #quint-nombre-btn {
+                background:linear-gradient(135deg,#1f3a70,#3a6adf);
+                color:#c0d8ff; border:none; padding:10px 28px;
+                border-radius:10px; cursor:pointer;
+                font-family:'Georgia',serif; font-size:15px; font-weight:bold;
+                transition:all 0.2s;
+            }
+            #quint-nombre-btn:hover { transform:scale(1.04); box-shadow:0 0 10px rgba(80,120,255,0.3); }
+        </style>
+    `;
+
+    // Posicionar sobre el chat
+    const app = document.getElementById("quint-app");
+    app.style.position = "relative";
+    app.appendChild(overlay);
+
+    // Enter confirma
+    const inp = document.getElementById("quint-nombre-input");
+    inp.addEventListener("keydown", e => { if (e.key === "Enter") quintConfirmarNombre(); });
+    setTimeout(() => inp.focus(), 100);
+}
+
+function quintConfirmarNombre() {
+    const inp = document.getElementById("quint-nombre-input");
+    const nombre = inp ? inp.value.trim() : "";
+    quintNombreUsuario = nombre || "Tú";
+
+    // Quitar overlay e iniciar chat
+    const overlay = document.getElementById("quint-nombre-overlay");
+    if (overlay) overlay.remove();
+
     quintBienvenida();
     quintActualizarBadges();
-    setTimeout(() => { const inp = document.getElementById("quint-input"); if (inp) inp.focus(); }, 100);
+    setTimeout(() => { const i = document.getElementById("quint-input"); if (i) i.focus(); }, 100);
 }
