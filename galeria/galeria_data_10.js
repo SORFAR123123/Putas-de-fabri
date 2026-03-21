@@ -236,6 +236,14 @@ const galeriaData_10 = {
             { id: 122, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD19/main/imagenes/img_1773599709311.png" }
         ]
     },
+
+    '10_Miku_nino_yotsuba_putitas': {
+        titulo: "",
+        descripcion: "",
+        categoria: "",
+        imagen: "",
+        imagenes: []
+    },
 };
 
 if (typeof galeriaDatabase !== 'undefined') {
