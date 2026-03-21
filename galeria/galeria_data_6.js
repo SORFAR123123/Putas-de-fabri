@@ -52,7 +52,12 @@ const galeriaData_6 = {
             { id: 22, url: "https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/img_1773797988173.png" },
             { id: 23, url: "https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/img_1773883225355.png" },
            
-            { id: 24, url: "https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/img_1774103182288.png" }
+            { id: 24, url: "https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/img_1774103182288.png" },
+            { id: 25, url: "https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/img_1774109732216_1.png" },
+            { id: 26, url: "https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/img_1774109734065_2.png" },
+            { id: 27, url: "https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/img_1774109735861_3.png" },
+            { id: 28, url: "https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/img_1774109737662_4.png" },
+            { id: 29, url: "https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/img_1774109739307_5.png" }
         ]
     },
     '6_2': {
