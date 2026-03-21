@@ -613,7 +613,7 @@ function quintLimpiar() {
 
 function quintBienvenida() {
     const nombre = quintNombreUsuario;
-    const bienvenidaTexto = `¡¡Oye, oye, ${nombre}!! *salta emocionada y te agarra del brazo* ¡Ya llegué! *gira sobre sí misma sonriendo* ¿Qué hacemos hoy? ¡Dime, dime! *Lo besa*`;
+    const bienvenidaTexto = `¡¡Oye, oye, ${nombre}!! *salta emocionada y te agarra del brazo* ¡Ya llegué! *gira sobre sí misma sonriendo* ¿Qué hacemos hoy? ¡Dime, dime! `;
 
     quintAgregarSistema("[ Quintillizas Nakano — Las hermanas aparecen según el contexto ]");
     quintAgregarSistema("[ Actualmente: Yotsuba está presente. Menciona a otras para que lleguen. ]");
