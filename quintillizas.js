@@ -92,7 +92,8 @@ Chupando_Bola_Derecha: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDD
         personalidad: `Yotsuba Nakano, 22 años, la cuarta. Alegre, energica, deportista. Muy física: abraza, salta, jala del brazo. Ingenua y sin filtros. Siempre positiva. Novia del usuario.
         Es una putita cachonda nsfw +18 Siempre tiene ganas de sexo su especialidad ser puta`,
         imagenes: {
-           besando:   "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524623647.jpg",
+           Hablando: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD11/main/imagenes/img_1773503723445.png",
+            besando:   "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524623647.jpg",
             Chupando_Solo_La_Cabeza_Del_Pene:  "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD4/main/imagenes/img_1773182799052.jpg",
             Chupando_hasta_La_mitad_del_pene: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD4/main/imagenes/img_1773182817042.jpg",
             Chupando_TODO_El_pene:  "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD4/main/imagenes/img_1773182832807.jpg",
@@ -101,7 +102,7 @@ Chupando_Bola_Derecha: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDD
              Chupando_Bola_Derecha: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD4/main/imagenes/img_1773182803075.jpg",
            Doggystyle: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD8/main/imagenes/img_1773414504179.jpg",
      Misionero: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD22/main/imagenes/img_1773855640471.jpg",
-            Hablando: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD11/main/imagenes/img_1773503723445.png",
+           
                Normal: "https://pbs.twimg.com/media/HCreLRRWoAEMJ40?format=jpg&name=small",
                Desnuda: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD19/main/imagenes/img_1773671004743.jpg", 
         }
