@@ -740,10 +740,11 @@ function cargarPaginaQuintillizas() {
                 </div>
 
                 <div id="quint-header-btns">
-                    <button class="quint-btn-top" onclick="quintImportar()">📂 Importar</button>
-                    <button class="quint-btn-top" onclick="quintExportar()">💾 Exportar</button>
-                    <button class="quint-btn-top quint-btn-danger" onclick="quintLimpiar()">🗑 Limpiar</button>
-                </div>
+    <button class="quint-btn-top" onclick="quintImportar()">📂 Importar</button>
+    <button class="quint-btn-top" onclick="quintExportar()">💾 Exportar</button>
+    <button class="quint-btn-top" onclick="quintBorrarUltimo()">↩ Borrar último</button>
+    <button class="quint-btn-top quint-btn-danger" onclick="quintLimpiar()">🗑 Limpiar</button>
+</div>
             </div>
 
             <!-- MENSAJES -->
