@@ -567,26 +567,29 @@ function quintAgregarChicaEscena(nombre) {
 // ============================================================
 //  ENVIAR
 // ============================================================
-
 async function quintEnviar() {
     if (quintOcupado) return;
     const input = document.getElementById("quint-input");
-    const texto = input.value.trim(); if (!texto) return;
+    const texto = input.value.trim();
     input.value = ""; input.style.height = "auto";
     quintOcupado = true;
     const btn = document.getElementById("quint-btn-enviar");
     btn.disabled = true; btn.textContent = "...";
 
-    quintAgregarUsuario(texto);
-    quintLogExport.push(`Tu: ${texto}`);
-    quintHistorial.push({ role:"user", content: texto });
+    if (texto) {
+        quintAgregarUsuario(texto);
+        quintLogExport.push(`Tu: ${texto}`);
+        quintHistorial.push({ role:"user", content: texto });
 
-    // Detectar chicas definidas mencionadas en el texto
-    Object.keys(CHICAS).forEach(nombre => {
-        if (!quintChicasActivas.has(nombre)) {
-            if (new RegExp(`\\b${nombre}\\b`, "i").test(texto)) quintAgregarChicaEscena(nombre);
-        }
-    });
+        Object.keys(CHICAS).forEach(nombre => {
+            if (!quintChicasActivas.has(nombre)) {
+                if (new RegExp(`\\b${nombre}\\b`, "i").test(texto)) quintAgregarChicaEscena(nombre);
+            }
+        });
+    } else {
+        // Input vacío = continuar historia según contexto
+        quintHistorial.push({ role:"user", content: "(Continúa la historia de forma natural según el contexto anterior, sin repetir lo ya dicho)" });
+    }
 
     quintShowTyping([...quintChicasActivas]);
     const datos = await quintObtenerRespuesta();
@@ -599,10 +602,18 @@ async function quintEnviar() {
     for (const p of (datos.chicasQueHablan || [])) {
         if (!p.nombre || !p.dialogo) continue;
         if (!quintChicasActivas.has(p.nombre)) quintAgregarChicaEscena(p.nombre);
-        quintAgregarChica(p.nombre, p.imagen_tag || "normal", p.dialogo || "...");
+        quintAgregarChica(p.nombre, p.imagen_tag || "Hablando", p.dialogo || "...");
     }
 
     quintOcupado = false; btn.disabled = false; btn.textContent = "Enviar ♡";
+}
+function quintBorrarUltimo() {
+    const chat = document.getElementById("quint-chat-mensajes");
+    const elementos = chat.querySelectorAll(".quint-burbuja, .quint-sistema");
+    if (!elementos.length) return;
+    elementos[elementos.length - 1].remove();
+    if (quintHistorial.length > 0) quintHistorial.pop();
+    if (quintLogExport.length > 0) quintLogExport.pop();
 }
 
 function quintKeyHandler(e) {
