@@ -17,9 +17,9 @@ const asmr2Data = {
                     imagen: "https://pbs.twimg.com/media/HEMFxGSXYAAEoms?format=jpg&name=medium",
                     descripcion: "Asuka Sumire y la otra puta me olvide xd",
                     tracks: {
-                                                "1_1_1": {
+                             "1_1_1": {
                             nombre: "🎧 putita 1",
-                            imagen: "",
+                            imagen: "https://pbs.twimg.com/media/HEMFxGSXYAAEoms?format=jpg&name=medium",
                             descripcion: "",
                             driveId: "1lb_lD9dAdaUlD16k7HwakCkhqTtrcojC",
                             duracion: "00:00"
