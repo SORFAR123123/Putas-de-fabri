@@ -66,6 +66,23 @@ Cowgirl: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXD
         Es una putita cachonda nsfw +18 Siempre tiene ganas de sexo su especialidad ser puta`,
         imagenes: {
            besando:   "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD12/main/imagenes/img_1773506144298.png",
+            //ROPAAA///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+    Ropa_Elegante:   "https://is.gd/PNNwGd",
+     Ropa_Idol:   "https://is.gd/f1Mytq",
+    Ropa_Sexy:   "https://is.gd/YlMfEf",
+    Ropa_Yukata:   "https://is.gd/lLI6wB",
+     Ropa_Bikini:   "https://is.gd/XxNXzJ",
+    Ropa_Modelo:   "https://is.gd/kjjWbr",
+     Ropa_Cita:   "https://is.gd/INprLR",
+     Moviendo_El_Culo:   "https://files.catbox.moe/fw4m70.gif",
+
+
+
+
+
+
+
+            
     Chupando_Solo_La_Punta_Del_Pene: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD3/main/imagenes/img_1773178619655.jpg",
       Chupando_Solo_La_Mitad_del_pene:  "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD3/main/imagenes/img_1773178625831.jpg",
     Chupando_TODO_El_pene:  "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD3/main/imagenes/img_1773178636024.jpg",
