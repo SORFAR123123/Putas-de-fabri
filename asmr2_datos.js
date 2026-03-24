@@ -6,19 +6,19 @@ const asmr2Data = {
     contenedores: {
         // CONTENEDOR 1: HERMANAS
         1: {
-            nombre: "Hermanas",
-            imagen: "https://pbs.twimg.com/media/G_CpDeXXAAAoqV5?format=png&name=small",
+            nombre: "Shota kachador de putas",
+            imagen: "https://pbs.twimg.com/media/HEMFxGSXYAAEoms?format=jpg&name=medium",
             descripcion: "ASMR con hermanas cariñosas",
             subcontenedores: {
                 // Hermana Mayor Yuki
                 "1_1": {
-                    nombre: "Hermana Mayor - Yuki",
-                    imagen: "https://pbs.twimg.com/media/G_CpDeXXAAAoqV5?format=png&name=small",
-                    descripcion: "Yuki, la hermana mayor cariñosa",
+                    nombre: "Kachando 3 putas",
+                    imagen: "https://pbs.twimg.com/media/HEMFxGSXYAAEoms?format=jpg&name=medium",
+                    descripcion: "Asuka Sumire y la otra puta me olvide xd",
                     tracks: {
                         "1_1_1": {
                             nombre: "🎧 Track 1: Presentación",
-                            imagen: "https://pbs.twimg.com/media/G_CpDeXXAAAoqV5?format=png&name=small",
+                            imagen: "https://pbs.twimg.com/media/HEMFxGSXYAAEoms?format=jpg&name=medium",
                             descripcion: "Yuki se presenta y te saluda con susurros",
                             driveId: "1aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe",
                             duracion: "08:30",
@@ -26,7 +26,7 @@ const asmr2Data = {
                         },
                         "1_1_2": {
                             nombre: "🎧 Track 2: Susurros al oído",
-                            imagen: "https://pbs.twimg.com/media/G_CpDeXXAAAoqV5?format=png&name=small",
+                            imagen: "https://pbs.twimg.com/media/HEMFxGSXYAAEoms?format=jpg&name=medium",
                             descripcion: "Susurros suaves para relajarte",
                             driveId: "2aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe",
                             duracion: "12:15",
@@ -34,7 +34,7 @@ const asmr2Data = {
                         },
                         "1_1_3": {
                             nombre: "🎧 Track 3: Limpieza de oídos",
-                            imagen: "https://pbs.twimg.com/media/G_CpDeXXAAAoqV5?format=png&name=small",
+                            imagen: "https://pbs.twimg.com/media/HEMFxGSXYAAEoms?format=jpg&name=medium",
                             descripcion: "Sonidos de mimikaki para dormir",
                             driveId: "3aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe",
                             duracion: "15:20",
@@ -42,7 +42,7 @@ const asmr2Data = {
                         },
                         "1_1_4": {
                             nombre: "🎧 Track 4: Masaje relajante",
-                            imagen: "https://pbs.twimg.com/media/G_CpDeXXAAAoqV5?format=png&name=small",
+                            imagen: "https://pbs.twimg.com/media/HEMFxGSXYAAEoms?format=jpg&name=medium",
                             descripcion: "Masaje en la espalda y hombros",
                             driveId: "4aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe",
                             duracion: "10:45",
@@ -50,7 +50,7 @@ const asmr2Data = {
                         },
                         "1_1_5": {
                             nombre: "🎧 Track 5: Arropando para dormir",
-                            imagen: "https://pbs.twimg.com/media/G_CpDeXXAAAoqV5?format=png&name=small",
+                            imagen: "https://pbs.twimg.com/media/HEMFxGSXYAAEoms?format=jpg&name=medium",
                             descripcion: "Te arropan y te dan las buenas noches",
                             driveId: "5aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe",
                             duracion: "09:30",
@@ -58,7 +58,7 @@ const asmr2Data = {
                         },
                         "1_1_6": {
                             nombre: "🎧 Track 6: Acariciando tu cabello",
-                            imagen: "https://pbs.twimg.com/media/G_CpDeXXAAAoqV5?format=png&name=small",
+                            imagen: "https://pbs.twimg.com/media/HEMFxGSXYAAEoms?format=jpg&name=medium",
                             descripcion: "Sonidos de cabello siendo acariciado",
                             driveId: "6aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe",
                             duracion: "11:00",
@@ -66,7 +66,7 @@ const asmr2Data = {
                         },
                         "1_1_7": {
                             nombre: "🎧 Track 7: Canción de cuna",
-                            imagen: "https://pbs.twimg.com/media/G_CpDeXXAAAoqV5?format=png&name=small",
+                            imagen: "https://pbs.twimg.com/media/HEMFxGSXYAAEoms?format=jpg&name=medium",
                             descripcion: "Yuki te canta para que duermas",
                             driveId: "7aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe",
                             duracion: "14:20",
@@ -74,7 +74,7 @@ const asmr2Data = {
                         },
                         "1_1_8": {
                             nombre: "🎧 Track 8: Conversación nocturna",
-                            imagen: "https://pbs.twimg.com/media/G_CpDeXXAAAoqV5?format=png&name=small",
+                            imagen: "https://pbs.twimg.com/media/HEMFxGSXYAAEoms?format=jpg&name=medium",
                             descripcion: "Hablando antes de dormir",
                             driveId: "8aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe",
                             duracion: "18:00",
