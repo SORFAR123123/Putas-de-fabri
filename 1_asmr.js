@@ -274,7 +274,38 @@ const asmrDatabase = {
         categoria: "Música",
         tipoVoz: "Instrumental",
         tags: ["koto", "música tradicional", "instrumental"]
+    },
+    '5_1': {
+        titulo: "Kchando putas",
+        driveId: "1FlSDnnuabUa_yEjdCaWYXo1L4dP__tCN",
+        descripcion: "Melodías tradicionales de koto con lluvia suave de fondo.",
+        timestamps: [
+            { tiempo: 0, titulo: "🎵 Tema principal" },
+            { tiempo: 600, titulo: "🌧️ Variación con lluvia" },
+            { tiempo: 1200, titulo: "🍃 Melodía de bosque" },
+            { tiempo: 1800, titulo: "🌊 Final con olas" }
+        ],
+        duracion: "30:00",
+        categoria: "Música",
+        tipoVoz: "Instrumental",
+        tags: ["koto", "música tradicional", "instrumental"]
+    },
+    '5_2': {
+        titulo: "Pruebaaa",
+        driveId: "1FlSDnnuabUa_yEjdCaWYXo1L4dP__tCN",
+        descripcion: "Melodías tradicionales de koto con lluvia suave de fondo.",
+        timestamps: [
+            { tiempo: 0, titulo: "🎵 Tema principal" },
+            { tiempo: 600, titulo: "🌧️ Variación con lluvia" },
+            { tiempo: 1200, titulo: "🍃 Melodía de bosque" },
+            { tiempo: 1800, titulo: "🌊 Final con olas" }
+        ],
+        duracion: "30:00",
+        categoria: "Música",
+        tipoVoz: "Instrumental",
+        tags: ["koto", "música tradicional", "instrumental"]
     }
+    
 };
 
 // ================================================
