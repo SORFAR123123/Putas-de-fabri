@@ -24,12 +24,12 @@ const asmr2Data = {
                             driveId: "1lb_lD9dAdaUlD16k7HwakCkhqTtrcojC",
                             duracion: "00:00"
                         },
-                        "1_1_2": {
-                            nombre: "🎧 Track 2: Susurros al oído",
-                            imagen: "https://pbs.twimg.com/media/HEMFxGSXYAAEoms?format=jpg&name=medium",
-                            descripcion: "Susurros suaves para relajarte",
-                            driveId: "2aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe",
-                            duracion: "12:15"
+                                                "1_1_2": {
+                            nombre: "🎧 putitas 2",
+                            imagen: "",
+                            descripcion: "",
+                            driveId: "1onjnFJGuf7fHCxNdbYnNBNOL4F1lLqvu",
+                            duracion: "00:00"
                         },
                         "1_1_3": {
                             nombre: "🎧 Track 3: Limpieza de oídos",
