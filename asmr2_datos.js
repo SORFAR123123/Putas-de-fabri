@@ -31,12 +31,12 @@ const asmr2Data = {
                             driveId: "1onjnFJGuf7fHCxNdbYnNBNOL4F1lLqvu",
                             duracion: "00:00"
                         },
-                        "1_1_3": {
-                            nombre: "🎧 Track 3: Limpieza de oídos",
-                            imagen: "https://pbs.twimg.com/media/HEMFxGSXYAAEoms?format=jpg&name=medium",
-                            descripcion: "Sonidos de mimikaki para dormir",
-                            driveId: "3aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe",
-                            duracion: "15:20"
+                                                "1_1_3": {
+                            nombre: "🎧 Putonas 3",
+                            imagen: "",
+                            descripcion: "",
+                            driveId: "1Q7lSWtffAsRsDDXyy81y9kSMF9ZJI9eJ",
+                            duracion: "00:00"
                         },
                         "1_1_4": {
                             nombre: "🎧 Track 4: Masaje relajante",
