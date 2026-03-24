@@ -2220,7 +2220,14 @@ const sistemaDescriptivo = {
                 duracion: '' 
             },
              
-             '8_1': { 
+            '7_13': { 
+                nombre: 'Nino kachando',
+                imagen: 'https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/frame_4440_1774367566582.webp', 
+                descripcion: '', 
+                duracion: '' 
+            },
+            
+                         '8_1': { 
                 nombre: 'fabri putardo',
                 imagen: 'https://pbs.twimg.com/media/G_2dDpBX0AAcGz6?format=png&name=small', 
                 descripcion: '', 
