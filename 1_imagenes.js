@@ -2612,6 +2612,12 @@ console.log('🔄 Funciones disponibles:');
 console.log('   - obtenerNombreContenedor(modo, numero)');
 console.log('   - obtenerNombreSubcontenedor(modo, contenedor, subcontenedor)');
 console.log('   - editarContenedor(modo, numero, {nombre, imagen, descripcion, ...})');
-console.log('   - editarSubcontenedor(modo, contenedor, subcontenedor, {nombre, imagen, descripcion, ...})');
+console.log('   - editarSubcontenedor(modo, contenedor, subcontenedor, {nombre, imagen, descripcion, ...            '4_20': { 
+                nombre: 'Makima putita',
+                imagen: 'https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/img_1774315214551.webp', 
+                descripcion: '', 
+                duracion: '' 
+            },
+        })');
 console.log('   - mostrarInfoContenedor(modo, numero)');
 console.log('   - mostrarInfoSubcontenedor(modo, contenedor, subcontenedor)');
