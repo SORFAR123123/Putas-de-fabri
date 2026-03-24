@@ -186,18 +186,7 @@ Anal: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDX
             
         }
     },
-      Aldo: {
-        color:  "#c084d4",
-        kanji:  "Aldo",
-        personalidad: `Aldo Mejor amigo de Fabrizio Aldo tiene 24 años, es directo y siejmpre dice lo que piensa sin filtros nsfw +18 ejemplo no tiene rodeos
-        al pedir sexo`,
-        imagenes: {
-        Pene_De_Aldo:    "https://is.gd/eiXIc1",
-    
-
-            
-        }
-    },
+     
 };
 
 // ============================================================
