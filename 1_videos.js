@@ -1169,17 +1169,7 @@ function existeVideo(contenedor, subcontenedor) {
 }
 
 function obtenerContenedoresDisponibles() {
-    const contenedores = {
-    // Sub-contenedor 4_20
-    '4_20': {
-        titulo: "Makima putita",
-        driveId: "1uPbtGds3iOUhG_RDCi6Mls5TPegbYii4",
-        descripcion: "",
-        timestamps: [],
-        duracion: "0:00",
-        categoria: "Basico"
-    },
-};
+    const contenedores = {};
     
     Object.keys(videosDatabase).forEach(key => {
         const [contenedor, subcontenedor] = key.split('_');
