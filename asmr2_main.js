@@ -1,29 +1,12 @@
 // ================================================
-// ASMR2 - SISTEMA PRINCIPAL (Con detección dinámica de mazos)
+// ASMR2 - SISTEMA PRINCIPAL (Con reproductor integrado)
 // ================================================
 
 // Variables globales
 let asmr2ContenedorActual = null;
 let asmr2SubcontenedorActual = null;
 let asmr2TrackActual = null;
-
-// ================================================
-// FUNCIÓN PARA OBTENER MAZOS DISPONIBLES DINÁMICAMENTE
-// ================================================
-
-function obtenerMazosDisponiblesTrack(trackKey) {
-    const mazos = [];
-    if (asmr2Vocabulario && asmr2Vocabulario[trackKey]) {
-        // Recorrer todas las propiedades del track en vocabulario
-        Object.keys(asmr2Vocabulario[trackKey]).forEach(key => {
-            const mazoNum = parseInt(key);
-            if (!isNaN(mazoNum)) {
-                mazos.push(mazoNum);
-            }
-        });
-    }
-    return mazos.sort((a, b) => a - b);
-}
+let reproductorActivo = false;
 
 // ================================================
 // FUNCIÓN PRINCIPAL - CARGAR PÁGINA ASMR2
@@ -119,7 +102,7 @@ function crearSubcontenedoresASMR2UI(contenedor, contData) {
 }
 
 // ================================================
-// 3. CREAR TRACKS (Cuadraditos de cada ASMR)
+// 3. CREAR TRACKS (Cuadraditos de cada ASMR) - CON IMAGEN HEREDADA
 // ================================================
 
 function cargarTracksASMR2(contenedor, subcontenedorKey) {
@@ -153,7 +136,11 @@ function crearTracksUI(contenedor, subcontenedorKey, subData) {
     
     for (let trackKey in subData.tracks) {
         const track = subData.tracks[trackKey];
-        // Detectar cuántos mazos tiene este track
+        
+        // ⭐ HEREDAR IMAGEN DEL SUBCONTENEDOR SI EL TRACK NO TIENE
+        const imagenTrack = track.imagen && track.imagen !== "" ? track.imagen : subData.imagen;
+        
+        // Detectar mazos disponibles
         const mazosDisponibles = obtenerMazosDisponiblesTrack(trackKey);
         const cantidadMazos = mazosDisponibles.length;
         
@@ -164,10 +151,10 @@ function crearTracksUI(contenedor, subcontenedorKey, subData) {
                         border: 2px solid rgba(255, 105, 180, 0.4); transition: all 0.3s;
                         text-align: center;">
                 <div style="width: 100%; height: 150px; border-radius: 10px; overflow: hidden; margin-bottom: 15px;">
-                    <img src="${track.imagen}" style="width: 100%; height: 100%; object-fit: cover;">
+                    <img src="${imagenTrack}" style="width: 100%; height: 100%; object-fit: cover;">
                 </div>
                 <h3 style="color: #FFD166; margin-bottom: 10px;">${track.nombre}</h3>
-                <p style="opacity: 0.8; font-size: 0.9rem; margin-bottom: 10px;">${track.descripcion}</p>
+                <p style="opacity: 0.8; font-size: 0.9rem; margin-bottom: 10px;">${track.descripcion || 'Sin descripción'}</p>
                 <div style="display: flex; justify-content: center; gap: 15px; margin-top: 10px;">
                     <span style="background: rgba(255, 105, 180, 0.3); padding: 5px 10px; border-radius: 20px; font-size: 0.8rem;">
                         🎵 ${track.duracion}
@@ -185,7 +172,7 @@ function crearTracksUI(contenedor, subcontenedorKey, subData) {
 }
 
 // ================================================
-// 4. PANTALLA DEL TRACK (Botón escuchar + Mazos DINÁMICOS)
+// 4. PANTALLA DEL TRACK (Reproductor integrado + Mazos)
 // ================================================
 
 function cargarPantallaTrack(contenedor, subcontenedorKey, trackKey) {
@@ -194,43 +181,51 @@ function cargarPantallaTrack(contenedor, subcontenedorKey, trackKey) {
     asmr2TrackActual = trackKey;
     
     const track = asmr2Data.contenedores[contenedor].subcontenedores[subcontenedorKey].tracks[trackKey];
-    const subNombre = asmr2Data.contenedores[contenedor].subcontenedores[subcontenedorKey].nombre;
+    const subData = asmr2Data.contenedores[contenedor].subcontenedores[subcontenedorKey];
+    const subNombre = subData.nombre;
+    const subImagen = subData.imagen;
     
     const mangaSection = document.getElementById('manga-section');
-    mangaSection.innerHTML = crearPantallaTrackUI(contenedor, subcontenedorKey, trackKey, track, subNombre);
+    mangaSection.innerHTML = crearPantallaTrackUI(contenedor, subcontenedorKey, trackKey, track, subNombre, subImagen);
     
     const botonVolver = crearBotonVolver(() => cargarTracksASMR2(contenedor, subcontenedorKey));
     mangaSection.insertBefore(botonVolver, mangaSection.firstChild);
 }
 
-function crearPantallaTrackUI(contenedor, subcontenedorKey, trackKey, track, subNombre) {
-    // OBTENER MAZOS DISPONIBLES DINÁMICAMENTE
+function crearPantallaTrackUI(contenedor, subcontenedorKey, trackKey, track, subNombre, subImagen) {
+    // ⭐ HEREDAR IMAGEN DEL SUBCONTENEDOR SI EL TRACK NO TIENE
+    const imagenTrack = track.imagen && track.imagen !== "" ? track.imagen : subImagen;
+    
+    // Obtener mazos disponibles
     const mazosDisponibles = obtenerMazosDisponiblesTrack(trackKey);
     
-    // Botón para escuchar el ASMR
-    const botonEscuchar = `
-        <div style="text-align: center; margin: 20px 0 30px 0;">
-            <button onclick="abrirReproductorASMR2('${track.driveId}')" 
-                    style="background: linear-gradient(135deg, #FF69B4, #FF1493);
-                           color: white;
-                           font-size: 1.5rem;
-                           padding: 18px 40px;
-                           border: none;
-                           border-radius: 60px;
-                           cursor: pointer;
-                           font-weight: bold;
-                           border: 3px solid white;
-                           box-shadow: 0 0 20px #FF69B4;
-                           transition: all 0.3s;
-                           width: 80%;
-                           max-width: 400px;">
-                🎧 ESCUCHAR ASMR (${track.duracion})
-            </button>
-            <p style="opacity: 0.7; margin-top: 10px;">${track.descripcion}</p>
+    // Reproductor integrado HTML5
+    const reproductorHTML = `
+        <div style="background: linear-gradient(135deg, #1a1a2e, #16213e); border-radius: 20px; padding: 20px; margin: 20px 0; border: 2px solid #FF69B4;">
+            <h3 style="color: #FFD166; text-align: center; margin-bottom: 15px;">🎧 REPRODUCTOR INTEGRADO</h3>
+            <div style="display: flex; justify-content: center;">
+                <audio id="asmr2-audio-player" controls style="width: 100%; max-width: 500px; border-radius: 50px;">
+                    <source src="https://drive.google.com/uc?export=download&id=${track.driveId}" type="audio/mpeg">
+                    Tu navegador no soporta el elemento de audio.
+                </audio>
+            </div>
+            <p style="text-align: center; opacity: 0.7; margin-top: 10px; font-size: 0.8rem;">
+                ⚠️ Si no se reproduce, haz clic en los tres puntos y selecciona "Descargar" o abre en otra pestaña
+            </p>
         </div>
     `;
     
-    // Crear cuadraditos de mazos DINÁMICAMENTE
+    // Botón alternativo (por si falla el reproductor)
+    const botonAlternativo = `
+        <div style="text-align: center; margin-top: 10px;">
+            <a href="https://drive.google.com/file/d/${track.driveId}/preview" target="_blank" 
+               style="background: #5864F5; color: white; padding: 8px 20px; border-radius: 50px; text-decoration: none; font-size: 0.9rem;">
+                🔗 Abrir en Google Drive (alternativo)
+            </a>
+        </div>
+    `;
+    
+    // Mazos HTML
     let mazosHTML = '';
     if (mazosDisponibles.length > 0) {
         mazosHTML = `
@@ -266,24 +261,24 @@ function crearPantallaTrackUI(contenedor, subcontenedorKey, trackKey, track, sub
     
     return `
         <div style="max-width: 1000px; margin: 0 auto; padding: 20px;">
-            <h2 style="text-align: center; color: #FF69B4; margin-bottom: 10px;">
-                🎵 ${track.nombre}
-            </h2>
-            <p style="text-align: center; opacity: 0.7; margin-bottom: 20px;">
-                ${subNombre} • Track ${trackKey.split('_')[2]}
-            </p>
+            <div style="text-align: center; margin-bottom: 20px;">
+                <img src="${imagenTrack}" style="width: 120px; height: 120px; border-radius: 20px; object-fit: cover; border: 3px solid #FF69B4;">
+                <h2 style="color: #FF69B4; margin-top: 10px;">${track.nombre}</h2>
+                <p style="opacity: 0.7;">${subNombre} • ${track.descripcion || 'Disfruta de este ASMR'}</p>
+            </div>
             
-            ${botonEscuchar}
+            ${reproductorHTML}
+            ${botonAlternativo}
             ${mazosHTML}
             
             <div style="background: rgba(255, 209, 102, 0.1); border-radius: 15px; padding: 20px; margin-top: 30px;">
                 <h4 style="color: #FFD166;">💡 ¿Cómo funciona?</h4>
                 <ul style="opacity: 0.8;">
-                    <li>🎧 Haz clic en "ESCUCHAR ASMR" para escuchar este track</li>
+                    <li>🎧 Usa el reproductor integrado para escuchar el ASMR</li>
                     <li>📚 Elige un mazo para practicar el vocabulario</li>
                     <li>💰 Gana dinero por cada palabra correcta</li>
                     <li>⭐ Las palabras que falles van al sistema SRS</li>
-                    <li>📖 Los mazos se crean automáticamente según el vocabulario disponible</li>
+                    <li>🖼️ Las imágenes se heredan automáticamente del personaje</li>
                 </ul>
             </div>
         </div>
@@ -291,27 +286,33 @@ function crearPantallaTrackUI(contenedor, subcontenedorKey, trackKey, track, sub
 }
 
 // ================================================
-// 5. ABRIR REPRODUCTOR DEL TRACK
+// FUNCIÓN PARA OBTENER MAZOS DISPONIBLES DINÁMICAMENTE
 // ================================================
 
-function abrirReproductorASMR2(driveId) {
-    const ancho = 800;
-    const alto = 500;
-    const left = (screen.width - ancho) / 2;
-    const top = (screen.height - alto) / 2;
-    
-    window.open(
-        `https://drive.google.com/file/d/${driveId}/preview`,
-        'ReproductorASMR2',
-        `width=${ancho},height=${alto},top=${top},left=${left}`
-    );
-    
-    mostrarNotificacionASMR2('🎧 Reproductor abierto en nueva ventana');
+function obtenerMazosDisponiblesTrack(trackKey) {
+    const mazos = [];
+    if (asmr2Vocabulario && asmr2Vocabulario[trackKey]) {
+        Object.keys(asmr2Vocabulario[trackKey]).forEach(key => {
+            const mazoNum = parseInt(key);
+            if (!isNaN(mazoNum)) {
+                mazos.push(mazoNum);
+            }
+        });
+    }
+    return mazos.sort((a, b) => a - b);
 }
 
 // ================================================
-// 6. INICIAR QUIZ
+// FUNCIONES DEL QUIZ
 // ================================================
+
+// Variables del quiz
+let asmr2PalabrasActuales = [];
+let asmr2IndicePalabra = 0;
+let asmr2Aciertos = 0;
+let asmr2Errores = 0;
+let asmr2EsperandoSiguiente = false;
+let asmr2MazoActual = null;
 
 function iniciarQuizASMR2(contenedor, subcontenedorKey, trackKey, mazoNumero) {
     // Obtener vocabulario
@@ -325,7 +326,7 @@ function iniciarQuizASMR2(contenedor, subcontenedorKey, trackKey, mazoNumero) {
         return;
     }
     
-    // Guardar contexto para el quiz
+    // Guardar contexto
     asmr2ContenedorActual = contenedor;
     asmr2SubcontenedorActual = subcontenedorKey;
     asmr2TrackActual = trackKey;
@@ -336,20 +337,11 @@ function iniciarQuizASMR2(contenedor, subcontenedorKey, trackKey, mazoNumero) {
     asmr2Errores = 0;
     asmr2EsperandoSiguiente = false;
     
-    // Ocultar manga y mostrar quiz
     document.getElementById('manga-section').style.display = 'none';
     document.getElementById('quiz-section').style.display = 'block';
     
     mostrarPalabraASMR2();
 }
-
-// Variables del quiz
-let asmr2PalabrasActuales = [];
-let asmr2IndicePalabra = 0;
-let asmr2Aciertos = 0;
-let asmr2Errores = 0;
-let asmr2EsperandoSiguiente = false;
-let asmr2MazoActual = null;
 
 function mostrarPalabraASMR2() {
     const palabra = asmr2PalabrasActuales[asmr2IndicePalabra];
@@ -517,4 +509,4 @@ function mostrarNotificacionASMR2(mensaje) {
     setTimeout(() => notif.remove(), 2500);
 }
 
-console.log('✅ ASMR2 - Sistema principal cargado (con detección dinámica de mazos)');
+console.log('✅ ASMR2 - Sistema principal cargado (con reproductor integrado y herencia de imágenes)');
