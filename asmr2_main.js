@@ -1,12 +1,11 @@
 // ================================================
-// ASMR2 - SISTEMA PRINCIPAL
-// Hermanas, Novias, Yanderes y más
+// ASMR2 - SISTEMA PRINCIPAL (Con tracks y mazos)
 // ================================================
 
-// Variable global para el estado actual
+// Variables globales
 let asmr2ContenedorActual = null;
 let asmr2SubcontenedorActual = null;
-let asmr2ModoQuiz = false;
+let asmr2TrackActual = null;
 
 // ================================================
 // FUNCIÓN PRINCIPAL - CARGAR PÁGINA ASMR2
@@ -26,41 +25,28 @@ function cargarPaginaASMR2() {
 }
 
 // ================================================
-// CREAR CONTENEDORES PRINCIPALES
+// 1. CREAR CONTENEDORES PRINCIPALES
 // ================================================
 
 function crearContenedoresASMR2() {
     if (!asmr2Data || !asmr2Data.contenedores) {
-        return `
-            <div style="text-align: center; padding: 100px 20px;">
-                <h2 style="color: #FF69B4;">❌ Error al cargar ASMR2</h2>
-                <p>No se encontraron los datos. Verifica que asmr2_datos.js esté cargado.</p>
-                <button class="btn-atras-especifico" onclick="volverAlInicio()">↩️ Volver al inicio</button>
-            </div>
-        `;
+        return `<div style="text-align: center; padding: 100px;"><h2>❌ Error al cargar ASMR2</h2></div>`;
     }
     
     let html = `
         <h2 style="text-align: center; margin-bottom: 30px; color: #FF69B4;">
-            🎧 ASMR2 - HERMANAS & NOVIAS
+            🎧 ASMR2 - CATEGORÍAS
         </h2>
-        <p style="text-align: center; margin-bottom: 30px; opacity: 0.8;">
-            Elige una categoría y disfruta de ASMR en japonés mientras practicas vocabulario
-        </p>
         <div class="manga-contenedores">
     `;
     
-    const contenedores = asmr2Data.contenedores;
-    
-    for (let key in contenedores) {
-        const contenedor = contenedores[key];
-        const numero = parseInt(key);
-        
+    for (let key in asmr2Data.contenedores) {
+        const cont = asmr2Data.contenedores[key];
         html += `
-            <div class="contenedor-item" onclick="cargarSubcontenedoresASMR2(${numero})">
-                <div class="contenedor-img" style="background-image: url('${contenedor.imagen || 'https://images.unsplash.com/photo-1572860177022-8fda92a90b95?w=400&h=400&fit=crop'}')"></div>
-                <div class="contenedor-numero">${contenedor.nombre}</div>
-                <p>${contenedor.descripcion || 'Disfruta de ASMR con esta categoría'}</p>
+            <div class="contenedor-item" onclick="cargarSubcontenedoresASMR2(${key})">
+                <div class="contenedor-img" style="background-image: url('${cont.imagen}')"></div>
+                <div class="contenedor-numero">${cont.nombre}</div>
+                <p>${cont.descripcion}</p>
                 <div class="card-button">Ver ASMRs</div>
             </div>
         `;
@@ -71,54 +57,102 @@ function crearContenedoresASMR2() {
 }
 
 // ================================================
-// CARGAR SUBCONTENEDORES (ASMRs individuales)
+// 2. CREAR SUBCONTENEDORES (Personajes)
 // ================================================
 
 function cargarSubcontenedoresASMR2(contenedor) {
     asmr2ContenedorActual = contenedor;
+    const contData = asmr2Data.contenedores[contenedor];
     
-    const contenedorData = asmr2Data.contenedores[contenedor];
-    if (!contenedorData || !contenedorData.subcontenedores) {
+    if (!contData || !contData.subcontenedores) {
         mostrarNotificacionASMR2('❌ No hay ASMRs en esta categoría');
         return;
     }
     
     const mangaSection = document.getElementById('manga-section');
-    mangaSection.innerHTML = crearSubcontenedoresASMR2UI(contenedor, contenedorData);
+    mangaSection.innerHTML = crearSubcontenedoresASMR2UI(contenedor, contData);
     
     const botonVolver = crearBotonVolver(cargarPaginaASMR2);
     mangaSection.insertBefore(botonVolver, mangaSection.firstChild);
 }
 
-function crearSubcontenedoresASMR2UI(contenedor, contenedorData) {
+function crearSubcontenedoresASMR2UI(contenedor, contData) {
     let html = `
         <h2 style="text-align: center; margin-bottom: 30px; color: #FF69B4;">
-            🎧 ${contenedorData.nombre} - ASMRs DISPONIBLES
+            🎧 ${contData.nombre} - PERSONAJES
         </h2>
-        <p style="text-align: center; margin-bottom: 30px; opacity: 0.8;">
-            ${contenedorData.descripcion || 'Elige un ASMR para escuchar y practicar vocabulario'}
-        </p>
         <div class="subcontenedores-grid">
     `;
     
-    const subcontenedores = contenedorData.subcontenedores;
-    
-    for (let key in subcontenedores) {
-        const sub = subcontenedores[key];
-        const subNumero = parseInt(key.split('_')[1]);
-        
+    for (let key in contData.subcontenedores) {
+        const sub = contData.subcontenedores[key];
         html += `
-            <div class="subcontenedor-item" onclick="cargarASMR2Track(${contenedor}, ${subNumero})">
-                <div class="subcontenedor-img" style="background-image: url('${sub.imagen || 'https://images.unsplash.com/photo-1572860177022-8fda92a90b95?w=300&h=300&fit=crop'}')"></div>
+            <div class="subcontenedor-item" onclick="cargarTracksASMR2(${contenedor}, '${key}')">
+                <div class="subcontenedor-img" style="background-image: url('${sub.imagen}')"></div>
                 <h3>${sub.nombre}</h3>
-                <p>${sub.descripcion || 'Audio ASMR con vocabulario'}</p>
-                <div style="margin: 10px 0;">
-                    <span style="background: rgba(255, 105, 180, 0.3); padding: 5px 10px; border-radius: 20px; font-size: 0.8rem;">
-                        🎵 ${sub.audio?.duracion || '??:??'}
-                    </span>
+                <p>${sub.descripcion}</p>
+                <div class="card-button">🎧 ${Object.keys(sub.tracks).length} tracks disponibles</div>
+            </div>
+        `;
+    }
+    
+    html += '</div>';
+    return html;
+}
+
+// ================================================
+// 3. CREAR TRACKS (Cuadraditos de cada ASMR)
+// ================================================
+
+function cargarTracksASMR2(contenedor, subcontenedorKey) {
+    asmr2ContenedorActual = contenedor;
+    asmr2SubcontenedorActual = subcontenedorKey;
+    
+    const subData = asmr2Data.contenedores[contenedor].subcontenedores[subcontenedorKey];
+    
+    if (!subData || !subData.tracks) {
+        mostrarNotificacionASMR2('❌ No hay tracks disponibles');
+        return;
+    }
+    
+    const mangaSection = document.getElementById('manga-section');
+    mangaSection.innerHTML = crearTracksUI(contenedor, subcontenedorKey, subData);
+    
+    const botonVolver = crearBotonVolver(() => cargarSubcontenedoresASMR2(contenedor));
+    mangaSection.insertBefore(botonVolver, mangaSection.firstChild);
+}
+
+function crearTracksUI(contenedor, subcontenedorKey, subData) {
+    let html = `
+        <h2 style="text-align: center; margin-bottom: 20px; color: #FF69B4;">
+            🎧 ${subData.nombre} - TRACKS
+        </h2>
+        <p style="text-align: center; margin-bottom: 30px; opacity: 0.8;">
+            ${subData.descripcion}
+        </p>
+        <div class="tracks-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: 20px;">
+    `;
+    
+    for (let trackKey in subData.tracks) {
+        const track = subData.tracks[trackKey];
+        html += `
+            <div class="track-item" onclick="cargarPantallaTrack(${contenedor}, '${subcontenedorKey}', '${trackKey}')" 
+                 style="background: linear-gradient(135deg, rgba(255, 105, 180, 0.15), rgba(255, 20, 147, 0.1)); 
+                        border-radius: 15px; padding: 20px; cursor: pointer; 
+                        border: 2px solid rgba(255, 105, 180, 0.4); transition: all 0.3s;
+                        text-align: center;">
+                <div style="width: 100%; height: 150px; border-radius: 10px; overflow: hidden; margin-bottom: 15px;">
+                    <img src="${track.imagen}" style="width: 100%; height: 100%; object-fit: cover;">
                 </div>
-                <div class="card-button" style="background: linear-gradient(135deg, #FF69B4, #FF1493); margin-top: 10px;">
-                    🎧 Escuchar ASMR
+                <h3 style="color: #FFD166; margin-bottom: 10px;">${track.nombre}</h3>
+                <p style="opacity: 0.8; font-size: 0.9rem; margin-bottom: 10px;">${track.descripcion}</p>
+                <div style="display: flex; justify-content: center; gap: 15px; margin-top: 10px;">
+                    <span style="background: rgba(255, 105, 180, 0.3); padding: 5px 10px; border-radius: 20px; font-size: 0.8rem;">
+                        🎵 ${track.duracion}
+                    </span>
+                    <span style="background: rgba(76, 175, 80, 0.3); padding: 5px 10px; border-radius: 20px; font-size: 0.8rem;">
+                        📚 ${track.mazos.length} mazos
+                    </span>
                 </div>
             </div>
         `;
@@ -129,165 +163,144 @@ function crearSubcontenedoresASMR2UI(contenedor, contenedorData) {
 }
 
 // ================================================
-// CARGAR ASMR ESPECÍFICO (con reproductor + mazos)
+// 4. PANTALLA DEL TRACK (Botón escuchar + Mazos)
 // ================================================
 
-function cargarASMR2Track(contenedor, subcontenedor) {
+function cargarPantallaTrack(contenedor, subcontenedorKey, trackKey) {
     asmr2ContenedorActual = contenedor;
-    asmr2SubcontenedorActual = subcontenedor;
+    asmr2SubcontenedorActual = subcontenedorKey;
+    asmr2TrackActual = trackKey;
     
-    const subData = asmr2Data.contenedores[contenedor]?.subcontenedores[`${contenedor}_${subcontenedor}`];
-    
-    if (!subData || !subData.audio) {
-        mostrarNotificacionASMR2('❌ No hay audio disponible');
-        return;
-    }
+    const track = asmr2Data.contenedores[contenedor].subcontenedores[subcontenedorKey].tracks[trackKey];
+    const subNombre = asmr2Data.contenedores[contenedor].subcontenedores[subcontenedorKey].nombre;
     
     const mangaSection = document.getElementById('manga-section');
-    mangaSection.innerHTML = crearReproductorASMR2UI(contenedor, subcontenedor, subData);
+    mangaSection.innerHTML = crearPantallaTrackUI(contenedor, subcontenedorKey, trackKey, track, subNombre);
     
-    const botonVolver = crearBotonVolver(() => cargarSubcontenedoresASMR2(contenedor));
+    const botonVolver = crearBotonVolver(() => cargarTracksASMR2(contenedor, subcontenedorKey));
     mangaSection.insertBefore(botonVolver, mangaSection.firstChild);
 }
 
-function crearReproductorASMR2UI(contenedor, subcontenedor, subData) {
-    const audio = subData.audio;
-    const mazos = subData.mazos || [];
+function crearPantallaTrackUI(contenedor, subcontenedorKey, trackKey, track, subNombre) {
+    // Botón para escuchar el ASMR
+    const botonEscuchar = `
+        <div style="text-align: center; margin: 20px 0 30px 0;">
+            <button onclick="abrirReproductorASMR2('${track.driveId}')" 
+                    style="background: linear-gradient(135deg, #FF69B4, #FF1493);
+                           color: white;
+                           font-size: 1.5rem;
+                           padding: 18px 40px;
+                           border: none;
+                           border-radius: 60px;
+                           cursor: pointer;
+                           font-weight: bold;
+                           border: 3px solid white;
+                           box-shadow: 0 0 20px #FF69B4;
+                           transition: all 0.3s;
+                           width: 80%;
+                           max-width: 400px;">
+                🎧 ESCUCHAR ASMR (${track.duracion})
+            </button>
+            <p style="opacity: 0.7; margin-top: 10px;">${track.descripcion}</p>
+        </div>
+    `;
     
-    // Crear timestamps HTML si existen
-    let timestampsHTML = '';
-    if (audio.timestamps && audio.timestamps.length > 0) {
-        timestampsHTML = `
-            <div style="background: rgba(255, 105, 180, 0.1); border-radius: 15px; padding: 20px; margin: 20px 0;">
-                <h4 style="color: #FF69B4; margin-bottom: 15px;">📍 SECCIONES DEL AUDIO</h4>
-                <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 10px;">
-                    ${audio.timestamps.map(ts => {
-                        const minutos = Math.floor(ts.tiempo / 60);
-                        const segundos = ts.tiempo % 60;
-                        return `
-                            <div class="timestamp-item" onclick="saltarEnASMR2(${ts.tiempo})" 
-                                 style="background: rgba(255, 105, 180, 0.15); cursor: pointer; padding: 12px; border-radius: 10px; text-align: center;">
-                                <div style="font-size: 1.2rem; color: #FF69B4; font-weight: bold;">
-                                    ${minutos.toString().padStart(2, '0')}:${segundos.toString().padStart(2, '0')}
-                                </div>
-                                <div style="font-size: 0.9rem;">${ts.titulo}</div>
-                            </div>
-                        `;
-                    }).join('')}
-                </div>
-            </div>
-        `;
-    }
-    
-    // Crear lista de mazos
+    // Crear cuadraditos de mazos
     let mazosHTML = '';
-    if (mazos.length > 0) {
+    if (track.mazos && track.mazos.length > 0) {
         mazosHTML = `
-            <div style="background: rgba(76, 175, 80, 0.1); border-radius: 15px; padding: 20px; margin: 20px 0;">
-                <h4 style="color: #4CAF50; margin-bottom: 15px;">📚 MAZOS DE VOCABULARIO</h4>
-                <p style="opacity: 0.8; margin-bottom: 15px;">Practica las palabras de este ASMR</p>
-                <div style="display: flex; flex-wrap: wrap; gap: 10px;">
-                    ${mazos.map(mazoNum => `
-                        <button class="card-button" onclick="iniciarQuizASMR2(${contenedor}, ${subcontenedor}, ${mazoNum})" 
-                                style="background: linear-gradient(135deg, #4CAF50, #2E7D32); margin: 0; padding: 10px 20px;">
-                            📖 Mazo ${mazoNum}
-                        </button>
+            <div style="margin-top: 30px;">
+                <h3 style="color: #FFD166; text-align: center; margin-bottom: 20px;">📚 MAZOS DE VOCABULARIO</h3>
+                <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 15px;">
+                    ${track.mazos.map(mazoNum => `
+                        <div class="mazo-item" onclick="iniciarQuizASMR2(${contenedor}, '${subcontenedorKey}', '${trackKey}', ${mazoNum})"
+                             style="background: linear-gradient(135deg, rgba(76, 175, 80, 0.2), rgba(33, 150, 243, 0.2));
+                                    border: 2px solid #4CAF50;
+                                    border-radius: 15px;
+                                    padding: 20px;
+                                    text-align: center;
+                                    cursor: pointer;
+                                    transition: all 0.3s;">
+                            <div style="font-size: 2rem; margin-bottom: 10px;">📖</div>
+                            <h3 style="color: #4CAF50;">MAZO ${mazoNum}</h3>
+                            <p style="opacity: 0.7; font-size: 0.9rem;">10 palabras japonesas</p>
+                            <div style="margin-top: 10px; font-size: 0.8rem; color: #FFD166;">⭐ +${mazoNum * 0.5} soles</div>
+                        </div>
                     `).join('')}
                 </div>
             </div>
         `;
+    } else {
+        mazosHTML = `<p style="text-align: center; opacity: 0.5;">No hay mazos disponibles para este track</p>`;
     }
     
     return `
-        <div class="reproductor-container" style="max-width: 1000px; margin: 0 auto; padding: 20px;">
-            <div style="text-align: center; margin-bottom: 25px;">
-                <h2 style="color: #FF69B4; margin-bottom: 10px;">${subData.nombre}</h2>
-                <p style="opacity: 0.8;">${subData.descripcion || 'Disfruta de este ASMR'}</p>
-                <div style="display: inline-block; background: rgba(255, 105, 180, 0.2); padding: 5px 15px; border-radius: 20px; margin-top: 10px;">
-                    🎵 Duración: ${audio.duracion || '??:??'}
-                </div>
-            </div>
+        <div style="max-width: 1000px; margin: 0 auto; padding: 20px;">
+            <h2 style="text-align: center; color: #FF69B4; margin-bottom: 10px;">
+                🎵 ${track.nombre}
+            </h2>
+            <p style="text-align: center; opacity: 0.7; margin-bottom: 20px;">
+                ${subNombre} • Track ${trackKey.split('_')[2]}
+            </p>
             
-            <div style="background: rgba(30, 30, 40, 0.95); border-radius: 25px; padding: 30px; box-shadow: 0 20px 40px rgba(0, 0, 0, 0.6); border: 2px solid #FF69B4;">
-                <h3 style="text-align: center; color: #FFD166; margin-bottom: 20px;">🎧 REPRODUCTOR ASMR</h3>
-                <div style="margin: 20px 0; text-align: center;">
-                    <iframe 
-                        src="https://drive.google.com/file/d/${audio.driveId}/preview"
-                        width="100%"
-                        height="120"
-                        frameborder="0"
-                        style="border-radius: 15px; background: rgba(0, 0, 0, 0.5);"
-                        allow="autoplay"
-                    ></iframe>
-                </div>
-                <p style="text-align: center; opacity: 0.7; font-size: 0.9rem;">
-                    🎧 Recomendación: Usa auriculares para mejor experiencia
-                </p>
-            </div>
-            
-            ${timestampsHTML}
+            ${botonEscuchar}
             ${mazosHTML}
             
-            <div style="background: rgba(255, 209, 102, 0.1); border-radius: 15px; padding: 20px; margin: 20px 0; border-left: 5px solid #FFD166;">
-                <h4 style="color: #FFD166; margin-bottom: 15px;">💡 ¿Cómo funciona?</h4>
-                <ul style="padding-left: 20px; opacity: 0.8;">
-                    <li>🎧 Escucha el ASMR mientras te relajas</li>
-                    <li>📚 Practica los mazos de vocabulario relacionados</li>
-                    <li>⏰ Usa los timestamps para saltar a secciones específicas</li>
-                    <li>💰 Gana dinero por cada mazo completado</li>
-                    <li>⭐ Las palabras que falles irán al sistema SRS</li>
+            <div style="background: rgba(255, 209, 102, 0.1); border-radius: 15px; padding: 20px; margin-top: 30px;">
+                <h4 style="color: #FFD166;">💡 ¿Cómo funciona?</h4>
+                <ul style="opacity: 0.8;">
+                    <li>🎧 Haz clic en "ESCUCHAR ASMR" para escuchar este track</li>
+                    <li>📚 Elige un mazo para practicar el vocabulario</li>
+                    <li>💰 Gana dinero por cada palabra correcta</li>
+                    <li>⭐ Las palabras que falles van al sistema SRS</li>
                 </ul>
-            </div>
-            
-            <div style="text-align: center; margin-top: 30px;">
-                <button class="quiz-btn" onclick="cargarSubcontenedoresASMR2(${contenedor})" style="background: linear-gradient(135deg, #8A5AF7, #5864F5);">
-                    ↩️ Volver a ASMRs
-                </button>
             </div>
         </div>
     `;
 }
 
 // ================================================
-// FUNCIONES DEL REPRODUCTOR
+// 5. ABRIR REPRODUCTOR DEL TRACK
 // ================================================
 
-function saltarEnASMR2(segundos) {
-    const iframe = document.querySelector('.reproductor-container iframe');
-    if (iframe) {
-        const minutos = Math.floor(segundos / 60);
-        const segs = segundos % 60;
-        const urlConTiempo = iframe.src.split('#')[0] + `#t=${minutos}m${segs}s`;
-        iframe.src = urlConTiempo;
-        mostrarNotificacionASMR2(`⏱️ Saltando a ${minutos}:${segs.toString().padStart(2, '0')}`);
-    } else {
-        mostrarNotificacionASMR2('❌ No se pudo encontrar el reproductor');
-    }
+function abrirReproductorASMR2(driveId) {
+    // Abrir en una nueva ventana o ventana flotante
+    const ancho = 800;
+    const alto = 500;
+    const left = (screen.width - ancho) / 2;
+    const top = (screen.height - alto) / 2;
+    
+    window.open(
+        `https://drive.google.com/file/d/${driveId}/preview`,
+        'ReproductorASMR2',
+        `width=${ancho},height=${alto},top=${top},left=${left}`
+    );
+    
+    mostrarNotificacionASMR2('🎧 Reproductor abierto en nueva ventana');
 }
 
 // ================================================
-// SISTEMA DE QUIZ PARA ASMR2
+// 6. INICIAR QUIZ
 // ================================================
 
-function iniciarQuizASMR2(contenedor, subcontenedor, mazoNumero) {
-    // Obtener vocabulario del archivo asmr2_vocabulario.js
-    const key = `${contenedor}_${subcontenedor}`;
-    const vocabularioKey = `${contenedor}_${subcontenedor}`;
+function iniciarQuizASMR2(contenedor, subcontenedorKey, trackKey, mazoNumero) {
+    // Obtener vocabulario
+    const vocabularioKey = trackKey;  // Ej: "1_1_1"
     
     let palabras = [];
-    
     if (asmr2Vocabulario && asmr2Vocabulario[vocabularioKey] && asmr2Vocabulario[vocabularioKey][mazoNumero]) {
         palabras = asmr2Vocabulario[vocabularioKey][mazoNumero];
     }
     
     if (palabras.length === 0) {
-        mostrarNotificacionASMR2(`❌ No hay palabras en el mazo ${mazoNumero} de este ASMR`);
+        mostrarNotificacionASMR2(`❌ No hay palabras en el mazo ${mazoNumero}`);
         return;
     }
     
     // Guardar contexto para el quiz
     asmr2ContenedorActual = contenedor;
-    asmr2SubcontenedorActual = subcontenedor;
+    asmr2SubcontenedorActual = subcontenedorKey;
+    asmr2TrackActual = trackKey;
     asmr2MazoActual = mazoNumero;
     asmr2PalabrasActuales = palabras;
     asmr2IndicePalabra = 0;
@@ -295,14 +308,14 @@ function iniciarQuizASMR2(contenedor, subcontenedor, mazoNumero) {
     asmr2Errores = 0;
     asmr2EsperandoSiguiente = false;
     
-    // Ocultar sección de manga y mostrar quiz
+    // Ocultar manga y mostrar quiz
     document.getElementById('manga-section').style.display = 'none';
     document.getElementById('quiz-section').style.display = 'block';
     
     mostrarPalabraASMR2();
 }
 
-// Variables globales para el quiz ASMR2
+// Variables del quiz
 let asmr2PalabrasActuales = [];
 let asmr2IndicePalabra = 0;
 let asmr2Aciertos = 0;
@@ -311,19 +324,20 @@ let asmr2EsperandoSiguiente = false;
 let asmr2MazoActual = null;
 
 function mostrarPalabraASMR2() {
-    const quizSection = document.getElementById('quiz-section');
     const palabra = asmr2PalabrasActuales[asmr2IndicePalabra];
+    const track = asmr2Data.contenedores[asmr2ContenedorActual]?.subcontenedores[asmr2SubcontenedorActual]?.tracks[asmr2TrackActual];
     
+    const quizSection = document.getElementById('quiz-section');
     quizSection.innerHTML = `
         <div class="quiz-container">
             <h2 style="text-align: center; color: #FF69B4; margin-bottom: 20px;">
-                🎧 ASMR2 • ${asmr2Data.contenedores[asmr2ContenedorActual]?.subcontenedores[`${asmr2ContenedorActual}_${asmr2SubcontenedorActual}`]?.nombre || 'ASMR'} • Mazo ${asmr2MazoActual}
-                <div style="font-size: 0.9rem; color: #FFD166; margin-top: 5px;">
+                🎧 ${track?.nombre || 'ASMR2'} • Mazo ${asmr2MazoActual}
+                <div style="font-size: 0.9rem; color: #FFD166;">
                     Palabra ${asmr2IndicePalabra + 1}/${asmr2PalabrasActuales.length}
                 </div>
             </h2>
             
-            <div class="palabra-japonesa" id="palabra-japonesa" style="border-color: #FF69B4;">
+            <div class="palabra-japonesa" style="border-color: #FF69B4;">
                 ${palabra.japones}
             </div>
             
@@ -331,18 +345,12 @@ function mostrarPalabraASMR2() {
                 <div class="romaji-text">${palabra.lectura}</div>
             </div>
             
-            <div id="opciones-container">
-                <!-- Opciones se cargan dinámicamente -->
-            </div>
+            <div id="opciones-container"></div>
             
-            <div id="resultado-container" style="display: none;">
-                <!-- Resultado se muestra después de responder -->
-            </div>
+            <div id="resultado-container" style="display: none;"></div>
             
             <div class="quiz-controls">
-                <button class="quiz-btn btn-volver" onclick="cancelarQuizASMR2()">
-                    ❌ Cancelar
-                </button>
+                <button class="quiz-btn btn-volver" onclick="cancelarQuizASMR2()">❌ Cancelar</button>
             </div>
         </div>
     `;
@@ -352,121 +360,81 @@ function mostrarPalabraASMR2() {
 
 function crearOpcionesASMR2(palabra) {
     const opcionesContainer = document.getElementById('opciones-container');
-    
     const opcionesMezcladas = [...palabra.opciones];
+    
     for (let i = opcionesMezcladas.length - 1; i > 0; i--) {
         const j = Math.floor(Math.random() * (i + 1));
         [opcionesMezcladas[i], opcionesMezcladas[j]] = [opcionesMezcladas[j], opcionesMezcladas[i]];
     }
     
-    const nuevaPosicionCorrecta = opcionesMezcladas.indexOf(palabra.opciones[palabra.respuesta]);
+    const posCorrecta = opcionesMezcladas.indexOf(palabra.opciones[palabra.respuesta]);
     
     opcionesContainer.innerHTML = `
         <div class="opciones-grid">
             <div class="opcion-fila">
-                <button class="opcion-btn" onclick="verificarRespuestaASMR2(0, ${nuevaPosicionCorrecta})" style="border-color: #FF69B4;">
-                    ${opcionesMezcladas[0]}
-                </button>
-                <button class="opcion-btn" onclick="verificarRespuestaASMR2(1, ${nuevaPosicionCorrecta})" style="border-color: #FF69B4;">
-                    ${opcionesMezcladas[1]}
-                </button>
+                <button class="opcion-btn" onclick="verificarRespuestaASMR2(0, ${posCorrecta})">${opcionesMezcladas[0]}</button>
+                <button class="opcion-btn" onclick="verificarRespuestaASMR2(1, ${posCorrecta})">${opcionesMezcladas[1]}</button>
             </div>
             <div class="opcion-fila">
-                <button class="opcion-btn" onclick="verificarRespuestaASMR2(2, ${nuevaPosicionCorrecta})" style="border-color: #FF69B4;">
-                    ${opcionesMezcladas[2]}
-                </button>
-                <button class="opcion-btn" onclick="verificarRespuestaASMR2(3, ${nuevaPosicionCorrecta})" style="border-color: #FF69B4;">
-                    ${opcionesMezcladas[3]}
-                </button>
+                <button class="opcion-btn" onclick="verificarRespuestaASMR2(2, ${posCorrecta})">${opcionesMezcladas[2]}</button>
+                <button class="opcion-btn" onclick="verificarRespuestaASMR2(3, ${posCorrecta})">${opcionesMezcladas[3]}</button>
             </div>
         </div>
     `;
 }
 
-function verificarRespuestaASMR2(opcionSeleccionada, posicionCorrecta) {
+function verificarRespuestaASMR2(opcionSeleccionada, posCorrecta) {
     if (asmr2EsperandoSiguiente) return;
     
     const palabra = asmr2PalabrasActuales[asmr2IndicePalabra];
-    const opcionesBtns = document.querySelectorAll('.opcion-btn');
-    const correcta = opcionSeleccionada === posicionCorrecta;
+    const correcta = opcionSeleccionada === posCorrecta;
     
     const romajiDebajo = document.getElementById('romaji-debajo');
     romajiDebajo.style.display = 'block';
     
-    opcionesBtns.forEach((btn, index) => {
-        if (index === posicionCorrecta) {
-            btn.classList.add('correcta');
-        } else if (index === opcionSeleccionada && !correcta) {
-            btn.classList.add('incorrecta');
-        }
+    const btns = document.querySelectorAll('.opcion-btn');
+    btns.forEach((btn, idx) => {
+        if (idx === posCorrecta) btn.classList.add('correcta');
+        else if (idx === opcionSeleccionada && !correcta) btn.classList.add('incorrecta');
         btn.disabled = true;
     });
     
-    const resultadoContainer = document.getElementById('resultado-container');
-    resultadoContainer.style.display = 'block';
-    resultadoContainer.innerHTML = `
+    const resultado = document.getElementById('resultado-container');
+    resultado.style.display = 'block';
+    resultado.innerHTML = `
         <div class="romaji-container">
-            <p style="margin-top: 10px; opacity: 0.8; font-size: 1.2rem;">
-                ${correcta ? '✅ ¡Correcto!' : '❌ Incorrecto. La respuesta correcta era: ' + palabra.opciones[palabra.respuesta]}
-            </p>
+            <p>${correcta ? '✅ ¡Correcto!' : '❌ Incorrecto. Respuesta: ' + palabra.opciones[palabra.respuesta]}</p>
         </div>
     `;
     
     if (correcta) {
         asmr2Aciertos++;
-        // Dar experiencia y dinero
         sistemaEconomia.agregarDinero(0.10);
         actualizarContadorDineroInicio();
         
-        setTimeout(() => {
-            pasarSiguientePalabraASMR2();
-        }, 1500);
+        setTimeout(() => pasarSiguientePalabraASMR2(), 1500);
     } else {
         asmr2Errores++;
-        
-        // Agregar al SRS si falló
         const palabraData = {
-            contenedor: asmr2ContenedorActual,
-            subcontenedor: asmr2SubcontenedorActual,
-            mazo: asmr2MazoActual,
-            indice: asmr2IndicePalabra,
             japones: palabra.japones,
             lectura: palabra.lectura,
             significado: palabra.opciones[palabra.respuesta],
             opciones: palabra.opciones,
             respuesta: palabra.respuesta
         };
-        
-        if (typeof agregarPalabraSRS === 'function') {
-            agregarPalabraSRS(palabraData);
-            mostrarNotificacionASMR2(`📝 Palabra agregada al SRS: ${palabra.japones}`);
-        }
+        if (typeof agregarPalabraSRS === 'function') agregarPalabraSRS(palabraData);
     }
     
     const controls = document.querySelector('.quiz-controls');
-    controls.innerHTML = '';
+    controls.innerHTML = correcta 
+        ? '<div style="text-align:center;padding:20px;">✅ Pasando...</div>'
+        : `<button class="quiz-btn btn-siguiente" onclick="pasarSiguientePalabraASMR2()">⏭️ Siguiente</button>`;
     
-    if (correcta) {
-        controls.innerHTML = `<div style="text-align: center; padding: 20px; color: #4CAF50;">
-            <p>✅ ¡Correcto! Pasando a la siguiente palabra...</p>
-        </div>`;
-        asmr2EsperandoSiguiente = true;
-    } else {
-        controls.innerHTML = `
-            <button class="quiz-btn btn-volver" onclick="cancelarQuizASMR2()">
-                ❌ Cancelar
-            </button>
-            <button class="quiz-btn btn-siguiente" onclick="pasarSiguientePalabraASMR2()">
-                ⏭️ Siguiente Palabra
-            </button>
-        `;
-        asmr2EsperandoSiguiente = true;
-    }
+    asmr2EsperandoSiguiente = true;
 }
 
 function pasarSiguientePalabraASMR2() {
     asmr2IndicePalabra++;
-    
     if (asmr2IndicePalabra < asmr2PalabrasActuales.length) {
         asmr2EsperandoSiguiente = false;
         mostrarPalabraASMR2();
@@ -477,104 +445,48 @@ function pasarSiguientePalabraASMR2() {
 
 function finalizarQuizASMR2() {
     const porcentaje = Math.round((asmr2Aciertos / asmr2PalabrasActuales.length) * 100);
-    const recompensa = asmr2Aciertos * 0.10;
-    
-    // Dar recompensa adicional por completar el mazo
-    if (porcentaje >= 80) {
-        sistemaEconomia.agregarDinero(1);
-        mostrarNotificacionASMR2(`🎉 ¡Mazo completado! +1 sol extra`);
-    }
-    
-    const subData = asmr2Data.contenedores[asmr2ContenedorActual]?.subcontenedores[`${asmr2ContenedorActual}_${asmr2SubcontenedorActual}`];
-    const subNombre = subData?.nombre || 'ASMR';
+    const track = asmr2Data.contenedores[asmr2ContenedorActual]?.subcontenedores[asmr2SubcontenedorActual]?.tracks[asmr2TrackActual];
     
     document.getElementById('quiz-section').innerHTML = `
         <div class="quiz-container">
             <h2 style="text-align: center; color: #FF69B4;">🎉 QUIZ COMPLETADO</h2>
-            
             <div style="text-align: center; margin: 40px 0;">
-                <div style="font-size: 4rem; margin-bottom: 20px;">${porcentaje}%</div>
-                <p style="font-size: 1.2rem; color: #FF69B4;">
-                    ${asmr2Aciertos} aciertos • ${asmr2Errores} errores
-                </p>
-                <p style="opacity: 0.8; margin-top: 10px;">
-                    Mazo ${asmr2MazoActual} de "${subNombre}" completado
-                </p>
+                <div style="font-size: 4rem;">${porcentaje}%</div>
+                <p>${asmr2Aciertos} aciertos • ${asmr2Errores} errores</p>
             </div>
-            
-            <div style="background: rgba(255, 105, 180, 0.1); padding: 25px; border-radius: 15px; margin: 20px 0;">
-                <h3 style="color: #4CAF50; margin-bottom: 15px;">💰 Recompensa Obtenida</h3>
-                <div style="font-size: 2rem; text-align: center; color: #FFD166;">
-                    +${recompensa.toFixed(2)} soles
-                </div>
-                <p style="text-align: center; margin-top: 10px; opacity: 0.8;">
-                    ¡Sigue practicando para ganar más!
-                </p>
+            <div style="background: rgba(255,105,180,0.1); padding: 25px; border-radius: 15px;">
+                <h3>💰 Recompensa: +${(asmr2Aciertos * 0.10).toFixed(2)} soles</h3>
             </div>
-            
-            <div style="text-align: center; margin: 30px 0;">
-                <div style="display: flex; justify-content: center; gap: 15px;">
-                    <button class="quiz-btn" onclick="cargarASMR2Track(${asmr2ContenedorActual}, ${asmr2SubcontenedorActual})" style="background: linear-gradient(135deg, #FF69B4, #FF1493);">
-                        🎧 Volver al ASMR
-                    </button>
-                    <button class="quiz-btn" onclick="iniciarQuizASMR2(${asmr2ContenedorActual}, ${asmr2SubcontenedorActual}, ${asmr2MazoActual})" style="background: linear-gradient(135deg, #4CAF50, #2E7D32);">
-                        🔄 Repetir Mazo
-                    </button>
-                </div>
-            </div>
-            
             <div class="quiz-controls">
-                <button class="quiz-btn btn-volver" onclick="cargarSubcontenedoresASMR2(${asmr2ContenedorActual})">
-                    ↩️ Volver a ASMRs
+                <button class="quiz-btn" onclick="cargarPantallaTrack(${asmr2ContenedorActual}, '${asmr2SubcontenedorActual}', '${asmr2TrackActual}')">
+                    ↩️ Volver al Track
+                </button>
+                <button class="quiz-btn" onclick="iniciarQuizASMR2(${asmr2ContenedorActual}, '${asmr2SubcontenedorActual}', '${asmr2TrackActual}', ${asmr2MazoActual})">
+                    🔄 Repetir Mazo
                 </button>
             </div>
         </div>
     `;
-    
-    actualizarContadorDineroInicio();
 }
 
 function cancelarQuizASMR2() {
-    if (confirm('¿Seguro que quieres cancelar el quiz? Se perderá el progreso actual.')) {
-        cargarASMR2Track(asmr2ContenedorActual, asmr2SubcontenedorActual);
+    if (confirm('¿Cancelar quiz? Se perderá el progreso.')) {
+        cargarPantallaTrack(asmr2ContenedorActual, asmr2SubcontenedorActual, asmr2TrackActual);
     }
 }
-
-// ================================================
-// NOTIFICACIONES
-// ================================================
 
 function mostrarNotificacionASMR2(mensaje) {
     const notif = document.createElement('div');
     notif.textContent = mensaje;
     notif.style.cssText = `
-        position: fixed;
-        top: 150px;
-        right: 20px;
+        position: fixed; top: 150px; right: 20px;
         background: linear-gradient(135deg, #FF69B4, #FF1493);
-        color: white;
-        padding: 12px 20px;
-        border-radius: 50px;
-        font-weight: bold;
-        box-shadow: 0 5px 15px rgba(0,0,0,0.4);
-        z-index: 1002;
+        color: white; padding: 12px 20px; border-radius: 50px;
+        font-weight: bold; z-index: 1002;
         animation: slideIn 0.3s ease, fadeOut 0.3s ease 2s forwards;
-        font-size: 1rem;
-        border: 2px solid white;
     `;
-    
     document.body.appendChild(notif);
-    
-    setTimeout(() => {
-        if (notif.parentNode) {
-            notif.parentNode.removeChild(notif);
-        }
-    }, 2500);
+    setTimeout(() => notif.remove(), 2500);
 }
 
-// ================================================
-// FUNCIÓN PARA VERIFICAR QUE LOS DATOS ESTÉN CARGADOS
-// ================================================
-
-console.log('✅ ASMR2 - Sistema cargado correctamente');
-console.log('📦 Contenedores disponibles:', asmr2Data ? Object.keys(asmr2Data.contenedores).length : 0);
+console.log('✅ ASMR2 - Sistema principal cargado');
