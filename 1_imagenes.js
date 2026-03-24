@@ -1760,7 +1760,14 @@ const sistemaDescriptivo = {
                 duracion: '' 
             },
            
-            '5_1': { 
+            '4_20': { 
+                nombre: 'Makima putita',
+                imagen: 'https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/img_1774362063224.webp', 
+                descripcion: '', 
+                duracion: '' 
+            },
+            
+                        '5_1': { 
                 nombre: 'Colombianas putardas',
                 imagen: 'https://pbs.twimg.com/media/G_Hrih3WkAYINc8?format=jpg&name=small', 
                 descripcion: '', 
