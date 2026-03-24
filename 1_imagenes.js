@@ -1249,6 +1249,12 @@ const sistemaDescriptivo = {
                 imagen: 'https://pbs.twimg.com/media/HCa56QhWEAANR17?format=png&name=small', 
                 descripcion: 'ASMR de sonidos ambientales',
                 ambiente: 'ambiental'
+            },
+            5: { 
+                nombre: 'Shota',
+                imagen: 'https://pbs.twimg.com/media/HEMFxGSXYAAEoms?format=jpg&name=small', 
+                descripcion: 'ASMR de sonidos ambientales',
+                ambiente: 'ambiental'
             }
         },
         
@@ -1356,7 +1362,23 @@ const sistemaDescriptivo = {
                 imagen: '', 
                 descripcion: '', 
                 tipoVoz: '' 
+            },
+              '5_1': { 
+                nombre: 'Me kacho a 3 putonas',
+                imagen: 'https://pbs.twimg.com/media/HEMFxGSXYAAEoms?format=jpg&name=small', 
+                descripcion: '', 
+                tipoVoz: '' 
+            },
+              '5_2': { 
+                nombre: 'Pruebaaaaa',
+                imagen: 'https://pbs.twimg.com/media/HEMFxGSXYAAEoms?format=jpg&name=small', 
+                descripcion: '', 
+                tipoVoz: '' 
             }
+
+
+
+            
         }
     },
     
