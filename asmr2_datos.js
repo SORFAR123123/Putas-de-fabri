@@ -17,12 +17,12 @@ const asmr2Data = {
                     imagen: "https://pbs.twimg.com/media/HEMFxGSXYAAEoms?format=jpg&name=medium",
                     descripcion: "Asuka Sumire y la otra puta me olvide xd",
                     tracks: {
-                        "1_1_1": {
-                            nombre: "🎧 Track 1: Presentación",
-                            imagen: "https://pbs.twimg.com/media/HEMFxGSXYAAEoms?format=jpg&name=medium",
-                            descripcion: "Yuki se presenta y te saluda con susurros",
-                            driveId: "1aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe",
-                            duracion: "08:30"
+                                                "1_1_1": {
+                            nombre: "🎧 putita 1",
+                            imagen: "",
+                            descripcion: "",
+                            driveId: "1lb_lD9dAdaUlD16k7HwakCkhqTtrcojC",
+                            duracion: "00:00"
                         },
                         "1_1_2": {
                             nombre: "🎧 Track 2: Susurros al oído",
