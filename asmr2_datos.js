@@ -1,169 +1,202 @@
 // ================================================
-// ASMR2 - DATOS (Contenedores + Subcontenedores)
+// ASMR2 - DATOS (Contenedores + Subcontenedores + Tracks)
 // ================================================
 
 const asmr2Data = {
     contenedores: {
-        // Contenedor 1: Hermanas
+        // CONTENEDOR 1: HERMANAS
         1: {
             nombre: "Hermanas",
-            imagen: "https://ejemplo.com/hermanas.jpg",
+            imagen: "https://pbs.twimg.com/media/G_CpDeXXAAAoqV5?format=png&name=small",
             descripcion: "ASMR con hermanas cariñosas",
             subcontenedores: {
+                // Hermana Mayor Yuki
                 "1_1": {
                     nombre: "Hermana Mayor - Yuki",
-                    imagen: "https://ejemplo.com/yuki.jpg",
+                    imagen: "https://pbs.twimg.com/media/G_CpDeXXAAAoqV5?format=png&name=small",
                     descripcion: "Yuki, la hermana mayor cariñosa",
-                    audio: {
-                        driveId: "1aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe",
-                        duracion: "45:00",
-                        timestamps: [
-                            { tiempo: 0, titulo: "Introducción" },
-                            { tiempo: 120, titulo: "Susurros" },
-                            { tiempo: 300, titulo: "Limpieza de oídos" }
-                        ]
-                    },
-                    mazos: [1, 2, 3, 4, 5]  // Mazos disponibles
+                    tracks: {
+                        "1_1_1": {
+                            nombre: "🎧 Track 1: Presentación",
+                            imagen: "https://pbs.twimg.com/media/G_CpDeXXAAAoqV5?format=png&name=small",
+                            descripcion: "Yuki se presenta y te saluda con susurros",
+                            driveId: "1aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe",
+                            duracion: "08:30",
+                            mazos: [1, 2]
+                        },
+                        "1_1_2": {
+                            nombre: "🎧 Track 2: Susurros al oído",
+                            imagen: "https://pbs.twimg.com/media/G_CpDeXXAAAoqV5?format=png&name=small",
+                            descripcion: "Susurros suaves para relajarte",
+                            driveId: "2aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe",
+                            duracion: "12:15",
+                            mazos: [3, 4]
+                        },
+                        "1_1_3": {
+                            nombre: "🎧 Track 3: Limpieza de oídos",
+                            imagen: "https://pbs.twimg.com/media/G_CpDeXXAAAoqV5?format=png&name=small",
+                            descripcion: "Sonidos de mimikaki para dormir",
+                            driveId: "3aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe",
+                            duracion: "15:20",
+                            mazos: [5, 6]
+                        },
+                        "1_1_4": {
+                            nombre: "🎧 Track 4: Masaje relajante",
+                            imagen: "https://pbs.twimg.com/media/G_CpDeXXAAAoqV5?format=png&name=small",
+                            descripcion: "Masaje en la espalda y hombros",
+                            driveId: "4aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe",
+                            duracion: "10:45",
+                            mazos: [7]
+                        },
+                        "1_1_5": {
+                            nombre: "🎧 Track 5: Arropando para dormir",
+                            imagen: "https://pbs.twimg.com/media/G_CpDeXXAAAoqV5?format=png&name=small",
+                            descripcion: "Te arropan y te dan las buenas noches",
+                            driveId: "5aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe",
+                            duracion: "09:30",
+                            mazos: [8, 9]
+                        },
+                        "1_1_6": {
+                            nombre: "🎧 Track 6: Acariciando tu cabello",
+                            imagen: "https://pbs.twimg.com/media/G_CpDeXXAAAoqV5?format=png&name=small",
+                            descripcion: "Sonidos de cabello siendo acariciado",
+                            driveId: "6aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe",
+                            duracion: "11:00",
+                            mazos: [10]
+                        },
+                        "1_1_7": {
+                            nombre: "🎧 Track 7: Canción de cuna",
+                            imagen: "https://pbs.twimg.com/media/G_CpDeXXAAAoqV5?format=png&name=small",
+                            descripcion: "Yuki te canta para que duermas",
+                            driveId: "7aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe",
+                            duracion: "14:20",
+                            mazos: [11, 12]
+                        },
+                        "1_1_8": {
+                            nombre: "🎧 Track 8: Conversación nocturna",
+                            imagen: "https://pbs.twimg.com/media/G_CpDeXXAAAoqV5?format=png&name=small",
+                            descripcion: "Hablando antes de dormir",
+                            driveId: "8aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe",
+                            duracion: "18:00",
+                            mazos: [13, 14, 15]
+                        }
+                    }
                 },
+                // Hermana Menor Sakura
                 "1_2": {
                     nombre: "Hermana Menor - Sakura",
-                    imagen: "https://ejemplo.com/sakura.jpg",
+                    imagen: "https://pbs.twimg.com/media/G_CpDeXXAAAoqV5?format=png&name=small",
                     descripcion: "Sakura, la hermana menor juguetona",
-                    audio: {
-                        driveId: "2aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe",
-                        duracion: "38:00",
-                        timestamps: [
-                            { tiempo: 0, titulo: "Jugando" },
-                            { tiempo: 180, titulo: "Canción de cuna" }
-                        ]
-                    },
-                    mazos: [1, 2, 3]
-                },
-                "1_3": {
-                    nombre: "Hermana Tsundere - Hikari",
-                    imagen: "https://ejemplo.com/hikari.jpg",
-                    descripcion: "Hikari, la tsundere que te quiere",
-                    audio: {
-                        driveId: "3aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe",
-                        duracion: "52:00",
-                        timestamps: [
-                            { tiempo: 0, titulo: "No es que me importes" },
-                            { tiempo: 240, titulo: "Arreglando tu ropa" }
-                        ]
-                    },
-                    mazos: [1, 2, 3, 4]
-                },
-                "1_4": {
-                    nombre: "Hermanas Gemelas - Mio & Mao",
-                    imagen: "https://ejemplo.com/gemelas.jpg",
-                    descripcion: "Las gemelas te miman juntas",
-                    audio: {
-                        driveId: "4aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe",
-                        duracion: "01:05:00",
-                        timestamps: [
-                            { tiempo: 0, titulo: "Susurros en ambos oídos" },
-                            { tiempo: 420, titulo: "Limpieza de oídos juntas" }
-                        ]
-                    },
-                    mazos: [1, 2, 3, 4, 5]
-                },
-                "1_5": {
-                    nombre: "Hermana Protectora - Aoi",
-                    imagen: "https://ejemplo.com/aoi.jpg",
-                    descripcion: "Aoi te cuida y protege",
-                    audio: {
-                        driveId: "5aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe",
-                        duracion: "48:00",
-                        timestamps: [
-                            { tiempo: 0, titulo: "Acariciando tu cabeza" },
-                            { tiempo: 300, titulo: "Abrazos reconfortantes" }
-                        ]
-                    },
-                    mazos: [1, 2]
+                    tracks: {
+                        "1_2_1": {
+                            nombre: "🎧 Track 1: Jugando con tu cabello",
+                            imagen: "https://pbs.twimg.com/media/G_CpDeXXAAAoqV5?format=png&name=small",
+                            descripcion: "Sakura juega con tu cabello",
+                            driveId: "9aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe",
+                            duracion: "10:00",
+                            mazos: [1, 2]
+                        },
+                        "1_2_2": {
+                            nombre: "🎧 Track 2: Canción de cuna",
+                            imagen: "https://pbs.twimg.com/media/G_CpDeXXAAAoqV5?format=png&name=small",
+                            descripcion: "Te canta una canción para dormir",
+                            driveId: "10aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe",
+                            duracion: "08:45",
+                            mazos: [3]
+                        }
+                    }
                 }
             }
         },
         
-        // Contenedor 2: Novia/Yandere
+        // CONTENEDOR 2: NOVIA/YANDERE
         2: {
             nombre: "Novia/Yandere",
-            imagen: "https://ejemplo.com/novia.jpg",
+            imagen: "https://pbs.twimg.com/media/G_CpDeXXAAAoqV5?format=png&name=small",
             descripcion: "ASMR con novias amorosas y yanderes",
             subcontenedores: {
                 "2_1": {
                     nombre: "Novia Tierna - Hana",
-                    imagen: "https://ejemplo.com/hana.jpg",
+                    imagen: "https://pbs.twimg.com/media/G_CpDeXXAAAoqV5?format=png&name=small",
                     descripcion: "Hana, tu novia cariñosa",
-                    audio: {
-                        driveId: "6aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe",
-                        duracion: "42:00",
-                        timestamps: [
-                            { tiempo: 0, titulo: "Declaración de amor" },
-                            { tiempo: 180, titulo: "Preparando té juntos" }
-                        ]
-                    },
-                    mazos: [1, 2, 3]
+                    tracks: {
+                        "2_1_1": {
+                            nombre: "🎧 Track 1: Declaración de amor",
+                            imagen: "https://pbs.twimg.com/media/G_CpDeXXAAAoqV5?format=png&name=small",
+                            descripcion: "Hana te confiesa sus sentimientos",
+                            driveId: "11aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe",
+                            duracion: "07:30",
+                            mazos: [1, 2]
+                        },
+                        "2_1_2": {
+                            nombre: "🎧 Track 2: Preparando té juntos",
+                            imagen: "https://pbs.twimg.com/media/G_CpDeXXAAAoqV5?format=png&name=small",
+                            descripcion: "Sonidos de preparación de té",
+                            driveId: "12aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe",
+                            duracion: "10:20",
+                            mazos: [3]
+                        }
+                    }
                 },
                 "2_2": {
                     nombre: "Yandere - Akari",
-                    imagen: "https://ejemplo.com/akari.jpg",
+                    imagen: "https://pbs.twimg.com/media/G_CpDeXXAAAoqV5?format=png&name=small",
                     descripcion: "Akari, tu novia obsesiva",
-                    audio: {
-                        driveId: "7aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe",
-                        duracion: "55:00",
-                        timestamps: [
-                            { tiempo: 0, titulo: "Eres solo mío" },
-                            { tiempo: 360, titulo: "Cuidando de ti" }
-                        ]
-                    },
-                    mazos: [1, 2, 3, 4]
+                    tracks: {
+                        "2_2_1": {
+                            nombre: "🎧 Track 1: Eres solo mío",
+                            imagen: "https://pbs.twimg.com/media/G_CpDeXXAAAoqV5?format=png&name=small",
+                            descripcion: "Susurros posesivos",
+                            driveId: "13aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe",
+                            duracion: "09:45",
+                            mazos: [1]
+                        },
+                        "2_2_2": {
+                            nombre: "🎧 Track 2: Cuidando de ti",
+                            imagen: "https://pbs.twimg.com/media/G_CpDeXXAAAoqV5?format=png&name=small",
+                            descripcion: "Akari te cuida... obsesivamente",
+                            driveId: "14aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe",
+                            duracion: "12:15",
+                            mazos: [2, 3]
+                        }
+                    }
                 }
             }
         },
         
-        // Contenedor 3: Madre/Milf
+        // CONTENEDOR 3: MADRE/MILF
         3: {
             nombre: "Madre/Milf",
-            imagen: "https://ejemplo.com/madre.jpg",
+            imagen: "https://pbs.twimg.com/media/G_CpDeXXAAAoqV5?format=png&name=small",
             descripcion: "ASMR con figuras maternales",
             subcontenedores: {
                 "3_1": {
                     nombre: "Madre Cariñosa - Kaori",
-                    imagen: "https://ejemplo.com/kaori.jpg",
+                    imagen: "https://pbs.twimg.com/media/G_CpDeXXAAAoqV5?format=png&name=small",
                     descripcion: "Kaori, la mamá amorosa",
-                    audio: {
-                        driveId: "8aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe",
-                        duracion: "50:00",
-                        timestamps: [
-                            { tiempo: 0, titulo: "Arrullos maternales" },
-                            { tiempo: 420, titulo: "Preparando tu comida favorita" }
-                        ]
-                    },
-                    mazos: [1, 2, 3]
-                }
-            }
-        },
-        
-        // Contenedor 4: Compañera de Clase
-        4: {
-            nombre: "Compañera de Clase",
-            imagen: "https://ejemplo.com/compañera.jpg",
-            descripcion: "ASMR con compañeras de escuela",
-            subcontenedores: {
-                "4_1": {
-                    nombre: "Compañera Callada - Yui",
-                    imagen: "https://ejemplo.com/yui.jpg",
-                    descripcion: "Yui, la chica tímida del salón",
-                    audio: {
-                        driveId: "9aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe",
-                        duracion: "40:00",
-                        timestamps: [
-                            { tiempo: 0, titulo: "Estudiando juntos" }
-                        ]
-                    },
-                    mazos: [1, 2]
+                    tracks: {
+                        "3_1_1": {
+                            nombre: "🎧 Track 1: Arrullos maternales",
+                            imagen: "https://pbs.twimg.com/media/G_CpDeXXAAAoqV5?format=png&name=small",
+                            descripcion: "Kaori te arrulla como cuando eras niño",
+                            driveId: "15aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe",
+                            duracion: "11:30",
+                            mazos: [1]
+                        },
+                        "3_1_2": {
+                            nombre: "🎧 Track 2: Preparando tu comida favorita",
+                            imagen: "https://pbs.twimg.com/media/G_CpDeXXAAAoqV5?format=png&name=small",
+                            descripcion: "Sonidos de cocina y cariño",
+                            driveId: "16aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe",
+                            duracion: "14:00",
+                            mazos: [2, 3]
+                        }
+                    }
                 }
             }
         }
     }
 };
+
+console.log('✅ ASMR2 - Datos cargados');
+console.log('📦 Contenedores:', Object.keys(asmr2Data.contenedores).length);
