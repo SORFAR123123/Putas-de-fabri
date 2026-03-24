@@ -23,7 +23,18 @@ const asmr2Data = {
                             descripcion: "Yuki se presenta y te saluda con susurros",
                             driveId: "1aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe",
                             duracion: "08:30"
+                        ,
+            tracks: {
+
+                        "1_1_1": {
+                            nombre: "🎧 putita 1",
+                            imagen: "",
+                            descripcion: "",
+                            driveId: "1M67gNvd0LLPCR9r8xMQDlB6uaCK0Ng1Y",
+                            duracion: "00:00"
                         },
+            }
+        },
                         "1_1_2": {
                             nombre: "🎧 Track 2: Susurros al oído",
                             imagen: "https://pbs.twimg.com/media/HEMFxGSXYAAEoms?format=jpg&name=medium",
