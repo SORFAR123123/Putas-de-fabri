@@ -1,5 +1,6 @@
 // ================================================
 // ASMR2 - DATOS (Contenedores + Subcontenedores + Tracks)
+// LOS MAZOS SE DETECTAN DINÁMICAMENTE DESDE VOCABULARIO
 // ================================================
 
 const asmr2Data = {
@@ -21,64 +22,56 @@ const asmr2Data = {
                             imagen: "https://pbs.twimg.com/media/HEMFxGSXYAAEoms?format=jpg&name=medium",
                             descripcion: "Yuki se presenta y te saluda con susurros",
                             driveId: "1aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe",
-                            duracion: "08:30",
-                            mazos: [1, 2]
+                            duracion: "08:30"
                         },
                         "1_1_2": {
                             nombre: "🎧 Track 2: Susurros al oído",
                             imagen: "https://pbs.twimg.com/media/HEMFxGSXYAAEoms?format=jpg&name=medium",
                             descripcion: "Susurros suaves para relajarte",
                             driveId: "2aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe",
-                            duracion: "12:15",
-                            mazos: [3, 4]
+                            duracion: "12:15"
                         },
                         "1_1_3": {
                             nombre: "🎧 Track 3: Limpieza de oídos",
                             imagen: "https://pbs.twimg.com/media/HEMFxGSXYAAEoms?format=jpg&name=medium",
                             descripcion: "Sonidos de mimikaki para dormir",
                             driveId: "3aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe",
-                            duracion: "15:20",
-                            mazos: [5, 6]
+                            duracion: "15:20"
                         },
                         "1_1_4": {
                             nombre: "🎧 Track 4: Masaje relajante",
                             imagen: "https://pbs.twimg.com/media/HEMFxGSXYAAEoms?format=jpg&name=medium",
                             descripcion: "Masaje en la espalda y hombros",
                             driveId: "4aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe",
-                            duracion: "10:45",
-                            mazos: [7]
+                            duracion: "10:45"
                         },
                         "1_1_5": {
                             nombre: "🎧 Track 5: Arropando para dormir",
                             imagen: "https://pbs.twimg.com/media/HEMFxGSXYAAEoms?format=jpg&name=medium",
                             descripcion: "Te arropan y te dan las buenas noches",
                             driveId: "5aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe",
-                            duracion: "09:30",
-                            mazos: [8, 9]
+                            duracion: "09:30"
                         },
                         "1_1_6": {
                             nombre: "🎧 Track 6: Acariciando tu cabello",
                             imagen: "https://pbs.twimg.com/media/HEMFxGSXYAAEoms?format=jpg&name=medium",
                             descripcion: "Sonidos de cabello siendo acariciado",
                             driveId: "6aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe",
-                            duracion: "11:00",
-                            mazos: [10]
+                            duracion: "11:00"
                         },
                         "1_1_7": {
                             nombre: "🎧 Track 7: Canción de cuna",
                             imagen: "https://pbs.twimg.com/media/HEMFxGSXYAAEoms?format=jpg&name=medium",
                             descripcion: "Yuki te canta para que duermas",
                             driveId: "7aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe",
-                            duracion: "14:20",
-                            mazos: [11, 12]
+                            duracion: "14:20"
                         },
                         "1_1_8": {
                             nombre: "🎧 Track 8: Conversación nocturna",
                             imagen: "https://pbs.twimg.com/media/HEMFxGSXYAAEoms?format=jpg&name=medium",
                             descripcion: "Hablando antes de dormir",
                             driveId: "8aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe",
-                            duracion: "18:00",
-                            mazos: [13, 14, 15]
+                            duracion: "18:00"
                         }
                     }
                 },
@@ -93,16 +86,14 @@ const asmr2Data = {
                             imagen: "https://pbs.twimg.com/media/G_CpDeXXAAAoqV5?format=png&name=small",
                             descripcion: "Sakura juega con tu cabello",
                             driveId: "9aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe",
-                            duracion: "10:00",
-                            mazos: [1, 2]
+                            duracion: "10:00"
                         },
                         "1_2_2": {
                             nombre: "🎧 Track 2: Canción de cuna",
                             imagen: "https://pbs.twimg.com/media/G_CpDeXXAAAoqV5?format=png&name=small",
                             descripcion: "Te canta una canción para dormir",
                             driveId: "10aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe",
-                            duracion: "08:45",
-                            mazos: [3]
+                            duracion: "08:45"
                         }
                     }
                 }
@@ -125,16 +116,14 @@ const asmr2Data = {
                             imagen: "https://pbs.twimg.com/media/G_CpDeXXAAAoqV5?format=png&name=small",
                             descripcion: "Hana te confiesa sus sentimientos",
                             driveId: "11aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe",
-                            duracion: "07:30",
-                            mazos: [1, 2]
+                            duracion: "07:30"
                         },
                         "2_1_2": {
                             nombre: "🎧 Track 2: Preparando té juntos",
                             imagen: "https://pbs.twimg.com/media/G_CpDeXXAAAoqV5?format=png&name=small",
                             descripcion: "Sonidos de preparación de té",
                             driveId: "12aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe",
-                            duracion: "10:20",
-                            mazos: [3]
+                            duracion: "10:20"
                         }
                     }
                 },
@@ -148,16 +137,14 @@ const asmr2Data = {
                             imagen: "https://pbs.twimg.com/media/G_CpDeXXAAAoqV5?format=png&name=small",
                             descripcion: "Susurros posesivos",
                             driveId: "13aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe",
-                            duracion: "09:45",
-                            mazos: [1]
+                            duracion: "09:45"
                         },
                         "2_2_2": {
                             nombre: "🎧 Track 2: Cuidando de ti",
                             imagen: "https://pbs.twimg.com/media/G_CpDeXXAAAoqV5?format=png&name=small",
                             descripcion: "Akari te cuida... obsesivamente",
                             driveId: "14aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe",
-                            duracion: "12:15",
-                            mazos: [2, 3]
+                            duracion: "12:15"
                         }
                     }
                 }
@@ -180,16 +167,14 @@ const asmr2Data = {
                             imagen: "https://pbs.twimg.com/media/G_CpDeXXAAAoqV5?format=png&name=small",
                             descripcion: "Kaori te arrulla como cuando eras niño",
                             driveId: "15aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe",
-                            duracion: "11:30",
-                            mazos: [1]
+                            duracion: "11:30"
                         },
                         "3_1_2": {
                             nombre: "🎧 Track 2: Preparando tu comida favorita",
                             imagen: "https://pbs.twimg.com/media/G_CpDeXXAAAoqV5?format=png&name=small",
                             descripcion: "Sonidos de cocina y cariño",
                             driveId: "16aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe",
-                            duracion: "14:00",
-                            mazos: [2, 3]
+                            duracion: "14:00"
                         }
                     }
                 }
