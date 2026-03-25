@@ -371,6 +371,9 @@ const asmr2Vocabulario = {
             { japones: '幸せ', lectura: 'shiawase', opciones: ['Felicidad', 'Tristeza', 'Enojo', 'Miedo'], respuesta: 0 }
         ]
     }
+    "1_1_7": {
+        // Mazos aquí
+    },
 };
 
 console.log('✅ ASMR2 - Vocabulario cargado');
