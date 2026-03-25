@@ -52,12 +52,12 @@ const asmr2Data = {
                             driveId: "1wI2zIa7YCDOrAUc-HR5EtcFM6uAfHF7U",
                             duracion: "00:00"
                         },
-                        "1_1_6": {
-                            nombre: "🎧 Track 6: Acariciando tu cabello",
-                            imagen: "https://pbs.twimg.com/media/HEMFxGSXYAAEoms?format=jpg&name=medium",
-                            descripcion: "Sonidos de cabello siendo acariciado",
-                            driveId: "6aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe",
-                            duracion: "11:00"
+                                                "1_1_6": {
+                            nombre: "🎧 putardas 6",
+                            imagen: "",
+                            descripcion: "",
+                            driveId: "1TLCjbRb257kGvF3jlxZnAyDa8SmhiUyv",
+                            duracion: "00:00"
                         },
                         "1_1_7": {
                             nombre: "🎧 Track 7: Canción de cuna",
