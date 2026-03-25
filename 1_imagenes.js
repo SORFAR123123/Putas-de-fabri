@@ -1459,6 +1459,12 @@ const sistemaDescriptivo = {
                 tematica: 'misceláneo'
             },
              13: { 
+                nombre: 'Doggystyle',
+                imagen: '', 
+                descripcion: 'culonas',
+                tematica: 'misceláneo'
+            },
+             14: { 
                 nombre: 'PRUEBA',
                 imagen: '', 
                 descripcion: 'culonas',
@@ -2298,8 +2304,14 @@ const sistemaDescriptivo = {
                 duracion: '' 
             },
             
-                        '13_1': { 
-                nombre: 'prueba',
+                 '13_1': { 
+                nombre: 'Doggystyle',
+                imagen: '', 
+                descripcion: '', 
+                duracion: '' 
+            },
+             '14_1': { 
+                nombre: 'Doggystyle',
                 imagen: '', 
                 descripcion: '', 
                 duracion: '' 
