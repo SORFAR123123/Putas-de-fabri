@@ -1457,6 +1457,12 @@ const sistemaDescriptivo = {
                 imagen: 'https://pbs.twimg.com/media/HBSejioaUAE8Tpb?format=png&name=small', 
                 descripcion: 'culonas',
                 tematica: 'misceláneo'
+            },
+             13: { 
+                nombre: 'PRUEBA',
+                imagen: '', 
+                descripcion: 'culonas',
+                tematica: 'misceláneo'
             }
         },
         
@@ -2282,6 +2288,12 @@ const sistemaDescriptivo = {
              '12_1': { 
                 nombre: 'Corrida en el orto',
                 imagen: 'https://pbs.twimg.com/media/HBSejioaUAE8Tpb?format=png&name=small', 
+                descripcion: '', 
+                duracion: '' 
+            },
+            '13_1': { 
+                nombre: 'prueba',
+                imagen: '', 
                 descripcion: '', 
                 duracion: '' 
             }
