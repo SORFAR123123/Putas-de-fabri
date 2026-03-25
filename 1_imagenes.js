@@ -2331,7 +2331,14 @@ const sistemaDescriptivo = {
                 duracion: '' 
             },
             
-                                     '14_1': { 
+            '13_4': { 
+                nombre: 'Perra',
+                imagen: 'https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/frame_690_1774481451683.webp', 
+                descripcion: '', 
+                duracion: '' 
+            },
+            
+                                                 '14_1': { 
                 nombre: 'Doggystyle',
                 imagen: '', 
                 descripcion: '', 
