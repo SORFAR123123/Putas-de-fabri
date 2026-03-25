@@ -2317,7 +2317,14 @@ const sistemaDescriptivo = {
                 descripcion: '', 
                 duracion: '' 
             },
-             '14_1': { 
+            '13_2': { 
+                nombre: 'Putita culona',
+                imagen: 'https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/frame_430_1774480403017.webp', 
+                descripcion: '', 
+                duracion: '' 
+            },
+            
+                         '14_1': { 
                 nombre: 'Doggystyle',
                 imagen: '', 
                 descripcion: '', 
