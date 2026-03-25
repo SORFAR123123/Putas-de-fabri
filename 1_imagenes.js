@@ -2291,7 +2291,14 @@ const sistemaDescriptivo = {
                 descripcion: '', 
                 duracion: '' 
             },
-            '13_1': { 
+            '12_2': { 
+                nombre: 'Me corro en su culo',
+                imagen: 'https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/frame_9570_1774448505071.webp', 
+                descripcion: '', 
+                duracion: '' 
+            },
+            
+                        '13_1': { 
                 nombre: 'prueba',
                 imagen: '', 
                 descripcion: '', 
