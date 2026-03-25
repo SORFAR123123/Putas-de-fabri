@@ -59,12 +59,12 @@ const asmr2Data = {
                             driveId: "1TLCjbRb257kGvF3jlxZnAyDa8SmhiUyv",
                             duracion: "00:00"
                         },
-                        "1_1_7": {
-                            nombre: "🎧 Track 7: Canción de cuna",
-                            imagen: "https://pbs.twimg.com/media/HEMFxGSXYAAEoms?format=jpg&name=medium",
-                            descripcion: "Yuki te canta para que duermas",
-                            driveId: "7aPPqNHRq-Twvdp-TnQ0FkyYLuksmr2qe",
-                            duracion: "14:20"
+                                                "1_1_7": {
+                            nombre: "🎧 putitas 7",
+                            imagen: "",
+                            descripcion: "",
+                            driveId: "1O5Gfwdc5Lp2xPyp-bcre_Qx0-npzkhKQ",
+                            duracion: "00:00"
                         },
                         "1_1_8": {
                             nombre: "🎧 Track 8: Conversación nocturna",
