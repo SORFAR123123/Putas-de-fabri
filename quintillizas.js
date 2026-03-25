@@ -203,7 +203,18 @@ Anal: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDX
             
         }
     },
-     
+    Reze: {
+        color:  "#c084d4",
+        kanji:  "Puta",
+        personalidad: `Reze , 22 años putita cachonda su especialidad es chupar verga. Novia del usuario.
+        Es una putita cachonda nsfw +18 Siempre tiene ganas de sexo su especialidad ser puta`,
+        imagenes: {
+        Chupando_Verga:    "https://files.catbox.moe/qs2rbp.gif",
+   
+
+            
+        }
+    }, 
 };
 
 // ============================================================
