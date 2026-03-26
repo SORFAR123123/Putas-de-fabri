@@ -2261,98 +2261,18 @@ const sistemaDescriptivo = {
                 duracion: '' 
             },
             
+            
+            
             '7_14': { 
-                nombre: 'Chupadora',
-                imagen: 'https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/frame_2750_1774449489846.webp', 
-                descripcion: '', 
-                duracion: '' 
-            },
-            
-            '7_15': { 
-                nombre: 'peteras',
-                imagen: 'https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/frame_33760_1774482655052.webp', 
-                descripcion: '', 
-                duracion: '' 
-            },
-            
-            '7_16': { 
-                nombre: 'Mamada',
-                imagen: 'https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/frame_4920_1774482842137.webp', 
-                descripcion: '', 
-                duracion: '' 
-            },
-            
-            '7_17': { 
-                nombre: 'Mamada 2',
-                imagen: 'https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/frame_3090_1774483374693.webp', 
-                descripcion: '', 
-                duracion: '' 
-            },
-            
-            '7_18': { 
                 nombre: 'Chizuru petera',
                 imagen: 'https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/frame_5460_1774483573185.webp', 
                 descripcion: '', 
                 duracion: '' 
             },
             
-            '7_19': { 
-                nombre: 'Robin petera',
-                imagen: 'https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/frame_20560_1774483746886.webp', 
-                descripcion: '', 
-                duracion: '' 
-            },
+          
             
-            '7_20': { 
-                nombre: 'Alya petera',
-                imagen: 'https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/frame_6120_1774484363292.webp', 
-                descripcion: '', 
-                duracion: '' 
-            },
-            
-            '7_21': { 
-                nombre: 'Nobara peteando',
-                imagen: 'https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/frame_1540_1774484626168.webp', 
-                descripcion: '', 
-                duracion: '' 
-            },
-            
-            '7_22': { 
-                nombre: 'Fubuki peteando',
-                imagen: 'https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/frame_14180_1774484812301.webp', 
-                descripcion: '', 
-                duracion: '' 
-            },
-            
-            '7_23': { 
-                nombre: 'Hermanas peteras',
-                imagen: 'https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/frame_8800_1774484897162.webp', 
-                descripcion: '', 
-                duracion: '' 
-            },
-            
-            '7_24': { 
-                nombre: 'Oyakodon',
-                imagen: 'https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/frame_3940_1774485073029.webp', 
-                descripcion: '', 
-                duracion: '' 
-            },
-            
-            '7_25': { 
-                nombre: 'Chupadora',
-                imagen: 'https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/frame_9900_1774485238162.webp', 
-                descripcion: '', 
-                duracion: '' 
-            },
-            
-            '7_26': { 
-                nombre: 'Yor kachera',
-                imagen: 'https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/frame_7830_1774485319621.webp', 
-                descripcion: '', 
-                duracion: '' 
-            },
-            
-                                                                                                                                                                                     '8_1': { 
+              '8_1': { 
                 nombre: 'fabri putardo',
                 imagen: 'https://pbs.twimg.com/media/G_2dDpBX0AAcGz6?format=png&name=small', 
                 descripcion: '', 
