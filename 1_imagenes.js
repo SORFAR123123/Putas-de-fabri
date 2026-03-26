@@ -2363,12 +2363,7 @@ const sistemaDescriptivo = {
                 duracion: '' 
             },
             
-            '7_27': { 
-                nombre: 'Kachando con kafka',
-                imagen: 'https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/frame_14640_1774557556038.webp', 
-                descripcion: '', 
-                duracion: '' 
-            },
+         
             
                                                                                                                                                                           '8_1': { 
                 nombre: 'fabri putardo',
