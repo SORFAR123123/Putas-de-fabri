@@ -1122,52 +1122,8 @@ const videosDatabase = {
     },
 
 
-    // Sub-contenedor 7_14
+ 
     '7_14': {
-        titulo: "Chupadora",
-        driveId: "1ClOpQBa33cY8QI6XjR9nGK_-IYHkpBEH",
-        descripcion: "",
-        timestamps: [],
-        duracion: "0:00",
-        categoria: "Basico"
-    },
-
-
-    // Sub-contenedor 7_15
-    '7_15': {
-        titulo: "peteras",
-        driveId: "1qU8jdrQgqGW06zSmjlEcO1PFCpqdYMb4",
-        descripcion: "",
-        timestamps: [],
-        duracion: "0:00",
-        categoria: "Basico"
-    },
-
-
-    // Sub-contenedor 7_16
-    '7_16': {
-        titulo: "Mamada",
-        driveId: "1OFtIHgsBIitHyv9Osg0tCEA7zFMHJVwb",
-        descripcion: "",
-        timestamps: [],
-        duracion: "0:00",
-        categoria: "Basico"
-    },
-
-
-    // Sub-contenedor 7_17
-    '7_17': {
-        titulo: "Mamada 2",
-        driveId: "1vJGkqMdcLDis-aOxid1CrdxOXvJ_6Ajt",
-        descripcion: "",
-        timestamps: [],
-        duracion: "0:00",
-        categoria: "Basico"
-    },
-
-
-    // Sub-contenedor 7_18
-    '7_18': {
         titulo: "Chizuru petera",
         driveId: "1SfA877TAYTZJggdCWKKNexPQcHyJuEE4",
         descripcion: "",
@@ -1177,94 +1133,9 @@ const videosDatabase = {
     },
 
 
-    // Sub-contenedor 7_19
-    '7_19': {
-        titulo: "Robin petera",
-        driveId: "1dSwpAZplEOllLfRktXoR-wTcObR9YA_W",
-        descripcion: "",
-        timestamps: [],
-        duracion: "0:00",
-        categoria: "Basico"
-    },
+   
 
-
-    // Sub-contenedor 7_20
-    '7_20': {
-        titulo: "Alya petera",
-        driveId: "1P-bm9dH2VLh26ucQVZP0X93ZYE2RoMo7",
-        descripcion: "",
-        timestamps: [],
-        duracion: "0:00",
-        categoria: "Basico"
-    },
-
-
-    // Sub-contenedor 7_21
-    '7_21': {
-        titulo: "Nobara peteando",
-        driveId: "1ZwjODPj6Io2qkhVFVgcZt1Uk9BgiTLJa",
-        descripcion: "",
-        timestamps: [],
-        duracion: "0:00",
-        categoria: "Basico"
-    },
-
-
-    // Sub-contenedor 7_22
-    '7_22': {
-        titulo: "Fubuki peteando",
-        driveId: "1QmvdIhumkT1OX6WdOIxEgOJiRJutHOPN",
-        descripcion: "",
-        timestamps: [],
-        duracion: "0:00",
-        categoria: "Basico"
-    },
-
-
-    // Sub-contenedor 7_23
-    '7_23': {
-        titulo: "Hermanas peteras",
-        driveId: "1Woha0Jg35hUCDWriQDw6FDzKXHSHo8J4",
-        descripcion: "",
-        timestamps: [],
-        duracion: "0:00",
-        categoria: "Basico"
-    },
-
-
-    // Sub-contenedor 7_24
-    '7_24': {
-        titulo: "Oyakodon",
-        driveId: "1WVDAxYf77Dx5dTfg_WBRokxlr55MW7tW",
-        descripcion: "",
-        timestamps: [],
-        duracion: "0:00",
-        categoria: "Basico"
-    },
-
-
-    // Sub-contenedor 7_25
-    '7_25': {
-        titulo: "Chupadora",
-        driveId: "1hZxZvbbSbT8boPXXrkLTxHrXIPG_rjzi",
-        descripcion: "",
-        timestamps: [],
-        duracion: "0:00",
-        categoria: "Basico"
-    },
-
-
-    // Sub-contenedor 7_26
-    '7_26': {
-        titulo: "Yor kachera",
-        driveId: "1QjKLRcsNcxwFcbRSMeEgTRSEVdZpeP9E",
-        descripcion: "",
-        timestamps: [],
-        duracion: "0:00",
-        categoria: "Basico"
-    },
-
-                                                              '8_1': {
+             '8_1': {
         titulo: "Fabri putardo novia yotsuba potona",
         driveId: "1ZOppS-j8KFYmDncgh4A1T9t1Q77tbKS7", // zero two
         descripcion: "Descuide a Yotsuba",
