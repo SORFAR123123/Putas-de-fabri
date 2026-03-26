@@ -593,14 +593,28 @@ class SistemaReproductorDrive {
         html += '<div class="timestamps-grid">';
 
         timestamps.forEach((ts, index) => {
-            const minutos = Math.floor(ts.tiempo / 60);
-            const segundos = ts.tiempo % 60;
+            // Compatibilidad con formato viejo {tiempo, titulo} y nuevo {tiempo, titulo, imagen}
+            const t = ts.tiempo;
+            const titulo = ts.titulo;
+            const imagen = ts.imagen || null;
+
+            const minutos = Math.floor(t / 60);
+            const segundos = t % 60;
             const tiempoFormateado = `${minutos.toString().padStart(2, '0')}:${segundos.toString().padStart(2, '0')}`;
 
+            const imgHtml = imagen
+                ? `<div style="width:100%;overflow:hidden;border-radius:8px;margin-bottom:8px;max-height:90px;">
+                       <img src="${imagen}" alt="${titulo}" loading="lazy"
+                            style="width:100%;height:90px;object-fit:cover;display:block;border-radius:8px;transition:transform 0.2s;"
+                            onerror="this.parentElement.style.display='none'">
+                   </div>`
+                : '';
+
             html += `
-                <div class="timestamp-item" onclick="sistemaReproductor.saltarATiempo(${ts.tiempo})" style="cursor: pointer;">
+                <div class="timestamp-item" onclick="sistemaReproductor.saltarATiempo(${t})" style="cursor: pointer;">
+                    ${imgHtml}
                     <div class="timestamp-tiempo" style="font-size: 1.4rem; color: #5864F5;">${tiempoFormateado}</div>
-                    <div class="timestamp-titulo" style="font-size: 1.1rem; margin-top: 5px;">${ts.titulo}</div>
+                    <div class="timestamp-titulo" style="font-size: 1.1rem; margin-top: 5px;">${titulo}</div>
                     <div style="font-size: 0.9rem; opacity: 0.7; margin-top: 8px;">🔗 Haz clic para cargar</div>
                 </div>
             `;
