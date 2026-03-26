@@ -1679,7 +1679,14 @@ const sistemaDescriptivo = {
                 descripcion: '', 
                 duracion: '' 
             },
-            '4_1': { 
+            '3_19': { 
+                nombre: 'China putarda',
+                imagen: 'https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/frame_59890_1774546205354.webp', 
+                descripcion: '', 
+                duracion: '' 
+            },
+            
+                        '4_1': { 
                 nombre: 'Zerotwo quiere pene',
                 imagen: 'https://pbs.twimg.com/media/G_DzDM8XQAAd3dA?format=jpg&name=small', 
                 descripcion: '', 
