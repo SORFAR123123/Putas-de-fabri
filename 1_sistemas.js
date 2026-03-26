@@ -593,7 +593,6 @@ class SistemaReproductorDrive {
         html += '<div class="timestamps-grid">';
 
         timestamps.forEach((ts, index) => {
-            // Compatibilidad con formato viejo {tiempo, titulo} y nuevo {tiempo, titulo, imagen}
             const t = ts.tiempo;
             const titulo = ts.titulo;
             const imagen = ts.imagen || null;
@@ -602,10 +601,11 @@ class SistemaReproductorDrive {
             const segundos = t % 60;
             const tiempoFormateado = `${minutos.toString().padStart(2, '0')}:${segundos.toString().padStart(2, '0')}`;
 
+            // ✅ CAMBIO: imagen más grande (160px alto) y mejor calidad visual
             const imgHtml = imagen
-                ? `<div style="width:100%;overflow:hidden;border-radius:8px;margin-bottom:8px;max-height:90px;">
+                ? `<div style="width:100%;overflow:hidden;border-radius:10px;margin-bottom:10px;max-height:160px;">
                        <img src="${imagen}" alt="${titulo}" loading="lazy"
-                            style="width:100%;height:90px;object-fit:cover;display:block;border-radius:8px;transition:transform 0.2s;"
+                            style="width:100%;height:160px;object-fit:cover;display:block;border-radius:10px;transition:transform 0.3s;"
                             onerror="this.parentElement.style.display='none'">
                    </div>`
                 : '';
@@ -770,19 +770,25 @@ document.addEventListener('DOMContentLoaded', function() {
     estiloTimestamps.textContent = `
         .timestamp-item {
             background: linear-gradient(135deg, rgba(88, 100, 245, 0.15), rgba(138, 90, 247, 0.15));
-            border-radius: 12px; padding: 25px; cursor: pointer;
+            border-radius: 12px; padding: 15px; cursor: pointer;
             transition: all 0.3s ease; border: 2px solid rgba(88, 100, 245, 0.3);
-            text-align: center; min-height: 120px; display: flex;
-            flex-direction: column; justify-content: center;
+            text-align: center; display: flex;
+            flex-direction: column; justify-content: flex-start;
         }
         .timestamp-item:hover {
             background: linear-gradient(135deg, rgba(88, 100, 245, 0.3), rgba(138, 90, 247, 0.3));
             transform: translateY(-5px) scale(1.02); border-color: #5864F5;
             box-shadow: 0 10px 25px rgba(88, 100, 245, 0.3);
         }
+        .timestamp-item:hover img {
+            transform: scale(1.05);
+        }
         .timestamp-tiempo { font-size: 1.5rem !important; font-weight: bold; color: #FFD166 !important; text-shadow: 0 2px 5px rgba(0,0,0,0.3); margin-bottom: 5px; }
         .timestamp-titulo { font-size: 1.1rem !important; margin-top: 8px !important; color: white; opacity: 0.9; }
-        .timestamps-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); gap: 20px; margin-top: 20px; }
+
+        /* ✅ CAMBIO PRINCIPAL: minmax 260px para tarjetas más anchas y nítidas */
+        .timestamps-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap: 20px; margin-top: 20px; }
+
         .timestamps-container { background: rgba(30, 30, 40, 0.8); border-radius: 18px; padding: 25px; margin: 20px 0; border-left: 5px solid #4CAF50; }
         @keyframes slideIn { from { transform: translateX(100px); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
         @keyframes fadeOut { from { opacity: 1; } to { opacity: 0; } }
