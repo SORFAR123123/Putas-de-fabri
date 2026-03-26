@@ -2317,7 +2317,14 @@ const sistemaDescriptivo = {
                 duracion: '' 
             },
             
-                                                                                                                         '8_1': { 
+            '7_22': { 
+                nombre: 'Fubuki peteando',
+                imagen: 'https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/frame_14180_1774484812301.webp', 
+                descripcion: '', 
+                duracion: '' 
+            },
+            
+                                                                                                                                     '8_1': { 
                 nombre: 'fabri putardo',
                 imagen: 'https://pbs.twimg.com/media/G_2dDpBX0AAcGz6?format=png&name=small', 
                 descripcion: '', 
