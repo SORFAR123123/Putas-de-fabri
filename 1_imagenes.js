@@ -2272,7 +2272,14 @@ const sistemaDescriptivo = {
             
           
             
-              '8_1': { 
+            '7_15': { 
+                nombre: 'Nobara peteando',
+                imagen: 'https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/frame_2580_1774538207412.webp', 
+                descripcion: '', 
+                duracion: '' 
+            },
+            
+                          '8_1': { 
                 nombre: 'fabri putardo',
                 imagen: 'https://pbs.twimg.com/media/G_2dDpBX0AAcGz6?format=png&name=small', 
                 descripcion: '', 
