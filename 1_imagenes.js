@@ -145,6 +145,12 @@ const sistemaDescriptivo = {
                 descripcion: 'perras', 
                 nivel: '' 
             },
+            '1_12': { 
+                nombre: 'Quinti Putas',
+                imagen: 'https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/img_1774636592194.webp', 
+                descripcion: 'asd', 
+                nivel: '' 
+            },
             
            
             
