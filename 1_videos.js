@@ -1320,22 +1320,19 @@ const videosDatabase = {
     },
 
 
-    // Sub-contenedor 7_30
     '7_30': {
-        titulo: "Kachando a navia y a arlecchino",
-        driveId: "19Wuar7XW7okIfTgk9NrayDPB8LL_otwp",
-        timestamps: [
-{ tiempo: 166, titulo: "Kachando", imagen: "https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/timestamp_7_30_166_1774650025185.webp" },
-            { tiempo: 312, titulo: "Putita albina", imagen: "https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/timestamp_7_30_312_1774650028203.webp" }
-        ],
-        descripcion: "",
-        timestamps: [
-{ tiempo: 227, titulo: "Twerk de la rubia putona", imagen: "https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/timestamp_7_30_227_1774650019584.webp" },
-            { tiempo: 250, titulo: "Twerk de arlecchino", imagen: "https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/timestamp_7_30_250_1774650022348.webp" }
-        ],
-        duracion: "0:00",
-        categoria: "Basico"
-    },
+    titulo: "Kachando a navia y a arlecchino",
+    driveId: "19Wuar7XW7okIfTgk9NrayDPB8LL_otwp",
+    timestamps: [
+        { tiempo: 166, titulo: "Kachando", imagen: "https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/timestamp_7_30_166_1774650025185.webp" },
+        { tiempo: 312, titulo: "Putita albina", imagen: "https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/timestamp_7_30_312_1774650028203.webp" },
+        { tiempo: 227, titulo: "Twerk de la rubia putona", imagen: "https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/timestamp_7_30_227_1774650019584.webp" },
+        { tiempo: 250, titulo: "Twerk de arlecchino", imagen: "https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/timestamp_7_30_250_1774650022348.webp" }
+    ],
+    descripcion: "",
+    duracion: "0:00",
+    categoria: "Basico"
+},
 
                                                                                  '8_1': {
         titulo: "Fabri putardo novia yotsuba potona",
