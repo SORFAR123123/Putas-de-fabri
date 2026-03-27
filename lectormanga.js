@@ -367,6 +367,19 @@ const mangaDatabase = {
         ]
     },
 
+    // Sub-contenedor 1.13
+    '1_13': {
+        titulo: "Putitas",
+        descripcion: "trolitas",
+        paginas: 2,
+        año: 2024,
+        autor: "Desconocido",
+        paginasUrls: [
+            "https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/img_1774638920828.webp", // Página 1
+            "https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/img_1774638922833.webp" // Página 2
+        ]
+    },
+
    
  
 
