@@ -354,6 +354,19 @@ const mangaDatabase = {
         ]
     },
 
+    // Sub-contenedor 1.12
+    '1_12': {
+        titulo: "Putas quinti",
+        descripcion: "asd",
+        paginas: 2,
+        año: 2024,
+        autor: "Desconocido",
+        paginasUrls: [
+            "https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/img_1774636592194.webp", // Página 1
+            "https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/img_1774636594371.webp" // Página 2
+        ]
+    },
+
    
  
 
