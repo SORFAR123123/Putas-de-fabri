@@ -151,6 +151,12 @@ const sistemaDescriptivo = {
                 descripcion: 'asd', 
                 nivel: '' 
             },
+            '1_13': { 
+                nombre: 'Nino y miku zorras',
+                imagen: 'https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/img_1774638920828.webp', 
+                descripcion: 'trolitas', 
+                nivel: '' 
+            },
          
             
            
