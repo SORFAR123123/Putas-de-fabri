@@ -151,12 +151,7 @@ const sistemaDescriptivo = {
                 descripcion: 'asd', 
                 nivel: '' 
             },
-            '1_13': { 
-                nombre: 'Itsuki kachera',
-                imagen: 'https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/img_1774637838676.webp', 
-                descripcion: 'itsuki', 
-                nivel: '' 
-            },
+         
             
            
             
