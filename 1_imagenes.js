@@ -2490,7 +2490,14 @@ const sistemaDescriptivo = {
                 duracion: '' 
             },
             
-                                                                                     '14_1': { 
+            '13_8': { 
+                nombre: 'putitas',
+                imagen: 'https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/frame_110_1774646874206.webp', 
+                descripcion: '', 
+                duracion: '' 
+            },
+            
+                                                                                                 '14_1': { 
                 nombre: 'Doggystyle',
                 imagen: '', 
                 descripcion: '', 
