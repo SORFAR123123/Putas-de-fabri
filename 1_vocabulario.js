@@ -2226,6 +2226,30 @@ const vocabularioDatabase = {
 
     },
 
+    // Sub-contenedor 1.13
+    'sub1_13': {
+        // MAZO 1
+        1: [
+            { japones: '久しぶり風太郎♥', lectura: 'hisashiburifuutarou♥', opciones: ['Hace tiempo, Fūtarō', 'cada día, nuestro amo nos hace sufrir', 'y lo pasamos bien', 'le enviaremos'], respuesta: 0 },
+            { japones: '私たちを寝取らせてから', lectura: 'watashitachiwonetorasetekara', opciones: ['desde que nos permitiste que te engañáramos', 'cada día, nuestro amo nos hace sufrir', 'Gracias, Fūtarō, eres un masoquista inútil', 'presentado a alguien tan maravilloso'], respuesta: 0 },
+            { japones: '一か月経ったのかな', lectura: 'ichikagekkeittanokana', opciones: ['¿ha pasado un mes?', 'el señor Fū, que disfruta siendo engañado', 'Gracias, Fūtarō, te estoy agradecida', 'se alegrará cuando le enviemos el video más tarde'], respuesta: 0 },
+            { japones: '風太郎には感謝してるよ♥', lectura: 'fuutarounihakanshashiteruyo♥', opciones: ['Gracias, Fūtarō, te estoy agradecida', '¿ha pasado un mes?', 'Gracias, Fūtarō, eres un masoquista inútil', 'Hace tiempo, Fūtarō'], respuesta: 0 },
+            { japones: '私たち姉妹にこんな', lectura: 'watashitachishimainikonna', opciones: ['nosotras, las hermanas, nos has', 'se alegrará cuando le enviemos el video más tarde', 'desde que nos permitiste que te engañáramos', 'le enviaremos'], respuesta: 0 },
+            { japones: '素晴らしい方を紹介してくれて▶', lectura: 'subarashiihouwoshoukaishitekurete▶', opciones: ['presentado a alguien tan maravilloso', '¿ha pasado un mes?', 'el señor Fū, que disfruta siendo engañado', 'Gracias, Fūtarō, eres un masoquista inútil'], respuesta: 0 },
+            { japones: 'ありがとう♥雑魚マゾ風太郎▶', lectura: 'arigatou♥zatsugyomazofuutarou▶', opciones: ['Gracias, Fūtarō, eres un masoquista inútil', 'le enviaremos', 'Gracias, Fūtarō, te estoy agradecida', '¿ha pasado un mes?'], respuesta: 0 },
+            { japones: '楽しく過ごしてるよ●', lectura: 'tanoshikusugoshiteruyo●', opciones: ['y lo pasamos bien', 'Gracias, Fūtarō, te estoy agradecida', 'Gracias, Fūtarō, eres un masoquista inútil', 'desde que nos permitiste que te engañáramos'], respuesta: 0 },
+            { japones: '寝取られマゾのフー君が', lectura: 'netoraremazonofuukunga', opciones: ['el señor Fū, que disfruta siendo engañado', 'nosotras, las hermanas, nos has', 'Gracias, Fūtarō, te estoy agradecida', 'y lo pasamos bien'], respuesta: 0 },
+            { japones: '喜べるように動画を後で', lectura: 'yorokoberuyounidougawoatode', opciones: ['se alegrará cuando le enviemos el video más tarde', 'nosotras, las hermanas, nos has', 'Gracias, Fūtarō, te estoy agradecida', 'presentado a alguien tan maravilloso'], respuesta: 0 },
+        ],
+
+        // MAZO 2
+        2: [
+            { japones: '送るね▶', lectura: 'okurune▶', opciones: ['le enviaremos', 'se alegrará cuando le enviemos el video más tarde', 'nosotras, las hermanas, nos has', 'Gracias, Fūtarō, eres un masoquista inútil'], respuesta: 0 },
+            { japones: '毎日ご主人様にハメ漬られて', lectura: 'mainichigoshujinsamanihameshirarete', opciones: ['cada día, nuestro amo nos hace sufrir', 'nosotras, las hermanas, nos has', 'el señor Fū, que disfruta siendo engañado', '¿ha pasado un mes?'], respuesta: 0 },
+        ],
+
+    },
+
   
  
 
