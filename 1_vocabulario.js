@@ -2171,6 +2171,61 @@ const vocabularioDatabase = {
 
     },
 
+    // Sub-contenedor 1.12
+    'sub1_12': {
+        // MAZO 1
+        1: [
+            { japones: 'いいだろ', lectura: 'iidaro', opciones: ['¿está bien?', 'te gusta', 'has salpicado', 'sumisa'], respuesta: 0 },
+            { japones: '俺の部屋', lectura: 'orenoheya', opciones: ['mi habitación', 'todavía no me satisface', 'nada más meterla un poco', 'no desobedecer'], respuesta: 0 },
+            { japones: '可愛がって', lectura: 'kawaigatte', opciones: ['tratar con cariño', 'hembra', 'con una voz tan sucia', 'coño'], respuesta: 0 },
+            { japones: 'ちょっと', lectura: 'chotto', opciones: ['un momento', 'de antes', 'resistiéndose', 'hermana mayor'], respuesta: 0 },
+            { japones: 'その娘', lectura: 'sonomusume', opciones: ['esa chica', 'todavía no me satisface', '¿está bien?', 'chupito'], respuesta: 0 },
+            { japones: '嫌がってる', lectura: 'iyagatteru', opciones: ['resistiéndose', 'te enseñaré', 'nada más meterla un poco', 'mi habitación'], respuesta: 0 },
+            { japones: 'お前', lectura: 'omae', opciones: ['tú', 'vacío', 'mira, fíjate', 'demasiado fácil jajaja'], respuesta: 0 },
+            { japones: 'さっさと', lectura: 'sassato', opciones: ['¡vamos!', 'tú', '¿quién es el dueño de ustedes?', 'de antes'], respuesta: 0 },
+            { japones: '消えなさい', lectura: 'kienasai', opciones: ['desaparece', 'cerebro', 'valentía', 'no desobedecer'], respuesta: 0 },
+            { japones: 'チョロすぎw', lectura: 'chorosugiw', opciones: ['demasiado fácil jajaja', 'resistiéndose', 'chupito', 'hembra'], respuesta: 0 },
+        ],
+
+        // MAZO 2
+        2: [
+            { japones: 'ハメたら', lectura: 'hametara', opciones: ['nada más meterla un poco', '¿quién es el dueño de ustedes?', 'desaparece', 'sumisa'], respuesta: 0 },
+            { japones: '従順', lectura: 'juujun', opciones: ['sumisa', 'masoquista', 'hermana mayor', 'con una voz tan sucia'], respuesta: 0 },
+            { japones: 'メス', lectura: 'mesu', opciones: ['hembra', 'coño', 'amo, dueño', '¡vamos!'], respuesta: 0 },
+            { japones: 'バカ', lectura: 'baka', opciones: ['tonta', 'que te toquen', 'esa chica', 'de antes'], respuesta: 0 },
+            { japones: 'まだ物足りねー', lectura: 'madamonotarinee', opciones: ['todavía no me satisface', '¡vamos!', 'que te toquen', 'esa chica'], respuesta: 0 },
+            { japones: 'マンコ', lectura: 'manko', opciones: ['coño', 'nada más meterla un poco', 'te gusta', '¿quién es el dueño de ustedes?'], respuesta: 0 },
+            { japones: 'チポップ', lectura: 'chipoppu', opciones: ['chupito', 'cerebro', 'de antes', 'te gusta'], respuesta: 0 },
+            { japones: '誰がお前らの所有者', lectura: 'daregaomaeranoshoyuusha', opciones: ['¿quién es el dueño de ustedes?', 'todavía no me satisface', 'coño', 'un momento'], respuesta: 0 },
+            { japones: 'スカスカ', lectura: 'sukasuka', opciones: ['vacío', '¿está bien?', 'no desobedecer', '¿quién es el dueño de ustedes?'], respuesta: 0 },
+            { japones: '脳みそ', lectura: 'noumiso', opciones: ['cerebro', 'tratar con cariño', 'de antes', 'chupito'], respuesta: 0 },
+        ],
+
+        // MAZO 3
+        3: [
+            { japones: 'お姉ちゃん', lectura: 'oneechan', opciones: ['hermana mayor', 'cerebro', 'mira, fíjate', 'zorra, concha de pescado'], respuesta: 0 },
+            { japones: 'イキ潮', lectura: 'ikishio', opciones: ['correrse, eyaculación femenina', 'vacío', 'esa chica', 'resistiéndose'], respuesta: 0 },
+            { japones: 'ぶっかけてんじゃん', lectura: 'bukkaketenjan', opciones: ['has salpicado', 'desaparece', 'esa chica', '¿quién es el dueño de ustedes?'], respuesta: 0 },
+            { japones: 'おとなしいてせ', lectura: 'otonashiitese', opciones: ['con una voz tan sucia', 'has salpicado', 'amo, dueño', '¿está bien?'], respuesta: 0 },
+            { japones: 'マゾメス', lectura: 'mazomesu', opciones: ['masoquista', 'no desobedecer', 'chupito', 'esa chica'], respuesta: 0 },
+            { japones: 'どうだ', lectura: 'douda', opciones: ['¿cómo te sientes?', 'tú', 'te enseñaré', 'amo, dueño'], respuesta: 0 },
+            { japones: '雑魚マンコ', lectura: 'zatsugyomanko', opciones: ['zorra, concha de pescado', '¿está bien?', 'con una voz tan sucia', 'desaparece'], respuesta: 0 },
+            { japones: 'ほじられる', lectura: 'hojirareru', opciones: ['que te toquen', 'mira, fíjate', 'masoquista', 'con una voz tan sucia'], respuesta: 0 },
+            { japones: '好きし', lectura: 'sukishi', opciones: ['te gusta', 'desaparece', 'de antes', 'cerebro'], respuesta: 0 },
+            { japones: 'オラッ', lectura: 'oratsu', opciones: ['mira, fíjate', 'nada más meterla un poco', 'coño', 'amo, dueño'], respuesta: 0 },
+        ],
+
+        // MAZO 4
+        4: [
+            { japones: 'さっきまでの', lectura: 'sakkimadeno', opciones: ['de antes', 'esa chica', 'que te toquen', 'masoquista'], respuesta: 0 },
+            { japones: '威勢', lectura: 'isei', opciones: ['valentía', 'que te toquen', 'te enseñaré', 'te gusta'], respuesta: 0 },
+            { japones: 'オス様', lectura: 'osusama', opciones: ['amo, dueño', 'mira, fíjate', 'te gusta', '¿cómo te sientes?'], respuesta: 0 },
+            { japones: '逆らえない', lectura: 'sakaraenai', opciones: ['no desobedecer', 'esa chica', 'valentía', 'resistiéndose'], respuesta: 0 },
+            { japones: '教え込んでやるよ', lectura: 'oshiekondeyaruyo', opciones: ['te enseñaré', 'mi habitación', 'masoquista', 'te gusta'], respuesta: 0 },
+        ],
+
+    },
+
   
  
 
