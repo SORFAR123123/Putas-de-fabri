@@ -2494,7 +2494,14 @@ const sistemaDescriptivo = {
                 duracion: '' 
             },
             
-                                                                                                                                                 '14_1': { 
+            '13_6': { 
+                nombre: 'Putita en hilo',
+                imagen: 'https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/frame_4420_1774724361327.webp', 
+                descripcion: '', 
+                duracion: '' 
+            },
+            
+                                                                                                                                                             '14_1': { 
                 nombre: 'Doggystyle',
                 imagen: '', 
                 descripcion: '', 
