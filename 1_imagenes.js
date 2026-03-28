@@ -2473,7 +2473,14 @@ const sistemaDescriptivo = {
                 duracion: '' 
             },
             
-                                                                                                             '14_1': { 
+            '13_3': { 
+                nombre: 'Culona en tanga',
+                imagen: 'https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/frame_950_1774723956468.webp', 
+                descripcion: '', 
+                duracion: '' 
+            },
+            
+                                                                                                                         '14_1': { 
                 nombre: 'Doggystyle',
                 imagen: '', 
                 descripcion: '', 
