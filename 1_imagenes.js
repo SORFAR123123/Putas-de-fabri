@@ -2456,60 +2456,15 @@ const sistemaDescriptivo = {
                 duracion: '' 
             },
             
-                 '13_1': { 
-                nombre: 'Doggystyle',
-                imagen: '', 
-                descripcion: '', 
-                duracion: '' 
-            },
-            '13_2': { 
-                nombre: 'Putita culona',
-                imagen: 'https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/frame_430_1774480403017.webp', 
-                descripcion: '', 
-                duracion: '' 
-            },
-            
-            '13_3': { 
-                nombre: 'potona',
-                imagen: 'https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/frame_2130_1774481011173.webp', 
-                descripcion: '', 
-                duracion: '' 
-            },
-            
-            '13_4': { 
-                nombre: 'Perra',
-                imagen: 'https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/frame_690_1774481451683.webp', 
-                descripcion: '', 
-                duracion: '' 
-            },
-            
-            '13_5': { 
-                nombre: 'putita en hilo',
-                imagen: 'https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/frame_4420_1774482063850.webp', 
-                descripcion: '', 
-                duracion: '' 
-            },
-            
-            '13_6': { 
-                nombre: 'belinda y zahiry',
-                imagen: 'https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/frame_20_1774482401453.webp', 
-                descripcion: '', 
-                duracion: '' 
-            },
-            
-            '13_7': { 
-                nombre: 'Japonesa putita',
-                imagen: 'https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/frame_0_1774482556761.webp', 
-                descripcion: '', 
-                duracion: '' 
-            },
-            
-            '13_8': { 
+               '13_1': { 
                 nombre: 'putitas',
                 imagen: 'https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/frame_110_1774646874206.webp', 
                 descripcion: '', 
                 duracion: '' 
             },
+           
+            
+           
             
                                                                                                  '14_1': { 
                 nombre: 'Doggystyle',
