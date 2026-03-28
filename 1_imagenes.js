@@ -2487,7 +2487,14 @@ const sistemaDescriptivo = {
                 duracion: '' 
             },
             
-                                                                                                                                     '14_1': { 
+            '13_5': { 
+                nombre: 'Potona',
+                imagen: 'https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/frame_0_1774724282860.webp', 
+                descripcion: '', 
+                duracion: '' 
+            },
+            
+                                                                                                                                                 '14_1': { 
                 nombre: 'Doggystyle',
                 imagen: '', 
                 descripcion: '', 
