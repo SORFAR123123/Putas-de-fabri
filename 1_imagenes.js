@@ -2466,7 +2466,14 @@ const sistemaDescriptivo = {
             
            
             
-                                                                                                 '14_1': { 
+            '13_2': { 
+                nombre: 'putita en tanga',
+                imagen: 'https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/frame_560_1774723895096.webp', 
+                descripcion: '', 
+                duracion: '' 
+            },
+            
+                                                                                                             '14_1': { 
                 nombre: 'Doggystyle',
                 imagen: '', 
                 descripcion: '', 
