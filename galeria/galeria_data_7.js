@@ -1470,11 +1470,18 @@ const galeriaData_7 = {
     },
 
     '7_18': {
-        titulo: "",
+        titulo: "Profesora petera",
         descripcion: "",
         categoria: "",
-        imagen: "",
-        imagenes: []
+        imagen: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD23/main/imagenes/img_1774806638206.png",
+        imagenes: [
+            { id: 1, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD23/main/imagenes/img_1774806613512.png" },
+            { id: 2, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD23/main/imagenes/img_1774806615301.png" },
+            { id: 3, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD23/main/imagenes/img_1774806617082.png" },
+            { id: 4, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD23/main/imagenes/img_1774806618789.png" },
+            { id: 5, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD23/main/imagenes/img_1774806620564.png" },
+            { id: 6, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD23/main/imagenes/img_1774806622394.png" }
+        ]
     },
     
     // CONTENEDOR 8 - Trolas Random
