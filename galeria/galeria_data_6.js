@@ -1628,6 +1628,14 @@ const galeriaData_6 = {
         ]
     },
 
+    '6_23': {
+        titulo: "",
+        descripcion: "",
+        categoria: "",
+        imagen: "",
+        imagenes: []
+    },
+
    
 
   
