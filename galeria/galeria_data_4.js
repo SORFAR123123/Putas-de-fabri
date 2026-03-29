@@ -1563,11 +1563,24 @@ const galeriaData_4 = {
     },
 
     '4_21': {
-        titulo: "",
+        titulo: "yotsuba petera",
         descripcion: "",
         categoria: "",
-        imagen: "",
-        imagenes: []
+        imagen: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD23/main/imagenes/img_1774806518920.png",
+        imagenes: [
+            { id: 1, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD23/main/imagenes/img_1774806481858.png" },
+            { id: 2, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD23/main/imagenes/img_1774806483558.png" },
+            { id: 3, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD23/main/imagenes/img_1774806485258.png" },
+            { id: 4, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD23/main/imagenes/img_1774806486980.png" },
+            { id: 5, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD23/main/imagenes/img_1774806488865.png" },
+            { id: 6, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD23/main/imagenes/img_1774806490593.png" },
+            { id: 7, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD23/main/imagenes/img_1774806492214.png" },
+            { id: 8, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD23/main/imagenes/img_1774806493988.png" },
+            { id: 9, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD23/main/imagenes/img_1774806495733.png" },
+            { id: 10, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD23/main/imagenes/img_1774806497374.png" },
+            { id: 11, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD23/main/imagenes/img_1774806499052.png" },
+            { id: 12, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD23/main/imagenes/img_1774806500769.png" }
+        ]
     },
     
     // CONTENEDOR 5 - Ichika
