@@ -138,6 +138,12 @@ const contenedoresGaleria = {
         imagen: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773519854964.png",
         descripcion: "puta de aldo",
         categoria: "Puta de aldo"
-    }
+    },
+    23: {
+        nombre: "Nobara",
+        imagen: "https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/img_1774912583173.jpg",
+        descripcion: "",
+        categoria: "Nobara"
+    },
 };
 
