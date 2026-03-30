@@ -355,6 +355,14 @@ const galeriaData_22 = {
             { id: 106, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD26/main/imagenes/img_1774816883721.webp" }
         ]
     },
+
+    '22_6': {
+        titulo: "",
+        descripcion: "",
+        categoria: "",
+        imagen: "",
+        imagenes: []
+    },
 };
 if (typeof galeriaDatabase !== 'undefined') {
     Object.assign(galeriaDatabase, galeriaData_22);
