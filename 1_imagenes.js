@@ -2515,7 +2515,14 @@ const sistemaDescriptivo = {
                 duracion: '' 
             },
             
-                                                                                                                                                                                     '14_1': { 
+            '13_9': { 
+                nombre: 'Putita japonesa',
+                imagen: 'https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/frame_360_1774914878235.webp', 
+                descripcion: '', 
+                duracion: '' 
+            },
+            
+                                                                                                                                                                                                 '14_1': { 
                 nombre: 'Doggystyle',
                 imagen: '', 
                 descripcion: '', 
