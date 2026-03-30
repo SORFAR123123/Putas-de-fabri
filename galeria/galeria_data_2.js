@@ -701,6 +701,14 @@ const galeriaData_2 = {
             { id: 108, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD14/main/imagenes/img_1773510401401.png" }
         ]
     },
+
+    '2_5': {
+        titulo: "",
+        descripcion: "",
+        categoria: "",
+        imagen: "",
+        imagenes: []
+    },
 };
 
 // Registrar en galeriaDatabase global
