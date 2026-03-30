@@ -7,7 +7,15 @@ const galeriaData_23 = {
         categoria: "Nobara",
         imagen: "https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/img_1774912583173.jpg",
         imagenes: []
-    }
+    },
+
+    '23_2': {
+        titulo: "",
+        descripcion: "",
+        categoria: "",
+        imagen: "",
+        imagenes: []
+    },
 };
 
 if (typeof galeriaDatabase !== 'undefined') {
