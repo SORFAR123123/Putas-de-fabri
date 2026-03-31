@@ -2529,7 +2529,14 @@ const sistemaDescriptivo = {
                 duracion: '' 
             },
             
-                                                                                                                                                                                                             '14_1': { 
+            '13_11': { 
+                nombre: 'Gotica putita',
+                imagen: 'https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/frame_540_1775000018830.webp', 
+                descripcion: '', 
+                duracion: '' 
+            },
+            
+                                                                                                                                                                                                                         '14_1': { 
                 nombre: 'Doggystyle',
                 imagen: '', 
                 descripcion: '', 
