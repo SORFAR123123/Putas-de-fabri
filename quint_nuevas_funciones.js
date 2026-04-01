@@ -88,42 +88,74 @@ function memorySaveToSlot(slotIndex) {
 
 function memoryLoadSlot(slotIndex) {
     const slots = memoryGetSlots();
-    const slot = slots[slotIndex];
+    const slot  = slots[slotIndex];
     if (!slot) return;
 
     if (!confirm(`¿Cargar memoria del slot ${slotIndex + 1}?\nSe reemplazará la conversación actual.`)) return;
 
+    // 1. Restaurar estado interno (no toca el DOM, es instantáneo)
     quintHistorial     = slot.historial || [];
-    quintLogExport     = slot.log || [];
-    quintNombreUsuario = slot.nombre || "Tú";
+    quintLogExport     = slot.log       || [];
+    quintNombreUsuario = slot.nombre    || "Tú";
     quintChicasActivas = new Set(slot.chicas || ["Yotsuba"]);
 
+    // 2. Limpiar chat y cerrar panel antes de renderizar
     const chat = document.getElementById("quint-chat-mensajes");
     if (chat) chat.innerHTML = "";
+    memoryClosePanel();
 
+    // 3. Mostrar cabecera de carga
     quintAgregarSistema(`[ Memoria cargada — ${slot.fecha} ]`);
+    quintAgregarSistema(`[ Usuario: ${slot.nombre} | Chicas: ${slot.chicas.join(", ")} ]`);
 
-    for (const l of quintLogExport) {
+    // 4. Solo mostrar las últimas N líneas como preview visual
+    //    El historial completo ya está restaurado — la IA tiene todo el contexto
+    const PREVIEW_LINES = 6;
+    const lineasMostrables = (slot.log || []).filter(l => {
         const t = l.trim();
-        if (!t) continue;
-        if (t.startsWith("Tu:"))  quintAgregarUsuario(t.slice(3).trim());
-        else if (t.startsWith("[")) quintAgregarSistema(t);
-        else {
-            const sep  = t.indexOf(":");
-            const nom  = sep > -1 ? t.slice(0, sep).trim() : "";
-            const dial = sep > -1 ? t.slice(sep + 1).trim() : t;
-            if (CHICAS[nom]) {
-                quintChicasActivas.add(nom);
-                quintAgregarChica(nom, Object.keys(CHICAS[nom].imagenes)[0] || "Hablando", dial);
-            } else {
-                quintAgregarSistema(t);
-            }
-        }
+        return t && !t.startsWith("[");
+    });
+
+    if (lineasMostrables.length > PREVIEW_LINES) {
+        quintAgregarSistema(`[ ... ${lineasMostrables.length - PREVIEW_LINES} mensajes anteriores omitidos ... ]`);
     }
 
-    quintActualizarBadges();
-    memoryClosePanel();
-    quintAgregarSistema("[ Continúa la conversación... ]");
+    const preview = lineasMostrables.slice(-PREVIEW_LINES);
+
+    // 5. Renderizar el preview una línea por frame para no bloquear el hilo
+    let i = 0;
+    function renderNext() {
+        if (i >= preview.length) {
+            quintActualizarBadges();
+            quintAgregarSistema("[ Continúa la conversación... ]");
+            const inp = document.getElementById("quint-input");
+            if (inp) inp.focus();
+            return;
+        }
+
+        const l    = preview[i].trim();
+        const sep  = l.indexOf(":");
+        const nom  = sep > -1 ? l.slice(0, sep).trim() : "";
+        const dial = sep > -1 ? l.slice(sep + 1).trim() : l;
+
+        if (l.startsWith("Tu:")) {
+            quintAgregarUsuario(l.slice(3).trim());
+        } else if (CHICAS[nom]) {
+            quintChicasActivas.add(nom);
+            const imgKeys = Object.keys(CHICAS[nom].imagenes);
+            const imgTag  = imgKeys.find(k => k.toLowerCase().includes("hablando")) || imgKeys[0] || "Hablando";
+            quintAgregarChica(nom, imgTag, dial);
+        } else if (nom) {
+            quintAgregarChica(nom, "normal", dial);
+        } else {
+            quintAgregarSistema(l);
+        }
+
+        i++;
+        requestAnimationFrame(renderNext);
+    }
+
+    requestAnimationFrame(renderNext);
 }
 
 // ============================================================
