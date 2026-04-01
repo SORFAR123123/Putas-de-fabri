@@ -2437,7 +2437,14 @@ const sistemaDescriptivo = {
                 descripcion: '', 
                 duracion: '' 
             },
-             '11_1': { 
+            '10_2': { 
+                nombre: 'Kachando',
+                imagen: 'https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/frame_900_1775077560946.webp', 
+                descripcion: '', 
+                duracion: '' 
+            },
+            
+                         '11_1': { 
                 nombre: 'estudiaNTE PUTA ',
                 imagen: 'https://pbs.twimg.com/media/HBSeqZLakAAXA51?format=png&name=small', 
                 descripcion: '', 
