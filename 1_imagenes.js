@@ -1473,7 +1473,7 @@ const sistemaDescriptivo = {
             },
              13: { 
                 nombre: 'Doggystyle',
-                imagen: '', 
+                imagen: 'https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/frame_360_1774914878235.webp', 
                 descripcion: 'culonas',
                 tematica: 'misceláneo'
             },
