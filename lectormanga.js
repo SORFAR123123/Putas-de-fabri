@@ -671,7 +671,7 @@ const mangaDatabase = {
             "https://i1.nhentai.net/galleries/3698272/12.webp", // Página 12
        
         ]
-    }
+    },
     
 
 
@@ -686,7 +686,8 @@ const mangaDatabase = {
             "https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/img_1775083164835.webp", // Página 1
             "https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/img_1775083168530.webp" // Página 2
         ]
-    },};
+    }
+};
 
 // ================================================
 // VARIABLES DEL LECTOR
