@@ -1231,13 +1231,13 @@ const sistemaDescriptivo = {
                 imagen: '', 
                 descripcion: '', 
                 artista: '' 
-            }
+            },
             '10_6': { 
                 nombre: '123',
                 imagen: 'https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/img_1775078495310.webp', 
                 descripcion: '123', 
                 nivel: '' 
-            },
+            }
         }
     },
     
