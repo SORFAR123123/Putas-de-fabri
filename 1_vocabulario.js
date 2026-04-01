@@ -3508,7 +3508,7 @@ const vocabularioDatabase = {
             { japones: '和製漢語', lectura: 'wasei kango', opciones: ['Palabras chinas creadas en Japón', 'Palabras extranjeras', 'Palabras nativas japonesas', 'Neologismos'], respuesta: 0 },
             { japones: '難読漢字', lectura: 'nandoku kanji', opciones: ['Kanji de lectura difícil', 'Kanji básico', 'Hiragana', 'Katakana'], respuesta: 0 }
         ]
-    }
+    },
 
     
     
@@ -3552,7 +3552,8 @@ const vocabularioDatabase = {
             { japones: '普通に彼女も欲しかった', lectura: 'futsuunikanojomohosshikatta', opciones: ['quería una novia de verdad', 'hablas mucho', 'ser un depredador sexual', 'me gustan las chicas con pechos grandes'], respuesta: 0 },
         ],
 
-    },};
+    }
+            };
 
 
 // Función para obtener vocabulario (modificada para manejar mazos difíciles)
