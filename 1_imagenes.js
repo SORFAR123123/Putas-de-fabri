@@ -1174,6 +1174,12 @@ const sistemaDescriptivo = {
                 descripcion: '', 
                 artista: '' 
             },
+            '8_6': { 
+                nombre: '11',
+                imagen: 'https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/img_1775150195804.webp', 
+                descripcion: '11', 
+                nivel: '' 
+            },
             
             // Contenedor 9
             '9_1': { 
