@@ -1650,11 +1650,23 @@ const galeriaData_7 = {
     },
 
     '7_21': {
-        titulo: "",
+        titulo: "que rico culo",
         descripcion: "",
         categoria: "",
-        imagen: "",
-        imagenes: []
+        imagen: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD29/main/imagenes/img_1775164827448.jpg",
+        imagenes: [
+            { id: 1, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD29/main/imagenes/img_1775164764573.jpg" },
+            { id: 2, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD29/main/imagenes/img_1775164767709.jpg" },
+            { id: 3, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD29/main/imagenes/img_1775164771065.jpg" },
+            { id: 4, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD29/main/imagenes/img_1775164774623.jpg" },
+            { id: 5, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD29/main/imagenes/img_1775164777514.jpg" },
+            { id: 6, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD29/main/imagenes/img_1775164781267.jpg" },
+            { id: 7, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD29/main/imagenes/img_1775164783965.jpg" },
+            { id: 8, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD29/main/imagenes/img_1775164787631.jpg" },
+            { id: 9, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD29/main/imagenes/img_1775164790563.jpg" },
+            { id: 10, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD29/main/imagenes/img_1775164793562.jpg" },
+            { id: 11, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD29/main/imagenes/img_1775164796349.jpg" }
+        ]
     },
     
     // CONTENEDOR 8 - Trolas Random
