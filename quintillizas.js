@@ -365,7 +365,7 @@ async function quintLlamarAPI(messages, modelo, system) {
                     model:       modelo,
                     messages:    [{ role: "system", content: sysPrompt }, ...msgs],
                     temperature: 0.8,
-                    max_tokens:  5000
+                    max_tokens:  1200
                 })
             });
 
