@@ -2086,11 +2086,32 @@ const galeriaData_1 = {
     },
 
     '1_33': {
-        titulo: "",
+        titulo: "Gatita kachera",
         descripcion: "",
         categoria: "",
-        imagen: "",
-        imagenes: []
+        imagen: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD23/main/imagenes/img_1775164426768.jpg",
+        imagenes: [
+            { id: 1, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD23/main/imagenes/img_1775164242945.jpg" },
+            { id: 2, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD23/main/imagenes/img_1775164245937.jpg" },
+            { id: 3, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD23/main/imagenes/img_1775164251573.jpg" },
+            { id: 4, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD23/main/imagenes/img_1775164254788.jpg" },
+            { id: 5, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD23/main/imagenes/img_1775164257901.jpg" },
+            { id: 6, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD23/main/imagenes/img_1775164262371.jpg" },
+            { id: 7, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD23/main/imagenes/img_1775164266079.jpg" },
+            { id: 8, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD23/main/imagenes/img_1775164269325.jpg" },
+            { id: 9, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD23/main/imagenes/img_1775164272336.jpg" },
+            { id: 10, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD23/main/imagenes/img_1775164275725.jpg" },
+            { id: 11, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD23/main/imagenes/img_1775164278331.jpg" },
+            { id: 12, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD23/main/imagenes/img_1775164281161.jpg" },
+            { id: 13, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD23/main/imagenes/img_1775164284171.jpg" },
+            { id: 14, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD23/main/imagenes/img_1775164287169.jpg" },
+            { id: 15, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD23/main/imagenes/img_1775164289876.jpg" },
+            { id: 16, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD23/main/imagenes/img_1775164292867.jpg" },
+            { id: 17, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD23/main/imagenes/img_1775164295518.jpg" },
+            { id: 18, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD23/main/imagenes/img_1775164298202.jpg" },
+            { id: 19, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD23/main/imagenes/img_1775164301145.jpg" },
+            { id: 20, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD23/main/imagenes/img_1775164303967.jpg" }
+        ]
     },
    
     
