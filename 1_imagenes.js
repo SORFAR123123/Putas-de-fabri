@@ -420,30 +420,7 @@ const sistemaDescriptivo = {
                 descripcion: '', 
                 nivel: '' 
             },
-            '9_6': { 
-                nombre: '123',
-                imagen: 'https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/img_1775083168530.webp', 
-                descripcion: '123', 
-                nivel: '' 
-            },
-            '9_7': { 
-                nombre: '12',
-                imagen: 'https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/img_1775158157634.webp', 
-                descripcion: '12', 
-                nivel: '' 
-            },
-            '9_8': { 
-                nombre: '12',
-                imagen: 'https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/img_1775225966025.webp', 
-                descripcion: '12', 
-                nivel: '' 
-            },
-            '9_9': { 
-                nombre: '1',
-                imagen: 'https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/img_1775239273662.webp', 
-                descripcion: '1', 
-                nivel: '' 
-            },
+            
             
             // Contenedor 10
             '10_1': { 
