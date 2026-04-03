@@ -12,8 +12,8 @@ const _K = [
 ];
 const GROQ_KEYS = _K.map(p => p.join(""));
 
-const MODELO_PRINCIPAL   = "llama-3.1-70b-versatile";
-const MODELO_ALTERNATIVO = "mixtral-8x7b-32768";
+const MODELO_PRINCIPAL   = "llama-3.3-70b-versatile";
+const MODELO_ALTERNATIVO = "llama-3.1-8b-instant";
 
 // ============================================================
 //  CHICAS
