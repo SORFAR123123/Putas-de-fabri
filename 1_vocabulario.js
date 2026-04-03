@@ -2748,6 +2748,58 @@ const vocabularioDatabase = {
 
     },
 
+    // Sub-contenedor 9.7
+    'sub9_7': {
+        // MAZO 1
+        1: [
+            { japones: '成人向け', lectura: 'seijin muke', opciones: ['para adultos', 'se profundizó', 'molestias', 'salir juntos'], respuesta: 0 },
+            { japones: '18歳未満の', lectura: 'jūhassai miman no', opciones: ['de menores de 18 años', 'difícil', 'para adultos', 'pensar'], respuesta: 0 },
+            { japones: '購入・閲覧禁止', lectura: 'kōnyū etsuran kinshi', opciones: ['prohibida la compra y visualización', 'para adultos', 'sentimientos', 'difícil'], respuesta: 0 },
+            { japones: 'いいんじゃ', lectura: 'ii n ja', opciones: ['¿no está bien?', 'relación', 'dos personas', 'difícil'], respuesta: 0 },
+            { japones: 'ないかな', lectura: 'nai ka na', opciones: ['¿no será?', 'hombre y mujer', 'nosotros', 'difícil'], respuesta: 0 },
+            { japones: 'どうかな', lectura: 'dou ka na', opciones: ['¿qué te parece?', 'aquel día', 'sin contratiempos', 'curso'], respuesta: 0 },
+            { japones: 'この服', lectura: 'kono fuku', opciones: ['esta ropa', 'prohibida la compra y visualización', 'de menores de 18 años', 'gusto'], respuesta: 0 },
+            { japones: '好み', lectura: 'konomi', opciones: ['gusto', 'relación', 'primera experiencia', '¿no está bien?'], respuesta: 0 },
+            { japones: '山田', lectura: 'Yamada', opciones: ['Yamada', 'relación', '¿qué te parece?', '¿no está bien?'], respuesta: 0 },
+            { japones: 'お前', lectura: 'omae', opciones: ['tú', 'gusto', 'esta ropa', 'salir juntos'], respuesta: 0 },
+        ],
+
+        // MAZO 2
+        2: [
+            { japones: '交際', lectura: 'kousai', opciones: ['relación sentimental', 'para adultos', '¿no está bien?', 'primera experiencia'], respuesta: 0 },
+            { japones: 'ちょっかい', lectura: 'chokkai', opciones: ['molestias', 'se profundizó', 'de menores de 18 años', 'pensar'], respuesta: 0 },
+            { japones: '厄介ごと', lectura: 'yakkaigoto', opciones: ['problemas', 'salir juntos', 'se profundizó', '¿qué te parece?'], respuesta: 0 },
+            { japones: '大変', lectura: 'taihen', opciones: ['difícil', 'relación sentimental', 'se profundizó', 'primera experiencia'], respuesta: 0 },
+            { japones: 'お互い', lectura: 'otagai', opciones: ['mutuamente', 'molestias', 'relación sentimental', 'Yamada'], respuesta: 0 },
+            { japones: '初体験', lectura: 'hatsutaiken', opciones: ['primera experiencia', '¿qué te parece?', 'por qué', 'gusto'], respuesta: 0 },
+            { japones: 'どうして', lectura: 'doushite', opciones: ['por qué', 'éxito', 'pensar', 'nosotros'], respuesta: 0 },
+            { japones: '順調', lectura: 'junchou', opciones: ['sin contratiempos', 'difícil', 'problemas', 'sin problemas'], respuesta: 0 },
+            { japones: '成功', lectura: 'seikou', opciones: ['éxito', 'gusto', '¿no será?', 'esta ropa'], respuesta: 0 },
+            { japones: '俺達', lectura: 'oretachi', opciones: ['nosotros', 'relación sentimental', 'problemas', 'sin contratiempos'], respuesta: 0 },
+        ],
+
+        // MAZO 3
+        3: [
+            { japones: 'あの日', lectura: 'ano hi', opciones: ['aquel día', 'sentimientos', 'mutuamente', 'molestias'], respuesta: 0 },
+            { japones: 'それから', lectura: 'sorekara', opciones: ['después de eso', 'nosotros', 'mutuamente', '¿no será?'], respuesta: 0 },
+            { japones: '男女', lectura: 'danjo', opciones: ['hombre y mujer', 'Yamada', 'para adultos', 'tú'], respuesta: 0 },
+            { japones: '気持ち', lectura: 'kimochi', opciones: ['sentimientos', 'gusto', 'nosotros', 'Yamada'], respuesta: 0 },
+            { japones: '無事', lectura: 'buji', opciones: ['sin problemas', 'nosotros', 'después de eso', 'dos personas'], respuesta: 0 },
+            { japones: '付き合う', lectura: 'tsukiau', opciones: ['salir juntos', 'molestias', 'éxito', 'hombre y mujer'], respuesta: 0 },
+            { japones: '流れ', lectura: 'nagare', opciones: ['curso', 'para adultos', 'esta ropa', '¿no está bien?'], respuesta: 0 },
+            { japones: '二人', lectura: 'futari', opciones: ['dos personas', 'mutuamente', 'pensar', 'hombre y mujer'], respuesta: 0 },
+            { japones: '仲', lectura: 'naka', opciones: ['relación', 'sin contratiempos', 'difícil', 'aquel día'], respuesta: 0 },
+            { japones: '更に', lectura: 'sarani', opciones: ['aún más', 'para adultos', 'curso', 'sin problemas'], respuesta: 0 },
+        ],
+
+        // MAZO 4
+        4: [
+            { japones: '深まった', lectura: 'fukamatta', opciones: ['se profundizó', 'gusto', 'éxito', 'dos personas'], respuesta: 0 },
+            { japones: '思う', lectura: 'omou', opciones: ['pensar', 'molestias', 'hombre y mujer', 'Yamada'], respuesta: 0 },
+        ],
+
+    },
+
     // ================================================
     // CONTENEDOR 10 (sub10_1 a sub10_5)
     // ================================================
