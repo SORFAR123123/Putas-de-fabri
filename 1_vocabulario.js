@@ -2706,6 +2706,48 @@ const vocabularioDatabase = {
     'sub9_4': { 1: [], 2: [], 3: [], 4: [], 5: [], 6: [], 'D1': [], 'D2': [] },
     'sub9_5': { 1: [], 2: [], 3: [], 4: [], 5: [], 6: [], 'D1': [], 'D2': [] },
 
+    // Sub-contenedor 9.6
+    'sub9_6': {
+        // MAZO 1
+        1: [
+            { japones: 'お近づきになりたい', lectura: 'ochikazuki ni naritai', opciones: ['querer acercarse o conocer mejor', 'novio', 'ese rostro', 'novia'], respuesta: 0 },
+            { japones: '相手にされない', lectura: 'aite ni sarenai', opciones: ['no ser correspondido o ignorado', 'es mi objetivo', 'cuerpo', 'tipo carnívoro'], respuesta: 0 },
+            { japones: '彼氏', lectura: 'kareshi', opciones: ['novio', '¡maldición!', 'quería', 'insípido'], respuesta: 0 },
+            { japones: '一花ちゃん', lectura: 'ichika-chan', opciones: ['Ichika', 'insípido', 'tipo carnívoro', 'quería'], respuesta: 0 },
+            { japones: '可愛すぎる', lectura: 'kawaisugiru', opciones: ['demasiado linda', 'chica', 'para ser honesto', 'solo busca sexo'], respuesta: 0 },
+            { japones: '凶悪な', lectura: 'kyouaku na', opciones: ['feroz o impresionante', '¡imposible!', 'para ser honesto', 'insípido'], respuesta: 0 },
+            { japones: 'ボディ', lectura: 'bodi', opciones: ['cuerpo', 'para ser honesto', '¡maldición!', 'demasiado linda'], respuesta: 0 },
+            { japones: 'あの顔', lectura: 'ano kao', opciones: ['ese rostro', 'quería', 'insípido', 'no ser correspondido o ignorado'], respuesta: 0 },
+            { japones: 'スキがなさすぎる', lectura: 'suki ga nasasugiru', opciones: ['demasiado perfecta o sin puntos débiles', 'con toda la intención', 'novio', '¡maldición!'], respuesta: 0 },
+            { japones: 'まさか', lectura: 'masaka', opciones: ['¡imposible!', 'que me invitara', 'es mi objetivo', 'insípido'], respuesta: 0 },
+        ],
+
+        // MAZO 2
+        2: [
+            { japones: '街宮さん', lectura: 'Machimiya-san', opciones: ['Sra.', 'pechos enormes', 'novio', 'que me invitara'], respuesta: 0 },
+            { japones: '誘ってくるとは', lectura: 'sasotte kuru to wa', opciones: ['que me invitara', 'chica', '¡maldición!', 'feroz o impresionante'], respuesta: 0 },
+            { japones: '女の子', lectura: 'onna no ko', opciones: ['chica', 'tipo carnívoro', 'ese rostro', 'solo busca sexo'], respuesta: 0 },
+            { japones: 'しまった', lectura: 'shimatta', opciones: ['¡maldición!', 'para ser honesto', 'novia', 'insípido'], respuesta: 0 },
+            { japones: 'ホテル', lectura: 'hoteru', opciones: ['hotel', '¿se había descubierto?', 'Ichika', 'es mi objetivo'], respuesta: 0 },
+            { japones: '気満々', lectura: 'ki manman', opciones: ['con toda la intención', 'novio', 'ese rostro', 'insípido'], respuesta: 0 },
+            { japones: 'バレてたか', lectura: 'barete ta ka', opciones: ['¿se había descubierto?', 'Sra.', 'solo busca sexo', 'hacer match'], respuesta: 0 },
+            { japones: '肉食系', lectura: 'nikushokukei', opciones: ['tipo carnívoro', 'Ichika', 'novio', 'demasiado linda'], respuesta: 0 },
+            { japones: 'はっきり言って', lectura: 'hakkiri itte', opciones: ['para ser honesto', '¡imposible!', 'novio', 'feroz o impresionante'], respuesta: 0 },
+            { japones: 'デカパイ', lectura: 'dekapai', opciones: ['pechos enormes', 'para ser honesto', '¡maldición!', 'hotel'], respuesta: 0 },
+        ],
+
+        // MAZO 3
+        3: [
+            { japones: '狙いだ', lectura: 'nerai da', opciones: ['es mi objetivo', 'chica', '¡maldición!', 'con toda la intención'], respuesta: 0 },
+            { japones: 'ヤリモク', lectura: 'yarimoku', opciones: ['solo busca sexo', 'quería', 'ese rostro', 'Ichika'], respuesta: 0 },
+            { japones: '味気なくて', lectura: 'ajikenakute', opciones: ['insípido', 'ese rostro', 'no ser correspondido o ignorado', 'querer acercarse o conocer mejor'], respuesta: 0 },
+            { japones: '彼女', lectura: 'kanojo', opciones: ['novia', '¿se había descubierto?', 'que me invitara', 'con toda la intención'], respuesta: 0 },
+            { japones: '欲しかった', lectura: 'hoshikatta', opciones: ['quería', 'querer acercarse o conocer mejor', 'que me invitara', 'chica'], respuesta: 0 },
+            { japones: 'マッチする', lectura: 'matchi suru', opciones: ['hacer match', '¿se había descubierto?', 'tipo carnívoro', 'insípido'], respuesta: 0 },
+        ],
+
+    },
+
     // ================================================
     // CONTENEDOR 10 (sub10_1 a sub10_5)
     // ================================================
