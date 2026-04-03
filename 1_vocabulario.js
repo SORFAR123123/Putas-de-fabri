@@ -3508,51 +3508,13 @@ const vocabularioDatabase = {
             { japones: '和製漢語', lectura: 'wasei kango', opciones: ['Palabras chinas creadas en Japón', 'Palabras extranjeras', 'Palabras nativas japonesas', 'Neologismos'], respuesta: 0 },
             { japones: '難読漢字', lectura: 'nandoku kanji', opciones: ['Kanji de lectura difícil', 'Kanji básico', 'Hiragana', 'Katakana'], respuesta: 0 }
         ]
-    },
-
-    
-    
-
-
-    // Sub-contenedor 9.6
-    'sub9_6': {
-        // MAZO 1
-        1: [
-            { japones: '美人だし', lectura: 'bijindashi', opciones: ['eres muy hermosa', 'me invita a salir', 'estoy pensando en ir al hotel', '¿se habrá dado cuenta?'], respuesta: 0 },
-            { japones: 'おしゃべりな', lectura: 'oshaberina', opciones: ['hablas mucho', 'estoy con otra persona con la que puedo tener rela', '¿en serio?', 'la señorita Shimamiya'], respuesta: 0 },
-            { japones: '女は苦手だから', lectura: 'onnahanigatedakara', opciones: ['no soy muy bueno con las mujeres', 'hablas mucho', 'la señorita Shimamiya', 'ser un depredador sexual'], respuesta: 0 },
-            { japones: '結構理想の相手かも・・', lectura: 'kekkourisounoaitekamo・・', opciones: ['podrías ser mi pareja ideal', 'quería una novia de verdad', 'no soy muy bueno con las mujeres', 'para ser honesto, soy'], respuesta: 0 },
-            { japones: '今からあのカラダ', lectura: 'imakaraanokarada', opciones: ['ahora mismo, ese cuerpo', 'un pervertido', 'me he quedado sin palabras', 'es aburrido'], respuesta: 0 },
-            { japones: '抱けると思うと', lectura: 'dakerutoomouto', opciones: ['creo que podría abrazarte', '¿se habrá dado cuenta?', 'lo siento por hacerte esperar', 'la señorita Shimamiya'], respuesta: 0 },
-            { japones: 'お待たせ', lectura: 'omatase', opciones: ['lo siento por hacerte esperar', 'me dice que soy un pervertido', 'eres muy hermosa', 'para ser honesto, soy'], respuesta: 0 },
-            { japones: 'しました', lectura: 'shimashita', opciones: ['hacer', 'me invita a salir', 'es aburrido', 'ser un depredador sexual'], respuesta: 0 },
-            { japones: 'まさか', lectura: 'masaka', opciones: ['¿en serio?', 'estoy pensando en ir al hotel', 'es aburrido', 'creo que podría abrazarte'], respuesta: 0 },
-            { japones: '街宮さんから', lectura: 'machimiyasankara', opciones: ['la señorita Shimamiya', 'aunque parezca así', '¿se habrá dado cuenta?', 'me dice que soy un pervertido'], respuesta: 0 },
-        ],
-
-        // MAZO 2
-        2: [
-            { japones: '誘ってくるとは・・・', lectura: 'sasotsutekurutoha・・・', opciones: ['me invita a salir', 'me he quedado sin palabras', 'lo siento por hacerte esperar', 'un pervertido'], respuesta: 0 },
-            { japones: '女の子に言わせて', lectura: 'onnanokoniiwasete', opciones: ['me dice que soy un pervertido', 'no soy muy bueno con las mujeres', 'pero siempre', 'me gustan las chicas con pechos grandes'], respuesta: 0 },
-            { japones: 'しまった', lectura: 'shimatta', opciones: ['me he quedado sin palabras', 'quería una novia de verdad', 'podrías ser mi pareja ideal', 'eres muy hermosa'], respuesta: 0 },
-            { japones: 'はっきり言って俺は', lectura: 'hakkiriitteoreha', opciones: ['para ser honesto, soy', 'ahora mismo, ese cuerpo', 'podrías ser mi pareja ideal', 'quería una novia de verdad'], respuesta: 0 },
-            { japones: 'あのとんでもない', lectura: 'anotondemonai', opciones: ['un pervertido', '¿en serio?', 'no soy muy bueno con las mujeres', 'creo que podría abrazarte'], respuesta: 0 },
-            { japones: 'デカパイ狙いだ', lectura: 'dekapaineraida', opciones: ['me gustan las chicas con pechos grandes', 'hablas mucho', 'estoy pensando en ir al hotel', '¿se habrá dado cuenta?'], respuesta: 0 },
-            { japones: 'ホテル行く気満々', lectura: 'hoteruikukimanman', opciones: ['estoy pensando en ir al hotel', 'eres muy hermosa', 'lo siento por hacerte esperar', '¿en serio?'], respuesta: 0 },
-            { japones: 'なのバレてたか', lectura: 'nanobaretetaka', opciones: ['¿se habrá dado cuenta?', 'es aburrido', 'ser un depredador sexual', 'lo siento por hacerte esperar'], respuesta: 0 },
-            { japones: 'ああ見えて', lectura: 'aamiete', opciones: ['aunque parezca así', 'me gustan las chicas con pechos grandes', 'hablas mucho', 'no soy muy bueno con las mujeres'], respuesta: 0 },
-            { japones: '肉食系だったり', lectura: 'nikushokukeidattari', opciones: ['ser un depredador sexual', 'me he quedado sin palabras', 'para ser honesto, soy', 'aunque parezca así'], respuesta: 0 },
-        ],
-
-        // MAZO 3
-        3: [
-            { japones: 'でもいつも', lectura: 'demoitsumo', opciones: ['pero siempre', 'me invita a salir', 'ser un depredador sexual', 'creo que podría abrazarte'], respuesta: 0 },
-            { japones: 'ヤリモク同士でマッチ', lectura: 'yarimokudoushidematchi', opciones: ['estoy con otra persona con la que puedo tener rela', 'es aburrido', 'ser un depredador sexual', 'para ser honesto, soy'], respuesta: 0 },
-            { japones: 'するのも味気なくて', lectura: 'surunomoajikenakute', opciones: ['es aburrido', 'la señorita Shimamiya', 'me dice que soy un pervertido', 'estoy pensando en ir al hotel'], respuesta: 0 },
-            { japones: '普通に彼女も欲しかった', lectura: 'futsuunikanojomohosshikatta', opciones: ['quería una novia de verdad', 'hablas mucho', 'ser un depredador sexual', 'me gustan las chicas con pechos grandes'], respuesta: 0 },
-        ],
-
     }
+
+    
+    
+
+
+ 
             };
 
 
