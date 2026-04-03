@@ -426,6 +426,12 @@ const sistemaDescriptivo = {
                 descripcion: 'XDXD', 
                 nivel: '' 
             },
+            '9_7': { 
+                nombre: 'yamada putarda',
+                imagen: 'https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/img_1775250374067.webp', 
+                descripcion: '123', 
+                nivel: '' 
+            },
             
             // Contenedor 10
             '10_1': { 
