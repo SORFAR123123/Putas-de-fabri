@@ -12,7 +12,7 @@ const _K = [
 ];
 const GROQ_KEYS = _K.map(p => p.join(""));
 
-const MODELO_PRINCIPAL   = "llama-3.3-70b-versatile";
+const MODELO_PRINCIPAL   = "openai/gpt-oss-120b";
 const MODELO_ALTERNATIVO = "llama-3.1-8b-instant";
 
 // ============================================================
