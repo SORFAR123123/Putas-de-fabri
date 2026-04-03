@@ -1207,6 +1207,12 @@ const sistemaDescriptivo = {
                 descripcion: '', 
                 artista: '' 
             },
+            '9_6': { 
+                nombre: 'PROBANDOXDXD',
+                imagen: 'https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/img_1775247341935.webp', 
+                descripcion: 'XDXD', 
+                nivel: '' 
+            },
            
             
             // Contenedor 10
