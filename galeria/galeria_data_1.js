@@ -2468,6 +2468,14 @@ const galeriaData_1 = {
             { id: 346, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD29/main/imagenes/img_1775182643914.webp" }
         ]
     },
+
+    '1_35': {
+        titulo: "",
+        descripcion: "",
+        categoria: "",
+        imagen: "",
+        imagenes: []
+    },
    
     
     // CONTENEDOR 2
