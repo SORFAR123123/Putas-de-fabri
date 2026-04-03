@@ -676,7 +676,18 @@ const mangaDatabase = {
 
 
     // Sub-contenedor 9.6
-    '9_6': {
+    '9_1': {
+        titulo: "123",
+        descripcion: "123",
+        paginas: 2,
+        año: 2024,
+        autor: "Desconocido",
+        paginasUrls: [
+            "https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/img_1775083164835.webp", // Página 1
+            "https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/img_1775083168530.webp" // Página 2
+        ]
+    },
+     '10_1': {
         titulo: "123",
         descripcion: "123",
         paginas: 2,
