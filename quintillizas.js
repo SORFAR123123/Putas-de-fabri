@@ -12,8 +12,8 @@ const _K = [
 ];
 const GROQ_KEYS = _K.map(p => p.join(""));
 
-const MODELO_PRINCIPAL   = "qwen/qwen3-32b";
-const MODELO_ALTERNATIVO = "openai/gpt-oss-120b"; 
+const MODELO_PRINCIPAL   = "openai/gpt-oss-120b"; 
+const MODELO_ALTERNATIVO = "qwen/qwen3-32b"; 
 
 // ============================================================
 //  CHICAS
