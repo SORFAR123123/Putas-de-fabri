@@ -1168,55 +1168,9 @@ const galeriaData_4 = {
         ]
     },
 
-    '4_15': {
-        titulo: "yotsuba chupa bolas",
-        descripcion: "",
-        categoria: "NTRの村",
-        imagen: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524695651.jpg",
-        imagenes: [
-            { id: 1, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524602280.jpg" },
-            { id: 2, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524604135.jpg" },
-            { id: 3, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524606403.jpg" },
-            { id: 4, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524608559.jpg" },
-            { id: 5, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524610724.jpg" },
-            { id: 6, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524612897.jpg" },
-            { id: 7, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524614912.jpg" },
-            { id: 8, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524616966.jpg" },
-            { id: 9, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524619128.jpg" },
-            { id: 10, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524621626.jpg" },
-            { id: 11, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524623647.jpg" },
-            { id: 12, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524625926.jpg" },
-            { id: 13, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524628053.jpg" },
-            { id: 14, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524630386.jpg" },
-            { id: 15, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524632530.jpg" },
-            { id: 16, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524634759.jpg" },
-            { id: 17, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524636947.jpg" },
-            { id: 18, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524639049.jpg" },
-            { id: 19, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524641273.jpg" },
-            { id: 20, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524643487.jpg" },
-            { id: 21, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524645566.jpg" },
-            { id: 22, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524647636.jpg" },
-            { id: 23, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524649770.jpg" },
-            { id: 24, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524651771.jpg" },
-            { id: 25, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524654125.jpg" },
-            { id: 26, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524656140.jpg" },
-            { id: 27, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524658194.jpg" },
-            { id: 28, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524660231.jpg" },
-            { id: 29, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524662374.jpg" },
-            { id: 30, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524664424.jpg" },
-            { id: 31, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524666438.jpg" },
-            { id: 32, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524668479.jpg" },
-            { id: 33, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524670469.jpg" },
-            { id: 34, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524672488.jpg" },
-            { id: 35, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524674647.jpg" },
-            { id: 36, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524676696.jpg" },
-            { id: 37, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524678762.jpg" },
-            { id: 38, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524680746.jpg" },
-            { id: 39, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD18/main/imagenes/img_1773524682911.jpg" }
-        ]
-    },
+   
 
-    '4_16': {
+    '4_15': {
         titulo: "kachando al capitan",
         descripcion: "",
         categoria: "",
@@ -1235,7 +1189,7 @@ const galeriaData_4 = {
         ]
     },
 
-    '4_17': {
+    '4_16': {
         titulo: "Culaso",
         descripcion: "",
         categoria: "",
@@ -1495,7 +1449,7 @@ const galeriaData_4 = {
         ]
     },
 
-    '4_18': {
+    '4_17': {
         titulo: "kachera",
         descripcion: "",
         categoria: "",
@@ -1514,7 +1468,7 @@ const galeriaData_4 = {
         ]
     },
 
-    '4_19': {
+    '4_18': {
         titulo: "Bien vestida la putita",
         descripcion: "",
         categoria: "",
@@ -1544,7 +1498,7 @@ const galeriaData_4 = {
         ]
     },
 
-    '4_20': {
+    '4_19': {
         titulo: "kachera",
         descripcion: "",
         categoria: "",
@@ -1562,7 +1516,7 @@ const galeriaData_4 = {
         ]
     },
 
-    '4_21': {
+    '4_20': {
         titulo: "yotsuba petera",
         descripcion: "",
         categoria: "",
@@ -1583,7 +1537,7 @@ const galeriaData_4 = {
         ]
     },
 
-    '4_22': {
+    '4_21': {
         titulo: "Yotsuba Kachada",
         descripcion: "",
         categoria: "",
@@ -1686,7 +1640,7 @@ const galeriaData_4 = {
         ]
     },
 
-    '4_23': {
+    '4_22': {
         titulo: "Yotsuba MON",
         descripcion: "",
         categoria: "",
@@ -1719,7 +1673,7 @@ const galeriaData_4 = {
         ]
     },
 
-    '4_24': {
+    '4_23': {
         titulo: "kachando a yotsuba",
         descripcion: "",
         categoria: "",
@@ -1848,7 +1802,7 @@ const galeriaData_4 = {
         ]
     },
 
-    '4_25': {
+    '4_24': {
         titulo: "En las duchas y porrista",
         descripcion: "",
         categoria: "",
@@ -1934,7 +1888,7 @@ const galeriaData_4 = {
         ]
     },
 
-    '4_26': {
+    '4_25': {
         titulo: "Yotsuba putita",
         descripcion: "",
         categoria: "",
