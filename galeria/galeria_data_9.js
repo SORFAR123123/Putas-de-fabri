@@ -965,11 +965,26 @@ const galeriaData_9 = {
     },
 
     '9_Nino_utsuki': {
-        titulo: "",
+        titulo: "kachando putas",
         descripcion: "",
         categoria: "",
-        imagen: "",
-        imagenes: []
+        imagen: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD29/main/imagenes/img_1775225493831.webp",
+        imagenes: [
+            { id: 1, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD29/main/imagenes/img_1775225436114.webp" },
+            { id: 2, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD29/main/imagenes/img_1775225437775.webp" },
+            { id: 3, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD29/main/imagenes/img_1775225439400.webp" },
+            { id: 4, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD29/main/imagenes/img_1775225440968.webp" },
+            { id: 5, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD29/main/imagenes/img_1775225442556.webp" },
+            { id: 6, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD29/main/imagenes/img_1775225444271.webp" },
+            { id: 7, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD29/main/imagenes/img_1775225445949.webp" },
+            { id: 8, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD29/main/imagenes/img_1775225447575.webp" },
+            { id: 9, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD29/main/imagenes/img_1775225449183.webp" },
+            { id: 10, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD29/main/imagenes/img_1775225450788.webp" },
+            { id: 11, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD29/main/imagenes/img_1775225452389.webp" },
+            { id: 12, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD29/main/imagenes/img_1775225454017.webp" },
+            { id: 13, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD29/main/imagenes/img_1775225455755.webp" },
+            { id: 14, url: "https://raw.githubusercontent.com/SORFAR123123/XDDDDDDDDDDDDDDDDDDDDXDXDXDXDXDXD29/main/imagenes/img_1775225457447.webp" }
+        ]
     },
 };
 
