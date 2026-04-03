@@ -990,6 +990,19 @@ const mangaDatabase = {
         paginasUrls: []
     },
 
+    // Sub-contenedor 9.6
+    '9_6': {
+        titulo: "PROBANDOXDD",
+        descripcion: "XDXD",
+        paginas: 2,
+        año: 2024,
+        autor: "Desconocido",
+        paginasUrls: [
+            "https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/img_1775247341935.webp", // Página 1
+            "https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/img_1775247343996.webp" // Página 2
+        ]
+    },
+
     // ================================================
     // CONTENEDOR 10
     // ================================================
