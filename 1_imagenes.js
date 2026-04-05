@@ -46,8 +46,8 @@ const sistemaDescriptivo = {
                 tipo: 'putardas'
             },
             7: { 
-                nombre: 'CONTAINER 7',
-                imagen: '', 
+                nombre: 'Yamada putarda',
+                imagen: 'https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/img_1775423168022.jpg', 
                 descripcion: 'Contenedor de one-shots',
                 tipo: 'oneshot'
             },
