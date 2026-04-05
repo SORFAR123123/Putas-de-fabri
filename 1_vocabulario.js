@@ -2688,6 +2688,416 @@ const vocabularioDatabase = {
     'sub7_4': { 1: [], 2: [], 3: [], 4: [], 5: [], 6: [], 'D1': [], 'D2': [] },
     'sub7_5': { 1: [], 2: [], 3: [], 4: [], 5: [], 6: [], 'D1': [], 'D2': [] },
 
+    // Sub-contenedor 7.6
+    'sub7_6': {
+        // MAZO 1
+        1: [
+            { japones: 'カラダ', lectura: 'karada', opciones: ['cuerpo', 'lo tengo', 'tanto como sea', 'esto'], respuesta: 0 },
+            { japones: 'に', lectura: 'ni', opciones: ['partícula que indica dirección, lugar o finalidad', 'tú', 'ya, otra vez', 'la boca'], respuesta: 0 },
+            { japones: 'も', lectura: 'mo', opciones: ['partícula que indica "también"', 'acabado', '¡Lo hice!', 'aunque no estoy acostumbrada'], respuesta: 0 },
+            { japones: 'ヤバイ', lectura: 'yabai', opciones: ['peligroso, grave, terrible', 'proactivo', 'cualquier cosa', 'sin problemas, fluido'], respuesta: 0 },
+            { japones: 'やっちゃった', lectura: 'yacchatta', opciones: ['lo hice', 'etc., y cosas por el estilo', '¿qué será?', 'por cierto'], respuesta: 0 },
+            { japones: 'DOJIN', lectura: 'dojin', opciones: ['doujin', 'salir', 'te lo voy a satisfacer', 'intenta ordeñarme'], respuesta: 0 },
+            { japones: 'R18', lectura: 'R18', opciones: ['clasificación para contenido adulto', 'último', 'conocimientos eróticos', 'me encantan'], respuesta: 0 },
+            { japones: '成人向け', lectura: 'seijinkuke', opciones: ['destinado a adultos, para adultos', 'eh, sí', 'porque es condón', 'vagina'], respuesta: 0 },
+            { japones: '18歳未満', lectura: 'juuhassai miman', opciones: ['menores de 18 años', 'no me queda otra que hacerlo', 'aunque', 'yo'], respuesta: 0 },
+            { japones: 'の', lectura: 'no', opciones: ['partícula posesiva "de"', '¿no?', 'ahora', 'este'], respuesta: 0 },
+        ],
+
+        // MAZO 2
+        2: [
+            { japones: '購入', lectura: 'kounyuu', opciones: ['compra', 'parece que podré esforzarme', 'delgado, fino', 'yo'], respuesta: 0 },
+            { japones: '閲覧禁止', lectura: 'etsuran kinshi', opciones: ['prohibición de visualización', '¡Lo hice!', 'esas cosas', 'esto'], respuesta: 0 },
+            { japones: 'この服', lectura: 'kono fuku', opciones: ['esta ropa', 'de Yamada', 'gracias a, por culpa de', 'forma'], respuesta: 0 },
+            { japones: 'いいんじゃないかな', lectura: 'ii n ja nai kana', opciones: ['¿no está bien?', 'no lo conozco', 'partícula de duda, \', 'no lo entiendo'], respuesta: 0 },
+            { japones: '好みってことだね', lectura: 'konomi tte koto da ne', opciones: ['es de mi gusto', 'confesar, expresar', 'el uniforme de siempre es sexy', 'compra'], respuesta: 0 },
+            { japones: 'うっおお', lectura: 'uoo', opciones: ['¡ugh!', '¿Qué tal?', 'dónde', '¿quieres que lo use?'], respuesta: 0 },
+            { japones: '山田お前', lectura: 'Yamada omae', opciones: ['Yamada, tú', 'partícula que indica dirección, lugar o finalidad', 'no poder hablar', 'tú'], respuesta: 0 },
+            { japones: 'お互い', lectura: 'otagai', opciones: ['mutuamente, el uno al otro', 'qué pasó', 'no', 'temible'], respuesta: 0 },
+            { japones: '気持ち', lectura: 'kimochi', opciones: ['sentimientos', 'está libre', '¡qué maravilla!', 'porque es condón'], respuesta: 0 },
+            { japones: 'を', lectura: 'wo', opciones: ['partícula de objeto directo', 'no lo conozco', 'chismes, interferencias', 'demasiado erótico'], respuesta: 0 },
+        ],
+
+        // MAZO 3
+        3: [
+            { japones: '伝え', lectura: 'tsutae', opciones: ['confesar, expresar', 'doujin', 'No puede ser… es una mentira…', 'vagina'], respuesta: 0 },
+            { japones: '無事', lectura: 'buji', opciones: ['sin contratiempos, seguro', 'ahora', 'de manera casual', 'conocimientos eróticos'], respuesta: 0 },
+            { japones: '付き合う', lectura: 'tsukiau', opciones: ['salir', 'al final', 'es que, ¡qué pasa!', 'cualquier cosa'], respuesta: 0 },
+            { japones: 'こと', lectura: 'koto', opciones: ['el hecho de', 'adorable', 'es una mentira', '¡qué maravilla!'], respuesta: 0 },
+            { japones: 'なった', lectura: 'natta', opciones: ['se convirtió en, llegó a ser', 'ver', 'eh... eso', 'compra'], respuesta: 0 },
+            { japones: '俺達', lectura: 'oretachi', opciones: ['nosotros', 'es', 'día', 'exprimir'], respuesta: 0 },
+            { japones: 'あの日', lectura: 'ano hi', opciones: ['ese día', 'No puede ser… es una mentira…', 'lo hice', 'esto'], respuesta: 0 },
+            { japones: 'こんな', lectura: 'konna', opciones: ['tal, este tipo de', 'partícula nominativa', 'tú', 'tú'], respuesta: 0 },
+            { japones: '交際', lectura: 'kousai', opciones: ['relación', 'muy', 'te queda bien', 'Yamada'], respuesta: 0 },
+            { japones: '周り', lectura: 'mawari', opciones: ['alrededor, entorno', 'partícula posesiva "de"', 'prueba', 'proactivo'], respuesta: 0 },
+        ],
+
+        // MAZO 4
+        4: [
+            { japones: 'ちょっかい', lectura: 'chokkai', opciones: ['chismes, interferencias', 'aspecto, apariencia', 'debería resolverlo', 'pensé que'], respuesta: 0 },
+            { japones: '厄介ごと', lectura: 'yakkai goto', opciones: ['problemas, complicaciones', 'con esto', 'fuerte, con intensidad', 'tanto'], respuesta: 0 },
+            { japones: '大変で', lectura: 'taihen de', opciones: ['era difícil, complicado', '¿no?', 'exprimir', 'corteza del glande'], respuesta: 0 },
+            { japones: 'あった', lectura: 'atta', opciones: ['existía, había', 'el uniforme de siempre es sexy', 'percibo, entiendo', 'exprimir'], respuesta: 0 },
+            { japones: '順調', lectura: 'junchou', opciones: ['sin problemas, fluido', '¿Mentira, Nokogawa?', 'siguiente', 'como el tío de la inseminación'], respuesta: 0 },
+            { japones: '続いていた', lectura: 'tsuzuiteita', opciones: ['continuaba, seguía', 'relación', 'tanto como sea', 'vamos a usarlo de inmediato'], respuesta: 0 },
+            { japones: 'それから', lectura: 'sorekara', opciones: ['después, luego', '¿qué será?', '¡Porque estoy llegando!', 'percibo, entiendo'], respuesta: 0 },
+            { japones: 'のはずだった', lectura: 'no hazu datta', opciones: ['se suponía que', '¡tócala!', 'vamos', 'varios'], respuesta: 0 },
+            { japones: 'しかし', lectura: 'shikashi', opciones: ['pero', 'no es adorable', 'relación', 'más bien, ¿qué estás haciendo dentro de mí?'], respuesta: 0 },
+            { japones: 'その日', lectura: 'sono hi', opciones: ['ese día', 'escuela', 'hoy', 'intenso, fuerte'], respuesta: 0 },
+        ],
+
+        // MAZO 5
+        5: [
+            { japones: 'から', lectura: 'kara', opciones: ['desde', 'beso', 'pero', 'debería resolverlo'], respuesta: 0 },
+            { japones: '山田', lectura: 'Yamada', opciones: ['Yamada', 'bien', 'aunque no estoy acostumbrada', '¡Porque estoy llegando!'], respuesta: 0 },
+            { japones: 'タガ', lectura: 'taga', opciones: ['correa', 'aunque, a pesar de que', 'qué bien se sintió', 'más bien, ¿qué estás haciendo dentro de mí?'], respuesta: 0 },
+            { japones: '外れてしまった', lectura: 'hazurete shimatta', opciones: ['se soltó', 'mutuamente, el uno al otro', 'Nokogawa', 'el uniforme de siempre es sexy'], respuesta: 0 },
+            { japones: '初々しい', lectura: 'uiui shii', opciones: ['inocentes', 'con mi polla', 'partícula de duda, \', '¿no está bien?'], respuesta: 0 },
+            { japones: 'は', lectura: 'wa', opciones: ['', 'partícula que indica dirección, lugar o finalidad', 'eres incansable', 'es de mi gusto'], respuesta: 0 },
+            { japones: '何処', lectura: 'doko', opciones: ['dónde', 'ahora', 'con esto', 'pero'], respuesta: 0 },
+            { japones: 'へ', lectura: 'e', opciones: ['a', 'si vienes', 'Kyōtarō', 'poder esforzarse'], respuesta: 0 },
+            { japones: '行った', lectura: 'itta', opciones: ['fuimos', 'lo tengo', 'ahora', 'esto es lo mejor'], respuesta: 0 },
+            { japones: 'のやら', lectura: 'no yara', opciones: ['¿qué será?', '¡qué maravilla!', 'te queda bien', 'demasiado erótico'], respuesta: 0 },
+        ],
+
+        // MAZO 6
+        6: [
+            { japones: '今や', lectura: 'ima ya', opciones: ['ahora', 'desde', 'que respeto', 'prueba'], respuesta: 0 },
+            { japones: 'サル', lectura: 'saru', opciones: ['mono', 'ese día', 'ese tipo', 'no hay forma de que no me excite'], respuesta: 0 },
+            { japones: 'だ', lectura: 'da', opciones: ['es', 'este', '¡oh! ¡oh!', 'esa'], respuesta: 0 },
+            { japones: '俺', lectura: 'ore', opciones: ['yo', '¿no?', 'desde', 'inmediatamente'], respuesta: 0 },
+            { japones: '搾り取る', lectura: 'shiboritoru', opciones: ['exprimir', '¿cómo?', 'no hay forma de que no me excite', 'expulsar'], respuesta: 0 },
+            { japones: 'ために', lectura: 'tame ni', opciones: ['para', 'ver', 'nuevo', 'en serio'], respuesta: 0 },
+            { japones: '色々な', lectura: 'iroiro na', opciones: ['varios', 'qué frustración', 'traje de cosplay', 'se pone'], respuesta: 0 },
+            { japones: 'コスプレ', lectura: 'kosupure', opciones: ['cosplay', '¿no?', 'repite', 'cuerpo'], respuesta: 0 },
+            { japones: 'してくる', lectura: 'shite kuru', opciones: ['se pone', 'día', 'provocativo, erótico', 'delgado, fino'], respuesta: 0 },
+            { japones: 'キス', lectura: 'kisu', opciones: ['beso', 'tener ganas de hacerlo', 'día', 'gracias a, por culpa de'], respuesta: 0 },
+        ],
+
+        // MAZO 7
+        7: [
+            { japones: '出た', lectura: 'deta', opciones: ['salió', 'cuerpo', 'pero', 'cualquier cosa'], respuesta: 0 },
+            { japones: 'やった', lectura: 'yatta', opciones: ['¡lo logré!', 'para', '¡qué maravilla!', 'alegre, qué alegría'], respuesta: 0 },
+            { japones: '毎回', lectura: 'maikai', opciones: ['cada vez', 'es', '¿tú?', 'muy'], respuesta: 0 },
+            { japones: 'コレ', lectura: 'kore', opciones: ['esto', 'dónde', 'tanto', '¡no puede ser!'], respuesta: 0 },
+            { japones: '見る', lectura: 'miru', opciones: ['ver', 'yo', 'asquerosa', 'por ti mismo'], respuesta: 0 },
+            { japones: 'ね', lectura: 'ne', opciones: ['¿no?', '¿cómo?', '¡muy bueno!', 'día'], respuesta: 0 },
+            { japones: '京太郎', lectura: 'Kyoutarou', opciones: ['Kyōtarō', 'tal, este tipo de', 'qué pasó', 'fuimos'], respuesta: 0 },
+            { japones: '可愛い', lectura: 'kawaii', opciones: ['adorable', 'delgado, fino', 'se suponía que', '¡para!'], respuesta: 0 },
+            { japones: 'のに', lectura: 'noni', opciones: ['aunque', 'nuevo', 'y linda', 'vamos'], respuesta: 0 },
+            { japones: 'こっちは', lectura: 'kocchi wa', opciones: ['yo', 'era difícil, complicado', 'frotar vigorosamente, roce áspero', 'ese'], respuesta: 0 },
+        ],
+
+        // MAZO 8
+        8: [
+            { japones: '全然', lectura: 'zenzen', opciones: ['para nada', 'temible', 'Shirokō', 'corteza del glande'], respuesta: 0 },
+            { japones: '可愛くない', lectura: 'kawaikunai', opciones: ['no es adorable', 'adorable', 'te lo voy a satisfacer', 'pero'], respuesta: 0 },
+            { japones: 'やめろ', lectura: 'yamero', opciones: ['¡para!', '¡qué maravilla!', 'cara', 'ambos'], respuesta: 0 },
+            { japones: '慣れない', lectura: 'narenai', opciones: ['no estoy acostumbrada', 'vamos', 'qué pasó', '¿no está bien?'], respuesta: 0 },
+            { japones: 'どっちも', lectura: 'docchi mo', opciones: ['ambos', 'mutuamente, el uno al otro', 'al dependiente', 'eh... eso'], respuesta: 0 },
+            { japones: '大好き', lectura: 'daisuki', opciones: ['me encantan', 'es', 'en gran cantidad', 'Kyōtarō'], respuesta: 0 },
+            { japones: 'だけど', lectura: 'dakedo', opciones: ['pero', 'a', 'clasificación para contenido adulto', 'compra'], respuesta: 0 },
+            { japones: 'そういうことを', lectura: 'sou iu koto wo', opciones: ['esas cosas', 'se pone', 'cuando me lo dices', 'no lo conozco'], respuesta: 0 },
+            { japones: 'サラっと', lectura: 'sara tto', opciones: ['de manera casual', 'tanto', 'nosotros', 'siguiente'], respuesta: 0 },
+            { japones: 'ところで', lectura: 'tokoro de', opciones: ['por cierto', 'alrededor, entorno', 'vamos', 'cuerpo'], respuesta: 0 },
+        ],
+
+        // MAZO 9
+        9: [
+            { japones: '見て', lectura: 'mite', opciones: ['mira', 'aspecto, apariencia', 'proactivo', 'temible'], respuesta: 0 },
+            { japones: 'これ', lectura: 'kore', opciones: ['esto', '¡para!', '¿no?', 'me encantan'], respuesta: 0 },
+            { japones: 'ゴム', lectura: 'gomu', opciones: ['condón', 'lo estás preparando, ¿verdad?', 'yo', 'lo sabes, ¿no?'], respuesta: 0 },
+            { japones: '変えてみたんだ', lectura: 'kaete mitanda', opciones: ['cambié', 'de alguna manera', 'fuimos', 'compra'], respuesta: 0 },
+            { japones: '極薄だって', lectura: 'gokuhaku datte', opciones: ['es súper delgado', 'intenta ordeñarme', 'bien', 'exprimir'], respuesta: 0 },
+            { japones: '早速使おうよ', lectura: 'sassoku tsukaou yo', opciones: ['vamos a usarlo de inmediato', 'eres incansable', 'por cierto', 'no poder hablar'], respuesta: 0 },
+            { japones: '慣れないけど', lectura: 'narenai kedo', opciones: ['aunque no estoy acostumbrada', 'ese tipo', 'Kyotaro', 'exprimir'], respuesta: 0 },
+            { japones: '笑顔で', lectura: 'egao de', opciones: ['con una sonrisa', 'tal, este tipo de', 'preparaste', 'aunque es mi novia'], respuesta: 0 },
+            { japones: 'そんなこと', lectura: 'sonna koto', opciones: ['esas cosas', 'se pone', 'vamos', 'tal, este tipo de'], respuesta: 0 },
+            { japones: '言われると', lectura: 'iwareru to', opciones: ['cuando me lo dices', 'más importante, el problema de Yamada', 'de Yamada', '¡oh! ¡oh!'], respuesta: 0 },
+        ],
+
+        // MAZO 10
+        10: [
+            { japones: '興奮してしまう', lectura: 'koufun shite shimau', opciones: ['me excito', 'siguiente', 'cuando me lo dices', 'a'], respuesta: 0 },
+            { japones: 'クソ', lectura: 'kuso', opciones: ['mierda', 'prueba', 'esto', '¿quieres que lo use?'], respuesta: 0 },
+            { japones: '早速', lectura: 'sosoku', opciones: ['inmediatamente', '¿quieres que lo use?', 'delgado, fino', 'esta ropa'], respuesta: 0 },
+            { japones: '試して', lectura: 'tameshite', opciones: ['prueba', 'esta voz', 'en gran cantidad', 'sentimientos'], respuesta: 0 },
+            { japones: 'いつも', lectura: 'itsumo', opciones: ['siempre', 'erectarse', 'esta ropa', 'cosplay'], respuesta: 0 },
+            { japones: 'より', lectura: 'yori', opciones: ['más que', 'te lo voy a satisfacer', 'yo', 'alegre, qué alegría'], respuesta: 0 },
+            { japones: '形', lectura: 'katachi', opciones: ['forma', 'poder ver', 'delgado, fino', '¡no puede ser!'], respuesta: 0 },
+            { japones: 'が', lectura: 'ga', opciones: ['partícula nominativa', 'yo', 'satisfecho', 'aunque no estoy acostumbrada'], respuesta: 0 },
+            { japones: 'おっおっ', lectura: 'otto', opciones: ['¡oh! ¡oh!', 'en gran cantidad', 'es un estado de ánimo, estoy de humor', 'varios'], respuesta: 0 },
+            { japones: 'すっごい', lectura: 'suggoi', opciones: ['increíble', 'con mi polla', 'sonrisa', 'cosplay'], respuesta: 0 },
+        ],
+
+        // MAZO 11
+        11: [
+            { japones: '分かる', lectura: 'wakaru', opciones: ['percibo, entiendo', 'conocimientos eróticos', 'tú mismo', 'parece que podré esforzarme'], respuesta: 0 },
+            { japones: 'よ', lectura: 'yo', opciones: ['partícula enfática', 'para', 'tanto como sea', 'condón'], respuesta: 0 },
+            { japones: 'これぇ', lectura: 'koree', opciones: ['esto', 'destinado a adultos, para adultos', 'rozarse, frotarse', 'en serio'], respuesta: 0 },
+            { japones: '薄い', lectura: 'usui', opciones: ['delgado, fino', 'partícula que indica dirección, lugar o finalidad', 'partícula de duda, \', 'no puedes hacerlo'], respuesta: 0 },
+            { japones: '凄いっ', lectura: 'sugoi', opciones: ['¡qué maravilla!', 'sonrisa', 'lo estás preparando, ¿verdad?', 'no lo conozco'], respuesta: 0 },
+            { japones: 'カリ', lectura: 'kari', opciones: ['corteza del glande', 'tal, este tipo de', 'sin problemas, fluido', 'hoy'], respuesta: 0 },
+            { japones: '膣', lectura: 'chitsu', opciones: ['vagina', 'mierda', 'conocimientos eróticos', 'más bien, ¿qué estás haciendo dentro de mí?'], respuesta: 0 },
+            { japones: 'で', lectura: 'de', opciones: ['partícula instrumental', 'porque me lo prohíben', 'no lo has logrado, ¿no?', 'último'], respuesta: 0 },
+            { japones: 'ゴリゴリ', lectura: 'gorogoro', opciones: ['frotar vigorosamente, roce áspero', 'se pone', 'condón', 'es de mi gusto'], respuesta: 0 },
+            { japones: '擦れる', lectura: 'sureru', opciones: ['rozarse, frotarse', 'despistada', 'esto es lo mejor', 'tío'], respuesta: 0 },
+        ],
+
+        // MAZO 12
+        12: [
+            { japones: 'ストップストップ', lectura: 'sutoppu sutoppu', opciones: ['¡para, para!', 'esta ropa', '*snif snif*', 'pero'], respuesta: 0 },
+            { japones: 'こんなんじゃすぐに', lectura: 'konnan ja sugu ni', opciones: ['si sigue así, pronto...', 'No puede ser… es una mentira…', 'prohibición de visualización', 'problemas, complicaciones'], respuesta: 0 },
+            { japones: 'ちょっと', lectura: 'chotto', opciones: ['un poco', 'así es', 'sentimientos', 'no puedes hacerlo'], respuesta: 0 },
+            { japones: '天然で', lectura: 'tennen de', opciones: ['despistada', 'no poder hablar', 'tú', 'y linda'], respuesta: 0 },
+            { japones: 'カワイくて', lectura: 'kawaikute', opciones: ['y linda', 'ver', 'asquerosa', 'porque'], respuesta: 0 },
+            { japones: '尊敬する', lectura: 'sonkei suru', opciones: ['que respeto', 'esas cosas', 'destinado a adultos, para adultos', 'quiero satisfacer'], respuesta: 0 },
+            { japones: '山田が', lectura: 'Yamada ga', opciones: ['Yamada', 'gracias a, por culpa de', 'muy', 'esta voz'], respuesta: 0 },
+            { japones: '僕の', lectura: 'boku no', opciones: ['mi', 'tal, este tipo de', 'cuando lo compra', 'exprimir'], respuesta: 0 },
+            { japones: 'チンコで', lectura: 'chinko de', opciones: ['con mi polla', 'debería resolverlo', 'peligroso, grave, terrible', 'partícula que indica dirección, lugar o finalidad'], respuesta: 0 },
+            { japones: '乱れるっ', lectura: 'midareru', opciones: ['se está descontrolando', 'es', 'qué frustración', 'alegre, qué alegría'], respuesta: 0 },
+        ],
+
+        // MAZO 13
+        13: [
+            { japones: 'こんなの', lectura: 'konna no', opciones: ['esto', 'desde', 'increíble', 'intenso, fuerte'], respuesta: 0 },
+            { japones: '興奮しないわけがない', lectura: 'koufun shinai wake ga nai', opciones: ['no hay forma de que no me excite', 'de repente', '*snif snif*', 'qué bien se sintió'], respuesta: 0 },
+            { japones: 'いっぱい', lectura: 'ippai', opciones: ['mucho, muchos', 'esta ropa', 'cuerpo', 'no hay forma de que no me excite'], respuesta: 0 },
+            { japones: '新しい', lectura: 'atarashii', opciones: ['nuevo', 'partícula instrumental', 'se soltó', ''], respuesta: 0 },
+            { japones: 'お陰', lectura: 'okage', opciones: ['gracias a, por culpa de', 'levántate', 'esto', 'pero'], respuesta: 0 },
+            { japones: 'かな', lectura: 'kana', opciones: ['partícula de duda, \', '¡oh! ¡oh!', 'partícula que indica "también"', 'levántate'], respuesta: 0 },
+            { japones: '嬉しい', lectura: 'ureshii', opciones: ['alegre, qué alegría', 'va a salir, se va a producir', 'clasificación para contenido adulto', 'dónde'], respuesta: 0 },
+            { japones: 'な', lectura: 'na', opciones: ['partícula emotiva', 'lo sabes, ¿no?', 'es una mentira', 'dónde'], respuesta: 0 },
+            { japones: 'お前っ', lectura: 'omae', opciones: ['tú', 'inmediatamente', '¿Mentira, Nokogawa?', 'reí'], respuesta: 0 },
+            { japones: '搾り取られた', lectura: 'shiboritoreta', opciones: ['fui exprimido, me exprimiste', 'parece que podré esforzarme', 'cuerpo', 'repite'], respuesta: 0 },
+        ],
+
+        // MAZO 14
+        14: [
+            { japones: 'エロ過ぎ', lectura: 'ero sugi', opciones: ['demasiado erótico', 'más', 'problemas, complicaciones', 'usé todo'], respuesta: 0 },
+            { japones: 'なんだよ', lectura: 'nan da yo', opciones: ['es que, ¡qué pasa!', 'de alguna manera', 'él lo hizo', 'por ti mismo'], respuesta: 0 },
+            { japones: '濃い', lectura: 'koi', opciones: ['intenso, fuerte', 'levántate', 'tanto', 'cara'], respuesta: 0 },
+            { japones: '出ちゃう', lectura: 'dechau', opciones: ['va a salir, se va a producir', 'cállate', 'así es', '¡oh! ¡oh!'], respuesta: 0 },
+            { japones: 'だろ', lectura: 'daro', opciones: ['¿no?', 'de hoy', 'y entonces', 'hoy'], respuesta: 0 },
+            { japones: 'ねぇ', lectura: 'nee', opciones: ['oye, eh', 'esto me satisface', 'nuevo', 'nosotros'], respuesta: 0 },
+            { japones: 'もう', lectura: 'mou', opciones: ['ya, otra vez', 'en serio', 'fuerte, con intensidad', 'escuela'], respuesta: 0 },
+            { japones: '一回', lectura: 'ikkai', opciones: ['Desconocido', 'partícula que indica dirección, lugar o finalidad', 'peligroso, grave, terrible', 'esa'], respuesta: 0 },
+            { japones: 'この', lectura: 'kono', opciones: ['este', '¡uh, sí!', '¿qué será?', 'delgado, fino'], respuesta: 0 },
+            { japones: 'エロい', lectura: 'eroi', opciones: ['provocativo, erótico', '', 'el último', 'yo'], respuesta: 0 },
+        ],
+
+        // MAZO 15
+        15: [
+            { japones: '笑顔', lectura: 'egao', opciones: ['sonrisa', 'continuaba, seguía', '¡ugh!', 'percibo, entiendo'], respuesta: 0 },
+            { japones: '見られる', lectura: 'mirareru', opciones: ['poder ver', 'vaya', 'esto', 'él lo hizo'], respuesta: 0 },
+            { japones: 'だけ', lectura: 'dake', opciones: ['solo', '¡para, para!', 'va a salir, se va a producir', 'esto'], respuesta: 0 },
+            { japones: 'いくらでも', lectura: 'ikurademo', opciones: ['tanto como sea', 'cosplay', 'correa', 'en momentos como este siempre aparece Nokogawa'], respuesta: 0 },
+            { japones: '頑張れる', lectura: 'ganbareru', opciones: ['poder esforzarse', 'yo', 'porque', 'y entonces'], respuesta: 0 },
+            { japones: 'けど', lectura: 'kedo', opciones: ['pero', 'acabado', 'fui exprimido, me exprimiste', 'correa'], respuesta: 0 },
+            { japones: '本当', lectura: 'hontou', opciones: ['en serio', '¿Mentira, Nokogawa?', 'es que, ¡qué pasa!', 'ver'], respuesta: 0 },
+            { japones: 'まだ', lectura: 'mada', opciones: ['todavía', 'qué frustración', 'porque me lo prohíben', 'al dependiente'], respuesta: 0 },
+            { japones: '勃つ', lectura: 'tatsu', opciones: ['erectarse', 'lo hice', 'bien', 'adorable'], respuesta: 0 },
+            { japones: 'どうした', lectura: 'doushita', opciones: ['qué pasó', 'partícula instrumental', 'beso', 'usé todo'], respuesta: 0 },
+        ],
+
+        // MAZO 16
+        16: [
+            { japones: 'いや', lectura: 'iya', opciones: ['no', 'se convirtió en, llegó a ser', 'partícula instrumental', 'vamos'], respuesta: 0 },
+            { japones: 'なんでも', lectura: 'nandemo', opciones: ['cualquier cosa', 'quiero que lo uses', 'si sigue así, pronto...', 'no me queda otra que hacerlo'], respuesta: 0 },
+            { japones: 'そして', lectura: 'soshite', opciones: ['y entonces', 'sentimientos', 'va a salir, se va a producir', 'mucho, muchos'], respuesta: 0 },
+            { japones: '次', lectura: 'tsugi', opciones: ['siguiente', 'Kyotaro', 'siempre', 'poder ver'], respuesta: 0 },
+            { japones: '日', lectura: 'hi', opciones: ['día', 'cada vez', 'eh... eso', 'esto es lo mejor'], respuesta: 0 },
+            { japones: '学校', lectura: 'gakkou', opciones: ['escuela', '¿no?', '', 'tener ganas de hacerlo'], respuesta: 0 },
+            { japones: 'あの', lectura: 'ano', opciones: ['esa', 'levántate', '¿no?', 'eh... eso'], respuesta: 0 },
+            { japones: '俺の', lectura: 'ore no', opciones: ['mi', 'delgado, fino', 'no lo conozco', 'partícula de objeto directo'], respuesta: 0 },
+            { japones: '彼女なのに', lectura: 'kanojo nanoni', opciones: ['aunque es mi novia', 'pero', 'muchísimo, muy', '¡qué maravilla!'], respuesta: 0 },
+            { japones: '満足させてやれない', lectura: 'manzoku sasete yarenai', opciones: ['no puedo satisfacer', 'el uniforme de siempre es sexy', 'y linda', 'Nokogawa'], respuesta: 0 },
+        ],
+
+        // MAZO 17
+        17: [
+            { japones: '悔しいなんて', lectura: 'kuyashii nante', opciones: ['qué frustración', 'yo', 'más bien, ¿qué estás haciendo dentro de mí?', 'aunque'], respuesta: 0 },
+            { japones: 'なんとか', lectura: 'nantoka', opciones: ['de alguna manera', 'Yamada', 'pero', 'porque es condón'], respuesta: 0 },
+            { japones: 'なんとかするしかないな', lectura: 'nantoka suru shika nai na', opciones: ['no me queda otra que hacerlo', '¡para, para!', 'la boca', '¡Te haré eyacular!'], respuesta: 0 },
+            { japones: 'この声', lectura: 'kono koe', opciones: ['esta voz', 'delgado, fino', 'aunque, a pesar de que', 'como el tío de la inseminación'], respuesta: 0 },
+            { japones: 'まさか', lectura: 'masaka', opciones: ['¡no puede ser!', 'de repente', 'como el tío de la inseminación', 'se pone'], respuesta: 0 },
+            { japones: 'あいつこんな時に', lectura: 'aitsu konna toki ni', opciones: ['él en un momento como este', '¡ugh!', '¡uh, sí!', 'la boca'], respuesta: 0 },
+            { japones: '濁川', lectura: 'nokogawa', opciones: ['Nokogawa', 'quiero que lo uses', 'hoy', 'ese día'], respuesta: 0 },
+            { japones: '白濁川だ', lectura: 'shirokōgawa da', opciones: ['es Shirakogawa', 'él lo hizo', 'era difícil, complicado', 'esto'], respuesta: 0 },
+            { japones: '白濁', lectura: 'shirokō', opciones: ['Shirokō', 'muy', 'No puede ser… es una mentira…', '¡oh! ¡oh!'], respuesta: 0 },
+            { japones: 'お前は', lectura: 'omae wa', opciones: ['¿tú?', 'tú', 'se está descontrolando', 'No puede ser… es una mentira…'], respuesta: 0 },
+        ],
+
+        // MAZO 18
+        18: [
+            { japones: '誰だっ', lectura: 'dare da', opciones: ['¿Quién eres?', 'hoy', 'quiero que lo uses', 'reí'], respuesta: 0 },
+            { japones: '分かるだろ', lectura: 'wakaru daro', opciones: ['lo sabes, ¿no?', 'mucho, muchos', 'sin problemas, fluido', 'de hoy'], respuesta: 0 },
+            { japones: 'お前のイマジナリーフレンド種付けおじさんだ', lectura: 'omae no imaginarī furendo tane tsuke ojisan da', opciones: ['soy el tío que fertiliza a tu amigo imaginario', 'partícula que indica "también"', 'sin contratiempos, seguro', ''], respuesta: 0 },
+            { japones: 'おじ', lectura: 'oji', opciones: ['tío', 'tener ganas de hacerlo', 'así es', 'último'], respuesta: 0 },
+            { japones: '知らないよ', lectura: 'shiranai yo', opciones: ['no lo conozco', 'solo', 'al final', 'es un estado de ánimo, estoy de humor'], respuesta: 0 },
+            { japones: 'こういう時に出てくるのは濁川だって決まって', lectura: 'kou iu toki ni dete kuru no wa nokogawa datte kimatte', opciones: ['en momentos como este siempre aparece Nokogawa', '¡tócala!', 'más importante, el problema de Yamada', 'acabado'], respuesta: 0 },
+            { japones: 'あいつはヤッた', lectura: 'aitsu wa yatta', opciones: ['él lo hizo', 'sin contratiempos, seguro', 'cualquier cosa', 'qué bien se sintió'], respuesta: 0 },
+            { japones: 'ヤッ', lectura: 'ya', opciones: ['¡Lo hice!', 'sin parar', 'nuevo', 'soy el tío que fertiliza a tu amigo imaginario'], respuesta: 0 },
+            { japones: '嘘だろ濁川', lectura: 'uso daro nokogawa', opciones: ['¿Mentira, Nokogawa?', 'levántate', 'no lo conozco', '¡no puede ser!'], respuesta: 0 },
+            { japones: 'というか俺の中で何してるんだよ', lectura: 'to iu ka ore no naka de nani shiteru n da yo', opciones: ['más bien, ¿qué estás haciendo dentro de mí?', 'vaya', 'tener ganas de hacerlo', '¡lo logré!'], respuesta: 0 },
+        ],
+
+        // MAZO 19
+        19: [
+            { japones: 'そんなことより山田の悩み', lectura: 'sonna koto yori Yamada no nayami', opciones: ['más importante, el problema de Yamada', 'se suponía que', 'tío', 'qué bien se sintió'], respuesta: 0 },
+            { japones: '解決してやればいいんだ', lectura: 'kaiketsu shite yareba ii n da', opciones: ['debería resolverlo', '¡para!', 'partícula que indica dirección, lugar o finalidad', 'pero'], respuesta: 0 },
+            { japones: 'あ…その', lectura: 'a... sono', opciones: ['eh... eso', 'condón', 'aunque no estoy acostumbrada', 'ahora'], respuesta: 0 },
+            { japones: 'どうやって', lectura: 'dou yatte', opciones: ['¿cómo?', 'no puedes hacerlo', 'esas cosas', '¿qué será?'], respuesta: 0 },
+            { japones: 'お前自身', lectura: 'omae jishin', opciones: ['tú mismo', 'temible', '¿no?', 'parece que podré esforzarme'], respuesta: 0 },
+            { japones: '満足', lectura: 'manzoku', opciones: ['satisfecho', 'mi', 'ese', 'esas cosas'], respuesta: 0 },
+            { japones: '出来てないんだろ', lectura: 'dekite nain daro', opciones: ['no lo has logrado, ¿no?', 'Yamada', 'después, luego', 'Nokogawa'], respuesta: 0 },
+            { japones: '絶倫だ', lectura: 'zetsurin da', opciones: ['eres incansable', 'confesar, expresar', 'partícula que indica "también"', 'él lo hizo'], respuesta: 0 },
+            { japones: 'もん', lectura: 'mon', opciones: ['porque', 'el uniforme escolar de siempre', 'vamos a usarlo de inmediato', 'Shirokō'], respuesta: 0 },
+            { japones: 'お前', lectura: 'omae', opciones: ['tú', 'el uniforme escolar de siempre', 'esas cosas', 'la boca'], respuesta: 0 },
+        ],
+
+        // MAZO 20
+        20: [
+            { japones: 'しか', lectura: 'shika', opciones: ['solo', 'Kyōtarō', 'el hecho de', 'tío'], respuesta: 0 },
+            { japones: '出来ないんだ', lectura: 'dekinain da', opciones: ['no puedes hacerlo', 'frotar vigorosamente, roce áspero', 'vagina', 'que respeto'], respuesta: 0 },
+            { japones: 'さぁ', lectura: 'saa', opciones: ['vamos', '¡qué maravilla!', 'aunque, a pesar de que', 'se convirtió en, llegó a ser'], respuesta: 0 },
+            { japones: '勃ち上がれ', lectura: 'bouchi agare', opciones: ['levántate', 'erótico', 'oye', 'partícula emotiva'], respuesta: 0 },
+            { japones: '満たしてやるんだ', lectura: 'mitashite yaru n da', opciones: ['te lo voy a satisfacer', 'se está descontrolando', 'es súper delgado', 'cuando me lo dices'], respuesta: 0 },
+            { japones: '種付けおじさんとして', lectura: 'tanetsuke ojisan toshite', opciones: ['como el tío de la inseminación', 'compra', 'increíble', 'sin contratiempos, seguro'], respuesta: 0 },
+            { japones: '全て', lectura: 'subete', opciones: ['todo', 'con mi polla', 'un poco', 'es un estado de ánimo, estoy de humor'], respuesta: 0 },
+            { japones: '伝授してやる', lectura: 'denju shite yaru', opciones: ['te enseñaré', 'dónde', 'esto', 'salió'], respuesta: 0 },
+            { japones: 'エロ知識', lectura: 'ero chishiki', opciones: ['conocimientos eróticos', 'increíble', '¿Qué tal?', 'ahora'], respuesta: 0 },
+            { japones: 'きょっ京太郎', lectura: 'kyottoKyōtarō', opciones: ['¡Kyōtarō...!', 'destinado a adultos, para adultos', 'muchísimo, muy', 'aunque'], respuesta: 0 },
+        ],
+
+        // MAZO 21
+        21: [
+            { japones: 'なんか', lectura: 'nanka', opciones: ['vaya', 'pero', 'fuerte, con intensidad', 'solo'], respuesta: 0 },
+            { japones: '今日は', lectura: 'kyō wa', opciones: ['hoy', 'frotar vigorosamente, roce áspero', 'Kyōtarō', 'clasificación para contenido adulto'], respuesta: 0 },
+            { japones: '積極的', lectura: 'sekkyokuteki', opciones: ['proactivo', '¡esto, esto!', 'esta voz', 'provocativo, erótico'], respuesta: 0 },
+            { japones: 'ゴムも', lectura: 'gomu mo', opciones: ['condón', '¡para, para!', 'muy', 'mucho, muchos'], respuesta: 0 },
+            { japones: '自分から', lectura: 'jibun kara', opciones: ['por ti mismo', 'no lo entiendo', 'yo', 'condón'], respuesta: 0 },
+            { japones: '用意して', lectura: 'yōi shite', opciones: ['preparaste', 'continuaba, seguía', 'nuevo', 'oye, eh'], respuesta: 0 },
+            { japones: '購入すると', lectura: 'kōnyū suru to', opciones: ['cuando lo compra', 'peligroso, grave, terrible', 'Kyotaro', 'ya, otra vez'], respuesta: 0 },
+            { japones: '店員さんに', lectura: 'ten'in-san ni', opciones: ['al dependiente', 'fuimos', 'adorable', '¡tócala!'], respuesta: 0 },
+            { japones: '止められるから', lectura: 'tomerareru kara', opciones: ['porque me lo prohíben', '¡Porque estoy llegando!', 'peligroso, grave, terrible', 'salió'], respuesta: 0 },
+            { japones: '私が', lectura: 'watashi ga', opciones: ['yo', 'adorable', 'Kyōtarō', 'eres incansable'], respuesta: 0 },
+        ],
+
+        // MAZO 22
+        22: [
+            { japones: 'うるさい', lectura: 'urusai', opciones: ['cállate', 'aunque', 'condón', 'te lo voy a satisfacer'], respuesta: 0 },
+            { japones: '減らず', lectura: 'herazu', opciones: ['sin parar', 'te lo voy a satisfacer', 'esa', 'tanto como sea'], respuesta: 0 },
+            { japones: '口を', lectura: 'kuchi o', opciones: ['la boca', '¡para, para!', 'te queda bien', 'esto me satisface'], respuesta: 0 },
+            { japones: '言えない', lectura: 'ienai', opciones: ['no poder hablar', 'él lo hizo', '¡Lo hice!', 'Kyōtarō'], respuesta: 0 },
+            { japones: 'くらい', lectura: 'kurai', opciones: ['tanto', 'No puede ser… es una mentira…', 'siempre', 'esto'], respuesta: 0 },
+            { japones: '俺が', lectura: 'ore ga', opciones: ['yo', 'tal, este tipo de', 'no', 'relación'], respuesta: 0 },
+            { japones: 'イカせまくってやる', lectura: 'ikase makutte yaru', opciones: ['¡Te haré eyacular!', 'proactivo', '¿quieres que lo use?', 'inocentes'], respuesta: 0 },
+            { japones: 'すごい', lectura: 'sugoi', opciones: ['increíble', 'mucho, muchos', 'para nada', 'partícula filler'], respuesta: 0 },
+            { japones: '気持ちよかった', lectura: 'kimochi yokatta', opciones: ['qué bien se sintió', 'lo tengo', 'mi', 'cambié'], respuesta: 0 },
+            { japones: 'ねっねぇ', lectura: 'ne nee', opciones: ['oye', 'se convirtió en, llegó a ser', 'vamos', 'correa'], respuesta: 0 },
+        ],
+
+        // MAZO 23
+        23: [
+            { japones: '今の', lectura: 'ima no', opciones: ['ahora', 'es una mentira', 'es Shirakogawa', 'y entonces'], respuesta: 0 },
+            { japones: 'またして', lectura: 'mata shite', opciones: ['repite', 'cara', 'siempre', 'clasificación para contenido adulto'], respuesta: 0 },
+            { japones: 'イッてるからッ', lectura: 'itte ru kara', opciones: ['¡Porque estoy llegando!', 'condón', 'cada vez', 'sin contratiempos, seguro'], respuesta: 0 },
+            { japones: '凄く', lectura: 'sugoku', opciones: ['muchísimo, muy', '¡para!', 'beso', 'es que, ¡qué pasa!'], respuesta: 0 },
+            { japones: 'ヤリたい', lectura: 'yaritai', opciones: ['tener ganas de hacerlo', 'con esto', 'no se detiene', 'como el tío de la inseminación'], respuesta: 0 },
+            { japones: '気分なんだ', lectura: 'kibun nan da', opciones: ['es un estado de ánimo, estoy de humor', 'no puedes hacerlo', 'no puedo satisfacer', 'frotar vigorosamente, roce áspero'], respuesta: 0 },
+            { japones: 'っついでに', lectura: 'tsuide ni', opciones: ['además, de paso', 'problemas, complicaciones', 'muy', 'ya, otra vez'], respuesta: 0 },
+            { japones: '満足させたい', lectura: 'manzoku sasetai', opciones: ['quiero satisfacer', 'siempre', '¡Kyōtarō...!', 'doujin'], respuesta: 0 },
+            { japones: 'そっそうなの', lectura: 'sosso nano', opciones: ['¿En serio?', 'se convirtió en, llegó a ser', 'demasiado erótico', 'eh... eso'], respuesta: 0 },
+            { japones: 'いきなり', lectura: 'ikinari', opciones: ['de repente', 'pero', '¡lo logré!', 'aunque'], respuesta: 0 },
+        ],
+
+        // MAZO 24
+        24: [
+            { japones: 'そうなんだッ', lectura: 'sou nan da', opciones: ['así es', 'pero', '¡para, para!', '¡ugh!'], respuesta: 0 },
+            { japones: '今日の', lectura: 'kyou no', opciones: ['de hoy', 'poder ver', 'qué bien se sintió', 'muy'], respuesta: 0 },
+            { japones: 'さ', lectura: 'sa', opciones: ['partícula filler', 'condón', 'cuerpo', 'intenta ordeñarme'], respuesta: 0 },
+            { japones: 'コス衣装', lectura: 'kosu ishō', opciones: ['traje de cosplay', 'tanto', 'me excito', 'solo'], respuesta: 0 },
+            { japones: 'とか', lectura: 'toka', opciones: ['etc., y cosas por el estilo', 'aunque es mi novia', 'rozarse, frotarse', 'es Shirakogawa'], respuesta: 0 },
+            { japones: '用意してるんだろ', lectura: 'youi shiterun daro', opciones: ['lo estás preparando, ¿verdad?', 'pero', 'lo sabes, ¿no?', 'tener ganas de hacerlo'], respuesta: 0 },
+            { japones: '着て欲しい', lectura: 'kite hoshii', opciones: ['quiero que lo uses', '¡ugh!', 'así es', 'él lo hizo'], respuesta: 0 },
+            { japones: '今', lectura: 'ima', opciones: ['ahora', 'partícula instrumental', 'delgado, fino', 'satisfecho'], respuesta: 0 },
+            { japones: '着て欲しいの', lectura: 'kite hoshii no', opciones: ['¿quieres que lo use?', 'cada vez', '¡para, para!', 'esas cosas'], respuesta: 0 },
+            { japones: '来てくれたら', lectura: 'kite kuretara', opciones: ['si vienes', 'por cierto', 'tú mismo', '¿cómo?'], respuesta: 0 },
+        ],
+
+        // MAZO 25
+        25: [
+            { japones: 'もっと', lectura: 'motto', opciones: ['más', 'no puedo satisfacer', 'por cierto', 'inmediatamente'], respuesta: 0 },
+            { japones: '頑張れそう', lectura: 'ganbare sou', opciones: ['parece que podré esforzarme', '¡Lo hice!', 'poder ver', 'partícula enfática'], respuesta: 0 },
+            { japones: 'なんだけど', lectura: 'nan da kedo', opciones: ['pero', 'en gran cantidad', 'ver', 'desde'], respuesta: 0 },
+            { japones: 'えっうん', lectura: 'e un', opciones: ['eh, sí', 'pero', 'en momentos como este siempre aparece Nokogawa', '¡tócala!'], respuesta: 0 },
+            { japones: 'あるよ', lectura: 'aru yo', opciones: ['lo tengo', 'en momentos como este siempre aparece Nokogawa', '¡Porque estoy llegando!', 'escuela'], respuesta: 0 },
+            { japones: 'うっうん！', lectura: 'u un!', opciones: ['¡uh, sí!', 'además, de paso', 'nosotros', 'ambos'], respuesta: 0 },
+            { japones: 'どうかな', lectura: 'dou kana', opciones: ['¿Qué tal?', 'alrededor, entorno', 'inmediatamente', 'muy'], respuesta: 0 },
+            { japones: 'とても', lectura: 'totemo', opciones: ['muy', 'yo', 'solo', 'traje de cosplay'], respuesta: 0 },
+            { japones: '似合ってる', lectura: 'niatteru', opciones: ['te queda bien', 'es Shirakogawa', '¡oh! ¡oh!', 'demasiado erótico'], respuesta: 0 },
+            { japones: 'その', lectura: 'sono', opciones: ['ese', 'relación', 'sentimientos', 'tanto como sea'], respuesta: 0 },
+        ],
+
+        // MAZO 26
+        26: [
+            { japones: '顔', lectura: 'kao', opciones: ['cara', 'mi', 'si vienes', 'último'], respuesta: 0 },
+            { japones: 'このっこのっ', lectura: 'kono kko no', opciones: ['¡esto, esto!', 'partícula de objeto directo', 'y linda', '¿no?'], respuesta: 0 },
+            { japones: '恰好', lectura: 'kakkou', opciones: ['aspecto, apariencia', 'temible', 'no es adorable', 'ese día'], respuesta: 0 },
+            { japones: 'エッチ', lectura: 'ecchi', opciones: ['erótico', 'aunque es mi novia', 'partícula emotiva', 'todavía'], respuesta: 0 },
+            { japones: 'いいよっ', lectura: 'ii yo', opciones: ['¡muy bueno!', 'está libre', 'él lo hizo', 'se está descontrolando'], respuesta: 0 },
+            { japones: 'さわっ', lectura: 'sawa', opciones: ['¡tócala!', 'escuela', 'para nada', 'tanto'], respuesta: 0 },
+            { japones: 'ムキッ', lectura: 'muki', opciones: ['fuerte, con intensidad', 'conocimientos eróticos', 'parece que podré esforzarme', 'me excito'], respuesta: 0 },
+            { japones: 'ヘコヘコ', lectura: 'heko heko', opciones: ['*snif snif*', '¿no?', 'un poco', 'no lo has logrado, ¿no?'], respuesta: 0 },
+            { japones: '最後の', lectura: 'saigo no', opciones: ['último', 'si vienes', 'al dependiente', 'relación'], respuesta: 0 },
+            { japones: 'ゴムだから', lectura: 'gomu dakara', opciones: ['porque es condón', 'no lo entiendo', 'este', 'frotar vigorosamente, roce áspero'], respuesta: 0 },
+        ],
+
+        // MAZO 27
+        27: [
+            { japones: '最後は', lectura: 'saigo wa', opciones: ['el último', 'en gran cantidad', 'era difícil, complicado', 'tanto'], respuesta: 0 },
+            { japones: 'いつもの学生服', lectura: 'itsumo no gakuseifuku', opciones: ['el uniforme escolar de siempre', 'quiero que lo uses', 'corteza del glande', 'muy'], respuesta: 0 },
+            { japones: 'いつもの制服がエロい', lectura: 'itsumo no seifuku ga eroi', opciones: ['el uniforme de siempre es sexy', 'doujin', 'el uniforme escolar de siempre', '¿En serio?'], respuesta: 0 },
+            { japones: 'これが一番だ', lectura: 'kore ga ichiban da', opciones: ['esto es lo mejor', 'cuando me lo dices', 'de hoy', 'lo tengo'], respuesta: 0 },
+            { japones: '京太郎っ', lectura: 'Kyotaro', opciones: ['Kyotaro', 'sin contratiempos, seguro', 'es un estado de ánimo, estoy de humor', 'ahora'], respuesta: 0 },
+            { japones: 'こんなの満足しちゃうっ', lectura: 'konna no manzoku shichau', opciones: ['esto me satisface', 'rozarse, frotarse', 'ese', '¿En serio?'], respuesta: 0 },
+            { japones: '最後', lectura: 'saigo', opciones: ['último', 'yo', 'esto', 'delgado, fino'], respuesta: 0 },
+            { japones: 'だって', lectura: 'datte', opciones: ['aunque, a pesar de que', 'forma', 'para nada', '¿no está bien?'], respuesta: 0 },
+            { japones: '射精', lectura: 'shasei', opciones: ['eyaculación', 'aunque es mi novia', 'partícula enfática', 'de repente'], respuesta: 0 },
+            { japones: '止まらない', lectura: 'tomaranai', opciones: ['no se detiene', 'beso', '¡qué maravilla!', 'Yamada'], respuesta: 0 },
+        ],
+
+        // MAZO 28
+        28: [
+            { japones: '搾り取ろうと', lectura: 'shiboritorou to', opciones: ['intenta ordeñarme', 'vaya', 'cara', 'eyaculación'], respuesta: 0 },
+            { japones: '使い切った', lectura: 'tsukaikitta', opciones: ['usé todo', 'cualquier cosa', 'tú', 'cuando lo compra'], respuesta: 0 },
+            { japones: 'あれだけ', lectura: 'are dake', opciones: ['tanto', 'desde', 'condón', 'conocimientos eróticos'], respuesta: 0 },
+            { japones: '出して', lectura: 'dashite', opciones: ['expulsar', 'mutuamente, el uno al otro', 'dónde', 'cuando me lo dices'], respuesta: 0 },
+            { japones: '最後に', lectura: 'saigo ni', opciones: ['al final', 'por ti mismo', 'no lo entiendo', 'tú'], respuesta: 0 },
+            { japones: '大量に', lectura: 'tairyou ni', opciones: ['en gran cantidad', 'increíble', 'esto', 'alegre, qué alegría'], respuesta: 0 },
+            { japones: '恐るべし', lectura: 'osorubeshi', opciones: ['temible', 'pero', 'aspecto, apariencia', '¡Porque estoy llegando!'], respuesta: 0 },
+            { japones: '山田の', lectura: 'Yamada no', opciones: ['de Yamada', 'percibo, entiendo', 'condón', '¡uh, sí!'], respuesta: 0 },
+            { japones: 'これで', lectura: 'kore de', opciones: ['con esto', 'te enseñaré', 'existía, había', 'partícula que indica "también"'], respuesta: 0 },
+            { japones: '嘘だろ', lectura: 'uso daro', opciones: ['No puede ser… es una mentira…', 'cara', 'compra', 'preparaste'], respuesta: 0 },
+        ],
+
+        // MAZO 29
+        29: [
+            { japones: '嘘だ', lectura: 'uso da', opciones: ['es una mentira', 'siguiente', 'ahora', 'inocentes'], respuesta: 0 },
+            { japones: '休みだって', lectura: 'yasumi datte', opciones: ['está libre', 'aunque, a pesar de que', 'no estoy acostumbrada', '¿no?'], respuesta: 0 },
+            { japones: '気持ち悪い', lectura: 'kimochi warui', opciones: ['asquerosa', 'último', 'esto', 'todo'], respuesta: 0 },
+            { japones: '笑いした', lectura: 'warai shita', opciones: ['reí', '', 'confesar, expresar', 'no es adorable'], respuesta: 0 },
+            { japones: 'と思ったら', lectura: 'to omottara', opciones: ['pensé que', 'es que, ¡qué pasa!', 'Yamada', 'inmediatamente'], respuesta: 0 },
+            { japones: 'これか', lectura: 'kore ka', opciones: ['esto?', 'siguiente', 'condón', 'acabado'], respuesta: 0 },
+            { japones: 'よく', lectura: 'yoku', opciones: ['bien', 'eres incansable', 'si sigue así, pronto...', 'me encantan'], respuesta: 0 },
+            { japones: 'わかんねー', lectura: 'wakannē', opciones: ['no lo entiendo', 'último', 'despistada', 'intenso, fuerte'], respuesta: 0 },
+            { japones: 'あいつ', lectura: 'aitsu', opciones: ['ese tipo', 'correa', 'etc., y cosas por el estilo', 'asquerosa'], respuesta: 0 },
+            { japones: 'おしまい', lectura: 'oshimai', opciones: ['acabado', 'erótico', 'exprimir', 'te enseñaré'], respuesta: 0 },
+        ],
+
+    },
+
     // ================================================
     // CONTENEDOR 8 (sub8_1 a sub8_5)
     // ================================================
