@@ -2263,6 +2263,12 @@ const sistemaDescriptivo = {
                 descripcion: 'Putonas', 
                 duracion: '' 
             },
+            '7_6': { 
+                nombre: 'Yamada putarda',
+                imagen: 'https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/img_1775423168022.jpg', 
+                descripcion: '', 
+                nivel: '' 
+            },
              '7_6': { 
                 nombre: 'Me Kacho a uzaki',
                 imagen: 'https://raw.githubusercontent.com/SORFAR123123/Putas-de-fabri/main/imagenes/img_1772906147340.jpg', 
