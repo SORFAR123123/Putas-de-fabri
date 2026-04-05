@@ -2709,7 +2709,7 @@ const vocabularioDatabase = {
             { japones: '購入', lectura: 'kounyuu', opciones: ['compra', 'parece que podré esforzarme', 'delgado, fino', 'yo'], respuesta: 0 },
             { japones: '閲覧禁止', lectura: 'etsuran kinshi', opciones: ['prohibición de visualización', '¡Lo hice!', 'esas cosas', 'esto'], respuesta: 0 },
             { japones: 'この服', lectura: 'kono fuku', opciones: ['esta ropa', 'de Yamada', 'gracias a, por culpa de', 'forma'], respuesta: 0 },
-            { japones: 'いいんじゃないかな', lectura: 'ii n ja nai kana', opciones: ['¿no está bien?', 'no lo conozco', 'partícula de duda, \', 'no lo entiendo'], respuesta: 0 },
+            { japones: 'いいんじゃないかな', lectura: 'ii n ja nai kana', opciones: ['¿no está bien?', 'no lo conozco', 'partícula de duda, ', 'no lo entiendo'], respuesta: 0 },
             { japones: '好みってことだね', lectura: 'konomi tte koto da ne', opciones: ['es de mi gusto', 'confesar, expresar', 'el uniforme de siempre es sexy', 'compra'], respuesta: 0 },
             { japones: 'うっおお', lectura: 'uoo', opciones: ['¡ugh!', '¿Qué tal?', 'dónde', '¿quieres que lo use?'], respuesta: 0 },
             { japones: '山田お前', lectura: 'Yamada omae', opciones: ['Yamada, tú', 'partícula que indica dirección, lugar o finalidad', 'no poder hablar', 'tú'], respuesta: 0 },
