@@ -432,6 +432,12 @@ const sistemaDescriptivo = {
                 descripcion: '123', 
                 nivel: '' 
             },
+            '9_8': { 
+                nombre: '123',
+                imagen: 'https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/img_1775401786340.jpg', 
+                descripcion: '123', 
+                nivel: '' 
+            },
             
             // Contenedor 10
             '10_1': { 
