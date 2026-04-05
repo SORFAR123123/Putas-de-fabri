@@ -891,6 +891,40 @@ const mangaDatabase = {
         paginasUrls: []
     },
 
+    // Sub-contenedor 7.6
+    '7_6': {
+        titulo: "Yamada putarda",
+        descripcion: "",
+        paginas: 23,
+        año: 2024,
+        autor: "Desconocido",
+        paginasUrls: [
+            "https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/img_1775423168022.jpg", // Página 1
+            "https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/img_1775423169995.jpg", // Página 2
+            "https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/img_1775423172146.jpg", // Página 3
+            "https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/img_1775423174418.jpg", // Página 4
+            "https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/img_1775423176631.jpg", // Página 5
+            "https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/img_1775423178868.jpg", // Página 6
+            "https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/img_1775423181241.jpg", // Página 7
+            "https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/img_1775423183619.jpg", // Página 8
+            "https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/img_1775423185812.jpg", // Página 9
+            "https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/img_1775423188168.jpg", // Página 10
+            "https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/img_1775423190446.jpg", // Página 11
+            "https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/img_1775423192752.jpg", // Página 12
+            "https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/img_1775423195087.jpg", // Página 13
+            "https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/img_1775423197371.jpg", // Página 14
+            "https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/img_1775423199757.jpg", // Página 15
+            "https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/img_1775423202169.jpg", // Página 16
+            "https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/img_1775423204461.jpg", // Página 17
+            "https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/img_1775423206669.jpg", // Página 18
+            "https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/img_1775423208892.jpg", // Página 19
+            "https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/img_1775423211235.jpg", // Página 20
+            "https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/img_1775423213590.jpg", // Página 21
+            "https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/img_1775423215933.jpg", // Página 22
+            "https://raw.githubusercontent.com/SORFAR123123/WAIFUAJUssola/main/imagenes/img_1775423218209.jpg" // Página 23
+        ]
+    },
+
     // ================================================
     // CONTENEDOR 8 (vacío completo hasta 8_5)
     // ================================================
