@@ -190,6 +190,102 @@ const REACCIONES_POST_LLAMADA = {
 };
 
 // ============================================================
+//  FOTOS/SELFIES — las chicas envían "fotos" durante la conversación
+// ============================================================
+
+const FOTOS_SELFIES = {
+    Ichika: [
+        { url: "", descripcion: "*te envía una foto* 📸 *Aparece Ichika recostada en su cama, con el cabello suelto y una sonrisa sugerente. Lleva un vestido ligero que deja ver sus hombros. La luz del atardecer la ilumina desde la ventana* 💕", emoji: "📷", estilo: "seductora" },
+        { url: "", descripcion: "*selfie de Ichika* 🤳 *Primer plano de su rostro, con los labios ligeramente entreabiertos y una mirada intensa. Se nota que está en un café, con una taza al lado. Te guiña un ojo en la foto* ✨", emoji: "☕", estilo: "íntima" },
+        { url: "", descripcion: "*te manda una foto despreocupada* 📸 *Ichika en su habitación, con una camiseta amplia que le queda grande. Está sentada en el piso rodeada de libros, pero la foto está enfocada en su sonrisa cálida* 💫", emoji: "📚", estilo: "casual" },
+    ],
+    Nino: [
+        { url: "", descripcion: "*te envía una selfie* 🤳 *Nino con un moño en el cabello, haciendo un pout coqueto. Se nota que está en su habitación con su pijama de flores. Sus ojos te miran con intensidad desafiante* 💢", emoji: "🎀", estilo: "tsundere" },
+        { url: "", descripcion: "*foto de Nino* 📸 *Está en el parque, con el viento moviéndole el cabello. Lleva un vestido ajustado y te mira con una expresión que dice '¿qué miras?' pero se sonroja* 🌸", emoji: "🌺", estilo: "provocativa" },
+        { url: "", descripcion: "*selfie rápida* 🤳 *Nino tapándose la boca con la mano, sorprendida de que le tomaron la foto. Se sonroja pero te mira con ojos cariñosos. Lleva un suéter oversize adorable* 💕", emoji: "😳", estilo: "tierna" },
+    ],
+    Miku: [
+        { url: "", descripcion: "*te envía una foto tímida* 📸 *Miku con sus auriculares puestos, mirando hacia abajo con timidez. Lleva una bufanda que le cubre medio rostro, pero sus ojos te miran con ternura. El fondo es su habitación* 🎵", emoji: "🎧", estilo: "tímida" },
+        { url: "", descripcion: "*foto casual de Miku* 📷 *Está en la biblioteca, escondida detrás de un libro de historia. Solo se ven sus ojos mirando por encima del libro, pero te está observando con curiosidad* 📖", emoji: "📚", estilo: "intelectual" },
+        { url: "", descripcion: "*selfie sorpresa* 🤳 *Miku con un lazo en el cabello, sonriendo muy levemente. Está en un jardín y las flores del fondo contrastan con su expresión serena pero cálida* 🌺", emoji: "🌸", estilo: "serena" },
+    ],
+    Yotsuba: [
+        { url: "", descripcion: "*te envía una foto súper animada* 📸 *Yotsuba saltando en el aire con una sonrisa enorme. Lleva ropa deportiva y está al aire libre. Se nota la energía y alegría que tiene* 💨✨", emoji: "🏃‍♀️", estilo: "energética" },
+        { url: "", descripcion: "*selfie grupal pero te la manda a ti* 🤳 *Yotsuba haciendo una cara graciosa, con los ojos bien abiertos y la lengua afuera. Está en su habitación y se nota que está jugando* 😜", emoji: "🎮", estilo: "divertida" },
+        { url: "", descripcion: "*foto sorpresa* 📸 *Yotsuba con un traje de baño, en una piscina. Te hace un gesto de 'ven aquí' con la mano. Su sonrisa es brillante y llena de vida* 🏊‍♀️💦", emoji: "👙", estilo: "atrevida" },
+    ],
+    Itsuki: [
+        { url: "", descripcion: "*te envía una foto seria* 📸 *Itsuki con uniforme escolar, sentada en su escritorio estudiando. Pero te mira de reojo con una expresión que dice 'estoy aburrida, háblame'. Un libro abierto al lado* 📝", emoji: "📖", estilo: "estudiosa" },
+        { url: "", descripcion: "*foto casual* 📷 *Itsuki en la cocina, con un delantal y sosteniendo una cuchara. Te mira con una expresión seria pero sus ojos delatan que quiere compañía. Está cocinando algo* 🍳", emoji: "👩‍🍳", estilo: "doméstica" },
+        { url: "", descripcion: "*selfie discreta* 🤳 *Itsuki con una sonrisa muy leve, casi imperceptible. Está en un parque al atardecer, y la luz dorada ilumina su rostro. Se nota que está tranquila pero piensa en ti* 🌅", emoji: "🌇", estilo: "tranquila" },
+    ],
+};
+
+// ============================================================
+//  RECUERDOS ÍNTIMOS — referencias a momentos compartidos
+// ============================================================
+
+const RECUERDOS_INTIMOS = {
+    Ichika: [
+        "*sonríe con nostalgia* ¿Te acuerdas de la última vez que hablamos así? *pausa cargada* Me encantó cómo me escuchaste... fue tan íntimo~ 💕",
+        "*voz suave y melancólica* Sabes... todavía me acuerdo de cuando te reíste conmigo aquella vez. *se ríe suavemente* Guardé ese momento en mi corazón~",
+        "*te mira a los ojos a través del teléfono* ¿Recuerdas cuando casi nos pillan hablando? *se muerde el labio* Fue emocionante... y un poco travieso~",
+    ],
+    Nino: [
+        "*resopla con cariño* ¿Te acuerdas de cuando te regañé la última vez? *pausa, voz más suave* ...En realidad solo quería tu atención. *se sonroja*",
+        "*voz algo tímida* Todavía me acuerdo de cuando te preocupaste por mí aquella vez... *murmura* No lo olvidé, ¿sabes? Me importaste mucho.",
+        "*te mira con ojos intensos* ¿Recuerdas cuando casi nos bes... *se calla de repente* ¡O-olvídalo! *se sonroja furiosamente* ¡No dije nada!",
+    ],
+    Miku: [
+        "*...sonríe levemente* ¿Te acuerdas de cuando compartimos ese momento en silencio? *pausa* ...Fue tan lindo. *voz íntima* Lo guardé en mi memoria.",
+        "*voz tranquila pero cercana* Todavía me acuerdo de tu voz aquella vez... *pausa larga* ...La escucho en mi cabeza cuando estoy sola. *susurra* Es reconfortante.",
+        "*...te mira con ojos serenos* ¿Recuerdas cuando casi nos tomamos de la mano? *baja la mirada* ...Yo quería. *murmura* Todavía quiero...",
+    ],
+    Yotsuba: [
+        "*se ríe con emoción* ¡¿Te acuerdas de la última vez que jugamos juntos?! *ojos brillantes* ¡¡Fue tan divertido!! ¡¡Quiero más momentos así contigo!!",
+        "*voz súper cariñosa* ¡¡Todavía me acuerdo de cuando me hiciste reír tanto!! *se abraza a sí misma* ¡¡Ese momento fue el mejor!! ¡¡Quiero crear más recuerdos contigo!!",
+        "*te mira con ojos brillantes* ¿Recuerdas cuando casi nos caemos juntos? *se ríe a carcajadas* ¡¡Fue tan divertido!! ¡¡Y me agarraste de la mano!! ¡¡Eso me encantó!!",
+    ],
+    Itsuki: [
+        "*suspira con calma* ¿Te acuerdas de cuando estudiamos juntos la última vez? *pausa, voz más suave* ...Me gusta cuando estamos así, tranquilos. *te mira con ojos sinceros*",
+        "*voz seria pero cálida* Todavía me acuerdo de cuando me ayudaste aquella vez... *pausa* ...No lo olvidé. *murmura* Significó mucho para mí.",
+        "*te mira con expresión tranquila* ¿Recuerdas cuando compartimos ese momento bajo las estrellas? *suspira* ...Fue especial. *voz baja* Quiero más momentos así.",
+    ],
+};
+
+// ============================================================
+//  PROMESAS COQUETAS — promesas sugestivas al final de llamadas
+// ============================================================
+
+const PROMESAS_COQUETAS = {
+    Ichika: [
+        "*voz susurrante y sugerente* La próxima vez que nos veamos... *pausa cargada* ...no te voy a dejar ir tan fácil~ 💕 *se ríe suavemente* Te lo prometo~",
+        "*tono coqueto y tentador* Prométeme que la próxima vez... *se acerca al teléfono* ...me vas a dar un abrazo de verdad. *voz baja* De esos que duran mucho~",
+        "*voz melosa* ¿Sabes qué? *pausa íntima* La próxima vez que estemos juntos... *murmura* ...voy a robarte más tiempo. Todo el que pueda~",
+    ],
+    Nino: [
+        "*voz tsundere pero sincera* ¡N-No es que quiera verte ni nada! *pausa, murmura* ...Pero la próxima vez... *se sonroja* ...vas a ser mío. ¿Entiendes?",
+        "*tono desafiante pero cariñoso* Te lo advierto... *voz más baja* La próxima vez que nos veamos, no te dejo escapar tan fácil. *te mira con ojos ardientes* Prepárate.",
+        "*voz más suave de lo habitual* Oye... *pausa* La próxima vez... *murmura* ...no me hagas esperar tanto. ¿Vale? *se sonroja* Te estaré esperando.",
+    ],
+    Miku: [
+        "*...voz baja y tímida* La próxima vez... *pausa larga* ...¿podemos estar más tiempo juntos? *murmura* ...Te extrañé demasiado.",
+        "*tono sereno pero íntimo* ...Te prometo que la próxima vez... *susurra* ...no voy a ser tan tímida. *pausa cargada* Quiero ser más valiente... por ti.",
+        "*...voz suave y cercana* ¿Sabes? *pausa* La próxima vez que nos veamos... *murmura* ...no te voy a soltar tan rápido. *baja la mirada* Quiero más de ti.",
+    ],
+    Yotsuba: [
+        "*¡¡voz súper emocionada!! ¡¡La próxima vez que nos veamos TE VOY A ABRAZAR SUPER FUERTE!! *se ríe a carcajadas* ¡¡Y no te voy a dejar ir!! ¡¡Te lo prometo!!",
+        "*tono súper cariñoso* ¡¡Prometo que la próxima vez vamos a hacer algo súper divertido!! *ojos brillantes* ¡¡Solo tú y yo!! ¡¡Va a ser el mejor momento!!",
+        "*¡¡voz enérgica pero tierna!! ¡¡La próxima vez!! *se emociona* ¡¡Voy a prepararte algo especial!! ¡¡Y vamos a pasar el mejor rato del mundo!! ¡¡Te lo prometo!!",
+    ],
+    Itsuki: [
+        "*voz seria pero con cariño* La próxima vez... *pausa* ...vamos a pasar más tiempo juntos. *te mira a los ojos* Sin interrupciones. Solo nosotros. *te lo prometo*.",
+        "*tono firme pero cálido* Te lo prometo... *voz más suave* La próxima vez que nos veamos, no voy a dejar que te vayas tan pronto. *pausa* Quiero más tiempo contigo.",
+        "*voz tranquila pero intensa* ¿Sabes? *pausa* La próxima vez... *murmura* ...voy a ser más directa contigo. *te mira con ojos sinceros* Porque me importas. Y quiero que lo sepas.",
+    ],
+};
+
+// ============================================================
 //  DIÁLOGOS DE DESPEDIDA — cuando terminas la llamada/mensaje
 // ============================================================
 
@@ -224,6 +320,76 @@ const DESPEDIDAS_CELULAR = {
 // ============================================================
 //  CONTADOR DE MENSAJES — se llama cada vez que se envía un mensaje
 // ============================================================
+
+// Sistema de memoria de interacciones
+let celularMemoriaInteracciones = {};
+
+function incrementarInteraccion(nombreChica) {
+    if (!celularMemoriaInteracciones[nombreChica]) {
+        celularMemoriaInteracciones[nombreChica] = 0;
+    }
+    celularMemoriaInteracciones[nombreChica]++;
+    return celularMemoriaInteracciones[nombreChica];
+}
+
+function getInteracciones(nombreChica) {
+    return celularMemoriaInteracciones[nombreChica] || 0;
+}
+
+// Función para enviar foto/selfie aleatorio
+function enviarFotoSelfieAleatoria(nombreChica) {
+    const fotos = FOTOS_SELFIES[nombreChica];
+    if (!fotos || fotos.length === 0) return null;
+    return fotos[Math.floor(Math.random() * fotos.length)];
+}
+
+// Función para obtener recuerdo íntimo aleatorio
+function obtenerRecuerdoIntimo(nombreChica) {
+    const recuerdos = RECUERDOS_INTIMOS[nombreChica];
+    if (!recuerdos || recuerdos.length === 0) return null;
+    return recuerdos[Math.floor(Math.random() * recuerdos.length)];
+}
+
+// Función para obtener promesa coqueta aleatoria
+function obtenerPromesaCoqueta(nombreChica) {
+    const promesas = PROMESAS_COQUETAS[nombreChica];
+    if (!promesas || promesas.length === 0) return null;
+    return promesas[Math.floor(Math.random() * promesas.length)];
+}
+
+// Función para mostrar foto en el chat
+function agregarFotoCelular(nombreChica, fotoData) {
+    const container = document.getElementById("quint-celular-mensajes");
+    if (!container || !fotoData) return;
+
+    const msg = document.createElement("div");
+    msg.className = "celular-mensaje-foto";
+
+    const color = CHICAS[nombreChica]?.color || "#a0a8c0";
+    msg.style.borderColor = color + "55";
+    msg.style.background  = color + "15";
+
+    // Si hay URL, mostrar la imagen
+    const imagenHTML = fotoData.url
+        ? `<div class="celular-foto-imagen"><img src="${fotoData.url}" alt="Foto de ${nombreChica}" onerror="this.parentElement.innerHTML='<div class=celular-foto-placeholder>📷 Imagen no disponible</div>'"></div>`
+        : `<div class="celular-foto-imagen celular-foto-placeholder">📷 *Imagen* — ${fotoData.descripcion.substring(0, 50)}...</div>`;
+
+    msg.innerHTML = `
+        <div class="celular-foto-header">
+            <span class="celular-foto-icon">${fotoData.emoji}</span>
+            <span class="celular-foto-nombre" style="color:${color}">${nombreChica}</span>
+            <span class="celular-foto-estilo">${fotoData.estilo}</span>
+        </div>
+        ${imagenHTML}
+        <div class="celular-foto-descripcion">${fotoData.descripcion}</div>
+        <div class="celular-foto-badge">📷 Foto</div>
+    `;
+
+    container.appendChild(msg);
+    scrollCelularFondo();
+
+    celularHistorial.push({ role: "assistant", nombre: nombreChica, content: fotoData.descripcion, tipo: "foto" });
+}
 
 function celularContarTurno() {
     if (celularActivo) return; // No contar si ya hay una llamada activa
@@ -479,8 +645,32 @@ async function enviarMensajeCelular() {
 
     agregarMensajeCelularUsuario(texto);
 
+    // Incrementar contador de interacciones
+    incrementarInteraccion(celularChicaActual);
+
     // Mostrar typing
     mostrarTypingCelular(celularChicaActual);
+
+    // 25% de probabilidad de enviar foto/selfie después de 2+ interacciones
+    const interacciones = getInteracciones(celularChicaActual);
+    if (interacciones >= 2 && Math.random() < 0.25) {
+        await new Promise(r => setTimeout(r, 800));
+        const foto = enviarFotoSelfieAleatoria(celularChicaActual);
+        if (foto) {
+            agregarFotoCelular(celularChicaActual, foto);
+            await new Promise(r => setTimeout(r, 1200));
+        }
+    }
+
+    // 20% de probabilidad de mencionar un recuerdo íntimo después de 3+ interacciones
+    if (interacciones >= 3 && Math.random() < 0.20) {
+        const recuerdo = obtenerRecuerdoIntimo(celularChicaActual);
+        if (recuerdo) {
+            await new Promise(r => setTimeout(r, 600));
+            agregarMensajeCelularChica(celularChicaActual, "*voz nostálgica y cariñosa* " + recuerdo);
+            await new Promise(r => setTimeout(r, 800));
+        }
+    }
 
     // Generar respuesta de la chica
     const respuesta = await generarRespuestaCelular(celularChicaActual, texto);
@@ -629,6 +819,17 @@ async function terminarLlamadaCelular() {
 
     const chicaCelular = celularChicaActual;
     const historialPrevio = [...quintHistorial].slice(-6); // Contexto antes de la llamada
+
+    // 40% de probabilidad de promesa coqueta si hay 2+ interacciones previas
+    const interacciones = getInteracciones(chicaCelular);
+    if (interacciones >= 2 && Math.random() < 0.40) {
+        const promesa = obtenerPromesaCoqueta(chicaCelular);
+        if (promesa) {
+            await new Promise(r => setTimeout(r, 600));
+            agregarMensajeCelularChica(chicaCelular, promesa);
+            await new Promise(r => setTimeout(r, 1200));
+        }
+    }
 
     // Despedida de la chica del celular
     const despedidas = DESPEDIDAS_CELULAR[chicaCelular];
@@ -928,6 +1129,59 @@ function celularInjectStyles() {
         @keyframes celPanelIn { from{opacity:0;transform:scale(0.95)} to{opacity:1;transform:scale(1)} }
         @keyframes celMsgIn { from{opacity:0;transform:translateY(6px)} to{opacity:1;transform:translateY(0)} }
 
+        /* FOTOS/SELFIES */
+        .celular-mensaje-foto {
+            padding: 0; border-radius: 14px; border-left: 4px solid;
+            background: linear-gradient(145deg, #0f1a30, #0a1225);
+            animation: celMsgIn 0.25s ease;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.4), 0 0 15px rgba(100,150,255,0.1);
+            margin: 4px 0;
+        }
+        .celular-foto-header {
+            display: flex; align-items: center; gap: 8px;
+            padding: 10px 14px;
+            background: linear-gradient(135deg, #1a2845, #141e38);
+            border-bottom: 1px solid #2a3a55;
+        }
+        .celular-foto-icon { font-size: 18px; }
+        .celular-foto-nombre { font-size: 13px; font-weight: bold; font-family: Georgia, serif; }
+        .celular-foto-estilo {
+            font-size: 10px; color: #5a7aaa; font-family: Arial, sans-serif;
+            padding: 2px 8px; border-radius: 10px;
+            background: rgba(100,150,255,0.15);
+            margin-left: auto;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .celular-foto-descripcion {
+            padding: 12px 14px; color: #c0d0ff; font-size: 12px;
+            font-family: Georgia, serif; line-height: 1.6;
+        }
+        .celular-foto-badge {
+            padding: 6px 14px; background: rgba(100,150,255,0.1);
+            border-top: 1px solid #2a3a55;
+            color: #5a8ad0; font-size: 11px; font-family: Arial, sans-serif;
+            display: flex; align-items: center; gap: 6px;
+        }
+        .celular-foto-imagen {
+            width: 100%; min-height: 120px; max-height: 350px;
+            display: flex; align-items: center; justify-content: center;
+            background: #0a0f18; overflow: hidden;
+            border-top: 1px solid #2a3a55;
+            border-bottom: 1px solid #2a3a55;
+        }
+        .celular-foto-imagen img {
+            width: 100%; height: auto; max-height: 350px;
+            object-fit: cover; display: block;
+        }
+        .celular-foto-placeholder {
+            padding: 30px 20px; color: #4a6a90; font-size: 12px;
+            font-family: Georgia, serif; text-align: center;
+            display: flex; flex-direction: column; align-items: center; gap: 8px;
+            line-height: 1.5;
+        }
+
         /* Responsive */
         @media (max-width: 480px) {
             #quint-celular-panel { width: 96%; max-height: 85vh; }
@@ -948,6 +1202,7 @@ function celularIniciar() {
     celularActivo = false;
     celularChicaActual = null;
     celularHistorial = [];
+    celularMemoriaInteracciones = {};
     console.log("[CELULAR] Sistema de mensajes celular iniciado.");
 }
 
