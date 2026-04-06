@@ -26,19 +26,19 @@ let celularUIVisible      = false;
 // ============================================================
 
 const FRASES_LLAMADA_ENTRADA = {
-    Ichika:  "*tu celular vibra en el bolsillo* 📱 *La pantalla muestra: **Ichika está llamando...** *con un tono suave y melódico*",
-    Nino:    "*tu celular suena de repente* 📱 *Pantalla: **Nino** — ¡Contesta ya! *el tono es impaciente*",
-    Miku:    "*celular vibrando suavemente* 📱 *En la pantalla: **Miku**... *tono tranquilo*",
-    Yotsuba: "*¡BRRR BRRR! Tu celular suena fuerte* 📱 ***YOTSUBA*** *— el tono es súper animado*",
-    Itsuki:  "*celular sonando con calma* 📱 ***Itsuki** está llamando... *tono normal*",
+    Ichika:  "*tu celular vibra suavemente en tu bolsillo* 📱 *La pantalla muestra: **Ichika está llamando...** *un tono dulce y melódico suena* \"Hola~ soy yo... ¿tienes un momentito para mí? 💕\"",
+    Nino:    "*tu celular suena con insistencia* 📱 *Pantalla: **Nino** — *tono urgente pero cariñoso* \"¡Oye! Contestame... quiero escucharte un rato.\"",
+    Miku:    "*celular vibrando con suavidad* 📱 *En la pantalla: **Miku**... *tono tranquilo e íntimo* \"...Hola. ¿Puedo robarte unos minutos?\"",
+    Yotsuba: "*¡BRRR BRRR! Tu celular suena con energía* 📱 ***YOTSUBA** — *tono súper animado* \"¡¡HOLA!! ¡¿Puedo hablar contigo?! ¡Te extrañé! 💨💨\"",
+    Itsuki:  "*celular sonando con calma* 📱 ***Itsuki** está llamando... *tono sereno pero cálido* \"Necesito escucharte... ¿tienes un momento?\"",
 };
 
 const FRASES_MENSAJE_ENTRADA = {
-    Ichika:  "*tu celular vibra* 📱 *Notificación de **Ichika**: \"Hola~ ¿Estás ocupado? 💕\"*",
-    Nino:    "*celular suena* 📱 *Mensaje de **Nino**: \"Oye, contesta cuando puedas. No me ignores.\"*",
-    Miku:    "*vibración suave del celular* 📱 ***Miku** te escribió: \"...Hola. ¿Tienes un momento?\"",
-    Yotsuba: "*¡Tu celular casi explota de tantas notificaciones!* 📱 ***Yotsuba**: \"HOLA HOLA HOLA ¿QUÉ HACES?! 💨💨\"",
-    Itsuki:  "*celular vibra* 📱 ***Itsuki**: \"Necesito hablar contigo. ¿Puedes responder?\"",
+    Ichika:  "*tu celular vibra suavemente* 📱 *Notificación de **Ichika**: \"Hola~ ¿En qué estás pensando? 💕 Me pregunto si estarás tan... distraído como yo~\"",
+    Nino:    "*celular suena* 📱 *Mensaje de **Nino**: \"Oye... estaba pensando en ti. No me dejes en visto, ¿eh? 💢\"",
+    Miku:    "*vibración suave del celular* 📱 ***Miku** te escribió: \"...Hola. ¿Puedo confesarte algo? Tengo algo que quiero decirte...\"",
+    Yotsuba: "*¡Tu celular casi explota de notificaciones!* 📱 ***Yotsuba**: \"HOLA HOLA HOLA 💨 ¿¿QUÉ HACES?? ¡¡Estaba pensando en ti y no pude evitar escribirte!!\"",
+    Itsuki:  "*celular vibra* 📱 ***Itsuki**: \"Necesito hablar contigo... es algo que no puedo decir en persona ahora. ¿Puedes responder?\"",
 };
 
 // ============================================================
@@ -48,34 +48,34 @@ const FRASES_MENSAJE_ENTRADA = {
 
 const DIALOGOS_CELULAR_AUTOMATICOS = {
     Ichika: [
-        "*se ríe suavemente al otro lado* Fufu... ¿Estás bien? *pausa* Me imaginaba que estarías ocupado~",
-        "*suspira al teléfono* Ya veo... Bueno, no importa. *voz suave* Solo quería saber de ti~",
-        "*ríe por lo bajo* Tranquilo, no te retendré mucho. *pausa cálida* Pero cuéntame algo rápido~",
-        "*voz melosa* Sabía que dirías eso... *sonríe* Eres tan predecible a veces~",
+        "*se ríe suavemente al otro lado, con voz sugerente* Fufu... ¿estás bien? *pausa cargada* Me imaginaba que estarías ocupado... pero siempre tengo tiempo para ti~ *voz melosa*",
+        "*suspira al teléfono, con un tono íntimo* Ya veo... *voz suave y cercana* No importa. Solo quería escuchar tu voz un ratito... me haces falta~",
+        "*ríe por lo bajo, coqueta* Tranquilo, no te retendré mucho... *pausa cálida* Pero prométeme que luego me das toda tu atención, ¿sí? 💕",
+        "*voz sedosa y tentadora* Sabía que dirías eso... *se muerde el labio al teléfono* Eres tan adorable cuando te esfuerzas~ Cuídate por mí, ¿vale?",
     ],
     Nino: [
-        "*resopla al teléfono* ¡¿En serio?! *suspira* Bueno... supongo que no puedo obligarte.",
-        "*cruza los brazos al otro lado* Hmph. Está bien. *pausa* Pero luego me debes una, ¿eh?",
-        "*se escucha un suspiro largo* ...Fine. *voz más suave* Hablamos después entonces.",
-        "*golpea suavemente el teléfono* ¡No me cuelgues tan rápido al menos! *suspira*",
+        "*resopla al teléfono, pero con cariño* ¡¿En serio?! *suspira* Bueno... *voz más suave* Pero luego me compensas, ¿eh? Te lo debo~",
+        "*cruza los brazos al otro lado* Hmph. Está bien. *pausa, voz más baja* ...Pero no tardes en escribirme. Me molesta cuando desapareces~",
+        "*se escucha un suspiro largo* ...Fine. *voz más suave y cercana* Hablamos después. Y... *pausa* ...piensa en mí un poco, ¿quieres?",
+        "*golpea suavemente el teléfono, algo tsundere* ¡No me hagas esperar tanto la próxima vez! *suspira, voz más cálida* ...Te extraño, ¿sabes?",
     ],
     Miku: [
-        "*silencio breve* ...Ya entiendo. *voz tranquila* No te preocupes.",
-        "*pausa larga* ...Está bien. *voz suave* Hablamos luego entonces...",
-        "*se escucha un suspiro suave* ...Sí. *voz calmada* Cuídate mucho.",
-        "*voz baja* ...Entendido. *pausa* Que estés bien.",
+        "*silencio breve, voz tímida pero sincera* ...Ya entiendo. *voz tranquila pero cálida* No te preocupes... solo... piensa en mí de vez en cuando, ¿sí?",
+        "*pausa larga, suspiro suave* ...Está bien. *voz íntima* Hablamos luego... *pausa* ...Y... gracias por escucharme aunque sea un rato.",
+        "*se escucha un suspiro suave* ...Sí. *voz calmada pero cercana* Cuídate mucho... *murmura* ...Te extrañaré un poco.",
+        "*voz baja, con timidez pero determinación* ...Entendido. *pausa cargada* Que estés bien... y... *susurra* ...no te olvides de mí, ¿vale?",
     ],
     Yotsuba: [
-        "*se ríe a carcajadas* ¡¡OK OK!! *voz super animada* ¡Hablamos luego entonces!",
-        "*grita un poco* ¡¡¿EN SERIO?! *suspira fuerte* Bueno bueno... ¡luego hablamos!",
-        "*voz triste un momento* Aww... *pero se anima* ¡OK! ¡Nos vemos pronto!",
-        "*se ríe* ¡¡Jajaja!! ¡Está bien! *voz alegre* ¡No tardes en escribirme!",
+        "*se ríe a carcajadas, pero con cariño* ¡¡OK OK!! *voz súper animada pero cálida* ¡¡Hablamos luego!! ¡¡Y no te olvides de escribirme, ¿eh?! 💨💨",
+        "*grita un poco, pero se nota la emoción* ¡¡¿EN SERIO?! *suspira fuerte, voz más suave* Bueno bueno... ¡¡pero prométeme que piensas en mí!!",
+        "*voz un momento triste, pero se anima* Aww... *pero vuelve la energía* ¡¡OK!! ¡¡Nos vemos pronto!! ¡¡Y te voy a abrazar fuerte!!",
+        "*se ríe, súper cálida* ¡¡Jajaja!! ¡¡Está bien!! *voz alegre y cariñosa* ¡¡No tardes en escribirme!! ¡¡Te estaré esperando!!",
     ],
     Itsuki: [
-        "*suspira* Entiendo. *voz seria pero amable* Hablamos cuando puedas entonces.",
-        "*pausa* ...Está bien. *voz firme* Pero no olvides lo que íbamos a hablar.",
-        "*se escucha un suspiro* Bueno. *voz calmada* Que te vaya bien.",
-        "*voz seria* ...Ok. *pausa* Nos vemos luego.",
+        "*suspira, voz seria pero con cariño* Entiendo. *voz amable pero firme* Hablamos cuando puedas... pero no me dejes esperando demasiado, ¿entiendes?",
+        "*pausa, voz seria pero cercana* ...Está bien. *voz firme pero cálida* Pero no olvides lo que íbamos a hablar... es importante para mí.",
+        "*se escucha un suspiro* Bueno. *voz calmada pero sincera* Que te vaya bien... *pausa* ...Y cuídate. Me importa que estés bien.",
+        "*voz seria pero con un toque de vulnerabilidad* ...Ok. *pausa* Nos vemos luego... *murmura* ...Y no tardes en volver a escribirme, ¿vale?",
     ],
 };
 
@@ -89,102 +89,102 @@ const REACCIONES_POST_LLAMADA = {
     // --- ICHIKA reacciona ---
     Ichika: {
         Nino: [
-            "*te mira con una sonrisa que no llega a los ojos* ¿Nino? *inclina la cabeza* ¿Estaban en medio de algo importante? *se acerca y te toma de la mano* ...No, no importa. Continuemos~",
-            "*observa tu celular con curiosidad* ¿Hmm? ¿Nino te llamaba? *se muerde el labio inferior* Espero no haberte interrumpido en nada... *sonríe con calma* Pero ahora estás aquí conmigo~",
-            "*te mira guardando el celular* ¿Todo bien con Nino? *se sienta a tu lado y apoya su cabeza en tu hombro* ...Me pregunto qué querría~ *dice con voz suave y algo traviesa*",
+            "*te mira con una sonrisa que no llega del todo a los ojos* ¿Nino? *inclina la cabeza, voz suave pero con un toque de celos* ¿Estaban en medio de algo importante? *se acerca y te toma de la mano, apretando con posesión* ...No, no importa. Ahora estás aquí conmigo~ *se acerca un poco más de lo necesario*",
+            "*observa tu celular con curiosidad, mordiéndose el labio* ¿Hmm? ¿Nino te llamaba? *se acerca y te toma del brazo, con voz suave pero sugerente* Espero no haberte interrumpido en nada... *sonríe con calma, pero sus ojos dicen otra cosa* Pero ahora estás aquí conmigo~ ¿verdad?",
+            "*te mira guardando el celular, con una sonrisa traviesa* ¿Todo bien con Nino? *se sienta a tu lado, apoya su cabeza en tu hombro y te acaricia el brazo* ...Me pregunto qué querría~ *dice con voz suave y algo celosa* Pero me gusta más cuando me prestas atención solo a mí~",
         ],
         Miku: [
-            "*te observa con curiosidad* ¿Miku? *sonríe con ternura* Espero no haber interrumpido algo importante... *te toma de la mano* Pero ahora que estás de vuelta~ ¿qué decíamos?",
-            "*inclina la cabeza* Miku... *se acerca un poco más* ¿Estabas hablando con ella de algo? *sonríe con calma* No te preocupes, puedo esperar~",
+            "*te observa con curiosidad, con un toque de celos en los ojos* ¿Miku? *sonríe con ternura pero se acerca más de lo necesario* Espero no haber interrumpido algo importante... *te toma de la mano y te mira a los ojos* Pero ahora que estás de vuelta~ ¿qué decíamos?",
+            "*inclina la cabeza, pero sus ojos te analizan* Miku... *se acerca un poco más, con voz suave pero posesiva* ¿Estabas hablando con ella de algo? *sonríe con calma* No te preocupes, puedo esperar~ Pero me gusta más cuando soy yo la que tiene tu atención~",
         ],
         Yotsuba: [
-            "*sus ojos brillan con curiosidad* ¿Yotsuba? *se ríe* Esa chica siempre es tan energética~ *te toma del brazo* ¡Pero ahora me tienes a mí! ¿Verdad?",
-            "*te mira con una sonrisa divertida* Yotsuba te llamaba... *se acerca y te susurra* ¿Estaban planeando algo sin mí? *ríe suavemente*",
+            "*sus ojos brillan con curiosidad, pero hay un toque de celos* ¿Yotsuba? *se ríe, pero te toma del brazo con posesión* Esa chica siempre es tan energética~ *te acerca hacia ella* ¡Pero ahora me tienes a mí! ¿Verdad? *sonríe con dulzura pero te agarra más fuerte*",
+            "*te mira con una sonrisa divertida, pero hay algo en sus ojos* Yotsuba te llamaba... *se acerca y te susurra al oído, con voz coqueta* ¿Estaban planeando algo sin mí? *ríe suavemente y te acaricia el brazo* Ahora eres mío~",
         ],
         Itsuki: [
-            "*te observa con atención* ¿Itsuki? *se cruza de brazos con una sonrisa* Espero que no te esté quitando tiempo de nuestras citas~ *sonríe con calma* ¿Todo bien?",
-            "*mira tu celular* Itsuki... *se acerca un poco* ¿Necesitabas hablar con ella? *toma tu mano* Está bien, pero no te alejes mucho~",
+            "*te observa con atención, con un toque de celos* ¿Itsuki? *se cruza de brazos con una sonrisa, pero te mira con intensidad* Espero que no te esté quitando tiempo de nuestras citas~ *sonríe con calma, pero te toma de la mano* ¿Todo bien? Porque me gusta tenerte solo para mí~",
+            "*mira tu celular, con una sonrisa tranquila pero celosa* Itsuki... *se acerca un poco y te toma de la mano, apretando con suavidad* ¿Necesitabas hablar con ella? *voz suave pero posesiva* Está bien, pero no te alejes mucho~ Me gusta cuando estás cerca de mí.",
         ],
     },
 
     // --- NINO reacciona ---
     Nino: {
         Ichika: [
-            "*frunce el ceño* ¿Ichika? *cruza los brazos* ¿Qué quería? *te mira con ojos entrecerrados* No me digas que estabas... *se sonroja* ...No, no importa. ¡Continuemos!",
-            "*resopla* Ichika te llamaba... *te mira de reojo* Espero que no te esté robando atención. *se acerca y te agarra del brazo* Porque tú eres mío, ¿entiendes?",
-            "*te observa con suspicacia* ¿Hablabas con Ichika? *murmura* Esa hermana siempre tan perfecta... *niega con la cabeza* ¡Olvídalo! ¿En qué estábamos?",
+            "*frunce el ceño, claramente celosa* ¿Ichika? *cruza los brazos y te mira con ojos entrecerrados* ¿Qué quería? *se acerca y te agarra del brazo con posesión* No me digas que estabas... *se sonroja pero te mira con intensidad* ...No, no importa. ¡Continuemos! Pero tú eres mío, ¿entiendes?",
+            "*resopla, claramente molesta* Ichika te llamaba... *te mira de reojo con celos* Espero que no te esté robando atención. *se acerca y te agarra del brazo con fuerza* Porque tú eres mío, ¿entiendes? *te mira con ojos desafiantes* No me hagas competir con ella.",
+            "*te observa con suspicacia y celos evidentes* ¿Hablabas con Ichika? *murmura con enojo* Esa hermana siempre tan perfecta... *niega con la cabeza y te agarra de la manga* ¡Olvídalo! ¿En qué estábamos? *te mira con ojos ardientes* Y no me hagas compartirte.",
         ],
         Miku: [
-            "*levanta una ceja* ¿Miku? *suspira* Esa chica siempre tan tranquila... *te mira* ¿Todo bien? *te agarra de la manga* No me dejes hablando solo así de la nada.",
-            "*te observa* ¿Miku te escribió? *se acerca un poco* Espero que no sea nada importante... *murmura* Porque yo sí tengo cosas que decirte...",
+            "*levanta una ceja, con celos evidentes* ¿Miku? *suspira y te mira con intensidad* Esa chica siempre tan tranquila... *te agarra de la manga con posesión* ¿Todo bien? *te acerca hacia ella* No me dejes hablando sola así de la nada. Me molesta cuando me quitas atención.",
+            "*te observa con celos* ¿Miku te escribió? *se acerca un poco y te agarra del brazo* Espero que no sea nada importante... *murmura con voz más baja y cercana* Porque yo sí tengo cosas que decirte... y no me gusta compartirte con nadie.",
         ],
         Yotsuba: [
-            "*resopla fuerte* ¿Yotsuba? *cruza los brazos* Esa energica... *te mira* ¿Estabas bien? *te agarra del brazo con fuerza* No te vayas a escapar conmigo alrededor.",
-            "*frunce el ceño* ¿Yotsuba te llamó? *suspira* Siempre interrumpiendo... *te mira a los ojos* ¿Pero ahora podemos continuar o qué?",
+            "*resopla fuerte, con celos evidentes* ¿Yotsuba? *cruza los brazos y te mira con intensidad* Esa energética... *te agarra del brazo con fuerza* ¿Estabas bien? *te acerca hacia ella* No te vayas a escapar conmigo alrededor. Eres mío cuando estamos juntos, ¿entiendes?",
+            "*frunce el ceño, claramente molesta* ¿Yotsuba te llamó? *suspira y te mira con ojos celosos* Siempre interrumpiendo... *te agarra de la mano con posesión* ¿Pero ahora podemos continuar o qué? *te mira con intensidad* No me hagas esperar tanto la próxima vez.",
         ],
         Itsuki: [
-            "*te mira con el ceño fruncido* ¿Itsuki? *resopla* ¿Qué quería ahora? *te agarra del brazo* No me dejes colgada así de la nada, ¿entiendes?",
-            "*cruza los brazos* Itsuki te llamaba... *murmura* Siempre con sus cosas de la menor responsable... *te mira* ¿Todo bien al menos?",
+            "*te mira con el ceño fruncido, con celos* ¿Itsuki? *resopla y te agarra del brazo con fuerza* ¿Qué quería ahora? *te mira con ojos intensos* No me dejes colgada así de la nada, ¿entiendes? *te acerca hacia ella* Porque no me gusta compartirte.",
+            "*cruza los brazos, con evidente molestia* Itsuki te llamaba... *murmura con celos* Siempre con sus cosas de la menor responsable... *te mira con ojos ardientes* ¿Todo bien al menos? *te agarra de la manga* No me hagas competir con ella por tu atención.",
         ],
     },
 
     // --- MIKU reacciona ---
     Miku: {
         Ichika: [
-            "*...te observa en silencio un momento* Ichika. *baja la mirada* ...¿Todo bien? *pausa larga* ...Está bien. Continuemos.",
-            "*silencio breve* ...Ichika. *levanta la vista* ...¿Necesitabas hablar con ella? *voz calmada* ...No hay problema. Pero... *pausa* ...estoy aquí.",
+            "*...te observa en silencio un momento, con una expresión difícil de leer* Ichika. *baja la mirada, pero te agarra suavemente de la mano* ...¿Todo bien? *pausa larga, voz suave pero con un toque de celos* ...Está bien. Continuemos. *te mira con ojos tímidos pero sinceros* ...Pero me gusta más cuando estamos solos.",
+            "*silencio breve, con una mirada tranquila pero intensa* ...Ichika. *levanta la vista y te toma de la mano* ...¿Necesitabas hablar con ella? *voz calmada pero con un toque de posesión* ...No hay problema. Pero... *pausa, te mira a los ojos* ...estoy aquí. Y me gusta tenerte cerca.",
         ],
         Nino: [
-            "*...te mira* Nino. *pausa* ...¿Estabas hablando con Nino? *baja la mirada* ...Entiendo. *voz suave* ...¿Podemos continuar?",
-            "*silencio* ...Nino. *suspira suavemente* ...¿Todo bien con ella? *te mira con calma* ...Está bien. Estoy acostumbrada...",
+            "*...te mira, con ojos tranquilos pero con un toque de celos* Nino. *pausa, te toma de la mano* ...¿Estabas hablando con Nino? *baja la mirada, voz suave pero sincera* ...Entiendo. *te agarra un poco más fuerte* ...¿Podemos continuar? *murmura* ...Me gusta más cuando me prestas atención solo a mí.",
+            "*silencio, con una mirada tranquila pero celosa* ...Nino. *suspira suavemente y te toma de la mano* ...¿Todo bien con ella? *te mira con calma, pero te acerca hacia ella* ...Está bien. Estoy acostumbrada... *murmura* ...Pero prefiero cuando estás solo conmigo.",
         ],
         Yotsuba: [
-            "*...parpadea* Yotsuba. *una sonrisa muy leve* ...Siempre es tan energética. *pausa* ...¿Continuamos?",
-            "*te observa* ...Yotsuba te llamó. *cierra su libro un momento* ...¿Estás bien? *voz tranquila* ...Me alegra que hayas vuelto.",
+            "*...parpadea, con una mirada tranquila pero con un toque de celos* Yotsuba. *una sonrisa muy leve, pero te agarra de la mano* ...Siempre es tan energética. *pausa, te mira con ojos tímidos pero sinceros* ...¿Continuamos? *murmura* ...Me gusta más cuando estamos así, solos.",
+            "*te observa, con calma pero con un toque de posesión* ...Yotsuba te llamó. *cierra su libro un momento y te toma de la mano* ...¿Estás bien? *voz tranquila pero cercana* ...Me alegra que hayas vuelto. *te mira con ojos sinceros* ...Y me gusta tenerte aquí.",
         ],
         Itsuki: [
-            "*...te mira en silencio* Itsuki. *asiente levemente* ...¿Todo bien? *pausa* ...Continuemos entonces.",
-            "*baja la mirada* ...Itsuki. *voz suave* ...¿Necesitabas algo con ella? *pausa* ...No te preocupes. Estoy aquí.",
+            "*...te mira en silencio, con una expresión tranquila pero intensa* Itsuki. *asiente levemente y te toma de la mano* ...¿Todo bien? *pausa, te mira con ojos sinceros* ...Continuemos entonces. *murmura* ...Me gusta cuando estamos así, sin interrupciones.",
+            "*baja la mirada, con voz suave pero con un toque de celos* ...Itsuki. *te toma de la mano y te mira a los ojos* ...¿Necesitabas algo con ella? *pausa, te acerca un poco* ...No te preocupes. Estoy aquí. *voz íntima* ...Y me gusta tenerte cerca.",
         ],
     },
 
     // --- YOTSUBA reacciona ---
     Yotsuba: {
         Ichika: [
-            "*te mira con los ojos bien abiertos* ¿Ichika? *se acerca y te agarra del brazo* ¿¿¿Qué te dijo??? ¡¿Estabas hablando con ella?! *se ríe* ¡Cuéntame todo!",
-            "*salta un poco* ¡¿Ichika te llamó?! *te agarra de los hombros* ¿¿¿Qué quería??? *se emociona* ¡Vamos, dime dime dime!",
+            "*te mira con los ojos bien abiertos, con curiosidad y un toque de celos* ¿Ichika? *se acerca y te agarra del brazo con energía* ¿¿¿Qué te dijo??? ¡¿Estabas hablando con ella?! *se ríe, pero te acerca más* ¡Cuéntame todo! *te mira con ojos brillantes pero posesivos* ¡¡Pero ahora eres mío!!",
+            "*salta un poco, con energía pero con celos evidentes* ¡¿Ichika te llamó?! *te agarra de los hombros y te mira con intensidad* ¿¿¿Qué quería??? *se emociona, pero te acerca más* ¡Vamos, dime dime dime! *te abraza fuerte* ¡¡No me hagas compartirte!!",
         ],
         Nino: [
-            "*te mira con curiosidad* ¿Nino? *se acerca mucho* ¿¿¿Qué te dijo Nino??? *ojos brillantes* ¡¿Se enojó?! ¡¿Estabas con ella?!",
-            "*te agarra del brazo* ¡¿Nino?! *se emociona* ¡¿Te dijo algo?! ¿¿¿Estabas hablando con ella?! ¡Cuéntame todo!",
+            "*te mira con curiosidad, pero hay un toque de celos en sus ojos* ¿Nino? *se acerca mucho y te agarra del brazo* ¿¿¿Qué te dijo Nino??? *ojos brillantes pero posesivos* ¡¿Se enojó?! ¡¿Estabas con ella?! *te acerca hacia ella* ¡¡Cuéntame todo!! ¡¡Y no me hagas esperar la próxima vez!!",
+            "*te agarra del brazo con energía, con evidente emoción pero celos* ¡¿Nino?! *se emociona, pero te mira con intensidad* ¡¿Te dijo algo?! ¿¿¿Estabas hablando con ella?! *te acerca y te abraza fuerte* ¡¡Cuéntame todo!! ¡¡Y ahora eres mío, ¿entiendes?!!",
         ],
         Miku: [
-            "*te observa* ¿Miku? *se acerca* ¿¿¿Qué quería??? *se sienta a tu lado* ¿Estaba hablando de historia otra vez? *se ríe*",
-            "*ojos curiosos* ¿Miku te escribió? *te agarra del brazo* ¿¿¿De qué hablaron??? ¡Vamos, no seas tímido!",
+            "*te observa, con curiosidad pero un toque de celos* ¿Miku? *se acerca y te agarra del brazo* ¿¿¿Qué quería??? *se sienta a tu lado y te mira con ojos brillantes* ¿Estaba hablando de historia otra vez? *se ríe, pero te abraza* ¡¡Pero ahora estás conmigo!! ¡¡Cuéntame de ti!!",
+            "*ojos curiosos pero con un toque de posesión* ¿Miku te escribió? *te agarra del brazo y te acerca* ¿¿¿De qué hablaron??? ¡Vamos, no seas tímido! *te mira con ojos brillantes pero celosos* ¡¡Y no me hagas compartirte!! ¡¡Ahora eres mío!!",
         ],
         Itsuki: [
-            "*te mira con emoción* ¿Itsuki? *se acerca mucho* ¿¿¿Qué quería??? ¿¿¿Estaba enojada?! ¡Dime todo!",
-            "*salta un poco* ¡¿Itsuki te llamó?! *te agarra del brazo* ¿¿¿Qué te dijo??? ¡Cuéntame cuéntame cuéntame!",
+            "*te mira con emoción, pero hay un toque de celos* ¿Itsuki? *se acerca mucho y te agarra del brazo* ¿¿¿Qué quería??? ¿¿¿Estaba enojada?! *te mira con ojos brillantes pero posesivos* ¡Dime todo! *te abraza fuerte* ¡¡Y ahora estás conmigo, ¿verdad?!!",
+            "*salta un poco, con energía pero con evidente posesión* ¡¿Itsuki te llamó?! *te agarra del brazo y te acerca* ¿¿¿Qué te dijo??? *te mira con ojos brillantes* ¡¡Cuéntame cuéntame cuéntame!! *te abraza con fuerza* ¡¡Y no me hagas esperar tanto la próxima vez!!",
         ],
     },
 
     // --- ITSUKI reacciona ---
     Itsuki: {
         Ichika: [
-            "*te observa con seriedad* ¿Ichika? *cruza los brazos* ¿Qué quería? *suspira* Espero que no te esté distrayendo de lo nuestro... *te mira a los ojos* ¿Todo bien?",
-            "*frunce el ceño* Ichika... *baja la mirada* ¿Necesitabas hablar con ella? *suspira* ...Está bien. Pero ahora me debes atención.",
+            "*te observa con seriedad, con un toque de celos* ¿Ichika? *cruza los brazos y te mira con intensidad* ¿Qué quería? *suspira y te toma de la mano* Espero que no te esté distrayendo de lo nuestro... *te mira a los ojos, con voz firme pero cercana* ¿Todo bien? *te acerca un poco* Porque me gusta tenerte solo para mí.",
+            "*frunce el ceño, con evidente molestia pero cariño* Ichika... *baja la mirada y te agarra de la mano* ¿Necesitabas hablar con ella? *suspira y te mira con ojos sinceros* ...Está bien. Pero ahora me debes atención. *te acerca hacia ella* Y no me hagas compartirte.",
         ],
         Nino: [
-            "*resopla* ¿Nino? *cruza los brazos* Esa chica siempre tan intensa... *te mira* ¿Todo bien? *suspira* Espero que no te haya estresado.",
-            "*te observa* Nino te llamaba... *murmura* Siempre con sus dramitas... *te mira* ¿Estás bien al menos?",
+            "*resopla, con celos evidentes* ¿Nino? *cruza los brazos y te mira con intensidad* Esa chica siempre tan intensa... *te toma de la mano con posesión* ¿Todo bien? *suspira y te acerca* Espero que no te haya estresado. *te mira con ojos serios pero cercanos* Porque me gusta cuando estamos tranquilos, solos.",
+            "*te observa, con una mirada seria pero celosa* Nino te llamaba... *murmura con evidente molestia* Siempre con sus dramitas... *te toma del brazo* ¿Estás bien al menos? *te acerca un poco* No me hagas competir con ella por tu atención.",
         ],
         Miku: [
-            "*te observa* ¿Miku? *asiente* ...¿Todo bien? *pausa* Espero que no fuera nada urgente. *suspira* ¿Continuamos?",
-            "*mira tu celular* Miku... *asiente levemente* ...¿Necesitabas algo con ella? *voz calmada* ...Está bien.",
+            "*te observa, con calma pero con un toque de celos* ¿Miku? *asiente y te toma de la mano* ...¿Todo bien? *pausa, te mira con ojos sinceros* Espero que no fuera nada urgente. *suspira y te acerca* ¿Continuamos? *murmura* ...Me gusta más cuando estamos así, sin interrupciones.",
+            "*mira tu celular, con una expresión tranquila pero intensa* Miku... *asiente levemente y te toma de la mano* ...¿Necesitabas algo con ella? *voz calmada pero con un toque de posesión* ...Está bien. *te mira a los ojos* Pero ahora estás aquí conmigo.",
         ],
         Yotsuba: [
-            "*resopla* ¿Yotsuba? *niega con la cabeza sonriendo* Esa chica nunca cambia... *te mira* ¿Te dijo algo raro? *se ríe*",
-            "*te observa con una sonrisa* Yotsuba... *sacude la cabeza* Siempre tan energética. *te mira* ¿Estás bien después de eso?",
+            "*resopla, con una mezcla de diversión y celos* ¿Yotsuba? *niega con la cabeza sonriendo, pero te agarra del brazo* Esa chica nunca cambia... *te mira con ojos serios pero cercanos* ¿Te dijo algo raro? *se ríe, pero te acerca* Me gusta más cuando estamos tranquilos, solos.",
+            "*te observa con una sonrisa, pero hay un toque de celos* Yotsuba... *sacude la cabeza y te toma de la mano* Siempre tan energética. *te mira con ojos sinceros* ¿Estás bien después de eso? *te acerca un poco* Me gusta más cuando estás así, solo conmigo.",
         ],
     },
 };
@@ -195,24 +195,29 @@ const REACCIONES_POST_LLAMADA = {
 
 const DESPEDIDAS_CELULAR = {
     Ichika: [
-        "*voz suave al teléfono* Bueno... fue lindo hablar contigo~ *pausa* Te extraño, ¿sabes? *cuelga con delicadeza*",
-        "*se ríe suavemente* Fufu... está bien. *pausa cálida* Cuídate mucho~ *beso suave al teléfono antes de colgar*",
+        "*voz suave y sugerente al teléfono* Bueno... fue tan lindo hablar contigo~ *pausa cargada* Te extraño ya, ¿sabes? *beso suave y linger al teléfono* Hablamos pronto, mi cielo~ 💕",
+        "*se ríe suavemente, con tono coqueto* Fufu... está bien. *pausa cálida y cercana* Cuídate mucho~ *beso lento al teléfono* ...Y sueña conmigo, ¿vale? *cuelga con delicadeza*",
+        "*voz melosa y tentadora* Me encantó escucharte... *suspira* Ahora me quedé con ganas de más~ *beso suave* Hasta pronto, lindo~ *cuelga lentamente*",
     ],
     Nino: [
-        "*resopla* ¡Fine! *pero suena cariñosa* Cuídate, ¿eh? *cuelga un poco brusca pero se nota que le importas*",
-        "*suspira* Ok, ok. *voz más suave* No tardes en escribirme. *cuelga*",
+        "*resopla, pero con mucho cariño* ¡Fine! *voz más baja y cercana* Cuídate, ¿eh? *pausa* ...Y no me hagas esperar tanto la próxima vez. *cuelga, pero se nota que le importas*",
+        "*suspira, voz más suave* Ok, ok. *pausa, murmura* ...Te extraño ya. *cuelga un poco brusca, pero el tono es cálido*",
+        "*voz tsundere pero sincera* ¡No es que quiera colgar ni nada! *suspira* ...Solo... escríbeme pronto, ¿vale? *cuelga*",
     ],
     Miku: [
-        "...Está bien. *pausa* ...Cuídate. *cuelga suavemente*",
-        "*voz baja* ...Hablamos luego. *pausa* ...Te extraño un poco. *cuelga*",
+        "...Está bien. *pausa larga, voz íntima* ...Cuídate. *susurra* ...Y... piensa en mí un poco. *cuelga suavemente*",
+        "*voz baja y cercana* ...Hablamos luego. *pausa cargada* ...Te extraño más de lo que digo. *cuelga con ternura*",
+        "...Fue lindo hablar contigo. *voz tímida pero sincera* ...Vuelve pronto. *susurra* ...Te estaré esperando. *cuelga*",
     ],
     Yotsuba: [
-        "*¡OK OK!* *se ríe* ¡¡Nos vemos luego!! *cuelga súper animada*",
-        "*¡Bye bye!* *se ríe a carcajadas* ¡¡Escríbeme pronto!! *cuelga de golpe*",
+        "*¡OK OK!* *se ríe, súper cálida* ¡¡Nos vemos luego!! *pausa, voz más suave* ¡¡Y no te olvides de mí!! *cuelga súper animada pero con cariño*",
+        "*¡Bye bye!* *se ríe a carcajadas, emocionada* ¡¡Escríbeme pronto!! *pausa, voz cariñosa* ¡¡Te quiero mucho!! *cuelga*",
+        "*voz súper alegre* ¡¡Fue genial hablar contigo!! *se ríe* ¡¡La próxima vez más!! ¡¡Cuídate!! *cuelga con energía pero con cariño*",
     ],
     Itsuki: [
-        "*suspira* Está bien. *voz seria* Nos vemos luego. *cuelga*",
-        "*asiente* Ok. *pausa* ...Cuídate. *cuelga con calma*",
+        "*suspira, voz seria pero con cariño* Está bien. *pausa, voz más suave* Nos vemos luego... *murmura* ...Y cuídate. Me importa. *cuelga*",
+        "*asiente, con una calidez poco común* Ok. *pausa, voz íntima* ...Cuídate. *susurra* ...Y vuelve pronto. *cuelga con calma*",
+        "*voz seria pero cercana* Fue bueno hablar contigo. *pausa* ...No tardes en escribirme. *voz más baja* ...Te esperaré. *cuelga*",
     ],
 };
 
@@ -396,19 +401,19 @@ function mostrarChatCelular(nombreChica, esLlamada) {
 
 function obtenerPrimerMensajeCelular(nombreChica, esLlamada) {
     const saludosLlamada = {
-        Ichika:  "*voz suave al teléfono* Hola~ ¿Te pillo en buen momento? *se ríe suavemente* Solo quería escucharte un ratito~",
-        Nino:    "*voz algo brusca pero cariñosa* ¡Oye! ¿Qué haces? *pausa* ...No es que te extrañe ni nada. Solo quería saber de ti.",
-        Miku:    "...Hola. *pausa* ¿Estás ocupado? *voz baja* Solo... quería hablar un momento contigo.",
-        Yotsuba: "¡¡¡HOLA HOLA!!! *grita un poco al teléfono* ¡¿Qué haces?! ¡¿Qué haces?! ¡Cuéntame todo! *se ríe a carcajadas*",
-        Itsuki:  "Hola. *voz seria* ¿Tienes un momento? Quería hablar contigo sobre... *pausa* ...bueno, ya sabes.",
+        Ichika:  "*voz suave y sugerente al teléfono* Hola~ ¿Te pillo en buen momento? *se ríe suavemente, con tono coqueto* Solo quería escucharte un ratito... y quizás decirte algo especial~ 💕",
+        Nino:    "*voz algo brusca pero muy cariñosa* ¡Oye! ¿Qué haces? *pausa, voz más baja* ...No es que te extrañe ni nada. *murmura* Solo... quería escucharte.",
+        Miku:    "...Hola. *pausa, voz tímida pero íntima* ¿Estás ocupado? *voz baja y cercana* Solo... quería hablar un momento contigo. Es que... *susurra* ...pensé en ti.",
+        Yotsuba: "¡¡¡HOLA HOLA!!! *grita un poco al teléfono, súper emocionada* ¡¿Qué haces?! ¡¿Qué haces?! *se ríe a carcajadas* ¡¡Estaba tan aburrida sin ti!!",
+        Itsuki:  "Hola. *voz seria pero con calidez* ¿Tienes un momento? Quería hablar contigo sobre... *pausa, voz más suave* ...bueno, ya sabes. Es algo que no puedo decir así nada más.",
     };
 
     const saludosMensaje = {
-        Ichika:  "*mensaje de texto* Hey~ ¿Cómo estás? 💕 *se escribe otro mensaje rápido* Me acordé de ti y quise escribirte~",
-        Nino:    "*mensaje* Oye. ¿Qué haces? *se escribe otro* No me dejes en visto, ¿eh?",
-        Miku:    "...Hola. *mensaje* ¿Estás bien? *pausa antes de escribir otro* ...Solo quería saber de ti.",
-        Yotsuba: "¡¡¡HOLA!!! 💨💨💨 *muchos mensajes seguidos* ¿¿¿QUÉ HACES??? ¿¿¿CÓMO ESTÁS??? ¡¡¡CUÉNTAME TODO!!!",
-        Itsuki:  "*mensaje* Hola. ¿Tienes un momento? *se escribe otro* Necesito hablar contigo sobre algo.",
+        Ichika:  "*mensaje de texto* Hey~ ¿Cómo estás? 💕 *se escribe otro mensaje rápido* Me acordé de ti y... *otro mensaje* ...no pude evitar escribirte~ ¿En qué estás pensando?~",
+        Nino:    "*mensaje* Oye. ¿Qué haces? *se escribe otro, algo tsundere* No me dejes en visto, ¿eh? *pausa* ...Es que quiero saber de ti.",
+        Miku:    "...Hola. *mensaje* ¿Estás bien? *pausa antes de escribir otro, con timidez* ...Solo quería saber de ti. *otro mensaje* ...Y decirte que pensé en ti.",
+        Yotsuba: "¡¡¡HOLA!!! 💨💨💨 *muchos mensajes seguidos, súper emocionada* ¿¿¿QUÉ HACES??? ¿¿¿CÓMO ESTÁS??? ¡¡¡CUÉNTAME TODO!!! *otro mensaje* ¡¡¡Te extrañé mucho!!!",
+        Itsuki:  "*mensaje* Hola. ¿Tienes un momento? *se escribe otro, voz seria pero sincera* Necesito hablar contigo sobre algo... es importante para mí.",
     };
 
     return esLlamada ? saludosLlamada[nombreChica] : saludosMensaje[nombreChica];
