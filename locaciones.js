@@ -188,23 +188,38 @@ const Locaciones = {
         musica: "",
         mensajesPorChica: {
             Ichika: {
-                mensaje: (nombre) => `*abre la puerta de casa con una sonrisa elegante* Bienvenido, ${nombre}. *toma tu abrigo y lo cuelga* Quédate cómodo~ *te guía al sillón y se sienta cerca* ¿Quieres té o algo más fuerte?`,
+                mensaje: (nombre) => `*abre la puerta de casa con una sonrisa pícara, trae un vestido corto que apenas le cubre* Bienvenido, ${nombre}... *se acerca despacio, te quita la chaqueta y te besa el cuello suavemente* Las hermanas salieron... estamos solos. *te empuja hacia el sofá y se sienta sobre tus piernas* ¿Seguro que quieres té? Porque yo tengo otras ideas~ *te muerde la oreja y susurra* No te voy a dejar escapar tan fácil...
+- En el sofá Ichika se sienta en tu regazo frotando su culo contra tu entrepierna
+- Se deja caer hacia atrás mostrando su escote
+- Te besa el cuello mientras te agarra de la mano y la lleva entre sus piernas`,
                 imagen: "",
             },
             Nino: {
-                mensaje: (nombre) => `*te recibe en la entrada con los brazos cruzados* Ya era hora de que llegaras. *desvía la mirada pero sonríe* La casa estaba muy silenciosa sin ti... *te empuja suavemente hacia adentro* ¡Entra de una vez!`,
+                mensaje: (nombre) => `*te recibe en la entrada en ropa interior y un delantal abierto por atrás* ¿Qué? Solo estaba... probando algo. *se sonroja pero te mira fijamente* No te quedes ahí parado, cierra la puerta. *te agarra de la camisa y te pega contra la pared* Hace rato que quiero hacer esto... *te besa con hambre y te aprieta contra ella* Si se te ocurre mirar a otra hermana te mato, ¿entiendes? Soy solo yo ahora.
+- Nino te empuja contra la pared y te besa apasionadamente
+- Se frota contra ti mientras te quita la camisa
+- Te muerde el labio inferior y te mira con ojos hambrientos`,
                 imagen: "",
             },
             Miku: {
-                mensaje: (nombre) => `*está en la sala leyendo con una manta* ...Ah, ${nombre}. *levanta la vista y cierra el libro* Bienvenido. *hace espacio en el sillón* Este es un buen lugar para estar tranquilo... si quieres quedarte.`,
+                mensaje: (nombre) => `*está acostada boca abajo en el sofá, con las piernas colgando y una pollera muy corta que se le sube* ...Ah, ${nombre}. *te mira por encima del hombro, se muerde el labio* Quédate... *se voltea boca arriba y se abre un poco de piernas* Hace mucho que no estamos así, solos. *se toca el cuello lentamente mientras te mira* ¿Vienes?
+- Miku está recostada en el sofá con las piernas abiertas
+- Se lame los labios mientras te mira fijamente
+- Se sube la pollera un poco más y te hace espacio a su lado`,
                 imagen: "",
             },
             Yotsuba: {
-                mensaje: (nombre) => `*abre la puerta saltando* ¡¡${nombre}!! ¡Llegaste! *te agarra del brazo y te jala hacia adentro* ¡Ven, te voy a enseñar algo genial! *te lleva al patio emocionada* ¡Las hermanas dijeron que podíamos hacer lo que quisiéramos hoy!`,
+                mensaje: (nombre) => `*abre la puerta casi sin nada puesto, solo una camiseta tuya gigante que le cubre apenas* ¡¡${nombre}!! ¡Estaba esperándote! *salta encima tuyo y te tira al piso* Las hermanas dijeron que no hiciera ruido... *se sienta a horcajadas sobre ti y te agarra la cara* Pero es que no aguanto más~ *se balancea sobre ti frotándose* ¡Hoy te voy a hacer cosas que nunca olvidaste!
+- Yotsuba te monta encima en el suelo, frotándose contra ti
+- Se quita la camiseta tuya quedando desnuda y sonriendo
+- Te obliga a tocar sus pechos mientras gime de emoción`,
                 imagen: "",
             },
             Itsuki: {
-                mensaje: (nombre) => `*está en la cocina con delantal y cuchara en mano* ${nombre}, llegaste perfecto. *te señala la mesa* Estaba preparando algo especial. *se sonroja un poco* Digo... no es que cocine para ti ni nada, simplemente hice de más...`,
+                mensaje: (nombre) => `*está en la cocina con un delantal y nada más, se voltea al verte y se le cae la cuchara* ${nombre}... *se tapa como puede pero no se va* Iba a cocinar pero... *se acerca a ti con las piernas temblando* Mejor cómemelo a mí primero. *te agarra la mano y te la pone en su culo desnudo* Siento que estoy ardiendo... ayúdame, por favor.
+- Itsuki te obliga a tocarle el culo bajo el delantal
+- Se inclina sobre la mesa de la cocina mostrando todo
+- Te agarra del pelo y te besa mientras se frota contra la mesa`,
                 imagen: "",
             },
         },
