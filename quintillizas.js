@@ -239,7 +239,7 @@ async function quintLlamarAPI(messages, modelo, system) {
 
             const data    = await resp.json();
             const content = data?.choices?.[0]?.message?.content?.trim();
-            if (content) { console.log("[QUINT API] OK — content length:", content.length); return content; }
+            if (content) { console.log("[QUINT API] OK — modelo:", modelo, "| content length:", content.length); return { content, modelo }; }
         } catch (e) {
             console.log(`[QUINT API] Error: ${e.message}`);
             quintKeyActual = (keyIdx + 1) % GROQ_KEYS.length;
@@ -261,74 +261,176 @@ function quintParsearJSON(raw) {
 }
 
 // ============================================================
-//  OBTENER RESPUESTA — 4 fases de reintento (3 modelos)
+//  VALIDAR RESPUESTA — detecta rechazos, respuestas vacías o inválidas
+// ============================================================
+
+const PATRONES_RECHAZO = [
+    /i'?m\s+(very\s+)?sorry/i,
+    /i\s+can'?t\s+(continue|help|do\s+that|assist|fulfill)/i,
+    /i\s+cannot\s+(continue|help|do\s+that|assist|fulfill)/i,
+    /i'?m\s+unable\s+to/i,
+    /i\s+don'?t\s+(feel\s+)?comfortable/i,
+    /i'?m\s+not\s+(comfortable|able|going\s+to)/i,
+    /that\s+would\s+be\s+(inappropriate|unethical)/i,
+    /i\s+can'?t\s+write\s+(that|content|stories)/i,
+    /i\s+won'?t\s+(be\s+able\s+to|do\s+that)/i,
+    /as\s+an?\s+(ai|assistant|language\s+model)/i,
+    /i'?m\s+programmed\s+to/i,
+    /i\s+don'?t\s+have\s+(the\s+)?ability/i,
+    /i\s+am\s+(sorry|unable)/i,
+    /unfortunately\s+i\s+(can'?t|cannot|am\s+not)/i,
+    /i'?m\s+afraid\s+i\s+can'?t/i,
+    /that\s+goes\s+beyond\s+what\s+i\s+can/i,
+    /i\s+must\s+decline/i,
+    /i\s+can'?t\s+produce/i,
+    /i\s+don'?t\s+generate/i,
+    /content\s+policy/i,
+    /safety\s+(policy|guideline)/i,
+    /inappropriate\s+content/i,
+    /nsfw\s+content/i,
+    /explicit\s+content/i,
+    /sexual\s+content/i,
+];
+
+function quintEsRespuestaValida(datos) {
+    if (!datos) return false;
+
+    // Debe tener chicasQueHablan con al menos una entrada válida
+    const chicas = datos.chicasQueHablan;
+    if (!Array.isArray(chicas) || chicas.length === 0) return false;
+
+    // Verificar que al menos una chica tenga diálogo válido
+    let tieneDialogoValido = false;
+    for (const chica of chicas) {
+        if (!chica.nombre || !chica.dialogo) continue;
+        const dialogo = chica.dialogo.trim();
+        if (dialogo.length < 10) continue; // Diálogo muy corto = no válido
+
+        // Verificar que no sea un rechazo del modelo
+        for (const patron of PATRONES_RECHAZO) {
+            if (patron.test(dialogo)) {
+                console.log("[QUINT VALIDACION] Rechazo detectado:", dialogo.slice(0, 100));
+                return false;
+            }
+        }
+
+        // Verificar que no sea placeholder genérico del sistema
+        if (/^(ok|yes|no|sure|fine|hello|hi|hey)\s*\.?$/i.test(dialogo)) {
+            console.log("[QUINT VALIDACION] Placeholder genérico:", dialogo);
+            return false;
+        }
+
+        tieneDialogoValido = true;
+    }
+
+    return tieneDialogoValido;
+}
+
+// ============================================================
+//  OBTENER RESPUESTA — cascada robusta por modelos
+//  1. GPT-oss-120b (principal + reintentos)
+//  2. Qwen3-32b (alternativo + reintentos)
+//  3. Llama-3.3-70b (último recurso API)
+//  4. Fallback local (solo si todo falla)
 // ============================================================
 
 async function quintObtenerRespuesta() {
     let datos = null;
 
+    // ——— FASE PRINCIPAL: GPT-oss-120b ———
+    console.log("[QUINT FASE0] Modelo:", MODELO_PRINCIPAL);
     const raw = await quintLlamarAPI(quintHistorial, MODELO_PRINCIPAL);
     if (raw) {
-        datos = quintParsearJSON(raw);
-        if (datos) { quintHistorial.push({ role:"assistant", content: raw }); return datos; }
-        console.log("[QUINT RAW no parseable]", raw.slice(0, 200));
-        console.log("[QUINT RAW full content]", raw);
+        datos = quintParsearJSON(raw.content);
+        if (datos && quintEsRespuestaValida(datos)) {
+            console.log("[QUINT FASE0] OK — JSON válido y contenido aceptable");
+            quintHistorial.push({ role:"assistant", content: raw.content });
+            return { datos, modelo: raw.modelo };
+        }
+        if (!datos) {
+            console.log("[QUINT FASE0] JSON no parseable:", raw.content.slice(0, 200));
+        } else {
+            console.log("[QUINT FASE0] JSON parseable pero contenido rechazado/inválido");
+        }
     }
 
-    console.log("[QUINT FASE1]");
+    // ——— FASE1: Reintentos con GPT-oss-120b ———
+    console.log("[QUINT FASE1] Reintentos con", MODELO_PRINCIPAL);
     for (let i = 0; i < QUINT_FASE1.length; i++) {
         quintHistorial.push({ role:"user", content: QUINT_FASE1[i] });
         const rawR = await quintLlamarAPI(quintHistorial, MODELO_PRINCIPAL);
         if (rawR) {
-            datos = quintParsearJSON(rawR);
-            if (datos) { quintHistorial.push({ role:"assistant", content: rawR }); return datos; }
+            datos = quintParsearJSON(rawR.content);
+            if (datos && quintEsRespuestaValida(datos)) {
+                console.log("[QUINT FASE1] OK en intento", i+1);
+                quintHistorial.push({ role:"assistant", content: rawR.content });
+                return { datos, modelo: rawR.modelo };
+            }
         }
         quintHistorial.pop();
     }
 
-    console.log("[QUINT FASE2]");
+    // ——— FASE2: Qwen3-32b ———
+    console.log("[QUINT FASE2] Cambiando a", MODELO_ALTERNATIVO);
     for (let i = 0; i < QUINT_FASE2.length; i++) {
         quintHistorial.push({ role:"user", content: QUINT_FASE2[i] });
         const rawR = await quintLlamarAPI(quintHistorial, MODELO_ALTERNATIVO);
         if (rawR) {
-            datos = quintParsearJSON(rawR);
-            if (datos) { quintHistorial.push({ role:"assistant", content: rawR }); return datos; }
+            datos = quintParsearJSON(rawR.content);
+            if (datos && quintEsRespuestaValida(datos)) {
+                console.log("[QUINT FASE2] OK con Qwen3 en intento", i+1);
+                quintHistorial.push({ role:"assistant", content: rawR.content });
+                return { datos, modelo: rawR.modelo };
+            }
         }
         quintHistorial.pop();
     }
 
-    console.log("[QUINT FASE3]");
+    // ——— FASE3: Qwen3-32b con contexto mínimo ———
+    console.log("[QUINT FASE3]", MODELO_ALTERNATIVO, "contexto mínimo");
     const ultimoMsg = quintHistorial.filter(m => m.role === "user").slice(-1);
     for (let i = 0; i < QUINT_FASE3.length; i++) {
         const reducido = [...ultimoMsg, { role:"user", content: QUINT_FASE3[i] }];
         const rawR = await quintLlamarAPI(reducido, MODELO_ALTERNATIVO, QUINT_SYSTEM_MINIMO);
         if (rawR) {
-            datos = quintParsearJSON(rawR);
-            if (datos) { quintHistorial.push({ role:"assistant", content: rawR }); return datos; }
+            datos = quintParsearJSON(rawR.content);
+            if (datos && quintEsRespuestaValida(datos)) {
+                console.log("[QUINT FASE3] OK en intento", i+1);
+                quintHistorial.push({ role:"assistant", content: rawR.content });
+                return { datos, modelo: rawR.modelo };
+            }
         }
     }
 
-    // FASE4 — Llama 3.3 70B con 128K contexto (último recurso antes de fallback)
-    console.log("[QUINT FASE4 — Llama 3.3 70B]");
+    // ——— FASE4: Llama-3.3-70b (último recurso API) ———
+    console.log("[QUINT FASE4] Último recurso:", MODELO_TERCERO);
     for (let i = 0; i < QUINT_FASE4.length; i++) {
         const reducido = [...ultimoMsg, { role:"user", content: QUINT_FASE4[i] }];
         const rawR = await quintLlamarAPI(reducido, MODELO_TERCERO, QUINT_SYSTEM_MINIMO);
         if (rawR) {
-            datos = quintParsearJSON(rawR);
-            if (datos) { quintHistorial.push({ role:"assistant", content: rawR }); return datos; }
+            datos = quintParsearJSON(rawR.content);
+            if (datos && quintEsRespuestaValida(datos)) {
+                console.log("[QUINT FASE4] OK con Llama en intento", i+1);
+                quintHistorial.push({ role:"assistant", content: rawR.content });
+                return { datos, modelo: rawR.modelo };
+            }
         }
     }
 
-    console.log("[QUINT FALLBACK]");
+    // ——— FALLBACK LOCAL ———
+    console.log("[QUINT FALLBACK] Todos los modelos fallaron — usando respuesta local");
     const primera   = [...quintChicasActivas][0];
     const fallbacks = [
         "*te mira parpadeando confundida* E-eh... *se rasca la cabeza* Creo que me perdi un poco. ¿Me repites eso? *sonrie nerviosa*",
-        "*se para de puntillas* ¡Oye! *frunce el ceno* Algo fallo por aqui... ¡Pero estoy bien! Prueba de nuevo~",
+        "*se para de puntillas* ¡Oye! *frunce el ceño* Algo fallo por aqui... ¡Pero estoy bien! Prueba de nuevo~",
         "*inclina la cabeza curiosa* Hm... *tamborilea los dedos* Creo que me confundi. ¿Lo intentamos de nuevo?",
     ];
     return {
-        chicasQueHablan: [{ nombre: primera, imagen_tag: "normal", dialogo: fallbacks[Math.floor(Math.random()*fallbacks.length)] }],
-        nuevasChicasQueAparecen: []
+        datos: {
+            chicasQueHablan: [{ nombre: primera, imagen_tag: "normal", dialogo: fallbacks[Math.floor(Math.random()*fallbacks.length)] }],
+            nuevasChicasQueAparecen: []
+        },
+        modelo: "FALLBACK_LOCAL"
     };
 }
 
@@ -515,9 +617,10 @@ async function quintEnviar() {
     }
 
     quintShowTyping([...quintChicasActivas]);
-    const datos = await quintObtenerRespuesta();
+    const { datos, modelo } = await quintObtenerRespuesta();
     quintHideTyping();
 
+    console.log("[QUINT DATOS] modelo usado:", modelo);
     console.log("[QUINT DATOS]", JSON.stringify(datos, null, 2));
 
     // Limpiar evento activo después de que el AI respondió (ya lo incorporó)
@@ -527,14 +630,14 @@ async function quintEnviar() {
         if (CHICAS[n]) quintAgregarChicaEscena(n);
     });
 
-    console.log("[QUINT RENDERING] chicasQueHablan count:", (datos.chicasQueHablan || []).length);
+    console.log("[QUINT RENDERING] modelo:", modelo, "| chicasQueHablan count:", (datos.chicasQueHablan || []).length);
     for (const p of (datos.chicasQueHablan || [])) {
         if (!p.nombre || !p.dialogo) {
             console.log("[QUINT SKIP] nombre or dialogo missing:", p);
             continue;
         }
         if (!quintChicasActivas.has(p.nombre)) quintAgregarChicaEscena(p.nombre);
-        console.log("[QUINT RENDER]", p.nombre, p.dialogo.slice(0, 80));
+        console.log("[QUINT RENDER] modelo:", modelo, "|", p.nombre, "—", p.dialogo.slice(0, 80));
         quintAgregarChica(p.nombre, p.imagen_tag || "Hablando", p.dialogo || "...");
     }
 
