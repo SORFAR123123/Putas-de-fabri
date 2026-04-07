@@ -239,7 +239,7 @@ async function quintLlamarAPI(messages, modelo, system) {
 
             const data    = await resp.json();
             const content = data?.choices?.[0]?.message?.content?.trim();
-            if (content) { console.log("[QUINT API] OK"); return content; }
+            if (content) { console.log("[QUINT API] OK — content length:", content.length); return content; }
         } catch (e) {
             console.log(`[QUINT API] Error: ${e.message}`);
             quintKeyActual = (keyIdx + 1) % GROQ_KEYS.length;
@@ -271,7 +271,8 @@ async function quintObtenerRespuesta() {
     if (raw) {
         datos = quintParsearJSON(raw);
         if (datos) { quintHistorial.push({ role:"assistant", content: raw }); return datos; }
-        console.log("[QUINT RAW no parseable]", raw.slice(0,120));
+        console.log("[QUINT RAW no parseable]", raw.slice(0, 200));
+        console.log("[QUINT RAW full content]", raw);
     }
 
     console.log("[QUINT FASE1]");
@@ -517,6 +518,8 @@ async function quintEnviar() {
     const datos = await quintObtenerRespuesta();
     quintHideTyping();
 
+    console.log("[QUINT DATOS]", JSON.stringify(datos, null, 2));
+
     // Limpiar evento activo después de que el AI respondió (ya lo incorporó)
     if (typeof limpiarEventoActivo === "function") limpiarEventoActivo();
 
@@ -524,9 +527,14 @@ async function quintEnviar() {
         if (CHICAS[n]) quintAgregarChicaEscena(n);
     });
 
+    console.log("[QUINT RENDERING] chicasQueHablan count:", (datos.chicasQueHablan || []).length);
     for (const p of (datos.chicasQueHablan || [])) {
-        if (!p.nombre || !p.dialogo) continue;
+        if (!p.nombre || !p.dialogo) {
+            console.log("[QUINT SKIP] nombre or dialogo missing:", p);
+            continue;
+        }
         if (!quintChicasActivas.has(p.nombre)) quintAgregarChicaEscena(p.nombre);
+        console.log("[QUINT RENDER]", p.nombre, p.dialogo.slice(0, 80));
         quintAgregarChica(p.nombre, p.imagen_tag || "Hablando", p.dialogo || "...");
     }
 
