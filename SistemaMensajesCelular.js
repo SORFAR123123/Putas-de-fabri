@@ -6,10 +6,9 @@
 // ============================================================
 
 const CELULAR_CONFIG = {
-    mensajesMinimos: 4,       // Mínimo de mensajes antes de que suene el celular
-    mensajesMaximos: 4,       // Forzar exactamente cada 4 mensajes (modo test)
-    probabilidad: 1.0,        // 100% de probabilidad (siempre se dispara)
-    tiposLlamada: ["llamada", "mensaje"],  // Puede ser llamada o mensaje de texto
+    mensajesMinimos: 15,       // Mínimo de mensajes antes de que suene el celular
+    mensajesMaximos: 30,       // Máximo de mensajes antes de que suene el celular
+    probabilidad: 0.35,        // 35% de probabilidad cuando se alcanza el contador
 };
 
 // Estado del sistema de celular
