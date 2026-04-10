@@ -91,7 +91,12 @@ function quintBuildSystem(activas) {
     // Contexto de evento aleatorio activo
     const eventoInfo = (typeof obtenerContextoEventoActivo === "function") ? obtenerContextoEventoActivo() : "";
 
-    return `Eres el narrador de un roleplay/visual novel con las Quintillizas Nakano de Gotoubun no Hanayome.${locInfo}${eventoInfo}
+    // Hechos clave en el system prompt
+    const hechosInfo = quintHechosClave.length > 0
+        ? `\nCONTEXTO ACUMULADO (hechos de conversaciones anteriores que DEBES recordar):\n${quintHechosClave.map(h => `• ${h}`).join("\n")}\n`
+        : "";
+
+    return `Eres el narrador de un roleplay/visual novel con las Quintillizas Nakano de Gotoubun no Hanayome.${locInfo}${eventoInfo}${hechosInfo}
 Las chicas ACTUALMENTE PRESENTES en la escena son: ${soloChicas.join(", ")}.
 ${externos.length > 0 ? "Personajes externos presentes: " + externos.join(", ") + "." : ""}
 
@@ -186,12 +191,19 @@ const QUINT_FASE4 = [
 //  ESTADO GLOBAL
 // ============================================================
 
-let quintHistorial     = [];
-let quintNombreUsuario = "Tú";
-let quintKeyActual     = 0;
-let quintOcupado       = false;
-let quintLogExport     = [];
-let quintChicasActivas = new Set(["Yotsuba"]);
+let quintHistorial       = [];
+let quintNombreUsuario   = "Tú";
+let quintKeyActual       = 0;
+let quintOcupado         = false;
+let quintLogExport       = [];
+let quintChicasActivas   = new Set(["Yotsuba"]);
+
+// ——— Sistema de Resumen + Memoria ———
+const QUINT_HISTORIAL_MAX    = 16;   // Mensajes raw a mantener (pares user+assistant = ~8 turnos)
+const QUINT_RECENT_KEEP      = 8;    // Mensajes recientes SIN resumir (siempre se envían completos)
+let quintResumenAcumulado    = "";   // Resumen acumulativo de mensajes viejos
+let quintHechosClave         = [];   // ["El usuario se llama Aldo", "Nino estaba celosa", ...]
+let quintResumenPendiente    = false;// Flag para generar resumen en background
 
 // ============================================================
 //  SCROLL al fondo
@@ -203,12 +215,204 @@ function quintScrollFondo() {
 }
 
 // ============================================================
+//  SISTEMA DE RESUMEN + MEMORIA DE HECHOS CLAVE
+//  Cuando el historial supera QUINT_HISTORIAL_MAX mensajes:
+//    1. Se extraen los mensajes viejos (excluyendo los últimos QUINT_RECENT_KEEP)
+//    2. Se llama al AI para generar un resumen compacto
+//    3. Se extraen hechos clave (nombre del usuario, relaciones, eventos, emociones)
+//    4. Los mensajes viejos se reemplazan por el resumen acumulado
+//    5. El resumen se acumula con el anterior (si ya existía)
+// ============================================================
+
+async function quintGenerarResumen(mensajesViejos, resumenPrevio) {
+    const promptResumen = `Resume la siguiente conversación de roleplay con las Quintillizas Nakano. 
+${resumenPrevio ? `RESUMEN ANTERIOR (ya cubre lo más viejo):\n${resumenPrevio}\n\n` : ''}
+CONVERSACIÓN A RESUMIR:
+${mensajesViejos.map(m => `${m.role === "user" ? "Usuario" : "Narrador"}: ${m.content}`).join("\n")}
+
+Genera un resumen narrativo compacto en 3-5 oraciones que capture:
+- Qué pasó en la conversación
+- Qué chicas participaron y cómo reaccionaron
+- Cualquier evento o acción importante
+- El tono emocional de la escena
+
+Solo el resumen, nada más. En español.`;
+
+    try {
+        const resp = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+            method: "POST",
+            headers: {
+                "Authorization": `Bearer ${GROQ_KEYS[quintKeyActual % GROQ_KEYS.length]}`,
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                model: MODELO_ALTERNATIVO,
+                messages: [{ role: "user", content: promptResumen }],
+                temperature: 0.5,
+                max_tokens: 500
+            })
+        });
+
+        if (resp.ok) {
+            const data = await resp.json();
+            const resumen = data?.choices?.[0]?.message?.content?.trim();
+            if (resumen) {
+                console.log("[QUINT RESUMEN] Generado correctamente — longitud:", resumen.length);
+                return resumen;
+            }
+        } else if (resp.status === 429 || resp.status === 401) {
+            quintKeyActual = (quintKeyActual + 1) % GROQ_KEYS.length;
+        }
+    } catch (e) {
+        console.log("[QUINT RESUMEN] Error:", e.message);
+    }
+
+    // Fallback: resumen básico automático
+    console.log("[QUINT RESUMEN] Usando fallback");
+    const acciones = mensajesViejos
+        .filter(m => m.role === "assistant")
+        .map(m => {
+            const datos = quintParsearJSON(m.content);
+            if (!datos) return null;
+            return (datos.chicasQueHablan || []).map(c => `${c.nombre}: ${c.dialogo.slice(0, 60)}`).join(" | ");
+        })
+        .filter(Boolean)
+        .join(". ");
+    return acciones ? `Resumen: ${acciones}` : "Conversación previa entre el usuario y las chicas.";
+}
+
+async function quintExtraerHechosClave(mensajesViejos, hechosPrevios) {
+    const promptHechos = `Extrae HECHOS IMPORTANTES de esta conversación de roleplay.
+${hechosPrevios.length > 0 ? `HECHOS YA CONOCIDOS (no repitas):\n${hechosPrevios.join("\n")}\n\n` : ''}
+CONVERSACIÓN:
+${mensajesViejos.map(m => `${m.role === "user" ? "Usuario" : "Narrador"}: ${m.content}`).join("\n")}
+
+Extrae hechos como lista breve (máximo 10). Un hecho es:
+- Información personal del usuario (nombre, preferencias, relaciones)
+- Eventos importantes que cambiaron algo
+- Decisiones tomadas por los personajes
+- Estados emocionales relevantes persistentes
+- Cambios en relaciones o situaciones
+
+Formato: un hecho por línea. Solo la lista, nada más. En español.`;
+
+    try {
+        const resp = await fetch("https://api.groq.com/openai/v1/chat/completions", {
+            method: "POST",
+            headers: {
+                "Authorization": `Bearer ${GROQ_KEYS[quintKeyActual % GROQ_KEYS.length]}`,
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                model: MODELO_ALTERNATIVO,
+                messages: [{ role: "user", content: promptHechos }],
+                temperature: 0.3,
+                max_tokens: 400
+            })
+        });
+
+        if (resp.ok) {
+            const data = await resp.json();
+            const texto = data?.choices?.[0]?.message?.content?.trim();
+            if (texto) {
+                const nuevosHechos = texto.split("\n")
+                    .map(l => l.replace(/^[\d\-\*\.\s]+/, "").trim())
+                    .filter(l => l.length > 5)
+                    .slice(0, 10);
+                console.log("[QUINT HECHOS] Extraídos:", nuevosHechos.length);
+                return nuevosHechos;
+            }
+        } else if (resp.status === 429 || resp.status === 401) {
+            quintKeyActual = (quintKeyActual + 1) % GROQ_KEYS.length;
+        }
+    } catch (e) {
+        console.log("[QUINT HECHOS] Error:", e.message);
+    }
+
+    // Fallback: extraer nombre del usuario y poco más
+    const hechosFallback = [...hechosPrevios];
+    for (const m of mensajesViejos) {
+        const match = m.content.match(/El nombre del usuario es (\w+)/);
+        if (match && !hechosFallback.some(h => h.includes(match[1]))) {
+            hechosFallback.push(`El usuario se llama ${match[1]}`);
+        }
+    }
+    return hechosFallback.length > 0 ? hechosFallback : ["El usuario está en una conversación con las Quintillizas Nakano."];
+}
+
+async function quintResumirSiEsNecesario() {
+    if (quintHistorial.length <= QUINT_HISTORIAL_MAX) return;
+    if (quintResumenPendiente) return; // Ya hay uno en proceso
+    if (quintOcupado) return; // No resumir mientras el AI está respondiendo
+
+    quintResumenPendiente = true;
+    console.log(`[QUINT RESUMEN] Activando — historial: ${quintHistorial.length} mensajes`);
+
+    // Calcular cuántos mensajes mover a resumen
+    const mensajesAResumir = quintHistorial.slice(0, quintHistorial.length - QUINT_RECENT_KEEP);
+    const mensajesRecientes  = quintHistorial.slice(-QUINT_RECENT_KEEP);
+
+    if (mensajesAResumir.length < 2) {
+        quintResumenPendiente = false;
+        return; // Muy pocos para resumir
+    }
+
+    // Generar resumen y hechos en paralelo
+    const [nuevoResumen, nuevosHechos] = await Promise.all([
+        quintGenerarResumen(mensajesAResumir, quintResumenAcumulado),
+        quintExtraerHechosClave(mensajesAResumir, quintHechosClave)
+    ]);
+
+    // Acumular resumen
+    if (nuevoResumen) {
+        quintResumenAcumulado = quintResumenAcumulado
+            ? `${quintResumenAcumulado}\n${nuevoResumen}`
+            : nuevoResumen;
+        // Limitar longitud del resumen acumulado (últimos 2000 caracteres)
+        if (quintResumenAcumulado.length > 2000) {
+            // Si crece demasiado, resumirlo de nuevo
+            const partes = quintResumenAcumulado.split("\n");
+            quintResumenAcumulado = partes.slice(-8).join("\n");
+        }
+    }
+
+    // Actualizar hechos (fusionar, máx 12)
+    const todosHechos = [...new Set([...quintHechosClave, ...nuevosHechos])];
+    quintHechosClave = todosHechos.slice(-12);
+
+    // Reemplazar historial: solo mensajes recientes
+    quintHistorial = mensajesRecientes;
+
+    console.log("[QUINT RESUMEN] Completado — resumen acumulado:", quintResumenAcumulado.length, "caracteres");
+    console.log("[QUINT RESUMEN] Hechos clave:", quintHechosClave.length);
+    console.log("[QUINT RESUMEN] Historial ahora:", quintHistorial.length, "mensajes");
+
+    quintResumenPendiente = false;
+}
+
+// ============================================================
 //  API GROQ
 // ============================================================
 
 async function quintLlamarAPI(messages, modelo, system) {
     const sysPrompt = system || quintBuildSystem(quintChicasActivas);
-    const msgs = messages.length > 0 ? messages : [{ role: "user", content: "Hola" }];
+    let msgs = messages.length > 0 ? messages : [{ role: "user", content: "Hola" }];
+
+    // ——— Inyectar resumen + hechos clave antes de los mensajes recientes ———
+    if (quintResumenAcumulado || quintHechosClave.length > 0) {
+        let contextoExtra = "";
+        if (quintResumenAcumulado) {
+            contextoExtra += `\n📝 RESUMEN DE LA CONVERSACIÓN ANTERIOR:\n${quintResumenAcumulado}\n`;
+        }
+        if (quintHechosClave.length > 0) {
+            contextoExtra += `\n📌 HECHOS IMPORTANTES RECUERDA:\n${quintHechosClave.map(h => `• ${h}`).join("\n")}\n`;
+        }
+        // Insertar como mensaje de sistema contextual antes de los mensajes
+        msgs = [{ role: "system", content: contextoExtra.trim() }, ...msgs];
+    }
+
+    // Intentar resumir historial viejo en background (no bloquea)
+    quintResumirSiEsNecesario();
 
     for (let k = 0; k < GROQ_KEYS.length; k++) {
         const keyIdx = (quintKeyActual + k) % GROQ_KEYS.length;
@@ -664,7 +868,8 @@ function quintExportar() {
     if (!quintLogExport.length) { alert("No hay nada que exportar."); return; }
     const fecha = new Date().toISOString().replace(/[:.]/g,"-").slice(0,19);
     const blob  = new Blob([JSON.stringify({
-        fecha, personaje:"Quintillizas", historial: quintHistorial, log: quintLogExport
+        fecha, personaje:"Quintillizas", historial: quintHistorial, log: quintLogExport,
+        resumenAcumulado: quintResumenAcumulado, hechosClave: quintHechosClave
     }, null, 2)], { type:"application/json" });
     const a = document.createElement("a"); a.href = URL.createObjectURL(blob);
     a.download = `quintillizas_chat_${fecha}.json`; a.click();
@@ -676,9 +881,11 @@ function quintImportar() {
         const file = e.target.files[0]; if (!file) return;
         try {
             const data = JSON.parse(await file.text());
-            quintHistorial     = data.historial || [];
-            quintLogExport     = data.log       || [];
-            quintChicasActivas = new Set(["Yotsuba"]);
+            quintHistorial       = data.historial || [];
+            quintLogExport       = data.log       || [];
+            quintResumenAcumulado = data.resumenAcumulado || "";
+            quintHechosClave     = data.hechosClave || [];
+            quintChicasActivas   = new Set(["Yotsuba"]);
             const chat = document.getElementById("quint-chat-mensajes"); chat.innerHTML = "";
             quintAgregarSistema(`[ Conversación cargada: ${file.name} ]`);
             for (const l of quintLogExport) {
@@ -704,9 +911,12 @@ function quintImportar() {
 
 function quintLimpiar() {
     if (!confirm("¿Limpiar toda la conversación?")) return;
-    quintHistorial     = [];
-    quintLogExport     = [];
-    quintChicasActivas = new Set(["Yotsuba"]);
+    quintHistorial       = [];
+    quintLogExport       = [];
+    quintResumenAcumulado = "";
+    quintHechosClave     = [];
+    quintResumenPendiente = false;
+    quintChicasActivas   = new Set(["Yotsuba"]);
     document.getElementById("quint-chat-mensajes").innerHTML = "";
     quintActualizarBadges();
     establecerLocacion(null);
@@ -992,9 +1202,12 @@ function cargarPaginaQuintillizas() {
         </style>
     `;
 
-    quintHistorial     = [];
-    quintLogExport     = [];
-    quintChicasActivas = new Set(["Yotsuba"]);
+    quintHistorial       = [];
+    quintLogExport       = [];
+    quintResumenAcumulado = "";
+    quintHechosClave     = [];
+    quintResumenPendiente = false;
+    quintChicasActivas   = new Set(["Yotsuba"]);
 
     // Mostrar pantalla de nombre antes de iniciar
     quintPedirNombre();

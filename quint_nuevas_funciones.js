@@ -140,6 +140,8 @@ function memorySaveToSlot(slotIndex) {
         historial:       quintHistorial,
         log:             quintLogExport,
         logEstructurado: quintLogEstructurado,  // ← imagen_tag real guardado aquí
+        resumenAcumulado: quintResumenAcumulado,
+        hechosClave:     quintHechosClave,
         thumbnail,
         resumen
     };
@@ -165,6 +167,9 @@ function memoryLoadSlot(slotIndex) {
     quintLogExport       = slot.log             || [];
     quintLogEstructurado = slot.logEstructurado || [];
     quintNombreUsuario   = slot.nombre          || "Tú";
+    quintResumenAcumulado = slot.resumenAcumulado || "";
+    quintHechosClave     = slot.hechosClave     || [];
+    quintResumenPendiente = false;
     quintChicasActivas   = new Set(slot.chicas  || ["Yotsuba"]);
 
     // 2. Limpiar DOM y cerrar panel
@@ -741,6 +746,9 @@ function cargarPaginaQuintillizas() {
     quintHistorial       = [];
     quintLogExport       = [];
     quintLogEstructurado = [];
+    quintResumenAcumulado = "";
+    quintHechosClave     = [];
+    quintResumenPendiente = false;
     quintChicasActivas   = new Set();
     quintChicaSeleccionadaInicial = null;
     _memoryPatched = false;   // permitir re-parchear en nueva sesión
@@ -768,6 +776,9 @@ function quintLimpiar() {
     quintHistorial       = [];
     quintLogExport       = [];
     quintLogEstructurado = [];
+    quintResumenAcumulado = "";
+    quintHechosClave     = [];
+    quintResumenPendiente = false;
     quintChicasActivas   = new Set();
     quintStatsData       = { mensajesPorChica: {}, mensajesPorLocacion: {}, totalMensajes: 0 };
     quintMusicaActivada  = false;
