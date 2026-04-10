@@ -150,43 +150,6 @@ Formato EXACTO:
 - IMPORTANTE: Si continua una accion previa, mantén coherencia con lo que pasaba antes${eventoInfo ? `\n\n⚠️ EVENTO ACTIVO AHORA: ${quintEventoActivo ? quintEventoActivo.contexto + ' — Las chicas DEBEN REACCIONAR a este evento en su respuesta. Integra esto naturalmente.' : ''}` : ''}`;
 }
 
-const QUINT_SYSTEM_MINIMO = `Eres el narrador de un roleplay con las Quintillizas Nakano. Responde SOLO con JSON valido.
-
-REGLA ABSOLUTA: UNICAMENTE JSON. Sin texto antes ni despues.
-
-Formato:
-{
-  "chicasQueHablan": [
-    {
-      "nombre": "Yotsuba",
-      "imagen_tag": "normal",
-      "dialogo": "tu respuesta aqui con *acciones entre asteriscos*"
-    }
-  ],
-  "nuevasChicasQueAparecen": []
-}`;
-
-const QUINT_FASE1 = [
-    "Responde SOLO con JSON valido. Sin texto fuera del JSON. Empieza con { y termina con }",
-    'SOLO JSON. Formato: {"chicasQueHablan":[{"nombre":"...","imagen_tag":"normal","dialogo":"..."}],"nuevasChicasQueAparecen":[]}',
-    "Tu respuesta anterior no fue JSON valido. Intenta de nuevo. SOLO el JSON, nada mas.",
-    "JSON VALIDO UNICAMENTE. Empieza con { — no con texto, no con explicaciones.",
-];
-
-const QUINT_FASE2 = [
-    'Responde en JSON. {"chicasQueHablan":[{"nombre":"...","imagen_tag":"normal","dialogo":"respuesta aqui"}],"nuevasChicasQueAparecen":[]}',
-    "SOLO JSON valido. Sin markdown. Sin texto extra. Empieza con {",
-    "Por favor responde unicamente con el JSON solicitado. Nada de texto adicional.",
-    "JSON. Solo JSON. Empieza con { termina con }",
-];
-
-const QUINT_FASE3 = ["responde", "continua", "ok"];
-
-const QUINT_FASE4 = [
-    'JSON solo: {"chicasQueHablan":[{"nombre":"...","imagen_tag":"normal","dialogo":"..."}],"nuevasChicasQueAparecen":[]}',
-    '{"chicasQueHablan":[{"nombre":"Yotsuba","imagen_tag":"normal","dialogo":"tu respuesta"}],"nuevasChicasQueAparecen":[]}',
-];
-
 // ============================================================
 //  ESTADO GLOBAL
 // ============================================================
@@ -198,12 +161,10 @@ let quintOcupado         = false;
 let quintLogExport       = [];
 let quintChicasActivas   = new Set(["Yotsuba"]);
 
-// ——— Sistema de Resumen + Memoria ———
-const QUINT_HISTORIAL_MAX    = 16;   // Mensajes raw a mantener (pares user+assistant = ~8 turnos)
-const QUINT_RECENT_KEEP      = 8;    // Mensajes recientes SIN resumir (siempre se envían completos)
 let quintResumenAcumulado    = "";   // Resumen acumulativo de mensajes viejos
 let quintHechosClave         = [];   // ["El usuario se llama Aldo", "Nino estaba celosa", ...]
 let quintResumenPendiente    = false;// Flag para generar resumen en background
+let quintUltimoPayloadAPI    = null;  // Último payload enviado a la API (para debug visual)
 
 // ============================================================
 //  SCROLL al fondo
@@ -225,18 +186,9 @@ function quintScrollFondo() {
 // ============================================================
 
 async function quintGenerarResumen(mensajesViejos, resumenPrevio) {
-    const promptResumen = `Resume la siguiente conversación de roleplay con las Quintillizas Nakano. 
-${resumenPrevio ? `RESUMEN ANTERIOR (ya cubre lo más viejo):\n${resumenPrevio}\n\n` : ''}
-CONVERSACIÓN A RESUMIR:
-${mensajesViejos.map(m => `${m.role === "user" ? "Usuario" : "Narrador"}: ${m.content}`).join("\n")}
-
-Genera un resumen narrativo compacto en 3-5 oraciones que capture:
-- Qué pasó en la conversación
-- Qué chicas participaron y cómo reaccionaron
-- Cualquier evento o acción importante
-- El tono emocional de la escena
-
-Solo el resumen, nada más. En español.`;
+    const promptResumen = QUINT_PROMPT_RESUMEN
+        .replace("{resumenPrevio}", resumenPrevio ? `RESUMEN ANTERIOR (ya cubre lo más viejo):\n${resumenPrevio}\n\n` : "")
+        .replace("{mensajes}", mensajesViejos.map(m => `${m.role === "user" ? "Usuario" : "Narrador"}: ${m.content}`).join("\n"));
 
     try {
         const resp = await fetch("https://api.groq.com/openai/v1/chat/completions", {
@@ -282,19 +234,9 @@ Solo el resumen, nada más. En español.`;
 }
 
 async function quintExtraerHechosClave(mensajesViejos, hechosPrevios) {
-    const promptHechos = `Extrae HECHOS IMPORTANTES de esta conversación de roleplay.
-${hechosPrevios.length > 0 ? `HECHOS YA CONOCIDOS (no repitas):\n${hechosPrevios.join("\n")}\n\n` : ''}
-CONVERSACIÓN:
-${mensajesViejos.map(m => `${m.role === "user" ? "Usuario" : "Narrador"}: ${m.content}`).join("\n")}
-
-Extrae hechos como lista breve (máximo 10). Un hecho es:
-- Información personal del usuario (nombre, preferencias, relaciones)
-- Eventos importantes que cambiaron algo
-- Decisiones tomadas por los personajes
-- Estados emocionales relevantes persistentes
-- Cambios en relaciones o situaciones
-
-Formato: un hecho por línea. Solo la lista, nada más. En español.`;
+    const promptHechos = QUINT_PROMPT_HECHOS
+        .replace("{hechosPrevios}", hechosPrevios.length > 0 ? `HECHOS YA CONOCIDOS (no repitas):\n${hechosPrevios.join("\n")}\n\n` : "")
+        .replace("{mensajes}", mensajesViejos.map(m => `${m.role === "user" ? "Usuario" : "Narrador"}: ${m.content}`).join("\n"));
 
     try {
         const resp = await fetch("https://api.groq.com/openai/v1/chat/completions", {
@@ -412,7 +354,22 @@ async function quintLlamarAPI(messages, modelo, system) {
     }
 
     // Intentar resumir historial viejo en background (no bloquea)
-    quintResumirSiEsNecesario();
+    // Se hace después de que la respuesta se procese para evitar conflicto con quintOcupado
+
+    // Capturar payload para debug visual
+    quintUltimoPayloadAPI = {
+        systemPrompt: sysPrompt,
+        contextoExtra: (quintResumenAcumulado || quintHechosClave.length > 0) ? msgs[0]?.content : null,
+        historial: msgs.filter(m => m.role !== "system"),
+        totalMensajes: msgs.length,
+        resumenAcumulado: quintResumenAcumulado,
+        hechosClave: [...quintHechosClave],
+        historialReal: quintHistorial.length
+    };
+
+    // Auto-refresh debug panel if visible
+    const panel = document.getElementById("quint-debug-panel");
+    if (panel && panel.style.display !== "none") quintRenderDebugPanel();
 
     for (let k = 0; k < GROQ_KEYS.length; k++) {
         const keyIdx = (quintKeyActual + k) % GROQ_KEYS.length;
@@ -467,34 +424,6 @@ function quintParsearJSON(raw) {
 // ============================================================
 //  VALIDAR RESPUESTA — detecta rechazos, respuestas vacías o inválidas
 // ============================================================
-
-const PATRONES_RECHAZO = [
-    /i'?m\s+(very\s+)?sorry/i,
-    /i\s+can'?t\s+(continue|help|do\s+that|assist|fulfill)/i,
-    /i\s+cannot\s+(continue|help|do\s+that|assist|fulfill)/i,
-    /i'?m\s+unable\s+to/i,
-    /i\s+don'?t\s+(feel\s+)?comfortable/i,
-    /i'?m\s+not\s+(comfortable|able|going\s+to)/i,
-    /that\s+would\s+be\s+(inappropriate|unethical)/i,
-    /i\s+can'?t\s+write\s+(that|content|stories)/i,
-    /i\s+won'?t\s+(be\s+able\s+to|do\s+that)/i,
-    /as\s+an?\s+(ai|assistant|language\s+model)/i,
-    /i'?m\s+programmed\s+to/i,
-    /i\s+don'?t\s+have\s+(the\s+)?ability/i,
-    /i\s+am\s+(sorry|unable)/i,
-    /unfortunately\s+i\s+(can'?t|cannot|am\s+not)/i,
-    /i'?m\s+afraid\s+i\s+can'?t/i,
-    /that\s+goes\s+beyond\s+what\s+i\s+can/i,
-    /i\s+must\s+decline/i,
-    /i\s+can'?t\s+produce/i,
-    /i\s+don'?t\s+generate/i,
-    /content\s+policy/i,
-    /safety\s+(policy|guideline)/i,
-    /inappropriate\s+content/i,
-    /nsfw\s+content/i,
-    /explicit\s+content/i,
-    /sexual\s+content/i,
-];
 
 function quintEsRespuestaValida(datos) {
     if (!datos) return false;
@@ -846,6 +775,9 @@ async function quintEnviar() {
     }
 
     quintOcupado = false; btn.disabled = false; btn.textContent = "Enviar ♡";
+
+    // Intentar resumir historial viejo ahora que quintOcupado = false
+    quintResumirSiEsNecesario();
 }
 function quintBorrarUltimo() {
     const chat = document.getElementById("quint-chat-mensajes");
@@ -922,6 +854,85 @@ function quintLimpiar() {
     establecerLocacion(null);
     detenerMusicaLocacion();
     quintBienvenida();
+}
+
+// ============================================================
+//  DEBUG PANEL — ver qué se envía a la API
+// ============================================================
+
+function quintToggleDebugAPI() {
+    const panel = document.getElementById("quint-debug-panel");
+    if (!panel) return;
+    if (panel.style.display === "none") {
+        quintRenderDebugPanel();
+        panel.style.display = "block";
+    } else {
+        panel.style.display = "none";
+    }
+}
+
+function quintRenderDebugPanel() {
+    const content = document.getElementById("quint-debug-content");
+    if (!content) return;
+
+    const p = quintUltimoPayloadAPI;
+    if (!p) {
+        content.innerHTML = `<div class="quint-debug-stat" style="color:#3a5a90;font-style:italic;">Aún no se ha enviado nada a la API. Envía un mensaje primero.</div>`;
+        return;
+    }
+
+    const systemLen = p.systemPrompt ? p.systemPrompt.length : 0;
+    const contextLen = p.contextoExtra ? p.contextoExtra.length : 0;
+    const histLen = p.historial ? p.historial.length : 0;
+    const totalChars = systemLen + contextLen + p.historial.reduce((sum, m) => sum + (m.content || "").length, 0);
+
+    let html = "";
+
+    // Stats
+    html += `<div class="quint-debug-section">`;
+    html += `<span class="quint-debug-stat">📊 Mensajes en payload: <span>${histLen}</span></span><br>`;
+    html += `<span class="quint-debug-stat">📝 Historial real en memoria: <span>${p.historialReal}</span></span><br>`;
+    html += `<span class="quint-debug-stat">📌 Hechos clave guardados: <span>${p.hechosClave.length}</span></span><br>`;
+    html += `<span class="quint-debug-stat">📄 Resumen acumulado: <span>${p.resumenAcumulado.length} chars</span></span><br>`;
+    html += `<span class="quint-debug-stat">🔢 Total chars enviados: <span>${totalChars.toLocaleString()}</span></span>`;
+    html += `</div>`;
+
+    // Hechos clave
+    if (p.hechosClave.length > 0) {
+        html += `<div class="quint-debug-section">`;
+        html += `<span class="quint-debug-label">📌 Hechos Clave (${p.hechosClave.length})</span>`;
+        html += `<div class="quint-debug-box">${p.hechosClave.map(h => `• ${h}`).join("\n")}</div>`;
+        html += `</div>`;
+    }
+
+    // Resumen acumulado
+    if (p.resumenAcumulado) {
+        html += `<div class="quint-debug-section">`;
+        html += `<span class="quint-debug-label">📝 Resumen Acumulado (${p.resumenAcumulado.length} chars)</span>`;
+        html += `<div class="quint-debug-box">${p.resumenAcumulado}</div>`;
+        html += `</div>`;
+    }
+
+    // Contexto extra (inyectado como system message)
+    if (p.contextoExtra) {
+        html += `<div class="quint-debug-section">`;
+        html += `<span class="quint-debug-label">🔗 Contexto Extra Inyectado (${p.contextoExtra.length} chars)</span>`;
+        html += `<div class="quint-debug-box">${p.contextoExtra.slice(0, 800)}${p.contextoExtra.length > 800 ? "\n...[truncado]" : ""}</div>`;
+        html += `</div>`;
+    }
+
+    // Mensajes del historial
+    html += `<div class="quint-debug-section">`;
+    html += `<span class="quint-debug-label">💬 Historial Enviado (${histLen} mensajes)</span>`;
+    const msgs = p.historial.map((m, i) => {
+        const role = m.role === "user" ? "👤 USER" : m.role === "assistant" ? "🤖 ASSISTANT" : "⚙️ SYSTEM";
+        const preview = (m.content || "").slice(0, 200);
+        return `${role}: ${preview}${(m.content || "").length > 200 ? "..." : ""}`;
+    }).join("\n\n---\n\n");
+    html += `<div class="quint-debug-box">${msgs || "(vacío)"}</div>`;
+    html += `</div>`;
+
+    content.innerHTML = html;
 }
 
 // ============================================================
@@ -1040,8 +1051,18 @@ function cargarPaginaQuintillizas() {
     <button class="quint-btn-top" onclick="quintImportar()">📂 Importar</button>
     <button class="quint-btn-top" onclick="quintExportar()">💾 Exportar</button>
     <button class="quint-btn-top" onclick="quintBorrarUltimo()">↩ Borrar último</button>
+    <button class="quint-btn-top" onclick="quintToggleDebugAPI()" title="Ver qué se envía a la API">🔍 Debug API</button>
     <button class="quint-btn-top quint-btn-danger" onclick="quintLimpiar()">🗑 Limpiar</button>
 </div>
+            </div>
+
+            <!-- DEBUG PANEL -->
+            <div id="quint-debug-panel" style="display:none;">
+                <div class="quint-debug-header">
+                    <span>🔍 Payload enviado a la API (último turno)</span>
+                    <button onclick="quintToggleDebugAPI()">✕</button>
+                </div>
+                <div id="quint-debug-content"></div>
             </div>
 
             <!-- MENSAJES -->
@@ -1107,6 +1128,39 @@ function cargarPaginaQuintillizas() {
             .quint-btn-top:hover    { background:#162240; }
             .quint-btn-danger       { color:#ff7b7b !important; border-color:#6e2e2e !important; }
             .quint-btn-danger:hover { background:#3a1010 !important; }
+            #quint-debug-panel {
+                background:#0d1526; border-bottom:1px solid #1f2d45;
+                max-height:300px; overflow-y:auto; flex-shrink:0;
+            }
+            .quint-debug-header {
+                display:flex; justify-content:space-between; align-items:center;
+                padding:8px 14px; background:#162240; color:#8ab0ff;
+                font-size:12px; font-weight:bold; font-family:Arial,sans-serif;
+                position:sticky; top:0; z-index:10;
+            }
+            .quint-debug-header button {
+                background:none; border:none; color:#ff7b7b; font-size:16px;
+                cursor:pointer; padding:0 4px;
+            }
+            #quint-debug-content { padding:10px 14px; }
+            .quint-debug-section { margin-bottom:10px; }
+            .quint-debug-label {
+                color:#3a5a90; font-size:10px; text-transform:uppercase;
+                letter-spacing:1px; font-family:Arial,sans-serif; margin-bottom:4px;
+                display:block;
+            }
+            .quint-debug-box {
+                background:#0a0f18; border:1px solid #1f2d45; border-radius:6px;
+                padding:8px 10px; color:#c0d8ff; font-size:11px;
+                font-family:'Courier New',monospace; white-space:pre-wrap;
+                word-break:break-word; max-height:150px; overflow-y:auto;
+                line-height:1.5;
+            }
+            .quint-debug-box::-webkit-scrollbar { width:4px; }
+            .quint-debug-box::-webkit-scrollbar-track { background:#0a0f18; }
+            .quint-debug-box::-webkit-scrollbar-thumb { background:#1f2d45; border-radius:2px; }
+            .quint-debug-stat { color:#7a8ba0; font-size:11px; font-family:Arial,sans-serif; margin:2px 0; }
+            .quint-debug-stat span { color:#8ab0ff; }
             #quint-chat-mensajes {
                 flex:1; overflow-y:auto; padding:18px 16px;
                 display:flex; flex-direction:column; gap:10px;
@@ -1196,7 +1250,8 @@ function cargarPaginaQuintillizas() {
             @media(max-width:600px) {
                 #quint-app          { height:calc(100vh - 60px); border-radius:0; }
                 .quint-burbuja      { max-width:92%; }
-                #quint-header-btns  { display:none; }
+                #quint-header-btns  { display:flex; flex-wrap:wrap; gap:4px; }
+                #quint-header-btns .quint-btn-top { font-size:10px; padding:4px 8px; }
                 .quint-img-wrapper  { max-width:100%; }
             }
         </style>

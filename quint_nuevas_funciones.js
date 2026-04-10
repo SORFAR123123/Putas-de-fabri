@@ -644,8 +644,18 @@ function cargarPaginaQuintillizas() {
                     <button class="quint-btn-top" id="quint-music-btn" onclick="quintToggleMusica()" title="Música ambiental">🎵 Música</button>
                     <button class="quint-btn-top" id="quint-stats-btn" onclick="quintMostrarEstadisticas()" title="Estadísticas">📊 Stats</button>
                     <button class="quint-btn-top" onclick="quintBorrarUltimo()">↩ Borrar</button>
+                    <button class="quint-btn-top" onclick="quintToggleDebugAPI()" title="Ver qué se envía a la API">🔍 Debug API</button>
                     <button class="quint-btn-top quint-btn-danger" onclick="quintLimpiar()">🗑 Limpiar</button>
                 </div>
+            </div>
+
+            <!-- DEBUG PANEL -->
+            <div id="quint-debug-panel" style="display:none;">
+                <div class="quint-debug-header">
+                    <span>🔍 Payload enviado a la API</span>
+                    <button onclick="quintToggleDebugAPI()">✕</button>
+                </div>
+                <div id="quint-debug-content"></div>
             </div>
 
             <div id="quint-chat-mensajes"></div>
@@ -677,6 +687,18 @@ function cargarPaginaQuintillizas() {
             .quint-btn-top:hover { background:#162240; }
             .quint-btn-danger { color:#ff7b7b !important; border-color:#6e2e2e !important; }
             .quint-btn-danger:hover { background:#3a1010 !important; }
+            #quint-debug-panel { background:#0d1526; border-bottom:1px solid #1f2d45; max-height:300px; overflow-y:auto; flex-shrink:0; }
+            .quint-debug-header { display:flex; justify-content:space-between; align-items:center; padding:8px 14px; background:#162240; color:#8ab0ff; font-size:12px; font-weight:bold; font-family:Arial,sans-serif; position:sticky; top:0; z-index:10; }
+            .quint-debug-header button { background:none; border:none; color:#ff7b7b; font-size:16px; cursor:pointer; padding:0 4px; }
+            #quint-debug-content { padding:10px 14px; }
+            .quint-debug-section { margin-bottom:10px; }
+            .quint-debug-label { color:#3a5a90; font-size:10px; text-transform:uppercase; letter-spacing:1px; font-family:Arial,sans-serif; margin-bottom:4px; display:block; }
+            .quint-debug-box { background:#0a0f18; border:1px solid #1f2d45; border-radius:6px; padding:8px 10px; color:#c0d8ff; font-size:11px; font-family:'Courier New',monospace; white-space:pre-wrap; word-break:break-word; max-height:150px; overflow-y:auto; line-height:1.5; }
+            .quint-debug-box::-webkit-scrollbar { width:4px; }
+            .quint-debug-box::-webkit-scrollbar-track { background:#0a0f18; }
+            .quint-debug-box::-webkit-scrollbar-thumb { background:#1f2d45; border-radius:2px; }
+            .quint-debug-stat { color:#7a8ba0; font-size:11px; font-family:Arial,sans-serif; margin:2px 0; }
+            .quint-debug-stat span { color:#8ab0ff; }
             #quint-chat-mensajes { flex:1; overflow-y:auto; padding:18px 16px; display:flex; flex-direction:column; gap:10px; scrollbar-width:thin; scrollbar-color:#1f2d45 #0a0f18; }
             #quint-chat-mensajes::-webkit-scrollbar { width:6px; }
             #quint-chat-mensajes::-webkit-scrollbar-track { background:#0a0f18; }
@@ -704,7 +726,7 @@ function cargarPaginaQuintillizas() {
             #quint-btn-enviar { background:linear-gradient(135deg,#1f3a70,#3a6adf); color:#c0d8ff; border:none; padding:9px 18px; border-radius:10px; cursor:pointer; font-family:'Georgia',serif; font-size:14px; font-weight:bold; transition:all 0.2s; white-space:nowrap; align-self:flex-end; }
             #quint-btn-enviar:hover { transform:scale(1.04); }
             #quint-btn-enviar:disabled { opacity:0.5; cursor:not-allowed; transform:none; }
-            @media(max-width:600px) { #quint-app{height:calc(100vh - 60px);border-radius:0;} .quint-burbuja{max-width:92%;} #quint-header-btns{display:none;} .quint-img-wrapper{max-width:100%;} }
+            @media(max-width:600px) { #quint-app{height:calc(100vh - 60px);border-radius:0;} .quint-burbuja{max-width:92%;} #quint-header-btns{display:flex;flex-wrap:wrap;gap:4px;} #quint-header-btns .quint-btn-top{font-size:10px;padding:4px 8px;} .quint-img-wrapper{max-width:100%;} }
 
             /* ESTADÍSTICAS */
             #quint-stats-overlay { position:absolute; inset:0; z-index:250; background:rgba(10,15,24,0.92); display:flex; align-items:center; justify-content:center; border-radius:16px; }
