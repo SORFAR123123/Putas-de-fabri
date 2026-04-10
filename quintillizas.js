@@ -13,8 +13,6 @@ const _K = [
 const GROQ_KEYS = _K.map(p => p.join(""));
 
 const MODELO_PRINCIPAL   = "openai/gpt-oss-120b";
-const MODELO_ALTERNATIVO = "qwen/qwen3-32b";
-const MODELO_TERCERO     = "llama-3.3-70b-versatile";
 
 // ============================================================
 //  CHICAS
@@ -198,7 +196,7 @@ async function quintGenerarResumen(mensajesViejos, resumenPrevio) {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                model: MODELO_ALTERNATIVO,
+                model: MODELO_PRINCIPAL,
                 messages: [{ role: "user", content: promptResumen }],
                 temperature: 0.5,
                 max_tokens: 500
@@ -246,7 +244,7 @@ async function quintExtraerHechosClave(mensajesViejos, hechosPrevios) {
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                model: MODELO_ALTERNATIVO,
+                model: MODELO_PRINCIPAL,
                 messages: [{ role: "user", content: promptHechos }],
                 temperature: 0.3,
                 max_tokens: 400
@@ -332,6 +330,44 @@ async function quintResumirSiEsNecesario() {
     quintResumenPendiente = false;
 }
 
+// ——— Recorte SÍNCRONO de emergencia (evita 413 sin llamar a la API) ———
+function quintRecortarHistorialSiEsNecesario() {
+    if (quintHistorial.length <= QUINT_RECENT_KEEP) return;
+
+    console.log("[QUINT RECORT] Emergencia — recortando de", quintHistorial.length, "a", QUINT_RECENT_KEEP, "mensajes");
+
+    // Generar resumen básico SIN llamar a la API (fallback local)
+    const mensajesAViejos = quintHistorial.slice(0, quintHistorial.length - QUINT_RECENT_KEEP);
+    const mensajesNuevos  = quintHistorial.slice(-QUINT_RECENT_KEEP);
+
+    // Resumen local básico (sin API call)
+    let resumenLocal = "";
+    for (const m of mensajesAViejos) {
+        if (m.role === "assistant") {
+            const datos = quintParsearJSON(m.content);
+            if (datos) {
+                const chicas = (datos.chicasQueHablan || []).map(c => c.nombre).join(", ");
+                resumenLocal += `${chicas} respondieron. `;
+            }
+        } else if (m.role === "user" && m.content.length > 50) {
+            resumenLocal += `Usuario dijo: ${m.content.slice(0, 80)}... `;
+        }
+    }
+
+    if (resumenLocal) {
+        quintResumenAcumulado = quintResumenAcumulado
+            ? `${quintResumenAcumulado}\n${resumenLocal}`
+            : resumenLocal;
+        if (quintResumenAcumulado.length > 2000) {
+            const partes = quintResumenAcumulado.split("\n");
+            quintResumenAcumulado = partes.slice(-8).join("\n");
+        }
+    }
+
+    quintHistorial = mensajesNuevos;
+    console.log("[QUINT RECORT] Historial recortado a", quintHistorial.length, "mensajes");
+}
+
 // ============================================================
 //  API GROQ
 // ============================================================
@@ -355,6 +391,9 @@ async function quintLlamarAPI(messages, modelo, system) {
 
     // Intentar resumir historial viejo en background (no bloquea)
     // Se hace después de que la respuesta se procese para evitar conflicto con quintOcupado
+
+    // ——— RECORTAR historial ANTES de enviar (evita 413) ———
+    quintRecortarHistorialSiEsNecesario();
 
     // Capturar payload para debug visual
     quintUltimoPayloadAPI = {
@@ -460,35 +499,33 @@ function quintEsRespuestaValida(datos) {
 }
 
 // ============================================================
-//  OBTENER RESPUESTA — cascada robusta por modelos
-//  1. GPT-oss-120b (principal + reintentos)
-//  2. Qwen3-32b (alternativo + reintentos)
-//  3. Llama-3.3-70b (último recurso API)
-//  4. Fallback local (solo si todo falla)
+//  OBTENER RESPUESTA — solo GPT-oss-120b, múltiples estrategias de reintento
+//  1. Intento normal con historial completo
+//  2. Reintentos con prompts de corrección JSON
+//  3. Historial reducido (últimos 4 mensajes) con resumen inyectado
+//  4. Contexto mínimo (solo último msg user + system mínimo)
+//  5. Prompt agresivo directo
+//  6. Fallback local (solo si todo falla)
 // ============================================================
 
 async function quintObtenerRespuesta() {
     let datos = null;
 
-    // ——— FASE PRINCIPAL: GPT-oss-120b ———
+    // ——— FASE PRINCIPAL: GPT-oss-120b con historial completo ———
     console.log("[QUINT FASE0] Modelo:", MODELO_PRINCIPAL);
     const raw = await quintLlamarAPI(quintHistorial, MODELO_PRINCIPAL);
     if (raw) {
         datos = quintParsearJSON(raw.content);
         if (datos && quintEsRespuestaValida(datos)) {
-            console.log("[QUINT FASE0] OK — JSON válido y contenido aceptable");
+            console.log("[QUINT FASE0] OK — JSON válido");
             quintHistorial.push({ role:"assistant", content: raw.content });
             return { datos, modelo: raw.modelo };
         }
-        if (!datos) {
-            console.log("[QUINT FASE0] JSON no parseable:", raw.content.slice(0, 200));
-        } else {
-            console.log("[QUINT FASE0] JSON parseable pero contenido rechazado/inválido");
-        }
+        console.log("[QUINT FASE0]", !datos ? "JSON no parseable" : "Contenido rechazado/inválido");
     }
 
-    // ——— FASE1: Reintentos con GPT-oss-120b ———
-    console.log("[QUINT FASE1] Reintentos con", MODELO_PRINCIPAL);
+    // ——— FASE1: Reintentos con prompts de corrección ———
+    console.log("[QUINT FASE1] Reintentos con corrección JSON");
     for (let i = 0; i < QUINT_FASE1.length; i++) {
         quintHistorial.push({ role:"user", content: QUINT_FASE1[i] });
         const rawR = await quintLlamarAPI(quintHistorial, MODELO_PRINCIPAL);
@@ -503,28 +540,32 @@ async function quintObtenerRespuesta() {
         quintHistorial.pop();
     }
 
-    // ——— FASE2: Qwen3-32b ———
-    console.log("[QUINT FASE2] Cambiando a", MODELO_ALTERNATIVO);
+    // ——— FASE2: Historial reducido + resumen inyectado ———
+    console.log("[QUINT FASE2] Historial reducido (últimos 4) + resumen");
+    const historialOriginal = [...quintHistorial];
+    const ultimos4 = quintHistorial.slice(-4);
+    quintHistorial = ultimos4;
     for (let i = 0; i < QUINT_FASE2.length; i++) {
         quintHistorial.push({ role:"user", content: QUINT_FASE2[i] });
-        const rawR = await quintLlamarAPI(quintHistorial, MODELO_ALTERNATIVO);
+        const rawR = await quintLlamarAPI(quintHistorial, MODELO_PRINCIPAL);
         if (rawR) {
             datos = quintParsearJSON(rawR.content);
             if (datos && quintEsRespuestaValida(datos)) {
-                console.log("[QUINT FASE2] OK con Qwen3 en intento", i+1);
+                console.log("[QUINT FASE2] OK con historial reducido, intento", i+1);
                 quintHistorial.push({ role:"assistant", content: rawR.content });
                 return { datos, modelo: rawR.modelo };
             }
         }
         quintHistorial.pop();
     }
+    quintHistorial = historialOriginal; // restaurar
 
-    // ——— FASE3: Qwen3-32b con contexto mínimo ———
-    console.log("[QUINT FASE3]", MODELO_ALTERNATIVO, "contexto mínimo");
+    // ——— FASE3: Contexto mínimo — solo último user + system mínimo ———
+    console.log("[QUINT FASE3] Contexto mínimo");
     const ultimoMsg = quintHistorial.filter(m => m.role === "user").slice(-1);
     for (let i = 0; i < QUINT_FASE3.length; i++) {
         const reducido = [...ultimoMsg, { role:"user", content: QUINT_FASE3[i] }];
-        const rawR = await quintLlamarAPI(reducido, MODELO_ALTERNATIVO, QUINT_SYSTEM_MINIMO);
+        const rawR = await quintLlamarAPI(reducido, MODELO_PRINCIPAL, QUINT_SYSTEM_MINIMO);
         if (rawR) {
             datos = quintParsearJSON(rawR.content);
             if (datos && quintEsRespuestaValida(datos)) {
@@ -535,15 +576,15 @@ async function quintObtenerRespuesta() {
         }
     }
 
-    // ——— FASE4: Llama-3.3-70b (último recurso API) ———
-    console.log("[QUINT FASE4] Último recurso:", MODELO_TERCERO);
+    // ——— FASE4: Prompt agresivo directo ———
+    console.log("[QUINT FASE4] Prompt agresivo directo");
     for (let i = 0; i < QUINT_FASE4.length; i++) {
         const reducido = [...ultimoMsg, { role:"user", content: QUINT_FASE4[i] }];
-        const rawR = await quintLlamarAPI(reducido, MODELO_TERCERO, QUINT_SYSTEM_MINIMO);
+        const rawR = await quintLlamarAPI(reducido, MODELO_PRINCIPAL, QUINT_SYSTEM_MINIMO);
         if (rawR) {
             datos = quintParsearJSON(rawR.content);
             if (datos && quintEsRespuestaValida(datos)) {
-                console.log("[QUINT FASE4] OK con Llama en intento", i+1);
+                console.log("[QUINT FASE4] OK en intento", i+1);
                 quintHistorial.push({ role:"assistant", content: rawR.content });
                 return { datos, modelo: rawR.modelo };
             }
@@ -551,7 +592,7 @@ async function quintObtenerRespuesta() {
     }
 
     // ——— FALLBACK LOCAL ———
-    console.log("[QUINT FALLBACK] Todos los modelos fallaron — usando respuesta local");
+    console.log("[QUINT FALLBACK] Todo falló — respuesta local");
     const primera   = [...quintChicasActivas][0];
     const fallbacks = [
         "*te mira parpadeando confundida* E-eh... *se rasca la cabeza* Creo que me perdi un poco. ¿Me repites eso? *sonrie nerviosa*",
