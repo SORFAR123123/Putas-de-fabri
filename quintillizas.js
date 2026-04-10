@@ -336,28 +336,58 @@ function quintRecortarHistorialSiEsNecesario() {
 
     console.log("[QUINT RECORT] Emergencia — recortando de", quintHistorial.length, "a", QUINT_RECENT_KEEP, "mensajes");
 
-    // Generar resumen básico SIN llamar a la API (fallback local)
     const mensajesAViejos = quintHistorial.slice(0, quintHistorial.length - QUINT_RECENT_KEEP);
     const mensajesNuevos  = quintHistorial.slice(-QUINT_RECENT_KEEP);
 
-    // Resumen local básico (sin API call)
-    let resumenLocal = "";
+    // Extraer frases clave CONCRETAS (acciones, eventos, besos, etc.)
+    let hechosLocales = [];
+
     for (const m of mensajesAViejos) {
         if (m.role === "assistant") {
             const datos = quintParsearJSON(m.content);
             if (datos) {
-                const chicas = (datos.chicasQueHablan || []).map(c => c.nombre).join(", ");
-                resumenLocal += `${chicas} respondieron. `;
+                for (const chica of (datos.chicasQueHablan || [])) {
+                    const dialogo = (chica.dialogo || "").toLowerCase();
+
+                    // Acciones físicas explícitas
+                    const acciones = [
+                        { patron: /bes[oó]|besando|beso/i, accion: `${chica.nombre} besó a alguien` },
+                        { patron: /abraz[oó]|abrazando|abrazo/i, accion: `${chica.nombre} abrazó` },
+                        { patron: /acarici[oó]|cariciando/i, accion: `${chica.nombre} acarició` },
+                        { patron: /chup[aó]|chupando|chup[ió]/i, accion: `${chica.nombre} chupó` },
+                        { patron: /foll[aó]| follando|follando|cog[ió]|cogiendo/i, accion: `${chica.nombre} tuvo sexo` },
+                        { patron: /desnud[aó]|desnudando|desnuda/i, accion: `${chica.nombre} se desnudó` },
+                        { patron: /toc[aó]|tocando|tocamiento/i, accion: `${chica.nombre} tocó` },
+                        { patron: /gem[ió]|gimiendo|gim[ió]/i, accion: `${chica.nombre} gimió` },
+                        { patron: /entr[oó]|entrando|lleg[oó]|llegando/i, accion: `${chica.nombre} llegó a la escena` },
+                        { patron: /celos|enoj[aó]|enojada|molest[aó]/i, accion: `${chica.nombre} tuvo celos/enojo` },
+                        { patron: /llor[aó]|llorando|triste/i, accion: `${chica.nombre} estuvo triste/lloró` },
+                        { patron: /se fue|sali[oó]|march[oó]/i, accion: `${chica.nombre} se fue` },
+                        { patron: /promet[ió]|promesa/i, accion: `${chica.nombre} hizo una promesa` },
+                    ];
+
+                    for (const { patron, accion } of acciones) {
+                        if (patron.test(dialogo) && !hechosLocales.includes(accion)) {
+                            hechosLocales.push(accion);
+                        }
+                    }
+                }
             }
-        } else if (m.role === "user" && m.content.length > 50) {
-            resumenLocal += `Usuario dijo: ${m.content.slice(0, 80)}... `;
+        } else if (m.role === "user") {
+            // Capturar lo que dijo el usuario (primeras 80 chars)
+            const texto = (m.content || "").replace(/\[EVENTO EN CURSO.*?\]/gs, "").trim();
+            if (texto.length > 20) {
+                hechosLocales.push(`Usuario: ${texto.slice(0, 80)}`);
+            }
         }
     }
 
-    if (resumenLocal) {
+    // Guardar como resumen acumulado
+    if (hechosLocales.length > 0) {
+        const nuevoResumen = hechosLocales.join(". ");
         quintResumenAcumulado = quintResumenAcumulado
-            ? `${quintResumenAcumulado}\n${resumenLocal}`
-            : resumenLocal;
+            ? `${quintResumenAcumulado}\n${nuevoResumen}`
+            : nuevoResumen;
         if (quintResumenAcumulado.length > 2000) {
             const partes = quintResumenAcumulado.split("\n");
             quintResumenAcumulado = partes.slice(-8).join("\n");
@@ -365,7 +395,7 @@ function quintRecortarHistorialSiEsNecesario() {
     }
 
     quintHistorial = mensajesNuevos;
-    console.log("[QUINT RECORT] Historial recortado a", quintHistorial.length, "mensajes");
+    console.log("[QUINT RECORT] Historial recortado a", quintHistorial.length, "mensajes. Hechos extraídos:", hechosLocales.length);
 }
 
 // ============================================================
